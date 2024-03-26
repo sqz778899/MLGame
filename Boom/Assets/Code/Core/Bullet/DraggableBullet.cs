@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
     public BulletEditMode BulletState = BulletEditMode.Non;
+    public int CurBagSlotID = 0;
     Vector3 originalPosition;
 
     public void OnPointerDown(PointerEventData eventData)
@@ -34,7 +35,8 @@ public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandle
             if (result.gameObject.CompareTag("BulletSlot"))
             {
                 BulletState = GetBulletState(result.gameObject);
-                CharacterManager.Instance.SetBullet();
+                CurBagSlotID = result.gameObject.GetComponent<BulletSlot>().SlotID;
+                CharacterManager.Instance.SetBullet(gameObject);
                 // 如果有一个子弹槽，我们就将子弹放到子弹槽中
                 transform.position = result.gameObject.transform.position;
                 return;

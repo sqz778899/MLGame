@@ -15,20 +15,6 @@ public class MSceneManager: ScriptableObject
         SceneManager.LoadScene(CurrentSceneIndex);
     }
 
-    public void SaveFile()
-    {
-        SaveFileJson lll = new SaveFileJson();
-        string content01 = JsonConvert.SerializeObject(lll,(Formatting) Formatting.Indented);
-        File.WriteAllText(PathConfig.SaveFileJson, content01);
-    }
-    
-    public void LoadFile()
-    {
-        string SaveFileJsonString = File.ReadAllText(PathConfig.SaveFileJson);
-        SaveFileJson SaveFile = JsonConvert.DeserializeObject<SaveFileJson>(SaveFileJsonString);
-        CharacterManager.Instance.LoadSaveFile(SaveFile);
-    }
-    
     public void ExitGame()
     {
 #if UNITY_EDITOR

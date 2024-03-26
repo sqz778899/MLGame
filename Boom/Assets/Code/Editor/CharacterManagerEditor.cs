@@ -11,7 +11,7 @@ public class CharacterManagerEditor: Editor
         CharacterManager myScript = (CharacterManager)target;
         if(GUILayout.Button("SaveFile"))
         {
-            myScript.SaveFile();
+            myScript.LoadSaveFile();
         }
     }
 }

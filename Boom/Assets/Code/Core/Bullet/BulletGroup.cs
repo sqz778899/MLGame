@@ -10,7 +10,7 @@ public class BulletGroup : MonoBehaviour
         InitSlotID();
     }
 
-    void InitSlotID()
+    public void InitSlotID()
     {
         BulletSlot[] bulletSlots = gameObject.GetComponentsInChildren<BulletSlot>();
         for (int i = 0; i < bulletSlots.Length; i++)
