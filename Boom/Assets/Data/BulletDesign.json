@@ -1,0 +1,12 @@
+[
+  {
+    "ID":1,
+    "name":"Basic001",
+    "speed": 10.0,
+    "damage": 1,
+    "bulletPrefabName": "P_Bullet_Inner_01",
+    "bulletEditAName": "P_Bullet_Edit_a_01",
+    "bulletEditBName": "P_Bullet_Edit_b_01",
+    "hitEffectName": ""
+  }
+]

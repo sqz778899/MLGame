@@ -17,6 +17,9 @@ public class CharacterMove : MonoBehaviour
     void Update()
     {
         Move();
+        
+        //快捷键响应
+        LevelLogicalManager.Instance.CheckForKeyPress(transform.position);
     }
 
     void Move()
@@ -33,5 +36,11 @@ public class CharacterMove : MonoBehaviour
         {
             transform.Translate( -forward * Speed * Time.deltaTime);
         }
+    }
+
+    public void Fire()
+    {
+        //快捷键响应
+        LevelLogicalManager.Instance.Fire(transform.position);
     }
 }
