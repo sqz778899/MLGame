@@ -35,8 +35,12 @@ public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandle
             if (result.gameObject.CompareTag("BulletSlot"))
             {
                 BulletState = GetBulletState(result.gameObject);
-                CurBagSlotID = result.gameObject.GetComponent<BulletSlot>().SlotID;
-                CharacterManager.Instance.SetBullet(gameObject);
+                BulletSlot curSlotSC = result.gameObject.GetComponent<BulletSlot>();
+                if (curSlotSC == null)
+                    CurBagSlotID = 0;
+                else
+                    CurBagSlotID = curSlotSC.SlotID;
+                CharacterManager.Instance.SetBullet();
                 // 如果有一个子弹槽，我们就将子弹放到子弹槽中
                 transform.position = result.gameObject.transform.position;
                 return;

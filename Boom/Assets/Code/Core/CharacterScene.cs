@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,11 @@ public class CharacterScene : MonoBehaviour
     public GameObject btnGO;
     public GameObject GroupBulletSlot;
     public GameObject GroupCharacter;
+
+    void Start()
+    {
+        CharacterManager.Instance.LoadSaveFile();
+    }
 
     public void EditBullet()
     {

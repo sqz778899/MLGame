@@ -8,10 +8,13 @@ public class CharacterMove : MonoBehaviour
     public float CameraFollowingThreshold = 0;
     Vector3 forward = new Vector3(1, 0, 0);
     Camera _mCamera;
+    
+    LevelLogicMono LevelLogic;
    
     void Awake()
     {
         _mCamera = Camera.main;
+        LevelLogic =  GameObject.Find("LevelLogic").GetComponent<LevelLogicMono>();
     }
     
     void Update()
@@ -19,7 +22,7 @@ public class CharacterMove : MonoBehaviour
         Move();
         
         //快捷键响应
-        LevelLogicalManager.Instance.CheckForKeyPress(transform.position);
+        LevelLogic.CheckForKeyPress(transform.position);
     }
 
     void Move()
@@ -41,6 +44,6 @@ public class CharacterMove : MonoBehaviour
     public void Fire()
     {
         //快捷键响应
-        LevelLogicalManager.Instance.Fire(transform.position);
+        LevelLogic.Fire(transform.position);
     }
 }

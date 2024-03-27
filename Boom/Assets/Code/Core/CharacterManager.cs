@@ -54,7 +54,8 @@ public class CharacterManager :ScriptableObject
         string SaveFileJsonString = File.ReadAllText(PathConfig.SaveFileJson);
         _saveFile = JsonConvert.DeserializeObject<SaveFileJson>(SaveFileJsonString);
         _bagData = new BagData();
-        _bagData.InitDataByJson(_saveFile.BagData,_bulletDesignJsons);
+        _bagData.InitDataByJson(_saveFile.BagData,BulletDesignJsons);
+        SetBullet();
     }
 
     public void SaveFile()
@@ -67,22 +68,32 @@ public class CharacterManager :ScriptableObject
     
     public GameObject BulletGroup;
     public List<BulletData> Bullets;
+    public List<BulletDataJson> BulletDesignJsons;
     
     BagData _bagData;
-    List<BulletDataJson> _bulletDesignJsons;
-    public void SetBullet(GameObject Bullet)
+    public void SetBullet()
     {
         BulletGroup = GameObject.Find("GroupBullet");
         if (BulletGroup == null)
             return;
 
-        //............SlotRole 更新.....................
-        _bagData.ClearSlotRole();
+        //............_bagData 更新.....................
+        _bagData.ClearBagData();
         for (int i = 0; i < BulletGroup.transform.childCount; i++)
         {
             GameObject perBullet = BulletGroup.transform.GetChild(i).gameObject;
             DraggableBullet perSc = perBullet.GetComponentInChildren<DraggableBullet>();
-            int BagSlot = perSc.CurBagSlotID;
+            //...........BagSlot 更新......................
+            int curBagSlotID = perSc.CurBagSlotID;
+            foreach (SingleSlot each in _bagData.bagSlots)
+            {
+                if (each.slotID == curBagSlotID)
+                {
+                    each.bulletID = perSc._bulletData.ID;
+                    each.bulletCount++;
+                }
+            }
+            //............SlotRole 更新.....................
             BulletEditMode curBulletSate = perSc.BulletState;
             switch (curBulletSate)
             {
@@ -103,12 +114,8 @@ public class CharacterManager :ScriptableObject
                     break;
             }
         }
-        _bagData.RefreshBullets(_bulletDesignJsons);
+        _bagData.RefreshBullets(BulletDesignJsons);
         Bullets = _bagData.curBullets;
-        
-        //...........BagSlot 更新......................
-        //int BagSlot = Bullet.GetComponent<DraggableBullet>().CurBagSlotID;
-        
         
         SaveFile();
         Debug.Log("Set BulletSlotRole");
@@ -116,7 +123,7 @@ public class CharacterManager :ScriptableObject
 
     void OnEnable()
     {
-        _bulletDesignJsons = LoadBulletData();
+        BulletDesignJsons = LoadBulletData();
     }
     
     public List<BulletDataJson> LoadBulletData()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -56,6 +57,29 @@ public class BulletData
         }
         return curDataJson;
     }
+
+    public GameObject InstanceBullet(List<BulletDataJson> BulletDesignJsons,Vector3 pos = new Vector3())
+    {
+        BulletDataJson curDesign = null;
+        foreach (BulletDataJson eachDesign in BulletDesignJsons)
+        {
+            if (eachDesign.ID == ID)
+            {
+                curDesign = eachDesign;
+                break;
+            }
+        }
+
+        if (curDesign != null)
+        {
+            GameObject bullet = GameObject.Instantiate(bulletPrefab,pos,quaternion.identity);
+            BulletBase bulletBase = bullet.GetComponentInChildren<BulletBase>();
+            bulletBase._bulletData = this;
+            bulletBase.InitBulletData();
+            return bullet;
+        }
+        return null;
+    }
 }
 
 public class BulletDataJson
@@ -99,6 +123,7 @@ public class BagData
     {
         if (curBullets == null)
             curBullets = new List<BulletData>();
+        curBullets.Clear();
         if (slotRole01 != 0)
             curBullets.Add(FindBulletData(BulletDesignJsons,slotRole01));
         if (slotRole02 != 0)
@@ -130,8 +155,13 @@ public class BagData
         else
             return null;
     }
-    public void ClearSlotRole()
+    public void ClearBagData()
     {
+        foreach (var each in bagSlots)
+        {
+            each.bulletID = 0;
+            each.bulletCount = 0;
+        }
         slotRole01 = 0;
         slotRole02 = 0;
         slotRole03 = 0;
@@ -161,7 +191,7 @@ public class BagData
             if (each.bulletID != 0)
             {
                 BulletData curBulletData = FindBulletData(BulletDesignJsons, each.bulletID);
-                GameObject bagSlotBullet = GameObject.Instantiate(curBulletData.bulletEditAPrefab);
+                GameObject bagSlotBullet = GetBulletInsByBulletData(curBulletData);
                 bagSlotBullet.transform.SetParent(groupBullet.transform);
                 bagSlotBullet.transform.localScale = Vector3.one;
 
@@ -182,23 +212,25 @@ public class BagData
 
         //实例化bullet
         if (slotRole01 != 0)
-            _instanceslotRole(slotRole01);
+            _instanceslotRole(slotRole01,1,BulletEditMode.SlotRole01);
         if (slotRole02 != 0)
-            _instanceslotRole(slotRole02);
+            _instanceslotRole(slotRole02,2,BulletEditMode.SlotRole02);
         if (slotRole03 != 0)
-            _instanceslotRole(slotRole03);
+            _instanceslotRole(slotRole03,3,BulletEditMode.SlotRole03);
         if (slotRole04 != 0)
-            _instanceslotRole(slotRole04);
+            _instanceslotRole(slotRole04,4,BulletEditMode.SlotRole04);
         if (slotRole05 != 0)
-            _instanceslotRole(slotRole05);
+            _instanceslotRole(slotRole05,5,BulletEditMode.SlotRole05);
 
-        void _instanceslotRole(int slotRoleID)
+        void _instanceslotRole(int slotRoleID,int slotIndex,BulletEditMode bulletEditMode)
         {
             BulletData slotRoleData = FindBulletData(BulletDesignJsons, slotRoleID);
-            GameObject slotRoleGO = GameObject.Instantiate(slotRoleData.bulletEditAPrefab);
+            GameObject slotRoleGO = GetBulletInsByBulletData(slotRoleData);
+            DraggableBullet slotRoleGOSc = slotRoleGO.GetComponentInChildren<DraggableBullet>();
+            slotRoleGOSc.BulletState = bulletEditMode;
             slotRoleGO.transform.SetParent(groupBullet.transform);
             slotRoleGO.transform.localScale = Vector3.one;
-            slotRoleGO.transform.position = groupBulletSlotRole.transform.GetChild(slotRoleID - 1).position;
+            slotRoleGO.transform.position = groupBulletSlotRole.transform.GetChild(slotIndex - 1).position;
         }
     }
 
@@ -214,6 +246,15 @@ public class BagData
         return BagJson;
     }
     #endregion
+
+    GameObject GetBulletInsByBulletData(BulletData curBulletData)
+    {
+        GameObject bullet = GameObject.Instantiate(curBulletData.bulletEditAPrefab);
+        BulletBase bulletBase = bullet.GetComponentInChildren<BulletBase>();
+        bulletBase._bulletData = curBulletData;
+        bulletBase.InitBulletData();
+        return bullet;
+    }
 }
 
 public class BagDataJson
