@@ -1,11 +1,23 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class LevelLogicMono : MonoBehaviour
 {
-    public float delay = 1.0f;
+    #region 计分板相关
+    public TextMeshProUGUI txtScore;
+
+    void Update()
+    {
+        txtScore.text = "Score: " + CharacterManager.Instance.Score;
+    }
+
+    #endregion
+
+    #region 开火相关
+    public float delay = 0.3f;
     List<BulletDataJson> BulletDesignJsons;
     GameObject GroupBullet;
     
@@ -40,4 +52,5 @@ public class LevelLogicMono : MonoBehaviour
             yield return new WaitForSeconds(delay);  // 在发射下一个子弹之前，等待delay秒
         }
     }
+    #endregion
 }

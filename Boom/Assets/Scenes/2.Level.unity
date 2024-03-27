@@ -3571,6 +3571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a30f8c34e83082469f3a533d1d31c6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  txtScore: {fileID: 2143159214}
   delay: 1
 --- !u!4 &948206932
 Transform:
@@ -5529,6 +5530,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
+  score: 100
 --- !u!50 &1519256685
 Rigidbody2D:
   serializedVersion: 4
@@ -8204,7 +8206,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -579.63806, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

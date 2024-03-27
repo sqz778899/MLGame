@@ -70,7 +70,9 @@ public class CharacterManager :ScriptableObject
     public List<BulletData> Bullets;
     public List<BulletDataJson> BulletDesignJsons;
     
-    BagData _bagData;
+    BagData _bagData;//背包相关
+    public int Score;
+    
     public void SetBullet()
     {
         BulletGroup = GameObject.Find("GroupBullet");
@@ -121,9 +123,11 @@ public class CharacterManager :ScriptableObject
         Debug.Log("Set BulletSlotRole");
     }
 
+    //..............初始化相关....................
     void OnEnable()
     {
         BulletDesignJsons = LoadBulletData();
+        Score = 0;
     }
     
     public List<BulletDataJson> LoadBulletData()

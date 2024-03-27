@@ -5,6 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public int health = 100;
+    public int score = 100;
 
     public void TakeDamage(int amount)
     {
@@ -13,7 +14,13 @@ public class Enemy : MonoBehaviour
         // 如果血量为0或更少，销毁这个敌人
         if (health <= 0)
         {
-            Destroy(gameObject);
+            DestroySelf();
         }
+    }
+
+    void DestroySelf()
+    {
+        CharacterManager.Instance.Score += score;
+        Destroy(gameObject);
     }
 }

@@ -43,7 +43,6 @@ public class CharacterMove : MonoBehaviour
 
     public void Fire()
     {
-        //快捷键响应
         LevelLogic.Fire(transform.position);
     }
 }
