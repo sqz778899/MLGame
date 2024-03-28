@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -21,6 +19,7 @@ public class Enemy : MonoBehaviour
     void DestroySelf()
     {
         CharacterManager.Instance.Score += score;
+        CharacterManager.Instance.WinOrFailState = WinOrFail.Win;
         Destroy(gameObject);
     }
 }

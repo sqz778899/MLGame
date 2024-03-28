@@ -6,15 +6,44 @@ using UnityEngine;
 
 public class LevelLogicMono : MonoBehaviour
 {
+    #region 关卡相关
+    public GameObject GroupLevel;
+    void Start()
+    {
+        //InitLevel
+        int curLevelID = MSceneManager.Instance.LevelID;
+        string curLevelName = string.Format("P_Level_{0}.prefab", curLevelID.ToString("D2"));
+        Instantiate(ResManager.instance.GetAssetCache<GameObject>
+               (PathConfig.LevelAssetDir+curLevelName), GroupLevel.transform);
+    }
+    #endregion
+
     #region 计分板相关
     public TextMeshProUGUI txtScore;
+    #endregion
 
+    public GameObject WinGUI;
+    public GameObject FailGUI;
     void Update()
     {
         txtScore.text = "Score: " + CharacterManager.Instance.Score;
+        WinOrFailThisLevel();
     }
 
-    #endregion
+    void WinOrFailThisLevel()
+    {
+        switch (CharacterManager.Instance.WinOrFailState)
+        {
+            case WinOrFail.InLevel:
+                break;
+            case WinOrFail.Win:
+                WinGUI.SetActive(true);
+                break;
+            case WinOrFail.Fail:
+                FailGUI.SetActive(true);
+                break;
+        }
+    }
 
     #region 开火相关
     public float delay = 0.3f;

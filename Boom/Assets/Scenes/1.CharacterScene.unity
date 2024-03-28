@@ -958,6 +958,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcd37d4720fb8364db1f8837ffa5453b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MapID: 1
   btnBeReady: {fileID: 1148680855}
   btnEditBullet: {fileID: 1397756654}
   btnGO: {fileID: 1918083995}
@@ -3827,14 +3828,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 36d297b1e3d8b3542947cc9ae503bcf7, type: 2}
-        m_TargetAssemblyTypeName: MSceneManager, Assembly-CSharp
-        m_MethodName: LoadScene
+      - m_Target: {fileID: 661466431}
+        m_TargetAssemblyTypeName: CharacterScene, Assembly-CSharp
+        m_MethodName: LoadSceneInCharacter
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

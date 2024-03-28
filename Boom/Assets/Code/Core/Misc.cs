@@ -282,3 +282,14 @@ public enum MapNodeState
 }
 #endregion
 
+#region 输赢条件相关
+
+public enum WinOrFail
+{
+    InLevel = 1,
+    Win = 2,
+    Fail = 3
+}
+
+#endregion
+

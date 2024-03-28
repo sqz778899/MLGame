@@ -72,6 +72,7 @@ public class CharacterManager :ScriptableObject
     
     BagData _bagData;//背包相关
     public int Score;
+    public WinOrFail WinOrFailState;
     
     public void SetBullet()
     {

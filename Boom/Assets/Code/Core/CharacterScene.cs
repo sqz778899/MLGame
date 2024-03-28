@@ -1,10 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CharacterScene : MonoBehaviour
 {
+    public int MapID;
+    
     public GameObject btnBeReady;
     public GameObject btnEditBullet;
     public GameObject btnGO;
@@ -36,5 +35,11 @@ public class CharacterScene : MonoBehaviour
         //GUI
         GroupCharacter?.SetActive(true);
         GroupBulletSlot?.SetActive(false);
+    }
+
+    public void LoadSceneInCharacter(int ScenceID)
+    {
+        MSceneManager.Instance.MapID = MapID;
+        MSceneManager.Instance.LoadScene(ScenceID);
     }
 }
