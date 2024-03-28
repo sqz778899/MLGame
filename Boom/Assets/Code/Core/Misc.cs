@@ -273,3 +273,12 @@ public class SaveFileJson
 }
 #endregion
 
+#region Map相关
+public enum MapNodeState
+{
+    UnLocked = 1,
+    Locked = 2,
+    IsFinish = 3,
+}
+#endregion
+
