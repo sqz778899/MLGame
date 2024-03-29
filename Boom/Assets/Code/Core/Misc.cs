@@ -1,99 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Unity.Mathematics;
-using Unity.VisualScripting;
+﻿using System.Collections.Generic;
 using UnityEngine;
-
-#region 子弹相关
-public enum BulletEditMode
-{
-    Non = 0,
-    SlotRole01 = 1,
-    SlotRole02 = 2,
-    SlotRole03 = 3,
-    SlotRole04 = 4,
-    SlotRole05 = 5,
-}
-
-[Serializable]
-public class BulletData
-{
-    public int ID;
-    public string name;
-    public float speed;
-    public int damage;
-    public GameObject bulletPrefab;
-    public GameObject bulletEditAPrefab;
-    public GameObject bulletEditBPrefab;
-    public GameObject hitEffect; // 击中效果预制体
-
-    public void SetDataByJson(BulletDataJson curData)
-    {
-        ID = curData.ID;
-        name = curData.name;
-        speed = curData.speed;
-        damage = curData.damage;
-        bulletPrefab = ResManager.instance.GetAssetCache<GameObject>(
-                PathConfig.BulletAssetDir + curData.bulletPrefabName + ".prefab");
-        bulletEditAPrefab = ResManager.instance.GetAssetCache<GameObject>(
-            PathConfig.BulletAssetDir + curData.bulletEditAName + ".prefab");
-        bulletEditBPrefab = ResManager.instance.GetAssetCache<GameObject>(
-            PathConfig.BulletAssetDir + curData.bulletEditBName + ".prefab");
-        hitEffect = ResManager.instance.GetAssetCache<GameObject>(
-            PathConfig.BulletAssetDir + curData.hitEffectName + ".prefab");
-    }
-
-    public BulletDataJson GetJsonData()
-    {
-        if (ID == null)
-            return null;
-
-        BulletDataJson curDataJson = null;
-        List<BulletDataJson> bulletDataJsons = CharacterManager.Instance.LoadBulletData();
-        foreach (BulletDataJson perDataJson in bulletDataJsons)
-        {
-            if (ID == perDataJson.ID)
-                curDataJson = perDataJson;
-        }
-        return curDataJson;
-    }
-
-    public GameObject InstanceBullet(List<BulletDataJson> BulletDesignJsons,Vector3 pos = new Vector3())
-    {
-        BulletDataJson curDesign = null;
-        foreach (BulletDataJson eachDesign in BulletDesignJsons)
-        {
-            if (eachDesign.ID == ID)
-            {
-                curDesign = eachDesign;
-                break;
-            }
-        }
-
-        if (curDesign != null)
-        {
-            GameObject bullet = GameObject.Instantiate(bulletPrefab,pos,quaternion.identity);
-            BulletBase bulletBase = bullet.GetComponentInChildren<BulletBase>();
-            bulletBase._bulletData = this;
-            bulletBase.InitBulletData();
-            return bullet;
-        }
-        return null;
-    }
-}
-
-public class BulletDataJson
-{
-    public int ID;
-    public string name;
-    public float speed;
-    public int damage;
-    public string bulletPrefabName;
-    public string bulletEditAName;
-    public string bulletEditBName;
-    public string hitEffectName;
-}
-#endregion
 
 #region 背包存档相关
 public class SingleSlot
@@ -145,7 +51,8 @@ public class BagData
             if (each.ID == ID)
             {
                 isFind = true;
-                curBulletData.SetDataByJson(each);
+                curBulletData.ID = ID;
+                curBulletData.SetDataByID();
                 break;
             }
         }
@@ -191,10 +98,11 @@ public class BagData
             if (each.bulletID != 0)
             {
                 BulletData curBulletData = FindBulletData(BulletDesignJsons, each.bulletID);
-                GameObject bagSlotBullet = GetBulletInsByBulletData(curBulletData);
-                bagSlotBullet.transform.SetParent(groupBullet.transform);
-                bagSlotBullet.transform.localScale = Vector3.one;
-
+                GameObject bagSlotBullet = curBulletData.InstanceBullet(Vector3.zero,BulletInsMode.Spawner);
+                DraggableBulletSpawner perSc = bagSlotBullet.GetComponentInChildren<DraggableBulletSpawner>();
+                perSc.Count = each.bulletCount;
+                perSc.InitData();
+                
                 GameObject curSlot = null;
                 for (int i = 0; i < allSlots.Length; i++)
                 {
@@ -205,7 +113,8 @@ public class BagData
 
                 if (curSlot != null)
                 {
-                    bagSlotBullet.transform.position = curSlot.transform.position;
+                    bagSlotBullet.transform.SetParent(curSlot.transform,false);
+                    bagSlotBullet.transform.localScale = Vector3.one;
                 }
             }
         }

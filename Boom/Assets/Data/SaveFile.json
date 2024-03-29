@@ -3,8 +3,8 @@
     "bagSlots": [
       {
         "slotID": 1,
-        "bulletID": 0,
-        "bulletCount": 0
+        "bulletID": 1,
+        "bulletCount": 3
       },
       {
         "slotID": 2,
@@ -64,8 +64,8 @@
     ],
     "slotRole01": 1,
     "slotRole02": 1,
-    "slotRole03": 1,
-    "slotRole04": 1,
-    "slotRole05": 1
+    "slotRole03": 0,
+    "slotRole04": 0,
+    "slotRole05": 0
   }
 }

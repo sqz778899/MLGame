@@ -6,18 +6,25 @@ public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandle
 {
     public BulletEditMode BulletState = BulletEditMode.Non;
     public int CurBagSlotID = 0;
-    Vector3 originalPosition;
+    public Vector3 originalPosition;
+    GameObject GroupBulletSlot;
+
+    void Start()
+    {
+        InitBulletData();
+        GroupBulletSlot = GameObject.Find("GroupBulletSlot");
+    }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         // 记录下我们开始拖动时的位置
-        originalPosition = transform.position;
+        originalPosition = transform.parent.position;
     }
 
-    public void OnDrag(PointerEventData eventData)
+    void DragOneBullet(PointerEventData eventData,Transform curTrans)
     {
         // 在拖动时，我们把子弹位置设置为鼠标位置
-        RectTransform rectTransform = GetComponent<RectTransform>();
+        RectTransform rectTransform = curTrans.GetComponent<RectTransform>();
         Vector3 worldPoint;
         if (RectTransformUtility.ScreenPointToWorldPointInRectangle(rectTransform, eventData.position, eventData.pressEventCamera, out worldPoint))
         {
@@ -25,16 +32,16 @@ public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandle
         }
     }
     
-    public void OnPointerUp(PointerEventData eventData)
+    void DropOneBullet(PointerEventData eventData)
     {
         // 在释放鼠标按钮时，我们检查这个位置下是否有一个子弹槽
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventData, results);
         foreach (RaycastResult result in results)
         {
-            if (result.gameObject.CompareTag("BulletSlot"))
+            if (result.gameObject.CompareTag("BulletSlotRole"))
             {
-                BulletState = GetBulletState(result.gameObject);
+                SetBulletState(result.gameObject);
                 BulletSlot curSlotSC = result.gameObject.GetComponent<BulletSlot>();
                 if (curSlotSC == null)
                     CurBagSlotID = 0;
@@ -42,16 +49,43 @@ public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandle
                     CurBagSlotID = curSlotSC.SlotID;
                 CharacterManager.Instance.SetBullet();
                 // 如果有一个子弹槽，我们就将子弹放到子弹槽中
-                transform.position = result.gameObject.transform.position;
+                transform.parent.position = result.gameObject.transform.position;
                 return;
+            }
+
+            if (result.gameObject.CompareTag("BulletSlot"))
+            {
+                //寻找母体
+                DraggableBulletSpawner[] allSpawner = GroupBulletSlot.GetComponentsInChildren<DraggableBulletSpawner>();
+                foreach (var each in allSpawner)
+                {
+                    if (each._bulletData.ID == _bulletData.ID)
+                    {
+                        each.AddCount();
+                        DestroyImmediate(transform.parent.gameObject);
+                        CharacterManager.Instance.SetBullet();
+                        return;
+                    }
+                }
             }
         }
 
         // 如果这个位置下没有子弹槽，我们就将子弹位置恢复到原来的位置
-        transform.position = originalPosition;
+        transform.parent.position = originalPosition;
+    }
+    
+    public void OnDrag(PointerEventData eventData)
+    {
+        Transform curTrans = transform.parent;
+        DragOneBullet(eventData, curTrans);
+    }
+    
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        DropOneBullet(eventData);
     }
 
-    BulletEditMode GetBulletState(GameObject Slot)
+    public void SetBulletState(GameObject Slot)
     {
         BulletEditMode curBulletState = BulletEditMode.Non;
         string SlotName = Slot.name;
@@ -75,7 +109,6 @@ public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandle
             default:
                 break;
         }
-
-        return curBulletState;
+        BulletState = curBulletState;
     }
 }

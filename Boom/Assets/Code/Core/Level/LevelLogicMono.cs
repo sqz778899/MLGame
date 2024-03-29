@@ -8,13 +8,21 @@ public class LevelLogicMono : MonoBehaviour
 {
     #region 关卡相关
     public GameObject GroupLevel;
-    void Start()
+
+    void InitLevel()
     {
-        //InitLevel
         int curLevelID = MSceneManager.Instance.LevelID;
         string curLevelName = string.Format("P_Level_{0}.prefab", curLevelID.ToString("D2"));
-        Instantiate(ResManager.instance.GetAssetCache<GameObject>
-               (PathConfig.LevelAssetDir+curLevelName), GroupLevel.transform);
+        GameObject LevelIns = Instantiate(ResManager.instance.GetAssetCache<GameObject>
+            (PathConfig.LevelAssetDir+curLevelName), GroupLevel.transform);
+        Enemy = LevelIns.GetComponentInChildren<Enemy>().gameObject;
+    }
+
+    public void LoadSceneWin(int SceneID)
+    {
+        MSceneManager.Instance.WinThisLevel();
+        CharacterManager.Instance.WinOrFailState = WinOrFail.InLevel;
+        MSceneManager.Instance.LoadScene(SceneID);
     }
     #endregion
 
@@ -22,25 +30,41 @@ public class LevelLogicMono : MonoBehaviour
     public TextMeshProUGUI txtScore;
     #endregion
 
+    private bool isBeginCalculation;
     public GameObject WinGUI;
     public GameObject FailGUI;
+    public GameObject Enemy;
+
+    void Start()
+    {
+        //InitLevel
+        InitLevel();
+        isBeginCalculation = false;
+    }
     void Update()
     {
         txtScore.text = "Score: " + CharacterManager.Instance.Score;
-        WinOrFailThisLevel();
+        if (isBeginCalculation)
+            WinOrFailThisLevel();
     }
 
     void WinOrFailThisLevel()
     {
+        //如果子弹为0，且敌人未死则失败
+        if (GroupBullet.transform.childCount == 0 && Enemy != null)
+            CharacterManager.Instance.WinOrFailState = WinOrFail.Fail;
+        
         switch (CharacterManager.Instance.WinOrFailState)
         {
             case WinOrFail.InLevel:
                 break;
             case WinOrFail.Win:
                 WinGUI.SetActive(true);
+                isBeginCalculation = false;
                 break;
             case WinOrFail.Fail:
                 FailGUI.SetActive(true);
+                isBeginCalculation = false;
                 break;
         }
     }
@@ -62,24 +86,21 @@ public class LevelLogicMono : MonoBehaviour
     
     public IEnumerator FireWithDelay(Vector3 pos, float delay)
     {
-        yield return new WaitForSeconds(delay);  // 等待delay秒，然后开始发射子弹
-
         Debug.Log("fire");
     
         List<BulletData> bulletDatas = CharacterManager.Instance.Bullets;
-        BulletDesignJsons = CharacterManager.Instance.BulletDesignJsons;
     
         if (GroupBullet == null)
             GroupBullet = GameObject.Find("GroupBullet");
     
         foreach (BulletData eBuDT in bulletDatas)
         {
-            GameObject curBullet = eBuDT.InstanceBullet(BulletDesignJsons,pos);
+            GameObject curBullet = eBuDT.InstanceBullet(pos);
             if (curBullet != null && GroupBullet != null)
                 curBullet.transform.SetParent(GroupBullet.transform);
-        
             yield return new WaitForSeconds(delay);  // 在发射下一个子弹之前，等待delay秒
         }
+        isBeginCalculation = true;     //发射子弹之后，关卡开启结算模式
     }
     #endregion
 }

@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
@@ -21,8 +22,19 @@ public class MSceneManager: ScriptableObject
     
     public int MapID;
     public int LevelID;
+    public List<int> IsFinishedLevels;
     
     public int CurrentSceneIndex;
+    
+    void OnEnable()
+    {
+        IsFinishedLevels = new List<int>();
+    }
+
+    public void WinThisLevel()
+    {
+        IsFinishedLevels.Add(LevelID);
+    }
     
     public void LoadScene(int SceneID)
     {

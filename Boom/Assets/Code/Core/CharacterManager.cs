@@ -55,6 +55,7 @@ public class CharacterManager :ScriptableObject
         _saveFile = JsonConvert.DeserializeObject<SaveFileJson>(SaveFileJsonString);
         _bagData = new BagData();
         _bagData.InitDataByJson(_saveFile.BagData,BulletDesignJsons);
+        WinOrFailState = WinOrFail.InLevel;
         SetBullet();
     }
 
@@ -67,36 +68,34 @@ public class CharacterManager :ScriptableObject
     #endregion
     
     public GameObject BulletGroup;
+    public GameObject GroupBulletSlot;
     public List<BulletData> Bullets;
     public List<BulletDataJson> BulletDesignJsons;
     
     BagData _bagData;//背包相关
     public int Score;
     public WinOrFail WinOrFailState;
+
+    public void InitData()
+    {
+        if (BulletGroup == null)
+            BulletGroup = GameObject.Find("GroupBullet");
+        if (GroupBulletSlot == null)
+            GroupBulletSlot = GameObject.Find("GroupBulletSlot");
+    }
     
     public void SetBullet()
     {
-        BulletGroup = GameObject.Find("GroupBullet");
-        if (BulletGroup == null)
+        InitData();
+        if (BulletGroup == null || GroupBulletSlot == null)
             return;
 
-        //............_bagData 更新.....................
+        //............SlotRole 更新.....................
         _bagData.ClearBagData();
         for (int i = 0; i < BulletGroup.transform.childCount; i++)
         {
             GameObject perBullet = BulletGroup.transform.GetChild(i).gameObject;
             DraggableBullet perSc = perBullet.GetComponentInChildren<DraggableBullet>();
-            //...........BagSlot 更新......................
-            int curBagSlotID = perSc.CurBagSlotID;
-            foreach (SingleSlot each in _bagData.bagSlots)
-            {
-                if (each.slotID == curBagSlotID)
-                {
-                    each.bulletID = perSc._bulletData.ID;
-                    each.bulletCount++;
-                }
-            }
-            //............SlotRole 更新.....................
             BulletEditMode curBulletSate = perSc.BulletState;
             switch (curBulletSate)
             {
@@ -117,6 +116,22 @@ public class CharacterManager :ScriptableObject
                     break;
             }
         }
+        
+        //...........BagSlot 更新......................
+        DraggableBulletSpawner[] Spawners = GroupBulletSlot.GetComponentsInChildren<DraggableBulletSpawner>();
+       
+        foreach (SingleSlot each in _bagData.bagSlots)
+        {
+            foreach (DraggableBulletSpawner eachSpawner in Spawners)
+            {
+                if (each.slotID == eachSpawner._bulletData.ID)
+                {
+                    each.bulletID = eachSpawner._bulletData.ID;
+                    each.bulletCount = eachSpawner.Count;
+                }
+            }
+        }
+        //.....................子弹上膛.........................
         _bagData.RefreshBullets(BulletDesignJsons);
         Bullets = _bagData.curBullets;
         
@@ -148,6 +163,7 @@ public class CharacterManager :ScriptableObject
         ss.bulletPrefabName = "P_Bullet_Inner_01";
         ss.bulletEditAName = "P_Bullet_Edit_a_01";
         ss.bulletEditBName = "P_Bullet_Edit_b_01";
+        ss.bulleSpawnerName = "P_Bullet_Spawner_01";
         ss.hitEffectName = "";
         List<BulletDataJson> ppp = new List<BulletDataJson>();
         ppp.Add(ss);

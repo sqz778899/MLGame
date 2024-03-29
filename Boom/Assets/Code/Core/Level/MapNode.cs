@@ -13,9 +13,13 @@ public class MapNode : MonoBehaviour
 
     public TextMeshProUGUI txtTitle;
 
-    void Start()
+    void Awake()
     {
         _fx_imNode = imNode.GetComponentsInChildren<ParticleSystem>();
+    }
+
+    void Start()
+    {
         ChangeState();
     }
 
@@ -24,7 +28,7 @@ public class MapNode : MonoBehaviour
         txtTitle.text = string.Format("LV{0}", LevelID);
     }
 
-    void ChangeState()
+    public void ChangeState()
     {
         switch (State)
         {

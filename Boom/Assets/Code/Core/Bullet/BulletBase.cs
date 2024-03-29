@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class BulletBase : MonoBehaviour
 {
@@ -7,6 +8,11 @@ public class BulletBase : MonoBehaviour
 
     public void InitBulletData()
     {
-        
+        if (_bulletData == null)
+        {
+            _bulletData = new BulletData();
+            _bulletData.ID = 1;
+        }
+        _bulletData.SetDataByID();
     }
 }
