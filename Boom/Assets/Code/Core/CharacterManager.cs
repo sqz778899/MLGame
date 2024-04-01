@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 
-[CreateAssetMenu]
 public class CharacterManager :ScriptableObject
 {
     #region 单例
@@ -69,6 +68,7 @@ public class CharacterManager :ScriptableObject
     
     public GameObject BulletGroup;
     public GameObject GroupBulletSlot;
+    public GameObject GroupBulletSlotRole;
     public List<BulletData> Bullets;
     public List<BulletDataJson> BulletDesignJsons;
     
@@ -82,6 +82,13 @@ public class CharacterManager :ScriptableObject
             BulletGroup = GameObject.Find("GroupBullet");
         if (GroupBulletSlot == null)
             GroupBulletSlot = GameObject.Find("GroupBulletSlot");
+        if (GroupBulletSlotRole == null)
+            GroupBulletSlotRole = GameObject.Find("imBulletSlotRole");
+
+        for (int i = 0; i < GroupBulletSlotRole.transform.childCount; i++)
+            GroupBulletSlotRole.transform.GetChild(i)
+                .GetComponent<BulletSlotRole>().IsHaveBullet = false;
+        
     }
     
     public void SetBullet()
@@ -100,19 +107,24 @@ public class CharacterManager :ScriptableObject
             switch (curBulletSate)
             {
                 case BulletEditMode.SlotRole01:
+                    GroupBulletSlotRole.transform.GetChild(i).GetComponent<BulletSlotRole>().IsHaveBullet = true;
                     _bagData.slotRole01 = perSc._bulletData.ID;
                     break;
                 case BulletEditMode.SlotRole02:
                     _bagData.slotRole02 = perSc._bulletData.ID;
+                    GroupBulletSlotRole.transform.GetChild(i).GetComponent<BulletSlotRole>().IsHaveBullet = true;
                     break;
                 case BulletEditMode.SlotRole03:
                     _bagData.slotRole03 = perSc._bulletData.ID;
+                    GroupBulletSlotRole.transform.GetChild(i).GetComponent<BulletSlotRole>().IsHaveBullet = true;
                     break;
                 case BulletEditMode.SlotRole04:
                     _bagData.slotRole04 = perSc._bulletData.ID;
+                    GroupBulletSlotRole.transform.GetChild(i).GetComponent<BulletSlotRole>().IsHaveBullet = true;
                     break;
                 case BulletEditMode.SlotRole05:
                     _bagData.slotRole05 = perSc._bulletData.ID;
+                    GroupBulletSlotRole.transform.GetChild(i).GetComponent<BulletSlotRole>().IsHaveBullet = true;
                     break;
             }
         }

@@ -97,8 +97,8 @@ public class BagData
         {
             if (each.bulletID != 0)
             {
-                BulletData curBulletData = FindBulletData(BulletDesignJsons, each.bulletID);
-                GameObject bagSlotBullet = curBulletData.InstanceBullet(Vector3.zero,BulletInsMode.Spawner);
+                GameObject bagSlotBullet = BulletManager.Instance.
+                    InstanceBullet(each.bulletID,BulletInsMode.Spawner);
                 DraggableBulletSpawner perSc = bagSlotBullet.GetComponentInChildren<DraggableBulletSpawner>();
                 perSc.Count = each.bulletCount;
                 perSc.InitData();
@@ -133,13 +133,17 @@ public class BagData
 
         void _instanceslotRole(int slotRoleID,int slotIndex,BulletEditMode bulletEditMode)
         {
-            BulletData slotRoleData = FindBulletData(BulletDesignJsons, slotRoleID);
-            GameObject slotRoleGO = GetBulletInsByBulletData(slotRoleData);
+            //
+            GameObject curSlotRole = groupBulletSlotRole.transform.GetChild(slotIndex - 1).gameObject;
+            BulletSlotRole curSlotRoleSC = curSlotRole.GetComponent<BulletSlotRole>();
+            curSlotRoleSC.IsHaveBullet = true;
+            
+            GameObject slotRoleGO = BulletManager.Instance.InstanceBullet(slotRoleID,BulletInsMode.EditB);
             DraggableBullet slotRoleGOSc = slotRoleGO.GetComponentInChildren<DraggableBullet>();
             slotRoleGOSc.BulletState = bulletEditMode;
             slotRoleGO.transform.SetParent(groupBullet.transform);
             slotRoleGO.transform.localScale = Vector3.one;
-            slotRoleGO.transform.position = groupBulletSlotRole.transform.GetChild(slotIndex - 1).position;
+            slotRoleGO.transform.position = curSlotRole.transform.position;
         }
     }
 
@@ -155,15 +159,6 @@ public class BagData
         return BagJson;
     }
     #endregion
-
-    GameObject GetBulletInsByBulletData(BulletData curBulletData)
-    {
-        GameObject bullet = GameObject.Instantiate(curBulletData.bulletEditAPrefab);
-        BulletBase bulletBase = bullet.GetComponentInChildren<BulletBase>();
-        bulletBase._bulletData = curBulletData;
-        bulletBase.InitBulletData();
-        return bullet;
-    }
 }
 
 public class BagDataJson
@@ -192,13 +187,11 @@ public enum MapNodeState
 #endregion
 
 #region 输赢条件相关
-
 public enum WinOrFail
 {
     InLevel = 1,
     Win = 2,
     Fail = 3
 }
-
 #endregion
 

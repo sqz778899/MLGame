@@ -95,7 +95,7 @@ public class LevelLogicMono : MonoBehaviour
     
         foreach (BulletData eBuDT in bulletDatas)
         {
-            GameObject curBullet = eBuDT.InstanceBullet(pos);
+            GameObject curBullet = BulletManager.Instance.InstanceBullet(eBuDT,BulletInsMode.Inner,pos);
             if (curBullet != null && GroupBullet != null)
                 curBullet.transform.SetParent(GroupBullet.transform);
             yield return new WaitForSeconds(delay);  // 在发射下一个子弹之前，等待delay秒

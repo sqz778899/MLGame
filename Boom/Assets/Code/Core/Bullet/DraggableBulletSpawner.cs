@@ -42,7 +42,7 @@ public class DraggableBulletSpawner : BulletBase, IPointerDownHandler, IPointerU
         if (childBulletIns == null && Count > 0)
         {
             IsChangeCount = true;
-            childBulletIns = _bulletData.InstanceBullet(transform.parent.position, BulletInsMode.EditA);
+            childBulletIns = BulletManager.Instance.InstanceBullet(_bulletData,BulletInsMode.EditA,transform.parent.position);
             childBulletIns.transform.SetParent(GroupBullet.transform);
             childBulletIns.transform.localScale = Vector3.one;
             DraggableBullet DraBuSC = childBulletIns.GetComponentInChildren<DraggableBullet>();
@@ -92,6 +92,10 @@ public class DraggableBulletSpawner : BulletBase, IPointerDownHandler, IPointerU
         {
             if (result.gameObject.CompareTag("BulletSlotRole"))
             {
+                BulletSlotRole curSlot = result.gameObject.GetComponent<BulletSlotRole>();
+                if (curSlot.IsHaveBullet)
+                    continue;
+                
                 DraggableBullet tempSC = childBulletIns.GetComponentInChildren<DraggableBullet>();
                 tempSC.SetBulletState(result.gameObject);
                 BulletSlot curSlotSC = result.gameObject.GetComponent<BulletSlot>();
@@ -103,6 +107,7 @@ public class DraggableBulletSpawner : BulletBase, IPointerDownHandler, IPointerU
                 // 如果有一个子弹槽，真正Spwan出来一个Bullet
                 childBulletIns.transform.position = result.gameObject.transform.position;
                 childBulletIns = null;
+                curSlot.IsHaveBullet = true;
                 return;
             }
         }

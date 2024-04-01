@@ -5,10 +5,6 @@
     "speed": 10.0,
     "damage": 1,
     "elementalType":1,
-    "bulletPrefabName": "P_Bullet_Inner_01",
-    "bulletEditAName": "P_Bullet_Edit_a_01",
-    "bulletEditBName": "P_Bullet_Edit_b_01",
-    "bulleSpawnerName": "P_Bullet_Spawner_01",
     "hitEffectName": ""
   }
 ]

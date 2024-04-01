@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 #region 一些枚举类
 public enum ElementalTypes
@@ -43,13 +44,10 @@ public class BulletData
     public ElementalTypes elementalType;
     
     //..............Instance..............
-    public GameObject bulletPrefab;
-    public GameObject bulletEditAPrefab;
-    public GameObject bulletEditBPrefab;
-    public GameObject bulletSpawnerPrefab;
+    public Sprite imgBullet;     //....image自动根据ID设置
     public GameObject hitEffect; // 击中效果预制体
 
-    public void SetDataByID()
+    public void SetDataByID(BulletInsMode bulletInsMode = BulletInsMode.EditA)
     {
         BulletDataJson curData = null;
         List<BulletDataJson> BulletDesignJsons = CharacterManager.Instance.BulletDesignJsons;
@@ -66,14 +64,9 @@ public class BulletData
         speed = curData.speed;
         damage = curData.damage;
         elementalType = (ElementalTypes)curData.elementalType;
-        bulletPrefab = ResManager.instance.GetAssetCache<GameObject>(
-                PathConfig.BulletAssetDir + curData.bulletPrefabName + ".prefab");
-        bulletEditAPrefab = ResManager.instance.GetAssetCache<GameObject>(
-            PathConfig.BulletAssetDir + curData.bulletEditAName + ".prefab");
-        bulletEditBPrefab = ResManager.instance.GetAssetCache<GameObject>(
-            PathConfig.BulletAssetDir + curData.bulletEditBName + ".prefab");
-        bulletSpawnerPrefab = ResManager.instance.GetAssetCache<GameObject>(
-            PathConfig.BulletAssetDir + curData.bulleSpawnerName + ".prefab");
+
+        imgBullet = ResManager.instance.GetAssetCache<Sprite>(PathConfig.GetBulletImagePath(ID, bulletInsMode));
+        //实例化Prefab
         hitEffect = ResManager.instance.GetAssetCache<GameObject>(
             PathConfig.BulletAssetDir + curData.hitEffectName + ".prefab");
     }
@@ -92,47 +85,7 @@ public class BulletData
         }
         return curDataJson;
     }
-
-    public GameObject InstanceBullet(Vector3 pos = new Vector3(),BulletInsMode insMode= BulletInsMode.Inner)
-    {
-        SetDataByID();
-        List<BulletDataJson> BulletDesignJsons = CharacterManager.Instance.BulletDesignJsons;
-        BulletDataJson curDesign = null;
-        foreach (BulletDataJson eachDesign in BulletDesignJsons)
-        {
-            if (eachDesign.ID == ID)
-            {
-                curDesign = eachDesign;
-                break;
-            }
-        }
-
-        if (curDesign != null)
-        {
-            GameObject bullet = null;
-            switch (insMode)
-            {
-                case BulletInsMode.Inner:
-                    bullet = GameObject.Instantiate(bulletPrefab,pos,quaternion.identity);
-                    break;
-                case BulletInsMode.EditA:
-                    bullet = GameObject.Instantiate(bulletEditAPrefab,pos,quaternion.identity);
-                    break;
-                case BulletInsMode.EditB:
-                    bullet = GameObject.Instantiate(bulletEditBPrefab,pos,quaternion.identity);
-                    break;
-                case BulletInsMode.Spawner:
-                    bullet = GameObject.Instantiate(bulletSpawnerPrefab,pos,quaternion.identity);
-                    break;
-            }
-            bullet.transform.localScale = Vector3.one;
-            BulletBase bulletBase = bullet.GetComponentInChildren<BulletBase>();
-            bulletBase._bulletData = this;
-            bulletBase.InitBulletData();
-            return bullet;
-        }
-        return null;
-    }
+    
 }
 #endregion
 
@@ -145,9 +98,5 @@ public class BulletDataJson
     public int damage;
     public int elementalType;
     
-    public string bulletPrefabName;
-    public string bulletEditAName;
-    public string bulletEditBName;
-    public string bulleSpawnerName;
     public string hitEffectName;
 }

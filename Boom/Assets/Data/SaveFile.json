@@ -4,7 +4,7 @@
       {
         "slotID": 1,
         "bulletID": 1,
-        "bulletCount": 3
+        "bulletCount": 2
       },
       {
         "slotID": 2,
@@ -64,7 +64,7 @@
     ],
     "slotRole01": 1,
     "slotRole02": 1,
-    "slotRole03": 0,
+    "slotRole03": 1,
     "slotRole04": 0,
     "slotRole05": 0
   }
