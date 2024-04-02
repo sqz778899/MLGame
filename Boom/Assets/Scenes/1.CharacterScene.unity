@@ -839,6 +839,111 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &490985699
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 170514, guid: 2aa1e7c21640d254492fa8035a6411e1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 176466, guid: 2aa1e7c21640d254492fa8035a6411e1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 191002, guid: 2aa1e7c21640d254492fa8035a6411e1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 193692, guid: 2aa1e7c21640d254492fa8035a6411e1, type: 3}
+      propertyPath: m_Name
+      value: ExplosionFireballBlue
+      objectReference: {fileID: 0}
+    - target: {fileID: 193692, guid: 2aa1e7c21640d254492fa8035a6411e1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 401202, guid: 2aa1e7c21640d254492fa8035a6411e1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 401202, guid: 2aa1e7c21640d254492fa8035a6411e1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 401202, guid: 2aa1e7c21640d254492fa8035a6411e1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 401202, guid: 2aa1e7c21640d254492fa8035a6411e1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 401202, guid: 2aa1e7c21640d254492fa8035a6411e1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 401202, guid: 2aa1e7c21640d254492fa8035a6411e1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 401202, guid: 2aa1e7c21640d254492fa8035a6411e1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 401202, guid: 2aa1e7c21640d254492fa8035a6411e1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 401202, guid: 2aa1e7c21640d254492fa8035a6411e1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 401202, guid: 2aa1e7c21640d254492fa8035a6411e1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19821420, guid: 2aa1e7c21640d254492fa8035a6411e1, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19821420, guid: 2aa1e7c21640d254492fa8035a6411e1, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19845844, guid: 2aa1e7c21640d254492fa8035a6411e1, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19845844, guid: 2aa1e7c21640d254492fa8035a6411e1, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19845844, guid: 2aa1e7c21640d254492fa8035a6411e1, type: 3}
+      propertyPath: InitialModule.startRotationX.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19845844, guid: 2aa1e7c21640d254492fa8035a6411e1, type: 3}
+      propertyPath: InitialModule.startRotationY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19886732, guid: 2aa1e7c21640d254492fa8035a6411e1, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19886732, guid: 2aa1e7c21640d254492fa8035a6411e1, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2aa1e7c21640d254492fa8035a6411e1, type: 3}
 --- !u!1 &526722823
 GameObject:
   m_ObjectHideFlags: 0
@@ -1296,6 +1401,7 @@ GameObject:
   - component: {fileID: 774886754}
   - component: {fileID: 774886753}
   - component: {fileID: 774886752}
+  - component: {fileID: 774886756}
   m_Layer: 5
   m_Name: imSlotRole05
   m_TagString: BulletSlotRole
@@ -1400,6 +1506,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 774886750}
   m_CullTransparentMesh: 1
+--- !u!114 &774886756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774886750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb3f314f0e3401e9e7ccbe56e7e4d67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SlotID: 0
+  IsHaveBullet: 0
 --- !u!1 &776651151
 GameObject:
   m_ObjectHideFlags: 0
@@ -1413,6 +1533,7 @@ GameObject:
   - component: {fileID: 776651155}
   - component: {fileID: 776651154}
   - component: {fileID: 776651153}
+  - component: {fileID: 776651157}
   m_Layer: 5
   m_Name: imSlotRole03
   m_TagString: BulletSlotRole
@@ -1517,6 +1638,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 776651151}
   m_CullTransparentMesh: 1
+--- !u!114 &776651157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 776651151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb3f314f0e3401e9e7ccbe56e7e4d67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SlotID: 0
+  IsHaveBullet: 0
 --- !u!1 &812811070
 GameObject:
   m_ObjectHideFlags: 0
@@ -2076,6 +2211,7 @@ GameObject:
   - component: {fileID: 1233128764}
   - component: {fileID: 1233128763}
   - component: {fileID: 1233128762}
+  - component: {fileID: 1233128766}
   m_Layer: 5
   m_Name: imSlotRole04
   m_TagString: BulletSlotRole
@@ -2180,6 +2316,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1233128760}
   m_CullTransparentMesh: 1
+--- !u!114 &1233128766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1233128760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb3f314f0e3401e9e7ccbe56e7e4d67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SlotID: 0
+  IsHaveBullet: 0
 --- !u!1 &1248253408
 GameObject:
   m_ObjectHideFlags: 0
@@ -2514,6 +2664,7 @@ GameObject:
   - component: {fileID: 1289356162}
   - component: {fileID: 1289356161}
   - component: {fileID: 1289356160}
+  - component: {fileID: 1289356164}
   m_Layer: 5
   m_Name: imSlotRole01
   m_TagString: BulletSlotRole
@@ -2618,6 +2769,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1289356158}
   m_CullTransparentMesh: 1
+--- !u!114 &1289356164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1289356158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb3f314f0e3401e9e7ccbe56e7e4d67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SlotID: 0
+  IsHaveBullet: 0
 --- !u!1 &1397756654
 GameObject:
   m_ObjectHideFlags: 0
@@ -3510,6 +3675,7 @@ GameObject:
   - component: {fileID: 1830987415}
   - component: {fileID: 1830987414}
   - component: {fileID: 1830987413}
+  - component: {fileID: 1830987417}
   m_Layer: 5
   m_Name: imSlotRole02
   m_TagString: BulletSlotRole
@@ -3614,6 +3780,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1830987411}
   m_CullTransparentMesh: 1
+--- !u!114 &1830987417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830987411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb3f314f0e3401e9e7ccbe56e7e4d67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SlotID: 0
+  IsHaveBullet: 0
 --- !u!1 &1860515274
 GameObject:
   m_ObjectHideFlags: 0
@@ -4185,3 +4365,4 @@ SceneRoots:
   - {fileID: 1496795483}
   - {fileID: 476547724}
   - {fileID: 661466432}
+  - {fileID: 490985699}

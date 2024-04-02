@@ -7,4 +7,22 @@
     "elementalType":1,
     "hitEffectName": ""
   }
+  ,
+  {
+    "ID":2,
+    "name":"Ice001",
+    "speed": 10.0,
+    "damage": 1,
+    "elementalType":2,
+    "hitEffectName": ""
+  }
+  ,
+  {
+    "ID":3,
+    "name":"Firec001",
+    "speed": 10.0,
+    "damage": 1,
+    "elementalType":3,
+    "hitEffectName": ""
+  }
 ]
