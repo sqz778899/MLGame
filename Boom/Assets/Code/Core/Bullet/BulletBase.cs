@@ -18,19 +18,41 @@ public class BulletBase : MonoBehaviour
         _bulletData.SetDataByID(bulletInsMode);
         
         //找到目标挂载子弹贴图的地方。
-        Image[] allImage = GetComponentsInChildren<Image>();
-        Image target = null;
-        foreach (var each in allImage)
+        Debug.Log(gameObject.name);
+        if (bulletInsMode == BulletInsMode.Inner)
         {
-            if (each.gameObject.name == "imgBullet")
+            SpriteRenderer targetSprite = null;
+            SpriteRenderer[] allRenderers = GetComponentsInChildren<SpriteRenderer>();
+            foreach (var each in allRenderers)
             {
-                target = each;
-                break;
+                if (each.gameObject.name == "imgBullet")
+                {
+                    targetSprite = each;
+                    break;
+                }
             }
+
+            if (targetSprite == null)
+                return;
+            
+            targetSprite.sprite = _bulletData.imgBullet;
         }
-        if (target == null)
-            return;
-        //
-        target.sprite = _bulletData.imgBullet;
+        else
+        {
+            Image[] allImage = GetComponentsInChildren<Image>();
+            Image target = null;
+            foreach (var each in allImage)
+            {
+                if (each.gameObject.name == "imgBullet")
+                {
+                    target = each;
+                    break;
+                }
+            }
+            if (target == null)
+                return;
+            //
+            target.sprite = _bulletData.imgBullet;
+        }
     }
 }

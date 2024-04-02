@@ -68,7 +68,7 @@ public class BulletData
         imgBullet = ResManager.instance.GetAssetCache<Sprite>(PathConfig.GetBulletImagePath(ID, bulletInsMode));
         //实例化Prefab
         hitEffect = ResManager.instance.GetAssetCache<GameObject>(
-            PathConfig.BulletAssetDir + curData.hitEffectName + ".prefab");
+            PathConfig.FXAssetDir + curData.hitEffectName + ".prefab");
     }
 
     public BulletDataJson GetJsonData()

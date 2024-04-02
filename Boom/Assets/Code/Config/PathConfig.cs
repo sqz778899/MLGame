@@ -9,16 +9,18 @@ public static class PathConfig
    
    public static string SaveFileJson = "Assets/Data/SaveFile.json";
    public static string BulletDesignJson = "Assets/Data/BulletDesign.json";
-   public static string BulletAssetDir = "Assets/Res/Bullet/Prefab/";
-   
+   public static string FXAssetDir = "Assets/Res/FX/Prefab/";
+
    //.........................ScriptObject...........................
    public static string MSceneManagerOBJ = "Assets/Res/MSceneManager.asset";
    public static string CharacterManagerOBJ = "Assets/Res/CharacterManager.asset";
    public static string BulletManagerOBJ = "Assets/Res/BulletManager.asset";
+   public static string CalculateDamageManagerOBJ = "Assets/Res/CalculateDamageManager.asset";
    ///.........................资源类.................................
    public static string DrawLineAsset = "Assets/Res/UI/Map/Prefab/P_DrawLine_01.prefab";
-   //子弹
+   //..........................子弹.............................................
    public static string BulletImageDir = "Assets/Res/Bullet/Textures/";
+   public static string BulletAssetDir = "Assets/Res/Bullet/Prefab/";
    
    //..........................全局大关卡...............................
    public static string LevelAssetDir = "Assets/Res/Levels/";
