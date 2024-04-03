@@ -30,7 +30,7 @@ public class LevelLogicMono : MonoBehaviour
     public TextMeshProUGUI txtScore;
     #endregion
 
-    private bool isBeginCalculation;
+    public bool isBeginCalculation;
     public GameObject WinGUI;
     public GameObject FailGUI;
     public GameObject Enemy;
@@ -52,7 +52,8 @@ public class LevelLogicMono : MonoBehaviour
     {
         //如果子弹为0，且敌人未死则失败
         if (GroupBullet.transform.childCount == 0 && Enemy != null)
-            CharacterManager.Instance.WinOrFailState = WinOrFail.Fail;
+            if ( Enemy.GetComponent<Enemy>().health > 0)
+                CharacterManager.Instance.WinOrFailState = WinOrFail.Fail;
         
         switch (CharacterManager.Instance.WinOrFailState)
         {

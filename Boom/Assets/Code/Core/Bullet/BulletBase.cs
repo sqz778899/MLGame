@@ -18,7 +18,6 @@ public class BulletBase : MonoBehaviour
         _bulletData.SetDataByID(bulletInsMode);
         
         //找到目标挂载子弹贴图的地方。
-        Debug.Log(gameObject.name);
         if (bulletInsMode == BulletInsMode.Inner)
         {
             SpriteRenderer targetSprite = null;

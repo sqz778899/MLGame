@@ -5,7 +5,7 @@
     "speed": 10.0,
     "damage": 1,
     "elementalType":1,
-    "hitEffectName": ""
+    "hitEffectName": "FX_Bullet01_hit"
   }
   ,
   {
@@ -23,6 +23,6 @@
     "speed": 10.0,
     "damage": 1,
     "elementalType":3,
-    "hitEffectName": ""
+    "hitEffectName": "FX_Bullet03_hit"
   }
 ]

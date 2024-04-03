@@ -35,18 +35,21 @@ public class MapLogic : MonoBehaviour
         }
         
         //..................下一关.......................
-        int nextLevelID = MSceneManager.Instance.LevelID + 1;
-        MapNode NextNode = null;
-        foreach (MapNode eachNode in _allNodes)
+        if (IsFinishedLevels.Contains(MSceneManager.Instance.LevelID))
         {
-            if (eachNode.LevelID == nextLevelID)
-                NextNode = eachNode;
-        }
+            int nextLevelID = MSceneManager.Instance.LevelID + 1;
+            MapNode NextNode = null;
+            foreach (MapNode eachNode in _allNodes)
+            {
+                if (eachNode.LevelID == nextLevelID)
+                    NextNode = eachNode;
+            }
 
-        if (NextNode != null)
-        {
-            NextNode.State = MapNodeState.UnLocked;
-            NextNode.ChangeState();
+            if (NextNode != null)
+            {
+                NextNode.State = MapNodeState.UnLocked;
+                NextNode.ChangeState();
+            }
         }
     }
 }

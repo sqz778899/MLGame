@@ -18,6 +18,9 @@ public static class PathConfig
    public static string CalculateDamageManagerOBJ = "Assets/Res/CalculateDamageManager.asset";
    ///.........................资源类.................................
    public static string DrawLineAsset = "Assets/Res/UI/Map/Prefab/P_DrawLine_01.prefab";
+   public static string TxtHitPB = "Assets/Res/UI/Prefab/P_txtHit_01.prefab";
+   
+   
    //..........................子弹.............................................
    public static string BulletImageDir = "Assets/Res/Bullet/Textures/";
    public static string BulletAssetDir = "Assets/Res/Bullet/Prefab/";

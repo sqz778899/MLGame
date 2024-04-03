@@ -14,10 +14,10 @@ public class Bullet : BulletBase
         if (other.CompareTag("Enemy"))
         {
             // 如果有敌人，将其血量减少
-            Enemy enemyHealth = other.GetComponent<Enemy>();
-            if (enemyHealth != null)
+            Enemy enemy = other.GetComponent<Enemy>();
+            if (enemy != null)
             {
-                enemyHealth.TakeDamage(_bulletData.damage);
+                CalculateDamageManager.Instance.CalDamage(_bulletData,enemy);
             }
 
             // 创建击中特效
