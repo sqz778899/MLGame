@@ -153,7 +153,7 @@ public class TrunkManager: ScriptableObject
         bagDataJson.slotRole05 = 0;
 
         _saveFile.Score = 0;
-        _saveFile.Gold = 0;
+        _saveFile.Gold = 10000000;
         _saveFile.SupremeCharms = new List<int>();
         #endregion
         

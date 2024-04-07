@@ -21,7 +21,8 @@ public enum BulletInsMode
     EditA = 2,
     EditB = 3,
     Spawner = 4,
-    Roll = 5
+    Roll = 5,
+    Standby = 6
 }
 #endregion
 

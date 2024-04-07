@@ -50,7 +50,10 @@ public static class PathConfig
             orginName = "P_Bullet_Edit_a_Template.prefab";
             break;
          case BulletInsMode.Roll:
-            orginName = "P_Bullet_Roll_Template.prefab";;
+            orginName = "P_Bullet_Roll_Template.prefab";
+            break;
+         case BulletInsMode.Standby:
+            orginName = "P_Bullet_Standby_Template.prefab";
             break;
       }
       string BulletTemplate = BulletAssetDir + orginName;
@@ -76,6 +79,9 @@ public static class PathConfig
             orginName = "T_Bullet_Edit_a_";
             break;
          case BulletInsMode.Roll:
+            orginName = "T_Bullet_Edit_a_";
+            break;
+         case BulletInsMode.Standby:
             orginName = "T_Bullet_Edit_a_";
             break;
       }

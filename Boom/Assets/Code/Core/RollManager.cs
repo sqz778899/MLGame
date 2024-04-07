@@ -25,11 +25,22 @@ public class RollManager: ScriptableObject
     //10概率 Bullet
 
     GameObject GroupRoll;
-    
-    public void RollBullet()
+    GameObject GroupSlotStandby;
+    GameObject GroupBullet;
+
+    void InitData()
     {
         if (GroupRoll == null)
             GroupRoll = GameObject.Find("GroupRoll");
+        if (GroupSlotStandby == null)
+            GroupSlotStandby = GameObject.Find("GroupSlotStandby");
+        if (GroupBullet == null)
+            GroupBullet = GameObject.Find("GroupBullet");
+    }
+    
+    public void OnceRollBullet()
+    {
+        InitData();
         
         //GetProbabilitys
         List<RollProbability> rollProbs = DealProb(TrunkManager.Instance.GetRollProbability());
@@ -37,11 +48,15 @@ public class RollManager: ScriptableObject
         //Cal gold
         int curCost = CharacterManager.Instance.Cost;
         int curGold = CharacterManager.Instance.Gold;
-        /*if (curGold < curCost)
+        if (curGold < curCost)
             return;
 
-        CharacterManager.Instance.Gold -= curCost;*/
+        CharacterManager.Instance.Gold -= curCost;
         //Clean Ins
+        int preRollIns = GroupRoll.transform.childCount;
+        for (int i = preRollIns - 1; i >= 0; i--)
+            DestroyImmediate(GroupRoll.transform.GetChild(i).gameObject);
+        
         //New Ins
         for (int i = 0; i < 5; i++)
         {
@@ -67,6 +82,44 @@ public class RollManager: ScriptableObject
         }
     }
 
+    public void SelOne(GameObject SelGO)
+    {
+        InitData();
+        RollBullet curSC = SelGO.GetComponentInChildren<RollBullet>();
+        if (curSC._bulletData.ID == 0)//Score
+        {
+            
+        }
+        else
+        {
+            GameObject curSlot = null;
+            for (int i = 0; i < GroupSlotStandby.transform.childCount; i++)
+            {
+                GameObject tmpSlot = GroupSlotStandby.transform.GetChild(i).gameObject;
+                BulletSlotStandby curSlotSC = tmpSlot.GetComponent<BulletSlotStandby>();
+                if (curSlotSC.curBulletID == 0)
+                {
+                    curSlot = tmpSlot;
+                    curSlotSC.curBulletID = curSC._bulletData.ID;
+                    break;
+                }
+            }
+
+            if (curSlot==null)
+                return;
+            
+            //
+            GameObject curSDIns = BulletManager.Instance.InstanceBullet(curSC._bulletData, BulletInsMode.Standby);
+            curSDIns.transform.SetParent(GroupBullet.transform);
+            curSDIns.transform.position = Vector3.zero;
+            curSDIns.transform.localScale = Vector3.one;
+            curSDIns.GetComponent<RectTransform>().anchoredPosition3D =
+                curSlot.GetComponent<RectTransform>().anchoredPosition3D;
+        }
+        Debug.Log(curSC._bulletData.ID);
+    }
+
+    #region SomeFunc
     List<RollProbability>  DealProb(List<RollProbability> OriginProbs)
     {
         List<RollProbability> newProbs = new List<RollProbability>();
@@ -130,5 +183,6 @@ public class RollManager: ScriptableObject
             ResManager.instance.GetAssetCache<GameObject>(PathConfig.RollScorePB));
         return RollScoreIns;
     }
+    #endregion
 }
 

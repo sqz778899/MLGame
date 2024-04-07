@@ -9,12 +9,12 @@
       {
         "slotID": 2,
         "bulletID": 2,
-        "bulletCount": 0
+        "bulletCount": 1
       },
       {
         "slotID": 3,
         "bulletID": 3,
-        "bulletCount": 0
+        "bulletCount": 1
       },
       {
         "slotID": 4,
@@ -62,14 +62,14 @@
         "bulletCount": 0
       }
     ],
-    "slotRole01": 3,
-    "slotRole02": 2,
+    "slotRole01": 0,
+    "slotRole02": 0,
     "slotRole03": 0,
     "slotRole04": 0,
     "slotRole05": 0
   },
   "Score": 0,
-  "Gold": 0,
+  "Gold": 10000000,
   "SupremeCharms": [],
   "UserMapSate": [
     {
