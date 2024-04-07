@@ -9,12 +9,12 @@
       {
         "slotID": 2,
         "bulletID": 2,
-        "bulletCount": 5
+        "bulletCount": 0
       },
       {
         "slotID": 3,
         "bulletID": 3,
-        "bulletCount": 5
+        "bulletCount": 0
       },
       {
         "slotID": 4,
@@ -62,10 +62,31 @@
         "bulletCount": 0
       }
     ],
-    "slotRole01": 0,
-    "slotRole02": 1,
-    "slotRole03": 1,
-    "slotRole04": 1,
+    "slotRole01": 3,
+    "slotRole02": 2,
+    "slotRole03": 0,
+    "slotRole04": 0,
     "slotRole05": 0
-  }
+  },
+  "Score": 0,
+  "Gold": 0,
+  "SupremeCharms": [],
+  "UserMapSate": [
+    {
+      "CurMapID": 1,
+      "MapID": 1,
+      "LevelID": 1,
+      "IsFinishedLevels": []
+    }
+  ],
+  "UserProbabilitys": [
+    {
+      "ID": 0,
+      "Probability": 0.9
+    },
+    {
+      "ID": 1,
+      "Probability": 0.1
+    }
+  ]
 }

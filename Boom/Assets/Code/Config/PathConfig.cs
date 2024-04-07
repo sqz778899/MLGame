@@ -12,14 +12,17 @@ public static class PathConfig
    public static string FXAssetDir = "Assets/Res/FX/Prefab/";
 
    //.........................ScriptObject...........................
+   public static string TrunkManagerOBJ = "Assets/Res/TrunkManager.asset";
+   public static string RollManagerOBJ = "Assets/Res/RollManager.asset";
    public static string MSceneManagerOBJ = "Assets/Res/MSceneManager.asset";
-   public static string CharacterManagerOBJ = "Assets/Res/CharacterManager.asset";
-   public static string BulletManagerOBJ = "Assets/Res/BulletManager.asset";
+   public static string CharacterManagerOBJ = "Assets/Res/Character/CharacterManager.asset";
+   public static string BulletManagerOBJ = "Assets/Res/Bullet/BulletManager.asset";
    public static string CalculateDamageManagerOBJ = "Assets/Res/CalculateDamageManager.asset";
+
    ///.........................资源类.................................
    public static string DrawLineAsset = "Assets/Res/UI/Map/Prefab/P_DrawLine_01.prefab";
    public static string TxtHitPB = "Assets/Res/UI/Prefab/P_txtHit_01.prefab";
-   
+   public static string RollScorePB = "Assets/Res/Bullet/Prefab/P_RollScore_Template.prefab";
    
    //..........................子弹.............................................
    public static string BulletImageDir = "Assets/Res/Bullet/Textures/";
@@ -46,6 +49,9 @@ public static class PathConfig
          case BulletInsMode.EditB:
             orginName = "P_Bullet_Edit_a_Template.prefab";
             break;
+         case BulletInsMode.Roll:
+            orginName = "P_Bullet_Roll_Template.prefab";;
+            break;
       }
       string BulletTemplate = BulletAssetDir + orginName;
       return BulletTemplate;
@@ -67,6 +73,9 @@ public static class PathConfig
             orginName = "T_Bullet_Edit_a_";
             break;
          case BulletInsMode.EditB:
+            orginName = "T_Bullet_Edit_a_";
+            break;
+         case BulletInsMode.Roll:
             orginName = "T_Bullet_Edit_a_";
             break;
       }

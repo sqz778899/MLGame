@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class Score : MonoBehaviour
+public class ScoreTextSync : MonoBehaviour
 {
     TextMeshProUGUI _txtScore;
     void Start()

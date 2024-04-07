@@ -61,4 +61,5 @@ public class FXTranslateEditor
             AssetDatabase.RenameAsset(path, newName);
         }
     }
+    
 }

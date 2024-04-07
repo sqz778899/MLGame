@@ -9,9 +9,9 @@ public class CharacterManagerEditor: Editor
         DrawDefaultInspector(); // 把默认的inspector的内容画出来
 
         CharacterManager myScript = (CharacterManager)target;
-        if(GUILayout.Button("SaveFile"))
+        if(GUILayout.Button("dddd"))
         {
-            myScript.LoadSaveFile();
+            //myScript.LoadSaveFile();
         }
     }
 }

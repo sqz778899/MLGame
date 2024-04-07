@@ -6804,6 +6804,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Enemy_01
       objectReference: {fileID: 0}
+    - target: {fileID: 4105577481829317920, guid: 8a8809792445aaa4ab4fd12202699af9, type: 3}
+      propertyPath: award.gold
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 4105577481829317920, guid: 8a8809792445aaa4ab4fd12202699af9, type: 3}
+      propertyPath: award.score
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 7291240283817990165, guid: 8a8809792445aaa4ab4fd12202699af9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.2

@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using Newtonsoft.Json;
 
 public class CharacterManager :ScriptableObject
 {
@@ -19,61 +17,20 @@ public class CharacterManager :ScriptableObject
         }
     }
     #endregion
-
-    #region 存档相关
-    SaveFileJson _saveFile = new SaveFileJson();
-    public void SetSaveFileTemplate()
-    {
-        _saveFile = new SaveFileJson();
-        BagDataJson bagDataJson = new BagDataJson();
-        List<SingleSlot> bagSlots = new List<SingleSlot>();
-        bagDataJson.bagSlots = bagSlots;
-        _saveFile.BagData = bagDataJson;
-
-        for (int i = 0; i < 12; i++)
-        {
-            SingleSlot temSlot = new SingleSlot();
-            temSlot.slotID = i + 1;
-            temSlot.bulletCount = 0;
-            temSlot.bulletID = 0;
-            bagSlots.Add(temSlot);
-        }
-        bagDataJson.slotRole01 = 0;
-        bagDataJson.slotRole02 = 0;
-        bagDataJson.slotRole03 = 0;
-        bagDataJson.slotRole04 = 0;
-        bagDataJson.slotRole05 = 0;
-        
-        string content01 = JsonConvert.SerializeObject(_saveFile,(Formatting) Formatting.Indented);
-        File.WriteAllText(PathConfig.SaveFileJson, content01);
-    }
-    
-    public void LoadSaveFile()
-    {
-        string SaveFileJsonString = File.ReadAllText(PathConfig.SaveFileJson);
-        _saveFile = JsonConvert.DeserializeObject<SaveFileJson>(SaveFileJsonString);
-        _bagData = new BagData();
-        _bagData.InitDataByJson(_saveFile.BagData,BulletDesignJsons);
-        WinOrFailState = WinOrFail.InLevel;
-        SetBullet();
-    }
-
-    public void SaveFile()
-    {
-        _saveFile.BagData = _bagData.SetDataJson();
-        string content01 = JsonConvert.SerializeObject(_saveFile,(Formatting) Formatting.Indented);
-        File.WriteAllText(PathConfig.SaveFileJson, content01);
-    }
-    #endregion
     
     public GameObject BulletGroup;
     public GameObject GroupBulletSlot;
     public GameObject GroupBulletSlotRole;
     public List<BulletData> Bullets;
-    public List<BulletDataJson> BulletDesignJsons;
     
-    BagData _bagData;//背包相关
+    //...............重要数据................
+    public BagData BagData = new BagData();//背包相关
     public int Score;
+    public int Gold;
+    public int Cost = 5;
+    public List<SupremeCharm> SupremeCharms = new List<SupremeCharm>();
+    
+    
     public WinOrFail WinOrFailState;
 
     public void InitData()
@@ -88,17 +45,18 @@ public class CharacterManager :ScriptableObject
         for (int i = 0; i < GroupBulletSlotRole.transform.childCount; i++)
             GroupBulletSlotRole.transform.GetChild(i)
                 .GetComponent<BulletSlotRole>().IsHaveBullet = false;
-        
+
+        WinOrFailState = WinOrFail.InLevel;
+        SetBullet();
     }
     
-    public void SetBullet()
+    void SetBullet()
     {
-        InitData();
         if (BulletGroup == null || GroupBulletSlot == null)
             return;
 
         //............SlotRole 更新.....................
-        _bagData.ClearBagData();
+        BagData.ClearBagData();
         for (int i = 0; i < GroupBulletSlotRole.transform.childCount; i++)
             GroupBulletSlotRole.transform.GetChild(i)
                 .GetComponent<BulletSlotRole>().IsHaveBullet = false;
@@ -111,22 +69,22 @@ public class CharacterManager :ScriptableObject
             {
                 case BulletEditMode.SlotRole01:
                     GroupBulletSlotRole.transform.GetChild(0).GetComponent<BulletSlotRole>().IsHaveBullet = true;
-                    _bagData.slotRole01 = perSc._bulletData.ID;
+                    BagData.slotRole01 = perSc._bulletData.ID;
                     break;
                 case BulletEditMode.SlotRole02:
-                    _bagData.slotRole02 = perSc._bulletData.ID;
+                    BagData.slotRole02 = perSc._bulletData.ID;
                     GroupBulletSlotRole.transform.GetChild(1).GetComponent<BulletSlotRole>().IsHaveBullet = true;
                     break;
                 case BulletEditMode.SlotRole03:
-                    _bagData.slotRole03 = perSc._bulletData.ID;
+                    BagData.slotRole03 = perSc._bulletData.ID;
                     GroupBulletSlotRole.transform.GetChild(2).GetComponent<BulletSlotRole>().IsHaveBullet = true;
                     break;
                 case BulletEditMode.SlotRole04:
-                    _bagData.slotRole04 = perSc._bulletData.ID;
+                    BagData.slotRole04 = perSc._bulletData.ID;
                     GroupBulletSlotRole.transform.GetChild(3).GetComponent<BulletSlotRole>().IsHaveBullet = true;
                     break;
                 case BulletEditMode.SlotRole05:
-                    _bagData.slotRole05 = perSc._bulletData.ID;
+                    BagData.slotRole05 = perSc._bulletData.ID;
                     GroupBulletSlotRole.transform.GetChild(4).GetComponent<BulletSlotRole>().IsHaveBullet = true;
                     break;
             }
@@ -135,7 +93,7 @@ public class CharacterManager :ScriptableObject
         //...........BagSlot 更新......................
         DraggableBulletSpawner[] Spawners = GroupBulletSlot.GetComponentsInChildren<DraggableBulletSpawner>();
        
-        foreach (SingleSlot each in _bagData.bagSlots)
+        foreach (SingleSlot each in BagData.bagSlots)
         {
             foreach (DraggableBulletSpawner eachSpawner in Spawners)
             {
@@ -147,27 +105,13 @@ public class CharacterManager :ScriptableObject
             }
         }
         //.....................子弹上膛.........................
-        _bagData.RefreshBullets(BulletDesignJsons);
-        Bullets = _bagData.curBullets;
+        BagData.RefreshBullets(TrunkManager.Instance.BulletDesignJsons);
+        Bullets = BagData.curBullets;
         
-        SaveFile();
+        //TrunkManager.Instance.SaveFile();
         Debug.Log("Set BulletSlotRole");
     }
-
-    //..............初始化相关....................
-    void OnEnable()
-    {
-        BulletDesignJsons = LoadBulletData();
-        Score = 0;
-    }
     
-    public List<BulletDataJson> LoadBulletData()
-    {
-        string BulletDesignString = File.ReadAllText(PathConfig.BulletDesignJson);
-        List<BulletDataJson> BulletDataJsons = JsonConvert.DeserializeObject<List<BulletDataJson>>(BulletDesignString);
-        return BulletDataJsons;
-    }
-
     #region 模板
     /*
     void Temp()

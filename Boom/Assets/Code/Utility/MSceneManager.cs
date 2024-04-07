@@ -2,8 +2,8 @@
 using UnityEditor;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.Rendering;
 
-[CreateAssetMenu]
 public class MSceneManager: ScriptableObject
 {
     #region 单例
@@ -19,29 +19,36 @@ public class MSceneManager: ScriptableObject
         }
     }
     #endregion
-    
-    public int MapID;
-    public int LevelID;
-    public List<int> IsFinishedLevels;
-    
+
+    public MapSate CurMapSate = new MapSate();
     public int CurrentSceneIndex;
     
-    void OnEnable()
-    {
-        IsFinishedLevels = new List<int>();
-    }
 
     public void WinThisLevel()
     {
-        IsFinishedLevels.Add(LevelID);
+        CurMapSate.IsFinishedLevels.Add(CurMapSate.LevelID);
     }
     
     public void LoadScene(int SceneID)
     {
         CurrentSceneIndex = SceneID;
         SceneManager.LoadScene(CurrentSceneIndex);
+        TrunkManager.Instance.SaveFile();
     }
 
+    public void NewGame()
+    {
+        TrunkManager.Instance.SetSaveFileTemplate();
+        CurrentSceneIndex = 1;
+        SceneManager.LoadScene(CurrentSceneIndex);
+    }
+
+    public void ContinueGame()
+    {
+        CurrentSceneIndex = 1;
+        SceneManager.LoadScene(CurrentSceneIndex);
+    }
+    
     public void ExitGame()
     {
 #if UNITY_EDITOR

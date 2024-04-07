@@ -54,7 +54,7 @@ public class MapNode : MonoBehaviour
 
     public void LoadSceneByNode(int SceneID)
     {
-        MSceneManager.Instance.LevelID = LevelID;
+        MSceneManager.Instance.CurMapSate.LevelID = LevelID;
         MSceneManager.Instance.LoadScene(SceneID);
     }
 }

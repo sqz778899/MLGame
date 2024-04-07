@@ -12,7 +12,7 @@ public class CharacterScene : MonoBehaviour
 
     void Start()
     {
-        CharacterManager.Instance.LoadSaveFile();
+        TrunkManager.Instance.LoadSaveFile();
     }
 
     public void EditBullet()
@@ -39,7 +39,7 @@ public class CharacterScene : MonoBehaviour
 
     public void LoadSceneInCharacter(int ScenceID)
     {
-        MSceneManager.Instance.MapID = MapID;
+        MSceneManager.Instance.CurMapSate.MapID = MapID;
         MSceneManager.Instance.LoadScene(ScenceID);
     }
 }

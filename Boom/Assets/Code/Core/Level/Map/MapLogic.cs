@@ -8,7 +8,7 @@ public class MapLogic : MonoBehaviour
     MapNode[] _allNodes;
     void Start()
     {
-        int curMapID = MSceneManager.Instance.MapID;
+        int curMapID = MSceneManager.Instance.CurMapSate.MapID;
         string curMapName = string.Format("P_Map_{0}.prefab", curMapID.ToString("D2"));
         GameObject curMapIns = Instantiate(
             ResManager.instance.GetAssetCache<GameObject>(PathConfig.LevelAssetDir + curMapName),
@@ -21,7 +21,7 @@ public class MapLogic : MonoBehaviour
 
     public void RefreshMapNodeState()
     {
-        List<int> IsFinishedLevels = MSceneManager.Instance.IsFinishedLevels;
+        List<int> IsFinishedLevels = MSceneManager.Instance.CurMapSate.IsFinishedLevels;
         foreach (MapNode eachNode in _allNodes)
         {
             foreach (int eachIsFinishedLevel in IsFinishedLevels)
@@ -35,9 +35,9 @@ public class MapLogic : MonoBehaviour
         }
         
         //..................下一关.......................
-        if (IsFinishedLevels.Contains(MSceneManager.Instance.LevelID))
+        if (IsFinishedLevels.Contains(MSceneManager.Instance.CurMapSate.LevelID))
         {
-            int nextLevelID = MSceneManager.Instance.LevelID + 1;
+            int nextLevelID = MSceneManager.Instance.CurMapSate.LevelID + 1;
             MapNode NextNode = null;
             foreach (MapNode eachNode in _allNodes)
             {

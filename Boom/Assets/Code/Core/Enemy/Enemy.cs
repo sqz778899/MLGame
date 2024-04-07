@@ -6,9 +6,11 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public int health = 1;
-    public int score = 100;
     public EnemyState state;
     public GameObject txtHitNode;
+    
+    //Award...........
+    public Award award;
     
     LevelLogicMono _LevelLogic;
 
@@ -49,7 +51,7 @@ public class Enemy : MonoBehaviour
     }
     void DestroySelf()
     {
-        CharacterManager.Instance.Score += score;
+        CharacterManager.Instance.Score += award.score;
         CharacterManager.Instance.WinOrFailState = WinOrFail.Win;
         _LevelLogic.isBeginCalculation = true; //通知进行结算
         Destroy(gameObject);

@@ -5,14 +5,6 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 #region 一些枚举类
-public enum ElementalTypes
-{
-    NonElemental = 1,
-    Ice = 2,
-    Fire = 3,
-    Electric = 4
-}
-
 public enum BulletEditMode
 {
     Non = 0,
@@ -28,7 +20,8 @@ public enum BulletInsMode
     Inner = 1,
     EditA = 2,
     EditB = 3,
-    Spawner = 4
+    Spawner = 4,
+    Roll = 5
 }
 #endregion
 
@@ -50,7 +43,7 @@ public class BulletData
     public void SetDataByID(BulletInsMode bulletInsMode = BulletInsMode.EditA)
     {
         BulletDataJson curData = null;
-        List<BulletDataJson> BulletDesignJsons = CharacterManager.Instance.BulletDesignJsons;
+        List<BulletDataJson> BulletDesignJsons = TrunkManager.Instance.BulletDesignJsons;
         foreach (BulletDataJson eachDesignJson in BulletDesignJsons)
         {
             if (eachDesignJson.ID == ID)
@@ -77,8 +70,7 @@ public class BulletData
             return null;
 
         BulletDataJson curDataJson = null;
-        List<BulletDataJson> bulletDataJsons = CharacterManager.Instance.LoadBulletData();
-        foreach (BulletDataJson perDataJson in bulletDataJsons)
+        foreach (BulletDataJson perDataJson in TrunkManager.Instance.BulletDesignJsons)
         {
             if (ID == perDataJson.ID)
                 curDataJson = perDataJson;

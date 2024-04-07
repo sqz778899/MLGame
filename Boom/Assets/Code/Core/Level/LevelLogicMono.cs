@@ -11,7 +11,7 @@ public class LevelLogicMono : MonoBehaviour
 
     void InitLevel()
     {
-        int curLevelID = MSceneManager.Instance.LevelID;
+        int curLevelID = MSceneManager.Instance.CurMapSate.LevelID;
         string curLevelName = string.Format("P_Level_{0}.prefab", curLevelID.ToString("D2"));
         GameObject LevelIns = Instantiate(ResManager.instance.GetAssetCache<GameObject>
             (PathConfig.LevelAssetDir+curLevelName), GroupLevel.transform);
