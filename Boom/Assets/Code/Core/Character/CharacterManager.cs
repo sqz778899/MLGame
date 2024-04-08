@@ -17,10 +17,20 @@ public class CharacterManager :ScriptableObject
         }
     }
     #endregion
+
+    #region 一些重要的UIGroup
+    //..........EditBulletScene............
+    GameObject BulletGroup;
+    GameObject GroupBulletSlot;
+    GameObject GroupBulletSlotRole;
     
-    public GameObject BulletGroup;
-    public GameObject GroupBulletSlot;
-    public GameObject GroupBulletSlotRole;
+    //..........MapScene............
+    GameObject GroupRoll;
+    GameObject GroupSlotStandby;
+    GameObject GroupRollBullet;
+    #endregion
+    
+    //...............子弹上膛................
     public List<BulletData> Bullets;
     
     //...............重要数据................
@@ -28,26 +38,54 @@ public class CharacterManager :ScriptableObject
     public int Score;
     public int Gold;
     public int Cost = 5;
+    public List<StandbyData> CurStandbyBullets = new List<StandbyData>();
     public List<SupremeCharm> SupremeCharms = new List<SupremeCharm>();
-    
-    
+
     public WinOrFail WinOrFailState;
 
     public void InitData()
     {
+        //..........EditBulletScene............
         if (BulletGroup == null)
             BulletGroup = GameObject.Find("GroupBullet");
         if (GroupBulletSlot == null)
             GroupBulletSlot = GameObject.Find("GroupBulletSlot");
         if (GroupBulletSlotRole == null)
             GroupBulletSlotRole = GameObject.Find("imBulletSlotRole");
+        
+        //..........MapScene............
+        if (GroupRoll == null)
+            GroupRoll = GameObject.Find("GroupRoll");
+        if (GroupSlotStandby == null)
+            GroupSlotStandby = GameObject.Find("GroupSlotStandby");
+        if (GroupRollBullet == null)
+            GroupRollBullet = GameObject.Find("GroupRollBullet");
 
-        for (int i = 0; i < GroupBulletSlotRole.transform.childCount; i++)
-            GroupBulletSlotRole.transform.GetChild(i)
-                .GetComponent<BulletSlotRole>().IsHaveBullet = false;
+        if (GroupSlotStandby != null && GroupRollBullet!= null)
+        {
+            List<StandbyData> saveSD = TrunkManager.Instance._saveFile.UserStandbyBullet;
+            for (int i = 0; i < GroupSlotStandby.transform.childCount; i++)
+            {
+                GameObject curSlot = GroupSlotStandby.transform.GetChild(i).gameObject;
+                BulletSlotStandby curSlotSC = curSlot.GetComponent<BulletSlotStandby>();
+                curSlotSC.SlotID = saveSD[i].SlotID;
+                curSlotSC.curBulletID = saveSD[i].BulletID;
+                if (curSlotSC.curBulletID != 0)
+                {
+                    BulletManager.Instance.InstanceStandByBullet(curSlotSC.curBulletID,GroupRollBullet,curSlot);
+                }
+            }
+        }
 
-        WinOrFailState = WinOrFail.InLevel;
-        SetBullet();
+        if (GroupBulletSlotRole != null)
+        {
+            for (int i = 0; i < GroupBulletSlotRole.transform.childCount; i++)
+                GroupBulletSlotRole.transform.GetChild(i)
+                    .GetComponent<BulletSlotRole>().IsHaveBullet = false;
+            
+            WinOrFailState = WinOrFail.InLevel;
+            SetBullet();
+        }
     }
     
     void SetBullet()
@@ -111,7 +149,48 @@ public class CharacterManager :ScriptableObject
         //TrunkManager.Instance.SaveFile();
         Debug.Log("Set BulletSlotRole");
     }
+
+    public bool AddStandbyBullet(int BulletID)
+    {
+        bool isAdd = false;
+        InitData();
+        GameObject curSlot = null;
+        BulletSlotStandby curSlotSC = null;
+        for (int i = 0; i < GroupSlotStandby.transform.childCount; i++)
+        {
+            GameObject tmpSlot = GroupSlotStandby.transform.GetChild(i).gameObject;
+            curSlotSC = tmpSlot.GetComponent<BulletSlotStandby>();
+            if (curSlotSC.curBulletID == 0)
+            {
+                curSlot = tmpSlot;
+                curSlotSC.curBulletID = BulletID;
+                break;
+            }
+        }
+        if (curSlot==null) return false;
+        
+        SetStandbyBullets();
+        isAdd = true;
+        BulletManager.Instance.InstanceStandByBullet(BulletID,GroupRollBullet,curSlot);
+        return isAdd;
+    }
     
+
+    public void SetStandbyBullets()
+    {
+        CurStandbyBullets = new List<StandbyData>();
+        for (int i = 0; i < GroupSlotStandby.transform.childCount; i++)
+        {
+            StandbyData curSD = new StandbyData();
+            GameObject curSlot = GroupSlotStandby.transform.GetChild(i).gameObject;
+            BulletSlotStandby curSlotSC = curSlot.GetComponent<BulletSlotStandby>();
+            curSD.SlotID = curSlotSC.SlotID;
+            curSD.BulletID = curSlotSC.curBulletID;
+            CurStandbyBullets.Add(curSD);
+        }
+        TrunkManager.Instance.SaveFile();
+    }
+
     #region 模板
     /*
     void Temp()

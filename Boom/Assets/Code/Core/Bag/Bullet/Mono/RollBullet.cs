@@ -7,12 +7,22 @@ using UnityEngine.EventSystems;
 public class RollBullet:BulletBase,IPointerEnterHandler,IPointerExitHandler,IPointerClickHandler
 {
     public int Cost;
+    public int Score;
     Image _rollImage;
     TextMeshProUGUI _rollScore;
+    TextMeshProUGUI _rollCost;
     void Start()
     {
         bulletInsMode = BulletInsMode.Roll;
         InitImage();
+    }
+
+    void Update()
+    {
+        if (_rollScore != null)
+            _rollScore.text = Score.ToString();
+        if (_rollCost != null)
+            _rollCost.text = Cost.ToString();
     }
 
     void InitImage()
@@ -23,13 +33,16 @@ public class RollBullet:BulletBase,IPointerEnterHandler,IPointerExitHandler,IPoi
             if (each.gameObject.name == "imgBullet")
             {
                 _rollImage = each.GetComponent<Image>();
-                break;
             }
 
             if (each.gameObject.name == "txtScore")
             {
                 _rollScore = each.GetComponent<TextMeshProUGUI>();
-                break;
+            }
+            
+            if (each.gameObject.name == "txtCost")
+            {
+                _rollCost = each.GetComponent<TextMeshProUGUI>();
             }
         }
     }

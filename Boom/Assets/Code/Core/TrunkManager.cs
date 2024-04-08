@@ -46,7 +46,7 @@ public class TrunkManager: ScriptableObject
     #endregion
     
     
-    SaveFileJson _saveFile = new SaveFileJson();
+    public SaveFileJson _saveFile = new SaveFileJson();
     
     public void LoadSaveFile()
     {
@@ -54,7 +54,6 @@ public class TrunkManager: ScriptableObject
         _saveFile = JsonConvert.DeserializeObject<SaveFileJson>(SaveFileJsonString);
 
         #region Character
-        CharacterManager.Instance.BagData.InitDataByJson(_saveFile.BagData,BulletDesignJsons);
         CharacterManager.Instance.Score = _saveFile.Score;
         CharacterManager.Instance.Gold = _saveFile.Gold;
         for (int i = 0; i < _saveFile.SupremeCharms.Count; i++)
@@ -64,6 +63,7 @@ public class TrunkManager: ScriptableObject
             curCharm.GetSupremeCharmByID();
             CharacterManager.Instance.SupremeCharms.Add(curCharm);
         }
+        CharacterManager.Instance.CurStandbyBullets = _saveFile.UserStandbyBullet;
         CharacterManager.Instance.InitData();
         #endregion
         
@@ -91,6 +91,7 @@ public class TrunkManager: ScriptableObject
         List<int> SupremeCharms = new List<int>();
         foreach (var each in CharacterManager.Instance.SupremeCharms)
             SupremeCharms.Add(each.ID);
+        _saveFile.UserStandbyBullet = CharacterManager.Instance.CurStandbyBullets;
         _saveFile.SupremeCharms = SupremeCharms;
         #endregion
 
@@ -155,6 +156,11 @@ public class TrunkManager: ScriptableObject
         _saveFile.Score = 0;
         _saveFile.Gold = 10000000;
         _saveFile.SupremeCharms = new List<int>();
+        
+        List<StandbyData> newGameSD = new List<StandbyData>();
+        for (int i = 0; i < 5; i++)
+            newGameSD.Add(new StandbyData(0,i+1));
+        _saveFile.UserStandbyBullet = newGameSD;
         #endregion
         
         #region Map

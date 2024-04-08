@@ -12,7 +12,11 @@ public class CharacterScene : MonoBehaviour
 
     void Start()
     {
+        //.................Global...........................
         TrunkManager.Instance.LoadSaveFile();
+        //.................Local...........................
+        CharacterManager.Instance.BagData.InitDataByJson(
+            TrunkManager.Instance._saveFile.BagData);
     }
 
     public void EditBullet()

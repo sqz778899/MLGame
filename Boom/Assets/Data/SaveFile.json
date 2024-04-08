@@ -68,8 +68,30 @@
     "slotRole04": 0,
     "slotRole05": 0
   },
-  "Score": 0,
-  "Gold": 10000000,
+  "Score": 6,
+  "Gold": 9999955,
+  "UserStandbyBullet": [
+    {
+      "BulletID": 1,
+      "SlotID": 1
+    },
+    {
+      "BulletID": 0,
+      "SlotID": 2
+    },
+    {
+      "BulletID": 0,
+      "SlotID": 3
+    },
+    {
+      "BulletID": 0,
+      "SlotID": 4
+    },
+    {
+      "BulletID": 0,
+      "SlotID": 5
+    }
+  ],
   "SupremeCharms": [],
   "UserMapSate": [
     {

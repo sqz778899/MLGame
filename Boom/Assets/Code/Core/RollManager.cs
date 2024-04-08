@@ -1,8 +1,4 @@
 ﻿using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine.SceneManagement;
-using System.IO;
-using Newtonsoft.Json;
 using UnityEngine;
 
 public class RollManager: ScriptableObject
@@ -21,12 +17,12 @@ public class RollManager: ScriptableObject
     }
     #endregion
     
+    #region 一些重要的UIGroup
     //90概率 Score
     //10概率 Bullet
-
     GameObject GroupRoll;
     GameObject GroupSlotStandby;
-    GameObject GroupBullet;
+    GameObject GroupRollBullet;
 
     void InitData()
     {
@@ -34,9 +30,14 @@ public class RollManager: ScriptableObject
             GroupRoll = GameObject.Find("GroupRoll");
         if (GroupSlotStandby == null)
             GroupSlotStandby = GameObject.Find("GroupSlotStandby");
-        if (GroupBullet == null)
-            GroupBullet = GameObject.Find("GroupBullet");
+        if (GroupRollBullet == null)
+            GroupRollBullet = GameObject.Find("GroupRollBullet");
     }
+    #endregion
+    
+    //.........temp
+    Vector2Int ScoreRange = new Vector2Int(3, 9);
+    int Cost = 5;
     
     public void OnceRollBullet()
     {
@@ -68,58 +69,65 @@ public class RollManager: ScriptableObject
                 return;
             }
 
+            //GetIns
             GameObject curRollIns = null;
             if (curProb.ID == 0)
                 curRollIns = InstanceRollScore();
             else
                 curRollIns = BulletManager.Instance.InstanceBullet(curProb.ID,BulletInsMode.Roll);
-            curRollIns.transform.SetParent(GroupRoll.transform);
-            curRollIns.transform.position = Vector3.zero;
-            curRollIns.transform.localScale = Vector3.one;
-            Vector3 pos = RollLayout.InsOriginPos;
-            pos = new Vector3(pos.x + RollLayout.xOffset * i, pos.y, pos.z);
-            curRollIns.GetComponent<RectTransform>().anchoredPosition3D = pos;
+            SetRollAttri(curRollIns, i);
         }
+        
+        TrunkManager.Instance.SaveFile();
     }
 
     public void SelOne(GameObject SelGO)
     {
         InitData();
         RollBullet curSC = SelGO.GetComponentInChildren<RollBullet>();
+        //............Cost Money.................
+        int curCost = curSC.Cost;
+        if (CharacterManager.Instance.Gold < curCost)
+        {
+            Debug.Log("No Money");
+            return;
+        }
+        CharacterManager.Instance.Gold -= curCost;
+        
+        //............Deal Data.................
         if (curSC._bulletData.ID == 0)//Score
         {
-            
+            CharacterManager.Instance.Score +=  curSC.Score;
         }
         else
         {
-            GameObject curSlot = null;
-            for (int i = 0; i < GroupSlotStandby.transform.childCount; i++)
+            bool isAdd = CharacterManager.Instance.AddStandbyBullet(curSC._bulletData.ID);
+            if (!isAdd)
             {
-                GameObject tmpSlot = GroupSlotStandby.transform.GetChild(i).gameObject;
-                BulletSlotStandby curSlotSC = tmpSlot.GetComponent<BulletSlotStandby>();
-                if (curSlotSC.curBulletID == 0)
-                {
-                    curSlot = tmpSlot;
-                    curSlotSC.curBulletID = curSC._bulletData.ID;
-                    break;
-                }
-            }
-
-            if (curSlot==null)
+                Debug.Log("qweqwesxas");
                 return;
-            
-            //
-            GameObject curSDIns = BulletManager.Instance.InstanceBullet(curSC._bulletData, BulletInsMode.Standby);
-            curSDIns.transform.SetParent(GroupBullet.transform);
-            curSDIns.transform.position = Vector3.zero;
-            curSDIns.transform.localScale = Vector3.one;
-            curSDIns.GetComponent<RectTransform>().anchoredPosition3D =
-                curSlot.GetComponent<RectTransform>().anchoredPosition3D;
+            }
         }
-        Debug.Log(curSC._bulletData.ID);
+        DestroyImmediate(SelGO);
+        TrunkManager.Instance.SaveFile();
     }
 
     #region SomeFunc
+    void SetRollAttri(GameObject curRollIns,int step)
+    {
+        //..................POS............................
+        curRollIns.transform.SetParent(GroupRoll.transform);
+        curRollIns.transform.position = Vector3.zero;
+        curRollIns.transform.localScale = Vector3.one;
+        Vector3 pos = RollLayout.InsOriginPos;
+        pos = new Vector3(pos.x + RollLayout.xOffset * step, pos.y, pos.z);
+        curRollIns.GetComponent<RectTransform>().anchoredPosition3D = pos;
+        //...............Attri.............................................
+        RollBullet curSC = curRollIns.GetComponentInChildren<RollBullet>();
+        int curScore = Random.Range(ScoreRange.x, ScoreRange.y+1);
+        curSC.Score = curScore;
+        curSC.Cost = Cost;
+    }
     List<RollProbability>  DealProb(List<RollProbability> OriginProbs)
     {
         List<RollProbability> newProbs = new List<RollProbability>();

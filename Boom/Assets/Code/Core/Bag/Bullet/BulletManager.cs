@@ -45,4 +45,15 @@ public class BulletManager :ScriptableObject
         bulletbase.InitBulletData();
         return Bullet;
     }
+
+    public GameObject InstanceStandByBullet(int bulletID,GameObject GroupBullet,GameObject curSlot)
+    {
+        GameObject curSDIns = InstanceBullet(bulletID, BulletInsMode.Standby);
+        curSDIns.transform.SetParent(GroupBullet.transform);
+        curSDIns.transform.position = Vector3.zero;
+        curSDIns.transform.localScale = Vector3.one;
+        curSDIns.GetComponent<RectTransform>().anchoredPosition3D =
+            curSlot.GetComponent<RectTransform>().anchoredPosition3D;
+        return curSDIns;
+    }
 }

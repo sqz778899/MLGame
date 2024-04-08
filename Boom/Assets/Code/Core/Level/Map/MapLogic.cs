@@ -17,6 +17,9 @@ public class MapLogic : MonoBehaviour
 
         _allNodes = MapGroup.GetComponentsInChildren<MapNode>();
         RefreshMapNodeState();
+        //.............Global..................
+        TrunkManager.Instance.LoadSaveFile();
+        //.............Local...................
     }
 
     public void RefreshMapNodeState()

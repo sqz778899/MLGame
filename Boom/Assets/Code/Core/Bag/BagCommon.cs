@@ -76,7 +76,7 @@ public class BagData
     }
     
     #region IO
-    public void InitDataByJson(BagDataJson BagJson,List<BulletDataJson> BulletDesignJsons)
+    public void InitDataByJson(BagDataJson BagJson)
     {
         bagSlots = BagJson.bagSlots;
         slotRole01 = BagJson.slotRole01;
