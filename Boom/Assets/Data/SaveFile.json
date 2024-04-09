@@ -2,81 +2,57 @@
   "BagData": {
     "bagSlots": [
       {
-        "slotID": 1,
-        "bulletID": 1,
-        "bulletCount": 5
+        "slotID": 1
       },
       {
-        "slotID": 2,
-        "bulletID": 2,
-        "bulletCount": 1
+        "slotID": 2
       },
       {
-        "slotID": 3,
-        "bulletID": 3,
-        "bulletCount": 0
+        "slotID": 3
       },
       {
-        "slotID": 4,
-        "bulletID": 0,
-        "bulletCount": 0
+        "slotID": 4
       },
       {
-        "slotID": 5,
-        "bulletID": 0,
-        "bulletCount": 0
+        "slotID": 5
       },
       {
-        "slotID": 6,
-        "bulletID": 0,
-        "bulletCount": 0
+        "slotID": 6
       },
       {
-        "slotID": 7,
-        "bulletID": 0,
-        "bulletCount": 0
+        "slotID": 7
       },
       {
-        "slotID": 8,
-        "bulletID": 0,
-        "bulletCount": 0
+        "slotID": 8
       },
       {
-        "slotID": 9,
-        "bulletID": 0,
-        "bulletCount": 0
+        "slotID": 9
       },
       {
-        "slotID": 10,
-        "bulletID": 0,
-        "bulletCount": 0
+        "slotID": 10
       },
       {
-        "slotID": 11,
-        "bulletID": 0,
-        "bulletCount": 0
+        "slotID": 11
       },
       {
-        "slotID": 12,
-        "bulletID": 0,
-        "bulletCount": 0
+        "slotID": 12
       }
     ],
-    "slotRole01": 3,
+    "slotRole01": 0,
     "slotRole02": 0,
     "slotRole03": 0,
     "slotRole04": 0,
     "slotRole05": 0
   },
   "Score": 0,
-  "Gold": 9999960,
+  "Gold": 10000000,
   "UserStandbyBullet": [
     {
-      "BulletID": 1,
+      "BulletID": 0,
       "SlotID": 1
     },
     {
-      "BulletID": 1,
+      "BulletID": 0,
       "SlotID": 2
     },
     {
@@ -90,6 +66,20 @@
     {
       "BulletID": 0,
       "SlotID": 5
+    }
+  ],
+  "UserBulletSpawner": [
+    {
+      "bulletID": 1,
+      "bulletCount": 5
+    },
+    {
+      "bulletID": 2,
+      "bulletCount": 1
+    },
+    {
+      "bulletID": 3,
+      "bulletCount": 1
     }
   ],
   "SupremeCharms": [],

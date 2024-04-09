@@ -18,7 +18,8 @@ public class SaveFileJson
     public int Score;
     public int Gold;
     public List<StandbyData> UserStandbyBullet;
-   
+    public List<BulletSpawner> UserBulletSpawner;
+    
     public List<int> SupremeCharms;
     public List<MapSate> UserMapSate;
     public List<RollProbability> UserProbabilitys;

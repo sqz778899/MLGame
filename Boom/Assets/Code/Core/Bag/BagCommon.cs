@@ -6,15 +6,25 @@ using UnityEngine;
 public class SingleSlot
 {
     public int slotID;
-    public int bulletID;
-    public int bulletCount;
+  
+
+    public SingleSlot(int _slotID=0)
+    {
+        slotID = _slotID;
+    }
 }
 
 [Serializable]
 public class BulletSpawner
 {
-    public int BulletID;
-    public int BulletCount;
+    public int bulletID;
+    public int bulletCount;
+
+    public BulletSpawner(int _bulletID = 0,int _bulletCount = 0)
+    {
+        bulletID = _bulletID;
+        bulletCount = _bulletCount;
+    }
 }
 
 [Serializable]
@@ -72,13 +82,8 @@ public class BagData
         else
             return null;
     }
-    public void ClearBagData()
+    public void ClearRoleSlotData()
     {
-        foreach (var each in bagSlots)
-        {
-            each.bulletID = 0;
-            each.bulletCount = 0;
-        }
         slotRole01 = 0;
         slotRole02 = 0;
         slotRole03 = 0;

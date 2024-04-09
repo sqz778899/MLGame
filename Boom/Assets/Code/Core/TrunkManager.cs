@@ -60,6 +60,7 @@ public class TrunkManager: ScriptableObject
             curCharm.GetSupremeCharmByID();
             CharacterManager.Instance.SupremeCharms.Add(curCharm);
         }
+        CharacterManager.Instance.CurBulletSpawners = _saveFile.UserBulletSpawner;
         CharacterManager.Instance.BagData.InitDataByJson(_saveFile.BagData);
         CharacterManager.Instance.CurStandbyBullets = _saveFile.UserStandbyBullet;
         #endregion
@@ -83,6 +84,7 @@ public class TrunkManager: ScriptableObject
     {
         #region Character
         _saveFile.BagData = CharacterManager.Instance.BagData.SetDataJson();
+        _saveFile.UserBulletSpawner = CharacterManager.Instance.CurBulletSpawners;
         _saveFile.Score = CharacterManager.Instance.Score;
         _saveFile.Gold = CharacterManager.Instance.Gold;
         List<int> SupremeCharms = new List<int>();
@@ -114,49 +116,36 @@ public class TrunkManager: ScriptableObject
     {
         _saveFile = new SaveFileJson();
         #region Character
+        //................bagSlots...........................
         BagDataJson bagDataJson = new BagDataJson();
         List<SingleSlot> bagSlots = new List<SingleSlot>();
         bagDataJson.bagSlots = bagSlots;
-        _saveFile.BagData = bagDataJson;
 
         for (int i = 0; i < 12; i++)
-        {
-            SingleSlot temSlot = new SingleSlot();
-            temSlot.slotID = i + 1;
-            switch (i)
-            {
-                case 0:
-                    temSlot.bulletCount = 5;
-                    temSlot.bulletID = 1;
-                    break;
-                case 1:
-                    temSlot.bulletCount = 1;
-                    temSlot.bulletID = 2;
-                    break;
-                case 2:
-                    temSlot.bulletCount = 1;
-                    temSlot.bulletID = 3;
-                    break;
-                default:
-                    temSlot.bulletCount = 0;
-                    temSlot.bulletID = 0;
-                    break;
-            }
-            bagSlots.Add(temSlot);
-        }
+            bagSlots.Add(new SingleSlot((i + 1)));
+        
         bagDataJson.slotRole01 = 0;
         bagDataJson.slotRole02 = 0;
         bagDataJson.slotRole03 = 0;
         bagDataJson.slotRole04 = 0;
         bagDataJson.slotRole05 = 0;
-
-        _saveFile.Score = 0;
-        _saveFile.Gold = 10000000;
-        _saveFile.SupremeCharms = new List<int>();
         
+        //................UserBulletSpawner...........................
+        List<BulletSpawner> UserBulletSpawner = new List<BulletSpawner>();
+        UserBulletSpawner.Add(new BulletSpawner(1,5));
+        UserBulletSpawner.Add(new BulletSpawner(2,1));
+        UserBulletSpawner.Add(new BulletSpawner(3,1));
+        
+        //..............StandbyData.........................
         List<StandbyData> newGameSD = new List<StandbyData>();
         for (int i = 0; i < 5; i++)
             newGameSD.Add(new StandbyData(0,i+1));
+        
+        _saveFile.BagData = bagDataJson;
+        _saveFile.UserBulletSpawner = UserBulletSpawner;
+        _saveFile.Score = 0;
+        _saveFile.Gold = 10000000;
+        _saveFile.SupremeCharms = new List<int>();
         _saveFile.UserStandbyBullet = newGameSD;
         #endregion
         

@@ -26,10 +26,10 @@ public class CharacterManager :ScriptableObject
     public int Score;
     public int Gold;
     public int Cost = 5;
+    public List<BulletSpawner> CurBulletSpawners;
     public List<StandbyData> CurStandbyBullets = new List<StandbyData>();
     public List<SupremeCharm> SupremeCharms = new List<SupremeCharm>();
-    public List<DraggableBulletSpawner> CurBulletSpawners;
-    
+
     public WinOrFail WinOrFailState;
 
     public void InitData()
@@ -59,12 +59,11 @@ public class CharacterManager :ScriptableObject
             }
         }
     }
-    
-    
+
     public void SetBullet()
     {
         //............SlotRole 更新.....................
-        //BagData.ClearBagData();
+        BagData.ClearRoleSlotData();
         GameObject GroupBulletSlotRole = UIManager.Instance.GroupBulletSlotRole;
         for (int i = 0; i < GroupBulletSlotRole.transform.childCount; i++)
             GroupBulletSlotRole.transform.GetChild(i)
@@ -100,20 +99,13 @@ public class CharacterManager :ScriptableObject
             }
         }
         
-        //...........BagSlot 更新......................
-        DraggableBulletSpawner[] Spawners = UIManager.Instance.GroupBulletSlot.GetComponentsInChildren<DraggableBulletSpawner>();
-       
-        foreach (SingleSlot each in BagData.bagSlots)
-        {
-            foreach (DraggableBulletSpawner eachSpawner in Spawners)
-            {
-                if (each.slotID == eachSpawner._bulletData.ID)
-                {
-                    each.bulletID = eachSpawner._bulletData.ID;
-                    each.bulletCount = eachSpawner.Count;
-                }
-            }
-        }
+        //...........Spawner 更新......................
+        DraggableBulletSpawner[] Spawners = UIManager.Instance
+            .GroupBulletSlot.GetComponentsInChildren<DraggableBulletSpawner>();
+        CurBulletSpawners = new List<BulletSpawner>();
+        foreach (DraggableBulletSpawner eachSpawner in Spawners)
+            CurBulletSpawners.Add(new BulletSpawner(eachSpawner._bulletData.ID,eachSpawner.Count));
+        
         //.....................子弹上膛.........................
         BagData.RefreshBullets();
         Bullets = BagData.curBullets;
@@ -166,29 +158,20 @@ public class CharacterManager :ScriptableObject
         GameObject groupBulletSlotRole = UIManager.Instance.GroupBulletSlotRole;
         GameObject groupBullet = UIManager.Instance.GroupBullet;
         BulletSlot[] allSlots = groupBulletSlot.GetComponentsInChildren<BulletSlot>();
-        
-        //实例化bullet
-        foreach (SingleSlot each in BagData.bagSlots)
-        {
-            if (each.bulletID != 0)
-            {
-                GameObject bagSlotBullet = BulletManager.Instance.
-                    InstanceBullet(each.bulletID,BulletInsMode.Spawner);
-                DraggableBulletSpawner perSc = bagSlotBullet.GetComponentInChildren<DraggableBulletSpawner>();
-                perSc.Count = each.bulletCount;
-                perSc.InitData();
-                
-                GameObject curSlot = null;
-                for (int i = 0; i < allSlots.Length; i++)
-                {
-                    BulletSlot curSC = allSlots[i];
-                    if (curSC.SlotID == each.slotID)
-                        curSlot = curSC.gameObject;
-                }
 
-                if (curSlot != null)
+        foreach (var each in CurBulletSpawners)
+        {
+            GameObject bagSlotBullet = BulletManager.Instance.
+                InstanceBullet(each.bulletID,BulletInsMode.Spawner);
+            DraggableBulletSpawner perSc = bagSlotBullet.GetComponentInChildren<DraggableBulletSpawner>();
+            perSc.Count = each.bulletCount;
+
+            foreach (var eachSlot in allSlots)
+            {
+                BulletSlot curSC = eachSlot;
+                if (curSC.SlotID == each.bulletID)
                 {
-                    bagSlotBullet.transform.SetParent(curSlot.transform,false);
+                    bagSlotBullet.transform.SetParent(curSC.gameObject.transform,false);
                     bagSlotBullet.transform.localScale = Vector3.one;
                 }
             }
