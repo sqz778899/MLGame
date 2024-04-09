@@ -35,8 +35,6 @@ public class TrunkManager: ScriptableObject
         }
     }
     
-    
-    
     public List<BulletDataJson> LoadBulletData()
     {
         string BulletDesignString = File.ReadAllText(PathConfig.BulletDesignJson);
@@ -44,7 +42,6 @@ public class TrunkManager: ScriptableObject
         return BulletDataJsons;
     }
     #endregion
-    
     
     public SaveFileJson _saveFile = new SaveFileJson();
     
@@ -63,8 +60,8 @@ public class TrunkManager: ScriptableObject
             curCharm.GetSupremeCharmByID();
             CharacterManager.Instance.SupremeCharms.Add(curCharm);
         }
+        CharacterManager.Instance.BagData.InitDataByJson(_saveFile.BagData);
         CharacterManager.Instance.CurStandbyBullets = _saveFile.UserStandbyBullet;
-        CharacterManager.Instance.InitData();
         #endregion
         
         #region Map

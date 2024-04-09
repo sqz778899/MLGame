@@ -31,6 +31,7 @@ public class MSceneManager: ScriptableObject
     
     public void LoadScene(int SceneID)
     {
+        Debug.Log("xxx:  " + CharacterManager.Instance.BagData.bagSlots[0].bulletCount);
         CurrentSceneIndex = SceneID;
         SceneManager.LoadScene(CurrentSceneIndex);
         TrunkManager.Instance.SaveFile();

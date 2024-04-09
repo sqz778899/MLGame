@@ -32,6 +32,7 @@ public class BulletData
 {
     //.............Attribute..............
     public int ID;
+    public int Level;
     public string name;
     public float speed;
     public int damage;
@@ -54,6 +55,7 @@ public class BulletData
             }
         }
         ID = curData.ID;
+        Level = curData.Level;
         name = curData.name;
         speed = curData.speed;
         damage = curData.damage;
@@ -82,10 +84,10 @@ public class BulletData
 }
 #endregion
 
-
 public class BulletDataJson
 {
     public int ID;
+    public int Level;
     public string name;
     public float speed;
     public int damage;

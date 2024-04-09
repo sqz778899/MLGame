@@ -1,12 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class SingleSlot
 {
     public int slotID;
     public int bulletID;
     public int bulletCount;
 }
+
+[Serializable]
+public class BulletSpawner
+{
+    public int BulletID;
+    public int BulletCount;
+}
+
+[Serializable]
 public class BagData
 {
     public BagData()
@@ -24,28 +35,28 @@ public class BagData
 
     public List<BulletData> curBullets;
 
-    public void RefreshBullets(List<BulletDataJson> BulletDesignJsons)
+    public void RefreshBullets()
     {
         if (curBullets == null)
             curBullets = new List<BulletData>();
         curBullets.Clear();
         if (slotRole01 != 0)
-            curBullets.Add(FindBulletData(BulletDesignJsons,slotRole01));
+            curBullets.Add(FindBulletData(slotRole01));
         if (slotRole02 != 0)
-            curBullets.Add(FindBulletData(BulletDesignJsons,slotRole02));
+            curBullets.Add(FindBulletData(slotRole02));
         if (slotRole03 != 0)
-            curBullets.Add(FindBulletData(BulletDesignJsons,slotRole03));
+            curBullets.Add(FindBulletData(slotRole03));
         if (slotRole04 != 0)
-            curBullets.Add(FindBulletData(BulletDesignJsons,slotRole04));
+            curBullets.Add(FindBulletData(slotRole04));
         if (slotRole05 != 0)
-            curBullets.Add(FindBulletData(BulletDesignJsons,slotRole05));
+            curBullets.Add(FindBulletData(slotRole05));
     }
 
-    BulletData FindBulletData(List<BulletDataJson> BulletDesignJsons,int ID)
+    BulletData FindBulletData(int ID)
     {
         BulletData curBulletData = new BulletData();
         bool isFind = false;
-        foreach (var each in BulletDesignJsons)
+        foreach (var each in TrunkManager.Instance.BulletDesignJsons)
         {
             if (each.ID == ID)
             {
@@ -84,66 +95,6 @@ public class BagData
         slotRole03 = BagJson.slotRole03;
         slotRole04 = BagJson.slotRole04;
         slotRole05 = BagJson.slotRole05;
-
-        GameObject groupBulletSlot = GameObject.Find("GroupBulletSlot");
-        GameObject groupBulletSlotRole = GameObject.Find("imBulletSlotRole");
-        GameObject groupBullet = GameObject.Find("GroupBullet");
-
-        BulletSlot[] allSlots = groupBulletSlot.GetComponentsInChildren<BulletSlot>();
-
-        //实例化bullet
-        foreach (SingleSlot each in bagSlots)
-        {
-            if (each.bulletID != 0)
-            {
-                GameObject bagSlotBullet = BulletManager.Instance.
-                    InstanceBullet(each.bulletID,BulletInsMode.Spawner);
-                DraggableBulletSpawner perSc = bagSlotBullet.GetComponentInChildren<DraggableBulletSpawner>();
-                perSc.Count = each.bulletCount;
-                perSc.InitData();
-                
-                GameObject curSlot = null;
-                for (int i = 0; i < allSlots.Length; i++)
-                {
-                    BulletSlot curSC = allSlots[i];
-                    if (curSC.SlotID == each.slotID)
-                        curSlot = curSC.gameObject;
-                }
-
-                if (curSlot != null)
-                {
-                    bagSlotBullet.transform.SetParent(curSlot.transform,false);
-                    bagSlotBullet.transform.localScale = Vector3.one;
-                }
-            }
-        }
-
-        //实例化bullet
-        if (slotRole01 != 0)
-            _instanceslotRole(slotRole01,1,BulletEditMode.SlotRole01);
-        if (slotRole02 != 0)
-            _instanceslotRole(slotRole02,2,BulletEditMode.SlotRole02);
-        if (slotRole03 != 0)
-            _instanceslotRole(slotRole03,3,BulletEditMode.SlotRole03);
-        if (slotRole04 != 0)
-            _instanceslotRole(slotRole04,4,BulletEditMode.SlotRole04);
-        if (slotRole05 != 0)
-            _instanceslotRole(slotRole05,5,BulletEditMode.SlotRole05);
-
-        void _instanceslotRole(int slotRoleID,int slotIndex,BulletEditMode bulletEditMode)
-        {
-            //
-            GameObject curSlotRole = groupBulletSlotRole.transform.GetChild(slotIndex - 1).gameObject;
-            BulletSlotRole curSlotRoleSC = curSlotRole.GetComponent<BulletSlotRole>();
-            curSlotRoleSC.IsHaveBullet = true;
-            
-            GameObject slotRoleGO = BulletManager.Instance.InstanceBullet(slotRoleID,BulletInsMode.EditB);
-            DraggableBullet slotRoleGOSc = slotRoleGO.GetComponentInChildren<DraggableBullet>();
-            slotRoleGOSc.BulletState = bulletEditMode;
-            slotRoleGO.transform.SetParent(groupBullet.transform);
-            slotRoleGO.transform.localScale = Vector3.one;
-            slotRoleGO.transform.position = curSlotRole.transform.position;
-        }
     }
 
     public BagDataJson SetDataJson()

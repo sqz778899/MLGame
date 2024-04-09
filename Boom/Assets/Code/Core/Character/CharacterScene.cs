@@ -15,8 +15,8 @@ public class CharacterScene : MonoBehaviour
         //.................Global...........................
         TrunkManager.Instance.LoadSaveFile();
         //.................Local...........................
-        CharacterManager.Instance.BagData.InitDataByJson(
-            TrunkManager.Instance._saveFile.BagData);
+        UIManager.Instance.InitCharacterScene();
+        CharacterManager.Instance.InitData();
     }
 
     public void EditBullet()

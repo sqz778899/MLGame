@@ -103,7 +103,7 @@ public class DraggableBulletSpawner : BulletBase, IPointerDownHandler, IPointerU
                     tempSC.CurBagSlotID = 0;
                 else
                     tempSC.CurBagSlotID = curSlotSC.SlotID;
-                CharacterManager.Instance.InitData();
+                CharacterManager.Instance.SetBullet();
                 // 如果有一个子弹槽，真正Spwan出来一个Bullet
                 childBulletIns.transform.position = result.gameObject.transform.position;
                 childBulletIns = null;

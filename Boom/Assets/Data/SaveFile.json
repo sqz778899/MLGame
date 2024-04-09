@@ -14,7 +14,7 @@
       {
         "slotID": 3,
         "bulletID": 3,
-        "bulletCount": 1
+        "bulletCount": 0
       },
       {
         "slotID": 4,
@@ -62,21 +62,21 @@
         "bulletCount": 0
       }
     ],
-    "slotRole01": 0,
+    "slotRole01": 3,
     "slotRole02": 0,
     "slotRole03": 0,
     "slotRole04": 0,
     "slotRole05": 0
   },
-  "Score": 6,
-  "Gold": 9999955,
+  "Score": 0,
+  "Gold": 9999960,
   "UserStandbyBullet": [
     {
       "BulletID": 1,
       "SlotID": 1
     },
     {
-      "BulletID": 0,
+      "BulletID": 1,
       "SlotID": 2
     },
     {

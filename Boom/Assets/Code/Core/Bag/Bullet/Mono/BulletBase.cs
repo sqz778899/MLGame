@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,36 @@ public class BulletBase : MonoBehaviour
     public Vector3 forward = new Vector3(1, 0, 0);
     public BulletData _bulletData;
     public BulletInsMode bulletInsMode;
+    public GameObject GroupStar; 
+    void Update()
+    {
+        if (GroupStar != null)
+        {
+            SetStart(_bulletData.Level);
+        }
+    }
+
+    void SetStart(int Level)
+    {
+        switch (Level)
+        {
+            case 1:
+                GroupStar.transform.GetChild(0).gameObject.SetActive(true);
+                GroupStar.transform.GetChild(1).gameObject.SetActive(false);
+                GroupStar.transform.GetChild(2).gameObject.SetActive(false);
+                break;
+            case 2:
+                GroupStar.transform.GetChild(0).gameObject.SetActive(true);
+                GroupStar.transform.GetChild(1).gameObject.SetActive(true);
+                GroupStar.transform.GetChild(2).gameObject.SetActive(false);
+                break;
+            case 3:
+                GroupStar.transform.GetChild(0).gameObject.SetActive(true);
+                GroupStar.transform.GetChild(1).gameObject.SetActive(true);
+                GroupStar.transform.GetChild(2).gameObject.SetActive(true);
+                break;
+        }
+    }
 
     public void InitBulletData()
     {

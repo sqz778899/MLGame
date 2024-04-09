@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,6 +21,19 @@ public class MapLogic : MonoBehaviour
         //.............Global..................
         TrunkManager.Instance.LoadSaveFile();
         //.............Local...................
+        UIManager.Instance.InitSelectLevel();
+        CharacterManager.Instance.InitStandbyBullet();
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (RollManager.Instance.ShopActive)
+                RollManager.Instance.OnOffShop();
+            else
+                return;
+        }
     }
 
     public void RefreshMapNodeState()

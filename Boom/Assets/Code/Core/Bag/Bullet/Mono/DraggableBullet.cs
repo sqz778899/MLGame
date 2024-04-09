@@ -49,7 +49,7 @@ public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandle
                     CurBagSlotID = curSlotSC.SlotID;
                 // 如果有一个子弹槽，我们就将子弹放到子弹槽中
                 transform.parent.position = result.gameObject.transform.position;
-                CharacterManager.Instance.InitData();
+                CharacterManager.Instance.SetBullet();
                 return;
             }
 
@@ -63,7 +63,7 @@ public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandle
                     {
                         each.AddCount();
                         DestroyImmediate(transform.parent.gameObject);
-                        CharacterManager.Instance.InitData();
+                        CharacterManager.Instance.SetBullet();
                         return;
                     }
                 }

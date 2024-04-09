@@ -13,11 +13,12 @@ public static class PathConfig
 
    //.........................ScriptObject...........................
    public static string TrunkManagerOBJ = "Assets/Res/TrunkManager.asset";
-   public static string RollManagerOBJ = "Assets/Res/RollManager.asset";
-   public static string MSceneManagerOBJ = "Assets/Res/MSceneManager.asset";
+   public static string UIManagerOBJ = "Assets/Res/Manager/UIManager.asset";
+   public static string RollManagerOBJ = "Assets/Res/Manager/RollManager.asset";
+   public static string MSceneManagerOBJ = "Assets/Res/Manager/MSceneManager.asset";
    public static string CharacterManagerOBJ = "Assets/Res/Character/CharacterManager.asset";
    public static string BulletManagerOBJ = "Assets/Res/Bullet/BulletManager.asset";
-   public static string CalculateDamageManagerOBJ = "Assets/Res/CalculateDamageManager.asset";
+   public static string CalculateDamageManagerOBJ = "Assets/Res/Manager/CalculateDamageManager.asset";
 
    ///.........................资源类.................................
    public static string DrawLineAsset = "Assets/Res/UI/Map/Prefab/P_DrawLine_01.prefab";

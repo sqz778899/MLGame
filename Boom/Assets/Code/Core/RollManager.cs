@@ -5,7 +5,6 @@ public class RollManager: ScriptableObject
 {
     #region 单例
     static RollManager s_instance;
-    
     public static RollManager Instance
     {
         get
@@ -16,33 +15,19 @@ public class RollManager: ScriptableObject
         }
     }
     #endregion
-    
-    #region 一些重要的UIGroup
+
+    #region Design
+    //.........temp
     //90概率 Score
     //10概率 Bullet
-    GameObject GroupRoll;
-    GameObject GroupSlotStandby;
-    GameObject GroupRollBullet;
-
-    void InitData()
-    {
-        if (GroupRoll == null)
-            GroupRoll = GameObject.Find("GroupRoll");
-        if (GroupSlotStandby == null)
-            GroupSlotStandby = GameObject.Find("GroupSlotStandby");
-        if (GroupRollBullet == null)
-            GroupRollBullet = GameObject.Find("GroupRollBullet");
-    }
-    #endregion
-    
-    //.........temp
     Vector2Int ScoreRange = new Vector2Int(3, 9);
     int Cost = 5;
+    #endregion
+
+    public bool ShopActive = false;
     
     public void OnceRollBullet()
     {
-        InitData();
-        
         //GetProbabilitys
         List<RollProbability> rollProbs = DealProb(TrunkManager.Instance.GetRollProbability());
         
@@ -54,9 +39,9 @@ public class RollManager: ScriptableObject
 
         CharacterManager.Instance.Gold -= curCost;
         //Clean Ins
-        int preRollIns = GroupRoll.transform.childCount;
+        int preRollIns = UIManager.Instance.GroupRoll.transform.childCount;
         for (int i = preRollIns - 1; i >= 0; i--)
-            DestroyImmediate(GroupRoll.transform.GetChild(i).gameObject);
+            DestroyImmediate(UIManager.Instance.GroupRoll.transform.GetChild(i).gameObject);
         
         //New Ins
         for (int i = 0; i < 5; i++)
@@ -83,7 +68,6 @@ public class RollManager: ScriptableObject
 
     public void SelOne(GameObject SelGO)
     {
-        InitData();
         RollBullet curSC = SelGO.GetComponentInChildren<RollBullet>();
         //............Cost Money.................
         int curCost = curSC.Cost;
@@ -108,15 +92,23 @@ public class RollManager: ScriptableObject
                 return;
             }
         }
-        DestroyImmediate(SelGO);
         TrunkManager.Instance.SaveFile();
+    }
+    
+    public void OnOffShop()
+    {
+        GameObject shop = UIManager.Instance.ShopCanvas;
+        ShopActive = shop.transform.GetChild(0).gameObject.activeSelf;
+        for (int i = 0; i < shop.transform.childCount; i++)
+            shop.transform.GetChild(i).gameObject.SetActive(!ShopActive);
+        ShopActive = !ShopActive;
     }
 
     #region SomeFunc
     void SetRollAttri(GameObject curRollIns,int step)
     {
         //..................POS............................
-        curRollIns.transform.SetParent(GroupRoll.transform);
+        curRollIns.transform.SetParent(UIManager.Instance.GroupRoll.transform);
         curRollIns.transform.position = Vector3.zero;
         curRollIns.transform.localScale = Vector3.one;
         Vector3 pos = RollLayout.InsOriginPos;
@@ -193,4 +185,3 @@ public class RollManager: ScriptableObject
     }
     #endregion
 }
-

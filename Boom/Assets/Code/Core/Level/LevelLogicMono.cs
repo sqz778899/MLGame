@@ -51,7 +51,7 @@ public class LevelLogicMono : MonoBehaviour
     void WinOrFailThisLevel()
     {
         //如果子弹为0，且敌人未死则失败
-        if (GroupBullet.transform.childCount == 0 && Enemy != null)
+        if (UIManager.Instance.GroupBullet.transform.childCount == 0 && Enemy != null)
             if ( Enemy.GetComponent<Enemy>().health > 0)
                 CharacterManager.Instance.WinOrFailState = WinOrFail.Fail;
         
@@ -72,8 +72,6 @@ public class LevelLogicMono : MonoBehaviour
 
     #region 开火相关
     public float delay = 0.3f;
-    List<BulletDataJson> BulletDesignJsons;
-    GameObject GroupBullet;
     
     public void CheckForKeyPress(Vector3 pos)
     {
@@ -88,17 +86,13 @@ public class LevelLogicMono : MonoBehaviour
     public IEnumerator FireWithDelay(Vector3 pos, float delay)
     {
         Debug.Log("fire");
-    
         List<BulletData> bulletDatas = CharacterManager.Instance.Bullets;
-    
-        if (GroupBullet == null)
-            GroupBullet = GameObject.Find("GroupBullet");
     
         foreach (BulletData eBuDT in bulletDatas)
         {
             GameObject curBullet = BulletManager.Instance.InstanceBullet(eBuDT,BulletInsMode.Inner,pos);
-            if (curBullet != null && GroupBullet != null)
-                curBullet.transform.SetParent(GroupBullet.transform);
+            if (curBullet != null && UIManager.Instance.GroupBullet != null)
+                curBullet.transform.SetParent(UIManager.Instance.GroupBullet.transform);
             yield return new WaitForSeconds(delay);  // 在发射下一个子弹之前，等待delay秒
         }
         isBeginCalculation = true;     //发射子弹之后，关卡开启结算模式
