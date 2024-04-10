@@ -42,10 +42,8 @@ public class BulletBase : MonoBehaviour
     public void InitBulletData()
     {
         if (_bulletData == null)
-        {
-            _bulletData = new BulletData();
-            _bulletData.ID = 1;
-        }
+            _bulletData = new BulletData(1);
+        
         _bulletData.SetDataByID(bulletInsMode);
         
         //找到目标挂载子弹贴图的地方。

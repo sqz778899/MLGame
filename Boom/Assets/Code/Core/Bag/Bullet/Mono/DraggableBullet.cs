@@ -4,7 +4,6 @@ using UnityEngine.EventSystems;
 
 public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
-    public BulletEditMode BulletState = BulletEditMode.Non;
     public int CurBagSlotID = 0;
     public Vector3 originalPosition;
     GameObject GroupBulletSlot;
@@ -41,12 +40,12 @@ public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandle
         {
             if (result.gameObject.CompareTag("BulletSlotRole"))
             {
-                SetBulletState(result.gameObject);
                 BulletSlot curSlotSC = result.gameObject.GetComponent<BulletSlot>();
-                if (curSlotSC == null)
-                    CurBagSlotID = 0;
-                else
-                    CurBagSlotID = curSlotSC.SlotID;
+                if (curSlotSC.BulletID != 0)
+                    return;
+                
+                CurBagSlotID = curSlotSC.SlotID;
+                curSlotSC.BulletID = _bulletData.ID;
                 // 如果有一个子弹槽，我们就将子弹放到子弹槽中
                 transform.parent.position = result.gameObject.transform.position;
                 CharacterManager.Instance.SetBullet();
@@ -83,32 +82,5 @@ public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandle
     public void OnPointerUp(PointerEventData eventData)
     {
         DropOneBullet(eventData);
-    }
-
-    public void SetBulletState(GameObject Slot)
-    {
-        BulletEditMode curBulletState = BulletEditMode.Non;
-        string SlotName = Slot.name;
-        switch (SlotName)
-        {
-            case "imSlotRole01":
-                curBulletState = BulletEditMode.SlotRole01;
-                break;
-            case "imSlotRole02":
-                curBulletState = BulletEditMode.SlotRole02;
-                break;
-            case "imSlotRole03":
-                curBulletState = BulletEditMode.SlotRole03;
-                break;
-            case "imSlotRole04":
-                curBulletState = BulletEditMode.SlotRole04;
-                break;
-            case "imSlotRole05":
-                curBulletState = BulletEditMode.SlotRole05;
-                break;
-            default:
-                break;
-        }
-        BulletState = curBulletState;
     }
 }

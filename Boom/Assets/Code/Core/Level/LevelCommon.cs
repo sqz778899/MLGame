@@ -1,5 +1,6 @@
 ﻿#region 输赢条件相关
 
+using System;
 using System.Collections.Generic;
 
 public enum WinOrFail
@@ -14,17 +15,18 @@ public enum WinOrFail
 
 public class SaveFileJson
 {
-    public BagDataJson BagData;
     public int Score;
     public int Gold;
-    public List<StandbyData> UserStandbyBullet;
     public List<BulletSpawner> UserBulletSpawner;
+    public List<BulletData> UserCurBullets;
+    public List<StandbyData> UserStandbyBullet;
     
     public List<int> SupremeCharms;
     public List<MapSate> UserMapSate;
     public List<RollProbability> UserProbabilitys;
 }
 
+[Serializable]
 public class StandbyData
 {
     public int BulletID;

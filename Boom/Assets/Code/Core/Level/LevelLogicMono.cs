@@ -86,7 +86,7 @@ public class LevelLogicMono : MonoBehaviour
     public IEnumerator FireWithDelay(Vector3 pos, float delay)
     {
         Debug.Log("fire");
-        List<BulletData> bulletDatas = CharacterManager.Instance.Bullets;
+        List<BulletData> bulletDatas = CharacterManager.Instance.CurBullets;
     
         foreach (BulletData eBuDT in bulletDatas)
         {

@@ -63,6 +63,12 @@ public static class PathConfig
 
    public static string GetBulletImagePath(int ID,BulletInsMode bulletInsMode)
    {
+      //temp todo
+      ID = ID % 10;
+      /*if ()
+      {
+         
+      }*/
       //"T_Bullet_Edit_a_01""T_Bullet_Inner_01"
       string orginName = "";
       switch (bulletInsMode)

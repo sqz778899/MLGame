@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
+using UnityEngine.Serialization;
 
 public class CharacterManager :ScriptableObject
 {
@@ -19,10 +20,9 @@ public class CharacterManager :ScriptableObject
     #endregion
     
     //...............子弹上膛................
-    public List<BulletData> Bullets;
+    public List<BulletData> CurBullets;
     
     //...............重要数据................
-    public BagData BagData = new BagData();//背包相关
     public int Score;
     public int Gold;
     public int Cost = 5;
@@ -36,10 +36,6 @@ public class CharacterManager :ScriptableObject
     {
         InstanceBagBullet();
         InitStandbyBullet();
-        
-        for (int i = 0; i < UIManager.Instance.GroupBulletSlotRole.transform.childCount; i++)
-            UIManager.Instance.GroupBulletSlotRole.transform.GetChild(i)
-                .GetComponent<BulletSlotRole>().IsHaveBullet = false;
             
         WinOrFailState = WinOrFail.InLevel;
     }
@@ -52,10 +48,10 @@ public class CharacterManager :ScriptableObject
             GameObject curSlot = UIManager.Instance.GroupSlotStandby.transform.GetChild(i).gameObject;
             BulletSlotStandby curSlotSC = curSlot.GetComponent<BulletSlotStandby>();
             curSlotSC.SlotID = saveSD[i].SlotID;
-            curSlotSC.curBulletID = saveSD[i].BulletID;
-            if (curSlotSC.curBulletID != 0)
+            curSlotSC.BulletID = saveSD[i].BulletID;
+            if (curSlotSC.BulletID != 0)
             {
-                BulletManager.Instance.InstanceStandByBullet(curSlotSC.curBulletID,curSlot);
+                BulletManager.Instance.InstanceStandByBullet(curSlotSC.BulletID,curSlot);
             }
         }
     }
@@ -63,39 +59,26 @@ public class CharacterManager :ScriptableObject
     public void SetBullet()
     {
         //............SlotRole 更新.....................
-        BagData.ClearRoleSlotData();
-        GameObject GroupBulletSlotRole = UIManager.Instance.GroupBulletSlotRole;
-        for (int i = 0; i < GroupBulletSlotRole.transform.childCount; i++)
-            GroupBulletSlotRole.transform.GetChild(i)
-                .GetComponent<BulletSlotRole>().IsHaveBullet = false;
-        
-        for (int i = 0; i < UIManager.Instance.GroupBullet.transform.childCount; i++)
+        GameObject SlotRoot = UIManager.Instance.GroupBulletSlotRole;
+        GameObject GroupBullet = UIManager.Instance.GroupBullet;
+        //............Clear.................
+        for (int i = 0; i < SlotRoot.transform.childCount; i++)
         {
-            GameObject perBullet = UIManager.Instance.GroupBullet.transform.GetChild(i).gameObject;
+            GameObject perSlot = SlotRoot.transform.GetChild(i).gameObject;
+            BulletSlotRole perSlotSc = perSlot.GetComponentInChildren<BulletSlotRole>();
+            perSlotSc.BulletID = 0;
+        }
+        //............Refresh.................
+        for (int i = 0; i < GroupBullet.transform.childCount; i++)
+        {
+            GameObject perBullet = GroupBullet.transform.GetChild(i).gameObject;
             DraggableBullet perSc = perBullet.GetComponentInChildren<DraggableBullet>();
-            BulletEditMode curBulletSate = perSc.BulletState;
-            switch (curBulletSate)
+            for (int j = 0; j < SlotRoot.transform.childCount; j++)
             {
-                case BulletEditMode.SlotRole01:
-                    GroupBulletSlotRole.transform.GetChild(0).GetComponent<BulletSlotRole>().IsHaveBullet = true;
-                    BagData.slotRole01 = perSc._bulletData.ID;
-                    break;
-                case BulletEditMode.SlotRole02:
-                    BagData.slotRole02 = perSc._bulletData.ID;
-                    GroupBulletSlotRole.transform.GetChild(1).GetComponent<BulletSlotRole>().IsHaveBullet = true;
-                    break;
-                case BulletEditMode.SlotRole03:
-                    BagData.slotRole03 = perSc._bulletData.ID;
-                    GroupBulletSlotRole.transform.GetChild(2).GetComponent<BulletSlotRole>().IsHaveBullet = true;
-                    break;
-                case BulletEditMode.SlotRole04:
-                    BagData.slotRole04 = perSc._bulletData.ID;
-                    GroupBulletSlotRole.transform.GetChild(3).GetComponent<BulletSlotRole>().IsHaveBullet = true;
-                    break;
-                case BulletEditMode.SlotRole05:
-                    BagData.slotRole05 = perSc._bulletData.ID;
-                    GroupBulletSlotRole.transform.GetChild(4).GetComponent<BulletSlotRole>().IsHaveBullet = true;
-                    break;
+                GameObject perSlot = SlotRoot.transform.GetChild(i).gameObject;
+                BulletSlotRole perSlotSc = perSlot.GetComponentInChildren<BulletSlotRole>();
+                if (perSlotSc.SlotID == perSc.CurBagSlotID)
+                    perSlotSc.BulletID = perSc._bulletData.ID;
             }
         }
         
@@ -104,37 +87,105 @@ public class CharacterManager :ScriptableObject
             .GroupBulletSlot.GetComponentsInChildren<DraggableBulletSpawner>();
         CurBulletSpawners = new List<BulletSpawner>();
         foreach (DraggableBulletSpawner eachSpawner in Spawners)
-            CurBulletSpawners.Add(new BulletSpawner(eachSpawner._bulletData.ID,eachSpawner.Count));
+            CurBulletSpawners.Add(new BulletSpawner(eachSpawner._bulletData.ID, eachSpawner.Count));
         
         //.....................子弹上膛.........................
-        BagData.RefreshBullets();
-        Bullets = BagData.curBullets;
+        //CurBullets = BagData.curBullets;
         
         Debug.Log("Set BulletSlotRole");
     }
 
+    #region 纯数据层操作
+    public void RefreshSpawner(BulletMutMode mode,int BulletID)
+    {
+        switch (mode)
+        {
+            case BulletMutMode.Sub:
+                foreach (var each in CurBulletSpawners)
+                {
+                    if (each.bulletID == BulletID)
+                        each.bulletCount -= 1;
+                }
+                break;
+            case BulletMutMode.Add:
+                foreach (var each in CurBulletSpawners)
+                {
+                    if (each.bulletID == BulletID)
+                        each.bulletCount += 1;
+                }
+                break;
+        }
+        //CurBulletSpawners
+    }
+
+    public void RefreshCurBullets(BulletMutMode mode, int BulletID,
+        BulletInsMode bulletInsMode = BulletInsMode.EditA)
+    {
+        switch (mode)
+        {
+            case BulletMutMode.Sub:
+                foreach (var each in CurBullets)
+                {
+                    if (each.ID == BulletID)
+                        CurBullets.Remove(each);
+                }
+                break;
+            case BulletMutMode.Add:
+                BulletData curData = new BulletData(BulletID);
+                curData.SetDataByID(bulletInsMode);
+                CurBullets.Add(curData);
+                break;
+        }
+    }
+    
+    public void RefreshStandbyBullets(BulletMutMode mode, int BulletID)
+    {
+        switch (mode)
+        {
+            case BulletMutMode.Sub:
+                foreach (var each in CurStandbyBullets)
+                {
+                    if (each.BulletID == BulletID)
+                        CurStandbyBullets.Remove(each);
+                }
+                break;
+            case BulletMutMode.Add:
+                foreach (var each in CurStandbyBullets)
+                {
+                    if (each.BulletID == 0)
+                        each.BulletID = BulletID;
+                }
+                break;
+        }
+    }
+
+    public void RefreshSupremeCharms(BulletMutMode mode, int CharmID)
+    {
+        switch (mode)
+        {
+            case BulletMutMode.Sub:
+                foreach (var each in SupremeCharms)
+                {
+                    if (each.ID == CharmID)
+                        SupremeCharms.Remove(each);
+                }
+                break;
+            case BulletMutMode.Add:
+                SupremeCharm newCharm = new SupremeCharm(CharmID);
+                newCharm.GetSupremeCharmByID();
+                SupremeCharms.Add(newCharm);
+                break;
+        }
+    }
+    #endregion
+
     public bool AddStandbyBullet(int BulletID)
     {
-        bool isAdd = false;
-        GameObject curSlot = null;
-        BulletSlotStandby curSlotSC = null;
-        for (int i = 0; i < UIManager.Instance.GroupSlotStandby.transform.childCount; i++)
-        {
-            GameObject tmpSlot = UIManager.Instance.GroupSlotStandby.transform.GetChild(i).gameObject;
-            curSlotSC = tmpSlot.GetComponent<BulletSlotStandby>();
-            if (curSlotSC.curBulletID == 0)
-            {
-                curSlot = tmpSlot;
-                curSlotSC.curBulletID = BulletID;
-                break;
-            }
-        }
-        if (curSlot==null) return false;
-        
+        GameObject BulletIns = BulletManager.Instance.InstanceStandByBullet(BulletID);
+        if (BulletIns == null)
+            return false;
         SetStandbyBullets();
-        isAdd = true;
-        BulletManager.Instance.InstanceStandByBullet(BulletID,curSlot);
-        return isAdd;
+        return true;
     }
 
     public void SetStandbyBullets()
@@ -142,11 +193,9 @@ public class CharacterManager :ScriptableObject
         CurStandbyBullets = new List<StandbyData>();
         for (int i = 0; i < UIManager.Instance.GroupSlotStandby.transform.childCount; i++)
         {
-            StandbyData curSD = new StandbyData();
             GameObject curSlot = UIManager.Instance.GroupSlotStandby.transform.GetChild(i).gameObject;
             BulletSlotStandby curSlotSC = curSlot.GetComponent<BulletSlotStandby>();
-            curSD.SlotID = curSlotSC.SlotID;
-            curSD.BulletID = curSlotSC.curBulletID;
+            StandbyData curSD = new StandbyData( curSlotSC.BulletID,curSlotSC.SlotID);
             CurStandbyBullets.Add(curSD);
         }
         TrunkManager.Instance.SaveFile();
@@ -165,11 +214,10 @@ public class CharacterManager :ScriptableObject
                 InstanceBullet(each.bulletID,BulletInsMode.Spawner);
             DraggableBulletSpawner perSc = bagSlotBullet.GetComponentInChildren<DraggableBulletSpawner>();
             perSc.Count = each.bulletCount;
-
             foreach (var eachSlot in allSlots)
             {
                 BulletSlot curSC = eachSlot;
-                if (curSC.SlotID == each.bulletID)
+                if (curSC.SlotID == (each.bulletID%10))
                 {
                     bagSlotBullet.transform.SetParent(curSC.gameObject.transform,false);
                     bagSlotBullet.transform.localScale = Vector3.one;
@@ -177,32 +225,29 @@ public class CharacterManager :ScriptableObject
             }
         }
 
-        //实例化bullet
+        /*//实例化bullet
         if (BagData.slotRole01 != 0)
-            _instanceslotRole(BagData.slotRole01,1,BulletEditMode.SlotRole01);
+            _instanceslotRole(BagData.slotRole01,1);
         if (BagData.slotRole02 != 0)
-            _instanceslotRole(BagData.slotRole02,2,BulletEditMode.SlotRole02);
+            _instanceslotRole(BagData.slotRole02,2);
         if (BagData.slotRole03 != 0)
-            _instanceslotRole(BagData.slotRole03,3,BulletEditMode.SlotRole03);
+            _instanceslotRole(BagData.slotRole03,3);
         if (BagData.slotRole04 != 0)
-            _instanceslotRole(BagData.slotRole04,4,BulletEditMode.SlotRole04);
+            _instanceslotRole(BagData.slotRole04,4);
         if (BagData.slotRole05 != 0)
-            _instanceslotRole(BagData.slotRole05,5,BulletEditMode.SlotRole05);
+            _instanceslotRole(BagData.slotRole05,5);
 
-        void _instanceslotRole(int slotRoleID,int slotIndex,BulletEditMode bulletEditMode)
+        void _instanceslotRole(int bulletID,int slotIndex)
         {
             //
             GameObject curSlotRole = groupBulletSlotRole.transform.GetChild(slotIndex - 1).gameObject;
             BulletSlotRole curSlotRoleSC = curSlotRole.GetComponent<BulletSlotRole>();
-            curSlotRoleSC.IsHaveBullet = true;
             
-            GameObject slotRoleGO = BulletManager.Instance.InstanceBullet(slotRoleID,BulletInsMode.EditB);
-            DraggableBullet slotRoleGOSc = slotRoleGO.GetComponentInChildren<DraggableBullet>();
-            slotRoleGOSc.BulletState = bulletEditMode;
+            GameObject slotRoleGO = BulletManager.Instance.InstanceBullet(bulletID,BulletInsMode.EditB);
             slotRoleGO.transform.SetParent(groupBullet.transform);
             slotRoleGO.transform.localScale = Vector3.one;
             slotRoleGO.transform.position = curSlotRole.transform.position;
-        }
+        }*/
     }
 
     #region 模板

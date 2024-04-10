@@ -391,6 +391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 0
+  BulletID: 0
 --- !u!1 &287374910
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,6 +641,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 0
+  BulletID: 0
 --- !u!1 &402161876
 GameObject:
   m_ObjectHideFlags: 0
@@ -771,6 +773,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 0
+  BulletID: 0
 --- !u!1 &476547721
 GameObject:
   m_ObjectHideFlags: 0
@@ -1387,6 +1390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 0
+  BulletID: 0
 --- !u!1 &774886750
 GameObject:
   m_ObjectHideFlags: 0
@@ -1517,7 +1521,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb3f314f0e3401e9e7ccbe56e7e4d67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SlotID: 0
+  SlotID: 5
+  BulletID: 0
   IsHaveBullet: 0
 --- !u!1 &776651151
 GameObject:
@@ -1649,7 +1654,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb3f314f0e3401e9e7ccbe56e7e4d67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SlotID: 0
+  SlotID: 3
+  BulletID: 0
   IsHaveBullet: 0
 --- !u!1 &812811070
 GameObject:
@@ -1782,6 +1788,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 0
+  BulletID: 0
 --- !u!1 &961691558
 GameObject:
   m_ObjectHideFlags: 0
@@ -1913,6 +1920,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 0
+  BulletID: 0
 --- !u!1 &1067621821
 GameObject:
   m_ObjectHideFlags: 0
@@ -2327,7 +2335,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb3f314f0e3401e9e7ccbe56e7e4d67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SlotID: 0
+  SlotID: 4
+  BulletID: 0
   IsHaveBullet: 0
 --- !u!1 &1248253408
 GameObject:
@@ -2340,6 +2349,7 @@ GameObject:
   - component: {fileID: 1248253409}
   - component: {fileID: 1248253411}
   - component: {fileID: 1248253410}
+  - component: {fileID: 1248253412}
   m_Layer: 5
   m_Name: GroupBulletSlotRole
   m_TagString: Untagged
@@ -2409,6 +2419,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1248253408}
   m_CullTransparentMesh: 1
+--- !u!114 &1248253412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248253408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77d5da3c21f37734197b7819efb27784, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1252668626
 GameObject:
   m_ObjectHideFlags: 0
@@ -2540,6 +2562,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 0
+  BulletID: 0
 --- !u!1 &1273792450
 GameObject:
   m_ObjectHideFlags: 0
@@ -2780,7 +2803,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb3f314f0e3401e9e7ccbe56e7e4d67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SlotID: 0
+  SlotID: 1
+  BulletID: 0
   IsHaveBullet: 0
 --- !u!1 &1397756654
 GameObject:
@@ -3180,6 +3204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 0
+  BulletID: 0
 --- !u!1 &1478675136
 GameObject:
   m_ObjectHideFlags: 0
@@ -3526,6 +3551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 0
+  BulletID: 0
 --- !u!1 &1795831628
 GameObject:
   m_ObjectHideFlags: 0
@@ -3790,7 +3816,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb3f314f0e3401e9e7ccbe56e7e4d67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SlotID: 0
+  SlotID: 2
+  BulletID: 0
   IsHaveBullet: 0
 --- !u!1 &1860515274
 GameObject:
@@ -3923,6 +3950,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 0
+  BulletID: 0
 --- !u!1 &1918083995
 GameObject:
   m_ObjectHideFlags: 0
@@ -4223,6 +4251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 0
+  BulletID: 0
 --- !u!1 &2128479779
 GameObject:
   m_ObjectHideFlags: 0
@@ -4354,6 +4383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 0
+  BulletID: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

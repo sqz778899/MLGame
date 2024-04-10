@@ -93,21 +93,16 @@ public class DraggableBulletSpawner : BulletBase, IPointerDownHandler, IPointerU
             if (result.gameObject.CompareTag("BulletSlotRole"))
             {
                 BulletSlotRole curSlot = result.gameObject.GetComponent<BulletSlotRole>();
-                if (curSlot.IsHaveBullet)
+                if (curSlot.BulletID != 0)
                     continue;
                 
-                DraggableBullet tempSC = childBulletIns.GetComponentInChildren<DraggableBullet>();
-                tempSC.SetBulletState(result.gameObject);
-                BulletSlot curSlotSC = result.gameObject.GetComponent<BulletSlot>();
-                if (curSlotSC == null)
-                    tempSC.CurBagSlotID = 0;
-                else
-                    tempSC.CurBagSlotID = curSlotSC.SlotID;
-                CharacterManager.Instance.SetBullet();
                 // 如果有一个子弹槽，真正Spwan出来一个Bullet
+                curSlot.BulletID = _bulletData.ID;
                 childBulletIns.transform.position = result.gameObject.transform.position;
+                //........ChangeData.................
+                CharacterManager.Instance.RefreshCurBullets(BulletMutMode.Add,_bulletData.ID);
+                CharacterManager.Instance.RefreshSpawner(BulletMutMode.Sub,_bulletData.ID);
                 childBulletIns = null;
-                curSlot.IsHaveBullet = true;
                 return;
             }
         }

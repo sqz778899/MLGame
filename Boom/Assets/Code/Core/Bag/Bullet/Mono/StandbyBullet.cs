@@ -25,4 +25,9 @@ public class StandbyBullet: BulletBase, IPointerDownHandler, IPointerUpHandler, 
             rectTransform.position = worldPoint;
         }
     }
+
+    public void DestroySelf()
+    {
+        Destroy(gameObject.transform.parent.gameObject);
+    }
 }

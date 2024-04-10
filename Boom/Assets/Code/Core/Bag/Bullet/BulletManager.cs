@@ -47,21 +47,69 @@ public class BulletManager :ScriptableObject
         return Bullet;
     }
 
-    public GameObject InstanceStandByBullet(int bulletID,GameObject curSlot)
+    public GameObject InstanceStandByBullet(int bulletID,GameObject curSlot = null)
     {
-        GameObject curSDIns = InstanceBullet(bulletID, BulletInsMode.Standby);
-        curSDIns.transform.SetParent(UIManager.Instance.GroupBulletStandby.transform);
-        curSDIns.transform.position = Vector3.zero;
-        curSDIns.transform.localScale = Vector3.one;
-        curSDIns.GetComponent<RectTransform>().anchoredPosition3D =
-            curSlot.GetComponent<RectTransform>().anchoredPosition3D;
+        GameObject curSDIns = null;
+        if (curSlot != null)
+        {
+            curSDIns = InstanceBullet(bulletID, BulletInsMode.Standby);
+            curSDIns.transform.SetParent(UIManager.Instance.GroupBulletStandby.transform);
+            curSDIns.transform.position = Vector3.zero;
+            curSDIns.transform.localScale = Vector3.one;
+            curSDIns.GetComponent<RectTransform>().anchoredPosition3D =
+                curSlot.GetComponent<RectTransform>().anchoredPosition3D;
+        }
+        else
+        {
+            GameObject SlotGroup = UIManager.Instance.GroupSlotStandby;
+            for (int i = 0; i < SlotGroup.transform.childCount; i++)
+            {
+                GameObject tmpSlot = SlotGroup.transform.GetChild(i).gameObject;
+                BulletSlotStandby curSlotSC = tmpSlot.GetComponent<BulletSlotStandby>();
+                if (curSlotSC.BulletID == 0)
+                {
+                    curSlotSC.BulletID = bulletID;
+                    curSDIns = InstanceBullet(bulletID, BulletInsMode.Standby);
+                    curSDIns.transform.SetParent(UIManager.Instance.GroupBulletStandby.transform);
+                    curSDIns.transform.position = Vector3.zero;
+                    curSDIns.transform.localScale = Vector3.one;
+                    curSDIns.GetComponent<RectTransform>().anchoredPosition3D =
+                        tmpSlot.GetComponent<RectTransform>().anchoredPosition3D;
+                    break;
+                }
+            }
+        }
         return curSDIns;
     }
 
+    void DestroyStandby(int BulletID)
+    {
+        List<StandbyData> curSDBullets = CharacterManager.Instance.CurStandbyBullets;
+        GameObject curSD = UIManager.Instance.GroupBulletStandby;
+        for (int i = curSD.transform.childCount-1 ; i >= 0; i--)
+        {
+            GameObject curBullet = curSD.transform.GetChild(i).gameObject;
+            StandbyBullet curSC = curBullet.GetComponentInChildren<StandbyBullet>();
+            if (curSC._bulletData.ID == BulletID)
+            {
+                foreach (var each in curSDBullets)
+                {
+                    if (each.BulletID == curSC._bulletData.ID )
+                    {
+                        each.BulletID = 0;
+                        break;
+                    }
+                }
+                curSC.DestroySelf();
+            }
+        }
+    }
+  
     public void BulletUpgrade()
     {
         GameObject curSD = UIManager.Instance.GroupBulletStandby;
         Dictionary<int, int> IDCount = new Dictionary<int, int>();
+        List<StandbyBullet> bulletFlags = new List<StandbyBullet>();
         for (int i = 0; i < curSD.transform.childCount; i++)
         {
             GameObject curBullet = curSD.transform.GetChild(i).gameObject;
@@ -70,18 +118,27 @@ public class BulletManager :ScriptableObject
                 IDCount.Add(curSC._bulletData.ID,1);
             else
                 IDCount[curSC._bulletData.ID] += 1;
+            bulletFlags.Add(curSC);
         }
 
         foreach (var each in IDCount)
         {
             if (each.Value == 2)
             {
-                //Check
-                //CharacterManager.Instance.BagData.bagSlots
+                foreach (var eachSpawner in CharacterManager.Instance.CurBulletSpawners)
+                {
+                    if (eachSpawner.bulletID == each.Key)
+                    {
+                        //Upgrade
+                        DestroyStandby(eachSpawner.bulletID);
+                        eachSpawner.bulletID += 100;
+                    }
+                }
             }
             if (each.Value == 3)
             {
-                //Upgrade
+                DestroyStandby(each.Key);
+                InstanceStandByBullet(each.Key+100);
             }
         }
         Debug.Log("Upgrade !!!!");

@@ -91,6 +91,8 @@ public class RollManager: ScriptableObject
                 Debug.Log("qweqwesxas");
                 return;
             }
+
+            BulletManager.Instance.BulletUpgrade();
         }
         TrunkManager.Instance.SaveFile();
     }

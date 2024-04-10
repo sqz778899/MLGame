@@ -55,13 +55,12 @@ public class TrunkManager: ScriptableObject
         CharacterManager.Instance.Gold = _saveFile.Gold;
         for (int i = 0; i < _saveFile.SupremeCharms.Count; i++)
         {
-            SupremeCharm curCharm = new SupremeCharm();
-            curCharm.ID = _saveFile.SupremeCharms[i];
+            SupremeCharm curCharm = new SupremeCharm(_saveFile.SupremeCharms[i]);
             curCharm.GetSupremeCharmByID();
             CharacterManager.Instance.SupremeCharms.Add(curCharm);
         }
         CharacterManager.Instance.CurBulletSpawners = _saveFile.UserBulletSpawner;
-        CharacterManager.Instance.BagData.InitDataByJson(_saveFile.BagData);
+        CharacterManager.Instance.CurBullets = _saveFile.UserCurBullets;
         CharacterManager.Instance.CurStandbyBullets = _saveFile.UserStandbyBullet;
         #endregion
         
@@ -83,10 +82,10 @@ public class TrunkManager: ScriptableObject
     public void SaveFile()
     {
         #region Character
-        _saveFile.BagData = CharacterManager.Instance.BagData.SetDataJson();
-        _saveFile.UserBulletSpawner = CharacterManager.Instance.CurBulletSpawners;
         _saveFile.Score = CharacterManager.Instance.Score;
         _saveFile.Gold = CharacterManager.Instance.Gold;
+        _saveFile.UserBulletSpawner = CharacterManager.Instance.CurBulletSpawners;
+        _saveFile.UserCurBullets = CharacterManager.Instance.CurBullets;
         List<int> SupremeCharms = new List<int>();
         foreach (var each in CharacterManager.Instance.SupremeCharms)
             SupremeCharms.Add(each.ID);
@@ -116,20 +115,6 @@ public class TrunkManager: ScriptableObject
     {
         _saveFile = new SaveFileJson();
         #region Character
-        //................bagSlots...........................
-        BagDataJson bagDataJson = new BagDataJson();
-        List<SingleSlot> bagSlots = new List<SingleSlot>();
-        bagDataJson.bagSlots = bagSlots;
-
-        for (int i = 0; i < 12; i++)
-            bagSlots.Add(new SingleSlot((i + 1)));
-        
-        bagDataJson.slotRole01 = 0;
-        bagDataJson.slotRole02 = 0;
-        bagDataJson.slotRole03 = 0;
-        bagDataJson.slotRole04 = 0;
-        bagDataJson.slotRole05 = 0;
-        
         //................UserBulletSpawner...........................
         List<BulletSpawner> UserBulletSpawner = new List<BulletSpawner>();
         UserBulletSpawner.Add(new BulletSpawner(1,5));
@@ -141,7 +126,7 @@ public class TrunkManager: ScriptableObject
         for (int i = 0; i < 5; i++)
             newGameSD.Add(new StandbyData(0,i+1));
         
-        _saveFile.BagData = bagDataJson;
+        _saveFile.UserCurBullets = new List<BulletData>();
         _saveFile.UserBulletSpawner = UserBulletSpawner;
         _saveFile.Score = 0;
         _saveFile.Gold = 10000000;

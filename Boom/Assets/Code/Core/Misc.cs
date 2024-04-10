@@ -35,6 +35,11 @@ public class SupremeCharm
     {
         
     }
+
+    public SupremeCharm(int _id)
+    {
+        ID = _id;
+    }
 }
 
 [Serializable]

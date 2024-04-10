@@ -5,14 +5,11 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 #region 一些枚举类
-public enum BulletEditMode
+
+public enum BulletMutMode
 {
-    Non = 0,
-    SlotRole01 = 1,
-    SlotRole02 = 2,
-    SlotRole03 = 3,
-    SlotRole04 = 4,
-    SlotRole05 = 5,
+    Add = 1,
+    Sub = 2,
 }
 
 public enum BulletInsMode
@@ -80,7 +77,11 @@ public class BulletData
         }
         return curDataJson;
     }
-    
+
+    public BulletData(int _id)
+    {
+        ID = _id;
+    }
 }
 #endregion
 
