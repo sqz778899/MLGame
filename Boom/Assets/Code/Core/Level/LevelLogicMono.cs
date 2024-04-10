@@ -86,11 +86,12 @@ public class LevelLogicMono : MonoBehaviour
     public IEnumerator FireWithDelay(Vector3 pos, float delay)
     {
         Debug.Log("fire");
-        List<BulletData> bulletDatas = CharacterManager.Instance.CurBullets;
+        List<BulletReady> bulletDatas = CharacterManager.Instance.CurBullets;
     
-        foreach (BulletData eBuDT in bulletDatas)
+        foreach (BulletReady eBuDT in bulletDatas)
         {
-            GameObject curBullet = BulletManager.Instance.InstanceBullet(eBuDT,BulletInsMode.Inner,pos);
+            GameObject curBullet = BulletManager.Instance.InstanceBullet(eBuDT.bulletID
+                ,BulletInsMode.Inner,pos);
             if (curBullet != null && UIManager.Instance.GroupBullet != null)
                 curBullet.transform.SetParent(UIManager.Instance.GroupBullet.transform);
             yield return new WaitForSeconds(delay);  // 在发射下一个子弹之前，等待delay秒

@@ -22,7 +22,7 @@ public class MapLogic : MonoBehaviour
         TrunkManager.Instance.LoadSaveFile();
         //.............Local...................
         UIManager.Instance.InitSelectLevel();
-        CharacterManager.Instance.InitStandbyBullet();
+        CharacterManager.Instance.InstanceStandbyBullets();
     }
 
     void Update()

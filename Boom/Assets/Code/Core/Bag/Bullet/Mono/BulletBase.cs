@@ -9,7 +9,8 @@ public class BulletBase : MonoBehaviour
     public BulletData _bulletData;
     public BulletInsMode bulletInsMode;
     public GameObject GroupStar; 
-    void Update()
+    
+    public virtual void Update()
     {
         if (GroupStar != null)
         {

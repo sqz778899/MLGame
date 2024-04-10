@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -10,31 +11,27 @@ public class DraggableBulletSpawner : BulletBase, IPointerDownHandler, IPointerU
     public int Count;
     public GameObject childBulletIns;
     public TextMeshProUGUI txtCount;
-    GameObject GroupBullet;
-    private bool IsChangeCount;
+    bool IsChangeCount;
 
     void Start()
     {
-        InitData();
-    }
-
-    public void InitData()
-    {
         IsChangeCount = false;
         childBulletIns = null;
-        GroupBullet = GameObject.Find("GroupBullet");
+    }
+
+    void Update()
+    {
+        base.Update();
         txtCount.text = "X" + Count;
     }
-    public void AddCount()
+    void AddCount()
     {
         Count++;
-        txtCount.text = "X" + Count;
     }
-    
-    public void SubCount()
+
+    void SubCount()
     {
         Count--;
-        txtCount.text = "X" + Count;
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -43,7 +40,7 @@ public class DraggableBulletSpawner : BulletBase, IPointerDownHandler, IPointerU
         {
             IsChangeCount = true;
             childBulletIns = BulletManager.Instance.InstanceBullet(_bulletData,BulletInsMode.EditA,transform.parent.position);
-            childBulletIns.transform.SetParent(GroupBullet.transform);
+            childBulletIns.transform.SetParent(UIManager.Instance.GroupBullet.transform);
             childBulletIns.transform.localScale = Vector3.one;
             DraggableBullet DraBuSC = childBulletIns.GetComponentInChildren<DraggableBullet>();
             DraBuSC.originalPosition = transform.position;
@@ -95,14 +92,9 @@ public class DraggableBulletSpawner : BulletBase, IPointerDownHandler, IPointerU
                 BulletSlotRole curSlot = result.gameObject.GetComponent<BulletSlotRole>();
                 if (curSlot.BulletID != 0)
                     continue;
-                
-                // 如果有一个子弹槽，真正Spwan出来一个Bullet
-                curSlot.BulletID = _bulletData.ID;
-                childBulletIns.transform.position = result.gameObject.transform.position;
                 //........ChangeData.................
-                CharacterManager.Instance.RefreshCurBullets(BulletMutMode.Add,_bulletData.ID);
-                CharacterManager.Instance.RefreshSpawner(BulletMutMode.Sub,_bulletData.ID);
-                childBulletIns = null;
+                CharacterManager.Instance.AddBullet(_bulletData.ID,curSlot.SlotID);
+                DestroyImmediate(childBulletIns);
                 return;
             }
         }

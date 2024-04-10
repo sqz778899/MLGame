@@ -25,6 +25,43 @@ public enum BulletInsMode
 
 #region 主要的子弹类
 [Serializable]
+public class StandbyData
+{
+    public int BulletID;
+    public int SlotID;
+
+    public StandbyData(int bulletID = 0,int slotID = 0)
+    {
+        BulletID = bulletID;
+        SlotID = slotID;
+    }
+}
+
+[Serializable]
+public class BulletSpawner
+{
+    public int bulletID;
+    public int bulletCount;
+    public BulletSpawner(int _bulletID = 0,int _bulletCount = 0)
+    {
+        bulletID = _bulletID;
+        bulletCount = _bulletCount;
+    }
+}
+
+[Serializable]
+public class BulletReady
+{
+    public int bulletID;
+    public int curSlotID;
+    public BulletReady(int _bulletID,int _curSlotID)
+    {
+        bulletID = _bulletID;
+        curSlotID = _curSlotID;
+    }
+}
+
+[Serializable]
 public class BulletData
 {
     //.............Attribute..............

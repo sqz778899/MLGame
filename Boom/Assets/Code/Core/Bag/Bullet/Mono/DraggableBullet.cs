@@ -6,12 +6,10 @@ public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandle
 {
     public int CurBagSlotID = 0;
     public Vector3 originalPosition;
-    GameObject GroupBulletSlot;
 
     void Start()
     {
         InitBulletData();
-        GroupBulletSlot = GameObject.Find("GroupBulletSlot");
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -43,26 +41,20 @@ public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandle
                 BulletSlot curSlotSC = result.gameObject.GetComponent<BulletSlot>();
                 if (curSlotSC.BulletID != 0)
                     return;
-                
-                CurBagSlotID = curSlotSC.SlotID;
-                curSlotSC.BulletID = _bulletData.ID;
-                // 如果有一个子弹槽，我们就将子弹放到子弹槽中
-                transform.parent.position = result.gameObject.transform.position;
-                CharacterManager.Instance.SetBullet();
+                //Add
+                CharacterManager.Instance.AddBullet(_bulletData.ID,curSlotSC.SlotID);
                 return;
             }
 
             if (result.gameObject.CompareTag("BulletSlot"))
             {
                 //寻找母体
-                DraggableBulletSpawner[] allSpawner = GroupBulletSlot.GetComponentsInChildren<DraggableBulletSpawner>();
+                DraggableBulletSpawner[] allSpawner = UIManager.Instance.GroupBulletSlot.GetComponentsInChildren<DraggableBulletSpawner>();
                 foreach (var each in allSpawner)
                 {
                     if (each._bulletData.ID == _bulletData.ID)
                     {
-                        each.AddCount();
-                        DestroyImmediate(transform.parent.gameObject);
-                        CharacterManager.Instance.SetBullet();
+                        CharacterManager.Instance.SubBullet(_bulletData.ID);
                         return;
                     }
                 }
@@ -82,5 +74,6 @@ public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandle
     public void OnPointerUp(PointerEventData eventData)
     {
         DropOneBullet(eventData);
+        Destroy(transform.parent.gameObject);
     }
 }

@@ -126,7 +126,7 @@ public class TrunkManager: ScriptableObject
         for (int i = 0; i < 5; i++)
             newGameSD.Add(new StandbyData(0,i+1));
         
-        _saveFile.UserCurBullets = new List<BulletData>();
+        _saveFile.UserCurBullets = new List<BulletReady>();
         _saveFile.UserBulletSpawner = UserBulletSpawner;
         _saveFile.Score = 0;
         _saveFile.Gold = 10000000;

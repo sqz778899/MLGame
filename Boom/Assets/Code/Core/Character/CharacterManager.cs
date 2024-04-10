@@ -20,7 +20,7 @@ public class CharacterManager :ScriptableObject
     #endregion
     
     //...............子弹上膛................
-    public List<BulletData> CurBullets;
+    public List<BulletReady> CurBullets;
     
     //...............重要数据................
     public int Score;
@@ -34,66 +34,13 @@ public class CharacterManager :ScriptableObject
 
     public void InitData()
     {
-        InstanceBagBullet();
-        InitStandbyBullet();
-            
+        InstanceSpawners();
+        InstanceCurBullets();
+        InstanceStandbyBullets();
+        
         WinOrFailState = WinOrFail.InLevel;
     }
-
-    public void InitStandbyBullet()
-    {
-        List<StandbyData> saveSD = TrunkManager.Instance._saveFile.UserStandbyBullet;
-        for (int i = 0; i < UIManager.Instance.GroupSlotStandby.transform.childCount; i++)
-        {
-            GameObject curSlot = UIManager.Instance.GroupSlotStandby.transform.GetChild(i).gameObject;
-            BulletSlotStandby curSlotSC = curSlot.GetComponent<BulletSlotStandby>();
-            curSlotSC.SlotID = saveSD[i].SlotID;
-            curSlotSC.BulletID = saveSD[i].BulletID;
-            if (curSlotSC.BulletID != 0)
-            {
-                BulletManager.Instance.InstanceStandByBullet(curSlotSC.BulletID,curSlot);
-            }
-        }
-    }
-
-    public void SetBullet()
-    {
-        //............SlotRole 更新.....................
-        GameObject SlotRoot = UIManager.Instance.GroupBulletSlotRole;
-        GameObject GroupBullet = UIManager.Instance.GroupBullet;
-        //............Clear.................
-        for (int i = 0; i < SlotRoot.transform.childCount; i++)
-        {
-            GameObject perSlot = SlotRoot.transform.GetChild(i).gameObject;
-            BulletSlotRole perSlotSc = perSlot.GetComponentInChildren<BulletSlotRole>();
-            perSlotSc.BulletID = 0;
-        }
-        //............Refresh.................
-        for (int i = 0; i < GroupBullet.transform.childCount; i++)
-        {
-            GameObject perBullet = GroupBullet.transform.GetChild(i).gameObject;
-            DraggableBullet perSc = perBullet.GetComponentInChildren<DraggableBullet>();
-            for (int j = 0; j < SlotRoot.transform.childCount; j++)
-            {
-                GameObject perSlot = SlotRoot.transform.GetChild(i).gameObject;
-                BulletSlotRole perSlotSc = perSlot.GetComponentInChildren<BulletSlotRole>();
-                if (perSlotSc.SlotID == perSc.CurBagSlotID)
-                    perSlotSc.BulletID = perSc._bulletData.ID;
-            }
-        }
-        
-        //...........Spawner 更新......................
-        DraggableBulletSpawner[] Spawners = UIManager.Instance
-            .GroupBulletSlot.GetComponentsInChildren<DraggableBulletSpawner>();
-        CurBulletSpawners = new List<BulletSpawner>();
-        foreach (DraggableBulletSpawner eachSpawner in Spawners)
-            CurBulletSpawners.Add(new BulletSpawner(eachSpawner._bulletData.ID, eachSpawner.Count));
-        
-        //.....................子弹上膛.........................
-        //CurBullets = BagData.curBullets;
-        
-        Debug.Log("Set BulletSlotRole");
-    }
+    
 
     #region 纯数据层操作
     public void RefreshSpawner(BulletMutMode mode,int BulletID)
@@ -118,21 +65,28 @@ public class CharacterManager :ScriptableObject
         //CurBulletSpawners
     }
 
-    public void RefreshCurBullets(BulletMutMode mode, int BulletID,
+    public void RefreshCurBullets(BulletMutMode mode, int BulletID,int SlotID = -1,
         BulletInsMode bulletInsMode = BulletInsMode.EditA)
     {
         switch (mode)
         {
             case BulletMutMode.Sub:
-                foreach (var each in CurBullets)
+                for (int i = CurBullets.Count - 1; i >= 0; i--)
                 {
-                    if (each.ID == BulletID)
-                        CurBullets.Remove(each);
+                    if (CurBullets[i].bulletID == BulletID)
+                    {
+                        CurBullets.RemoveAt(i);
+                        break;
+                    }
                 }
                 break;
             case BulletMutMode.Add:
-                BulletData curData = new BulletData(BulletID);
-                curData.SetDataByID(bulletInsMode);
+                if (SlotID == -1)
+                {
+                    Debug.LogError("未设置SlotID");
+                    return;
+                }
+                BulletReady curData = new BulletReady(BulletID,SlotID);
                 CurBullets.Add(curData);
                 break;
         }
@@ -179,94 +133,102 @@ public class CharacterManager :ScriptableObject
     }
     #endregion
 
+    #region 场景内GO操作
+    public void InstanceSpawners()
+    {
+        //..............Clear Old Data..................
+        DraggableBulletSpawner[] oldSpawner = UIManager.Instance
+            .GroupBulletSlot.GetComponentsInChildren<DraggableBulletSpawner>();
+        for (int i = oldSpawner.Length - 1; i >= 0; i--)
+        {
+            DestroyImmediate(oldSpawner[i].gameObject);
+        }
+        //..............Instance New Data..................
+        BulletSlot[] slots = UIManager.Instance.GroupBulletSlot.GetComponentsInChildren<BulletSlot>();
+        foreach (BulletSpawner each in CurBulletSpawners)
+        {
+            int curSpawnerFindID = each.bulletID % 10;
+            for (int i = 0; i < slots.Length; i++)
+            {
+                if (curSpawnerFindID == slots[i].SlotID)
+                {
+                    slots[i].BulletID = each.bulletID;
+                    GameObject newSpawnerIns = BulletManager.Instance.
+                        InstanceBullet(each.bulletID,BulletInsMode.Spawner);
+                    newSpawnerIns.GetComponentInChildren<DraggableBulletSpawner>().Count = each.bulletCount;
+                    newSpawnerIns.transform.SetParent(slots[i].gameObject.transform);
+                    newSpawnerIns.transform.localScale = Vector3.one;
+                    newSpawnerIns.GetComponent<RectTransform>().anchoredPosition3D = Vector3.zero;
+                }
+            }
+        }
+    }
+
+    public void InstanceCurBullets()
+    {
+        GameObject roleSlotRoot = UIManager.Instance.GroupBulletSlotRole;
+        GameObject bulletRoot = UIManager.Instance.GroupBullet;
+        //..............Clear Old Data..................
+        for (int i = bulletRoot.transform.childCount - 1; i >= 0; i--)
+        {
+            DestroyImmediate(bulletRoot.transform.GetChild(i).gameObject);
+        }
+        //..............Instance New Data..................
+        foreach (BulletReady each in CurBullets)
+        {
+            GameObject BulletIns = BulletManager.Instance.InstanceBullet(each.bulletID,BulletInsMode.EditA);
+            BulletIns.transform.SetParent(bulletRoot.transform);
+            BulletIns.transform.localScale = Vector3.one;
+            BulletIns.name = "ssssss";
+            BulletIns.transform.position = roleSlotRoot.transform.GetChild(each.curSlotID - 1).position;
+        }
+    }
+    
+    public void InstanceStandbyBullets()
+    {
+        GameObject SDSlotRoot = UIManager.Instance.GroupSlotStandby;
+        GameObject SDBulletRoot = UIManager.Instance.GroupBulletStandby;
+        //..............Clear Old Data..................
+        for (int i = SDBulletRoot.transform.childCount - 1; i >= 0; i--)
+        {
+            DestroyImmediate(SDBulletRoot.transform.GetChild(i).gameObject);
+        }
+        //..............Instance New Data..................
+        for (int i = 0; i < SDSlotRoot.transform.childCount; i++)
+        {
+            GameObject curSlot = SDSlotRoot.transform.GetChild(i).gameObject;
+            BulletSlotStandby curSlotSC = curSlot.GetComponent<BulletSlotStandby>();
+            if (CurStandbyBullets[i].BulletID != 0)
+            {
+                curSlotSC.BulletID = CurStandbyBullets[i].BulletID;
+                BulletManager.Instance.InstanceStandByBullet(CurStandbyBullets[i].BulletID,curSlot);
+            }
+        }
+    }
+    
     public bool AddStandbyBullet(int BulletID)
     {
         GameObject BulletIns = BulletManager.Instance.InstanceStandByBullet(BulletID);
         if (BulletIns == null)
             return false;
-        SetStandbyBullets();
         return true;
     }
-
-    public void SetStandbyBullets()
-    {
-        CurStandbyBullets = new List<StandbyData>();
-        for (int i = 0; i < UIManager.Instance.GroupSlotStandby.transform.childCount; i++)
-        {
-            GameObject curSlot = UIManager.Instance.GroupSlotStandby.transform.GetChild(i).gameObject;
-            BulletSlotStandby curSlotSC = curSlot.GetComponent<BulletSlotStandby>();
-            StandbyData curSD = new StandbyData( curSlotSC.BulletID,curSlotSC.SlotID);
-            CurStandbyBullets.Add(curSD);
-        }
-        TrunkManager.Instance.SaveFile();
-    }
-
-    void InstanceBagBullet()
-    {
-        GameObject groupBulletSlot = UIManager.Instance.GroupBulletSlot;
-        GameObject groupBulletSlotRole = UIManager.Instance.GroupBulletSlotRole;
-        GameObject groupBullet = UIManager.Instance.GroupBullet;
-        BulletSlot[] allSlots = groupBulletSlot.GetComponentsInChildren<BulletSlot>();
-
-        foreach (var each in CurBulletSpawners)
-        {
-            GameObject bagSlotBullet = BulletManager.Instance.
-                InstanceBullet(each.bulletID,BulletInsMode.Spawner);
-            DraggableBulletSpawner perSc = bagSlotBullet.GetComponentInChildren<DraggableBulletSpawner>();
-            perSc.Count = each.bulletCount;
-            foreach (var eachSlot in allSlots)
-            {
-                BulletSlot curSC = eachSlot;
-                if (curSC.SlotID == (each.bulletID%10))
-                {
-                    bagSlotBullet.transform.SetParent(curSC.gameObject.transform,false);
-                    bagSlotBullet.transform.localScale = Vector3.one;
-                }
-            }
-        }
-
-        /*//实例化bullet
-        if (BagData.slotRole01 != 0)
-            _instanceslotRole(BagData.slotRole01,1);
-        if (BagData.slotRole02 != 0)
-            _instanceslotRole(BagData.slotRole02,2);
-        if (BagData.slotRole03 != 0)
-            _instanceslotRole(BagData.slotRole03,3);
-        if (BagData.slotRole04 != 0)
-            _instanceslotRole(BagData.slotRole04,4);
-        if (BagData.slotRole05 != 0)
-            _instanceslotRole(BagData.slotRole05,5);
-
-        void _instanceslotRole(int bulletID,int slotIndex)
-        {
-            //
-            GameObject curSlotRole = groupBulletSlotRole.transform.GetChild(slotIndex - 1).gameObject;
-            BulletSlotRole curSlotRoleSC = curSlotRole.GetComponent<BulletSlotRole>();
-            
-            GameObject slotRoleGO = BulletManager.Instance.InstanceBullet(bulletID,BulletInsMode.EditB);
-            slotRoleGO.transform.SetParent(groupBullet.transform);
-            slotRoleGO.transform.localScale = Vector3.one;
-            slotRoleGO.transform.position = curSlotRole.transform.position;
-        }*/
-    }
-
-    #region 模板
-    /*
-    void Temp()
-    {
-        BulletDataJson ss = new BulletDataJson();
-        ss.speed = 10;
-        ss.damage = 1;
-        ss.bulletPrefabName = "P_Bullet_Inner_01";
-        ss.bulletEditAName = "P_Bullet_Edit_a_01";
-        ss.bulletEditBName = "P_Bullet_Edit_b_01";
-        ss.bulleSpawnerName = "P_Bullet_Spawner_01";
-        ss.hitEffectName = "";
-        List<BulletDataJson> ppp = new List<BulletDataJson>();
-        ppp.Add(ss);
-        string content01 = JsonConvert.SerializeObject(ppp,(Formatting) Formatting.Indented);
-        File.WriteAllText(PathConfig.BulletDesignJson, content01);
-    }*/
     #endregion
+
+    public void AddBullet(int bulletID,int slotID)
+    {
+        RefreshCurBullets(BulletMutMode.Add,bulletID,slotID);
+        RefreshSpawner(BulletMutMode.Sub,bulletID);
+        InstanceSpawners();
+        InstanceCurBullets();
+    }
+
+    public void SubBullet(int bulletID)
+    {
+        RefreshCurBullets(BulletMutMode.Sub,bulletID);
+        RefreshSpawner(BulletMutMode.Add,bulletID);
+        InstanceSpawners();
+        InstanceCurBullets();
+    }
 }
 
