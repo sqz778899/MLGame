@@ -81,29 +81,6 @@ public class BulletManager :ScriptableObject
         }
         return curSDIns;
     }
-
-    void DestroyStandby(int BulletID)
-    {
-        List<StandbyData> curSDBullets = CharacterManager.Instance.CurStandbyBullets;
-        GameObject curSD = UIManager.Instance.GroupBulletStandby;
-        for (int i = curSD.transform.childCount-1 ; i >= 0; i--)
-        {
-            GameObject curBullet = curSD.transform.GetChild(i).gameObject;
-            StandbyBullet curSC = curBullet.GetComponentInChildren<StandbyBullet>();
-            if (curSC._bulletData.ID == BulletID)
-            {
-                foreach (var each in curSDBullets)
-                {
-                    if (each.BulletID == curSC._bulletData.ID )
-                    {
-                        each.BulletID = 0;
-                        break;
-                    }
-                }
-                curSC.DestroySelf();
-            }
-        }
-    }
   
     public void BulletUpgrade()
     {
@@ -130,17 +107,25 @@ public class BulletManager :ScriptableObject
                     if (eachSpawner.bulletID == each.Key)
                     {
                         //Upgrade
-                        DestroyStandby(eachSpawner.bulletID);
+                        CharacterManager.Instance.SubStandebyBullet(eachSpawner.bulletID);
                         eachSpawner.bulletID += 100;
                     }
                 }
             }
             if (each.Value == 3)
             {
-                DestroyStandby(each.Key);
+                CharacterManager.Instance.SubStandebyBullet(each.Key);
                 InstanceStandByBullet(each.Key+100);
             }
         }
         Debug.Log("Upgrade !!!!");
     }
+
+    #region 给Tooltip用
+    public BulletTooltipInfo GetBulletInfo(int bulletID)
+    {
+        return null;
+    }
+
+    #endregion
 }

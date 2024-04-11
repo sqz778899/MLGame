@@ -94,7 +94,9 @@ public class DraggableBulletSpawner : BulletBase, IPointerDownHandler, IPointerU
                     continue;
                 //........ChangeData.................
                 CharacterManager.Instance.AddBullet(_bulletData.ID,curSlot.SlotID);
-                DestroyImmediate(childBulletIns);
+                CharacterManager.Instance.SetBulletPos(childBulletIns.transform,
+                    result.gameObject.transform);
+                childBulletIns = null;
                 return;
             }
         }

@@ -53,6 +53,14 @@ public class UIManager : ScriptableObject
     }
     #endregion
 
+    #region 2.Level
+    public void InitCharacterLevel()
+    {
+        if (GroupBullet == null)
+            GroupBullet = GameObject.Find("GroupBullet");
+    }
+    #endregion
+
     #region 3.SelectLevel
     public GameObject GroupSelectLevel;
     public GameObject ShopCanvas;

@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
-    public int CurBagSlotID = 0;
+    public int curSlotID = 0;
     public Vector3 originalPosition;
 
     void Start()
@@ -40,21 +40,28 @@ public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandle
             {
                 BulletSlot curSlotSC = result.gameObject.GetComponent<BulletSlot>();
                 if (curSlotSC.BulletID != 0)
+                {
+                    CharacterManager.Instance.BulletInterchangePos(curSlotID, curSlotSC.SlotID);
+                    //Replace(curSlotID,curSlotSC.SlotID)
                     return;
+                }
                 //Add
                 CharacterManager.Instance.AddBullet(_bulletData.ID,curSlotSC.SlotID);
+                CharacterManager.Instance.SetBulletPos(transform.parent, result.gameObject.transform);
                 return;
             }
 
             if (result.gameObject.CompareTag("BulletSlot"))
             {
                 //寻找母体
-                DraggableBulletSpawner[] allSpawner = UIManager.Instance.GroupBulletSlot.GetComponentsInChildren<DraggableBulletSpawner>();
+                DraggableBulletSpawner[] allSpawner = UIManager.Instance
+                    .GroupBulletSlot.GetComponentsInChildren<DraggableBulletSpawner>();
                 foreach (var each in allSpawner)
                 {
                     if (each._bulletData.ID == _bulletData.ID)
                     {
                         CharacterManager.Instance.SubBullet(_bulletData.ID);
+                        Destroy(transform.parent.gameObject);
                         return;
                     }
                 }
@@ -74,6 +81,6 @@ public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandle
     public void OnPointerUp(PointerEventData eventData)
     {
         DropOneBullet(eventData);
-        Destroy(transform.parent.gameObject);
+        //Destroy(transform.parent.gameObject);
     }
 }

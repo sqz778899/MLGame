@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 #region 一些枚举类
 
@@ -132,4 +133,11 @@ public class BulletDataJson
     public int elementalType;
     
     public string hitEffectName;
+}
+
+public class BulletTooltipInfo
+{
+    public Image bulletImage;
+    public string name;
+    public string description;
 }

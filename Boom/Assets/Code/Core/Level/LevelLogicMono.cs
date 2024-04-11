@@ -40,6 +40,7 @@ public class LevelLogicMono : MonoBehaviour
         //InitLevel
         InitLevel();
         isBeginCalculation = false;
+        UIManager.Instance.InitCharacterLevel();
     }
     void Update()
     {

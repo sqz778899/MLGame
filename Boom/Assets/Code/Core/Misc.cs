@@ -10,6 +10,11 @@ public enum ElementalTypes
     Electric = 4
 }
 
+public enum ItemTypes
+{
+    Bullet = 1
+}
+
 //score
 //gold
 //insignias
