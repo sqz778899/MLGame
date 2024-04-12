@@ -2,7 +2,8 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandler, IDragHandler
+public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandler, 
+    IDragHandler,IPointerExitHandler,IPointerMoveHandler
 {
     public int curSlotID = 0;
     public Vector3 originalPosition;
@@ -82,5 +83,21 @@ public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandle
     {
         DropOneBullet(eventData);
         //Destroy(transform.parent.gameObject);
+    }
+    
+    public void OnPointerMove(PointerEventData eventData)
+    {
+        RectTransform rectTransform = transform.GetComponent<RectTransform>();
+        Vector3 worldPoint;
+        if (RectTransformUtility.ScreenPointToWorldPointInRectangle(rectTransform, 
+                eventData.position, eventData.pressEventCamera, out worldPoint))
+        {
+            DisplayTooltips(worldPoint);
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        DestroyTooltips();
     }
 }

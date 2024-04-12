@@ -20,11 +20,20 @@ public enum BulletInsMode
     EditB = 3,
     Spawner = 4,
     Roll = 5,
-    Standby = 6
+    Standby = 6,
+    Thumbnail = 7
 }
 #endregion
 
 #region 主要的子弹类
+public enum ElementalTypes
+{
+    Non = 1,
+    Ice = 2,
+    Fire = 3,
+    Electric = 4
+}
+
 [Serializable]
 public class StandbyData
 {
@@ -137,7 +146,7 @@ public class BulletDataJson
 
 public class BulletTooltipInfo
 {
-    public Image bulletImage;
+    public Sprite bulletImage;
     public string name;
     public string description;
 }

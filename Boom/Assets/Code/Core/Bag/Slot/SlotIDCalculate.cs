@@ -1,9 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletGroup : MonoBehaviour
+public class SlotIDCalculate : MonoBehaviour
 {
     void Start()
     {

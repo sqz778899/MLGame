@@ -5,7 +5,6 @@ using UnityEngine;
 public static class PathConfig
 {
    public static string MiscDir = "Assets/Res/UI/Misc/";
-
    
    public static string SaveFileJson = "Assets/Data/SaveFile.json";
    public static string BulletDesignJson = "Assets/Data/BulletDesign.json";
@@ -21,6 +20,7 @@ public static class PathConfig
    public static string CalculateDamageManagerOBJ = "Assets/Res/Manager/CalculateDamageManager.asset";
 
    ///.........................资源类.................................
+   public static string TooltipAsset = "Assets/Res/UI/Prefab/P_Tooltip_01.prefab";
    public static string DrawLineAsset = "Assets/Res/UI/Map/Prefab/P_DrawLine_01.prefab";
    public static string TxtHitPB = "Assets/Res/UI/Prefab/P_txtHit_01.prefab";
    public static string RollScorePB = "Assets/Res/Bullet/Prefab/P_RollScore_Template.prefab";
@@ -89,6 +89,9 @@ public static class PathConfig
             orginName = "T_Bullet_Edit_a_";
             break;
          case BulletInsMode.Standby:
+            orginName = "T_Bullet_Edit_a_";
+            break;
+         case BulletInsMode.Thumbnail:
             orginName = "T_Bullet_Edit_a_";
             break;
       }

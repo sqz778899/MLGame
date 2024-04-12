@@ -1,12 +1,11 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DraggableBulletSpawner : BulletBase, IPointerDownHandler, IPointerUpHandler, IDragHandler
+public class DraggableBulletSpawner : BulletBase, IPointerDownHandler, 
+    IPointerUpHandler, IDragHandler,IPointerExitHandler,IPointerMoveHandler
 {
     public int Count;
     public GameObject childBulletIns;
@@ -67,7 +66,21 @@ public class DraggableBulletSpawner : BulletBase, IPointerDownHandler, IPointerU
             DragOneBullet(eventData, childBulletIns.transform);
         }
     }
+    public void OnPointerMove(PointerEventData eventData)
+    {
+        RectTransform rectTransform = transform.GetComponent<RectTransform>();
+        Vector3 worldPoint;
+        if (RectTransformUtility.ScreenPointToWorldPointInRectangle(rectTransform, eventData.position, eventData.pressEventCamera, out worldPoint))
+        {
+            DisplayTooltips(worldPoint);
+        }
+    }
 
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        DestroyTooltips();
+    }
+    
     #region MyRegion
     void DragOneBullet(PointerEventData eventData,Transform curTrans)
     {
@@ -106,4 +119,5 @@ public class DraggableBulletSpawner : BulletBase, IPointerDownHandler, IPointerU
         DestroyImmediate(childBulletIns);
     }
     #endregion
+    
 }

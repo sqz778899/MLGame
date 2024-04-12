@@ -25,7 +25,7 @@ public class CalculateDamageManager : ScriptableObject
         int curHealth = curEnemy.health;
         switch (curBulletData.elementalType)
         {
-            case ElementalTypes.NonElemental:
+            case ElementalTypes.Non:
                 curEnemy.health = curHealth - curDamage;
                 curEnemy.TakeDamage(curDamage);
                 break;

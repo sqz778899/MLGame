@@ -8,7 +8,8 @@ public class BulletBase : MonoBehaviour
     public Vector3 forward = new Vector3(1, 0, 0);
     public BulletData _bulletData;
     public BulletInsMode bulletInsMode;
-    public GameObject GroupStar; 
+    public GameObject GroupStar;
+    internal GameObject TooltipsGO;
     
     public virtual void Update()
     {
@@ -83,5 +84,25 @@ public class BulletBase : MonoBehaviour
             //
             target.sprite = _bulletData.imgBullet;
         }
+    }
+
+    internal void DisplayTooltips(Vector3 pos)
+    {
+        if (TooltipsGO == null)
+        {
+            TooltipsGO = Instantiate(ResManager.instance
+                .GetAssetCache<GameObject>(PathConfig.TooltipAsset));
+            CommonTooltip curTip = TooltipsGO.GetComponentInChildren<CommonTooltip>();
+            curTip.SyncInfo(_bulletData.ID,ItemTypes.Bullet);
+            TooltipsGO.transform.SetParent(UIManager.Instance.TooltipsRoot.transform);
+            TooltipsGO.transform.localScale = Vector3.one;
+        }
+        TooltipsGO.transform.position = pos;
+    }
+
+    internal void DestroyTooltips()
+    {
+        if (TooltipsGO != null)
+            DestroyImmediate(TooltipsGO);   
     }
 }

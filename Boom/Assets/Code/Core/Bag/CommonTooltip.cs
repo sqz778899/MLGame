@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,16 +8,13 @@ public class CommonTooltip : MonoBehaviour
     public TextMeshProUGUI txtTitle;
     public TextMeshProUGUI txtDescription;
 
-    public int ID;
-    public ItemTypes CurType;
-
-    void ppp()
+    public void SyncInfo(int ID,ItemTypes CurType)
     {
         switch (CurType)
         {
             case ItemTypes.Bullet:
                 BulletTooltipInfo curInfo = BulletManager.Instance.GetBulletInfo(ID);
-                ImgThumbnail = curInfo.bulletImage;
+                ImgThumbnail.sprite = curInfo.bulletImage;
                 txtTitle.text = curInfo.name;
                 txtDescription.text = curInfo.description;
                 break;

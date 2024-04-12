@@ -162,4 +162,20 @@ public class TrunkManager: ScriptableObject
         File.WriteAllText(PathConfig.SaveFileJson, content01);
     }
     #endregion
+
+    #region MyRegion
+    public BulletDataJson GetBulletDesignData(int BulletID)
+    {
+        BulletDataJson curData = null;
+        foreach (BulletDataJson each in BulletDesignJsons)
+        {
+            if (each.ID == BulletID)
+            {
+                curData = each;
+                break;
+            }
+        }
+        return curData;
+    }
+    #endregion
 }

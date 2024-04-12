@@ -1,13 +1,13 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(BulletGroup))]
+[CustomEditor(typeof(SlotIDCalculate))]
 public class BulletGroupEditor: Editor
 {
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
-        BulletGroup myScript = (BulletGroup)target;
+        SlotIDCalculate myScript = (SlotIDCalculate)target;
         if(GUILayout.Button("InitSlotID"))
         {
             Debug.Log("InitSlotID");

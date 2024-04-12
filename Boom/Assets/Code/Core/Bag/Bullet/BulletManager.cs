@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BulletManager :ScriptableObject
 {
@@ -17,6 +18,8 @@ public class BulletManager :ScriptableObject
         }
     }
     #endregion
+
+    #region InstanceBullet
     void GetIns(BulletInsMode bulletInsMode,out GameObject Bullet,Vector3 pos = new Vector3())
     {
         Bullet = GameObject.Instantiate(
@@ -81,6 +84,7 @@ public class BulletManager :ScriptableObject
         }
         return curSDIns;
     }
+    #endregion
   
     public void BulletUpgrade()
     {
@@ -124,7 +128,15 @@ public class BulletManager :ScriptableObject
     #region 给Tooltip用
     public BulletTooltipInfo GetBulletInfo(int bulletID)
     {
-        return null;
+        BulletDataJson curDsData = TrunkManager.Instance.GetBulletDesignData(bulletID);
+        BulletTooltipInfo tInfo = new BulletTooltipInfo();
+        tInfo.bulletImage = ResManager.instance.GetAssetCache<Sprite>(
+            PathConfig.GetBulletImagePath(bulletID, BulletInsMode.Thumbnail));
+        tInfo.name = curDsData.name;
+        string ElementalType = ((ElementalTypes)curDsData.elementalType).ToString();
+        tInfo.description = string.Format("Lv: {0}\nDamage: {1}\nElement: {2}",
+            curDsData.Level,curDsData.damage,ElementalType);
+        return tInfo;
     }
 
     #endregion

@@ -24,6 +24,7 @@ public class UIManager : ScriptableObject
     public GameObject GroupBullet;
     public GameObject GroupSlotStandby;
     public GameObject GroupBulletStandby;
+    public GameObject TooltipsRoot;
 
     
     #region 1.CharacterScene
@@ -44,6 +45,9 @@ public class UIManager : ScriptableObject
             return;
         }
 
+        if (TooltipsRoot == null)
+            TooltipsRoot = GameObject.Find("TooltipsRoot");
+
         GroupCharacter = GroupCharacterScene.transform.GetChild(0).gameObject;
         GroupBulletSlot = GroupCharacterScene.transform.GetChild(1).gameObject;
         GroupBulletSlotRole = GroupCharacterScene.transform.GetChild(2).gameObject;
@@ -58,6 +62,9 @@ public class UIManager : ScriptableObject
     {
         if (GroupBullet == null)
             GroupBullet = GameObject.Find("GroupBullet");
+        
+        if (TooltipsRoot == null)
+            TooltipsRoot = GameObject.Find("TooltipsRoot");
     }
     #endregion
 
@@ -74,6 +81,9 @@ public class UIManager : ScriptableObject
             Debug.LogError("Erro: InitSelectLevel");
             return;
         }
+        
+        if (TooltipsRoot == null)
+            TooltipsRoot = GameObject.Find("TooltipsRoot");
         
         GroupSlotStandby = GroupSelectLevel.transform.GetChild(0).gameObject;
         GroupBulletStandby = GroupSelectLevel.transform.GetChild(1).gameObject;

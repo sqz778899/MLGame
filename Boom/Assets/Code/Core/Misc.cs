@@ -2,13 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ElementalTypes
-{
-    NonElemental = 1,
-    Ice = 2,
-    Fire = 3,
-    Electric = 4
-}
+
 
 public enum ItemTypes
 {

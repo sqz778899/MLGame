@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Bullet : BulletBase
+public class BulletInner : BulletBase
 {
     void Update()
     {
