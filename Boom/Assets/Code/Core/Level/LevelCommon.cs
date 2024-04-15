@@ -20,10 +20,11 @@ public class SaveFileJson
     public List<BulletSpawner> UserBulletSpawner;
     public List<BulletReady> UserCurBullets;
     public List<StandbyData> UserStandbyBullet;
+    public List<int> UserCurBuff;
     
     public List<int> SupremeCharms;
     public List<MapSate> UserMapSate;
     public List<RollProbability> UserProbabilitys;
+    public Dictionary<int, float> BuffIDToProbabilityPool;
 }
-
 #endregion
