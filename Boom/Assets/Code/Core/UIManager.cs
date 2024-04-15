@@ -26,7 +26,7 @@ public class UIManager : ScriptableObject
     public GameObject GroupBulletStandby;
     public GameObject TooltipsRoot;
 
-    
+
     #region 1.CharacterScene
     //1.CharacterScene
     public GameObject GroupCharacterScene;
@@ -58,6 +58,7 @@ public class UIManager : ScriptableObject
     #endregion
 
     #region 2.Level
+    public GameObject GroupBuffRogue;
     public void InitCharacterLevel()
     {
         if (GroupBullet == null)
@@ -65,6 +66,9 @@ public class UIManager : ScriptableObject
         
         if (TooltipsRoot == null)
             TooltipsRoot = GameObject.Find("TooltipsRoot");
+
+        if (GroupBuffRogue == null)
+            GroupBuffRogue = GameObject.Find("GroupBuffRogue");
     }
     #endregion
 

@@ -1,10 +1,7 @@
 ﻿using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine.SceneManagement;
 using System.IO;
 using Newtonsoft.Json;
 using UnityEngine;
-
 
 public class TrunkManager: ScriptableObject
 {
@@ -25,6 +22,7 @@ public class TrunkManager: ScriptableObject
     #region 策划数据
 
     List<BulletDataJson> _bulletDesignJsons;
+    List<BuffDataJson> _buffDesignJsons;
     public List<BulletDataJson> BulletDesignJsons
     {
         get
@@ -35,11 +33,28 @@ public class TrunkManager: ScriptableObject
         }
     }
     
+    public List<BuffDataJson> BuffDesignJsons
+    {
+        get
+        {
+            if (_buffDesignJsons == null)
+                _buffDesignJsons = LoadBuffData();
+            return _buffDesignJsons;
+        }
+    }
+    
     public List<BulletDataJson> LoadBulletData()
     {
         string BulletDesignString = File.ReadAllText(PathConfig.BulletDesignJson);
         List<BulletDataJson> BulletDataJsons = JsonConvert.DeserializeObject<List<BulletDataJson>>(BulletDesignString);
         return BulletDataJsons;
+    }
+    
+    public List<BuffDataJson> LoadBuffData()
+    {
+        string BuffDesignString = File.ReadAllText(PathConfig.BuffDesignJson);
+        List<BuffDataJson> BuffDataJsons = JsonConvert.DeserializeObject<List<BuffDataJson>>(BuffDesignString);
+        return BuffDataJsons;
     }
     #endregion
     
@@ -108,6 +123,11 @@ public class TrunkManager: ScriptableObject
     public List<RollProbability> GetRollProbability()
     {
         return _saveFile.UserProbabilitys;
+    }
+    
+    public Dictionary<int, float> GetBuffPool()
+    {
+        return _saveFile.BuffIDToProbabilityPool;
     }
 
     #region NewGame

@@ -24,6 +24,7 @@ public class RollManager: ScriptableObject
     int Cost = 5;
     #endregion
 
+    #region RollBullet
     public bool ShopActive = false;
     
     public void OnceRollBullet()
@@ -105,6 +106,19 @@ public class RollManager: ScriptableObject
             shop.transform.GetChild(i).gameObject.SetActive(!ShopActive);
         ShopActive = !ShopActive;
     }
+    #endregion
+
+    #region RollBuff
+    public void OnceRollBuff()
+    {
+        Dictionary<int, float> curBuffPool = TrunkManager.Instance.GetBuffPool();
+
+        foreach (var each in curBuffPool)
+        {
+            
+        }
+    }
+    #endregion
 
     #region SomeFunc
     void SetRollAttri(GameObject curRollIns,int step)

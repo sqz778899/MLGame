@@ -1,0 +1,18 @@
+[
+  {
+    "ID":1,
+    "name": "Sharpness",
+    "comAttributes":
+    {
+        "damage": 1,
+        "elementalType": 1,
+        "elementalValue": 1,
+        "Penetration": 1
+    },
+    "speAttributes":
+    {
+        "interest": 1,
+        "standbyAdd": 1
+    }
+  }
+]

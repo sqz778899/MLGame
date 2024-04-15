@@ -1,8 +1,7 @@
-﻿#region 输赢条件相关
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 
+#region 输赢条件相关
 public enum WinOrFail
 {
     InLevel = 1,
@@ -28,3 +27,4 @@ public class SaveFileJson
     public Dictionary<int, float> BuffIDToProbabilityPool;
 }
 #endregion
+

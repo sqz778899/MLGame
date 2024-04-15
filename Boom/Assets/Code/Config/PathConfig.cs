@@ -8,26 +8,31 @@ public static class PathConfig
    
    public static string SaveFileJson = "Assets/Data/SaveFile.json";
    public static string BulletDesignJson = "Assets/Data/BulletDesign.json";
+   public static string BuffDesignJson = "Assets/Data/BuffDesign.json";
    public static string FXAssetDir = "Assets/Res/FX/Prefab/";
 
    //.........................ScriptObject...........................
    public static string TrunkManagerOBJ = "Assets/Res/TrunkManager.asset";
    public static string UIManagerOBJ = "Assets/Res/Manager/UIManager.asset";
    public static string RollManagerOBJ = "Assets/Res/Manager/RollManager.asset";
+   public static string BuffMannagerOBJ = "Assets/Res/Manager/BuffMannager.asset";
    public static string MSceneManagerOBJ = "Assets/Res/Manager/MSceneManager.asset";
    public static string CharacterManagerOBJ = "Assets/Res/Character/CharacterManager.asset";
    public static string BulletManagerOBJ = "Assets/Res/Bullet/BulletManager.asset";
    public static string CalculateDamageManagerOBJ = "Assets/Res/Manager/CalculateDamageManager.asset";
+   
 
    ///.........................资源类.................................
    public static string TooltipAsset = "Assets/Res/UI/Prefab/P_Tooltip_01.prefab";
    public static string DrawLineAsset = "Assets/Res/UI/Map/Prefab/P_DrawLine_01.prefab";
    public static string TxtHitPB = "Assets/Res/UI/Prefab/P_txtHit_01.prefab";
    public static string RollScorePB = "Assets/Res/Bullet/Prefab/P_RollScore_Template.prefab";
-   
+
    //..........................子弹.............................................
    public static string BulletImageDir = "Assets/Res/Bullet/Textures/";
-   public static string BulletAssetDir = "Assets/Res/Bullet/Prefab/";
+   public static string BulletAssetDir = "Assets/Res/Bullet/Prefab/"; 
+   //..........................Buff.............................................
+   public static string BuffImageDir = "Assets/Res/UI/Buff/Textures/T_Buff_Sharpness_01.png";
    
    //..........................全局大关卡...............................
    public static string LevelAssetDir = "Assets/Res/Levels/";
@@ -65,10 +70,6 @@ public static class PathConfig
    {
       //temp todo
       ID = ID % 10;
-      /*if ()
-      {
-         
-      }*/
       //"T_Bullet_Edit_a_01""T_Bullet_Inner_01"
       string orginName = "";
       switch (bulletInsMode)
@@ -98,6 +99,14 @@ public static class PathConfig
       orginName = orginName + ID.ToString("D2") + ".png";
       string curImagePath = BulletImageDir + orginName;
 
+      return curImagePath;
+   }
+
+   public static string GetBufftImagePath(int ID,string name)
+   {
+      string orginName = "T_Buff_" + name +"_" +  ID.ToString("D2") + ".png";
+      string curImagePath = BuffImageDir + orginName;
+      
       return curImagePath;
    }
 }
