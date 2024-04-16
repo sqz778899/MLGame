@@ -9,6 +9,7 @@ public static class PathConfig
    public static string SaveFileJson = "Assets/Data/SaveFile.json";
    public static string BulletDesignJson = "Assets/Data/BulletDesign.json";
    public static string BuffDesignJson = "Assets/Data/BuffDesign.json";
+   public static string LevelBuffDesignJson = "Assets/Data/LevelBuffDesign.json";
    public static string FXAssetDir = "Assets/Res/FX/Prefab/";
 
    //.........................ScriptObject...........................
@@ -33,6 +34,7 @@ public static class PathConfig
    public static string BulletAssetDir = "Assets/Res/Bullet/Prefab/"; 
    //..........................Buff.............................................
    public static string BuffImageDir = "Assets/Res/UI/Buff/Textures/T_Buff_Sharpness_01.png";
+   public static string BuffPB = "Assets/Res/UI/Buff/Prefabs/P_Buff_Template.prefab";
    
    //..........................全局大关卡...............................
    public static string LevelAssetDir = "Assets/Res/Levels/";

@@ -61,14 +61,23 @@ public class LevelLogicMono : MonoBehaviour
             case WinOrFail.InLevel:
                 break;
             case WinOrFail.Win:
-                WinGUI.SetActive(true);
-                isBeginCalculation = false;
+                WinTheLevel();
                 break;
             case WinOrFail.Fail:
                 FailGUI.SetActive(true);
                 isBeginCalculation = false;
                 break;
         }
+    }
+    //
+    void WinTheLevel()
+    {
+        //播放胜利
+        WinGUI.SetActive(true);
+        isBeginCalculation = false;
+        //给一个随机Buff
+        //RollManager.Instance.OnceRollBuff();
+        //选完了给一个随机宝物
     }
 
     #region 开火相关

@@ -4,71 +4,71 @@
     "Level": 1,
     "name": "Basic01",
     "damage": 1,
-    "elementalType": 1,
-    "hitEffectName": "FX_Bullet01_hit"
+    "elementalType": 0,
+    "hitEffectName": "1"
   },
   {
     "ID": 101,
     "Level": 2,
     "name": "Basic02",
     "damage": 2,
-    "elementalType": 1,
-    "hitEffectName": "FX_Bullet01_hit"
+    "elementalType": 0,
+    "hitEffectName": "1"
   },
   {
     "ID": 201,
     "Level": 3,
     "name": "Basic03",
     "damage": 5,
-    "elementalType": 1,
-    "hitEffectName": "FX_Bullet01_hit"
+    "elementalType": 0,
+    "hitEffectName": "1"
   },
   {
     "ID": 2,
     "Level": 1,
     "name": "Ice01",
     "damage": 1,
-    "elementalType": 2,
-    "hitEffectName": "FX_Bullet02_hit"
+    "elementalType": 0,
+    "hitEffectName": "2"
   },
   {
     "ID": 202,
     "Level": 2,
     "name": "Ice02",
     "damage": 3,
-    "elementalType": 2,
-    "hitEffectName": "FX_Bullet02_hit"
+    "elementalType": 0,
+    "hitEffectName": "2"
   },
   {
     "ID": 302,
     "Level": 3,
     "name": "Ice03",
     "damage": 6,
-    "elementalType": 2,
-    "hitEffectName": "FX_Bullet02_hit"
+    "elementalType": 0,
+    "hitEffectName": "2"
   },
   {
     "ID": 3,
     "Level": 1,
     "name": "Fire01",
     "damage": 1,
-    "elementalType": 3,
-    "hitEffectName": "FX_Bullet03_hit"
+    "elementalType": 0,
+    "hitEffectName": "3"
   },
   {
     "ID": 203,
     "Level": 2,
     "name": "Fire02",
     "damage": 2,
-    "elementalType": 3,
-    "hitEffectName": "FX_Bullet03_hit"
+    "elementalType": 0,
+    "hitEffectName": "3"
   },
   {
     "ID": 303,
     "Level": 3,
     "name": "Fire03",
     "damage": 7,
-    "elementalType": 3,
-    "hitEffectName": "FX_Bullet03_hit"
+    "elementalType": 0,
+    "hitEffectName": "3"
   }
 ]

@@ -11,7 +11,6 @@ public enum WinOrFail
 #endregion
 
 #region 存档相关
-
 public class SaveFileJson
 {
     public int Score;
@@ -27,3 +26,9 @@ public class SaveFileJson
 }
 #endregion
 
+
+public class LevelBuff
+{
+    public int LevelID;
+    public List<RollProbability> CurBuffProb;
+}

@@ -13,24 +13,26 @@ public class ExcelExport
     void ExportDesignData()
     {
         ExportBullet();
+        ExportBuffDesign();
+        ExportLevelBuffDesign();
     }
 
     public void ExportBullet()
     {
         DataSet curTables = GetDataSet();
-        
         List<BulletDataJson> curBulletDesign = new List<BulletDataJson>();
-        int rowsPrefix = curTables.Tables[0].Rows.Count;
-        for (int i = 1; i < rowsPrefix; i++)
+        DataTable curTable = curTables.Tables[0];
+       
+        for (int i = 1; i < curTable.Rows.Count; i++)
         {
             BulletDataJson curData = new BulletDataJson();
-            if (curTables.Tables[0].Rows[i][1].ToString() == "") continue;
-            curData.ID = int.Parse(curTables.Tables[0].Rows[i][0].ToString());
-            curData.Level = int.Parse(curTables.Tables[0].Rows[i][1].ToString());
-            curData.name = curTables.Tables[0].Rows[i][2].ToString();
-            curData.damage = int.Parse(curTables.Tables[0].Rows[i][3].ToString());
-            curData.elementalType = int.Parse(curTables.Tables[0].Rows[i][4].ToString());
-            curData.hitEffectName = curTables.Tables[0].Rows[i][5].ToString();
+            if (curTable.Rows[i][1].ToString() == "") continue;
+            curData.ID = int.Parse(curTable.Rows[i][0].ToString());
+            curData.Level = int.Parse(curTable.Rows[i][1].ToString());
+            curData.name = curTable.Rows[i][2].ToString();
+            curData.damage = int.Parse(curTable.Rows[i][3].ToString());
+            curData.elementalType = int.Parse(curTable.Rows[i][4].ToString());
+            curData.hitEffectName = curTable.Rows[i][5].ToString();
             curBulletDesign.Add(curData);
         }
         
@@ -50,18 +52,63 @@ public class ExcelExport
             CommonAttribute comAttri = new CommonAttribute();
             SpeAttribute speAttri = new SpeAttribute();
             if (curTable.Rows[i][1].ToString() == "") continue;
-            curData.ID = int.Parse(curTables.Tables[0].Rows[i][0].ToString());
-            curData.name = curTables.Tables[0].Rows[i][1].ToString();
-            comAttri.damage = int.Parse(curTables.Tables[0].Rows[i][2].ToString());
-            comAttri.elementalType = int.Parse(curTables.Tables[0].Rows[i][3].ToString());
-            comAttri.elementalValue = int.Parse(curTables.Tables[0].Rows[i][4].ToString());
-            comAttri.Penetration = int.Parse(curTables.Tables[0].Rows[i][5].ToString());
-            speAttri.interest = int.Parse(curTables.Tables[0].Rows[i][6].ToString());
-            speAttri.standbyAdd = int.Parse(curTables.Tables[0].Rows[i][7].ToString());
+            curData.ID = int.Parse(curTable.Rows[i][0].ToString());
+            curData.name = curTable.Rows[i][1].ToString();
+            comAttri.damage = int.Parse(curTable.Rows[i][2].ToString());
+            comAttri.elementalType = int.Parse(curTable.Rows[i][3].ToString());
+            comAttri.elementalValue = int.Parse(curTable.Rows[i][4].ToString());
+            comAttri.Penetration = int.Parse(curTable.Rows[i][5].ToString());
+            speAttri.interest = int.Parse(curTable.Rows[i][6].ToString());
+            speAttri.standbyAdd = int.Parse(curTable.Rows[i][7].ToString());
             curData.comAttributes = comAttri;
             curData.speAttributes = speAttri;
             curBuffData.Add(curData);
         }
+        
+        string content01 = JsonConvert.SerializeObject(curBuffData,(Formatting) Formatting.Indented);
+        File.WriteAllText(PathConfig.BuffDesignJson, content01);
+    }
+
+    public void ExportLevelBuffDesign()
+    {
+        DataSet curTables = GetDataSet();
+        List<LevelBuff> curLBuffData = new List<LevelBuff>();
+
+        DataTable curTable = curTables.Tables[2];
+        for (int i = 1; i < curTable.Rows.Count; i++)
+        {
+            LevelBuff curLB = new LevelBuff();
+            List<RollProbability> curRProb = new List<RollProbability>();
+            if (curTable.Rows[i][1].ToString() == "") continue;
+            curLB.LevelID = int.Parse(curTable.Rows[i][0].ToString());
+            string sBuffIDs = curTable.Rows[i][1].ToString();
+            string sBuffProbs = curTable.Rows[i][2].ToString();
+            string[] sBuffIDTemp = sBuffIDs.Split(";");
+            string[] sBuffProbTemp = sBuffProbs.Split(";");
+            if (sBuffIDTemp.Length != sBuffProbTemp.Length)
+            {
+                Debug.LogError("导表失败");
+                return;
+            }
+
+            List<float> orProb = new List<float>();
+            for (int j = 0; j < sBuffIDTemp.Length; j++)
+                orProb.Add(float.Parse(sBuffProbTemp[j]));
+            
+            List<float> normalizeProb = RollManager.Instance.NormalizeProb(orProb);
+            for (int j = 0; j < sBuffIDTemp.Length; j++)
+            {
+                RollProbability curRP = new RollProbability();
+                curRP.ID = int.Parse(sBuffIDTemp[j]);
+                curRP.Probability = normalizeProb[j];
+                curRProb.Add(curRP);
+            }
+            curLB.CurBuffProb = curRProb;
+            curLBuffData.Add(curLB);
+        }
+        
+        string content01 = JsonConvert.SerializeObject(curLBuffData,(Formatting) Formatting.Indented);
+        File.WriteAllText(PathConfig.LevelBuffDesignJson, content01);
     }
 
     DataSet GetDataSet()

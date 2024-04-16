@@ -30,7 +30,8 @@ public class RollManager: ScriptableObject
     public void OnceRollBullet()
     {
         //GetProbabilitys
-        List<RollProbability> rollProbs = DealProb(TrunkManager.Instance.GetRollProbability());
+        List<RollProbability> rollProbs = TrunkManager.Instance.GetRollProbability();
+        DealProb(ref rollProbs);
         
         //Cal gold
         int curCost = CharacterManager.Instance.Cost;
@@ -111,18 +112,68 @@ public class RollManager: ScriptableObject
     #region RollBuff
     public void OnceRollBuff()
     {
-        //MSceneManager.Instance.CurMapSate.LevelID
-        
-        /*Dictionary<int, float> curBuffPool = TrunkManager.Instance.GetBuffPool();
-
-        foreach (var each in curBuffPool)
+        GameObject curRoot = UIManager.Instance.GroupBuffRogue;
+        int curLevelID = MSceneManager.Instance.CurMapSate.LevelID;
+        List<LevelBuff> curDesign = TrunkManager.Instance.LevelBuffDesignJsons;
+        LevelBuff curLB = null;
+        foreach (var each in curDesign)
         {
+            if (each.LevelID == curLevelID)
+            {
+                curLB = each;
+                break;
+            }
+        }
+
+        if (curLB == null) return;
+
+        List<RollProbability> curBuffPool = curLB.CurBuffProb;
+        int xOffset = 612;
+        int start = -612;
+        for (int i = 0; i < 3; i++)
+        {
+            RollProbability curRoll = SingleRoll(curBuffPool);
+            curBuffPool.Remove(curRoll);
+            DealProb(ref curBuffPool);
             
-        }*/
+            GameObject curBuffPBIns = Instantiate(ResManager.
+                instance.GetAssetCache<GameObject>(PathConfig.BuffPB));
+            BuffMono curSC = curBuffPBIns.GetComponentInChildren<BuffMono>();
+            curSC.ID = curRoll.ID;
+            curSC.InitBuffData();
+            curBuffPBIns.transform.SetParent(curRoot.transform);
+            curBuffPBIns.transform.localScale = Vector3.one;
+            curBuffPBIns.GetComponent<RectTransform>().anchoredPosition3D =
+                new Vector3(start + xOffset * i, 0, 0);
+        }
+        
     }
+    
     #endregion
 
     #region SomeFunc
+    public List<float> NormalizeProb(List<float> Probs)
+    {
+        List<float> normalProbs = new List<float>();
+        float start = 0f;
+        float max = 100f;
+        float account = 0;
+        
+        for (int i = 0; i < Probs.Count; i++)
+            account += Probs[i];
+
+        if (account == 0) return null;
+        
+        float newRatio = 1/(account / max);
+        for (int i = 0; i < Probs.Count; i++)
+        {
+            float newP = Probs[i] * newRatio;
+            start += newP;
+            normalProbs.Add(start);
+        }
+        return normalProbs;
+    }
+    
     void SetRollAttri(GameObject curRollIns,int step)
     {
         //..................POS............................
@@ -138,34 +189,17 @@ public class RollManager: ScriptableObject
         curSC.Score = curScore;
         curSC.Cost = Cost;
     }
-    List<RollProbability>  DealProb(List<RollProbability> OriginProbs)
+    void DealProb(ref List<RollProbability> OriginProbs)
     {
-        List<RollProbability> newProbs = new List<RollProbability>();
-        float start = 0f;
-        float max = 100f;
-        float account = 0;
-        int pCount = OriginProbs.Count;
-        for (int i = 0; i < pCount; i++)
-        {
-            account += OriginProbs[i].Probability;
-        }
+        List<float> orProb = new List<float>();
+        foreach (var each in OriginProbs)
+            orProb.Add(each.Probability);
+        List<float> normalizeProb = NormalizeProb(orProb);
 
-        if (account == 0)
-            return null;
-        float newRatio = 1/(account / max);
-        for (int i = 0; i < pCount; i++)
-        {
-           float newP = OriginProbs[i].Probability * newRatio;
-           start += newP;
-           RollProbability curP = new RollProbability();
-           curP.ID = OriginProbs[i].ID;
-           curP.Probability = start;
-           newProbs.Add(curP);
-        }
-
-        return newProbs;
+        for (int i = 0; i < OriginProbs.Count; i++)
+            OriginProbs[i].Probability = normalizeProb[i];
     }
-
+    
     RollProbability SingleRoll(List<RollProbability> rollProbs)
     {
         float c = Random.Range(0f, 100f);

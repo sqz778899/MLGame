@@ -23,6 +23,7 @@ public class TrunkManager: ScriptableObject
 
     List<BulletDataJson> _bulletDesignJsons;
     List<BuffDataJson> _buffDesignJsons;
+    List<LevelBuff> _levelBuffDesignJsons;
     public List<BulletDataJson> BulletDesignJsons
     {
         get
@@ -42,6 +43,16 @@ public class TrunkManager: ScriptableObject
             return _buffDesignJsons;
         }
     }
+
+    public List<LevelBuff> LevelBuffDesignJsons
+    {
+        get
+        {
+            if (_levelBuffDesignJsons == null)
+                _levelBuffDesignJsons = LoadLevelBuffData();
+            return _levelBuffDesignJsons;
+        }
+    }
     
     public List<BulletDataJson> LoadBulletData()
     {
@@ -55,6 +66,13 @@ public class TrunkManager: ScriptableObject
         string BuffDesignString = File.ReadAllText(PathConfig.BuffDesignJson);
         List<BuffDataJson> BuffDataJsons = JsonConvert.DeserializeObject<List<BuffDataJson>>(BuffDesignString);
         return BuffDataJsons;
+    }
+
+    public List<LevelBuff> LoadLevelBuffData()
+    {
+        string LBDesignStr = File.ReadAllText(PathConfig.LevelBuffDesignJson);
+        List<LevelBuff> LBuffDataJsons = JsonConvert.DeserializeObject<List<LevelBuff>>(LBDesignStr);
+        return LBuffDataJsons;
     }
     #endregion
     
