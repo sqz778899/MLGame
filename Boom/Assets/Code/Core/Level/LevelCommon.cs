@@ -24,7 +24,6 @@ public class SaveFileJson
     public List<int> SupremeCharms;
     public List<MapSate> UserMapSate;
     public List<RollProbability> UserProbabilitys;
-    public Dictionary<int, float> BuffIDToProbabilityPool;
 }
 #endregion
 

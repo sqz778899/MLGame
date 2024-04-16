@@ -124,11 +124,6 @@ public class TrunkManager: ScriptableObject
     {
         return _saveFile.UserProbabilitys;
     }
-    
-    public Dictionary<int, float> GetBuffPool()
-    {
-        return _saveFile.BuffIDToProbabilityPool;
-    }
 
     #region NewGame
     public void SetSaveFileTemplate()

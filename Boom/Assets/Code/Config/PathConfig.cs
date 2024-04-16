@@ -36,8 +36,8 @@ public static class PathConfig
    
    //..........................全局大关卡...............................
    public static string LevelAssetDir = "Assets/Res/Levels/";
-
-
+   
+   #region Function
    public static string GetBulletTemplate(BulletInsMode bulletInsMode)
    {
       string orginName = "";
@@ -109,4 +109,5 @@ public static class PathConfig
       
       return curImagePath;
    }
+   #endregion
 }

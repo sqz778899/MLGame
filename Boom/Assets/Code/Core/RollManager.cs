@@ -111,12 +111,14 @@ public class RollManager: ScriptableObject
     #region RollBuff
     public void OnceRollBuff()
     {
-        Dictionary<int, float> curBuffPool = TrunkManager.Instance.GetBuffPool();
+        //MSceneManager.Instance.CurMapSate.LevelID
+        
+        /*Dictionary<int, float> curBuffPool = TrunkManager.Instance.GetBuffPool();
 
         foreach (var each in curBuffPool)
         {
             
-        }
+        }*/
     }
     #endregion
 

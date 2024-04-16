@@ -1,0 +1,24 @@
+[
+  {
+    "LevelID":1,
+    "BuffProbabilityPool":
+    [
+      {
+        "ID":1,
+        "Probability" : 0.7
+      },
+      {
+        "ID":2,
+        "Probability" : 0.2
+      },
+      {
+        "ID":3,
+        "Probability" : 0.4
+      },
+      {
+        "ID":4,
+        "Probability" : 0.5
+      }
+    ]
+  }
+]

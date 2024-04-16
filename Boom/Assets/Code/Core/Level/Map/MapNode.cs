@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -10,6 +11,8 @@ public class MapNode : MonoBehaviour
     public GameObject imNode;
     ParticleSystem[] _fx_imNode;
     public GameObject imIsFinish;
+
+    public List<RollProbability> BuffProbabilityPool;
 
     public TextMeshProUGUI txtTitle;
 
