@@ -78,8 +78,8 @@ public class BulletData
     public int ID;
     public int Level;
     public string name;
-    public float speed;
     public int damage;
+    public int penetration;
     public ElementalTypes elementalType;
     
     //..............Instance..............
@@ -102,6 +102,7 @@ public class BulletData
         Level = curData.Level;
         name = curData.name;
         damage = curData.damage;
+        penetration = curData.penetration;
         elementalType = (ElementalTypes)curData.elementalType;
 
         imgBullet = ResManager.instance.GetAssetCache<Sprite>(PathConfig.GetBulletImagePath(ID, bulletInsMode));
@@ -137,6 +138,7 @@ public class BulletDataJson
     public int Level;
     public string name;
     public int damage;
+    public int penetration;
     public int elementalType;
     
     public string hitEffectName;

@@ -5,8 +5,106 @@
     "comAttributes": {
       "damage": 1,
       "elementalType": 1,
-      "elementalValue": 0,
-      "Penetration": 1
+      "elementalValue": 1,
+      "Penetration": 0
+    },
+    "speAttributes": {
+      "interest": 1,
+      "standbyAdd": 0
+    }
+  },
+  {
+    "ID": 2,
+    "name": "SevereWinter",
+    "comAttributes": {
+      "damage": 2,
+      "elementalType": 0,
+      "elementalValue": 2,
+      "Penetration": 3
+    },
+    "speAttributes": {
+      "interest": 0,
+      "standbyAdd": 0
+    }
+  },
+  {
+    "ID": 3,
+    "name": "Windrider",
+    "comAttributes": {
+      "damage": 1,
+      "elementalType": 2,
+      "elementalValue": 1,
+      "Penetration": 0
+    },
+    "speAttributes": {
+      "interest": 0,
+      "standbyAdd": 0
+    }
+  },
+  {
+    "ID": 4,
+    "name": "Inferno",
+    "comAttributes": {
+      "damage": 2,
+      "elementalType": 0,
+      "elementalValue": 3,
+      "Penetration": 3
+    },
+    "speAttributes": {
+      "interest": 0,
+      "standbyAdd": 0
+    }
+  },
+  {
+    "ID": 5,
+    "name": "BulletSync",
+    "comAttributes": {
+      "damage": 3,
+      "elementalType": 0,
+      "elementalValue": 1,
+      "Penetration": 0
+    },
+    "speAttributes": {
+      "interest": 0,
+      "standbyAdd": 0
+    }
+  },
+  {
+    "ID": 6,
+    "name": "GoldRush",
+    "comAttributes": {
+      "damage": 2,
+      "elementalType": 0,
+      "elementalValue": 1,
+      "Penetration": 0
+    },
+    "speAttributes": {
+      "interest": 0,
+      "standbyAdd": 1
+    }
+  },
+  {
+    "ID": 7,
+    "name": "Thunderstrike",
+    "comAttributes": {
+      "damage": 2,
+      "elementalType": 0,
+      "elementalValue": 4,
+      "Penetration": 3
+    },
+    "speAttributes": {
+      "interest": 0,
+      "standbyAdd": 0
+    }
+  },
+  {
+    "ID": 8,
+    "name": "ElementalRise",
+    "comAttributes": {
+      "damage": 3,
+      "elementalType": 0,
+      "elementalValue": 1,
+      "Penetration": 0
     },
     "speAttributes": {
       "interest": 0,

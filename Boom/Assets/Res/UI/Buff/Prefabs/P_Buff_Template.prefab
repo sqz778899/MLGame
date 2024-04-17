@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 7423150521435620893}
   - component: {fileID: 474138137647785812}
   m_Layer: 5
-  m_Name: Image
+  m_Name: ImgBuff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -196,6 +196,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7275766515389805056}
+  - component: {fileID: 1078220696403699409}
   m_Layer: 5
   m_Name: P_Buff_Template
   m_TagString: Untagged
@@ -225,6 +226,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1078220696403699409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6509390043344321261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78eb0d30847516a42bbb890f31063b4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 0
+  imgBuff: {fileID: 474138137647785812}
+  txtTitle: {fileID: 890669908413074393}
+  txtDescription: {fileID: 5171192516210382896}
 --- !u!1 &6536606970417029692
 GameObject:
   m_ObjectHideFlags: 0

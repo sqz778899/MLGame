@@ -4,7 +4,7 @@
   "UserBulletSpawner": [
     {
       "bulletID": 1,
-      "bulletCount": 5
+      "bulletCount": 2
     },
     {
       "bulletID": 2,
@@ -15,7 +15,20 @@
       "bulletCount": 1
     }
   ],
-  "UserCurBullets": [],
+  "UserCurBullets": [
+    {
+      "bulletID": 1,
+      "curSlotID": 1
+    },
+    {
+      "bulletID": 1,
+      "curSlotID": 2
+    },
+    {
+      "bulletID": 1,
+      "curSlotID": 3
+    }
+  ],
   "UserStandbyBullet": [
     {
       "BulletID": 0,
@@ -38,6 +51,7 @@
       "SlotID": 5
     }
   ],
+  "UserCurBuff": null,
   "SupremeCharms": [],
   "UserMapSate": [
     {

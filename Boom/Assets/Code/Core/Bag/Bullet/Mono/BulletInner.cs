@@ -5,7 +5,7 @@ public class BulletInner : BulletBase
     void Update()
     {
         // 让子弹沿着Z轴向前移动
-        transform.Translate(forward * _bulletData.speed * Time.deltaTime);
+        transform.Translate(forward * 10f * Time.deltaTime);
     }
 
     void OnTriggerEnter2D(Collider2D other)

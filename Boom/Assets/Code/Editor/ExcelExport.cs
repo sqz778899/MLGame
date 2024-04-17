@@ -31,8 +31,9 @@ public class ExcelExport
             curData.Level = int.Parse(curTable.Rows[i][1].ToString());
             curData.name = curTable.Rows[i][2].ToString();
             curData.damage = int.Parse(curTable.Rows[i][3].ToString());
-            curData.elementalType = int.Parse(curTable.Rows[i][4].ToString());
-            curData.hitEffectName = curTable.Rows[i][5].ToString();
+            curData.penetration = int.Parse(curTable.Rows[i][4].ToString());
+            curData.elementalType = int.Parse(curTable.Rows[i][5].ToString());
+            curData.hitEffectName = curTable.Rows[i][6].ToString();
             curBulletDesign.Add(curData);
         }
         

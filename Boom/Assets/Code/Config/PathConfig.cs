@@ -33,7 +33,7 @@ public static class PathConfig
    public static string BulletImageDir = "Assets/Res/Bullet/Textures/";
    public static string BulletAssetDir = "Assets/Res/Bullet/Prefab/"; 
    //..........................Buff.............................................
-   public static string BuffImageDir = "Assets/Res/UI/Buff/Textures/T_Buff_Sharpness_01.png";
+   public static string BuffImageDir = "Assets/Res/UI/Buff/Textures/";
    public static string BuffPB = "Assets/Res/UI/Buff/Prefabs/P_Buff_Template.prefab";
    
    //..........................全局大关卡...............................
