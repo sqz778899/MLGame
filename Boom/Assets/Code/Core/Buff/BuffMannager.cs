@@ -46,7 +46,4 @@ public class BuffMannager:ScriptableObject
         return curSprite;
     }
     #endregion
-    
-    
-    
 }

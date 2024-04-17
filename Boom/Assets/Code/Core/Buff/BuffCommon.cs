@@ -18,6 +18,7 @@ public class BuffDataJson
 {
     public int ID;
     public string name;
+    public int rare;
     public CommonAttribute comAttributes;
     public SpeAttribute speAttributes;
 }

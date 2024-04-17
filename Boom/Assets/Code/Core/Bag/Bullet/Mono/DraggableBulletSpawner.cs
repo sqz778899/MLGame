@@ -35,6 +35,7 @@ public class DraggableBulletSpawner : BulletBase, IPointerDownHandler,
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        DestroyTooltips();
         if (childBulletIns == null && Count > 0)
         {
             IsChangeCount = true;
@@ -49,12 +50,14 @@ public class DraggableBulletSpawner : BulletBase, IPointerDownHandler,
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        DestroyTooltips();
         if (Count >= 0 && childBulletIns != null)
             DropOneBullet(eventData);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+        DestroyTooltips();
         if (Count >= 0 && childBulletIns != null)
         {
             if (IsChangeCount)

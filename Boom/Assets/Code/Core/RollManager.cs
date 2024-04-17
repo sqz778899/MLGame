@@ -146,9 +146,18 @@ public class RollManager: ScriptableObject
             curBuffPBIns.GetComponent<RectTransform>().anchoredPosition3D =
                 new Vector3(start + xOffset * i, 0, 0);
         }
-        
     }
-    
+
+    public void SelOneBuff(GameObject curBuffIns)
+    {
+        //Clean Buff
+        GameObject curRoot = UIManager.Instance.GroupBuffRogue;
+        for (int i = curRoot.transform.childCount - 1; i >= 0; i--)
+        {
+            DestroyImmediate(curRoot.transform.GetChild(i).gameObject);
+        }
+        Debug.Log("hhhh: ");
+    }
     #endregion
 
     #region SomeFunc

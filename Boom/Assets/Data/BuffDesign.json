@@ -2,25 +2,27 @@
   {
     "ID": 1,
     "name": "Sharpness",
+    "rare": 1,
     "comAttributes": {
       "damage": 1,
       "elementalType": 1,
-      "elementalValue": 1,
-      "Penetration": 0
+      "elementalValue": 0,
+      "Penetration": 1
     },
     "speAttributes": {
-      "interest": 1,
+      "interest": 0,
       "standbyAdd": 0
     }
   },
   {
     "ID": 2,
     "name": "SevereWinter",
+    "rare": 2,
     "comAttributes": {
-      "damage": 2,
-      "elementalType": 0,
-      "elementalValue": 2,
-      "Penetration": 3
+      "damage": 0,
+      "elementalType": 2,
+      "elementalValue": 3,
+      "Penetration": 0
     },
     "speAttributes": {
       "interest": 0,
@@ -30,10 +32,11 @@
   {
     "ID": 3,
     "name": "Windrider",
+    "rare": 1,
     "comAttributes": {
-      "damage": 1,
-      "elementalType": 2,
-      "elementalValue": 1,
+      "damage": 2,
+      "elementalType": 1,
+      "elementalValue": 0,
       "Penetration": 0
     },
     "speAttributes": {
@@ -44,11 +47,12 @@
   {
     "ID": 4,
     "name": "Inferno",
+    "rare": 2,
     "comAttributes": {
-      "damage": 2,
-      "elementalType": 0,
+      "damage": 0,
+      "elementalType": 3,
       "elementalValue": 3,
-      "Penetration": 3
+      "Penetration": 0
     },
     "speAttributes": {
       "interest": 0,
@@ -58,10 +62,11 @@
   {
     "ID": 5,
     "name": "BulletSync",
+    "rare": 3,
     "comAttributes": {
-      "damage": 3,
-      "elementalType": 0,
-      "elementalValue": 1,
+      "damage": 0,
+      "elementalType": 1,
+      "elementalValue": 0,
       "Penetration": 0
     },
     "speAttributes": {
@@ -72,25 +77,27 @@
   {
     "ID": 6,
     "name": "GoldRush",
+    "rare": 2,
     "comAttributes": {
-      "damage": 2,
-      "elementalType": 0,
-      "elementalValue": 1,
+      "damage": 0,
+      "elementalType": 1,
+      "elementalValue": 0,
       "Penetration": 0
     },
     "speAttributes": {
-      "interest": 0,
-      "standbyAdd": 1
+      "interest": 1,
+      "standbyAdd": 0
     }
   },
   {
     "ID": 7,
     "name": "Thunderstrike",
+    "rare": 2,
     "comAttributes": {
-      "damage": 2,
-      "elementalType": 0,
-      "elementalValue": 4,
-      "Penetration": 3
+      "damage": 0,
+      "elementalType": 4,
+      "elementalValue": 3,
+      "Penetration": 0
     },
     "speAttributes": {
       "interest": 0,
@@ -100,10 +107,11 @@
   {
     "ID": 8,
     "name": "ElementalRise",
+    "rare": 3,
     "comAttributes": {
-      "damage": 3,
-      "elementalType": 0,
-      "elementalValue": 1,
+      "damage": 0,
+      "elementalType": 1,
+      "elementalValue": 0,
       "Penetration": 0
     },
     "speAttributes": {

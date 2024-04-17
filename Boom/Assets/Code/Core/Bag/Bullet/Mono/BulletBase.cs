@@ -102,7 +102,10 @@ public class BulletBase : MonoBehaviour
 
     internal void DestroyTooltips()
     {
-        if (TooltipsGO != null)
-            DestroyImmediate(TooltipsGO);   
+        for (int i = UIManager.Instance.TooltipsRoot.transform.childCount - 1; i >= 0; i--)
+        {
+            DestroyImmediate(UIManager.Instance.TooltipsRoot
+                .transform.GetChild(i).gameObject);
+        }
     }
 }

@@ -1,15 +1,33 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
+using System.Net.Mime;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class BuffMono : MonoBehaviour
+public class BuffMono : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPointerClickHandler
 {
     public int ID;
     public Image imgBuff;
     public TextMeshProUGUI txtTitle;
     public TextMeshProUGUI txtDescription;
+
+    Dictionary<Image, Color> imgToColor;
+    Dictionary<TextMeshProUGUI, Color> txtToColor;
+
+    void Start()
+    {
+        imgToColor = new Dictionary<Image, Color>();
+        txtToColor = new Dictionary<TextMeshProUGUI, Color>();
+        Image[] allImg = GetComponentsInChildren<Image>();
+        TextMeshProUGUI[] allTxt = GetComponentsInChildren<TextMeshProUGUI>();
+        for (int i = 0; i < allImg.Length; i++)
+            imgToColor.Add(allImg[i],allImg[i].color);
+
+        for (int i = 0; i < allTxt.Length; i++)
+            txtToColor.Add(allTxt[i],allTxt[i].color);
+    }
 
     public void InitBuffData()
     {
@@ -69,5 +87,26 @@ public class BuffMono : MonoBehaviour
         }
         
         return result;
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        foreach (var each in imgToColor)
+            each.Key.color = each.Value * Color.yellow;
+        foreach (var each in txtToColor)
+            each.Key.color = each.Value * Color.yellow;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        foreach (var each in imgToColor)
+            each.Key.color = each.Value;
+        foreach (var each in txtToColor)
+            each.Key.color = each.Value;
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        RollManager.Instance.SelOneBuff(eventData.pointerClick);
     }
 }

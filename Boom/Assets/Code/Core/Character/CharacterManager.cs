@@ -241,7 +241,14 @@ public class CharacterManager :ScriptableObject
                 RefreshCurBullets(BulletMutMode.Add, curSC._bulletData.ID,curSlotID);
                 targetIns.transform.position = curSlot.transform.position;
                 targetIns.GetComponentInChildren<DraggableBullet>().curSlotID = curSlotID;
+                break;
             }
+        }
+
+        for (int i = bulletRoot.transform.childCount - 1; i >= 0; i--)
+        {
+            GameObject curBullet = bulletRoot.transform.GetChild(i).gameObject;
+            DraggableBullet curSC = curBullet.GetComponentInChildren<DraggableBullet>();
             //放进去
             if (curSC.curSlotID == curSlotID)
             {
@@ -249,6 +256,7 @@ public class CharacterManager :ScriptableObject
                 RefreshCurBullets(BulletMutMode.Add, curSC._bulletData.ID,targetSlotID);
                 curIns.transform.position = targetSlot.transform.position;
                 curIns.GetComponentInChildren<DraggableBullet>().curSlotID = targetSlotID;
+                break;
             }
         }
     }

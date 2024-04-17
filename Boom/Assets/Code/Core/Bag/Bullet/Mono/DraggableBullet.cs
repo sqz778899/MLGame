@@ -7,9 +7,11 @@ public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandle
 {
     public int curSlotID = 0;
     public Vector3 originalPosition;
+    bool IsToolTipsDisplay;
 
     void Start()
     {
+        IsToolTipsDisplay = true;
         InitBulletData();
     }
 
@@ -17,6 +19,7 @@ public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandle
     {
         // 记录下我们开始拖动时的位置
         originalPosition = transform.parent.position;
+        DestroyTooltips();
     }
 
     void DragOneBullet(PointerEventData eventData,Transform curTrans)
@@ -28,10 +31,13 @@ public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandle
         {
             rectTransform.position = worldPoint;
         }
+        DestroyTooltips();
     }
     
     void DropOneBullet(PointerEventData eventData)
     {
+        DestroyTooltips();
+        IsToolTipsDisplay = true;
         // 在释放鼠标按钮时，我们检查这个位置下是否有一个子弹槽
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventData, results);
@@ -45,7 +51,7 @@ public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandle
                     CharacterManager.Instance.BulletInterchangePos(curSlotID, curSlotSC.SlotID);
                     //Replace(curSlotID,curSlotSC.SlotID)
                     return;
-                }
+                }   
                 //Add
                 CharacterManager.Instance.AddBullet(_bulletData.ID,curSlotSC.SlotID);
                 CharacterManager.Instance.SetBulletPos(transform.parent, result.gameObject.transform);
@@ -77,16 +83,20 @@ public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandle
     {
         Transform curTrans = transform.parent;
         DragOneBullet(eventData, curTrans);
+        DestroyTooltips();
+        IsToolTipsDisplay = false;
     }
     
     public void OnPointerUp(PointerEventData eventData)
     {
         DropOneBullet(eventData);
-        //Destroy(transform.parent.gameObject);
+        DestroyTooltips();
     }
     
     public void OnPointerMove(PointerEventData eventData)
     {
+        if (!IsToolTipsDisplay) return;
+        
         RectTransform rectTransform = transform.GetComponent<RectTransform>();
         Vector3 worldPoint;
         if (RectTransformUtility.ScreenPointToWorldPointInRectangle(rectTransform, 

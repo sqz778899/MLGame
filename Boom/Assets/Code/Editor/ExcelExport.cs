@@ -55,12 +55,13 @@ public class ExcelExport
             if (curTable.Rows[i][1].ToString() == "") continue;
             curData.ID = int.Parse(curTable.Rows[i][0].ToString());
             curData.name = curTable.Rows[i][1].ToString();
-            comAttri.damage = int.Parse(curTable.Rows[i][2].ToString());
-            comAttri.elementalType = int.Parse(curTable.Rows[i][3].ToString());
-            comAttri.elementalValue = int.Parse(curTable.Rows[i][4].ToString());
-            comAttri.Penetration = int.Parse(curTable.Rows[i][5].ToString());
-            speAttri.interest = int.Parse(curTable.Rows[i][6].ToString());
-            speAttri.standbyAdd = int.Parse(curTable.Rows[i][7].ToString());
+            curData.rare = int.Parse(curTable.Rows[i][2].ToString());
+            comAttri.damage = int.Parse(curTable.Rows[i][3].ToString());
+            comAttri.elementalType = int.Parse(curTable.Rows[i][4].ToString());
+            comAttri.elementalValue = int.Parse(curTable.Rows[i][5].ToString());
+            comAttri.Penetration = int.Parse(curTable.Rows[i][6].ToString());
+            speAttri.interest = int.Parse(curTable.Rows[i][7].ToString());
+            speAttri.standbyAdd = int.Parse(curTable.Rows[i][8].ToString());
             curData.comAttributes = comAttri;
             curData.speAttributes = speAttri;
             curBuffData.Add(curData);
@@ -82,6 +83,7 @@ public class ExcelExport
             List<RollProbability> curRProb = new List<RollProbability>();
             if (curTable.Rows[i][1].ToString() == "") continue;
             curLB.LevelID = int.Parse(curTable.Rows[i][0].ToString());
+            
             string sBuffIDs = curTable.Rows[i][1].ToString();
             string sBuffProbs = curTable.Rows[i][2].ToString();
             string[] sBuffIDTemp = sBuffIDs.Split(";");
