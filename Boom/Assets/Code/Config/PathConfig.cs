@@ -4,13 +4,21 @@ using UnityEngine;
 
 public static class PathConfig
 {
-   public static string MiscDir = "Assets/Res/UI/Misc/";
+   public static string GetPrepath()
+   {
+#if UNITY_EDITOR
+      return "Assets/";
+#endif
+      return Application.streamingAssetsPath + "/";
+   }
+
+   public static string MiscDir = GetPrepath() + "Res/UI/Misc/";
    
-   public static string SaveFileJson = "Assets/Data/SaveFile.json";
-   public static string BulletDesignJson = "Assets/Data/BulletDesign.json";
-   public static string BuffDesignJson = "Assets/Data/BuffDesign.json";
-   public static string LevelBuffDesignJson = "Assets/Data/LevelBuffDesign.json";
-   public static string FXAssetDir = "Assets/Res/FX/Prefab/";
+   public static string SaveFileJson = GetPrepath() + "Data/SaveFile.json";
+   public static string BulletDesignJson = GetPrepath() + "Data/BulletDesign.json";
+   public static string BuffDesignJson = GetPrepath() + "Data/BuffDesign.json";
+   public static string LevelBuffDesignJson = GetPrepath() + "Data/LevelBuffDesign.json";
+   public static string FXAssetDir = GetPrepath() + "Res/FX/Prefab/";
 
    //.........................ScriptObject...........................
    public static string TrunkManagerOBJ = "Assets/Res/TrunkManager.asset";

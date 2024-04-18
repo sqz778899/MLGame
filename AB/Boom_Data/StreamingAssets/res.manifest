@@ -1,0 +1,272 @@
+ManifestFileVersion: 0
+CRC: 1582670940
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 0f88802106750f3119cd7906e25a860a
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: e30d4568345e4c90278e6c4a8dfa46e3
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 0f88802106750f3119cd7906e25a860a
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 50
+  Script: {instanceID: 0}
+- Class: 61
+  Script: {instanceID: 0}
+- Class: 70
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 82
+  Script: {instanceID: 0}
+- Class: 83
+  Script: {instanceID: 0}
+- Class: 111
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1adee1ee73de999498115b7877509b70, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5ef25c4a1cc448f991369836f2f9b51b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e784e55017ab8a1419cc4aa281bc8a7b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: c38890b61f384ff382d8bb53adab6f1b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f6db6d97e977b2f4fb31211b32721169, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d60f8495b3acfc84fae320e7a4a421d3, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: c3aca150b5484867be729f91562c76f3, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 77d5da3c21f37734197b7819efb27784, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e5c2057c8aebf174cbe3041368d0b664, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 05e99f5196b148aa9ec6aa6c897e93cc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3a986d0338451854d9a54b85cc79843a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fc2d1d0c68770284c9c0db8adcd5eded, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 873d62595b6849d981dc0f27b844e7e5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: a1e928f7a2bb5a948b96f853eb99c984, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0eb1b696718d36049a7ae473d125b8fa, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 78eb0d30847516a42bbb890f31063b4e, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7c476447e8834b96b85b1bf3473b354c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3dc2ee539f03a37409343e10b7d88c93, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 6d775faf1d1f4ba6be434a5c2c8f2f9e, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: cfe3de5847756494999c50ba29eace8f, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: ef7f20c543b94a61a52e9d1ebac1cc3c, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 120
+  Script: {instanceID: 0}
+- Class: 128
+  Script: {instanceID: 0}
+- Class: 198
+  Script: {instanceID: 0}
+- Class: 199
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 223
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: Assembly-CSharp
+  ClassName: Award
+- AssemblyName: Assembly-CSharp
+  ClassName: BulletData
+- AssemblyName: Assembly-CSharp
+  ClassName: MapSate
+- AssemblyName: Assembly-CSharp
+  ClassName: SupremeCharm
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.FaceInfo_Legacy
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.FontAssetCreationSettings
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.KerningTable
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_Character
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_FontFeatureTable
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_FontWeightPair
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_GlyphAdjustmentRecord
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_GlyphPairAdjustmentRecord
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_GlyphValueRecord
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.VertexGradient
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.ArgumentCache
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.PersistentCallGroup
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.PersistentListenerMode
+- AssemblyName: UnityEngine.TextCoreFontEngineModule
+  ClassName: UnityEngine.TextCore.FaceInfo
+- AssemblyName: UnityEngine.TextCoreFontEngineModule
+  ClassName: UnityEngine.TextCore.Glyph
+- AssemblyName: UnityEngine.TextCoreFontEngineModule
+  ClassName: UnityEngine.TextCore.GlyphMetrics
+- AssemblyName: UnityEngine.TextCoreFontEngineModule
+  ClassName: UnityEngine.TextCore.GlyphRect
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.AnimationTriggers
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.Button/ButtonClickedEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.ColorBlock
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.Navigation
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.SpriteState
+Assets:
+- Assets/Res/Bullet/Prefab/P_Bullet_Roll_01.prefab
+- Assets/Res/FX/Material/M_FX_circle.mat
+- Assets/Res/Animation/Ani_txtDisappera_01.anim
+- Assets/Res/Bullet/Prefab/P_Bullet_Roll_Template.prefab
+- Assets/Res/FX/Material/M_FX_explosion_spritesheet_3x3.mat
+- Assets/Res/FX/Texture/fx_circle.png
+- Assets/Res/FX/Texture/fx_glow.png
+- Assets/Res/UI/Prefab/GroupSlotStandby.prefab
+- Assets/Res/FX/Texture/fx_smoke_01.png
+- Assets/Res/Bullet/Prefab/P_Bullet_Edit_a_Template.prefab
+- Assets/Res/Levels/P_Level_01.prefab
+- Assets/Res/Character/CharacterManager.asset
+- Assets/Res/Manager/RollManager.asset
+- Assets/Res/FX/Texture/FXV_ActivationPattern1.png
+- Assets/Res/Manager/UIManager.asset
+- Assets/Res/Bullet/Textures/T_Start_01.png
+- Assets/Res/FX/Texture/FXV_Pattern2a.png
+- Assets/Res/FX/Texture/fx_t_distortion.png
+- Assets/Res/FX/Texture/fx_t_motion_02.png
+- Assets/Res/Bullet/Prefab/P_Bullet_Edit_a_01.prefab
+- Assets/Res/Levels/P_Level_03.prefab
+- Assets/Res/UI/Prefab/P_Tooltip_01.prefab
+- Assets/Res/Bullet/Prefab/P_Bullet_Spawner_01.prefab
+- Assets/Res/UI/Buff/Prefabs/P_Buff_Template.prefab
+- Assets/Res/UI/Buff/Textures/T_Buff_BulletSync_05.png
+- Assets/Res/FX/Material/M_FX_Circle_01.mat
+- Assets/Res/UI/Map/Texture/T_MapNode_01.png
+- Assets/Res/UI/Material/M_UI_Q_3200.mat
+- Assets/Res/UI/Buff/Textures/T_Buff_Inferno_04.png
+- Assets/Res/UI/Material/M_UI_Q_3100.mat
+- Assets/Res/FX/Texture/fx_nova_3x3_spritesheet.png
+- Assets/Res/FX/Material/M_FX_triangle_curve.mat
+- Assets/Res/FX/Texture/fx_cardMask.png
+- Assets/Res/Bullet/Textures/T_Bullet_Edit_a_02.png
+- Assets/Res/UI/Material/M_UI_Q_3300.mat
+- Assets/Res/FX/Material/M_FX_circle_additive.mat
+- Assets/Res/UI/Buff/Textures/T_Buff_SevereWinter_02.png
+- Assets/Res/FX/Texture/fx_line_01.png
+- Assets/Res/FX/Sound/etfx_explosion_fireball.wav
+- Assets/Res/FX/Material/M_FX_wave3.mat
+- Assets/Res/Bullet/Prefab/P_Bullet_Standby_Template.prefab
+- Assets/Res/FX/Material/M_FX_cloud_2x2_hard.mat
+- Assets/Res/TrunkManager.asset
+- Assets/Res/Enemy/Prefab/P_Enemy_01.prefab
+- Assets/Res/FX/Prefab/FX_Bullet02_hit.prefab
+- Assets/Res/UI/Buff/Textures/T_Buff_GoldRush_06.png
+- Assets/Res/UI/T_Bg_02.png
+- Assets/Res/UI/DefultPureWite.png
+- Assets/Res/UI/Buff/Textures/T_Buff_Sharpness_01.png
+- Assets/Res/Manager/MSceneManager.asset
+- Assets/Res/UI/Misc/T_Misc_01.png
+- Assets/Res/UI/Misc/T_Misc_04.png
+- Assets/Res/UI/Misc/T_Misc_03.png
+- Assets/Res/FX/Material/M_FX_glow.mat
+- Assets/Res/Bullet/Textures/T_Bullet_Edit_a_01.png
+- Assets/Res/UI/Map/Prefab/P_MapNode_01.prefab
+- Assets/Res/Bullet/Textures/T_Bullet_Inner_03.png
+- Assets/Res/FX/Texture/fx_t_mask_124_01.png
+- Assets/Res/UI/Map/Prefab/P_DrawLine_01.prefab
+- Assets/Res/FX/Texture/fx_cloud_2x2_hard.png
+- Assets/Res/Bullet/Textures/T_Bullet_Edit_a_03.png
+- Assets/Res/UI/Prefab/P_txtHit_01.prefab
+- Assets/Res/FX/Prefab/FX_Bullet01_hit.prefab
+- Assets/Res/UI/Map/Texture/T_MapLock_01.png
+- Assets/Res/UI/Misc/T_Misc_02.png
+- Assets/Res/Bullet/BulletManager.asset
+- Assets/Res/Bullet/Textures/T_Bullet_Inner_01.png
+- Assets/Res/UI/T_Slot_01.png
+- Assets/Res/UI/Buff/Textures/T_Buff_Thunderstrike_07.png
+- Assets/Res/FX/Texture/fx_t_motion_01.png
+- Assets/Res/Levels/P_Map_01.prefab
+- Assets/Res/FX/Texture/fx_point_01.png
+- Assets/Res/UI/Buff/Textures/T_Buff_ElementalRise_08.png
+- Assets/Res/FX/Prefab/FX_Bullet03_hit.prefab
+- Assets/Res/FX/Texture/fx_wave3.png
+- Assets/Res/FX/Texture/fx_point_02.png
+- Assets/Res/FX/Texture/fx_trail_02.png
+- Assets/Res/FX/Texture/FXV_Pattern1d.png
+- Assets/Res/FX/Texture/fx_triangle_curve.png
+- Assets/Res/Bullet/Prefab/P_Bullet_Standby_01.prefab
+- Assets/Res/FX/Texture/fx_trail_01.png
+- Assets/Res/Levels/P_Level_02.prefab
+- Assets/Res/FX/Texture/fx_t_circle_79.png
+- Assets/Res/Enemy/Texture/T_Enemy_Inner_01.png
+- Assets/Res/Bullet/Prefab/P_Bullet_Spawner_Template.prefab
+- Assets/Res/FX/Prefab/FX_Mark_01.prefab
+- Assets/Res/UI/Buff/Textures/T_Buff_Windrider_03.png
+- Assets/Res/Bullet/Prefab/P_Bullet_Inner_01.prefab
+- Assets/Res/FX/Texture/fx_explosion_spritesheet_3x3.png
+- Assets/Res/Character/T_Character_01.png
+- Assets/Res/Manager/BuffMannager.asset
+- Assets/Res/Animation/Ani_txt_01.anim
+- Assets/Res/FX/Texture/fx_t_circle_90.tga
+- Assets/Res/Bullet/Prefab/P_RollScore_Template.prefab
+- Assets/Res/Bullet/Prefab/P_Bullet_Inner_Template.prefab
+- Assets/Res/Bullet/Textures/T_Bullet_Inner_02.png
+- Assets/Res/Manager/CalculateDamageManager.asset
+- Assets/Res/UI/Misc/T_Misc_06.png
+- Assets/Res/UI/Misc/T_Misc_05.png
+Dependencies: []

@@ -64,10 +64,12 @@ public class BulletReady
 {
     public int bulletID;
     public int curSlotID;
-    public BulletReady(int _bulletID,int _curSlotID)
+    public int instanceID;
+    public BulletReady(int _bulletID,int _curSlotID,int _instanceID = -1)
     {
         bulletID = _bulletID;
         curSlotID = _curSlotID;
+        instanceID = _instanceID;
     }
 }
 

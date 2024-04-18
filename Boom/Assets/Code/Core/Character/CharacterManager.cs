@@ -65,7 +65,7 @@ public class CharacterManager :ScriptableObject
         //CurBulletSpawners
     }
 
-    public void RefreshCurBullets(BulletMutMode mode, int BulletID,int SlotID = -1,
+    public void RefreshCurBullets(BulletMutMode mode, int BulletID,int SlotID = -1,int InstanceID = -1,
         BulletInsMode bulletInsMode = BulletInsMode.EditA)
     {
         switch (mode)
@@ -73,7 +73,8 @@ public class CharacterManager :ScriptableObject
             case BulletMutMode.Sub:
                 for (int i = CurBullets.Count - 1; i >= 0; i--)
                 {
-                    if (CurBullets[i].bulletID == BulletID)
+                    if (CurBullets[i].bulletID == BulletID &&
+                        CurBullets[i].instanceID == InstanceID)
                     {
                         CurBullets.RemoveAt(i);
                         break;
@@ -86,7 +87,7 @@ public class CharacterManager :ScriptableObject
                     Debug.LogError("未设置SlotID");
                     return;
                 }
-                BulletReady curData = new BulletReady(BulletID,SlotID);
+                BulletReady curData = new BulletReady(BulletID,SlotID,InstanceID);
                 CurBullets.Add(curData);
                 break;
         }
@@ -153,7 +154,8 @@ public class CharacterManager :ScriptableObject
                     slots[i].BulletID = each.bulletID;
                     GameObject newSpawnerIns = BulletManager.Instance.
                         InstanceBullet(each.bulletID,BulletInsMode.Spawner);
-                    newSpawnerIns.GetComponentInChildren<DraggableBulletSpawner>().Count = each.bulletCount;
+                    var curSC = newSpawnerIns.GetComponentInChildren<DraggableBulletSpawner>();
+                    curSC.Count = each.bulletCount;
                     newSpawnerIns.transform.SetParent(slots[i].gameObject.transform);
                     newSpawnerIns.transform.localScale = Vector3.one;
                     newSpawnerIns.GetComponent<RectTransform>().anchoredPosition3D = Vector3.zero;
@@ -200,6 +202,7 @@ public class CharacterManager :ScriptableObject
     {
         GameObject roleSlotRoot = UIManager.Instance.GroupBulletSlotRole;
         GameObject bulletRoot = UIManager.Instance.GroupBullet;
+        //设置Slot的BulletID
         for (int i = roleSlotRoot.transform.childCount - 1; i >= 0; i--)
         {
             GameObject curSlot = roleSlotRoot.transform.GetChild(i).gameObject;
@@ -210,14 +213,15 @@ public class CharacterManager :ScriptableObject
                     curSlotSC.BulletID = each.bulletID;
             }
         }
-
+        //设置Bullet的SlotID
         for (int i = bulletRoot.transform.childCount - 1; i >= 0; i--)
         {
             GameObject curBullet = bulletRoot.transform.GetChild(i).gameObject;
             DraggableBullet curSC = curBullet.GetComponentInChildren<DraggableBullet>();
             foreach (var each in CurBullets)
             {
-                if (each.bulletID == curSC._bulletData.ID)
+                if (each.bulletID == curSC._bulletData.ID
+                    && each.instanceID == curSC.InstanceID)
                     curSC.curSlotID = each.curSlotID;
             }
         }
@@ -230,35 +234,44 @@ public class CharacterManager :ScriptableObject
         GameObject curIns = GetReadyBulletBySlotID(curSlotID);
         GameObject targetIns = GetReadyBulletBySlotID(targetSlotID);
         GameObject bulletRoot = UIManager.Instance.GroupBullet;
+        DraggableBullet curSC = curIns.GetComponentInChildren<DraggableBullet>();
+        DraggableBullet targetSC = targetIns.GetComponentInChildren<DraggableBullet>();
+        
+        //挪出来
+        RefreshCurBullets(BulletMutMode.Sub, targetSC._bulletData.ID,targetSlotID,targetSC.InstanceID);
+        RefreshCurBullets(BulletMutMode.Add,targetSC._bulletData.ID,curSlotID,targetSC.InstanceID);
+        targetIns.transform.position = curSlot.transform.position;
+        targetIns.GetComponentInChildren<DraggableBullet>().curSlotID = curSlotID;
+        //移进去
+        RefreshCurBullets(BulletMutMode.Sub, curSC._bulletData.ID,curSlotID,curSC.InstanceID);
+        RefreshCurBullets(BulletMutMode.Add, curSC._bulletData.ID,targetSlotID,curSC.InstanceID);
+        curIns.transform.position = targetSlot.transform.position;
+        curIns.GetComponentInChildren<DraggableBullet>().curSlotID = targetSlotID;
+        
+        
+        /*
         for (int i = bulletRoot.transform.childCount - 1; i >= 0; i--)
         {
             GameObject curBullet = bulletRoot.transform.GetChild(i).gameObject;
             DraggableBullet curSC = curBullet.GetComponentInChildren<DraggableBullet>();
+            DraggableBullet targetSC = targetIns.GetComponentInChildren<DraggableBullet>();
             //挪出来
             if (curSC.curSlotID == targetSlotID)
             {
-                RefreshCurBullets(BulletMutMode.Sub, curSC._bulletData.ID);
-                RefreshCurBullets(BulletMutMode.Add, curSC._bulletData.ID,curSlotID);
+                RefreshCurBullets(BulletMutMode.Sub, targetSC._bulletData.ID,targetSlotID,targetSC.InstanceID);
+                RefreshCurBullets(BulletMutMode.Add, curSC._bulletData.ID,curSlotID,curSC.InstanceID);
                 targetIns.transform.position = curSlot.transform.position;
                 targetIns.GetComponentInChildren<DraggableBullet>().curSlotID = curSlotID;
-                break;
             }
-        }
-
-        for (int i = bulletRoot.transform.childCount - 1; i >= 0; i--)
-        {
-            GameObject curBullet = bulletRoot.transform.GetChild(i).gameObject;
-            DraggableBullet curSC = curBullet.GetComponentInChildren<DraggableBullet>();
-            //放进去
+            //移进去
             if (curSC.curSlotID == curSlotID)
             {
-                RefreshCurBullets(BulletMutMode.Sub, curSC._bulletData.ID);
-                RefreshCurBullets(BulletMutMode.Add, curSC._bulletData.ID,targetSlotID);
+                RefreshCurBullets(BulletMutMode.Sub, curSC._bulletData.ID,curSlotID,curSC.InstanceID);
+                RefreshCurBullets(BulletMutMode.Add, curSC._bulletData.ID,targetSlotID,curSC.InstanceID);
                 curIns.transform.position = targetSlot.transform.position;
                 curIns.GetComponentInChildren<DraggableBullet>().curSlotID = targetSlotID;
-                break;
             }
-        }
+        }*/
     }
     
     public void InstanceStandbyBullets()
@@ -316,17 +329,17 @@ public class CharacterManager :ScriptableObject
     #endregion
 
     #region 外部可以调用的操作组封装
-    public void AddBullet(int bulletID,int slotID)
+    public void AddBullet(int bulletID,int slotID,int instanceID)
     {
-        RefreshCurBullets(BulletMutMode.Add,bulletID,slotID);
+        RefreshCurBullets(BulletMutMode.Add,bulletID,slotID,instanceID);
         RefreshSpawner(BulletMutMode.Sub,bulletID);
         RefreshSpawnerIns();
         RefreshCurBulletSlots();
     }
 
-    public void SubBullet(int bulletID)
+    public void SubBullet(int bulletID,int instanceID)
     {
-        RefreshCurBullets(BulletMutMode.Sub,bulletID);
+        RefreshCurBullets(BulletMutMode.Sub,bulletID,InstanceID:instanceID);
         RefreshSpawner(BulletMutMode.Add,bulletID);
         RefreshSpawnerIns();
         RefreshCurBulletSlots();

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class BulletBase : MonoBehaviour
 {
     public Vector3 forward = new Vector3(1, 0, 0);
+    public int InstanceID;
     public BulletData _bulletData;
     public BulletInsMode bulletInsMode;
     public GameObject GroupStar;

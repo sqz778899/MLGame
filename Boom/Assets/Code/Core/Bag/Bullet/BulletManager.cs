@@ -34,6 +34,7 @@ public class BulletManager :ScriptableObject
         GetIns(bulletInsMode, out GameObject Bullet,pos);
         BulletBase bulletbase = Bullet.GetComponentInChildren<BulletBase>();
         bulletbase._bulletData.ID = ID;
+        bulletbase.InstanceID = Bullet.GetInstanceID();
         bulletbase.bulletInsMode = bulletInsMode;
         bulletbase.InitBulletData();
         return Bullet;
@@ -44,6 +45,7 @@ public class BulletManager :ScriptableObject
     {
         GetIns(bulletInsMode, out GameObject Bullet,pos);
         BulletBase bulletbase = Bullet.GetComponentInChildren<BulletBase>();
+        bulletbase.InstanceID = Bullet.GetInstanceID();
         bulletbase._bulletData = bulletData;
         bulletbase.bulletInsMode = bulletInsMode;
         bulletbase.InitBulletData();
