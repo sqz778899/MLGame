@@ -11,41 +11,50 @@ public static class PathConfig
 #endif
       return Application.streamingAssetsPath + "/";
    }
-
-   public static string MiscDir = GetPrepath() + "Res/UI/Misc/";
    
-   public static string SaveFileJson = GetPrepath() + "Data/SaveFile.json";
-   public static string BulletDesignJson = GetPrepath() + "Data/BulletDesign.json";
-   public static string BuffDesignJson = GetPrepath() + "Data/BuffDesign.json";
-   public static string LevelBuffDesignJson = GetPrepath() + "Data/LevelBuffDesign.json";
+   public static string GetDataPrepath()
+   {
+#if UNITY_EDITOR
+      return "Assets/StreamingAssets/";
+#endif
+      return Application.streamingAssetsPath + "/";
+   }
+   
+   //......................Data..............................................
+   public static string SaveFileJson = GetDataPrepath() + "Data/SaveFile.json";
+   public static string BulletDesignJson = GetDataPrepath() + "Data/BulletDesign.json";
+   public static string BuffDesignJson = GetDataPrepath() + "Data/BuffDesign.json";
+   public static string LevelBuffDesignJson = GetDataPrepath() + "Data/LevelBuffDesign.json";
+   //........................Misc...........................................
+   public static string MiscDir = GetPrepath() + "Res/UI/Misc/";
    public static string FXAssetDir = GetPrepath() + "Res/FX/Prefab/";
 
    //.........................ScriptObject...........................
-   public static string TrunkManagerOBJ = "Assets/Res/TrunkManager.asset";
-   public static string UIManagerOBJ = "Assets/Res/Manager/UIManager.asset";
-   public static string RollManagerOBJ = "Assets/Res/Manager/RollManager.asset";
-   public static string BuffMannagerOBJ = "Assets/Res/Manager/BuffMannager.asset";
-   public static string MSceneManagerOBJ = "Assets/Res/Manager/MSceneManager.asset";
-   public static string CharacterManagerOBJ = "Assets/Res/Character/CharacterManager.asset";
-   public static string BulletManagerOBJ = "Assets/Res/Bullet/BulletManager.asset";
-   public static string CalculateDamageManagerOBJ = "Assets/Res/Manager/CalculateDamageManager.asset";
+   public static string TrunkManagerOBJ = GetPrepath() + "Res/TrunkManager.asset";
+   public static string UIManagerOBJ = GetPrepath() + "Res/Manager/UIManager.asset";
+   public static string RollManagerOBJ = GetPrepath() + "Res/Manager/RollManager.asset";
+   public static string BuffMannagerOBJ = GetPrepath() + "Res/Manager/BuffMannager.asset";
+   public static string MSceneManagerOBJ = GetPrepath() + "Res/Manager/MSceneManager.asset";
+   public static string CharacterManagerOBJ = GetPrepath() + "Res/Character/CharacterManager.asset";
+   public static string BulletManagerOBJ = GetPrepath() + "Res/Bullet/BulletManager.asset";
+   public static string CalculateDamageManagerOBJ = GetPrepath() + "Res/Manager/CalculateDamageManager.asset";
    
 
    ///.........................资源类.................................
-   public static string TooltipAsset = "Assets/Res/UI/Prefab/P_Tooltip_01.prefab";
-   public static string DrawLineAsset = "Assets/Res/UI/Map/Prefab/P_DrawLine_01.prefab";
-   public static string TxtHitPB = "Assets/Res/UI/Prefab/P_txtHit_01.prefab";
-   public static string RollScorePB = "Assets/Res/Bullet/Prefab/P_RollScore_Template.prefab";
+   public static string TooltipAsset = GetPrepath() + "Res/UI/Prefab/P_Tooltip_01.prefab";
+   public static string DrawLineAsset = GetPrepath() + "Res/UI/Map/Prefab/P_DrawLine_01.prefab";
+   public static string TxtHitPB = GetPrepath() + "Res/UI/Prefab/P_txtHit_01.prefab";
+   public static string RollScorePB = GetPrepath() + "Res/Bullet/Prefab/P_RollScore_Template.prefab";
 
    //..........................子弹.............................................
-   public static string BulletImageDir = "Assets/Res/Bullet/Textures/";
-   public static string BulletAssetDir = "Assets/Res/Bullet/Prefab/"; 
+   public static string BulletImageDir = GetPrepath() + "Res/Bullet/Textures/";
+   public static string BulletAssetDir = GetPrepath() + "Res/Bullet/Prefab/"; 
    //..........................Buff.............................................
-   public static string BuffImageDir = "Assets/Res/UI/Buff/Textures/";
-   public static string BuffPB = "Assets/Res/UI/Buff/Prefabs/P_Buff_Template.prefab";
+   public static string BuffImageDir = GetPrepath() + "Res/UI/Buff/Textures/";
+   public static string BuffPB = GetPrepath() + "Res/UI/Buff/Prefabs/P_Buff_Template.prefab";
    
    //..........................全局大关卡...............................
-   public static string LevelAssetDir = "Assets/Res/Levels/";
+   public static string LevelAssetDir = GetPrepath() + "Res/Levels/";
    
    #region Function
    public static string GetBulletTemplate(BulletInsMode bulletInsMode)

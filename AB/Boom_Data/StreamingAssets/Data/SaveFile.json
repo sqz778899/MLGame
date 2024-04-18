@@ -1,0 +1,81 @@
+{
+  "Score": 600,
+  "Gold": 10000000,
+  "UserBulletSpawner": [
+    {
+      "bulletID": 1,
+      "bulletCount": 2
+    },
+    {
+      "bulletID": 2,
+      "bulletCount": 1
+    },
+    {
+      "bulletID": 3,
+      "bulletCount": 1
+    }
+  ],
+  "UserCurBullets": [
+    {
+      "bulletID": 1,
+      "curSlotID": 1,
+      "instanceID": -610
+    },
+    {
+      "bulletID": 1,
+      "curSlotID": 2,
+      "instanceID": -1944
+    },
+    {
+      "bulletID": 1,
+      "curSlotID": 3,
+      "instanceID": -3002
+    }
+  ],
+  "UserStandbyBullet": [
+    {
+      "BulletID": 0,
+      "SlotID": 1
+    },
+    {
+      "BulletID": 0,
+      "SlotID": 2
+    },
+    {
+      "BulletID": 0,
+      "SlotID": 3
+    },
+    {
+      "BulletID": 0,
+      "SlotID": 4
+    },
+    {
+      "BulletID": 0,
+      "SlotID": 5
+    }
+  ],
+  "UserCurBuff": null,
+  "SupremeCharms": [],
+  "UserMapSate": [
+    {
+      "CurMapID": 1,
+      "MapID": 1,
+      "LevelID": 3,
+      "IsFinishedLevels": [
+        1,
+        2,
+        3
+      ]
+    }
+  ],
+  "UserProbabilitys": [
+    {
+      "ID": 0,
+      "Probability": 0.9
+    },
+    {
+      "ID": 1,
+      "Probability": 0.1
+    }
+  ]
+}

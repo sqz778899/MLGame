@@ -1,0 +1,65 @@
+[
+  {
+    "LevelID": 1,
+    "CurBuffProb": [
+      {
+        "ID": 1,
+        "Probability": 40.0
+      },
+      {
+        "ID": 2,
+        "Probability": 52.0
+      },
+      {
+        "ID": 3,
+        "Probability": 72.0
+      },
+      {
+        "ID": 4,
+        "Probability": 100.0
+      }
+    ]
+  },
+  {
+    "LevelID": 2,
+    "CurBuffProb": [
+      {
+        "ID": 2,
+        "Probability": 23.0769234
+      },
+      {
+        "ID": 3,
+        "Probability": 53.8461533
+      },
+      {
+        "ID": 7,
+        "Probability": 73.07692
+      },
+      {
+        "ID": 8,
+        "Probability": 100.0
+      }
+    ]
+  },
+  {
+    "LevelID": 3,
+    "CurBuffProb": [
+      {
+        "ID": 5,
+        "Probability": 26.3157883
+      },
+      {
+        "ID": 6,
+        "Probability": 42.1052628
+      },
+      {
+        "ID": 7,
+        "Probability": 68.42105
+      },
+      {
+        "ID": 8,
+        "Probability": 100.0
+      }
+    ]
+  }
+]

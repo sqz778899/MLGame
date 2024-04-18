@@ -48,6 +48,16 @@ public class MSceneManager: ScriptableObject
         CurrentSceneIndex = 1;
         SceneManager.LoadScene(CurrentSceneIndex);
     }
+
+    public void Setting()
+    {
+        Debug.Log("xxxxxxxxxxxxxxxxxx");
+        /*if (curResolution[0] == 1920 && curResolution[1] == 1080)
+        {
+            txtResolution.text = "1920*1080";
+            Screen.SetResolution(1920,1080,true);
+        }*/
+    }
     
     public void ExitGame()
     {
