@@ -39,11 +39,13 @@ public class StandbyData
 {
     public int BulletID;
     public int SlotID;
+    public int InstanceID;
 
-    public StandbyData(int bulletID = 0,int slotID = 0)
+    public StandbyData(int bulletID = 0,int slotID = 0,int instanceID = 0)
     {
         BulletID = bulletID;
         SlotID = slotID;
+        InstanceID = instanceID;
     }
 }
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
@@ -13,9 +14,8 @@ public class LevelLogicMono : MonoBehaviour
     {
         int curLevelID = MSceneManager.Instance.CurMapSate.LevelID;
         string curLevelName = string.Format("P_Level_{0}.prefab", curLevelID.ToString("D2"));
-        GameObject LevelIns = Instantiate(ResManager.instance.GetAssetCache<GameObject>
+        Instantiate(ResManager.instance.GetAssetCache<GameObject>
             (PathConfig.LevelAssetDir+curLevelName), GroupLevel.transform);
-        Enemy = LevelIns.GetComponentInChildren<Enemy>().gameObject;
     }
 
     public void LoadSceneWin(int SceneID)
@@ -29,31 +29,47 @@ public class LevelLogicMono : MonoBehaviour
     #region 计分板相关
     public TextMeshProUGUI txtScore;
     #endregion
-
+    
+    public bool isBeginCameraMove;
+    GameObject FirstBullet;
     public bool isBeginCalculation;
     public GameObject WinGUI;
     public GameObject FailGUI;
-    public GameObject Enemy;
+
+    public float Distance;
 
     void Start()
     {
         //InitLevel
         InitLevel();
+        isBeginCameraMove = false;
         isBeginCalculation = false;
         UIManager.Instance.InitCharacterLevel();
+        Distance = 0f;
     }
     void Update()
     {
         txtScore.text = "Score: " + CharacterManager.Instance.Score;
         if (isBeginCalculation)
             WinOrFailThisLevel();
+
+        if (UIManager.Instance.EnemyILIns != null)
+            Distance = Vector2.Distance(UIManager.Instance.EnemyILIns.transform.position,
+                UIManager.Instance.CharILIns.transform.position);
+
+        if (isBeginCameraMove && FirstBullet != null)
+        {
+            Vector3 s = Camera.main.transform.position;
+            Camera.main.transform.position = new Vector3(FirstBullet.transform.position.x,s.y,s.z);
+        }
     }
 
     void WinOrFailThisLevel()
     {
         //如果子弹为0，且敌人未死则失败
-        if (UIManager.Instance.GroupBullet.transform.childCount == 0 && Enemy != null)
-            if ( Enemy.GetComponent<Enemy>().health > 0)
+        if (UIManager.Instance.GroupBullet.transform.childCount == 0 && 
+            UIManager.Instance.EnemyILIns != null)
+            if ( UIManager.Instance.EnemyILIns.GetComponent<Enemy>().health > 0)
                 CharacterManager.Instance.WinOrFailState = WinOrFail.Fail;
         
         switch (CharacterManager.Instance.WinOrFailState)
@@ -97,15 +113,23 @@ public class LevelLogicMono : MonoBehaviour
     {
         Debug.Log("fire");
         List<BulletReady> bulletDatas = CharacterManager.Instance.CurBullets;
-    
-        foreach (BulletReady eBuDT in bulletDatas)
+        
+        //
+        for (int i = 0; i < bulletDatas.Count; i++)
         {
-            GameObject curBullet = BulletManager.Instance.InstanceBullet(eBuDT.bulletID
-                ,BulletInsMode.Inner,pos);
+            BulletReady curB = bulletDatas[i];
+            GameObject curBullet = BulletManager.Instance.InstanceBullet(curB.bulletID,BulletInsMode.Inner,pos);
+            if (i == 0)
+                FirstBullet = curBullet;
+            
             if (curBullet != null && UIManager.Instance.GroupBullet != null)
                 curBullet.transform.SetParent(UIManager.Instance.GroupBullet.transform);
             yield return new WaitForSeconds(delay);  // 在发射下一个子弹之前，等待delay秒
         }
+        
+        //.......Camera Move.............
+        isBeginCameraMove = true;
+        //........Enemy Die..............
         isBeginCalculation = true;     //发射子弹之后，关卡开启结算模式
     }
     #endregion

@@ -4,14 +4,19 @@ using UnityEngine;
 public class ResManager : Singleton<ResManager>
 {
     public T GetAssetCache<T>(string AssetPath) where T : Object
-   {
+    {
 #if UNITY_EDITOR
-      Object target = AssetDatabase.LoadAssetAtPath<T>(AssetPath);
-      return target as T;
+       Object target = AssetDatabase.LoadAssetAtPath<T>(AssetPath);
+       return target as T;
 #endif
-      string FileName = GetFileNameByPath(AssetPath).Split('.')[0];  
-      return ABManager.instance.LoadRes<T>(FileName) as T;
-   }
+       string FileName = GetFileNameByPath(AssetPath).Split('.')[0];  
+       return ABManager.instance.LoadRes<T>(FileName) as T;
+    }
+
+    public T CreatInstance<T>(string AssetPath) where T : Object
+    {
+        return GameObject.Instantiate(GetAssetCache<T>(AssetPath));
+    }
     
    
    static string GetFileNameByPath(string CurPath)

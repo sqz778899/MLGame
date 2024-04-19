@@ -114,6 +114,11 @@ public class BulletManager :ScriptableObject
                     {
                         //Upgrade
                         CharacterManager.Instance.SubStandebyBullet(eachSpawner.bulletID);
+                        foreach (var eachBullet in CharacterManager.Instance.CurBullets)
+                        {
+                            if (eachBullet.bulletID == eachSpawner.bulletID)
+                                eachBullet.bulletID += 100;
+                        }
                         eachSpawner.bulletID += 100;
                     }
                 }

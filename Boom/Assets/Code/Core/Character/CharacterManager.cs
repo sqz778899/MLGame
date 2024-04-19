@@ -93,7 +93,7 @@ public class CharacterManager :ScriptableObject
         }
     }
     
-    public void RefreshStandbyBullets(BulletMutMode mode, int BulletID)
+    public void RefreshStandbyBullets(BulletMutMode mode, int BulletID,int InstanceID)
     {
         switch (mode)
         {
@@ -101,14 +101,21 @@ public class CharacterManager :ScriptableObject
                 foreach (var each in CurStandbyBullets)
                 {
                     if (each.BulletID == BulletID)
+                    {
                         each.BulletID = 0;
+                        each.InstanceID = 0;
+                    }
                 }
                 break;
             case BulletMutMode.Add:
                 foreach (var each in CurStandbyBullets)
                 {
                     if (each.BulletID == 0)
+                    {
                         each.BulletID = BulletID;
+                        each.InstanceID = InstanceID;
+                        break;
+                    }
                 }
                 break;
         }
@@ -194,6 +201,7 @@ public class CharacterManager :ScriptableObject
             BulletSlot curSlotSC = curSlot.GetComponentInChildren<BulletSlot>();
             curSC.curSlotID = each.curSlotID;
             curSlotSC.BulletID = each.bulletID;
+            curSlotSC.InstanceID = each.instanceID;
             SetBulletPos(BulletIns.transform, curSlot.transform);
         }
     }
@@ -210,7 +218,10 @@ public class CharacterManager :ScriptableObject
             foreach (var each in CurBullets)
             {
                 if (each.curSlotID == curSlotSC.SlotID)
+                {
                     curSlotSC.BulletID = each.bulletID;
+                    curSlotSC.InstanceID = each.instanceID;
+                }
             }
         }
         //设置Bullet的SlotID
@@ -233,7 +244,6 @@ public class CharacterManager :ScriptableObject
         GameObject targetSlot = GetSlot(targetSlotID, SlotKind.SlotRole);
         GameObject curIns = GetReadyBulletBySlotID(curSlotID);
         GameObject targetIns = GetReadyBulletBySlotID(targetSlotID);
-        GameObject bulletRoot = UIManager.Instance.GroupBullet;
         DraggableBullet curSC = curIns.GetComponentInChildren<DraggableBullet>();
         DraggableBullet targetSC = targetIns.GetComponentInChildren<DraggableBullet>();
         
@@ -247,31 +257,6 @@ public class CharacterManager :ScriptableObject
         RefreshCurBullets(BulletMutMode.Add, curSC._bulletData.ID,targetSlotID,curSC.InstanceID);
         curIns.transform.position = targetSlot.transform.position;
         curIns.GetComponentInChildren<DraggableBullet>().curSlotID = targetSlotID;
-        
-        
-        /*
-        for (int i = bulletRoot.transform.childCount - 1; i >= 0; i--)
-        {
-            GameObject curBullet = bulletRoot.transform.GetChild(i).gameObject;
-            DraggableBullet curSC = curBullet.GetComponentInChildren<DraggableBullet>();
-            DraggableBullet targetSC = targetIns.GetComponentInChildren<DraggableBullet>();
-            //挪出来
-            if (curSC.curSlotID == targetSlotID)
-            {
-                RefreshCurBullets(BulletMutMode.Sub, targetSC._bulletData.ID,targetSlotID,targetSC.InstanceID);
-                RefreshCurBullets(BulletMutMode.Add, curSC._bulletData.ID,curSlotID,curSC.InstanceID);
-                targetIns.transform.position = curSlot.transform.position;
-                targetIns.GetComponentInChildren<DraggableBullet>().curSlotID = curSlotID;
-            }
-            //移进去
-            if (curSC.curSlotID == curSlotID)
-            {
-                RefreshCurBullets(BulletMutMode.Sub, curSC._bulletData.ID,curSlotID,curSC.InstanceID);
-                RefreshCurBullets(BulletMutMode.Add, curSC._bulletData.ID,targetSlotID,curSC.InstanceID);
-                curIns.transform.position = targetSlot.transform.position;
-                curIns.GetComponentInChildren<DraggableBullet>().curSlotID = targetSlotID;
-            }
-        }*/
     }
     
     public void InstanceStandbyBullets()
@@ -289,42 +274,88 @@ public class CharacterManager :ScriptableObject
             if (CurStandbyBullets[i].BulletID != 0)
             {
                 curSlotSC.BulletID = CurStandbyBullets[i].BulletID;
+                //curSlotSC.InstanceID =  CurStandbyBullets[i].;
                 BulletManager.Instance.InstanceStandByBullet(CurStandbyBullets[i].BulletID,curSlot);
             }
         }
     }
     
-    public bool AddStandbyBullet(int BulletID)
+    public bool AddStandbyBullet(int BulletID,int InstanceID)
     {
         GameObject BulletIns = BulletManager.Instance.InstanceStandByBullet(BulletID);
         if (BulletIns == null)
             return false;
 
-        RefreshStandbyBullets(BulletMutMode.Add, BulletID);
+        RefreshStandbyBullets(BulletMutMode.Add, BulletID,InstanceID);
         return true;
     }
 
-    public void SubStandebyBullet(int BulletID)
+    public void SubStandebyBullet(int BulletID,int InstanceID = -1)
     {
-        RefreshStandbyBullets(BulletMutMode.Sub, BulletID);
+        RefreshStandbyBullets(BulletMutMode.Sub, BulletID,InstanceID);
         GameObject curSD = UIManager.Instance.GroupBulletStandby;
-        for (int i = curSD.transform.childCount-1 ; i >= 0; i--)
+        GameObject curSDSlot = UIManager.Instance.GroupSlotStandby;
+
+        if (InstanceID == -1)//全删
         {
-            GameObject curBullet = curSD.transform.GetChild(i).gameObject;
-            StandbyBullet curSC = curBullet.GetComponentInChildren<StandbyBullet>();
-            if (curSC._bulletData.ID == BulletID)
+            for (int i = curSD.transform.childCount-1 ; i >= 0; i--)
             {
-                foreach (var each in CurStandbyBullets)
+                GameObject curBullet = curSD.transform.GetChild(i).gameObject;
+                StandbyBullet curSC = curBullet.GetComponentInChildren<StandbyBullet>();
+                if (curSC._bulletData.ID == BulletID)
                 {
-                    if (each.BulletID == curSC._bulletData.ID )
+                    foreach (var each in CurStandbyBullets)
                     {
-                        each.BulletID = 0;
-                        break;
+                        if (each.BulletID == curSC._bulletData.ID )
+                        {
+                            each.BulletID = 0;
+                        }
                     }
+                    curSC.DestroySelf();
                 }
-                curSC.DestroySelf();
+            }
+
+            for (int i = curSDSlot.transform.childCount - 1; i >= 0; i--)
+            {
+                GameObject curSlot = curSDSlot.transform.GetChild(i).gameObject;
+                BulletSlot curSC = curSlot.GetComponentInChildren<BulletSlot>();
+                if (curSC.BulletID == BulletID)
+                {
+                    curSC.BulletID = 0;
+                }
             }
         }
+        else//根据InstanceID删一个
+        {
+            for (int i = curSD.transform.childCount-1 ; i >= 0; i--)
+            {
+                GameObject curBullet = curSD.transform.GetChild(i).gameObject;
+                StandbyBullet curSC = curBullet.GetComponentInChildren<StandbyBullet>();
+                if (curSC._bulletData.ID == BulletID)
+                {
+                    foreach (var each in CurStandbyBullets)
+                    {
+                        if (each.BulletID == curSC._bulletData.ID &&
+                            curSC.InstanceID == InstanceID)
+                        {
+                            each.BulletID = 0;
+                        }
+                    }
+                    curSC.DestroySelf();
+                }
+            }
+
+            for (int i = curSDSlot.transform.childCount - 1; i >= 0; i--)
+            {
+                GameObject curSlot = curSDSlot.transform.GetChild(i).gameObject;
+                BulletSlot curSC = curSlot.GetComponentInChildren<BulletSlot>();
+                if (curSC.BulletID == BulletID && curSC.InstanceID == InstanceID)
+                {
+                    curSC.BulletID = 0;
+                }
+            }
+        }
+        
     }
     #endregion
 

@@ -41,6 +41,19 @@ public class CharacterScene : MonoBehaviour
         GroupBulletSlot?.SetActive(false);
     }
 
+    public void GO()
+    {
+        if ( CharacterManager.Instance.CurBullets.Count == 0)
+        {
+            GameObject curTexttipIns = ResManager.instance.CreatInstance<GameObject>(PathConfig.TexttipAsset);
+            curTexttipIns.GetComponent<TextTip>().CurText.text = "Non Bullet Ready !";
+            curTexttipIns.transform.SetParent(UIManager.Instance.TooltipsRoot.transform,false);
+            curTexttipIns.transform.localScale = Vector3.one;
+            return;
+        }
+        LoadSceneInCharacter(3);
+    }
+    
     public void LoadSceneInCharacter(int ScenceID)
     {
         MSceneManager.Instance.CurMapSate.MapID = MapID;

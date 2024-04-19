@@ -87,7 +87,7 @@ public class RollManager: ScriptableObject
         }
         else
         {
-            bool isAdd = CharacterManager.Instance.AddStandbyBullet(curSC._bulletData.ID);
+            bool isAdd = CharacterManager.Instance.AddStandbyBullet(curSC._bulletData.ID,curSC.InstanceID);
             if (!isAdd)
             {
                 Debug.Log("qweqwesxas");

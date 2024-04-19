@@ -6,4 +6,5 @@ public class BulletSlot : MonoBehaviour
 {
    public int SlotID;
    public int BulletID;
+   public int InstanceID;
 }

@@ -42,6 +42,7 @@ public static class PathConfig
 
    ///.........................资源类.................................
    public static string TooltipAsset = GetPrepath() + "Res/UI/Prefab/P_Tooltip_01.prefab";
+   public static string TexttipAsset = GetPrepath() + "Res/UI/Prefab/P_Tooltip_Text_02.prefab";
    public static string DrawLineAsset = GetPrepath() + "Res/UI/Map/Prefab/P_DrawLine_01.prefab";
    public static string TxtHitPB = GetPrepath() + "Res/UI/Prefab/P_txtHit_01.prefab";
    public static string RollScorePB = GetPrepath() + "Res/Bullet/Prefab/P_RollScore_Template.prefab";

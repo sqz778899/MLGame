@@ -36,6 +36,7 @@ public class UIManager : ScriptableObject
 
     public void InitCharacterScene()
     {
+        InitComon();
         if (GroupCharacterScene == null)
             GroupCharacterScene = GameObject.Find("GroupCharacterScene");
 
@@ -44,9 +45,6 @@ public class UIManager : ScriptableObject
             Debug.LogError("Error : InitCharacterScene");
             return;
         }
-
-        if (TooltipsRoot == null)
-            TooltipsRoot = GameObject.Find("TooltipsRoot");
 
         GroupCharacter = GroupCharacterScene.transform.GetChild(0).gameObject;
         GroupBulletSlot = GroupCharacterScene.transform.GetChild(1).gameObject;
@@ -59,16 +57,26 @@ public class UIManager : ScriptableObject
 
     #region 2.Level
     public GameObject GroupBuffRogue;
+    public LevelLogicMono LevelLogic;
+    //childs
+    public GameObject EnemyILIns;
+    public GameObject CharILIns;
     public void InitCharacterLevel()
     {
-        if (GroupBullet == null)
-            GroupBullet = GameObject.Find("GroupBullet");
-        
-        if (TooltipsRoot == null)
-            TooltipsRoot = GameObject.Find("TooltipsRoot");
+        InitComon();
 
         if (GroupBuffRogue == null)
             GroupBuffRogue = GameObject.Find("GroupBuffRogue");
+
+        if (LevelLogic == null)
+            LevelLogic = GameObject.Find("LevelLogic").GetComponent<LevelLogicMono>();
+        
+        //...................Childs............................
+        GameObject GroupEnemy = GameObject.Find("GroupEnemy");
+        EnemyILIns = GroupEnemy.transform.GetChild(0).gameObject;
+        GameObject GroupCharacter = GameObject.Find("GroupCharacter");
+        CharILIns = GroupCharacter.transform.GetChild(0).gameObject;
+        
     }
     #endregion
 
@@ -76,8 +84,10 @@ public class UIManager : ScriptableObject
     public GameObject GroupSelectLevel;
     public GameObject ShopCanvas;
     public GameObject GroupRoll;
+    
     public void InitSelectLevel()
     {
+        InitComon();
         GroupSelectLevel = GameObject.Find("GroupSelectLevel");
         ShopCanvas = GameObject.Find("CanvasRoll");
         if (GroupSelectLevel == null || ShopCanvas == null)
@@ -86,12 +96,19 @@ public class UIManager : ScriptableObject
             return;
         }
         
-        if (TooltipsRoot == null)
-            TooltipsRoot = GameObject.Find("TooltipsRoot");
-        
         GroupSlotStandby = GroupSelectLevel.transform.GetChild(0).gameObject;
         GroupBulletStandby = GroupSelectLevel.transform.GetChild(1).gameObject;
         GroupRoll = ShopCanvas.transform.GetChild(1).gameObject;
     }
     #endregion
+    
+    void InitComon()
+    {
+        if (GroupBullet == null)
+            GroupBullet = GameObject.Find("GroupBullet");
+        
+        if (TooltipsRoot == null)
+            TooltipsRoot = GameObject.Find("TooltipsRoot");
+    }
+
 }

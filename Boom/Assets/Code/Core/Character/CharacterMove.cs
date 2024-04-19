@@ -35,7 +35,7 @@ public class CharacterMove : MonoBehaviour
             }
             transform.Translate( forward * Speed * Time.deltaTime);
         }
-        if(Input.GetKey("a"))
+        if(Input.GetKey("a") && _mCamera.WorldToViewportPoint(transform.position).x > 0)
         {
             transform.Translate( -forward * Speed * Time.deltaTime);
         }
