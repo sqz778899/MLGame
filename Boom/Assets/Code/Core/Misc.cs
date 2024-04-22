@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 
@@ -7,6 +8,54 @@ using UnityEngine;
 public enum ItemTypes
 {
     Bullet = 1
+}
+
+#region 多语言相关
+public enum MultiLaEN
+{
+    English = 1,
+    ZH_Simplified = 2,
+    ZH_Traditional = 3,
+    Japanese = 4,
+    Korean = 5,
+}
+
+public class MStr
+{
+    public string Str;
+    public float FondSize;
+    public TMP_FontAsset FondAsset;
+
+    public MStr(string _str,float _fondSize,TMP_FontAsset _fondAsset)
+    {
+        Str = _str;
+        FondSize = _fondSize;
+        FondAsset = _fondAsset;
+    }
+}
+
+public class MultiLaJson
+{
+    public List<string> English;
+    public Dictionary<string, string> ZH_Simplified;
+    public Dictionary<string, string> ZH_Traditional;
+    public Dictionary<string, string> Japanese;
+    public Dictionary<string, string> Korean;
+
+    public MultiLaJson()
+    {
+        English = new List<string>();
+        ZH_Simplified = new Dictionary<string, string>();
+        ZH_Traditional = new Dictionary<string, string>();
+        Japanese = new Dictionary<string, string>();
+        Korean = new Dictionary<string, string>();
+    }
+}
+#endregion
+
+public class UserConfig
+{
+    public int UserLanguage;
 }
 
 //score

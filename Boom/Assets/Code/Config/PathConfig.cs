@@ -21,6 +21,7 @@ public static class PathConfig
    }
    
    //......................Data..............................................
+   public static string MultiLaDesignJson = GetDataPrepath() + "Data/MultiLa.json";
    public static string SaveFileJson = GetDataPrepath() + "Data/SaveFile.json";
    public static string BulletDesignJson = GetDataPrepath() + "Data/BulletDesign.json";
    public static string BuffDesignJson = GetDataPrepath() + "Data/BuffDesign.json";
@@ -38,6 +39,7 @@ public static class PathConfig
    public static string CharacterManagerOBJ = GetPrepath() + "Res/Character/CharacterManager.asset";
    public static string BulletManagerOBJ = GetPrepath() + "Res/Bullet/BulletManager.asset";
    public static string CalculateDamageManagerOBJ = GetPrepath() + "Res/Manager/CalculateDamageManager.asset";
+   public static string MultiLaOBJ =  GetPrepath() + "Res/Manager/MultiLa.asset";
    
 
    ///.........................资源类.................................
@@ -56,6 +58,12 @@ public static class PathConfig
    
    //..........................全局大关卡...............................
    public static string LevelAssetDir = GetPrepath() + "Res/Levels/";
+   
+
+   public static string GetFondPath(MultiLaEN MultiLa)
+   {
+      return GetPrepath() + string.Format("Res/UI/Fond/{0}.asset",MultiLa.ToString());
+   }
    
    #region Function
    public static string GetBulletTemplate(BulletInsMode bulletInsMode)

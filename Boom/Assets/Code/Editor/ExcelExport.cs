@@ -15,8 +15,10 @@ public class ExcelExport
         ExportBullet();
         ExportBuffDesign();
         ExportLevelBuffDesign();
+        ExportMuliLa();
     }
 
+    #region 游戏设计
     public void ExportBullet()
     {
         DataSet curTables = GetDataSet();
@@ -113,15 +115,50 @@ public class ExcelExport
         string content01 = JsonConvert.SerializeObject(curLBuffData,(Formatting) Formatting.Indented);
         File.WriteAllText(PathConfig.LevelBuffDesignJson, content01);
     }
-
+    
     DataSet GetDataSet()
     {
-        FileStream fileStream = File.Open(GetBulletDesignPath("CommonDesign.xlsx"), FileMode.Open, FileAccess.Read);
+        FileStream fileStream = File.Open(GetDesignExcelPath("CommonDesign.xlsx"), FileMode.Open, FileAccess.Read);
         IExcelDataReader excelDataReader = ExcelReaderFactory.CreateOpenXmlReader(fileStream);
         DataSet result = excelDataReader.AsDataSet();
         return result;
     }
-    string GetBulletDesignPath(string excelName)
+    #endregion
+
+    #region 多语言
+
+    public void ExportMuliLa()
+    {
+        DataSet curTables = GetMultiDataSet();
+        MultiLaJson newMultiLa = new MultiLaJson();
+        for (int i = 0; i < curTables.Tables.Count; i++)
+        {
+            DataTable curTable = curTables.Tables[i];
+            for (int j = 1; j < curTable.Rows.Count; j++)
+            {
+                if (curTable.Rows[j][0].ToString() == "") continue;
+                string keyStr = curTable.Rows[j][0].ToString(); //用英文当作Key
+                newMultiLa.English.Add(keyStr);
+                newMultiLa.ZH_Simplified.Add(keyStr,curTable.Rows[j][1].ToString());
+                newMultiLa.ZH_Traditional.Add(keyStr,curTable.Rows[j][2].ToString());
+                newMultiLa.Japanese.Add(keyStr,curTable.Rows[j][3].ToString());
+                newMultiLa.Korean.Add(keyStr,curTable.Rows[j][4].ToString());
+                //curTable.Rows[j][0]
+            }
+        }
+        string content = JsonConvert.SerializeObject(newMultiLa,(Formatting) Formatting.Indented);
+        File.WriteAllText(PathConfig.MultiLaDesignJson, content);
+    }
+    
+    DataSet GetMultiDataSet()
+    {
+        FileStream fileStream = File.Open(GetDesignExcelPath("Multi_Language.xlsx"), FileMode.Open, FileAccess.Read);
+        IExcelDataReader excelDataReader = ExcelReaderFactory.CreateOpenXmlReader(fileStream);
+        DataSet result = excelDataReader.AsDataSet();
+        return result;
+    }
+    #endregion
+    string GetDesignExcelPath(string excelName)
     {
         string diskDir = Application.streamingAssetsPath.Replace(
             "Assets/StreamingAssets", "Excel/") + excelName;
