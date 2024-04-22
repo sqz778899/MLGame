@@ -25,6 +25,7 @@ public class UIManager : ScriptableObject
     public GameObject GroupSlotStandby;
     public GameObject GroupBulletStandby;
     public GameObject TooltipsRoot;
+    public GameObject GroupSetting;
 
 
     #region 1.CharacterScene
@@ -109,6 +110,9 @@ public class UIManager : ScriptableObject
         
         if (TooltipsRoot == null)
             TooltipsRoot = GameObject.Find("TooltipsRoot");
+
+        if (GroupSetting == null)
+            GroupSetting =GameObject.Find("GroupSetting");
     }
 
 }

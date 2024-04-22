@@ -41,9 +41,10 @@ public class MultiLa :ScriptableObject
         });
     }
     
-    public void GetMLStr(ref MStr curMStr)
+    public void GetMLStr(string OrginStr,float OrginFondSize,ref MStr curMStr)
     {
-        string rStr = "";
+        string rStr = OrginStr;
+        float rFondSize = curMStr.FondSize;
         TMP_FontAsset rAsset = null;
         switch (CurLanguage)
         {
@@ -53,26 +54,28 @@ public class MultiLa :ScriptableObject
                 //curMStr.FondSize
                 break;
             case MultiLaEN.ZH_Simplified:
-                rStr = LocalizeText(curMStr.Str, multiLaJsons.ZH_Simplified);
+                rStr = LocalizeText(OrginStr, multiLaJsons.ZH_Simplified);
                 rAsset = GetAsset(MultiLaEN.ZH_Simplified);
                 break;
             case MultiLaEN.ZH_Traditional:
-                rStr = LocalizeText(curMStr.Str, multiLaJsons.ZH_Traditional);
+                rStr = LocalizeText(OrginStr, multiLaJsons.ZH_Traditional);
                 rAsset = GetAsset(MultiLaEN.ZH_Traditional);
                 break;
             case MultiLaEN.Japanese:
-                rStr = LocalizeText(curMStr.Str, multiLaJsons.Japanese);
+                rStr = LocalizeText(OrginStr, multiLaJsons.Japanese);
                 rAsset = GetAsset(MultiLaEN.Japanese);
+                rFondSize = OrginFondSize - 7;
                 break;
             case MultiLaEN.Korean:
-                rStr = LocalizeText(curMStr.Str, multiLaJsons.Korean);
+                rStr = LocalizeText(OrginStr, multiLaJsons.Korean);
                 rAsset = GetAsset(MultiLaEN.Korean);
+                rFondSize = OrginFondSize - 5;
                 break;
         }
 
         curMStr.Str = rStr;
         curMStr.FondAsset = rAsset;
-        //curMStr.FondSize = 
+        curMStr.FondSize = rFondSize;
     }
 
     TMP_FontAsset GetAsset(MultiLaEN MultiLa)
