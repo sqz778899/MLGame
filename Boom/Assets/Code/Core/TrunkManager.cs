@@ -77,7 +77,14 @@ public class TrunkManager: ScriptableObject
     #endregion
     
     public SaveFileJson _saveFile = new SaveFileJson();
-    
+    public UserConfig _userConfig = new UserConfig();
+
+    public List<RollProbability> GetRollProbability()
+    {
+        return _saveFile.UserProbabilitys;
+    }
+
+    #region 存档相关
     public void LoadSaveFile()
     {
         string SaveFileJsonString = File.ReadAllText(PathConfig.SaveFileJson);
@@ -110,6 +117,8 @@ public class TrunkManager: ScriptableObject
         }
         MSceneManager.Instance.CurMapSate = curMapSate;
         #endregion
+
+        LoadUserConfig();
     }
     
     public void SaveFile()
@@ -136,12 +145,29 @@ public class TrunkManager: ScriptableObject
         
         string content01 = JsonConvert.SerializeObject(_saveFile,(Formatting) Formatting.Indented);
         File.WriteAllText(PathConfig.SaveFileJson, content01);
+
+        SaveUserConfig();
     }
 
-    public List<RollProbability> GetRollProbability()
+    public void LoadUserConfig()
     {
-        return _saveFile.UserProbabilitys;
+        string SaveFileJsonString = File.ReadAllText(PathConfig.UserConfigJson);
+        _userConfig = JsonConvert.DeserializeObject<UserConfig>(SaveFileJsonString);
+
+        MultiLa.Instance.CurLanguage = (MultiLaEN)_userConfig.UserLanguage;
+        MSceneManager.Instance.SetScreenResolution(_userConfig.UserScreenResolution);
+        MSceneManager.Instance.SetScreenMode(_userConfig.UserScreenMode);
+        Debug.Log("LoadUserConfig");
     }
+
+    public void SaveUserConfig()
+    {
+        _userConfig.UserLanguage = (int)MultiLa.Instance.CurLanguage;
+        string content = JsonConvert.SerializeObject(_userConfig,(Formatting) Formatting.Indented);
+        File.WriteAllText(PathConfig.UserConfigJson, content);
+        Debug.Log("SaveUserConfig");
+    }
+    #endregion
 
     #region NewGame
     public void SetSaveFileTemplate()

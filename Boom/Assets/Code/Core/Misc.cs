@@ -13,11 +13,11 @@ public enum ItemTypes
 #region 多语言相关
 public enum MultiLaEN
 {
-    English = 1,
-    ZH_Simplified = 2,
-    ZH_Traditional = 3,
-    Japanese = 4,
-    Korean = 5,
+    English = 0,
+    ZH_Simplified = 1,
+    ZH_Traditional = 2,
+    Japanese = 3,
+    Korean = 4,
 }
 
 public class MStr
@@ -53,11 +53,16 @@ public class MultiLaJson
 }
 #endregion
 
-public class UserConfig
+#region PlayerSetting
+public enum ScreenRes
 {
-    public int UserLanguage;
+    Set3840_2160 = 0,
+    Set2560_1440 = 1,
+    Set1920_1080 = 2,
+    Set1366_768 = 3
 }
 
+#endregion
 //score
 //gold
 //insignias

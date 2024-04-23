@@ -24,6 +24,20 @@ public class SaveFileJson
     public List<MapSate> UserMapSate;
     public List<RollProbability> UserProbabilitys;
 }
+
+public class UserConfig
+{
+    public int UserLanguage;
+    public int UserScreenResolution;
+    public int UserScreenMode;
+
+    public UserConfig()
+    {
+        UserLanguage = 0;
+        UserScreenResolution = 2;
+        UserScreenMode = 1;
+    }
+}
 #endregion
 
 

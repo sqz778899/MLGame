@@ -49,15 +49,49 @@ public class MSceneManager: ScriptableObject
         SceneManager.LoadScene(CurrentSceneIndex);
     }
 
+    #region PlayerSetting
     public void Setting()
     {
-        Debug.Log("xxxxxxxxxxxxxxxxxx");
-        /*if (curResolution[0] == 1920 && curResolution[1] == 1080)
-        {
-            txtResolution.text = "1920*1080";
-            Screen.SetResolution(1920,1080,true);
-        }*/
+        UIManager.Instance.GroupSetting.GetComponent<SettingMono>().OnOffSetting();
     }
+    
+    public void SetScreenResolution(int value)
+    {
+        TrunkManager.Instance._userConfig.UserScreenResolution = value;
+        ScreenRes CurResolution = (ScreenRes)value;
+        switch (CurResolution)
+        {
+            case ScreenRes.Set3840_2160:
+                Screen.SetResolution(3840,2160,true);
+                break;
+            case ScreenRes.Set2560_1440:
+                Screen.SetResolution(2560,1440,true);
+                break;
+            case ScreenRes.Set1920_1080:
+                Screen.SetResolution(1920,1080,true);
+                break;
+            case ScreenRes.Set1366_768:
+                Screen.SetResolution(1366,768,true);
+                break;
+        }
+        TrunkManager.Instance.SaveUserConfig();
+    }
+
+    public void SetScreenMode(FullScreenMode CurScreenMode)
+    {
+        //FullScreenMode.ExclusiveFullScreen;
+        //FullScreenMode.MaximizedWindow;
+        //FullScreenMode.Windowed;
+        Screen.fullScreenMode = CurScreenMode;
+    }
+    
+    public void SetScreenMode(int value)
+    {
+        TrunkManager.Instance._userConfig.UserScreenMode = value;
+        Screen.fullScreenMode = (FullScreenMode)value;
+        TrunkManager.Instance.SaveUserConfig();
+    }
+    #endregion
     
     public void ExitGame()
     {

@@ -26,7 +26,14 @@ public class UIManager : ScriptableObject
     public GameObject GroupBulletStandby;
     public GameObject TooltipsRoot;
     public GameObject GroupSetting;
+    
+    #region 1.StartGame
 
+    public void InitStartGame()
+    {
+        InitComon();
+    }
+    #endregion
 
     #region 1.CharacterScene
     //1.CharacterScene

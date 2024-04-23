@@ -23,6 +23,7 @@ public static class PathConfig
    //......................Data..............................................
    public static string MultiLaDesignJson = GetDataPrepath() + "Data/MultiLa.json";
    public static string SaveFileJson = GetDataPrepath() + "Data/SaveFile.json";
+   public static string UserConfigJson = GetDataPrepath() + "Data/UserConfig.json";
    public static string BulletDesignJson = GetDataPrepath() + "Data/BulletDesign.json";
    public static string BuffDesignJson = GetDataPrepath() + "Data/BuffDesign.json";
    public static string LevelBuffDesignJson = GetDataPrepath() + "Data/LevelBuffDesign.json";

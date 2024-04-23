@@ -25,9 +25,14 @@ public class MultiLa :ScriptableObject
 
     public MultiLaEN CurLanguage;
     
+    public void ChangeLanguage(int value)
+    {
+        CurLanguage = (MultiLaEN)value;
+    }
+    
     public string LocalizeText(string text,Dictionary<string, string> dict)
     {
-        return Regex.Replace(text, @"\b\w+\b", match =>
+        return Regex.Replace(text, @"\b\w+\x20?\w+\b", match =>
         {
             string word = match.Value;
             if (dict.TryGetValue(word, out string localizedWord))

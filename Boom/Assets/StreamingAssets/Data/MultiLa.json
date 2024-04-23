@@ -3,30 +3,75 @@
     "NewGame",
     "Continue",
     "Setting",
-    "Quit"
+    "Quit",
+    "Language",
+    "Audio",
+    "Main Volume",
+    "SFX Volume",
+    "Display",
+    "Resolution",
+    "Full Screen",
+    "Borderless",
+    "Windowed"
   ],
   "ZH_Simplified": {
     "NewGame": "新游戏",
     "Continue": "继续",
     "Setting": "设置",
-    "Quit": "退出"
+    "Quit": "退出",
+    "Language": "语言",
+    "Audio": "音频",
+    "Main Volume": "主音量",
+    "SFX Volume": "音效音量",
+    "Display": "显示",
+    "Resolution": "分辨率",
+    "Full Screen": "全屏",
+    "Borderless": "无边框",
+    "Windowed": "窗口模式"
   },
   "ZH_Traditional": {
     "NewGame": "新遊戲",
     "Continue": "繼續",
     "Setting": "設置",
-    "Quit": "退出"
+    "Quit": "退出",
+    "Language": "語言",
+    "Audio": "音頻",
+    "Main Volume": "主音量",
+    "SFX Volume": "音效音量",
+    "Display": "顯示",
+    "Resolution": "分辨率",
+    "Full Screen": "全螢幕",
+    "Borderless": "無邊框",
+    "Windowed": "窗口模式"
   },
   "Japanese": {
     "NewGame": "ニューゲーム",
     "Continue": "続ける",
     "Setting": "設定",
-    "Quit": "終了"
+    "Quit": "終了",
+    "Language": "言語",
+    "Audio": "オーディオ",
+    "Main Volume": "メインボリューム",
+    "SFX Volume": "SFXボリューム",
+    "Display": "表示",
+    "Resolution": "解像度",
+    "Full Screen": "フルスクリーン",
+    "Borderless": "ボーダーレス",
+    "Windowed": "ウィンドウモード"
   },
   "Korean": {
     "NewGame": "새로운 게임",
     "Continue": "계속",
     "Setting": "설정",
-    "Quit": "나가기"
+    "Quit": "나가기",
+    "Language": "언어",
+    "Audio": "오디오",
+    "Main Volume": "메인 볼륨",
+    "SFX Volume": "SFX 볼륨",
+    "Display": "디스플레이",
+    "Resolution": "해상도",
+    "Full Screen": "전체 화면",
+    "Borderless": "경계선 없는",
+    "Windowed": "윈도우 모드"
   }
 }
