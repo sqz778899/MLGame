@@ -12,18 +12,28 @@ public class HeightLightButton : MonoBehaviour,IPointerExitHandler,IPointerMoveH
     Color _textOrginalColor;
     void Start()
     {
-        _myMark = GetComponentInChildren<ParticleSystem>();
-        _myText = GetComponentInChildren<TextMeshProUGUI>();
+        _myMark = GetComponentInChildren<ParticleSystem>(true);
+        _myText = GetComponentInChildren<TextMeshProUGUI>(true);
         _textOrginalColor = _myText.color;
     }
 
     public void OnPointerMove(PointerEventData eventData)
     {
+        if (!_myMark.gameObject.activeSelf)
+        {
+            _myMark.gameObject.SetActive(true);
+            _myMark.Play();
+        }
         _myText.color = Color.white;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        if (_myMark.gameObject.activeSelf)
+        {
+            _myMark.Stop();
+            _myMark.gameObject.SetActive(false);
+        }
         _myText.color = _textOrginalColor;
     }
 }
