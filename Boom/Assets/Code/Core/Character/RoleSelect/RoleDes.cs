@@ -22,14 +22,19 @@ public class RoleDes : MonoBehaviour
         SyncRoleData();
     }
 
+    private void Update()
+    {
+        SyncRoleData();
+    }
+
     public void SyncRoleData()
     {
         _imgRole.sprite = CurRole._spRole;
-        _bloodGroup.text = CurRole.BloodGroup;
-        _zodiacSign.text = CurRole.ZodiacSign;
-        _MBTI.text = CurRole.MBTI;
-        _description.text = CurRole.Description;
-        _attri.text = GetAttriStr(CurRole.Attri);
+        MultiLa.Instance.SyncText(_bloodGroup, CurRole.BloodGroup);
+        MultiLa.Instance.SyncText(_zodiacSign, CurRole.ZodiacSign);
+        MultiLa.Instance.SyncText(_MBTI, CurRole.MBTI);
+        MultiLa.Instance.SyncText(_description, CurRole.Description);
+        MultiLa.Instance.SyncText(_attri, GetAttriStr(CurRole.Attri));
     }
 
     string GetAttriStr(RoleAttri attri)

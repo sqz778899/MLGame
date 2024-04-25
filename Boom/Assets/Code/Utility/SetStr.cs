@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class SetStr : MonoBehaviour
 {
+    public string _orginStr;
     TextMeshProUGUI _curText;
     MStr _mStr;
-    string _orginStr;
     float _orginFondSize;
     MultiLaEN _curLanguage;
     
@@ -23,15 +23,14 @@ public class SetStr : MonoBehaviour
     
     void Update()
     {
-        /*if (_curLanguage != MultiLa.Instance.CurLanguage)
+        if (_curLanguage != MultiLa.Instance.CurLanguage)
         {
             SyncTextData();
             _curLanguage = MultiLa.Instance.CurLanguage;
-        }*/
-        SyncTextData();
+        }
     }
     
-    void SyncTextData()
+    public void SyncTextData()
     {
         MultiLa.Instance.GetMLStr(_orginStr,_orginFondSize,ref _mStr);
         _curText.text = _mStr.Str;

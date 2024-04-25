@@ -114,10 +114,12 @@ public class UIManager : ScriptableObject
 
     #region SelectRole
     public GameObject GroupRoleDes;
+    public GameObject SelRoleLogic;
     public void InitSelectRole()
     {
         InitComon();
         GroupRoleDes = GameObject.Find("GroupRoleDes");
+        SelRoleLogic = GameObject.Find("SelRoleLogic");
     }
     #endregion
     

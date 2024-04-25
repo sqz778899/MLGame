@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class StartGameLogic : KeyBoardBase
 {
-    void Start()
+    internal void Start()
     {
+        base.Start();
         UIManager.Instance.InitStartGame();
         TrunkManager.Instance.LoadSaveFile();
     }

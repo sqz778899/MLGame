@@ -803,6 +803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 978986faa98350541be4f9f5f8b4a86b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _orginStr: 
 --- !u!1 &281407453
 GameObject:
   m_ObjectHideFlags: 0
@@ -950,6 +951,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 978986faa98350541be4f9f5f8b4a86b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _orginStr: 
 --- !u!1 &544899159
 GameObject:
   m_ObjectHideFlags: 0
@@ -1616,7 +1618,7 @@ GameObject:
   - component: {fileID: 840796078}
   - component: {fileID: 840796080}
   m_Layer: 5
-  m_Name: txtContent
+  m_Name: txtZSContent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1661,7 +1663,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Aquarius
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a650febf0105e444897c91ce3f6b9570, type: 2}
   m_sharedMaterial: {fileID: 3816334893551737869, guid: a650febf0105e444897c91ce3f6b9570, type: 2}
@@ -1750,6 +1752,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 978986faa98350541be4f9f5f8b4a86b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _orginStr: 
 --- !u!1 &859794825
 GameObject:
   m_ObjectHideFlags: 0
@@ -2736,6 +2739,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 978986faa98350541be4f9f5f8b4a86b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _orginStr: 
 --- !u!1 &1306370574
 GameObject:
   m_ObjectHideFlags: 0
@@ -2959,6 +2963,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 978986faa98350541be4f9f5f8b4a86b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _orginStr: 
 --- !u!1 &1376838936
 GameObject:
   m_ObjectHideFlags: 0
@@ -3861,6 +3866,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 978986faa98350541be4f9f5f8b4a86b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _orginStr: 
 --- !u!1 &1706346918
 GameObject:
   m_ObjectHideFlags: 0
@@ -4744,6 +4750,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 978986faa98350541be4f9f5f8b4a86b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _orginStr: 
 --- !u!1 &2023878087
 GameObject:
   m_ObjectHideFlags: 0
@@ -4892,6 +4899,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 978986faa98350541be4f9f5f8b4a86b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _orginStr: 
 --- !u!1 &2032610260
 GameObject:
   m_ObjectHideFlags: 0

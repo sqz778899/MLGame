@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class SelRoleLogic : KeyBoardBase
 {
-    void Start()
+    internal override void Start()
     {
+        base.Start();
         UIManager.Instance.InitSelectRole();
     }
 }

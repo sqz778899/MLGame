@@ -32,8 +32,12 @@ public class MultiLa :ScriptableObject
     
     public string LocalizeText(string text,Dictionary<string, string> dict)
     {
-        var c = Regex.Match(text, @"\w+\x20?(\,)?");
-        return Regex.Replace(text, @"\w+\x20?(\,)?", match =>
+        Regex rex01 = new Regex(@"\b.*\b");
+        Regex rex02 = new Regex("[A-Za-z]+");
+        var c = rex01.Match(text);
+        //rex01.Replace(text,"");
+        
+        return Regex.Replace(text, @"\b.*\b", match =>
         {
             string word = match.Value;
             if (dict.TryGetValue(word, out string localizedWord))
@@ -46,7 +50,7 @@ public class MultiLa :ScriptableObject
             }
         });
     }
-    
+
     public void GetMLStr(string OrginStr,float OrginFondSize,ref MStr curMStr)
     {
         string rStr = OrginStr;
@@ -88,6 +92,21 @@ public class MultiLa :ScriptableObject
     {
         return ResManager.instance.GetAssetCache<TMP_FontAsset>(PathConfig.GetFondPath(MultiLa));
     }
+
+    public void SyncText(TextMeshProUGUI curPro,string curStr)
+    {
+        SetStr curSC = curPro.gameObject.GetComponent<SetStr>();
+        if (curSC == null)
+        {
+            curPro.text = curStr;
+            return;
+        }
+
+        curSC._orginStr = curStr;
+        curSC.SyncTextData();
+    }
+    
+    
     #region 初始化文本数据
     MultiLaJson _multiLaJsons;
     public MultiLaJson multiLaJsons
