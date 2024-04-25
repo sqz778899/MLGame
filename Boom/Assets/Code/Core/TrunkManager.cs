@@ -24,6 +24,7 @@ public class TrunkManager: ScriptableObject
     List<BulletDataJson> _bulletDesignJsons;
     List<BuffDataJson> _buffDesignJsons;
     List<LevelBuff> _levelBuffDesignJsons;
+    List<RoleBase> _roleDesignJsons;
     public List<BulletDataJson> BulletDesignJsons
     {
         get
@@ -54,6 +55,16 @@ public class TrunkManager: ScriptableObject
         }
     }
     
+    public List<RoleBase> RoleDesignJsons
+    {
+        get
+        {
+            if (_roleDesignJsons == null)
+                _roleDesignJsons = LoadRoleBaseData();
+            return _roleDesignJsons;
+        }
+    }
+    
     public List<BulletDataJson> LoadBulletData()
     {
         string BulletDesignString = File.ReadAllText(PathConfig.BulletDesignJson);
@@ -73,6 +84,13 @@ public class TrunkManager: ScriptableObject
         string LBDesignStr = File.ReadAllText(PathConfig.LevelBuffDesignJson);
         List<LevelBuff> LBuffDataJsons = JsonConvert.DeserializeObject<List<LevelBuff>>(LBDesignStr);
         return LBuffDataJsons;
+    }
+    
+    public List<RoleBase> LoadRoleBaseData()
+    {
+        string RoleDesignStr = File.ReadAllText(PathConfig.RoleDesignJson);
+        List<RoleBase> RoleDesignJsons = JsonConvert.DeserializeObject<List<RoleBase>>(RoleDesignStr);
+        return RoleDesignJsons;
     }
     #endregion
     

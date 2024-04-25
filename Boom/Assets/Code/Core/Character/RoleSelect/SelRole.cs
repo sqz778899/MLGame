@@ -3,22 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class SelRole : MonoBehaviour,IPointerMoveHandler,IPointerClickHandler
+public class SelRole : MonoBehaviour,IPointerClickHandler
 {
     public int roleID;
     public GameObject fxSelBox;
+    RoleDes _roleDes;
 
-    public void OnPointerMove(PointerEventData eventData)
+    void InitData()
     {
-        /*fxSelBox.transform.SetParent(eventData.pointerEnter.transform,false);
-        fxSelBox.GetComponent<RectTransform>().anchoredPosition3D = Vector3.zero;
-        Debug.Log(eventData.pointerEnter.name);*/
+        if (_roleDes == null)
+            _roleDes = UIManager.Instance.GroupRoleDes.GetComponent<RoleDes>();
     }
-
+    
     public void OnPointerClick(PointerEventData eventData)
     {
+        InitData();
         fxSelBox.transform.SetParent(eventData.pointerEnter.transform,false);
         fxSelBox.GetComponent<RectTransform>().anchoredPosition3D = Vector3.zero;
-        Debug.Log(eventData.pointerEnter.name);
+        _roleDes.CurRole.ID = roleID;
+        _roleDes.CurRole.InitRoleData();
+        _roleDes.SyncRoleData();
     }
 }

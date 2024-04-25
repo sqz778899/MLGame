@@ -27,6 +27,7 @@ public static class PathConfig
    public static string BulletDesignJson = GetDataPrepath() + "Data/BulletDesign.json";
    public static string BuffDesignJson = GetDataPrepath() + "Data/BuffDesign.json";
    public static string LevelBuffDesignJson = GetDataPrepath() + "Data/LevelBuffDesign.json";
+   public static string RoleDesignJson = GetDataPrepath() + "Data/RoleDesign.json";
    //........................Misc...........................................
    public static string MiscDir = GetPrepath() + "Res/UI/Misc/";
    public static string FXAssetDir = GetPrepath() + "Res/FX/Prefab/";
@@ -41,7 +42,6 @@ public static class PathConfig
    public static string BulletManagerOBJ = GetPrepath() + "Res/Bullet/BulletManager.asset";
    public static string CalculateDamageManagerOBJ = GetPrepath() + "Res/Manager/CalculateDamageManager.asset";
    public static string MultiLaOBJ =  GetPrepath() + "Res/Manager/MultiLa.asset";
-   
 
    ///.........................资源类.................................
    public static string TooltipAsset = GetPrepath() + "Res/UI/Prefab/P_Tooltip_01.prefab";
@@ -49,7 +49,12 @@ public static class PathConfig
    public static string DrawLineAsset = GetPrepath() + "Res/UI/Map/Prefab/P_DrawLine_01.prefab";
    public static string TxtHitPB = GetPrepath() + "Res/UI/Prefab/P_txtHit_01.prefab";
    public static string RollScorePB = GetPrepath() + "Res/Bullet/Prefab/P_RollScore_Template.prefab";
-
+   //...........................角色.................................
+   public static string GetRoleImgPath(int ID)
+   {
+      return GetPrepath() + "Res/Character/T_RoleSel_" + ID.ToString("D2") + ".png";
+   }
+   
    //..........................子弹.............................................
    public static string BulletImageDir = GetPrepath() + "Res/Bullet/Textures/";
    public static string BulletAssetDir = GetPrepath() + "Res/Bullet/Prefab/"; 
@@ -60,13 +65,12 @@ public static class PathConfig
    //..........................全局大关卡...............................
    public static string LevelAssetDir = GetPrepath() + "Res/Levels/";
    
-
+   #region Function
    public static string GetFondPath(MultiLaEN MultiLa)
    {
       return GetPrepath() + string.Format("Res/UI/Fond/{0}.asset",MultiLa.ToString());
    }
    
-   #region Function
    public static string GetBulletTemplate(BulletInsMode bulletInsMode)
    {
       string orginName = "";

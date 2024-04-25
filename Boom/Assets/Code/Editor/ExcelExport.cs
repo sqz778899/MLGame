@@ -16,6 +16,7 @@ public class ExcelExport
         ExportBuffDesign();
         ExportLevelBuffDesign();
         ExportMuliLa();
+        ExportRoleDesign();
     }
 
     #region 游戏设计
@@ -114,6 +115,34 @@ public class ExcelExport
         
         string content01 = JsonConvert.SerializeObject(curLBuffData,(Formatting) Formatting.Indented);
         File.WriteAllText(PathConfig.LevelBuffDesignJson, content01);
+    }
+
+    public void ExportRoleDesign()
+    {
+        DataSet curTables = GetDataSet();
+        List<RoleBase> curRoleData = new List<RoleBase>();
+
+        DataTable curTable = curTables.Tables[3];
+        for (int i = 1; i < curTable.Rows.Count; i++)
+        {
+            RoleBase curRole = new RoleBase();
+            RoleAttri curRoleAttri = new RoleAttri();
+            curRole.Attri = curRoleAttri;
+            if (curTable.Rows[i][0].ToString() == "") continue;
+            
+            curRole.ID = int.Parse(curTable.Rows[i][0].ToString());
+            //...................RoleAttri........................
+            curRoleAttri.StandbyAdd = int.Parse(curTable.Rows[i][1].ToString());
+            //....................................................
+            curRole.BloodGroup = curTable.Rows[i][2].ToString();
+            curRole.ZodiacSign = curTable.Rows[i][3].ToString();
+            curRole.MBTI = curTable.Rows[i][4].ToString();
+            curRole.Description = curTable.Rows[i][5].ToString();
+            curRoleData.Add(curRole);
+        }
+        
+        string content = JsonConvert.SerializeObject(curRoleData,(Formatting) Formatting.Indented);
+        File.WriteAllText(PathConfig.RoleDesignJson, content);
     }
     
     DataSet GetDataSet()

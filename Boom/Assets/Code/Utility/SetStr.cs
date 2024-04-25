@@ -23,11 +23,12 @@ public class SetStr : MonoBehaviour
     
     void Update()
     {
-        if (_curLanguage != MultiLa.Instance.CurLanguage)
+        /*if (_curLanguage != MultiLa.Instance.CurLanguage)
         {
             SyncTextData();
             _curLanguage = MultiLa.Instance.CurLanguage;
-        }
+        }*/
+        SyncTextData();
     }
     
     void SyncTextData()

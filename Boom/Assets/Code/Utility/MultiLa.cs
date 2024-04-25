@@ -32,7 +32,8 @@ public class MultiLa :ScriptableObject
     
     public string LocalizeText(string text,Dictionary<string, string> dict)
     {
-        return Regex.Replace(text, @"\b\w+\x20?\w+\b", match =>
+        var c = Regex.Match(text, @"\w+\x20?(\,)?");
+        return Regex.Replace(text, @"\w+\x20?(\,)?", match =>
         {
             string word = match.Value;
             if (dict.TryGetValue(word, out string localizedWord))

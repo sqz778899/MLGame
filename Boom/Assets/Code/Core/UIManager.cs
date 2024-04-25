@@ -21,6 +21,8 @@ public class UIManager : ScriptableObject
     //1.CharacterScene
     //2.Level
     //3.SelectLevel
+    //4.SelectRole
+    //GroupRoleDes
     public GameObject GroupBullet;
     public GameObject GroupSlotStandby;
     public GameObject GroupBulletStandby;
@@ -107,6 +109,15 @@ public class UIManager : ScriptableObject
         GroupSlotStandby = GroupSelectLevel.transform.GetChild(0).gameObject;
         GroupBulletStandby = GroupSelectLevel.transform.GetChild(1).gameObject;
         GroupRoll = ShopCanvas.transform.GetChild(1).gameObject;
+    }
+    #endregion
+
+    #region SelectRole
+    public GameObject GroupRoleDes;
+    public void InitSelectRole()
+    {
+        InitComon();
+        GroupRoleDes = GameObject.Find("GroupRoleDes");
     }
     #endregion
     
