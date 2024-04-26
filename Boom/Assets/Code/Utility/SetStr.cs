@@ -6,17 +6,17 @@ using UnityEngine;
 public class SetStr : MonoBehaviour
 {
     public string _orginStr;
+    public float _orginFondSize;
     TextMeshProUGUI _curText;
     MStr _mStr;
-    float _orginFondSize;
     MultiLaEN _curLanguage;
     
-    void Start()
+    void Awake()
     {
-        _curLanguage = MultiLa.Instance.CurLanguage;
         _curText = GetComponent<TextMeshProUGUI>();
         _orginStr = _curText.text;
         _orginFondSize = _curText.fontSize;
+        _curLanguage = MultiLa.Instance.CurLanguage;
         _mStr = new MStr(_curText.text,_curText.fontSize,_curText.font);
         SyncTextData();
     }

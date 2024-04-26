@@ -32,23 +32,27 @@ public class MultiLa :ScriptableObject
     
     public string LocalizeText(string text,Dictionary<string, string> dict)
     {
+        //..................短语............................
         Regex rex01 = new Regex(@"\b.*\b");
-        Regex rex02 = new Regex("[A-Za-z]+");
-        var c = rex01.Match(text);
-        //rex01.Replace(text,"");
-        
-        return Regex.Replace(text, @"\b.*\b", match =>
+        string shortWord = rex01.Match(text).Value;
+        dict.TryGetValue(shortWord, out string localizedWord);
+        if (localizedWord != null)
         {
-            string word = match.Value;
-            if (dict.TryGetValue(word, out string localizedWord))
-            {
-                return localizedWord;
-            }
-            else
-            {
-                return word;
-            }
-        });
+            return text.Replace(shortWord, localizedWord);
+        }
+        
+        //..................如果短语匹配不到 换替换词匹配算法...........................
+        Regex rex = new Regex("[A-Za-z]+");
+        var curMatches = rex.Matches(text);
+        string newStr = "";
+        for (int i = 0; i < curMatches.Count; i++)
+        {
+            dict.TryGetValue(curMatches[i].Value, out string word);
+            if (word != null)
+                newStr = text.Replace(curMatches[i].Value, word);
+        }
+
+        return newStr;
     }
 
     public void GetMLStr(string OrginStr,float OrginFondSize,ref MStr curMStr)
@@ -60,21 +64,23 @@ public class MultiLa :ScriptableObject
         {
             case MultiLaEN.English:
                 rAsset = GetAsset(MultiLaEN.ZH_Simplified);
-                //curMStr.Str = curStr;
+                rFondSize = OrginFondSize;
                 //curMStr.FondSize
                 break;
             case MultiLaEN.ZH_Simplified:
                 rStr = LocalizeText(OrginStr, multiLaJsons.ZH_Simplified);
                 rAsset = GetAsset(MultiLaEN.ZH_Simplified);
+                rFondSize = OrginFondSize;
                 break;
             case MultiLaEN.ZH_Traditional:
                 rStr = LocalizeText(OrginStr, multiLaJsons.ZH_Traditional);
                 rAsset = GetAsset(MultiLaEN.ZH_Traditional);
+                rFondSize = OrginFondSize;
                 break;
             case MultiLaEN.Japanese:
                 rStr = LocalizeText(OrginStr, multiLaJsons.Japanese);
                 rAsset = GetAsset(MultiLaEN.Japanese);
-                rFondSize = OrginFondSize - 7;
+                rFondSize = OrginFondSize - 5;
                 break;
             case MultiLaEN.Korean:
                 rStr = LocalizeText(OrginStr, multiLaJsons.Korean);
