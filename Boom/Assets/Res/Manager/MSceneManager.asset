@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d60f8495b3acfc84fae320e7a4a421d3, type: 3}
   m_Name: MSceneManager
   m_EditorClassIdentifier: 
-  CurrentSceneIndex: 0
+  CurMapSate:
+    CurMapID: 1
+    MapID: 1
+    LevelID: 1
+    IsFinishedLevels: 
+  CurrentSceneIndex: 1

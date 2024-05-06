@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CharacterScene : MonoBehaviour
+public class CharacterScene : KeyBoardBase
 {
     public int MapID;
     
