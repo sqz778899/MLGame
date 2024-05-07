@@ -58,7 +58,7 @@ public class BulletManager :ScriptableObject
         if (curSlot != null)
         {
             curSDIns = InstanceBullet(bulletID, BulletInsMode.Standby);
-            curSDIns.transform.SetParent(UIManager.Instance.GroupBulletStandby.transform);
+            curSDIns.transform.SetParent(UIManager.Instance.G_BulletStandby.transform);
             curSDIns.transform.position = Vector3.zero;
             curSDIns.transform.localScale = Vector3.one;
             curSDIns.GetComponent<RectTransform>().anchoredPosition3D =
@@ -66,7 +66,7 @@ public class BulletManager :ScriptableObject
         }
         else
         {
-            GameObject SlotGroup = UIManager.Instance.GroupSlotStandby;
+            GameObject SlotGroup = UIManager.Instance.G_SlotStandby;
             for (int i = 0; i < SlotGroup.transform.childCount; i++)
             {
                 GameObject tmpSlot = SlotGroup.transform.GetChild(i).gameObject;
@@ -75,7 +75,7 @@ public class BulletManager :ScriptableObject
                 {
                     curSlotSC.BulletID = bulletID;
                     curSDIns = InstanceBullet(bulletID, BulletInsMode.Standby);
-                    curSDIns.transform.SetParent(UIManager.Instance.GroupBulletStandby.transform);
+                    curSDIns.transform.SetParent(UIManager.Instance.G_BulletStandby.transform);
                     curSDIns.transform.position = Vector3.zero;
                     curSDIns.transform.localScale = Vector3.one;
                     curSDIns.GetComponent<RectTransform>().anchoredPosition3D =
@@ -90,7 +90,7 @@ public class BulletManager :ScriptableObject
   
     public void BulletUpgrade()
     {
-        GameObject curSD = UIManager.Instance.GroupBulletStandby;
+        GameObject curSD = UIManager.Instance.G_BulletStandby;
         Dictionary<int, int> IDCount = new Dictionary<int, int>();
         List<StandbyBullet> bulletFlags = new List<StandbyBullet>();
         for (int i = 0; i < curSD.transform.childCount; i++)

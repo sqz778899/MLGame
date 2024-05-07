@@ -61,7 +61,7 @@ public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandle
             {
                 //寻找母体
                 DraggableBulletSpawner[] allSpawner = UIManager.Instance
-                    .GroupBulletSlot.GetComponentsInChildren<DraggableBulletSpawner>();
+                    .G_BulletSpawnerSlot.GetComponentsInChildren<DraggableBulletSpawner>();
                 foreach (var each in allSpawner)
                 {
                     if (each._bulletData.ID == _bulletData.ID)

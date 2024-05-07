@@ -146,11 +146,11 @@ public class CharacterManager :ScriptableObject
     {
         //..............Clear Old Data..................
         DraggableBulletSpawner[] oldSpawner = UIManager.Instance
-            .GroupBulletSlot.GetComponentsInChildren<DraggableBulletSpawner>();
+            .G_BulletSpawnerSlot.GetComponentsInChildren<DraggableBulletSpawner>();
         for (int i = oldSpawner.Length - 1; i >= 0; i--)
             DestroyImmediate(oldSpawner[i].gameObject);
         //..............Instance New Data..................
-        BulletSlot[] slots = UIManager.Instance.GroupBulletSlot.GetComponentsInChildren<BulletSlot>();
+        BulletSlot[] slots = UIManager.Instance.G_BulletSpawnerSlot.GetComponentsInChildren<BulletSlot>();
         foreach (BulletSpawner each in CurBulletSpawners)
         {
             int curSpawnerFindID = each.bulletID % 10;
@@ -174,7 +174,7 @@ public class CharacterManager :ScriptableObject
     public void RefreshSpawnerIns()
     {
         DraggableBulletSpawner[] oldSpawner = UIManager.Instance
-            .GroupBulletSlot.GetComponentsInChildren<DraggableBulletSpawner>();
+            .G_BulletSpawnerSlot.GetComponentsInChildren<DraggableBulletSpawner>();
         foreach (BulletSpawner each in CurBulletSpawners)
         {
             foreach (var perSpawner in oldSpawner)
@@ -187,8 +187,8 @@ public class CharacterManager :ScriptableObject
 
     public void InstanceCurBullets()
     {
-        GameObject roleSlotRoot = UIManager.Instance.GroupBulletSlotRole;
-        GameObject bulletRoot = UIManager.Instance.GroupBullet;
+        GameObject roleSlotRoot = UIManager.Instance.G_BulletRoleSlot;
+        GameObject bulletRoot = UIManager.Instance.G_Bullet;
         //..............Clear Old Data..................
         for (int i = bulletRoot.transform.childCount - 1; i >= 0; i--)
             DestroyImmediate(bulletRoot.transform.GetChild(i).gameObject);
@@ -208,8 +208,8 @@ public class CharacterManager :ScriptableObject
     
     public void RefreshCurBulletSlots()
     {
-        GameObject roleSlotRoot = UIManager.Instance.GroupBulletSlotRole;
-        GameObject bulletRoot = UIManager.Instance.GroupBullet;
+        GameObject roleSlotRoot = UIManager.Instance.G_BulletRoleSlot;
+        GameObject bulletRoot = UIManager.Instance.G_Bullet;
         //设置Slot的BulletID
         for (int i = roleSlotRoot.transform.childCount - 1; i >= 0; i--)
         {
@@ -261,8 +261,8 @@ public class CharacterManager :ScriptableObject
     
     public void InstanceStandbyBullets()
     {
-        GameObject SDSlotRoot = UIManager.Instance.GroupSlotStandby;
-        GameObject SDBulletRoot = UIManager.Instance.GroupBulletStandby;
+        GameObject SDSlotRoot = UIManager.Instance.G_SlotStandby;
+        GameObject SDBulletRoot = UIManager.Instance.G_BulletStandby;
         //..............Clear Old Data..................
         for (int i = SDBulletRoot.transform.childCount - 1; i >= 0; i--)
             DestroyImmediate(SDBulletRoot.transform.GetChild(i).gameObject);
@@ -293,8 +293,8 @@ public class CharacterManager :ScriptableObject
     public void SubStandebyBullet(int BulletID,int InstanceID = -1)
     {
         RefreshStandbyBullets(BulletMutMode.Sub, BulletID,InstanceID);
-        GameObject curSD = UIManager.Instance.GroupBulletStandby;
-        GameObject curSDSlot = UIManager.Instance.GroupSlotStandby;
+        GameObject curSD = UIManager.Instance.G_BulletStandby;
+        GameObject curSDSlot = UIManager.Instance.G_SlotStandby;
 
         if (InstanceID == -1)//全删
         {
@@ -378,7 +378,7 @@ public class CharacterManager :ScriptableObject
 
     public void SetBulletPos(Transform bulletTrans,Transform slotTrans)
     {
-        bulletTrans.SetParent(UIManager.Instance.GroupBullet.transform);
+        bulletTrans.SetParent(UIManager.Instance.G_Bullet.transform);
         bulletTrans.localScale = Vector3.one;
         bulletTrans.position = slotTrans.position;
     }
@@ -396,7 +396,7 @@ public class CharacterManager :ScriptableObject
         switch (slotKind)
         {
             case SlotKind.SlotRole:
-                root = UIManager.Instance.GroupBulletSlotRole;
+                root = UIManager.Instance.G_BulletRoleSlot;
                 break;
             case SlotKind.SlotSpawn:
                 break;
@@ -418,7 +418,7 @@ public class CharacterManager :ScriptableObject
     GameObject GetReadyBulletBySlotID(int slotID)
     {
         GameObject curIns = null;
-        GameObject bulletRoot = UIManager.Instance.GroupBullet;
+        GameObject bulletRoot = UIManager.Instance.G_Bullet;
         for (int i = bulletRoot.transform.childCount - 1; i >= 0; i--)
         {
             GameObject curbullet = bulletRoot.transform.GetChild(i).gameObject;

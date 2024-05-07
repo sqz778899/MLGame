@@ -40,7 +40,7 @@ public class DraggableBulletSpawner : BulletBase, IPointerDownHandler,
         {
             IsChangeCount = true;
             childBulletIns = BulletManager.Instance.InstanceBullet(_bulletData,BulletInsMode.EditA,transform.parent.position);
-            childBulletIns.transform.SetParent(UIManager.Instance.GroupBullet.transform);
+            childBulletIns.transform.SetParent(UIManager.Instance.G_Bullet.transform);
             childBulletIns.transform.localScale = Vector3.one;
             DraggableBullet DraBuSC = childBulletIns.GetComponentInChildren<DraggableBullet>();
             DraBuSC.originalPosition = transform.position;

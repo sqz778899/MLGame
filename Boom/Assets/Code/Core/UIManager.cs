@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class UIManager : ScriptableObject
 {
@@ -23,9 +24,9 @@ public class UIManager : ScriptableObject
     //3.SelectLevel
     //4.SelectRole
     //GroupRoleDes
-    public GameObject GroupBullet;
-    public GameObject GroupSlotStandby;
-    public GameObject GroupBulletStandby;
+    [FormerlySerializedAs("GroupBullet")] public GameObject G_Bullet;
+    [FormerlySerializedAs("GroupSlotStandby")] public GameObject G_SlotStandby;
+    [FormerlySerializedAs("GroupBulletStandby")] public GameObject G_BulletStandby;
     public GameObject TooltipsRoot;
     public GameObject GroupSetting;
     
@@ -39,29 +40,32 @@ public class UIManager : ScriptableObject
 
     #region 1.CharacterScene
     //1.CharacterScene
-    public GameObject GroupCharacterScene;
+    public GameObject SlotRoot;
+    public GameObject BulletRoot;
     public GameObject GroupCharacter;
-    public GameObject GroupBulletSlot;
-    public GameObject GroupBulletSlotRole;
+    public GameObject G_BulletSpawnerSlot;
+    public GameObject G_BulletRoleSlot;
 
     public void InitCharacterScene()
     {
         InitComon();
-        if (GroupCharacterScene == null)
-            GroupCharacterScene = GameObject.Find("GroupCharacterScene");
+        if (SlotRoot == null)
+            SlotRoot = GameObject.Find("SlotRoot");
+        if (BulletRoot == null)
+            BulletRoot = GameObject.Find("BulletRoot");
 
-        if (GroupCharacterScene == null)
+        if (SlotRoot == null)
         {
             Debug.LogError("Error : InitCharacterScene");
             return;
         }
+        
+        G_BulletSpawnerSlot = SlotRoot.transform.GetChild(1).gameObject;
+        G_BulletRoleSlot = SlotRoot.transform.GetChild(2).gameObject;
+        G_SlotStandby = SlotRoot.transform.GetChild(3).gameObject;
 
-        GroupCharacter = GroupCharacterScene.transform.GetChild(0).gameObject;
-        GroupBulletSlot = GroupCharacterScene.transform.GetChild(1).gameObject;
-        GroupBulletSlotRole = GroupCharacterScene.transform.GetChild(2).gameObject;
-        GroupSlotStandby = GroupCharacterScene.transform.GetChild(3).gameObject;
-        GroupBullet = GroupCharacterScene.transform.GetChild(4).gameObject;
-        GroupBulletStandby = GroupCharacterScene.transform.GetChild(5).gameObject;
+        G_Bullet = BulletRoot.transform.GetChild(0).gameObject;
+        G_BulletStandby = BulletRoot.transform.GetChild(1).gameObject;
     }
     #endregion
 
@@ -106,8 +110,8 @@ public class UIManager : ScriptableObject
             return;
         }
         
-        GroupSlotStandby = GroupSelectLevel.transform.GetChild(0).gameObject;
-        GroupBulletStandby = GroupSelectLevel.transform.GetChild(1).gameObject;
+        G_SlotStandby = GroupSelectLevel.transform.GetChild(0).gameObject;
+        G_BulletStandby = GroupSelectLevel.transform.GetChild(1).gameObject;
         GroupRoll = ShopCanvas.transform.GetChild(1).gameObject;
     }
     #endregion
@@ -125,8 +129,8 @@ public class UIManager : ScriptableObject
     
     void InitComon()
     {
-        if (GroupBullet == null)
-            GroupBullet = GameObject.Find("GroupBullet");
+        if (G_Bullet == null)
+            G_Bullet = GameObject.Find("GroupBullet");
         
         if (TooltipsRoot == null)
             TooltipsRoot = GameObject.Find("TooltipsRoot");

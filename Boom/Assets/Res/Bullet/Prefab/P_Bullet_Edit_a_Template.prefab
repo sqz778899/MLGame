@@ -329,7 +329,7 @@ RectTransform:
   m_GameObject: {fileID: 6729577381677666101}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2070897819471615241}
@@ -391,19 +391,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forward: {x: 1, y: 0, z: 0}
+  InstanceID: 0
   _bulletData:
     ID: 0
     Level: 0
     name: 
-    speed: 0
     damage: 0
+    penetration: 0
     elementalType: 0
     imgBullet: {fileID: 0}
     hitEffect: {fileID: 0}
   bulletInsMode: 0
   GroupStar: {fileID: 4465356624630410386}
-  BulletState: 0
-  CurBagSlotID: 0
+  curSlotID: 0
   originalPosition: {x: 0, y: 0, z: 0}
 --- !u!223 &1248726184561975701
 Canvas:
