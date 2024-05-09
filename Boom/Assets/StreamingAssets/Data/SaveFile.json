@@ -4,7 +4,7 @@
   "UserBulletSpawner": [
     {
       "bulletID": 1,
-      "bulletCount": 5
+      "bulletCount": 4
     },
     {
       "bulletID": 2,
@@ -15,7 +15,13 @@
       "bulletCount": 1
     }
   ],
-  "UserCurBullets": [],
+  "UserCurBullets": [
+    {
+      "bulletID": 1,
+      "curSlotID": 1,
+      "instanceID": -146524
+    }
+  ],
   "UserStandbyBullet": [
     {
       "BulletID": 0,
