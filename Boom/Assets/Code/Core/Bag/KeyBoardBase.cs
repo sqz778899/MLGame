@@ -17,7 +17,8 @@ public class KeyBoardBase : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Escape))
         {
-            UIManager.Instance.GroupSetting.GetComponent<SettingMono>().CloseSetting();
+            UIManager.Instance.G_Setting.GetComponent<SettingMono>().CloseWindow();
+            UIManager.Instance.G_Help.GetComponent<HelpMono>().CloseWindow();
         }
     }
 

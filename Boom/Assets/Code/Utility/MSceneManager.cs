@@ -49,10 +49,17 @@ public class MSceneManager: ScriptableObject
         SceneManager.LoadScene(CurrentSceneIndex);
     }
 
+    #region Help
+    public void Help()
+    {
+        UIManager.Instance.G_Help.GetComponent<HelpMono>().OnOffWindow();
+    }
+    #endregion
+
     #region PlayerSetting
     public void Setting()
     {
-        UIManager.Instance.GroupSetting.GetComponent<SettingMono>().OnOffSetting();
+        UIManager.Instance.G_Setting.GetComponent<SettingMono>().OnOffWindow();
     }
     
     public void SetScreenResolution(int value)

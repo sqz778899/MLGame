@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingMono : MonoBehaviour
+public class SettingMono : GUIBase
 {
     public TMP_Dropdown MultiLaDP;
     public TMP_Dropdown ScreenResolutionDP;
@@ -18,23 +18,7 @@ public class SettingMono : MonoBehaviour
         MultiLaDP.value = (int)MultiLa.Instance.CurLanguage;
         ScreenResolutionDP.value = TrunkManager.Instance._userConfig.UserScreenResolution;
         ScreenMode(TrunkManager.Instance._userConfig.UserScreenMode);
-        CloseSetting();
-    }
-
-    public void CloseSetting()
-    {
-        for (int i = 0; i < transform.childCount; i++)
-            transform.GetChild(i).gameObject.SetActive(false);
-    }
-    
-    
-    public void OnOffSetting()
-    {
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            GameObject curGO = transform.GetChild(i).gameObject;
-            curGO.SetActive(!curGO.activeSelf);
-        }
+        CloseWindow();
     }
 
     public void ScreenMode(int value)

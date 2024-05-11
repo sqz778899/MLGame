@@ -24,11 +24,12 @@ public class UIManager : ScriptableObject
     //3.SelectLevel
     //4.SelectRole
     //GroupRoleDes
-    [FormerlySerializedAs("GroupBullet")] public GameObject G_Bullet;
-    [FormerlySerializedAs("GroupSlotStandby")] public GameObject G_SlotStandby;
-    [FormerlySerializedAs("GroupBulletStandby")] public GameObject G_BulletStandby;
     public GameObject TooltipsRoot;
-    public GameObject GroupSetting;
+    public GameObject G_Bullet;
+    public GameObject G_SlotStandby;
+    public GameObject G_BulletStandby;
+    public GameObject G_Setting;
+    public GameObject G_Help;
     
     #region 1.StartGame
 
@@ -135,8 +136,10 @@ public class UIManager : ScriptableObject
         if (TooltipsRoot == null)
             TooltipsRoot = GameObject.Find("TooltipsRoot");
 
-        if (GroupSetting == null)
-            GroupSetting =GameObject.Find("GroupSetting");
+        if (G_Setting == null)
+            G_Setting = GameObject.Find("GroupSetting");
+        
+        if (G_Help == null)
+            G_Help = GameObject.Find("GroupHelp");
     }
-
 }
