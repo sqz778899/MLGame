@@ -2,24 +2,15 @@ Shader "Boom/Parallax Cloud"
 {
 	Properties
 	{
-		[Header(Color)]
-		[HDR]_ColorUp("顶部颜色",Color) = (1,1,1,1)
-		[HDR]_ColorDown("底部颜色",Color) = (0,0,0,1)
-		[Space(10)]
-		[Header(Parallax)]
-		_MainTex("噪波贴图",2D) = "white"{}
-		_Height("深度",range(0,1)) = 0.15
-		_LayerStep("层数",Range(1,256)) = 16
-		[Space(10)]
-		[Header(Show)]
-		_DistanceMax("最大距离",Range(0,1)) = 0.5
-		_DistanceMin("最小距离",Range(0,1)) = 0.5
-
-		[Header(Animation)]
-		_MoveSpeedX("贴图移动X",Range(0,1)) = 0.5
-		_MoveSpeedY("贴图移动Y",Range(0,1)) = 0.5
-		
-		_Alpha("Alpha",Range(0,1)) = 0.5
+		_Color("Color",Color) = (1,1,1,1)
+		_MainTex("MainTex",2D)="white"{}
+		_Alpha("Alpha", Range(0,1)) = 0.5
+		_Height("Displacement Amount",range(0,1)) = 0.15
+		_HeightAmount("Turbulence Amount",range(0,2)) = 1
+		_HeightTileSpeed("Turbulence Tile&Speed",Vector) = (1.0,1.0,0.05,0.0)
+		_LightIntensity ("Ambient Intensity", Range(0,3)) = 1.0
+		[Toggle] _UseFixedLight("Use Fixed Light", Int) = 1
+		_FixedLightDir("Fixed Light Direction", Vector) = (0.981, 0.122, -0.148, 0.0)
 	}
 	
 	SubShader
@@ -33,46 +24,49 @@ Shader "Boom/Parallax Cloud"
 
 		//UPR变量
 		CBUFFER_START(UnityPerMaterial)
-			float4 _MainTex_ST;//纹理重复
-			float4 _MainTex_TexelSize;//纹理像素数据（1/x,1/y,x,y）
-			float _Height;//高度
-			float4 _ColorUp;//顶部颜色
-			float4 _ColorDown;//底部颜色
-			float _LayerStep;//层数
-			float _DistanceMax;//UV距离限制
-			float _DistanceMin;//UV距离限制
-			float _MoveSpeedX;
-			float _MoveSpeedY;
-			float _Alpha;
+			float4 _MainTex_ST;
+			float _Height;
+			float4 _HeightTileSpeed;
+			half _HeightAmount;
+			half4 _Color;
+			half _Alpha;
+			half _LightIntensity;
+			half4 _LightingColor;
+			half4 _FixedLightDir;
+			half _UseFixedLight;
 		CBUFFER_END
-
-			//贴图数据
-			TEXTURE2D(_MainTex);
-		//贴图容器
+		
+		TEXTURE2D(_MainTex);
 		SAMPLER(sampler_MainTex);
 
 		//模型原始数据
 		struct VertexInput
 		{
-			float4 vertexOS : POSITION;//模型顶点坐标
-			float3 normalOS : NORMAL;//顶点保存的物体空间的法线数据
-			float4 tangentOS : TANGENT;//顶点保存的物体空间的切线数据
-			float2 uv : TEXCOORD0;//顶点保存的UV数据
-			float2 uv2 : TEXCOORD1;//顶点保存的UV数据
-
+			float4 vertex : POSITION;
+			float4 tangent : TANGENT;
+			float3 normal : NORMAL;
+			float4 texcoord : TEXCOORD0;
+		    float4 texcoord1 : TEXCOORD1;
+		    float4 texcoord2 : TEXCOORD2;
+		    float4 texcoord3 : TEXCOORD3;
+			half4 color : COLOR;
+			UNITY_VERTEX_INPUT_INSTANCE_ID
 		};
 
 		//顶点与表面程序传递变狼
 		struct VertexOutput
 		{
 			float4 vertexCS : SV_POSITION;
-			float4 uv : TEXCOORD0;
+			float2 uv : TEXCOORD0;
 			float2 uv2 : TEXCOORD1;
-			float3 viewDirTS : TEXCOORD2;
+			float3 normalDir : TEXCOORD2;
+			float3 viewDirTS : TEXCOORD3;
+			float4 posWorld : TEXCOORD4;
+			half4 color : TEXCOORD5;
+			UNITY_VERTEX_INPUT_INSTANCE_ID
+			UNITY_VERTEX_OUTPUT_STEREO
 		};
 		ENDHLSL
-
-
 
 		pass
 		{
@@ -87,20 +81,18 @@ Shader "Boom/Parallax Cloud"
 				//声明输出变量
 				VertexOutput  o;
 				//转换物体顶点空间
-				VertexPositionInputs positionInputs = GetVertexPositionInputs(v.vertexOS.xyz);
-				//顶点的裁切空间
+				VertexPositionInputs positionInputs = GetVertexPositionInputs(v.vertex.xyz);
 				o.vertexCS = positionInputs.positionCS;
-				//贴图重复
-				o.uv.xy = TRANSFORM_TEX(v.uv, _MainTex);
-				o.uv.zw = v.uv;
-				o.uv2 = v.uv2;
+			
+				o.uv = TRANSFORM_TEX(v.texcoord,_MainTex) + float2(frac(_Time.y *_HeightTileSpeed.zw));
+				o.uv2 = v.texcoord * _HeightTileSpeed.xy;
 				//获取转换切线空间矩阵 rotation
-				float3 binormalOS = cross(v.normalOS, v.tangentOS.xyz) * v.tangentOS.w;
-				float3x3 rotation = float3x3(v.tangentOS.xyz, binormalOS, v.normalOS);
+				float3 binormalOS = cross(v.normal, v.tangent.xyz) * v.tangent.w;
+				float3x3 rotation = float3x3(v.tangent.xyz, binormalOS, v.normal);
 
 				//世界视角方向（世界顶点-摄像机坐标） 转 表面切线空间
-				o.viewDirTS = mul(rotation, GetObjectSpaceNormalizeViewDir(v.vertexOS));
-				//输出
+				o.viewDirTS = mul(rotation, GetObjectSpaceNormalizeViewDir(v.vertex));
+				o.color = v.color;
 				return o;
 			}
 
@@ -112,16 +104,42 @@ Shader "Boom/Parallax Cloud"
 				float3 viewRay = normalize(i.viewDirTS);
 				viewRay.xy *= _Height;
 				//获得深度距离的绝对值
-				viewRay.z += 0.4;
+				viewRay.z = abs(viewRay.z)+ 0.4;
 
 				float3 uv = float3(i.uv.xy,0);
 				float3 uv2 = float3(i.uv2,0);
-				
-				float4 MainTex = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uv.xy);
+
+				const int linearStep = 2;
+				const int binaryStep = 5;
+				float4 T = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uv2.xy);;
+				float h2 = T.a * _HeightAmount;
+				// linear search
+				float3 lioffset = viewRay / (viewRay.z * (linearStep+1));
+				for(int k=0; k<linearStep; k++)
+				{
+				    float d = 1.0 -  SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uv.xy).r * h2;
+				    uv += lioffset * step(uv.z, d);
+				}
+				// binary search
+				float3 biOffset = lioffset;
+				for(int j=0; j<binaryStep; j++)
+				{
+				    biOffset = biOffset * 0.5;
+				    float d = 1.0 - SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uv.xy).r * h2;
+				    uv += biOffset * sign(d - uv.z);
+				}
+				half4 _Color = half4(1.0,1.0,1.0,1.0);
+				half4 c = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uv.xy) * T * _Color;
+				half Alpha = 0.9;
+	
+	
+				 
+				return half4(c.rgb,1);
+				/*float4 MainTex = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uv.xy);
 				float3 minOffset = viewRay/(viewRay.z * _LayerStep);
 				float finiNOise = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uv2.xy).r * MainTex.x;
 				float3 prev_uv = uv;
-
+				return float4(i.viewDirTS,1);
 				while (finiNOise > uv.z)
 				{
 					uv += minOffset;
@@ -137,48 +155,7 @@ Shader "Boom/Parallax Cloud"
 				half rangeClt = MainTex.a * resultColor.r + _Alpha * 0.75;
 				half Alpha = abs(smoothstep(rangeClt,_Alpha,1.0));
 				Alpha = Alpha*Alpha*Alpha*Alpha*Alpha;
-				return half4(resultColor.rgb * _ColorDown.rgb * _MainLightColor.rgb,Alpha);
-
-				//获取整数层
-				_LayerStep = ceil(_LayerStep);
-				//对距离翻倍,获取0~1范围的偏移步长
-				float3 _Offset = viewRay / (viewRay.z * _LayerStep);
-				//初始化亮度为最大值
-				float d = 1.0;
-				//组织UV，Z为平面距离
-				float3 _UV3 = float3(i.uv.xy+float2(_MoveSpeedX, _MoveSpeedY)*_Time.x,0);
-				//构建抖动顺序矩阵
-				float2x2 thresholdMatrix =
-				{ 1.0 / 5.0,  3.0 / 5.0,
-				  4.0 / 5.0,  2.0 / 5.0};
-				//创建遮罩矩阵
-				float2x2 _RowAccess = { 1,0,0,1};
-				//获取贴图像素坐标
-				float2 pos = _MainTex_TexelSize.zw * i.uv.xy*2;
-				//依据动态抖动计算透明度
-				float Dither = thresholdMatrix[fmod(pos.x, 2)] * _RowAccess[fmod(pos.y, 2)] / _LayerStep;
-				//图像亮度与(当前深度+像素抖动）对比
-				while (d > _UV3.z - Dither)
-				{
-					//探索下一层图像
-					_UV3 += _Offset;
-					//使用新的UV获取图像，翻转亮度
-					d = 1 - SAMPLE_TEXTURE2D_LOD(_MainTex, sampler_MainTex, _UV3.xy,0).r;
-				}
-				//获得偏移后的贴图纹理
-				float4 c = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, _UV3.xy);
-				//渐变着色
-				c = lerp(_ColorDown, _ColorUp, c.r);
-				//uv计算距离衰减
-				float distance = length(i.uv.zw*2-1);
-				distance =1 - smoothstep(
-					min(_DistanceMin, _DistanceMax),
-					max(_DistanceMin, _DistanceMax),
-					distance);
-				//透明混合衰减
-				c.a *= distance;
-				return c;
-
+				return half4(resultColor.rgb * _ColorDown.rgb * _MainLightColor.rgb,Alpha);*/
 			}
 			ENDHLSL
 		}
