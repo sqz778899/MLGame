@@ -71,6 +71,7 @@ Shader "Boom/Parallax Cloud"
 		pass
 		{
 			Blend SrcAlpha OneMinusSrcAlpha
+			ZWrite On
 			
 			HLSLPROGRAM
 			#pragma vertex vert
@@ -83,13 +84,14 @@ Shader "Boom/Parallax Cloud"
 				//转换物体顶点空间
 				VertexPositionInputs positionInputs = GetVertexPositionInputs(v.vertex.xyz);
 				o.vertexCS = positionInputs.positionCS;
+				o.posWorld.xyz = positionInputs.positionWS;
 			
 				o.uv = TRANSFORM_TEX(v.texcoord,_MainTex) + float2(frac(_Time.y *_HeightTileSpeed.zw));
 				o.uv2 = v.texcoord * _HeightTileSpeed.xy;
 				//获取转换切线空间矩阵 rotation
 				float3 binormalOS = cross(v.normal, v.tangent.xyz) * v.tangent.w;
 				float3x3 rotation = float3x3(v.tangent.xyz, binormalOS, v.normal);
-
+				o.normalDir = TransformObjectToWorldNormal(v.normal);
 				//世界视角方向（世界顶点-摄像机坐标） 转 表面切线空间
 				o.viewDirTS = mul(rotation, GetObjectSpaceNormalizeViewDir(v.vertex));
 				o.color = v.color;
@@ -101,61 +103,52 @@ Shader "Boom/Parallax Cloud"
 			float4 frag(VertexOutput  i) : SV_TARGET
 			{
 				//视角向量单位化
-				float3 viewRay = normalize(i.viewDirTS);
+				float3 viewRay = normalize(i.viewDirTS*-1);
+
 				viewRay.xy *= _Height;
 				//获得深度距离的绝对值
-				viewRay.z = abs(viewRay.z)+ 0.4;
+				viewRay.z = abs(viewRay.z)+0.8;
 
-				float3 uv = float3(i.uv.xy,0);
-				float3 uv2 = float3(i.uv2,0);
+				float3 shadeP = float3(i.uv.xy,0);
+				float3 shadeP2 = float3(i.uv2,0);
 
-				const int linearStep = 2;
-				const int binaryStep = 5;
-				float4 T = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uv2.xy);;
+				float linearStep = 16;
+				
+				float4 T = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, shadeP2.xy);
 				float h2 = T.a * _HeightAmount;
+				
 				// linear search
-				float3 lioffset = viewRay / (viewRay.z * (linearStep+1));
-				for(int k=0; k<linearStep; k++)
+				float3 lioffset = viewRay / (viewRay.z * linearStep);
+				float d = 1.0 -  SAMPLE_TEXTURE2D_LOD(_MainTex, sampler_MainTex, shadeP.xy,0).a * h2;
+				float3 prev_d = d;
+				float3 prev_shadeP = shadeP;
+				//return half4(d.rrr,1.0);
+				//return half4(lioffset.zzz,1.0);
+				while(d > shadeP.z)
 				{
-				    float d = 1.0 -  SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uv.xy).r * h2;
-				    uv += lioffset * step(uv.z, d);
+					prev_shadeP = shadeP;
+					shadeP += lioffset;
+					prev_d = d;
+					d = 1.0 - SAMPLE_TEXTURE2D_LOD(_MainTex,sampler_MainTex, shadeP.xy,0).a * h2;
 				}
-				// binary search
-				float3 biOffset = lioffset;
-				for(int j=0; j<binaryStep; j++)
-				{
-				    biOffset = biOffset * 0.5;
-				    float d = 1.0 - SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uv.xy).r * h2;
-				    uv += biOffset * sign(d - uv.z);
-				}
-				half4 _Color = half4(1.0,1.0,1.0,1.0);
-				half4 c = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uv.xy) * T * _Color;
-				half Alpha = 0.9;
-	
-	
-				 
-				return half4(c.rgb,1);
-				/*float4 MainTex = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uv.xy);
-				float3 minOffset = viewRay/(viewRay.z * _LayerStep);
-				float finiNOise = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uv2.xy).r * MainTex.x;
-				float3 prev_uv = uv;
-				return float4(i.viewDirTS,1);
-				while (finiNOise > uv.z)
-				{
-					uv += minOffset;
-					finiNOise = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, float4(uv.xy,0,0)).r * MainTex.r;
-				}
+				//return half4(lioffset.zzz,1.0);
+				float d1 = d - shadeP.z;
+				float d2 = prev_d - prev_shadeP.z;
+				float w = d1 / (d1 - d2);
+				shadeP = lerp(shadeP, prev_shadeP, w);
 
-				float d1 = finiNOise - uv.z;
-				float d2 = finiNOise - prev_uv.z;
-				float w = d1/(d1 - d2 + 0.0000001);
-				uv = lerp(uv,prev_uv,w);
-				half4 resultColor = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex,uv.xy) * MainTex;
-
-				half rangeClt = MainTex.a * resultColor.r + _Alpha * 0.75;
-				half Alpha = abs(smoothstep(rangeClt,_Alpha,1.0));
-				Alpha = Alpha*Alpha*Alpha*Alpha*Alpha;
-				return half4(resultColor.rgb * _ColorDown.rgb * _MainLightColor.rgb,Alpha);*/
+				half4 c = SAMPLE_TEXTURE2D(_MainTex,sampler_MainTex,shadeP.xy) * T * _Color;
+				half Alpha = lerp(c.a, 1.0, _Alpha) * i.color.r;
+				
+				float3 normal = normalize(i.normalDir);
+				half3 lightDir1 = normalize(_FixedLightDir.xyz);
+				half3 lightDir2 = _MainLightPosition.xyz;
+				half3 lightDir = lerp(lightDir2, lightDir1, _UseFixedLight);
+				float NdotL = max(0,dot(normal,lightDir));
+				half3 lightColor = _MainLightColor.rgb;
+                half3 finalColor = c.rgb*(NdotL*lightColor + 1.0);
+                return half4(finalColor.rgb,Alpha);
+	
 			}
 			ENDHLSL
 		}

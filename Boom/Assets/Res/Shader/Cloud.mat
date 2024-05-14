@@ -17,7 +17,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3100
   stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
@@ -82,7 +82,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 0.878
+    - _Alpha: 0.207
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _Blend: 0
@@ -102,8 +102,8 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Height: 0.237
-    - _HeightAmount: 2
+    - _Height: 0.576
+    - _HeightAmount: 0.874
     - _LayerStep: 7
     - _LightIntensity: 1.43
     - _Metallic: 0
@@ -124,7 +124,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.61715317, g: 0.64761305, b: 0.6698113, a: 1}
     - _ColorDown: {r: 0, g: 0, b: 0, a: 1}
     - _ColorUp: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
