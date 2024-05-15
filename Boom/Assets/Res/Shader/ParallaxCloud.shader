@@ -38,7 +38,9 @@ Shader "Boom/Parallax Cloud"
 		
 		TEXTURE2D(_MainTex);
 		SAMPLER(sampler_MainTex);
-
+		float4 _UnLockNodeCenter;
+		float _UnLockNodeRadius;
+		float _FadeRange;
 		//模型原始数据
 		struct VertexInput
 		{
@@ -97,23 +99,19 @@ Shader "Boom/Parallax Cloud"
 				o.color = v.color;
 				return o;
 			}
-
-
-			//表面程序
+			
 			float4 frag(VertexOutput  i) : SV_TARGET
 			{
 				//视角向量单位化
 				float3 viewRay = normalize(i.viewDirTS*-1);
-
 				viewRay.xy *= _Height;
 				//获得深度距离的绝对值
-				viewRay.z = abs(viewRay.z)+0.8;
+				viewRay.z = abs(viewRay.z)+0.2;
 
 				float3 shadeP = float3(i.uv.xy,0);
 				float3 shadeP2 = float3(i.uv2,0);
 
 				float linearStep = 16;
-				
 				float4 T = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, shadeP2.xy);
 				float h2 = T.a * _HeightAmount;
 				
@@ -122,8 +120,7 @@ Shader "Boom/Parallax Cloud"
 				float d = 1.0 -  SAMPLE_TEXTURE2D_LOD(_MainTex, sampler_MainTex, shadeP.xy,0).a * h2;
 				float3 prev_d = d;
 				float3 prev_shadeP = shadeP;
-				//return half4(d.rrr,1.0);
-				//return half4(lioffset.zzz,1.0);
+				
 				while(d > shadeP.z)
 				{
 					prev_shadeP = shadeP;
@@ -131,7 +128,7 @@ Shader "Boom/Parallax Cloud"
 					prev_d = d;
 					d = 1.0 - SAMPLE_TEXTURE2D_LOD(_MainTex,sampler_MainTex, shadeP.xy,0).a * h2;
 				}
-				//return half4(lioffset.zzz,1.0);
+
 				float d1 = d - shadeP.z;
 				float d2 = prev_d - prev_shadeP.z;
 				float w = d1 / (d1 - d2);
@@ -147,6 +144,23 @@ Shader "Boom/Parallax Cloud"
 				float NdotL = max(0,dot(normal,lightDir));
 				half3 lightColor = _MainLightColor.rgb;
                 half3 finalColor = c.rgb*(NdotL*lightColor + 1.0);
+
+
+				float dist = distance(i.posWorld, _UnLockNodeCenter.xyz);
+			
+				// 如果像素在球体外围的过渡区域内
+			    if (dist > _UnLockNodeRadius && dist < (_UnLockNodeRadius + _FadeRange))
+			    {
+			        // 使用 smoothstep 函数来计算平滑的过渡
+			        float edge1 = _UnLockNodeRadius;
+			        float edge2 = _UnLockNodeRadius + _FadeRange;
+			        Alpha *= smoothstep(edge1, edge2, dist); // 由外向内过渡至透明
+			    }
+			    else if (dist <= _UnLockNodeRadius)
+			    {
+			        // 如果在球体内部，那么完全透明
+			        Alpha = 0.0;
+			    }
                 return half4(finalColor.rgb,Alpha);
 	
 			}
