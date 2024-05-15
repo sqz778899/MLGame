@@ -14,7 +14,7 @@ public class MapNode : MonoBehaviour
 
     public List<RollProbability> BuffProbabilityPool;
 
-    public TextMeshProUGUI txtTitle;
+    public TextMeshPro txtTitle;
 
     void Awake()
     {
