@@ -15,6 +15,8 @@ public class MapNode : MonoBehaviour
     public List<RollProbability> BuffProbabilityPool;
 
     public TextMeshPro txtTitle;
+    //解锁迷雾的参数
+    public NodeOpenFog OpenFog;
 
     void Awake()
     {
