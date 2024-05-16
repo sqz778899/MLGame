@@ -3,18 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteAlways]
 public class MapLogic : MonoBehaviour
 {
     public Transform MapGroup;
     MapNode[] _allNodes;
+
+    Vector4[] _UnLockNodeCenters = new Vector4[30];
+    float[] _UnLockNodeRadiuss = new float[30];
+    float[] _FadeRanges = new float[30];
     void Start()
     {
-        int curMapID = MSceneManager.Instance.CurMapSate.MapID;
+        /*int curMapID = MSceneManager.Instance.CurMapSate.MapID;
         string curMapName = string.Format("P_Map_{0}.prefab", curMapID.ToString("D2"));
         GameObject curMapIns = Instantiate(
             ResManager.instance.GetAssetCache<GameObject>(PathConfig.LevelAssetDir + curMapName),
             MapGroup);
-        curMapIns.transform.SetSiblingIndex(0);
+        curMapIns.transform.SetSiblingIndex(0);*/
 
         _allNodes = MapGroup.GetComponentsInChildren<MapNode>();
         RefreshMapNodeState();
@@ -34,6 +39,31 @@ public class MapLogic : MonoBehaviour
             else
                 return;
         }
+
+        SetOpenFogPara();
+    }
+
+    void SetOpenFogPara()
+    {
+        for (int i = 0; i < 30; i++)
+        {
+            if (i < _allNodes.Length)
+            {
+                NodeOpenFog openFog = _allNodes[i].OpenFog;
+                _UnLockNodeCenters[i] = _allNodes[i].transform.position;
+                _UnLockNodeRadiuss[i] = openFog.openFogRadius;
+                _FadeRanges[i] = openFog.openFogFadeRange;
+            }
+            else
+            {
+                _UnLockNodeCenters[i] = Vector4.zero;
+                _UnLockNodeRadiuss[i] = 0;
+                _FadeRanges[i] = 0;
+            }
+        }
+        Shader.SetGlobalVectorArray("_UnLockNodeCenters", _UnLockNodeCenters);
+        Shader.SetGlobalFloatArray("_UnLockNodeRadiuss", _UnLockNodeRadiuss);
+        Shader.SetGlobalFloatArray("_FadeRanges", _FadeRanges);
     }
 
     public void RefreshMapNodeState()

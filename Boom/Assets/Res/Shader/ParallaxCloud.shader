@@ -35,12 +35,13 @@ Shader "Boom/Parallax Cloud"
 			half4 _FixedLightDir;
 			half _UseFixedLight;
 		CBUFFER_END
-		
+		//UNITY_DEFINE_FIXED_ARRAY(float4, _MyVectors, 100);
+		float4 _UnLockNodeCenters[30];
+		float  _UnLockNodeRadiuss[30];
+		float _FadeRanges[30];
 		TEXTURE2D(_MainTex);
 		SAMPLER(sampler_MainTex);
-		float4 _UnLockNodeCenter;
-		float _UnLockNodeRadius;
-		float _FadeRange;
+
 		//模型原始数据
 		struct VertexInput
 		{
@@ -145,22 +146,25 @@ Shader "Boom/Parallax Cloud"
 				half3 lightColor = _MainLightColor.rgb;
                 half3 finalColor = c.rgb*(NdotL*lightColor + 1.0);
 
-
-				float dist = distance(i.posWorld, _UnLockNodeCenter.xyz);
-			
-				// 如果像素在球体外围的过渡区域内
-			    if (dist > _UnLockNodeRadius && dist < (_UnLockNodeRadius + _FadeRange))
-			    {
-			        // 使用 smoothstep 函数来计算平滑的过渡
-			        float edge1 = _UnLockNodeRadius;
-			        float edge2 = _UnLockNodeRadius + _FadeRange;
-			        Alpha *= smoothstep(edge1, edge2, dist); // 由外向内过渡至透明
-			    }
-			    else if (dist <= _UnLockNodeRadius)
-			    {
-			        // 如果在球体内部，那么完全透明
-			        Alpha = 0.0;
-			    }
+				for (int j = 0; j < 30 ; j++)
+				{
+					float3 center = _UnLockNodeCenters[j];
+					half radius = _UnLockNodeRadiuss[j];
+					half fade = _FadeRanges[j];
+					float dist = distance(i.posWorld, center.xyz);
+					if (dist > radius && dist < (radius + fade))
+				    {
+				        // 使用 smoothstep 函数来计算平滑的过渡
+				        float edge1 = radius;
+				        float edge2 = radius + fade;
+				        Alpha *= smoothstep(edge1, edge2, dist); // 由外向内过渡至透明
+				    }
+					else if (dist <= radius)
+				    {
+				        // 如果在球体内部，那么完全透明
+				        Alpha = 0.0;
+				    }
+				}
                 return half4(finalColor.rgb,Alpha);
 	
 			}
