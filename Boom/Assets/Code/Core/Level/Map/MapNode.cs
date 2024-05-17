@@ -20,7 +20,7 @@ public class MapNode : MonoBehaviour
 
     void Awake()
     {
-        _fx_imNode = imNode.GetComponentsInChildren<ParticleSystem>();
+        _fx_imNode = imNode.GetComponentsInChildren<ParticleSystem>(true);
     }
 
     void Start()
