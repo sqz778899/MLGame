@@ -12,33 +12,32 @@ public class DrawLine : MonoBehaviour
     void Awake()
     {
         MapNodes = new List<Transform>();
+        allLines = new List<LineRenderer>();
         for (int i = 0; i < MapNodeGroup.transform.childCount; i++)
             MapNodes.Add(MapNodeGroup.transform.GetChild(i));
     }
 
     void Start()
     {
-        DrawLineByMapNode();
+        InitDrawLineData();
     }
 
     void Update()
     {
         for (int i = 1; i < MapNodes.Count; i++)
         {
-            LineRenderer curRenderer = allLines[i];
+            LineRenderer curRenderer = allLines[i-1];
             curRenderer.SetPosition(0,MapNodes[i-1].position);
             curRenderer.SetPosition(1,MapNodes[i].position);
         }
     }
 
-    void DrawLineByMapNode()
+    void InitDrawLineData()
     {
         for (int i = 1; i < MapNodes.Count; i++)
         {
             LineRenderer curRenderer = InstanceSingleLine();
             allLines.Add(curRenderer);
-            curRenderer.SetPosition(0,MapNodes[i-1].position);
-            curRenderer.SetPosition(1,MapNodes[i].position);
         }
     }
 
