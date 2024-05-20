@@ -7,6 +7,7 @@ public class DrawLine : MonoBehaviour
 {
     public GameObject MapNodeGroup;
     List<Transform> MapNodes;
+    List<LineRenderer> allLines;
     
     void Awake()
     {
@@ -20,11 +21,22 @@ public class DrawLine : MonoBehaviour
         DrawLineByMapNode();
     }
 
+    void Update()
+    {
+        for (int i = 1; i < MapNodes.Count; i++)
+        {
+            LineRenderer curRenderer = allLines[i];
+            curRenderer.SetPosition(0,MapNodes[i-1].position);
+            curRenderer.SetPosition(1,MapNodes[i].position);
+        }
+    }
+
     void DrawLineByMapNode()
     {
         for (int i = 1; i < MapNodes.Count; i++)
         {
             LineRenderer curRenderer = InstanceSingleLine();
+            allLines.Add(curRenderer);
             curRenderer.SetPosition(0,MapNodes[i-1].position);
             curRenderer.SetPosition(1,MapNodes[i].position);
         }
