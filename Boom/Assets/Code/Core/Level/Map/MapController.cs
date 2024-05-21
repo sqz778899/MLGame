@@ -4,6 +4,8 @@ using UnityEngine;
 public class MapControl : MonoBehaviour
 {
     public Vector2 MinMaxZ;
+    public Canvas CurCanvas;
+    Vector3[] _mapCorners = new Vector3[4];
     
     Vector3 dragOrigin; // 用于存储地图原始位置
     BoxCollider2D curMapBox;
@@ -12,6 +14,7 @@ public class MapControl : MonoBehaviour
     {
         curMapBox = GetComponent<BoxCollider2D>();
     }
+    
 
     void Update()
     {
@@ -33,21 +36,68 @@ public class MapControl : MonoBehaviour
         if (Input.GetMouseButton(0))
         {
             Vector3 currentWorldPoint = GetClickPos();
+            if (dragOrigin == Vector3.zero || currentWorldPoint == Vector3.zero)//不知道为啥，Unity有时候捕捉不到鼠标输入的坐标
+                return;
+            
             Vector3 offset = currentWorldPoint - dragOrigin;
+            offset.z = 0;
 
             Vector3 oldPos = transform.position;
             Vector3 newPos = transform.position + offset;
-            
+            Debug.Log($"offset: {offset} dragOrigin: {dragOrigin}  currentWorldPoint: {currentWorldPoint}");
             transform.position += offset ;
             dragOrigin = currentWorldPoint;
+            
+            Vector3 fixV = Vector3.zero;
+            bool posLegal = true;
+            Debug.Log($"fixV: {fixV}");
+            CornersDetection(ref posLegal,ref fixV);
+            if (!posLegal)
+            {
+                transform.position += fixV ;
+            }
+        }
+    }
+    
+    void CornersDetection(ref bool posLegal,ref Vector3 fixV)
+    {
+        int detectStep = 2;
+        RectTransform rectTransform = CurCanvas.GetComponent<RectTransform>();
+        Vector3[] corners = new Vector3[4];
+
+        // 获取四个角的位置
+        rectTransform.GetWorldCorners(corners);
+        Vector3[] dirs = GetDirs();
+        
+        //射线检测四个角有无碰撞
+        Ray curRayBottomLeft = new Ray(corners[0], dirs[0]);
+        Physics.Raycast(curRayBottomLeft, out RaycastHit hitBottomLeft);
+
+        if (hitBottomLeft.transform == null)
+        {
+            posLegal = false;
+            for (int i = 0; i < 3000; i++)
+            {
+                Vector3 curV = new Vector3(corners[0].x + i * detectStep, corners[0].y, corners[0].z);
+                Ray curTempRay = new Ray(curV, dirs[0]);
+                Physics.Raycast(curTempRay, out RaycastHit tempHitBottomLeft);
+                if (tempHitBottomLeft.transform != null)
+                {
+                    fixV = new Vector3(i * detectStep,0,0) * -1;
+                    Debug.Log("FixV: " + curV);
+                    break;
+                }
+            }
         }
         
-        Vector3 fixPos = Vector2.zero;
-        if (QuadrangleEdgeDetection(ref fixPos))
-        {
-            Debug.Log("xxxxxxxxxxxxxxxxx");
-            transform.position += fixPos;
-        }
+        Ray curRayTopLeft = new Ray(corners[1], dirs[1]);
+        Physics.Raycast(curRayTopLeft, out RaycastHit hotTopLeft);
+        
+        /*Ray curRayBottomLeft = new Ray(corners[0], dirs[0]);
+        Physics.Raycast(curRayBottomLeft, out RaycastHit hotBottomLeft);
+        
+        Ray curRayBottomLeft = new Ray(corners[0], dirs[0]);
+        Physics.Raycast(curRayBottomLeft, out RaycastHit hotBottomLeft);*/
     }
     
 
@@ -63,66 +113,64 @@ public class MapControl : MonoBehaviour
         return hit.point;
     }
 
-    bool RayDetection(Ray curRay)
+    Vector3[] GetDirs()
     {
-        RaycastHit hit;
-        Physics.Raycast(curRay, out hit);
-        if (hit.transform != null)
-            return true;
-        else
-            return false;
+        Vector3[] dirs = new Vector3[4];
+        CameraCulRay curCulRay = GetCameraCulRay();
+        // 获取四个角的位置
+        RectTransform rectTransform = CurCanvas.GetComponent<RectTransform>();
+        Vector3[] corners = new Vector3[4];
+        rectTransform.GetWorldCorners(corners);
+        dirs[0] = Vector3.Normalize(curCulRay.bottomLeft - corners[0]);
+        dirs[1] = Vector3.Normalize(curCulRay.topLeft - corners[1]);
+        dirs[2] = Vector3.Normalize(curCulRay.topRight - corners[2]);
+        dirs[3] = Vector3.Normalize(curCulRay.bottomRight - corners[3]);
+
+        return dirs;
     }
-
-    Vector3 ccc(Vector3 ScreenPos)
-    {
-        Ray r01 = Camera.main.ScreenPointToRay(ScreenPos);
-        RaycastHit hit;
-        Physics.Raycast(r01, out hit);
-        return hit.point;
-    }
-
-    //计算一下屏幕空间两个像素之间，在世界空间下的差值。方便后续修正坐标
-    float GetCurScreenPerPixelDis()
-    {
-        Vector3 curScreenPos01 = new Vector3(100, 100,0);
-        Vector3 curScreenPos02 = new Vector3(101, 100,0);
-        float dis = Vector3.Distance(ccc(curScreenPos01) , ccc(curScreenPos02));
-        return dis;
-    }
-
-    bool QuadrangleEdgeDetection(ref Vector3 fixPos)
-    {
-        bool IsInEdge = false;
-        // 屏幕左下角的坐标
-        Ray bottomLeftRay = Camera.main.ScreenPointToRay(new Vector2(0, 0));
-        if (!RayDetection(bottomLeftRay))
-        {
-            for (int i = 0; i < 3000; i++)
-            {
-                Vector2 curV01 = new Vector2(i, 0);
-                Vector2 curV02 = new Vector2(0, i);
-                Vector2 curV03 = new Vector2(i, i);
-                Ray r01 = Camera.main.ScreenPointToRay(curV01);
-                RaycastHit hit;
-                Physics.Raycast(r01, out hit);
-                if (hit.transform != null)
-                {
-                    fixPos.x = -GetCurScreenPerPixelDis()*i;
-                    break;
-                }
-            }
-            IsInEdge = true;
-        }
-
-        return IsInEdge;
-
-        /*// 屏幕右下角的坐标
-        Vector3 bottomRight = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, 0, Camera.main.nearClipPlane));
     
-// 屏幕左上角的坐标
-        Vector3 topLeft = Camera.main.ScreenToWorldPoint(new Vector3(0, Camera.main.pixelHeight, Camera.main.nearClipPlane));
     
-// 屏幕右上角的坐标
-        Vector3 topRight = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight, Camera.main.nearClipPlane));*/
+    public class CameraCulRay
+    {
+        public Vector3 topRight;
+        public Vector3 topLeft;
+        public Vector3 bottomRight;
+        public Vector3 bottomLeft;
     }
+    
+    CameraCulRay GetCameraCulRay()
+    {
+        Camera _camera = Camera.main;
+        CameraCulRay _cameraRay = new CameraCulRay();
+    
+        float camFar = _camera.farClipPlane;
+        float camFov = _camera.fieldOfView;
+        float camAspect = _camera.aspect;
+
+        float fovWHalf = camFov * 0.5f;
+
+        Vector3 toRight = _camera.transform.right * Mathf.Tan(fovWHalf * Mathf.Deg2Rad) * camAspect;
+        Vector3 toTop = _camera.transform.up * Mathf.Tan(fovWHalf * Mathf.Deg2Rad);
+    
+        _cameraRay.topLeft = _camera.transform.forward - toRight + toTop;
+        float camScale = _cameraRay.topLeft.magnitude * camFar;
+    
+        _cameraRay.topLeft.Normalize();
+        _cameraRay.topLeft *= camScale;
+
+        _cameraRay.topRight = _camera.transform.forward + toRight + toTop;
+        _cameraRay.topRight.Normalize();
+        _cameraRay.topRight *= camScale;
+    
+        _cameraRay.bottomRight = _camera.transform.forward + toRight - toTop;
+        _cameraRay.bottomRight.Normalize();
+        _cameraRay.bottomRight *= camScale;
+    
+        _cameraRay.bottomLeft = _camera.transform.forward - toRight - toTop;
+        _cameraRay.bottomLeft.Normalize();
+        _cameraRay.bottomLeft *= camScale;
+
+        return _cameraRay;
+    }
+
 }

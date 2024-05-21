@@ -15,6 +15,7 @@ public class MiscToolBox : OdinMenuEditorWindow
         tree.Selection.SupportsMultiSelect = false;
         tree.Add("ExcelExport", new ExcelExport());
         tree.Add("FXTranslate", new FXTranslateEditor());
+        tree.Add("Debug", new DebugTool());
         return tree;
     }
 }
