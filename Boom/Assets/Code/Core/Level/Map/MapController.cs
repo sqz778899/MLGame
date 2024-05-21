@@ -22,8 +22,10 @@ public class MapControl : MonoBehaviour
         float scroll = Input.GetAxis("Mouse ScrollWheel") * 40;
         Vector3 curPos = transform.position;
         curPos.z -= scroll; // 根据滚轮输入修改Z值
-        if (curPos.z > MinMaxZ.x && MinMaxZ.x < MinMaxZ.y)
+        if (curPos.z > MinMaxZ.x && curPos.z < MinMaxZ.y)
+        {
             transform.position = curPos;
+        }
 
         // 检测鼠标按下事件，记录按下时鼠标的世界坐标
         if (Input.GetMouseButtonDown(0))
@@ -41,24 +43,23 @@ public class MapControl : MonoBehaviour
             
             Vector3 offset = currentWorldPoint - dragOrigin;
             offset.z = 0;
-
-            Vector3 oldPos = transform.position;
-            Vector3 newPos = transform.position + offset;
-            Debug.Log($"offset: {offset} dragOrigin: {dragOrigin}  currentWorldPoint: {currentWorldPoint}");
+            
             transform.position += offset ;
             dragOrigin = currentWorldPoint;
-            
-            Vector3 fixV = Vector3.zero;
-            bool posLegal = true;
-            Debug.Log($"fixV: {fixV}");
-            CornersDetection(ref posLegal,ref fixV);
-            if (!posLegal)
-            {
-                transform.position += fixV ;
-            }
         }
+
+        FixMapEdge();
     }
-    
+
+    #region 好费劲写的地图边缘检测逻辑，好像终于准了
+    void FixMapEdge()
+    {
+        Vector3 fixV = Vector3.zero;
+        bool posLegal = true;
+        CornersDetection(ref posLegal,ref fixV);
+        if (!posLegal)
+            transform.position += fixV ;
+    }
     void CornersDetection(ref bool posLegal,ref Vector3 fixV)
     {
         int detectStep = 2;
@@ -72,9 +73,21 @@ public class MapControl : MonoBehaviour
         //射线检测四个角有无碰撞
         Ray curRayBottomLeft = new Ray(corners[0], dirs[0]);
         Physics.Raycast(curRayBottomLeft, out RaycastHit hitBottomLeft);
+        
+        Ray curRayTopLeft = new Ray(corners[1], dirs[1]);
+        Physics.Raycast(curRayTopLeft, out RaycastHit hitTopLeft);
+        
+        Ray curRayTopRight = new Ray(corners[2], dirs[2]);
+        Physics.Raycast(curRayTopRight, out RaycastHit hitTopRight);
+        
+        Ray curRayBottomRight = new Ray(corners[3], dirs[3]);
+        Physics.Raycast(curRayBottomRight, out RaycastHit hitBottomRight);
 
-        if (hitBottomLeft.transform == null)
+        #region 四边Case
+        //.....................小地图到左侧边缘了.........................
+        if (hitBottomLeft.transform == null && hitTopLeft.transform == null)
         {
+            bool isFind = false;
             posLegal = false;
             for (int i = 0; i < 3000; i++)
             {
@@ -83,15 +96,135 @@ public class MapControl : MonoBehaviour
                 Physics.Raycast(curTempRay, out RaycastHit tempHitBottomLeft);
                 if (tempHitBottomLeft.transform != null)
                 {
+                    isFind = true;
                     fixV = new Vector3(i * detectStep,0,0) * -1;
-                    Debug.Log("FixV: " + curV);
                     break;
+                }
+            }
+
+            if (!isFind)
+            {
+                for (int i = 0; i < 3000; i++)
+                {
+                    Vector3 curV = new Vector3(corners[1].x + i * detectStep, corners[1].y, corners[1].z);
+                    Ray curTempRay = new Ray(curV, dirs[1]);
+                    Physics.Raycast(curTempRay, out RaycastHit tempHitBottomLeft);
+                    if (tempHitBottomLeft.transform != null)
+                    {
+                        isFind = true;
+                        fixV = new Vector3(i * detectStep,0,0) * -1;
+                        break;
+                    }
+                }
+            }
+        }
+        //.....................小地图到右侧边缘了.........................
+        if (hitTopRight.transform == null && hitBottomRight.transform == null)
+        {
+            bool isFind = false;
+            posLegal = false;
+            for (int i = 0; i < 3000; i++)
+            {
+                Vector3 curV = new Vector3(corners[3].x - i * detectStep, corners[3].y, corners[3].z);
+                Ray curTempRay = new Ray(curV, dirs[3]);
+                Physics.Raycast(curTempRay, out RaycastHit tempHitBottomLeft);
+                if (tempHitBottomLeft.transform != null)
+                {
+                    isFind = true;
+                    fixV = new Vector3(i * detectStep,0,0);
+                    break;
+                }
+            }
+            if (!isFind)
+            {
+                for (int i = 0; i < 3000; i++)
+                {
+                    Vector3 curV = new Vector3(corners[2].x - i * detectStep, corners[2].y, corners[2].z);
+                    Ray curTempRay = new Ray(curV, dirs[2]);
+                    Physics.Raycast(curTempRay, out RaycastHit tempHitBottomLeft);
+                    if (tempHitBottomLeft.transform != null)
+                    {
+                        fixV = new Vector3(i * detectStep,0,0);
+                        break;
+                    }
                 }
             }
         }
         
-        Ray curRayTopLeft = new Ray(corners[1], dirs[1]);
-        Physics.Raycast(curRayTopLeft, out RaycastHit hotTopLeft);
+        //.....................小地图到上面边缘了.........................
+        if (hitTopRight.transform == null && hitTopLeft.transform == null)
+        {
+            bool isFind = false;
+            posLegal = false;
+            for (int i = 0; i < 3000; i++)
+            {
+                Vector3 curV = new Vector3(corners[1].x , corners[1].y - i * detectStep, corners[1].z);
+                Ray curTempRay = new Ray(curV, dirs[1]);
+                Physics.Raycast(curTempRay, out RaycastHit tempHitBottomLeft);
+                if (tempHitBottomLeft.transform != null)
+                {
+                    isFind = true;
+                    fixV = new Vector3(0,i * detectStep,0);
+                    break;
+                }
+            }
+            if (!isFind)
+            {
+                for (int i = 0; i < 3000; i++)
+                {
+                    Vector3 curV = new Vector3(corners[2].x , corners[2].y - i * detectStep, corners[2].z);
+                    Ray curTempRay = new Ray(curV, dirs[2]);
+                    Physics.Raycast(curTempRay, out RaycastHit tempHitBottomLeft);
+                    if (tempHitBottomLeft.transform != null)
+                    {
+                        fixV = new Vector3(0,i * detectStep,0);
+                        break;
+                    }
+                }
+            }
+        }
+        
+        //.....................小地图到下面边缘了.........................
+        if (hitBottomRight.transform == null && hitBottomLeft.transform == null)
+        {
+            bool isFind = false;
+            posLegal = false;
+            for (int i = 0; i < 3000; i++)
+            {
+                Vector3 curV = new Vector3(corners[3].x , corners[3].y + i * detectStep, corners[3].z);
+                Ray curTempRay = new Ray(curV, dirs[3]);
+                Physics.Raycast(curTempRay, out RaycastHit tempHitBottomLeft);
+                if (tempHitBottomLeft.transform != null)
+                {
+                    isFind = true;
+                    fixV = new Vector3(0,i * detectStep,0) * -1;
+                    break;
+                }
+            }
+
+            if (!isFind)
+            {
+                for (int i = 0; i < 3000; i++)
+                {
+                    Vector3 curV = new Vector3(corners[2].x , corners[2].y + i * detectStep, corners[2].z);
+                    Ray curTempRay = new Ray(curV, dirs[2]);
+                    Physics.Raycast(curTempRay, out RaycastHit tempHitBottomLeft);
+                    if (tempHitBottomLeft.transform != null)
+                    {
+                        fixV = new Vector3(0,i * detectStep,0) * -1;
+                        break;
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region 四角Case
+
+        
+
+        #endregion
+        
         
         /*Ray curRayBottomLeft = new Ray(corners[0], dirs[0]);
         Physics.Raycast(curRayBottomLeft, out RaycastHit hotBottomLeft);
@@ -130,7 +263,7 @@ public class MapControl : MonoBehaviour
     }
     
     
-    public class CameraCulRay
+    internal class CameraCulRay
     {
         public Vector3 topRight;
         public Vector3 topLeft;
@@ -172,5 +305,6 @@ public class MapControl : MonoBehaviour
 
         return _cameraRay;
     }
+    #endregion
 
 }

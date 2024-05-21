@@ -40,7 +40,9 @@ public class MapNode : MonoBehaviour
             case MapNodeState.Locked:
                 imLocked.SetActive(true);
                 imNode.SetActive(false);
-                imIsFinish.SetActive(true);
+                foreach (var each in _fx_imNode)
+                    each.Stop();
+                imIsFinish.SetActive(false);
                 break;
             case MapNodeState.UnLocked:
                 imLocked.SetActive(false);
@@ -52,6 +54,8 @@ public class MapNode : MonoBehaviour
             case MapNodeState.IsFinish:
                 imLocked.SetActive(false);
                 imNode.SetActive(false);
+                foreach (var each in _fx_imNode)
+                    each.Stop();
                 imIsFinish.SetActive(true);
                 break;
         }

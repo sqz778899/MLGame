@@ -469,7 +469,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelID: 1
-  State: 2
+  State: 1
   imLocked: {fileID: 1866613203730259625}
   imNode: {fileID: 1866613203730259625}
   imIsFinish: {fileID: 6142497973506604818}
@@ -866,7 +866,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelID: 2
-  State: 1
+  State: 2
   imLocked: {fileID: 7108274560372021153}
   imNode: {fileID: 7108274560372021153}
   imIsFinish: {fileID: 3726322239077114613}
@@ -1142,11 +1142,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2733367097029622220, guid: cf2cd495b1b8d654da22ebea20bb18bc, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2931786456891466839, guid: cf2cd495b1b8d654da22ebea20bb18bc, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4974534768457564090, guid: cf2cd495b1b8d654da22ebea20bb18bc, type: 3}
       propertyPath: m_Name
@@ -1154,7 +1154,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7791541699050740803, guid: cf2cd495b1b8d654da22ebea20bb18bc, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1228,11 +1228,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2733367097029622220, guid: cf2cd495b1b8d654da22ebea20bb18bc, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2931786456891466839, guid: cf2cd495b1b8d654da22ebea20bb18bc, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4974534768457564090, guid: cf2cd495b1b8d654da22ebea20bb18bc, type: 3}
       propertyPath: m_Name
@@ -1240,7 +1240,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7791541699050740803, guid: cf2cd495b1b8d654da22ebea20bb18bc, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

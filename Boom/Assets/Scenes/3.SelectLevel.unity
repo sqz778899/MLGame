@@ -318,7 +318,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 279946a2d18d6c941b0b9d92ef5bf963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MinMaxZ: {x: -9, y: 100}
+  MinMaxZ: {x: -9, y: 80}
+  CurCanvas: {fileID: 2018418571}
 --- !u!1 &67876256
 GameObject:
   m_ObjectHideFlags: 0
@@ -2744,22 +2745,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 59386579}
     m_Modifications:
-    - target: {fileID: 2687354206642609805, guid: d5c37a7e0803d034d8f517a091d10a33, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2885246823230096150, guid: d5c37a7e0803d034d8f517a091d10a33, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3920700992110977902, guid: d5c37a7e0803d034d8f517a091d10a33, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4262712146538413813, guid: d5c37a7e0803d034d8f517a091d10a33, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5491107476276431479, guid: d5c37a7e0803d034d8f517a091d10a33, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2800,17 +2785,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7045239169912972953, guid: d5c37a7e0803d034d8f517a091d10a33, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 9161540931542748510, guid: d5c37a7e0803d034d8f517a091d10a33, type: 3}
       propertyPath: m_Name
       value: P_Map_01
-      objectReference: {fileID: 0}
-    - target: {fileID: 9198289736058996449, guid: d5c37a7e0803d034d8f517a091d10a33, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
