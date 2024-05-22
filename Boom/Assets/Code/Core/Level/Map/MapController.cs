@@ -3,23 +3,16 @@ using UnityEngine;
 
 public class MapControl : MonoBehaviour
 {
+    public float Sensitive;
     public Vector2 MinMaxZ;
     public Canvas CurCanvas;
-    Vector3[] _mapCorners = new Vector3[4];
     
     Vector3 dragOrigin; // 用于存储地图原始位置
-    BoxCollider2D curMapBox;
-
-    void Awake()
-    {
-        curMapBox = GetComponent<BoxCollider2D>();
-    }
-    
 
     void Update()
     {
         // 滚轮缩放地图逻辑
-        float scroll = Input.GetAxis("Mouse ScrollWheel") * 40;
+        float scroll = Input.GetAxis("Mouse ScrollWheel") * Sensitive;
         Vector3 curPos = transform.position;
         curPos.z -= scroll; // 根据滚轮输入修改Z值
         if (curPos.z > MinMaxZ.x && curPos.z < MinMaxZ.y)
@@ -218,19 +211,6 @@ public class MapControl : MonoBehaviour
             }
         }
         #endregion
-
-        #region 四角Case
-
-        
-
-        #endregion
-        
-        
-        /*Ray curRayBottomLeft = new Ray(corners[0], dirs[0]);
-        Physics.Raycast(curRayBottomLeft, out RaycastHit hotBottomLeft);
-        
-        Ray curRayBottomLeft = new Ray(corners[0], dirs[0]);
-        Physics.Raycast(curRayBottomLeft, out RaycastHit hotBottomLeft);*/
     }
     
 
@@ -238,11 +218,8 @@ public class MapControl : MonoBehaviour
     Vector3 GetClickPos()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
         // 进行射线检测
-        RaycastHit hit;
-        Physics.Raycast(ray, out hit);
-
+        Physics.Raycast(ray, out RaycastHit hit);
         return hit.point;
     }
 
