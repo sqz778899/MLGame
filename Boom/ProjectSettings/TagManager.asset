@@ -9,6 +9,7 @@ TagManager:
   - BulletSlot
   - BulletSlotRole
   - SButton
+  - MapNode
   layers:
   - Default
   - TransparentFX

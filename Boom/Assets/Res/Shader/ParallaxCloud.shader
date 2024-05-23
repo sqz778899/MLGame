@@ -74,7 +74,7 @@ Shader "Boom/Parallax Cloud"
 		pass
 		{
 			Blend SrcAlpha OneMinusSrcAlpha
-			ZWrite On
+			ZWrite Off
 			
 			HLSLPROGRAM
 			#pragma vertex vert

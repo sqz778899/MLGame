@@ -18,6 +18,15 @@ public class MapSate
     public List<int> IsFinishedLevels;
 }
 
+public enum MapNodeType
+{
+    Main = 1,
+    Shop = 2,
+    Event = 3,
+    TreasureBox = 4,
+    GoldPile = 5
+}
+
 [Serializable]
 public class NodeOpenFog
 {

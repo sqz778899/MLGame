@@ -14,7 +14,13 @@ public class DrawLine : MonoBehaviour
         MapNodes = new List<Transform>();
         allLines = new List<LineRenderer>();
         for (int i = 0; i < MapNodeGroup.transform.childCount; i++)
-            MapNodes.Add(MapNodeGroup.transform.GetChild(i));
+        {
+            Transform trans = MapNodeGroup.transform.GetChild(i);
+            if (trans.tag == "MapNode")
+            {
+                MapNodes.Add(trans);
+            }
+        }
     }
 
     void Start()

@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public class SpriteClickHandler : MonoBehaviour
 {
-    public UnityEvent onClick;
+    public UnityEvent onClick = new UnityEvent();
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -23,7 +23,7 @@ public class SpriteClickHandler : MonoBehaviour
 
         foreach (RaycastHit hit in hits)
         {
-            if (hit.transform.tag == "SButton")
+            if (hit.transform == this.transform && hit.transform.tag == "SButton")
                 isClick = true;
         }
         return isClick;

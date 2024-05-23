@@ -34,6 +34,7 @@ public static class PathConfig
 
    //.........................ScriptObject...........................
    public static string TrunkManagerOBJ = GetPrepath() + "Res/TrunkManager.asset";
+   public static string GLGameDataManagerOBJ = GetPrepath() + "Res/GlobalGameDataManager.asset";
    public static string UIManagerOBJ = GetPrepath() + "Res/Manager/UIManager.asset";
    public static string RollManagerOBJ = GetPrepath() + "Res/Manager/RollManager.asset";
    public static string BuffMannagerOBJ = GetPrepath() + "Res/Manager/BuffMannager.asset";

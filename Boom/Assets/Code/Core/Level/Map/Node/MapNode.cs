@@ -2,15 +2,20 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class MapNode : MonoBehaviour
 {
     public int LevelID;
     public MapNodeState State;
-    public GameObject imLocked;
-    public GameObject imNode;
-    ParticleSystem[] _fx_imNode;
-    public GameObject imIsFinish;
+    public MapNodeType Type;
+    
+    public GameObject Node_Main;
+    public GameObject Node_Locked;
+    public GameObject Node_Finish;
+    
+    public GameObject Node_FX;
+    ParticleSystem[] _fxs;
 
     public List<RollProbability> BuffProbabilityPool;
 
@@ -20,50 +25,84 @@ public class MapNode : MonoBehaviour
 
     void Awake()
     {
-        _fx_imNode = imNode.GetComponentsInChildren<ParticleSystem>(true);
+        _fxs = Node_FX.GetComponentsInChildren<ParticleSystem>(true);
     }
 
     void Start()
     {
+        
         ChangeState();
     }
-
-    void Update()
-    {
-        txtTitle.text = string.Format("LV{0}", LevelID);
-    }
-
+    
     public void ChangeState()
     {
+        if (_fxs == null)
+            _fxs = Node_FX.GetComponentsInChildren<ParticleSystem>(true);
+       
+        txtTitle.text = string.Format("LV{0}", LevelID);
         switch (State)
         {
             case MapNodeState.Locked:
-                imLocked.SetActive(true);
-                imNode.SetActive(false);
-                foreach (var each in _fx_imNode)
+                Node_Locked.SetActive(true);
+                Node_Main.SetActive(false);
+                foreach (var each in _fxs)
                     each.Stop();
-                imIsFinish.SetActive(false);
+                Node_Finish.SetActive(false);
+                OpenFog = GlobalGameDataManager.Instance.LockedPara;
                 break;
             case MapNodeState.UnLocked:
-                imLocked.SetActive(false);
-                imNode.SetActive(true);
-                foreach (var each in _fx_imNode)
+                Node_Locked.SetActive(false);
+                Node_Main.SetActive(true);
+                foreach (var each in _fxs)
                     each.Play();
-                imIsFinish.SetActive(false);
+                Node_Finish.SetActive(false);
+                if (Type == MapNodeType.Main)
+                {
+                    OpenFog = GlobalGameDataManager.Instance.GetUnlockedPara();
+                }
                 break;
             case MapNodeState.IsFinish:
-                imLocked.SetActive(false);
-                imNode.SetActive(false);
-                foreach (var each in _fx_imNode)
+                Node_Locked.SetActive(false);
+                Node_Main.SetActive(false);
+                foreach (var each in _fxs)
                     each.Stop();
-                imIsFinish.SetActive(true);
+                Node_Finish.SetActive(true);
+                if (Type == MapNodeType.Main)
+                {
+                    OpenFog = GlobalGameDataManager.Instance.GetUnlockedPara();
+                }
                 break;
         }
     }
 
-    public void LoadSceneByNode(int SceneID)
+    //Fight
+    public void EnterFight()
     {
         MSceneManager.Instance.CurMapSate.LevelID = LevelID;
-        MSceneManager.Instance.LoadScene(SceneID);
+        MSceneManager.Instance.LoadScene(2);
+    }
+    
+    //Event
+    public void RandomEvent()
+    {
+        Debug.Log("Random Event");
+    }
+    
+    //Shop
+    public void EnterShop()
+    {
+        Debug.Log("Shop !!");
+    }
+    
+    //Gold
+    public void GetGold()
+    {
+        Debug.Log("Gold !!");
+    }
+    
+    //Open
+    public void OpenTressureBox()
+    {
+        Debug.Log("Open Tressure Box !!");
     }
 }
