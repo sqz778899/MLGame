@@ -4,9 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class MapNode : MonoBehaviour
+public class MapNodeBase : MonoBehaviour
 {
-    public int LevelID;
     public MapNodeState State;
     public MapNodeType Type;
     
@@ -38,8 +37,7 @@ public class MapNode : MonoBehaviour
     {
         if (_fxs == null)
             _fxs = Node_FX.GetComponentsInChildren<ParticleSystem>(true);
-       
-        txtTitle.text = string.Format("LV{0}", LevelID);
+        
         switch (State)
         {
             case MapNodeState.Locked:
@@ -73,36 +71,5 @@ public class MapNode : MonoBehaviour
                 }
                 break;
         }
-    }
-
-    //Fight
-    public void EnterFight()
-    {
-        MSceneManager.Instance.CurMapSate.LevelID = LevelID;
-        MSceneManager.Instance.LoadScene(2);
-    }
-    
-    //Event
-    public void RandomEvent()
-    {
-        Debug.Log("Random Event");
-    }
-    
-    //Shop
-    public void EnterShop()
-    {
-        Debug.Log("Shop !!");
-    }
-    
-    //Gold
-    public void GetGold()
-    {
-        Debug.Log("Gold !!");
-    }
-    
-    //Open
-    public void OpenTressureBox()
-    {
-        Debug.Log("Open Tressure Box !!");
     }
 }

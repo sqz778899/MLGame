@@ -7,7 +7,7 @@ using UnityEngine;
 public class MapLogic : MonoBehaviour
 {
     public Transform MapGroup;
-    MapNode[] _allNodes;
+    MapNodeBase[] _allMainNodes;
 
     Vector4[] _UnLockNodeCenters = new Vector4[30];
     float[] _UnLockNodeRadiuss = new float[30];
@@ -21,7 +21,7 @@ public class MapLogic : MonoBehaviour
             MapGroup);
         curMapIns.transform.SetSiblingIndex(0);*/
 
-        _allNodes = MapGroup.GetComponentsInChildren<MapNode>();
+        _allMainNodes = MapGroup.GetComponentsInChildren<MainNode>();
         RefreshMapNodeState();
         //.............Global..................
         TrunkManager.Instance.LoadSaveFile();
@@ -47,10 +47,10 @@ public class MapLogic : MonoBehaviour
     {
         for (int i = 0; i < 30; i++)
         {
-            if (i < _allNodes.Length)
+            if (i < _allMainNodes.Length)
             {
-                NodeOpenFog openFog = _allNodes[i].OpenFog;
-                _UnLockNodeCenters[i] = _allNodes[i].transform.position;
+                NodeOpenFog openFog = _allMainNodes[i].OpenFog;
+                _UnLockNodeCenters[i] = _allMainNodes[i].transform.position;
                 _UnLockNodeRadiuss[i] = openFog.openFogRadius;
                 _FadeRanges[i] = openFog.openFogFadeRange;
             }
@@ -69,7 +69,7 @@ public class MapLogic : MonoBehaviour
     public void RefreshMapNodeState()
     {
         List<int> IsFinishedLevels = MSceneManager.Instance.CurMapSate.IsFinishedLevels;
-        foreach (MapNode eachNode in _allNodes)
+        foreach (MainNode eachNode in _allMainNodes)
         {
             foreach (int eachIsFinishedLevel in IsFinishedLevels)
             {
@@ -85,17 +85,17 @@ public class MapLogic : MonoBehaviour
         if (IsFinishedLevels.Contains(MSceneManager.Instance.CurMapSate.LevelID))
         {
             int nextLevelID = MSceneManager.Instance.CurMapSate.LevelID + 1;
-            MapNode NextNode = null;
-            foreach (MapNode eachNode in _allNodes)
+            MapNodeBase nextNodeBase = null;
+            foreach (MainNode eachNode in _allMainNodes)
             {
                 if (eachNode.LevelID == nextLevelID)
-                    NextNode = eachNode;
+                    nextNodeBase = eachNode;
             }
 
-            if (NextNode != null)
+            if (nextNodeBase != null)
             {
-                NextNode.State = MapNodeState.UnLocked;
-                NextNode.ChangeState();
+                nextNodeBase.State = MapNodeState.UnLocked;
+                nextNodeBase.ChangeState();
             }
         }
     }

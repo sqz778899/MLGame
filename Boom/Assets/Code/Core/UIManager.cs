@@ -29,6 +29,7 @@ public class UIManager : ScriptableObject
     public GameObject G_SlotStandby;
     public GameObject G_BulletStandby;
     public GameObject G_Setting;
+    public GameObject REventRoot;
     public GameObject G_Help;
     
     #region 1.StartGame
@@ -138,6 +139,9 @@ public class UIManager : ScriptableObject
 
         if (G_Setting == null)
             G_Setting = GameObject.Find("GroupSetting");
+
+        if (REventRoot == null)
+            REventRoot = GameObject.Find("REventRoot");
         
         if (G_Help == null)
             G_Help = GameObject.Find("GroupHelp");

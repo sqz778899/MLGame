@@ -45,10 +45,10 @@ public static class PathConfig
    public static string MultiLaOBJ =  GetPrepath() + "Res/Manager/MultiLa.asset";
 
    ///.........................资源类.................................
-   public static string TooltipAsset = GetPrepath() + "Res/UI/Prefab/P_Tooltip_01.prefab";
-   public static string TexttipAsset = GetPrepath() + "Res/UI/Prefab/P_Tooltip_Text_02.prefab";
+   public static string TooltipAsset = GetPrepath() + "Res/UI/Prefabs/P_Tooltip_01.prefab";
+   public static string TexttipAsset = GetPrepath() + "Res/UI/Prefabs/P_Tooltip_Text_02.prefab";
    public static string DrawLineAsset = GetPrepath() + "Res/Map/Prefabs/P_DrawLine_01.prefab";
-   public static string TxtHitPB = GetPrepath() + "Res/UI/Prefab/P_txtHit_01.prefab";
+   public static string TxtHitPB = GetPrepath() + "Res/UI/Prefabs/P_txtHit_01.prefab";
    public static string RollScorePB = GetPrepath() + "Res/Bullet/Prefab/P_RollScore_Template.prefab";
    //...........................角色.................................
    public static string GetRoleImgPath(int ID)
@@ -62,6 +62,12 @@ public static class PathConfig
    //..........................Buff.............................................
    public static string BuffImageDir = GetPrepath() + "Res/UI/Buff/Textures/";
    public static string BuffPB = GetPrepath() + "Res/UI/Buff/Prefabs/P_Buff_Template.prefab";
+   
+   //..........................事件...............................
+   public static string GetREventPath(int ID)
+   {
+      return GetPrepath() + "Res/UI/Prefabs/REvents/P_REvent_" + ID.ToString("D2") + ".prefab";
+   }
    
    //..........................全局大关卡...............................
    public static string LevelAssetDir = GetPrepath() + "Res/Levels/";

@@ -20,7 +20,6 @@ public class TrunkManager: ScriptableObject
     #endregion
 
     #region 策划数据
-
     List<BulletDataJson> _bulletDesignJsons;
     List<BuffDataJson> _buffDesignJsons;
     List<LevelBuff> _levelBuffDesignJsons;
@@ -101,6 +100,9 @@ public class TrunkManager: ScriptableObject
     {
         return _saveFile.UserProbabilitys;
     }
+    
+    //RandomEvent
+    public List<int> RandomEvents = new List<int>();
 
     #region 存档相关
     public void LoadSaveFile()

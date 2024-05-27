@@ -235,7 +235,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2809800254729216055}
-  - component: {fileID: 4336476328093376794}
+  - component: {fileID: 4061894451546930495}
   m_Layer: 0
   m_Name: P_NodeMain_01
   m_TagString: MapNode
@@ -263,7 +263,7 @@ Transform:
   - {fileID: 8516999130154264225}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4336476328093376794
+--- !u!114 &4061894451546930495
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -272,10 +272,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7692672117766204378}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e784e55017ab8a1419cc4aa281bc8a7b, type: 3}
+  m_Script: {fileID: 11500000, guid: 1e1bc551c4b242a0a24af1a80815146f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelID: 1
   State: 1
   Type: 1
   Node_Main: {fileID: 9184835828108059066}
@@ -285,8 +284,9 @@ MonoBehaviour:
   BuffProbabilityPool: []
   txtTitle: {fileID: 4691595124281981105}
   OpenFog:
-    openFogRadius: 5.17
-    openFogFadeRange: 4.19
+    openFogRadius: 10
+    openFogFadeRange: 10
+  LevelID: 1
 --- !u!1 &9015427541717258841
 GameObject:
   m_ObjectHideFlags: 0
@@ -725,7 +725,7 @@ PrefabInstance:
     - target: {fileID: 5210709930292982052, guid: 9d65d2d7957f89441a0d9a61a85ff5a4, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 4336476328093376794}
+      objectReference: {fileID: 4061894451546930495}
     - target: {fileID: 5210709930292982052, guid: 9d65d2d7957f89441a0d9a61a85ff5a4, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -736,7 +736,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5210709930292982052, guid: 9d65d2d7957f89441a0d9a61a85ff5a4, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MapNode, Assembly-CSharp
+      value: MainNode, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5210709930292982052, guid: 9d65d2d7957f89441a0d9a61a85ff5a4, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
