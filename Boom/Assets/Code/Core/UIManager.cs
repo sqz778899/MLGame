@@ -98,15 +98,15 @@ public class UIManager : ScriptableObject
 
     #region 3.SelectLevel
     public GameObject GroupSelectLevel;
-    public GameObject ShopCanvas;
+    public GameObject CanvasShop;
     public GameObject GroupRoll;
     
     public void InitSelectLevel()
     {
         InitComon();
         GroupSelectLevel = GameObject.Find("GroupSelectLevel");
-        ShopCanvas = GameObject.Find("CanvasRoll");
-        if (GroupSelectLevel == null || ShopCanvas == null)
+        CanvasShop = GameObject.Find("CanvasShop");
+        if (GroupSelectLevel == null || CanvasShop == null)
         {
             Debug.LogError("Erro: InitSelectLevel");
             return;
@@ -114,7 +114,7 @@ public class UIManager : ScriptableObject
         
         G_SlotStandby = GroupSelectLevel.transform.GetChild(0).gameObject;
         G_BulletStandby = GroupSelectLevel.transform.GetChild(1).gameObject;
-        GroupRoll = ShopCanvas.transform.GetChild(1).gameObject;
+        GroupRoll = CanvasShop.transform.GetChild(1).gameObject;
     }
     #endregion
 

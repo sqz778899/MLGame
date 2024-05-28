@@ -99,14 +99,6 @@ public class RollManager: ScriptableObject
         TrunkManager.Instance.SaveFile();
     }
     
-    public void OnOffShop()
-    {
-        GameObject shop = UIManager.Instance.ShopCanvas;
-        ShopActive = shop.transform.GetChild(0).gameObject.activeSelf;
-        for (int i = 0; i < shop.transform.childCount; i++)
-            shop.transform.GetChild(i).gameObject.SetActive(!ShopActive);
-        ShopActive = !ShopActive;
-    }
     #endregion
 
     #region RollBuff

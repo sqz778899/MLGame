@@ -50,6 +50,9 @@ public static class PathConfig
    public static string DrawLineAsset = GetPrepath() + "Res/Map/Prefabs/P_DrawLine_01.prefab";
    public static string TxtHitPB = GetPrepath() + "Res/UI/Prefabs/P_txtHit_01.prefab";
    public static string RollScorePB = GetPrepath() + "Res/Bullet/Prefab/P_RollScore_Template.prefab";
+
+   ///.........................GUI.................................
+   public static string ShopAsset = GetPrepath() + "Res/UI/Prefabs/P_Shop.prefab";
    //...........................角色.................................
    public static string GetRoleImgPath(int ID)
    {
@@ -62,6 +65,7 @@ public static class PathConfig
    //..........................Buff.............................................
    public static string BuffImageDir = GetPrepath() + "Res/UI/Buff/Textures/";
    public static string BuffPB = GetPrepath() + "Res/UI/Buff/Prefabs/P_Buff_Template.prefab";
+   //Assets/Res/UI/Prefabs/P_Shop.prefab
    
    //..........................事件...............................
    public static string GetREventPath(int ID)

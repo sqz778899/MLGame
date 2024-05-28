@@ -32,14 +32,6 @@ public class MapLogic : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (RollManager.Instance.ShopActive)
-                RollManager.Instance.OnOffShop();
-            else
-                return;
-        }
-
         SetOpenFogPara();
     }
 
