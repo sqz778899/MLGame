@@ -1,6 +1,6 @@
 {
   "Score": 0,
-  "Gold": 10000000,
+  "Gold": 9999985,
   "UserBulletSpawner": [
     {
       "bulletID": 1,
@@ -18,9 +18,9 @@
   "UserCurBullets": [],
   "UserStandbyBullet": [
     {
-      "BulletID": 0,
+      "BulletID": 1,
       "SlotID": 1,
-      "InstanceID": 0
+      "InstanceID": -63662
     },
     {
       "BulletID": 0,
@@ -56,11 +56,11 @@
   "UserProbabilitys": [
     {
       "ID": 0,
-      "Probability": 0.9
+      "Probability": 47.3684235
     },
     {
       "ID": 1,
-      "Probability": 0.1
+      "Probability": 100.0
     }
   ]
 }
