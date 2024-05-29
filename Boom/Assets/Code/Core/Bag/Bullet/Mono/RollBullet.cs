@@ -65,7 +65,7 @@ public class RollBullet:BulletBase,IPointerEnterHandler,IPointerExitHandler,IPoi
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        RollManager.Instance.SelOne(eventData.pointerClick);
+        ShopUtility.SelOne(eventData.pointerClick);
         Destroy(transform.gameObject);
     }
 }

@@ -22,7 +22,7 @@ public class GUIBase : MonoBehaviour
             transform.GetChild(i).gameObject.SetActive(false);
     }
 
-    public void CloseSelf()
+    public virtual void QuitSelf()
     {
         DestroyImmediate(gameObject);
     }

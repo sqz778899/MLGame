@@ -10,6 +10,7 @@ public class MapNodeBase : MonoBehaviour
     public MapNodeType Type;
     
     public GameObject Node_Main;
+    public GameObject Bubble;
     public GameObject Node_Locked;
     public GameObject Node_Finish;
     
@@ -37,18 +38,36 @@ public class MapNodeBase : MonoBehaviour
     {
         if (_fxs == null)
             _fxs = Node_FX.GetComponentsInChildren<ParticleSystem>(true);
-        
+
+        switch (Type)
+        {
+            case MapNodeType.Shop:
+                ChangeStateShop();
+                break;
+            case MapNodeType.Event:
+                ChangeStateEvent();
+                break;
+            default:
+                ChangeStateMain();
+                break;
+        }
+    }
+
+    void ChangeStateMain()
+    {
         switch (State)
         {
             case MapNodeState.Locked:
+                Bubble.SetActive(false);
                 Node_Locked.SetActive(true);
-                Node_Main.SetActive(false);
+                Node_Main.SetActive(true);
                 foreach (var each in _fxs)
                     each.Stop();
                 Node_Finish.SetActive(false);
                 OpenFog = GlobalGameDataManager.Instance.LockedPara;
                 break;
             case MapNodeState.UnLocked:
+                Bubble.SetActive(true);
                 Node_Locked.SetActive(false);
                 Node_Main.SetActive(true);
                 foreach (var each in _fxs)
@@ -60,6 +79,7 @@ public class MapNodeBase : MonoBehaviour
                 }
                 break;
             case MapNodeState.IsFinish:
+                Bubble.SetActive(false);
                 Node_Locked.SetActive(false);
                 Node_Main.SetActive(false);
                 foreach (var each in _fxs)
@@ -71,5 +91,35 @@ public class MapNodeBase : MonoBehaviour
                 }
                 break;
         }
+    }
+
+    void ChangeStateShop()
+    {
+        MatPropertyBlock curMainBlock = Node_Main.GetComponent<MatPropertyBlock>();
+        switch (State)
+        {
+            case MapNodeState.UnLocked:
+                Bubble.SetActive(true);
+                Node_Locked.SetActive(false);
+                curMainBlock.SetBlockDefault();
+                foreach (var each in _fxs)
+                    each.Play();
+                OpenFog = GlobalGameDataManager.Instance.LockedPara;
+                break;
+            case MapNodeState.IsFinish:
+                Bubble.SetActive(false);
+                curMainBlock.SetBlockFinish();
+                Node_Locked.SetActive(true);
+                foreach (var each in _fxs)
+                    each.Stop();
+                OpenFog = GlobalGameDataManager.Instance.LockedPara;
+                break;
+        }
+    }
+    
+    void ChangeStateEvent()
+    {
+        //和Shop逻辑一样
+        ChangeStateShop();
     }
 }

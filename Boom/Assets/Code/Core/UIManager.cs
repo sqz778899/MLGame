@@ -26,11 +26,10 @@ public class UIManager : ScriptableObject
     //GroupRoleDes
     public GameObject TooltipsRoot;
     public GameObject G_Bullet;
-    public GameObject G_SlotStandby;
-    public GameObject G_BulletStandby;
     public GameObject G_Setting;
-    public GameObject REventRoot;
     public GameObject G_Help;
+    //............GroupTitle.........
+    public GameObject TitleGold;
     
     #region 1.StartGame
 
@@ -96,17 +95,24 @@ public class UIManager : ScriptableObject
     }
     #endregion
 
-    #region 3.SelectLevel
+    #region 3.MiniMap
     public GameObject GroupSelectLevel;
-    public GameObject CanvasShop;
-    public GameObject GroupRoll;
+    public GameObject ShopRoot;
+    public GameObject REventRoot;
+    public GameObject RewardRoot;
+    
+    public GameObject G_SlotStandby;
+    public GameObject G_BulletStandby;
     
     public void InitSelectLevel()
     {
         InitComon();
         GroupSelectLevel = GameObject.Find("GroupSelectLevel");
-        CanvasShop = GameObject.Find("CanvasShop");
-        if (GroupSelectLevel == null || CanvasShop == null)
+        ShopRoot = GameObject.Find("ShopRoot");
+        REventRoot = GameObject.Find("REventRoot");
+        RewardRoot = GameObject.Find("RewardRoot");
+        
+        if (GroupSelectLevel == null || ShopRoot == null)
         {
             Debug.LogError("Erro: InitSelectLevel");
             return;
@@ -114,7 +120,6 @@ public class UIManager : ScriptableObject
         
         G_SlotStandby = GroupSelectLevel.transform.GetChild(0).gameObject;
         G_BulletStandby = GroupSelectLevel.transform.GetChild(1).gameObject;
-        GroupRoll = CanvasShop.transform.GetChild(1).gameObject;
     }
     #endregion
 
@@ -139,11 +144,11 @@ public class UIManager : ScriptableObject
 
         if (G_Setting == null)
             G_Setting = GameObject.Find("GroupSetting");
-
-        if (REventRoot == null)
-            REventRoot = GameObject.Find("REventRoot");
         
         if (G_Help == null)
             G_Help = GameObject.Find("GroupHelp");
+
+        if (TitleGold == null)
+            TitleGold = GameObject.Find("ImgGold");
     }
 }

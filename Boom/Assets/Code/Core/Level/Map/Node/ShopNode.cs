@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class ShopNode: MapNodeBase
 {
@@ -6,8 +7,16 @@ public class ShopNode: MapNodeBase
     public void EnterShop()
     {
         Debug.Log("Shop !!");
-        GameObject GO = Instantiate(ResManager.instance.GetAssetCache<GameObject>(PathConfig.ShopAsset));
-        GO.transform.SetParent(UIManager.Instance.CanvasShop.transform,false);
-        Debug.Log("Shop !!");
+        GameObject ShopIns = Instantiate(ResManager.instance.GetAssetCache<GameObject>(PathConfig.ShopAsset));
+        ShopIns.transform.SetParent(UIManager.Instance.ShopRoot.transform,false);
+        //建立链接
+        Shop curShopSC = ShopIns.GetComponent<Shop>();
+        curShopSC.CurShopNode = this;
+    }
+
+    public void QuitShop()
+    {
+        State = MapNodeState.IsFinish;
+        ChangeState();
     }
 }

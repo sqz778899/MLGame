@@ -215,6 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MColor: {r: 0.7688679, g: 0.92656714, b: 1, a: 1}
+  FinishColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!135 &1142964855469904894
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -251,9 +252,9 @@ MonoBehaviour:
   onClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 3192072017174140274}
         m_TargetAssemblyTypeName: MapNode, Assembly-CSharp
-        m_MethodName: RandomEvent
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
