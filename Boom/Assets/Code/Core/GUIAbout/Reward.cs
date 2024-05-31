@@ -7,7 +7,7 @@ public class Reward : MonoBehaviour
 {
     public AnimationCurve Curve;
     CanvasGroup canvasGroup;
-    public GameObject Ctrl;
+    //public GameObject Ctrl;
     public float duration = 2f;
     void Start()
     {
@@ -17,7 +17,7 @@ public class Reward : MonoBehaviour
         Vector3[] path = new Vector3[]
         {
             transform.position,
-            Ctrl.transform.position,
+            //Ctrl.transform.position,
             UIManager.Instance.TitleGold.transform.position
         };
 

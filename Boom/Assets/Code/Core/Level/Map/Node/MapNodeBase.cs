@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class MapNodeBase : MonoBehaviour
 {
@@ -30,7 +29,6 @@ public class MapNodeBase : MonoBehaviour
 
     void Start()
     {
-        
         ChangeState();
     }
     
@@ -46,6 +44,9 @@ public class MapNodeBase : MonoBehaviour
                 break;
             case MapNodeType.Event:
                 ChangeStateEvent();
+                break;
+            case MapNodeType.TreasureBox:
+                ChangeStateTreasureBox();
                 break;
             default:
                 ChangeStateMain();
@@ -121,5 +122,28 @@ public class MapNodeBase : MonoBehaviour
     {
         //和Shop逻辑一样
         ChangeStateShop();
+    }
+    
+    void ChangeStateTreasureBox()
+    {
+        switch (State)
+        {
+            case MapNodeState.UnLocked:
+                Bubble.SetActive(true);
+                Node_Main.SetActive(true);
+                Node_Finish.SetActive(false);
+                foreach (var each in _fxs)
+                    each.Play();
+                OpenFog = GlobalGameDataManager.Instance.LockedPara;
+                break;
+            case MapNodeState.IsFinish:
+                Bubble.SetActive(false);
+                Node_Main.SetActive(false);
+                Node_Finish.SetActive(true);
+                foreach (var each in _fxs)
+                    each.Stop();
+                OpenFog = GlobalGameDataManager.Instance.LockedPara;
+                break;
+        }
     }
 }
