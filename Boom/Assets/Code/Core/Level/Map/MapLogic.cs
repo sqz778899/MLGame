@@ -1,13 +1,20 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 //[ExecuteAlways]
 public class MapLogic : MonoBehaviour
 {
     public Transform MapGroup;
-    MapNodeBase[] _allMainNodes;
+    public Transform MainNodeRoot;
+    public Transform OtherNodeRoot;
+    
+    List<MapNodeBase> _allNodes;
+    List<MapNodeBase> _mainNodes;
+    List<MapNodeBase> _otherNodes;
+    
 
     Vector4[] _UnLockNodeCenters = new Vector4[30];
     float[] _UnLockNodeRadiuss = new float[30];
@@ -20,8 +27,11 @@ public class MapLogic : MonoBehaviour
             ResManager.instance.GetAssetCache<GameObject>(PathConfig.LevelAssetDir + curMapName),
             MapGroup);
         curMapIns.transform.SetSiblingIndex(0);*/
-
-        _allMainNodes = MapGroup.GetComponentsInChildren<MainNode>();
+        
+        _allNodes = MapGroup.GetComponentsInChildren<MapNodeBase>().ToList();
+        _mainNodes = MainNodeRoot.GetComponentsInChildren<MapNodeBase>().ToList();
+        _otherNodes = OtherNodeRoot.GetComponentsInChildren<MapNodeBase>().ToList();
+        
         RefreshMapNodeState();
         //.............Global..................
         TrunkManager.Instance.LoadSaveFile();
@@ -39,10 +49,11 @@ public class MapLogic : MonoBehaviour
     {
         for (int i = 0; i < 30; i++)
         {
-            if (i < _allMainNodes.Length)
+            if (i < _allNodes.Count && _allNodes[i] != null)
             {
-                NodeOpenFog openFog = _allMainNodes[i].OpenFog;
-                _UnLockNodeCenters[i] = _allMainNodes[i].transform.position;
+                NodeOpenFog openFog = _allNodes[i].OpenFog;
+                _UnLockNodeCenters[i] = _allNodes[i].transform.position + 
+                                        GlobalGameDataManager.Instance.openFogOffset;
                 _UnLockNodeRadiuss[i] = openFog.openFogRadius;
                 _FadeRanges[i] = openFog.openFogFadeRange;
             }
@@ -61,7 +72,7 @@ public class MapLogic : MonoBehaviour
     public void RefreshMapNodeState()
     {
         List<int> IsFinishedLevels = MSceneManager.Instance.CurMapSate.IsFinishedLevels;
-        foreach (MainNode eachNode in _allMainNodes)
+        foreach (MainNode eachNode in _mainNodes)
         {
             foreach (int eachIsFinishedLevel in IsFinishedLevels)
             {
@@ -78,7 +89,7 @@ public class MapLogic : MonoBehaviour
         {
             int nextLevelID = MSceneManager.Instance.CurMapSate.LevelID + 1;
             MapNodeBase nextNodeBase = null;
-            foreach (MainNode eachNode in _allMainNodes)
+            foreach (MainNode eachNode in _otherNodes)
             {
                 if (eachNode.LevelID == nextLevelID)
                     nextNodeBase = eachNode;

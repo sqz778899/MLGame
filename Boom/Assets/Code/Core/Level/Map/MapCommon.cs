@@ -34,3 +34,8 @@ public class NodeOpenFog
     public float openFogRadius = 10;
     public float openFogFadeRange = 10;
 }
+
+public class NodeSate
+{
+    
+}

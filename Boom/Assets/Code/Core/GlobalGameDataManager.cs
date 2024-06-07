@@ -27,15 +27,16 @@ public class GlobalGameDataManager: ScriptableObject
     
     #endregion
     
+    public readonly Vector3 openFogOffset = new Vector3(5f,5f,0);
     public NodeOpenFog LockedPara = new NodeOpenFog
     {
-        openFogRadius = 5.17f,
-        openFogFadeRange = 4.19f
+        openFogRadius = 8.6f,
+        openFogFadeRange = 8.17f
     };
     
     const float openFogRadius = 16.2f;
     const float openFogFadeRange = 30.6f;
-    
+
     public NodeOpenFog GetUnlockedPara()
     {
         NodeOpenFog UnlockedPara = new NodeOpenFog
