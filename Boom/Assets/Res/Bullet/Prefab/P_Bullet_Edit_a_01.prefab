@@ -391,18 +391,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forward: {x: 1, y: 0, z: 0}
+  InstanceID: 0
   _bulletData:
     ID: 0
     Level: 0
     name: 
-    speed: 0
     damage: 0
+    penetration: 0
     elementalType: 0
     imgBullet: {fileID: 0}
     hitEffect: {fileID: 0}
   bulletInsMode: 0
-  BulletState: 0
-  CurBagSlotID: 0
+  GroupStar: {fileID: 0}
+  curSlotID: 0
   originalPosition: {x: 0, y: 0, z: 0}
 --- !u!223 &985535621341473391
 Canvas:
@@ -443,4 +444,4 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
