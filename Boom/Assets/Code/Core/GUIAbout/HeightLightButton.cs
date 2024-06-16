@@ -13,6 +13,7 @@ public class HeightLightButton : MonoBehaviour,IPointerExitHandler,IPointerMoveH
     void Start()
     {
         _myMark = GetComponentInChildren<ParticleSystem>(true);
+        _myMark.Stop();
         _myText = GetComponentInChildren<TextMeshProUGUI>(true);
         _textOrginalColor = _myText.color;
     }

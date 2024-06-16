@@ -108,13 +108,13 @@ public class BulletManager :ScriptableObject
         {
             if (each.Value == 2)
             {
-                foreach (var eachSpawner in CharacterManager.Instance.CurBulletSpawners)
+                foreach (var eachSpawner in MainRoleManager.Instance.CurBulletSpawners)
                 {
                     if (eachSpawner.bulletID == each.Key)
                     {
                         //Upgrade
-                        CharacterManager.Instance.SubStandebyBullet(eachSpawner.bulletID);
-                        foreach (var eachBullet in CharacterManager.Instance.CurBullets)
+                        MainRoleManager.Instance.SubStandebyBullet(eachSpawner.bulletID);
+                        foreach (var eachBullet in MainRoleManager.Instance.CurBullets)
                         {
                             if (eachBullet.bulletID == eachSpawner.bulletID)
                                 eachBullet.bulletID += 100;
@@ -125,7 +125,7 @@ public class BulletManager :ScriptableObject
             }
             if (each.Value == 3)
             {
-                CharacterManager.Instance.SubStandebyBullet(each.Key);
+                MainRoleManager.Instance.SubStandebyBullet(each.Key);
                 InstanceStandByBullet(each.Key+100);
             }
         }

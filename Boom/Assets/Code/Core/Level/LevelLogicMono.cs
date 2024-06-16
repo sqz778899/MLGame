@@ -21,7 +21,7 @@ public class LevelLogicMono : MonoBehaviour
     public void LoadSceneWin(int SceneID)
     {
         MSceneManager.Instance.WinThisLevel();
-        CharacterManager.Instance.WinOrFailState = WinOrFail.InLevel;
+        MainRoleManager.Instance.WinOrFailState = WinOrFail.InLevel;
         MSceneManager.Instance.LoadScene(SceneID);
     }
     #endregion
@@ -49,7 +49,7 @@ public class LevelLogicMono : MonoBehaviour
     }
     void Update()
     {
-        txtScore.text = "Score: " + CharacterManager.Instance.Score;
+        txtScore.text = "Score: " + MainRoleManager.Instance.Score;
         if (isBeginCalculation)
             WinOrFailThisLevel();
 
@@ -70,9 +70,9 @@ public class LevelLogicMono : MonoBehaviour
         if (UIManager.Instance.G_Bullet.transform.childCount == 0 && 
             UIManager.Instance.EnemyILIns != null)
             if ( UIManager.Instance.EnemyILIns.GetComponent<Enemy>().health > 0)
-                CharacterManager.Instance.WinOrFailState = WinOrFail.Fail;
+                MainRoleManager.Instance.WinOrFailState = WinOrFail.Fail;
         
-        switch (CharacterManager.Instance.WinOrFailState)
+        switch (MainRoleManager.Instance.WinOrFailState)
         {
             case WinOrFail.InLevel:
                 break;
@@ -112,7 +112,7 @@ public class LevelLogicMono : MonoBehaviour
     public IEnumerator FireWithDelay(Vector3 pos, float delay)
     {
         Debug.Log("fire");
-        List<BulletReady> bulletDatas = CharacterManager.Instance.CurBullets;
+        List<BulletReady> bulletDatas = MainRoleManager.Instance.CurBullets;
         
         //
         for (int i = 0; i < bulletDatas.Count; i++)

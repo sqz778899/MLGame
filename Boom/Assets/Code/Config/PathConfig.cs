@@ -39,7 +39,7 @@ public static class PathConfig
    public static string RollManagerOBJ = GetPrepath() + "Res/Manager/RollManager.asset";
    public static string BuffMannagerOBJ = GetPrepath() + "Res/Manager/BuffMannager.asset";
    public static string MSceneManagerOBJ = GetPrepath() + "Res/Manager/MSceneManager.asset";
-   public static string CharacterManagerOBJ = GetPrepath() + "Res/Character/CharacterManager.asset";
+   public static string MainRoleManagerOBJ = GetPrepath() + "Res/Character/MainRole/MainRoleManager.asset";
    public static string BulletManagerOBJ = GetPrepath() + "Res/Bullet/BulletManager.asset";
    public static string CalculateDamageManagerOBJ = GetPrepath() + "Res/Manager/CalculateDamageManager.asset";
    public static string MultiLaOBJ =  GetPrepath() + "Res/Manager/MultiLa.asset";
@@ -57,7 +57,7 @@ public static class PathConfig
    //...........................角色.................................
    public static string GetRoleImgPath(int ID)
    {
-      return GetPrepath() + "Res/Character/T_RoleSel_" + ID.ToString("D2") + ".png";
+      return GetPrepath() + "Res/Character/MainRole/T_RoleSel_" + ID.ToString("D2") + ".png";
    }
    
    //..........................子弹.............................................

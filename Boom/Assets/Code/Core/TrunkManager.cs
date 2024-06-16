@@ -111,17 +111,17 @@ public class TrunkManager: ScriptableObject
         _saveFile = JsonConvert.DeserializeObject<SaveFileJson>(SaveFileJsonString);
 
         #region Character
-        CharacterManager.Instance.Score = _saveFile.Score;
-        CharacterManager.Instance.Gold = _saveFile.Gold;
+        MainRoleManager.Instance.Score = _saveFile.Score;
+        MainRoleManager.Instance.Gold = _saveFile.Gold;
         for (int i = 0; i < _saveFile.SupremeCharms.Count; i++)
         {
             SupremeCharm curCharm = new SupremeCharm(_saveFile.SupremeCharms[i]);
             curCharm.GetSupremeCharmByID();
-            CharacterManager.Instance.SupremeCharms.Add(curCharm);
+            MainRoleManager.Instance.SupremeCharms.Add(curCharm);
         }
-        CharacterManager.Instance.CurBulletSpawners = _saveFile.UserBulletSpawner;
-        CharacterManager.Instance.CurBullets = _saveFile.UserCurBullets;
-        CharacterManager.Instance.CurStandbyBullets = _saveFile.UserStandbyBullet;
+        MainRoleManager.Instance.CurBulletSpawners = _saveFile.UserBulletSpawner;
+        MainRoleManager.Instance.CurBullets = _saveFile.UserCurBullets;
+        MainRoleManager.Instance.CurStandbyBullets = _saveFile.UserStandbyBullet;
         #endregion
         
         #region Map
@@ -144,14 +144,14 @@ public class TrunkManager: ScriptableObject
     public void SaveFile()
     {
         #region Character
-        _saveFile.Score = CharacterManager.Instance.Score;
-        _saveFile.Gold = CharacterManager.Instance.Gold;
-        _saveFile.UserBulletSpawner = CharacterManager.Instance.CurBulletSpawners;
-        _saveFile.UserCurBullets = CharacterManager.Instance.CurBullets;
+        _saveFile.Score = MainRoleManager.Instance.Score;
+        _saveFile.Gold = MainRoleManager.Instance.Gold;
+        _saveFile.UserBulletSpawner = MainRoleManager.Instance.CurBulletSpawners;
+        _saveFile.UserCurBullets = MainRoleManager.Instance.CurBullets;
         List<int> SupremeCharms = new List<int>();
-        foreach (var each in CharacterManager.Instance.SupremeCharms)
+        foreach (var each in MainRoleManager.Instance.SupremeCharms)
             SupremeCharms.Add(each.ID);
-        _saveFile.UserStandbyBullet = CharacterManager.Instance.CurStandbyBullets;
+        _saveFile.UserStandbyBullet = MainRoleManager.Instance.CurStandbyBullets;
         _saveFile.SupremeCharms = SupremeCharms;
         #endregion
 

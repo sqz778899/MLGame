@@ -8,21 +8,21 @@ public static class ShopUtility
         RollBullet curSC = SelGO.GetComponentInChildren<RollBullet>();
         //............Cost Money.................
         int curCost = curSC.Cost;
-        if (CharacterManager.Instance.Gold < curCost)
+        if (MainRoleManager.Instance.Gold < curCost)
         {
             Debug.Log("No Money");
             return;
         }
-        CharacterManager.Instance.Gold -= curCost;
+        MainRoleManager.Instance.Gold -= curCost;
         
         //............Deal Data.................
         if (curSC._bulletData.ID == 0)//Score
         {
-            CharacterManager.Instance.Score +=  curSC.Score;
+            MainRoleManager.Instance.Score +=  curSC.Score;
         }
         else
         {
-            bool isAdd = CharacterManager.Instance.AddStandbyBullet(curSC._bulletData.ID,curSC.InstanceID);
+            bool isAdd = MainRoleManager.Instance.AddStandbyBullet(curSC._bulletData.ID,curSC.InstanceID);
             if (!isAdd)
             {
                 Debug.Log("qweqwesxas");

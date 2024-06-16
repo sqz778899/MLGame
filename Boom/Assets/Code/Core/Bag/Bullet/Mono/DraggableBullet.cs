@@ -48,12 +48,12 @@ public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandle
                 BulletSlot curSlotSC = result.gameObject.GetComponent<BulletSlot>();
                 if (curSlotSC.BulletID != 0)
                 {
-                    CharacterManager.Instance.BulletInterchangePos(curSlotID, curSlotSC.SlotID);
+                    MainRoleManager.Instance.BulletInterchangePos(curSlotID, curSlotSC.SlotID);
                     return;
                 } 
                 //Add
-                CharacterManager.Instance.AddBullet(_bulletData.ID,curSlotSC.SlotID,InstanceID);
-                CharacterManager.Instance.SetBulletPos(transform.parent, result.gameObject.transform);
+                MainRoleManager.Instance.AddBullet(_bulletData.ID,curSlotSC.SlotID,InstanceID);
+                MainRoleManager.Instance.SetBulletPos(transform.parent, result.gameObject.transform);
                 continue;
             }
 
@@ -66,7 +66,7 @@ public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandle
                 {
                     if (each._bulletData.ID == _bulletData.ID)
                     {
-                        CharacterManager.Instance.SubBullet(_bulletData.ID,InstanceID);
+                        MainRoleManager.Instance.SubBullet(_bulletData.ID,InstanceID);
                         Destroy(transform.parent.gameObject);
                     }
                 }

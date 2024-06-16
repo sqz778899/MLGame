@@ -35,8 +35,8 @@ public class RollManager: ScriptableObject
         if (curLB == null) return;
 
         List<RollProbability> curBuffPool = curLB.CurBuffProb;
-        int xOffset = 612;
-        int start = -612;
+        int xOffset = 1167;
+        int start = -1167;
         for (int i = 0; i < 3; i++)
         {
             RollProbability curRoll = SingleRoll(curBuffPool);

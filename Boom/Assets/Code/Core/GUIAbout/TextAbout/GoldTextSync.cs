@@ -11,6 +11,6 @@ public class GoldTextSync : MonoBehaviour
 
     void Update()
     {
-        _txtGold.text = CharacterManager.Instance.Gold.ToString();
+        _txtGold.text = MainRoleManager.Instance.Gold.ToString();
     }
 }

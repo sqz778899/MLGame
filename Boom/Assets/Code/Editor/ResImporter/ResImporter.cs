@@ -7,7 +7,8 @@ public class ResImporter : AssetPostprocessor
 {
     public void OnPreprocessTexture()
     {
-        if (assetPath.StartsWith("Assets/Res/UI/"))
+        if (assetPath.StartsWith("Assets/Res/UI/") ||
+            assetPath.StartsWith("Assets/Res/Character/"))
         {
             int MaxSize = 2048;
             TextureImporter textureImporter = (TextureImporter)assetImporter;

@@ -110,8 +110,8 @@ public class DraggableBulletSpawner : BulletBase, IPointerDownHandler,
                     continue;
                 //........ChangeData.................
                 BulletBase curSc = childBulletIns.GetComponentInChildren<BulletBase>();
-                CharacterManager.Instance.AddBullet(_bulletData.ID,curSlot.SlotID,curSc.InstanceID);
-                CharacterManager.Instance.SetBulletPos(childBulletIns.transform,
+                MainRoleManager.Instance.AddBullet(_bulletData.ID,curSlot.SlotID,curSc.InstanceID);
+                MainRoleManager.Instance.SetBulletPos(childBulletIns.transform,
                     result.gameObject.transform);
                 childBulletIns = null;
                 return;

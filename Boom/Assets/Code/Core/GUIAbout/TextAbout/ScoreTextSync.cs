@@ -11,6 +11,6 @@ public class ScoreTextSync : MonoBehaviour
 
     void Update()
     {
-        _txtScore.text = CharacterManager.Instance.Score.ToString();
+        _txtScore.text = MainRoleManager.Instance.Score.ToString();
     }
 }

@@ -63,7 +63,7 @@ public class UIManager : ScriptableObject
         
         G_BulletSpawnerSlot = SlotRoot.transform.GetChild(1).gameObject;
         G_BulletRoleSlot = SlotRoot.transform.GetChild(2).gameObject;
-        G_SlotStandby = SlotRoot.transform.GetChild(3).gameObject;
+        //G_SlotStandby = SlotRoot.transform.GetChild(3).gameObject;
 
         G_Bullet = BulletRoot.transform.GetChild(0).gameObject;
         G_BulletStandby = BulletRoot.transform.GetChild(1).gameObject;

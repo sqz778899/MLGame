@@ -51,8 +51,8 @@ public class Enemy : MonoBehaviour
     }
     void DestroySelf()
     {
-        CharacterManager.Instance.Score += award.score;
-        CharacterManager.Instance.WinOrFailState = WinOrFail.Win;
+        MainRoleManager.Instance.Score += award.score;
+        MainRoleManager.Instance.WinOrFailState = WinOrFail.Win;
         _LevelLogic.isBeginCalculation = true; //通知进行结算
         Destroy(gameObject);
     }

@@ -22,12 +22,12 @@ public class Shop:GUIBase
         RollManager.Instance.DealProb(ref rollProbs);
         
         //Cal gold
-        int curCost = CharacterManager.Instance.Cost;
-        int curGold = CharacterManager.Instance.Gold;
+        int curCost = MainRoleManager.Instance.Cost;
+        int curGold = MainRoleManager.Instance.Gold;
         if (curGold < curCost)
             return;
 
-        CharacterManager.Instance.Gold -= curCost;
+        MainRoleManager.Instance.Gold -= curCost;
         //Clean Ins
         int preRollIns = RollInsRoot.transform.childCount;
         for (int i = preRollIns - 1; i >= 0; i--)

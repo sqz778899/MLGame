@@ -17,7 +17,7 @@ public class CharacterSceneLogic : KeyBoardBase
         TrunkManager.Instance.LoadSaveFile();
         //.................Local...........................
         UIManager.Instance.InitCharacterScene();
-        CharacterManager.Instance.InitData();
+        MainRoleManager.Instance.InitData();
     }
 
     public void EditBullet()
@@ -44,7 +44,7 @@ public class CharacterSceneLogic : KeyBoardBase
 
     public void GO()
     {
-        if ( CharacterManager.Instance.CurBullets.Count == 0)
+        if ( MainRoleManager.Instance.CurBullets.Count == 0)
         {
             GameObject curTexttipIns = ResManager.instance.CreatInstance<GameObject>(PathConfig.TexttipAsset);
             curTexttipIns.GetComponent<TextTip>().CurText.text = "Non Bullet Ready !";
