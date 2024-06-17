@@ -25,6 +25,11 @@ public class UIManager : ScriptableObject
     //4.SelectRole
     //GroupRoleDes
     public GameObject TooltipsRoot;
+    public GameObject StandByRoot;
+    
+    public GameObject G_BulletStandby;
+    public GameObject G_SlotStandby;
+    
     public GameObject G_Bullet;
     public GameObject G_Setting;
     public GameObject G_Help;
@@ -63,10 +68,7 @@ public class UIManager : ScriptableObject
         
         G_BulletSpawnerSlot = SlotRoot.transform.GetChild(1).gameObject;
         G_BulletRoleSlot = SlotRoot.transform.GetChild(2).gameObject;
-        //G_SlotStandby = SlotRoot.transform.GetChild(3).gameObject;
-
         G_Bullet = BulletRoot.transform.GetChild(0).gameObject;
-        G_BulletStandby = BulletRoot.transform.GetChild(1).gameObject;
     }
     #endregion
 
@@ -101,9 +103,6 @@ public class UIManager : ScriptableObject
     public GameObject REventRoot;
     public GameObject RewardRoot;
     
-    public GameObject G_SlotStandby;
-    public GameObject G_BulletStandby;
-    
     public void InitSelectLevel()
     {
         InitComon();
@@ -136,11 +135,19 @@ public class UIManager : ScriptableObject
     
     void InitComon()
     {
-        if (G_Bullet == null)
-            G_Bullet = GameObject.Find("GroupBullet");
-        
         if (TooltipsRoot == null)
             TooltipsRoot = GameObject.Find("TooltipsRoot");
+        
+        //StandByRoot
+        if (StandByRoot == null)
+            StandByRoot = GameObject.Find("StandByRoot");
+        if (G_SlotStandby == null)
+            G_SlotStandby = StandByRoot.transform.GetChild(0).gameObject;
+        if (G_BulletStandby == null)
+            G_BulletStandby = StandByRoot.transform.GetChild(1).gameObject;
+        
+        if (G_Bullet == null)
+            G_Bullet = GameObject.Find("GroupBullet");
 
         if (G_Setting == null)
             G_Setting = GameObject.Find("GroupSetting");
