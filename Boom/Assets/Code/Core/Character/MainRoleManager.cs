@@ -210,7 +210,15 @@ public class MainRoleManager :ScriptableObject
     {
         GameObject roleSlotRoot = UIManager.Instance.G_BulletRoleSlot;
         GameObject bulletRoot = UIManager.Instance.G_Bullet;
-        //设置Slot的BulletID
+        //1)重置Slot
+        BulletSlot[] bulletSlots = roleSlotRoot.GetComponentsInChildren<BulletSlot>();
+        foreach (BulletSlot each in bulletSlots)
+        {
+            each.BulletID = 0;
+            each.InstanceID = 0;
+        }
+
+        //2)设置Slot的BulletID
         for (int i = roleSlotRoot.transform.childCount - 1; i >= 0; i--)
         {
             GameObject curSlot = roleSlotRoot.transform.GetChild(i).gameObject;
@@ -224,7 +232,7 @@ public class MainRoleManager :ScriptableObject
                 }
             }
         }
-        //设置Bullet的SlotID
+        //3)设置Bullet的SlotID
         for (int i = bulletRoot.transform.childCount - 1; i >= 0; i--)
         {
             GameObject curBullet = bulletRoot.transform.GetChild(i).gameObject;
@@ -238,25 +246,35 @@ public class MainRoleManager :ScriptableObject
         }
     }
 
+    /// <summary>
+    /// 满足两个逻辑，一个是子弹空拖动，一个是子弹交换拖动
+    /// </summary>
+    /// <param name="curSlotID"></param>
+    /// <param name="targetSlotID"></param>
     public void BulletInterchangePos(int curSlotID,int targetSlotID)
     {
         GameObject curSlot = GetSlot(curSlotID, SlotKind.SlotRole);
         GameObject targetSlot = GetSlot(targetSlotID, SlotKind.SlotRole);
         GameObject curIns = GetReadyBulletBySlotID(curSlotID);
-        GameObject targetIns = GetReadyBulletBySlotID(targetSlotID);
         DraggableBullet curSC = curIns.GetComponentInChildren<DraggableBullet>();
-        DraggableBullet targetSC = targetIns.GetComponentInChildren<DraggableBullet>();
+        GameObject targetIns = GetReadyBulletBySlotID(targetSlotID);
         
-        //挪出来
-        RefreshCurBullets(BulletMutMode.Sub, targetSC._bulletData.ID,targetSlotID,targetSC.InstanceID);
-        RefreshCurBullets(BulletMutMode.Add,targetSC._bulletData.ID,curSlotID,targetSC.InstanceID);
-        targetIns.transform.position = curSlot.transform.position;
-        targetIns.GetComponentInChildren<DraggableBullet>().curSlotID = curSlotID;
+        if (targetIns != null)//子弹交换逻辑
+        {
+            DraggableBullet targetSC = targetIns.GetComponentInChildren<DraggableBullet>();
+            //挪出来
+            RefreshCurBullets(BulletMutMode.Sub, targetSC._bulletData.ID,targetSlotID,targetSC.InstanceID);
+            RefreshCurBullets(BulletMutMode.Add,targetSC._bulletData.ID,curSlotID,targetSC.InstanceID);
+            targetIns.transform.position = curSlot.transform.position;
+            targetIns.GetComponentInChildren<DraggableBullet>().curSlotID = curSlotID;
+        }
         //移进去
-        RefreshCurBullets(BulletMutMode.Sub, curSC._bulletData.ID,curSlotID,curSC.InstanceID);
-        RefreshCurBullets(BulletMutMode.Add, curSC._bulletData.ID,targetSlotID,curSC.InstanceID);
+        RefreshCurBullets(BulletMutMode.Sub, curSC._bulletData.ID,curSlotID,curSC.InstanceID);  //....数据层
+        RefreshCurBullets(BulletMutMode.Add, curSC._bulletData.ID,targetSlotID,curSC.InstanceID); //....数据层
         curIns.transform.position = targetSlot.transform.position;
         curIns.GetComponentInChildren<DraggableBullet>().curSlotID = targetSlotID;
+        
+        RefreshCurBulletSlots();//....GO层
     }
     
     public void InstanceStandbyBullets()
@@ -360,6 +378,19 @@ public class MainRoleManager :ScriptableObject
     #endregion
 
     #region 外部可以调用的操作组封装
+
+    public bool IsNullDrag(int instanceID)
+    {
+        bool isNullDrag = false;
+        //如果这个Instance有了，证明是在RoleSlot内空拖行为，删掉原来的数据再更新
+        for (int i = CurBullets.Count - 1; i >= 0; i--)
+        {
+            BulletReady preData = CurBullets[i];
+            if (preData.instanceID == instanceID)
+                isNullDrag = true;
+        }
+        return isNullDrag;
+    }
     public void AddBullet(int bulletID,int slotID,int instanceID)
     {
         RefreshCurBullets(BulletMutMode.Add,bulletID,slotID,instanceID);

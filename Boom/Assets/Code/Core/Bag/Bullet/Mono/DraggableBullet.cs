@@ -41,20 +41,27 @@ public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandle
         // 在释放鼠标按钮时，我们检查这个位置下是否有一个子弹槽
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventData, results);
+
+        bool NonHappen = true; // 发生逻辑，如果未发生，则之后子弹弹回原位
         foreach (RaycastResult result in results)
         {
             if (result.gameObject.CompareTag("BulletSlotRole"))
             {
                 BulletSlot curSlotSC = result.gameObject.GetComponent<BulletSlot>();
-                if (curSlotSC.BulletID != 0)
+                //交换逻辑
+                int curBulletInsID = eventData.pointerDrag.GetComponent<DraggableBullet>().InstanceID;
+                bool isNullDrage = MainRoleManager.Instance.IsNullDrag(curBulletInsID);
+                if (curSlotSC.BulletID != 0 || isNullDrage)
                 {
                     MainRoleManager.Instance.BulletInterchangePos(curSlotID, curSlotSC.SlotID);
-                    return;
-                } 
-                //Add
-                MainRoleManager.Instance.AddBullet(_bulletData.ID,curSlotSC.SlotID,InstanceID);
-                MainRoleManager.Instance.SetBulletPos(transform.parent, result.gameObject.transform);
-                continue;
+                }
+                else
+                {
+                    //Add逻辑
+                    MainRoleManager.Instance.AddBullet(_bulletData.ID,curSlotSC.SlotID,InstanceID);
+                    MainRoleManager.Instance.SetBulletPos(transform.parent, result.gameObject.transform);
+                }
+                NonHappen = false;
             }
 
             if (result.gameObject.CompareTag("BulletSlot"))
@@ -70,11 +77,13 @@ public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandle
                         Destroy(transform.parent.gameObject);
                     }
                 }
+                NonHappen = false;
             }
         }
 
         // 如果这个位置下没有子弹槽，我们就将子弹位置恢复到原来的位置
-        transform.parent.position = originalPosition;
+        if (NonHappen)
+            transform.parent.position = originalPosition;
     }
     
     public void OnDrag(PointerEventData eventData)

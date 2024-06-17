@@ -4,18 +4,39 @@
   "UserBulletSpawner": [
     {
       "bulletID": 1,
-      "bulletCount": 5
+      "bulletCount": 3
     },
     {
       "bulletID": 2,
-      "bulletCount": 1
+      "bulletCount": 0
     },
     {
       "bulletID": 3,
-      "bulletCount": 1
+      "bulletCount": 0
     }
   ],
-  "UserCurBullets": [],
+  "UserCurBullets": [
+    {
+      "bulletID": 1,
+      "curSlotID": 1,
+      "instanceID": -187112
+    },
+    {
+      "bulletID": 2,
+      "curSlotID": 2,
+      "instanceID": -192356
+    },
+    {
+      "bulletID": 3,
+      "curSlotID": 4,
+      "instanceID": -189826
+    },
+    {
+      "bulletID": 1,
+      "curSlotID": 3,
+      "instanceID": -194196
+    }
+  ],
   "UserStandbyBullet": [
     {
       "BulletID": 0,

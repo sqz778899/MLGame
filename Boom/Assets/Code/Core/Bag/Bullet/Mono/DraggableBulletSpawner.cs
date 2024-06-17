@@ -10,11 +10,9 @@ public class DraggableBulletSpawner : BulletBase, IPointerDownHandler,
     public int Count;
     public GameObject childBulletIns;
     public TextMeshProUGUI txtCount;
-    bool IsChangeCount;
 
     void Start()
     {
-        IsChangeCount = false;
         childBulletIns = null;
     }
 
@@ -38,12 +36,12 @@ public class DraggableBulletSpawner : BulletBase, IPointerDownHandler,
         DestroyTooltips();
         if (childBulletIns == null && Count > 0)
         {
-            IsChangeCount = true;
             childBulletIns = BulletManager.Instance.InstanceBullet(_bulletData,BulletInsMode.EditA,transform.parent.position);
             childBulletIns.transform.SetParent(UIManager.Instance.G_Bullet.transform);
             childBulletIns.transform.localScale = Vector3.one;
             DraggableBullet DraBuSC = childBulletIns.GetComponentInChildren<DraggableBullet>();
             DraBuSC.originalPosition = transform.position;
+            SubCount();
         }
     }
     
@@ -60,12 +58,6 @@ public class DraggableBulletSpawner : BulletBase, IPointerDownHandler,
         DestroyTooltips();
         if (Count >= 0 && childBulletIns != null)
         {
-            if (IsChangeCount)
-            {
-                SubCount();
-                IsChangeCount = false;
-            }
-
             DragOneBullet(eventData, childBulletIns.transform);
         }
     }
