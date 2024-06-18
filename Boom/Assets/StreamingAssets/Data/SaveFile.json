@@ -12,29 +12,24 @@
     },
     {
       "bulletID": 3,
-      "bulletCount": 0
+      "bulletCount": 1
     }
   ],
   "UserCurBullets": [
     {
       "bulletID": 1,
       "curSlotID": 1,
-      "instanceID": -187112
-    },
-    {
-      "bulletID": 2,
-      "curSlotID": 2,
-      "instanceID": -192356
-    },
-    {
-      "bulletID": 3,
-      "curSlotID": 4,
-      "instanceID": -189826
+      "instanceID": -44528
     },
     {
       "bulletID": 1,
+      "curSlotID": 2,
+      "instanceID": -46000
+    },
+    {
+      "bulletID": 2,
       "curSlotID": 3,
-      "instanceID": -194196
+      "instanceID": -48270
     }
   ],
   "UserStandbyBullet": [

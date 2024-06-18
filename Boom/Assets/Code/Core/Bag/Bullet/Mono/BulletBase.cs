@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class BulletBase : MonoBehaviour
 {
+    public GameObject Ins;
     public Vector3 forward = new Vector3(1, 0, 0);
     public int InstanceID;
     public BulletData _bulletData;
@@ -42,6 +43,7 @@ public class BulletBase : MonoBehaviour
         }
     }
 
+    //初始化子弹的资产
     public void InitBulletData()
     {
         if (_bulletData == null)
@@ -85,6 +87,16 @@ public class BulletBase : MonoBehaviour
             //
             target.sprite = _bulletData.imgBullet;
         }
+    }
+    
+    //切换美术资产
+    public void ChangeBulletMode(BulletInsMode bulletInsMode)
+    {
+        Transform root = transform.parent;
+        _bulletData.SetDataByID(bulletInsMode);
+        GameObject BulletIns = BulletManager.Instance.InstanceBullet(_bulletData,bulletInsMode,InstanceID);
+        BulletIns.transform.SetParent(root.parent,false);
+        BulletIns.transform.position = root.position;
     }
 
     internal void DisplayTooltips(Vector3 pos)

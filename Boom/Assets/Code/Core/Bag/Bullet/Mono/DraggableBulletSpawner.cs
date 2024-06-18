@@ -50,7 +50,7 @@ public class DraggableBulletSpawner : BulletBase, IPointerDownHandler,
     {
         DestroyTooltips();
         if (Count >= 0 && childBulletIns != null)
-            DropOneBullet(eventData);
+            childBulletIns.GetComponentInChildren<DraggableBullet>().DropOneBullet(eventData);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -86,33 +86,6 @@ public class DraggableBulletSpawner : BulletBase, IPointerDownHandler,
         {
             rectTransform.position = worldPoint;
         }
-    }
-    
-    void DropOneBullet(PointerEventData eventData)
-    {
-        // 在释放鼠标按钮时，我们检查这个位置下是否有一个子弹槽
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(eventData, results);
-        foreach (RaycastResult result in results)
-        {
-            if (result.gameObject.CompareTag("BulletSlotRole"))
-            {
-                BulletSlotRole curSlot = result.gameObject.GetComponent<BulletSlotRole>();
-                if (curSlot.BulletID != 0)
-                    continue;
-                //........ChangeData.................
-                BulletBase curSc = childBulletIns.GetComponentInChildren<BulletBase>();
-                MainRoleManager.Instance.AddBullet(_bulletData.ID,curSlot.SlotID,curSc.InstanceID);
-                MainRoleManager.Instance.SetBulletPos(childBulletIns.transform,
-                    result.gameObject.transform);
-                childBulletIns = null;
-                return;
-            }
-        }
-
-        // 如果这个位置下没有子弹槽，我们就将子弹位置恢复到原来的位置
-        AddCount();
-        DestroyImmediate(childBulletIns);
     }
     #endregion
     

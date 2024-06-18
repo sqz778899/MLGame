@@ -195,14 +195,18 @@ public class MainRoleManager :ScriptableObject
         //..............Instance New Data..................
         foreach (BulletReady each in CurBullets)
         {
-            GameObject BulletIns = BulletManager.Instance.InstanceBullet(each.bulletID,BulletInsMode.EditA);
+            GameObject BulletIns = BulletManager.Instance.InstanceBullet(each.bulletID,BulletInsMode.EditB);
+            each.instanceID = BulletIns.GetComponentInChildren<BulletBase>().InstanceID; //读取存档，要把InstanceID同步
+            
             DraggableBullet curSC = BulletIns.GetComponentInChildren<DraggableBullet>();
             GameObject curSlot = roleSlotRoot.transform.GetChild(each.curSlotID - 1).gameObject;
             BulletSlot curSlotSC = curSlot.GetComponentInChildren<BulletSlot>();
             curSC.curSlotID = each.curSlotID;
             curSlotSC.BulletID = each.bulletID;
             curSlotSC.InstanceID = each.instanceID;
-            SetBulletPos(BulletIns.transform, curSlot.transform);
+            
+            BulletIns.transform.SetParent(UIManager.Instance.G_Bullet.transform,false);
+            BulletIns.transform.position = curSlot.transform.position;
         }
     }
     
@@ -398,6 +402,12 @@ public class MainRoleManager :ScriptableObject
         RefreshSpawnerIns();
         RefreshCurBulletSlots();
     }
+    
+    public void AddBulletOnlyData(int bulletID,int slotID,int instanceID)
+    {
+        RefreshCurBullets(BulletMutMode.Add,bulletID,slotID,instanceID);
+        RefreshSpawner(BulletMutMode.Sub,bulletID);
+    }
 
     public void SubBullet(int bulletID,int instanceID)
     {
@@ -405,13 +415,6 @@ public class MainRoleManager :ScriptableObject
         RefreshSpawner(BulletMutMode.Add,bulletID);
         RefreshSpawnerIns();
         RefreshCurBulletSlots();
-    }
-
-    public void SetBulletPos(Transform bulletTrans,Transform slotTrans)
-    {
-        bulletTrans.SetParent(UIManager.Instance.G_Bullet.transform);
-        bulletTrans.localScale = Vector3.one;
-        bulletTrans.position = slotTrans.position;
     }
     #endregion
 

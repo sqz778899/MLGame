@@ -33,6 +33,7 @@ public class BulletManager :ScriptableObject
     {
         GetIns(bulletInsMode, out GameObject Bullet,pos);
         BulletBase bulletbase = Bullet.GetComponentInChildren<BulletBase>();
+        bulletbase.Ins = Bullet;
         bulletbase._bulletData.ID = ID;
         bulletbase.InstanceID = Bullet.GetInstanceID();
         bulletbase.bulletInsMode = bulletInsMode;
@@ -40,12 +41,28 @@ public class BulletManager :ScriptableObject
         return Bullet;
     }
     
+    //使用真的InstanceID
     public GameObject InstanceBullet(BulletData bulletData,
         BulletInsMode bulletInsMode,Vector3 pos = new Vector3())
     {
         GetIns(bulletInsMode, out GameObject Bullet,pos);
         BulletBase bulletbase = Bullet.GetComponentInChildren<BulletBase>();
+        bulletbase.Ins = Bullet;
         bulletbase.InstanceID = Bullet.GetInstanceID();
+        bulletbase._bulletData = bulletData;
+        bulletbase.bulletInsMode = bulletInsMode;
+        bulletbase.InitBulletData();
+        return Bullet;
+    }
+    
+    //使用假的InstanceID
+    public GameObject InstanceBullet(BulletData bulletData,
+        BulletInsMode bulletInsMode,int InstanceID,Vector3 pos = new Vector3())
+    {
+        GetIns(bulletInsMode, out GameObject Bullet,pos);
+        BulletBase bulletbase = Bullet.GetComponentInChildren<BulletBase>();
+        bulletbase.Ins = Bullet;
+        bulletbase.InstanceID = InstanceID;
         bulletbase._bulletData = bulletData;
         bulletbase.bulletInsMode = bulletInsMode;
         bulletbase.InitBulletData();

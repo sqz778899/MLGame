@@ -103,7 +103,7 @@ public static class PathConfig
             orginName = "P_Bullet_Edit_a_Template.prefab";
             break;
          case BulletInsMode.EditB:
-            orginName = "P_Bullet_Edit_a_Template.prefab";
+            orginName = "P_Bullet_Edit_b_Template.prefab";
             break;
          case BulletInsMode.Roll:
             orginName = "P_Bullet_Roll_Template.prefab";
@@ -134,7 +134,7 @@ public static class PathConfig
             orginName = "T_Bullet_Edit_a_";
             break;
          case BulletInsMode.EditB:
-            orginName = "T_Bullet_Edit_a_";
+            orginName = "T_Bullet_Edit_b_";
             break;
          case BulletInsMode.Roll:
             orginName = "T_Bullet_Edit_a_";

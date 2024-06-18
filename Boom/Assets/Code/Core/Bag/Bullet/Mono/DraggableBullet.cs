@@ -34,7 +34,7 @@ public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandle
         DestroyTooltips();
     }
     
-    void DropOneBullet(PointerEventData eventData)
+    public void DropOneBullet(PointerEventData eventData)
     {
         DestroyTooltips();
         IsToolTipsDisplay = true;
@@ -49,8 +49,7 @@ public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandle
             {
                 BulletSlot curSlotSC = result.gameObject.GetComponent<BulletSlot>();
                 //交换逻辑
-                int curBulletInsID = eventData.pointerDrag.GetComponent<DraggableBullet>().InstanceID;
-                bool isNullDrage = MainRoleManager.Instance.IsNullDrag(curBulletInsID);
+                bool isNullDrage = MainRoleManager.Instance.IsNullDrag(InstanceID);
                 if (curSlotSC.BulletID != 0 || isNullDrage)
                 {
                     MainRoleManager.Instance.BulletInterchangePos(curSlotID, curSlotSC.SlotID);
@@ -58,8 +57,12 @@ public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandle
                 else
                 {
                     //Add逻辑
-                    MainRoleManager.Instance.AddBullet(_bulletData.ID,curSlotSC.SlotID,InstanceID);
-                    MainRoleManager.Instance.SetBulletPos(transform.parent, result.gameObject.transform);
+                    MainRoleManager.Instance.AddBulletOnlyData(_bulletData.ID,curSlotSC.SlotID,InstanceID);
+                    Ins.transform.SetParent(UIManager.Instance.G_Bullet.transform,false);
+                    Ins.transform.position = curSlotSC.transform.position;
+                    GameObject tmp = Ins;
+                    ChangeBulletMode(BulletInsMode.EditB); //这一步会改变INS
+                    DestroyImmediate(tmp);
                 }
                 NonHappen = false;
             }
