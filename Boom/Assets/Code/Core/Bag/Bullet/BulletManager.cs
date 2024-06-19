@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class BulletManager :ScriptableObject
 {
@@ -22,7 +21,7 @@ public class BulletManager :ScriptableObject
     #region InstanceBullet
     void GetIns(BulletInsMode bulletInsMode,out GameObject Bullet,Vector3 pos = new Vector3())
     {
-        Bullet = GameObject.Instantiate(
+        Bullet = Instantiate(
             ResManager.instance.GetAssetCache<GameObject>
                 (PathConfig.GetBulletTemplate(bulletInsMode)),pos,
             quaternion.identity);

@@ -34,7 +34,10 @@ public class UIManager : ScriptableObject
     public GameObject G_Setting;
     public GameObject G_Help;
     //............GroupTitle.........
+    public GameObject TitleRoot;
     public GameObject TitleGold;
+    public GameObject G_CurBulletIcon; //侧边栏当前子弹图标
+    public GameObject G_StandbyIcon; //侧边栏待机图标
     
     #region 1.StartGame
 
@@ -55,6 +58,7 @@ public class UIManager : ScriptableObject
     public void InitCharacterScene()
     {
         InitComon();
+        InitTileRoot();
         if (SlotRoot == null)
             SlotRoot = GameObject.Find("SlotRoot");
         if (BulletRoot == null)
@@ -106,6 +110,7 @@ public class UIManager : ScriptableObject
     public void InitSelectLevel()
     {
         InitComon();
+        InitTileRoot();
         GroupSelectLevel = GameObject.Find("GroupSelectLevel");
         ShopRoot = GameObject.Find("ShopRoot");
         REventRoot = GameObject.Find("REventRoot");
@@ -154,8 +159,16 @@ public class UIManager : ScriptableObject
         
         if (G_Help == null)
             G_Help = GameObject.Find("GroupHelp");
-
-        if (TitleGold == null)
-            TitleGold = GameObject.Find("ImgGold");
     }
+
+    #region MiscInit
+    void InitTileRoot()
+    {
+        TitleRoot = GameObject.Find("TitleRoot");
+        TitleRootMono titleRootMono = TitleRoot.GetComponent<TitleRootMono>();
+        TitleGold = titleRootMono.TitleGold;
+        G_CurBulletIcon = titleRootMono.G_CurBulletIcon;
+        G_StandbyIcon = titleRootMono.G_StandbyIcon;
+    }
+    #endregion
 }

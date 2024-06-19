@@ -100,10 +100,10 @@ public static class PathConfig
             orginName = "P_Bullet_Spawner_Template.prefab";
             break;
          case BulletInsMode.EditA:
-            orginName = "P_Bullet_Edit_a_Template.prefab";
+            orginName = "P_Bullet_Edit_Template.prefab";
             break;
          case BulletInsMode.EditB:
-            orginName = "P_Bullet_Edit_b_Template.prefab";
+            orginName = "P_Bullet_Edit_Template.prefab";
             break;
          case BulletInsMode.Roll:
             orginName = "P_Bullet_Roll_Template.prefab";
@@ -145,6 +145,10 @@ public static class PathConfig
          case BulletInsMode.Thumbnail:
             orginName = "T_Bullet_Edit_a_";
             break;
+         case BulletInsMode.Icon:
+            orginName = "T_Bullet_Icon_";
+            break;
+         //T_Bullet_Icon_01
       }
       orginName = orginName + ID.ToString("D2") + ".png";
       string curImagePath = BulletImageDir + orginName;

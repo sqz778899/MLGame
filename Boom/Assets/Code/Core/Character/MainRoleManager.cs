@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class MainRoleManager :ScriptableObject
 {
@@ -40,7 +41,6 @@ public class MainRoleManager :ScriptableObject
         
         WinOrFailState = WinOrFail.InLevel;
     }
-    
 
     #region 纯数据层操作
     public void RefreshSpawner(BulletMutMode mode,int BulletID)
@@ -62,7 +62,6 @@ public class MainRoleManager :ScriptableObject
                 }
                 break;
         }
-        //CurBulletSpawners
     }
 
     public void RefreshCurBullets(BulletMutMode mode, int BulletID,int SlotID = -1,int InstanceID = -1,
@@ -199,7 +198,8 @@ public class MainRoleManager :ScriptableObject
             each.instanceID = BulletIns.GetComponentInChildren<BulletBase>().InstanceID; //读取存档，要把InstanceID同步
             
             DraggableBullet curSC = BulletIns.GetComponentInChildren<DraggableBullet>();
-            GameObject curSlot = roleSlotRoot.transform.GetChild(each.curSlotID - 1).gameObject;
+            //...................SetSlot.......................
+            GameObject curSlot = roleSlotRoot.transform.GetChild(each.curSlotID - 1).gameObject;//找到对应的Slot
             BulletSlot curSlotSC = curSlot.GetComponentInChildren<BulletSlot>();
             curSC.curSlotID = each.curSlotID;
             curSlotSC.BulletID = each.bulletID;
@@ -207,6 +207,29 @@ public class MainRoleManager :ScriptableObject
             
             BulletIns.transform.SetParent(UIManager.Instance.G_Bullet.transform,false);
             BulletIns.transform.position = curSlot.transform.position;
+        }
+
+        SyncBulletIcon();
+    }
+
+    void SyncBulletIcon()
+    {
+        GameObject bulletIconRoot = UIManager.Instance.G_CurBulletIcon;
+        for (int i = 0; i < 5; i++)
+        {
+            int curSlotID = i+1;
+            BulletReady curBulletReady = null;
+            foreach (var each in CurBullets)
+            {
+                if (each.curSlotID == i)
+                    curBulletReady = each;
+            }
+            GameObject curIconSlot = bulletIconRoot.transform.GetChild(i - 1).gameObject;//找到对应的IconSlot
+            if (curBulletReady == null)
+                curIconSlot.transform.GetChild(0).GetComponent<Image>().sprite = null;
+            else
+                curIconSlot.transform.GetChild(0).GetComponent<Image>().sprite = ResManager.instance.
+                    GetAssetCache<Sprite>(PathConfig.GetBulletImagePath(curBulletReady.bulletID, BulletInsMode.Icon));
         }
     }
     
@@ -248,6 +271,8 @@ public class MainRoleManager :ScriptableObject
                     curSC.curSlotID = each.curSlotID;
             }
         }
+        //4)刷新Icon
+        SyncBulletIcon();
     }
 
     /// <summary>
@@ -383,17 +408,23 @@ public class MainRoleManager :ScriptableObject
 
     #region 外部可以调用的操作组封装
 
-    public bool IsNullDrag(int instanceID)
+    public bool InstanceIDIsInCurBullet(int instanceID)
     {
-        bool isNullDrag = false;
+        bool instanceIDIsInCurBullet = false;
         //如果这个Instance有了，证明是在RoleSlot内空拖行为，删掉原来的数据再更新
         for (int i = CurBullets.Count - 1; i >= 0; i--)
         {
             BulletReady preData = CurBullets[i];
             if (preData.instanceID == instanceID)
-                isNullDrag = true;
+                instanceIDIsInCurBullet = true;
         }
-        return isNullDrag;
+        return instanceIDIsInCurBullet;
+    }
+
+    public void TmpHongSpawner(int bulletID)
+    {
+        RefreshSpawner(BulletMutMode.Sub,bulletID);
+        RefreshSpawnerIns();
     }
     public void AddBullet(int bulletID,int slotID,int instanceID)
     {
@@ -406,7 +437,7 @@ public class MainRoleManager :ScriptableObject
     public void AddBulletOnlyData(int bulletID,int slotID,int instanceID)
     {
         RefreshCurBullets(BulletMutMode.Add,bulletID,slotID,instanceID);
-        RefreshSpawner(BulletMutMode.Sub,bulletID);
+       // RefreshSpawner(BulletMutMode.Sub,bulletID);
     }
 
     public void SubBullet(int bulletID,int instanceID)

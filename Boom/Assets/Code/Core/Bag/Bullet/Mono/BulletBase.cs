@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class BulletBase : MonoBehaviour
@@ -10,7 +8,9 @@ public class BulletBase : MonoBehaviour
     public int InstanceID;
     public BulletData _bulletData;
     public BulletInsMode bulletInsMode;
-    public GameObject GroupStar;
+    public GameObject Edit_a;
+    public GameObject Edit_b;
+    GameObject GroupStar;
     internal GameObject TooltipsGO;
     
     public virtual void Update()
@@ -43,19 +43,20 @@ public class BulletBase : MonoBehaviour
         }
     }
 
-    //初始化子弹的资产
-    public void InitBulletData()
+    void SetInfo(GameObject curRoot)
     {
-        if (_bulletData == null)
-            _bulletData = new BulletData(1);
-        
-        _bulletData.SetDataByID(bulletInsMode);
-        
-        //找到目标挂载子弹贴图的地方。
+        //...........GroupStar...................
+        GroupStar = null;
+        for (int i = 0; i < curRoot.transform.childCount; i++)
+        {
+            if (curRoot.transform.GetChild(i).name == "GroupStar")
+                GroupStar = curRoot.transform.GetChild(i).gameObject;
+        }
+        //...........GroupStar...................
         if (bulletInsMode == BulletInsMode.Inner)
         {
             SpriteRenderer targetSprite = null;
-            SpriteRenderer[] allRenderers = GetComponentsInChildren<SpriteRenderer>();
+            SpriteRenderer[] allRenderers = curRoot.GetComponentsInChildren<SpriteRenderer>();
             foreach (var each in allRenderers)
             {
                 if (each.gameObject.name == "imgBullet")
@@ -72,8 +73,8 @@ public class BulletBase : MonoBehaviour
         }
         else
         {
-            Image[] allImage = GetComponentsInChildren<Image>();
             Image target = null;
+            Image[] allImage = GetComponentsInChildren<Image>();
             foreach (var each in allImage)
             {
                 if (each.gameObject.name == "imgBullet")
@@ -88,15 +89,39 @@ public class BulletBase : MonoBehaviour
             target.sprite = _bulletData.imgBullet;
         }
     }
-    
-    //切换美术资产
-    public void ChangeBulletMode(BulletInsMode bulletInsMode)
+
+    //初始化子弹的资产
+    public void InitBulletData()
     {
-        Transform root = transform.parent;
+        if (_bulletData == null)
+            _bulletData = new BulletData(1);
         _bulletData.SetDataByID(bulletInsMode);
-        GameObject BulletIns = BulletManager.Instance.InstanceBullet(_bulletData,bulletInsMode,InstanceID);
-        BulletIns.transform.SetParent(root.parent,false);
-        BulletIns.transform.position = root.position;
+        
+        switch (bulletInsMode)
+        {
+            case BulletInsMode.Inner:
+                SetInfo(this.gameObject);
+                break;
+            case BulletInsMode.Spawner:
+                SetInfo(this.gameObject);
+                break;
+            case BulletInsMode.Roll:
+                SetInfo(this.gameObject);
+                break;
+            case BulletInsMode.EditA:
+                Edit_a.SetActive(true);
+                Edit_b.SetActive(false);
+                SetInfo(Edit_a);
+                break;
+            case BulletInsMode.EditB:
+                Edit_a.SetActive(false);
+                Edit_b.SetActive(true);
+                SetInfo(Edit_b);
+                break;
+            default:
+                GroupStar = null;
+                break;
+        }
     }
 
     internal void DisplayTooltips(Vector3 pos)

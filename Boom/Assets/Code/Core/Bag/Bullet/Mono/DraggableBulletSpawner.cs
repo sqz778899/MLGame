@@ -21,16 +21,6 @@ public class DraggableBulletSpawner : BulletBase, IPointerDownHandler,
         base.Update();
         txtCount.text = "X" + Count;
     }
-    void AddCount()
-    {
-        Count++;
-    }
-
-    void SubCount()
-    {
-        Count--;
-    }
-
     public void OnPointerDown(PointerEventData eventData)
     {
         DestroyTooltips();
@@ -41,7 +31,7 @@ public class DraggableBulletSpawner : BulletBase, IPointerDownHandler,
             childBulletIns.transform.localScale = Vector3.one;
             DraggableBullet DraBuSC = childBulletIns.GetComponentInChildren<DraggableBullet>();
             DraBuSC.originalPosition = transform.position;
-            SubCount();
+            MainRoleManager.Instance.TmpHongSpawner(_bulletData.ID);
         }
     }
     
@@ -50,7 +40,10 @@ public class DraggableBulletSpawner : BulletBase, IPointerDownHandler,
     {
         DestroyTooltips();
         if (Count >= 0 && childBulletIns != null)
+        {
             childBulletIns.GetComponentInChildren<DraggableBullet>().DropOneBullet(eventData);
+            childBulletIns = null;
+        }
     }
 
     public void OnDrag(PointerEventData eventData)

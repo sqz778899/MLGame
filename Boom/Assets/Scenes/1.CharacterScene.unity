@@ -5599,7 +5599,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 312697177564136084, guid: 6afe8313f6f491e46a229769a95c362b, type: 3}
       propertyPath: m_Name
-      value: GroupTitle
+      value: TitleRoot
       objectReference: {fileID: 0}
     - target: {fileID: 1958779161350697352, guid: 6afe8313f6f491e46a229769a95c362b, type: 3}
       propertyPath: m_Pivot.x
