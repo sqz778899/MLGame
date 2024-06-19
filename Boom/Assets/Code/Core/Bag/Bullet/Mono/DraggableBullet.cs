@@ -105,6 +105,7 @@ public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandle
                 //寻找母体
                 ReturnToSpawner();
                 NonHappen = false;
+                break;
             }
         }
 

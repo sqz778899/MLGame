@@ -12,7 +12,7 @@ public class MapLogic : MonoBehaviour
     public Transform OtherNodeRoot;
     
     List<MapNodeBase> _allNodes;
-    List<MapNodeBase> _mainNodes;
+    List<MainNode> _mainNodes;
     List<MapNodeBase> _otherNodes;
     
 
@@ -29,7 +29,7 @@ public class MapLogic : MonoBehaviour
         curMapIns.transform.SetSiblingIndex(0);*/
         
         _allNodes = MapGroup.GetComponentsInChildren<MapNodeBase>().ToList();
-        _mainNodes = MainNodeRoot.GetComponentsInChildren<MapNodeBase>().ToList();
+        _mainNodes = MapGroup.GetComponentsInChildren<MainNode>().ToList();
         _otherNodes = OtherNodeRoot.GetComponentsInChildren<MapNodeBase>().ToList();
         
         RefreshMapNodeState();

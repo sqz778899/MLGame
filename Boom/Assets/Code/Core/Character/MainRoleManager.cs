@@ -217,19 +217,23 @@ public class MainRoleManager :ScriptableObject
         GameObject bulletIconRoot = UIManager.Instance.G_CurBulletIcon;
         for (int i = 0; i < 5; i++)
         {
-            int curSlotID = i+1;
+            int curSlotID = i + 1;
             BulletReady curBulletReady = null;
             foreach (var each in CurBullets)
             {
-                if (each.curSlotID == i)
+                if (each.curSlotID == curSlotID)
                     curBulletReady = each;
             }
-            GameObject curIconSlot = bulletIconRoot.transform.GetChild(i - 1).gameObject;//找到对应的IconSlot
+            GameObject curIconSlot = bulletIconRoot.transform.GetChild(curSlotID).gameObject;//找到对应的IconSlot
+            Image curImg = curIconSlot.transform.GetChild(0).GetComponent<Image>();
             if (curBulletReady == null)
-                curIconSlot.transform.GetChild(0).GetComponent<Image>().sprite = null;
+                curImg.color = Color.clear;
             else
-                curIconSlot.transform.GetChild(0).GetComponent<Image>().sprite = ResManager.instance.
-                    GetAssetCache<Sprite>(PathConfig.GetBulletImagePath(curBulletReady.bulletID, BulletInsMode.Icon));
+            {
+                curImg.color = Color.white;
+                curImg.sprite = ResManager.instance.GetAssetCache<
+                    Sprite>(PathConfig.GetBulletImagePath(curBulletReady.bulletID, BulletInsMode.Icon));
+            }
         }
     }
     
@@ -437,6 +441,7 @@ public class MainRoleManager :ScriptableObject
     public void AddBulletOnlyData(int bulletID,int slotID,int instanceID)
     {
         RefreshCurBullets(BulletMutMode.Add,bulletID,slotID,instanceID);
+        RefreshCurBulletSlots();
        // RefreshSpawner(BulletMutMode.Sub,bulletID);
     }
 
