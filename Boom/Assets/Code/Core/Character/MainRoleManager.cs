@@ -212,7 +212,7 @@ public class MainRoleManager :ScriptableObject
         SyncBulletIcon();
     }
 
-    void SyncBulletIcon()
+    public void SyncBulletIcon()
     {
         GameObject bulletIconRoot = UIManager.Instance.G_CurBulletIcon;
         for (int i = 0; i < 5; i++)

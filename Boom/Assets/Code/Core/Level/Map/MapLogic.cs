@@ -24,7 +24,6 @@ public class MapLogic : MonoBehaviour
             ResManager.instance.GetAssetCache<GameObject>(PathConfig.LevelAssetDir + curMapName),
             MapGroup);
         curMapIns.transform.SetSiblingIndex(0);*/
-        
         _allNodes = MapGroup.GetComponentsInChildren<MapNodeBase>().ToList();
         _mainNodes = new List<MainNode>();
         _otherNodes = new List<MapNodeBase>();
@@ -46,6 +45,7 @@ public class MapLogic : MonoBehaviour
         //.............Local...................
         UIManager.Instance.InitSelectLevel();
         MainRoleManager.Instance.InstanceStandbyBullets();
+        MainRoleManager.Instance.SyncBulletIcon();
     }
 
     void Update()
@@ -97,7 +97,7 @@ public class MapLogic : MonoBehaviour
         {
             int nextLevelID = MSceneManager.Instance.CurMapSate.LevelID + 1;
             MapNodeBase nextNodeBase = null;
-            foreach (MainNode eachNode in _otherNodes)
+            foreach (MainNode eachNode in _mainNodes)
             {
                 if (eachNode.LevelID == nextLevelID)
                     nextNodeBase = eachNode;

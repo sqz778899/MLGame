@@ -5,6 +5,7 @@ using UnityEngine.Serialization;
 public class Shop:GUIBase
 {
     public GameObject RollInsRoot;
+    public GameObject ShopSlotRoot;
     public ShopNode CurShopNode;
     #region Design
     //.........temp
@@ -50,24 +51,19 @@ public class Shop:GUIBase
                 curRollIns = ResManager.instance.IntanceAsset(PathConfig.RollScorePB);
             else
                 curRollIns = BulletManager.Instance.InstanceBullet(curProb.ID,BulletInsMode.Roll);
-            SetRollInsAttri(curRollIns, i);
+
+            Transform curPivot = ShopSlotRoot.transform.GetChild(i);
+            curRollIns.transform.SetParent(RollInsRoot.transform,false);
+            curRollIns.transform.position = curPivot.position;
+            RollBullet curSC = curRollIns.GetComponentInChildren<RollBullet>();
+            int curScore = Random.Range(ScoreRange.x, ScoreRange.y+1);
+            curSC.Score = curScore;
+            curSC.Cost = Cost;
+            
+            //SetRollInsAttri(curRollIns, i);
         }
         
         TrunkManager.Instance.SaveFile();
-    }
-    
-    void SetRollInsAttri(GameObject curRollIns,int step)
-    {
-        //..................POS............................
-        curRollIns.transform.SetParent(RollInsRoot.transform,false);
-        Vector3 pos = RollLayout.InsOriginPos;
-        pos = new Vector3(pos.x + RollLayout.xOffset * step, pos.y, pos.z);
-        curRollIns.GetComponent<RectTransform>().anchoredPosition3D = pos;
-        //...............Attri.............................................
-        RollBullet curSC = curRollIns.GetComponentInChildren<RollBullet>();
-        int curScore = Random.Range(ScoreRange.x, ScoreRange.y+1);
-        curSC.Score = curScore;
-        curSC.Cost = Cost;
     }
     #endregion
 

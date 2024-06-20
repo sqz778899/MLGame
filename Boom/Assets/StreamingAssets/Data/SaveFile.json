@@ -1,10 +1,10 @@
 {
-  "Score": 0,
-  "Gold": 9999980,
+  "Score": 600,
+  "Gold": 9999450,
   "UserBulletSpawner": [
     {
       "bulletID": 1,
-      "bulletCount": 4
+      "bulletCount": 3
     },
     {
       "bulletID": 2,
@@ -19,17 +19,22 @@
     {
       "bulletID": 1,
       "curSlotID": 1,
-      "instanceID": -117220
+      "instanceID": -30662
+    },
+    {
+      "bulletID": 1,
+      "curSlotID": 2,
+      "instanceID": -30752
     },
     {
       "bulletID": 2,
-      "curSlotID": 3,
-      "instanceID": -117310
+      "curSlotID": 4,
+      "instanceID": -30842
     },
     {
       "bulletID": 3,
-      "curSlotID": 2,
-      "instanceID": -117400
+      "curSlotID": 3,
+      "instanceID": -30932
     }
   ],
   "UserStandbyBullet": [
@@ -65,18 +70,22 @@
     {
       "CurMapID": 1,
       "MapID": 1,
-      "LevelID": 1,
-      "IsFinishedLevels": []
+      "LevelID": 2,
+      "IsFinishedLevels": [
+        1,
+        1,
+        2
+      ]
     }
   ],
   "UserProbabilitys": [
     {
       "ID": 0,
-      "Probability": 24.3243256
+      "Probability": 0.9988898
     },
     {
       "ID": 1,
-      "Probability": 100.0
+      "Probability": 99.99999
     }
   ]
 }

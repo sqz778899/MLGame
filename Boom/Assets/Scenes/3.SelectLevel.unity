@@ -504,6 +504,10 @@ PrefabInstance:
       propertyPath: State
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4061894451546930495, guid: efafee50b94d59842a2d9c481c2c1afc, type: 3}
+      propertyPath: LevelID
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4336476328093376794, guid: efafee50b94d59842a2d9c481c2c1afc, type: 3}
       propertyPath: State
       value: 2
@@ -1942,8 +1946,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MapGroup: {fileID: 59386579}
-  MainNodeRoot: {fileID: 7509449091262505111}
-  OtherNodeRoot: {fileID: 0}
 --- !u!4 &1831187682
 Transform:
   m_ObjectHideFlags: 0
@@ -2238,7 +2240,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 312697177564136084, guid: 6afe8313f6f491e46a229769a95c362b, type: 3}
       propertyPath: m_Name
-      value: GroupTitle
+      value: TitleRoot
       objectReference: {fileID: 0}
     - target: {fileID: 1958779161350697352, guid: 6afe8313f6f491e46a229769a95c362b, type: 3}
       propertyPath: m_Pivot.x
@@ -2380,6 +2382,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4061894451546930495, guid: efafee50b94d59842a2d9c481c2c1afc, type: 3}
       propertyPath: State
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4061894451546930495, guid: efafee50b94d59842a2d9c481c2c1afc, type: 3}
+      propertyPath: LevelID
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4336476328093376794, guid: efafee50b94d59842a2d9c481c2c1afc, type: 3}
