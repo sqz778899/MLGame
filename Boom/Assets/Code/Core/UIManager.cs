@@ -102,7 +102,6 @@ public class UIManager : ScriptableObject
     #endregion
 
     #region 3.MiniMap
-    public GameObject GroupSelectLevel;
     public GameObject ShopRoot;
     public GameObject REventRoot;
     public GameObject RewardRoot;
@@ -111,19 +110,9 @@ public class UIManager : ScriptableObject
     {
         InitComon();
         InitTileRoot();
-        GroupSelectLevel = GameObject.Find("GroupSelectLevel");
         ShopRoot = GameObject.Find("ShopRoot");
         REventRoot = GameObject.Find("REventRoot");
         RewardRoot = GameObject.Find("RewardRoot");
-        
-        if (GroupSelectLevel == null || ShopRoot == null)
-        {
-            Debug.LogError("Erro: InitSelectLevel");
-            return;
-        }
-        
-        G_SlotStandby = GroupSelectLevel.transform.GetChild(0).gameObject;
-        G_BulletStandby = GroupSelectLevel.transform.GetChild(1).gameObject;
     }
     #endregion
 

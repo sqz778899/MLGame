@@ -1,6 +1,6 @@
 {
   "Score": 0,
-  "Gold": 10000000,
+  "Gold": 9999980,
   "UserBulletSpawner": [
     {
       "bulletID": 1,
@@ -72,11 +72,11 @@
   "UserProbabilitys": [
     {
       "ID": 0,
-      "Probability": 0.9
+      "Probability": 24.3243256
     },
     {
       "ID": 1,
-      "Probability": 0.1
+      "Probability": 100.0
     }
   ]
 }

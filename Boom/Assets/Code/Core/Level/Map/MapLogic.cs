@@ -8,13 +8,10 @@ using UnityEngine;
 public class MapLogic : MonoBehaviour
 {
     public Transform MapGroup;
-    public Transform MainNodeRoot;
-    public Transform OtherNodeRoot;
     
     List<MapNodeBase> _allNodes;
     List<MainNode> _mainNodes;
     List<MapNodeBase> _otherNodes;
-    
 
     Vector4[] _UnLockNodeCenters = new Vector4[30];
     float[] _UnLockNodeRadiuss = new float[30];
@@ -29,8 +26,19 @@ public class MapLogic : MonoBehaviour
         curMapIns.transform.SetSiblingIndex(0);*/
         
         _allNodes = MapGroup.GetComponentsInChildren<MapNodeBase>().ToList();
-        _mainNodes = MapGroup.GetComponentsInChildren<MainNode>().ToList();
-        _otherNodes = OtherNodeRoot.GetComponentsInChildren<MapNodeBase>().ToList();
+        _mainNodes = new List<MainNode>();
+        _otherNodes = new List<MapNodeBase>();
+        foreach (var each in _allNodes)
+        {
+            if (each.Type == MapNodeType.Main)
+            {
+                _mainNodes.Add(each as MainNode);
+            }
+            else
+            {
+                _otherNodes.Add(each);
+            }
+        }
         
         RefreshMapNodeState();
         //.............Global..................
