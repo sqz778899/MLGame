@@ -1,0 +1,26 @@
+[
+  {
+    "ID": 1,
+    "Title": "Clay reinforcement",
+    "EDescription": "Increased probability of clay.",
+    "AddPRDict": {
+      "1": 0.05
+    },
+    "SubPRDict": {
+      "0": 0.0
+    }
+  },
+  {
+    "ID": 2,
+    "Title": "Three phase force",
+    "EDescription": "Increase the probability of clay, ice and fire.",
+    "AddPRDict": {
+      "1": 0.05,
+      "2": 0.05,
+      "3": 0.05
+    },
+    "SubPRDict": {
+      "0": 0.0
+    }
+  }
+]

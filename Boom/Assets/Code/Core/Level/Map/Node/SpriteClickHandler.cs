@@ -23,6 +23,9 @@ public class SpriteClickHandler : MonoBehaviour
 
         foreach (RaycastHit hit in hits)
         {
+            if (hit.transform.tag == "MapEvent")
+                break;
+            
             if (hit.transform == this.transform && hit.transform.tag == "SButton")
                 isClick = true;
         }

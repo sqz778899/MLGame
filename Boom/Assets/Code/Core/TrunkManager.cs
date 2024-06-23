@@ -24,6 +24,7 @@ public class TrunkManager: ScriptableObject
     List<BuffDataJson> _buffDesignJsons;
     List<LevelBuff> _levelBuffDesignJsons;
     List<RoleBase> _roleDesignJsons;
+    List<RollPREvent> _prDesignJsons;
     public List<BulletDataJson> BulletDesignJsons
     {
         get
@@ -64,6 +65,16 @@ public class TrunkManager: ScriptableObject
         }
     }
     
+    public List<RollPREvent> PRDesignJsons
+    {
+        get
+        {
+            _prDesignJsons = LoadPRDesignData();
+            return _prDesignJsons;
+        }
+    }
+
+    
     public List<BulletDataJson> LoadBulletData()
     {
         string BulletDesignString = File.ReadAllText(PathConfig.BulletDesignJson);
@@ -91,16 +102,18 @@ public class TrunkManager: ScriptableObject
         List<RoleBase> RoleDesignJsons = JsonConvert.DeserializeObject<List<RoleBase>>(RoleDesignStr);
         return RoleDesignJsons;
     }
+    
+    public List<RollPREvent> LoadPRDesignData()
+    {
+        string PRDesignStr = File.ReadAllText(PathConfig.PREventDesignJson);
+        List<RollPREvent> PRDesignJsons = JsonConvert.DeserializeObject<List<RollPREvent>>(PRDesignStr);
+        return PRDesignJsons;
+    }
     #endregion
     
     public SaveFileJson _saveFile = new SaveFileJson();
     public UserConfig _userConfig = new UserConfig();
 
-    public List<RollProbability> GetRollProbability()
-    {
-        return _saveFile.UserProbabilitys;
-    }
-    
     //RandomEvent
     public List<int> RandomEvents = new List<int>();
 
@@ -122,6 +135,7 @@ public class TrunkManager: ScriptableObject
         MainRoleManager.Instance.CurBulletSpawners = _saveFile.UserBulletSpawner;
         MainRoleManager.Instance.CurBullets = _saveFile.UserCurBullets;
         MainRoleManager.Instance.CurStandbyBullets = _saveFile.UserStandbyBullet;
+        MainRoleManager.Instance.CurRollPREveIDs = _saveFile.CurRollPREveIDs;
         #endregion
         
         #region Map
@@ -223,20 +237,11 @@ public class TrunkManager: ScriptableObject
         curMapSate.Add(curMap);
         _saveFile.UserMapSate = curMapSate;
         #endregion
-        
-        #region RollProbability
-        List<RollProbability> userProbabilitys = new List<RollProbability>();
-        RollProbability ScorePro = new RollProbability();
-        ScorePro.ID = 0;
-        ScorePro.Probability = 0.9f;
-        RollProbability Bullet01Pro = new RollProbability();
-        Bullet01Pro.ID = 1;
-        Bullet01Pro.Probability = 0.1f;
-        userProbabilitys.Add(ScorePro);
-        userProbabilitys.Add(Bullet01Pro);
-        _saveFile.UserProbabilitys = userProbabilitys;
+
+        #region 随机事件概率
+        _saveFile.CurRollPREveIDs = new List<int>();
         #endregion
-        
+
         string content01 = JsonConvert.SerializeObject(_saveFile,(Formatting) Formatting.Indented);
         File.WriteAllText(PathConfig.SaveFileJson, content01);
     }

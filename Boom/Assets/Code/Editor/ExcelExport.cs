@@ -6,6 +6,7 @@ using Excel;
 using System.Data;
 using System.IO;
 using Newtonsoft.Json;
+using Unity.VisualScripting;
 
 public class ExcelExport
 {
@@ -17,6 +18,8 @@ public class ExcelExport
         ExportLevelBuffDesign();
         ExportMuliLa();
         ExportRoleDesign();
+        ExportPREventDesign();
+        //PREventDesignJson
     }
 
     #region 游戏设计
@@ -83,7 +86,7 @@ public class ExcelExport
         for (int i = 1; i < curTable.Rows.Count; i++)
         {
             LevelBuff curLB = new LevelBuff();
-            List<RollProbability> curRProb = new List<RollProbability>();
+            List<RollPR> curRProb = new List<RollPR>();
             if (curTable.Rows[i][1].ToString() == "") continue;
             curLB.LevelID = int.Parse(curTable.Rows[i][0].ToString());
             
@@ -104,7 +107,7 @@ public class ExcelExport
             List<float> normalizeProb = RollManager.Instance.NormalizeProb(orProb);
             for (int j = 0; j < sBuffIDTemp.Length; j++)
             {
-                RollProbability curRP = new RollProbability();
+                RollPR curRP = new RollPR();
                 curRP.ID = int.Parse(sBuffIDTemp[j]);
                 curRP.Probability = normalizeProb[j];
                 curRProb.Add(curRP);
@@ -143,6 +146,42 @@ public class ExcelExport
         
         string content = JsonConvert.SerializeObject(curRoleData,(Formatting) Formatting.Indented);
         File.WriteAllText(PathConfig.RoleDesignJson, content);
+    }
+    
+    public void ExportPREventDesign()
+    {
+        DataSet curTables = GetDataSet();
+        List<RollPREvent> curPREvents = new List<RollPREvent>();
+
+        DataTable curTable = curTables.Tables[4];
+        for (int i = 1; i < curTable.Rows.Count; i++)
+        {
+            RollPREvent curRollPREvent = new RollPREvent();
+            if (curTable.Rows[i][0].ToString() == "") continue;
+            
+            curRollPREvent.ID = int.Parse(curTable.Rows[i][0].ToString());
+            //...................Add........................
+            Dictionary<int, float> AddPRDict = new Dictionary<int, float>();
+            List<float> curAddPR = ExcellUtility.GetListFloat(curTable.Rows[i][1].ToString());
+            List<int> curAddPRBullet = ExcellUtility.GetListInt(curTable.Rows[i][2].ToString());
+            for (int j = 0; j < curAddPR.Count; j++)
+                AddPRDict[curAddPRBullet[j]] = curAddPR[j];
+            curRollPREvent.AddPRDict = AddPRDict;
+            //...................Sub........................
+            Dictionary<int, float> SubPRDict = new Dictionary<int, float>();
+            List<float> curSubPR = ExcellUtility.GetListFloat(curTable.Rows[i][3].ToString());
+            List<int> curSubPRBullet = ExcellUtility.GetListInt(curTable.Rows[i][4].ToString());
+            for (int j = 0; j < curSubPR.Count; j++)
+                SubPRDict[curSubPRBullet[j]] = curSubPR[j];
+            curRollPREvent.SubPRDict = SubPRDict;
+            //...................Title........................
+            curRollPREvent.Title = curTable.Rows[i][5].ToString();
+            curRollPREvent.EDescription = curTable.Rows[i][6].ToString();
+            curPREvents.Add(curRollPREvent);
+        }
+        
+        string content = JsonConvert.SerializeObject(curPREvents,(Formatting) Formatting.Indented);
+        File.WriteAllText(PathConfig.PREventDesignJson, content);
     }
     
     DataSet GetDataSet()

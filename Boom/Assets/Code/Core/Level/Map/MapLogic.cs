@@ -44,6 +44,7 @@ public class MapLogic : MonoBehaviour
         TrunkManager.Instance.LoadSaveFile();
         //.............Local...................
         UIManager.Instance.InitSelectLevel();
+        MainRoleManager.Instance.InitContainer();
         MainRoleManager.Instance.InstanceStandbyBullets();
         MainRoleManager.Instance.SyncBulletIcon();
     }

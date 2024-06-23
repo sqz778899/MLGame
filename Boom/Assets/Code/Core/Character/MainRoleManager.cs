@@ -31,13 +31,98 @@ public class MainRoleManager :ScriptableObject
     public List<StandbyData> CurStandbyBullets = new List<StandbyData>();
     public List<SupremeCharm> SupremeCharms = new List<SupremeCharm>();
 
+    #region 决定商店抽卡概率的部分
+    public List<RollPR> CurRollPR;
+    public List<int> CurRollPREveIDs = new List<int>();
+    
+    List<RollPR> _orginalRollPR;
+    public List<RollPR> OrginalRollPR
+    {
+        get
+        {
+            _orginalRollPR = new List<RollPR>();
+            RollPR ScorePro = new RollPR();
+            ScorePro.ID = 0;
+            ScorePro.Probability = 0.99f;
+            RollPR Bullet01Pro = new RollPR();
+            Bullet01Pro.ID = 1;
+            Bullet01Pro.Probability = 0.01f;
+            _orginalRollPR.Add(ScorePro);
+            _orginalRollPR.Add(Bullet01Pro);
+            return _orginalRollPR;
+        }
+    }
+
+    public void InitCurRollPR()
+    {
+        CurRollPR = new List<RollPR>(OrginalRollPR);
+        RollPR rubbish = CurRollPR[0];
+        List<RollPREvent> PRDesignJsons = TrunkManager.Instance.PRDesignJsons; //策划数据
+        //遍历所有当前事件，把概率都加入到当前概率中。
+        for (int i = 0; i < CurRollPREveIDs.Count; i++)
+        {
+            int curEID = CurRollPREveIDs[i];
+            RollPREvent curPRE = ComFunc.GetSingle(PRDesignJsons, curEID);
+            
+            foreach (var each in curPRE.AddPRDict)
+            {
+                bool IsFind = false;
+                foreach (var eachPR in CurRollPR)
+                {
+                    if (eachPR.ID == each.Key)
+                    {
+                        eachPR.Probability += each.Value;
+                        IsFind = true;
+                        break;
+                    }
+                }
+                if (!IsFind)
+                {
+                    int tmp = int.Parse(each.Key.ToString());
+                    CurRollPR.Add(new RollPR{ID = tmp,Probability = each.Value});
+                }
+                rubbish.Probability -= each.Value;
+            }
+            
+            foreach (var each in curPRE.SubPRDict)
+            {
+                bool IsFind = false;
+                foreach (var eachPR in CurRollPR)
+                {
+                    if (eachPR.ID == each.Key)
+                    {
+                        eachPR.Probability -= each.Value;
+                        rubbish.Probability += each.Value;
+                        IsFind = true;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    public void AddPREve(int EveID)
+    {
+        CurRollPREveIDs.Add(EveID);
+        InitCurRollPR();
+    }
+    #endregion
+
     public WinOrFail WinOrFailState;
+
+    public void InitContainer()
+    {
+        if (CurRollPREveIDs == null)
+            CurRollPREveIDs = new List<int>();
+    }
 
     public void InitData()
     {
+        InitContainer();
         InstanceSpawners();
         InstanceCurBullets();
         InstanceStandbyBullets();
+        InitCurRollPR();
         
         WinOrFailState = WinOrFail.InLevel;
     }

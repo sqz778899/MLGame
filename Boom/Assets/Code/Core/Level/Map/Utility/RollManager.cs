@@ -34,12 +34,12 @@ public class RollManager: ScriptableObject
 
         if (curLB == null) return;
 
-        List<RollProbability> curBuffPool = curLB.CurBuffProb;
+        List<RollPR> curBuffPool = curLB.CurBuffProb;
         int xOffset = 1167;
         int start = -1167;
         for (int i = 0; i < 3; i++)
         {
-            RollProbability curRoll = SingleRoll(curBuffPool);
+            RollPR curRoll = SingleRoll(curBuffPool);
             curBuffPool.Remove(curRoll);
             DealProb(ref curBuffPool);
             
@@ -91,21 +91,41 @@ public class RollManager: ScriptableObject
     }
     
     //................把概率重新分布.................
-    public void DealProb(ref List<RollProbability> OriginProbs)
+    public void DealProb(ref List<RollPR> OriginProbs)
     {
+        List<RollPR> newProbs = new List<RollPR>();
         List<float> orProb = new List<float>();
         foreach (var each in OriginProbs)
             orProb.Add(each.Probability);
         List<float> normalizeProb = NormalizeProb(orProb);
 
         for (int i = 0; i < OriginProbs.Count; i++)
+        {
             OriginProbs[i].Probability = normalizeProb[i];
+        }
+    }
+    public List<RollPR> DealProb(List<RollPR> OriginProbs)
+    {
+        List<RollPR> newProbs = new List<RollPR>();
+        List<float> orProb = new List<float>();
+        foreach (var each in OriginProbs)
+            orProb.Add(each.Probability);
+        List<float> normalizeProb = NormalizeProb(orProb);
+
+        for (int i = 0; i < OriginProbs.Count; i++)
+        {
+            RollPR tmp = new RollPR();
+            tmp.ID = OriginProbs[i].ID;
+            tmp.Probability = normalizeProb[i];
+            newProbs.Add(tmp);
+        }
+        return newProbs;
     }
     
-    public RollProbability SingleRoll(List<RollProbability> rollProbs)
+    public RollPR SingleRoll(List<RollPR> rollProbs)
     {
         float c = Random.Range(0f, 100f);
-        RollProbability curProb = null;
+        RollPR curProb = null;
         for (int j = 0; j < rollProbs.Count; j++)
         {
             float min = 0;

@@ -28,6 +28,7 @@ public static class PathConfig
    public static string BuffDesignJson = GetDataPrepath() + "Data/BuffDesign.json";
    public static string LevelBuffDesignJson = GetDataPrepath() + "Data/LevelBuffDesign.json";
    public static string RoleDesignJson = GetDataPrepath() + "Data/RoleDesign.json";
+   public static string PREventDesignJson = GetDataPrepath() + "Data/PREventDesign.json";
    //........................Misc...........................................
    public static string MiscDir = GetPrepath() + "Res/UI/Misc/";
    public static string FXAssetDir = GetPrepath() + "Res/FX/Prefab/";
@@ -69,9 +70,12 @@ public static class PathConfig
    //Assets/Res/UI/Prefabs/P_Shop.prefab
    
    //..........................事件...............................
-   public static string GetREventPath(int ID)
+   public static string GetREventPath(int ID,MapEventType CurType)
    {
-      return GetPrepath() + "Res/UI/Prefabs/REvents/P_REvent_" + ID.ToString("D2") + ".prefab";
+      string IDStr = ID.ToString("D2");
+      string TypeStr = CurType.ToString();
+      string PBName = $"P_{TypeStr}_{IDStr}.prefab" ;
+      return GetPrepath() + "Res/UI/Prefabs/REvents/" + PBName;
    }
    //..........................MapNode...............................
    public static string MapNodeEvent = GetPrepath() + "Res/Map/Prefabs/P_NodeEvent_01.prefab";

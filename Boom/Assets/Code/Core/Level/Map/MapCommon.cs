@@ -35,7 +35,8 @@ public class NodeOpenFog
     public float openFogFadeRange = 10;
 }
 
-public class NodeSate
+public enum MapEventType
 {
-    
+    Non = 0,
+    PREvent = 1
 }

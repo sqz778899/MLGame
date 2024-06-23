@@ -16,7 +16,7 @@ public class MapNodeBase : MonoBehaviour
     public GameObject Node_FX;
     ParticleSystem[] _fxs;
 
-    public List<RollProbability> BuffProbabilityPool;
+    public List<RollPR> BuffProbabilityPool;
 
     public TextMeshPro txtTitle;
     //解锁迷雾的参数

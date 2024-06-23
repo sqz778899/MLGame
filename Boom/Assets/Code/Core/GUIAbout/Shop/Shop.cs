@@ -19,8 +19,8 @@ public class Shop:GUIBase
     public void OnceRollBullet()
     {
         //GetProbabilitys
-        List<RollProbability> rollProbs = TrunkManager.Instance.GetRollProbability();
-        RollManager.Instance.DealProb(ref rollProbs);
+        List<RollPR> rollProbs = RollManager.
+            Instance.DealProb(MainRoleManager.Instance.OrginalRollPR);
         
         //Cal gold
         int curCost = MainRoleManager.Instance.Cost;
@@ -37,7 +37,7 @@ public class Shop:GUIBase
         //New Ins
         for (int i = 0; i < 5; i++)
         {
-            RollProbability curProb = RollManager.Instance.SingleRoll(rollProbs);
+            RollPR curProb = RollManager.Instance.SingleRoll(rollProbs);
             
             if (curProb == null)
             {

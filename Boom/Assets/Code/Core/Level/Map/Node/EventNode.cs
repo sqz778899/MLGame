@@ -2,12 +2,13 @@
 
 public class EventNode:MapNodeBase
 {
+    public MapEventType CurType;
     public int EventID;
     //Event
     public void EnterEvent()  
     {
         //LoadEvent()
-        string curREventPath = PathConfig.GetREventPath(EventID);
+        string curREventPath = PathConfig.GetREventPath(EventID,CurType);
         GameObject REventIns =  ResManager.instance.CreatInstance<GameObject>(curREventPath);
         REventIns.transform.SetParent(UIManager.Instance.REventRoot.transform,false);
         REvent curREvent = REventIns.GetComponent<REvent>();
