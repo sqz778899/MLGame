@@ -65,6 +65,8 @@ public static class PathConfig
    //..........................子弹.............................................
    public static string BulletImageDir = GetPrepath() + "Res/Bullet/Textures/";
    public static string BulletAssetDir = GetPrepath() + "Res/Bullet/Prefab/"; 
+   //..........................ScoreMat.............................................
+   public static string ScoreMatImage = GetPrepath() + "Res/Bullet/Textures/T_ScoreMat_01.png";
    //..........................Buff.............................................
    public static string BuffImageDir = GetPrepath() + "Res/UI/Buff/Textures/";
    public static string BuffPB = GetPrepath() + "Res/UI/Buff/Prefabs/P_Buff_Template.prefab";
@@ -153,17 +155,17 @@ public static class PathConfig
          case BulletInsMode.Icon:
             orginName = "T_Bullet_Icon_";
             break;
+         case BulletInsMode.Mat:
+            orginName = "T_BulletMat_";
+            break;
          //T_Bullet_Icon_01
       }
-      orginName = orginName + ID.ToString("D2") + ".png";
-      string curImagePath = BulletImageDir + orginName;
 
-      return curImagePath;
-   }
-   
-   public static string GetBulletMatImagePath(int ID)
-   {
-      string curImagePath = BulletImageDir + $"T_Bullet_mat_{ID.ToString("D2")}.png";
+      string curIDStr = ID.ToString("D2");
+      string smallDir = $"Bullet_{curIDStr}/";
+      orginName = orginName + ID.ToString("D2") + ".png";
+      string curImagePath = BulletImageDir + smallDir + orginName;
+
       return curImagePath;
    }
 

@@ -8,6 +8,12 @@ public class Shop:GUIBase
     public GameObject ShopSlotRoot;
     public GameObject BarRoot;
     public ShopNode CurShopNode;
+
+    void Start()
+    {
+        GetCurPRBarDisplay();
+    }
+    
     #region Design
     //.........temp
     //90概率 Score
@@ -69,15 +75,15 @@ public class Shop:GUIBase
     #region Bar
     //-1118 -200 //-362 -200
     //-1118 -308
-    void ppp()
+    void GetCurPRBarDisplay()
     {
         List<RollPR> CurRollPR = MainRoleManager.Instance.CurRollPR;
-        foreach (RollPR each in CurRollPR)
+        for (int i = 0; i < CurRollPR.Count; i++)
         {
             GameObject curBar = ResManager.instance.IntanceAsset(PathConfig.PRDisplayBarPB);
             curBar.transform.SetParent(BarRoot.transform,false);
             PRDisplayBar curBarSC = curBar.GetComponent<PRDisplayBar>();
-            curBarSC.ID = each.ID;
+            curBarSC.ID = CurRollPR[i].ID;
             curBarSC.InitDataByID();
         }
     }

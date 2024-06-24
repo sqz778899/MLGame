@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,8 +25,16 @@ public class PRDisplayBar : MonoBehaviour
                 CurRollPr = each;
         }
 
-        Sprite curImage = ResManager.instance.GetAssetCache<Sprite>(
-            PathConfig.GetBulletMatImagePath(ID));
+        if (CurRollPr == null)
+            CurRollPr = new RollPR { ID = ID, Probability = 0 };
+        
+        string curImagePath = "";
+        if (ID != 0)
+            curImagePath = PathConfig.GetBulletImagePath(ID, BulletInsMode.Mat);
+        else
+            curImagePath = PathConfig.ScoreMatImage;
+        
+        Sprite curImage = ResManager.instance.GetAssetCache<Sprite>(curImagePath);
         MatImage.sprite = curImage;
     }
    

@@ -22,7 +22,8 @@ public enum BulletInsMode
     Roll = 5,
     Standby = 6,
     Thumbnail = 7,
-    Icon = 8
+    Icon = 8,
+    Mat = 9
 }
 #endregion
 
