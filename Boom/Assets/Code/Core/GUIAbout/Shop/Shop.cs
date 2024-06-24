@@ -9,6 +9,8 @@ public class Shop:GUIBase
     public GameObject BarRoot;
     public ShopNode CurShopNode;
 
+    const int rowOffet = 756;
+    const int columnOffet = -108;
     void Start()
     {
         GetCurPRBarDisplay();
@@ -78,13 +80,24 @@ public class Shop:GUIBase
     void GetCurPRBarDisplay()
     {
         List<RollPR> CurRollPR = MainRoleManager.Instance.CurRollPR;
+        int column = 0;
+        int row = 0;
         for (int i = 0; i < CurRollPR.Count; i++)
         {
+            if (i % 4 == 0 && i!=0)
+            {
+                row++;
+                column = 0;
+            }
+            Vector2 curPos = new Vector2(-1118 + row*rowOffet, -200 + column*columnOffet);
+            
             GameObject curBar = ResManager.instance.IntanceAsset(PathConfig.PRDisplayBarPB);
             curBar.transform.SetParent(BarRoot.transform,false);
+            curBar.transform.GetComponent<RectTransform>().anchoredPosition = curPos;
             PRDisplayBar curBarSC = curBar.GetComponent<PRDisplayBar>();
             curBarSC.ID = CurRollPR[i].ID;
             curBarSC.InitDataByID();
+            column++;
         }
     }
     
