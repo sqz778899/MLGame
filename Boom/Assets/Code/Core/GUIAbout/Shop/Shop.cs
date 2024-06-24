@@ -6,6 +6,7 @@ public class Shop:GUIBase
 {
     public GameObject RollInsRoot;
     public GameObject ShopSlotRoot;
+    public GameObject BarRoot;
     public ShopNode CurShopNode;
     #region Design
     //.........temp
@@ -20,7 +21,7 @@ public class Shop:GUIBase
     {
         //GetProbabilitys
         List<RollPR> rollProbs = RollManager.
-            Instance.DealProb(MainRoleManager.Instance.OrginalRollPR);
+            Instance.DealProb(MainRoleManager.Instance.CurRollPR);
         
         //Cal gold
         int curCost = MainRoleManager.Instance.Cost;
@@ -59,14 +60,30 @@ public class Shop:GUIBase
             int curScore = Random.Range(ScoreRange.x, ScoreRange.y+1);
             curSC.Score = curScore;
             curSC.Cost = Cost;
-            
-            //SetRollInsAttri(curRollIns, i);
         }
         
         TrunkManager.Instance.SaveFile();
     }
     #endregion
 
+    #region Bar
+    //-1118 -200 //-362 -200
+    //-1118 -308
+    void ppp()
+    {
+        List<RollPR> CurRollPR = MainRoleManager.Instance.CurRollPR;
+        foreach (RollPR each in CurRollPR)
+        {
+            GameObject curBar = ResManager.instance.IntanceAsset(PathConfig.PRDisplayBarPB);
+            curBar.transform.SetParent(BarRoot.transform,false);
+            PRDisplayBar curBarSC = curBar.GetComponent<PRDisplayBar>();
+            curBarSC.ID = each.ID;
+            curBarSC.InitDataByID();
+        }
+    }
+    
+
+    #endregion
     public override void QuitSelf()
     {
         CurShopNode.QuitShop();

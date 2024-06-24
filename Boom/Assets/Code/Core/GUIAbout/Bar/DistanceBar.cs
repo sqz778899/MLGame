@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
@@ -9,7 +6,6 @@ public class DistanceBar : MonoBehaviour
 {
     public Image NarmalBar;
     public TextMeshProUGUI Text;
-    LevelLogicMono _LLGO;
     
     public float MaxDistance;
     public float CurDistance;

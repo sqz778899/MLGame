@@ -114,6 +114,7 @@ public class MainRoleManager :ScriptableObject
     {
         if (CurRollPREveIDs == null)
             CurRollPREveIDs = new List<int>();
+        CurRollPR = new List<RollPR>(OrginalRollPR);
     }
 
     public void InitData()

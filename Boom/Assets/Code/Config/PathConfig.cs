@@ -55,6 +55,7 @@ public static class PathConfig
 
    ///.........................GUI.................................
    public static string ShopAsset = GetPrepath() + "Res/UI/Prefabs/P_Shop.prefab";
+   public static string  PRDisplayBarPB = GetPrepath() + "Res/UI/Prefabs/Misc/PRBar_Template.prefab";
    //...........................角色.................................
    public static string GetRoleImgPath(int ID)
    {
@@ -157,6 +158,12 @@ public static class PathConfig
       orginName = orginName + ID.ToString("D2") + ".png";
       string curImagePath = BulletImageDir + orginName;
 
+      return curImagePath;
+   }
+   
+   public static string GetBulletMatImagePath(int ID)
+   {
+      string curImagePath = BulletImageDir + $"T_Bullet_mat_{ID.ToString("D2")}.png";
       return curImagePath;
    }
 
