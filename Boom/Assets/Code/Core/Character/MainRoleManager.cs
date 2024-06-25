@@ -30,6 +30,8 @@ public class MainRoleManager :ScriptableObject
     public List<BulletSpawner> CurBulletSpawners;
     public List<StandbyData> CurStandbyBullets = new List<StandbyData>();
     public List<SupremeCharm> SupremeCharms = new List<SupremeCharm>();
+    
+    public List<BulletEntry> CurBulletEntries;
 
     #region 决定商店抽卡概率的部分
     public List<RollPR> CurRollPR;
@@ -107,6 +109,7 @@ public class MainRoleManager :ScriptableObject
         InitCurRollPR();
     }
     #endregion
+    
 
     public WinOrFail WinOrFailState;
 
