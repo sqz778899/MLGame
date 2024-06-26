@@ -29,6 +29,7 @@ public static class PathConfig
    public static string LevelBuffDesignJson = GetDataPrepath() + "Data/LevelBuffDesign.json";
    public static string RoleDesignJson = GetDataPrepath() + "Data/RoleDesign.json";
    public static string PREventDesignJson = GetDataPrepath() + "Data/PREventDesign.json";
+   public static string BulletEntryDesignJson = GetDataPrepath() + "Data/BulletEntryDesign.json";
    //........................Misc...........................................
    public static string MiscDir = GetPrepath() + "Res/UI/Misc/";
    public static string FXAssetDir = GetPrepath() + "Res/FX/Prefab/";

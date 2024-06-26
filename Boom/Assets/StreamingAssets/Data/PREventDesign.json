@@ -1,6 +1,5 @@
 [
   {
-    "ID": 1,
     "Title": "Clay reinforcement",
     "EDescription": "Increased probability of clay.",
     "AddPRDict": {
@@ -8,10 +7,10 @@
     },
     "SubPRDict": {
       "0": 0.0
-    }
+    },
+    "ID": 1
   },
   {
-    "ID": 2,
     "Title": "Three phase force",
     "EDescription": "Increase the probability of clay, ice and fire.",
     "AddPRDict": {
@@ -21,6 +20,7 @@
     },
     "SubPRDict": {
       "0": 0.0
-    }
+    },
+    "ID": 2
   }
 ]

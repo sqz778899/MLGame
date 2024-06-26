@@ -30,7 +30,6 @@ public class MainRoleManager :ScriptableObject
     public List<BulletSpawner> CurBulletSpawners;
     public List<StandbyData> CurStandbyBullets = new List<StandbyData>();
     public List<SupremeCharm> SupremeCharms = new List<SupremeCharm>();
-    
     public List<BulletEntry> CurBulletEntries;
 
     #region 决定商店抽卡概率的部分
@@ -109,7 +108,6 @@ public class MainRoleManager :ScriptableObject
         InitCurRollPR();
     }
     #endregion
-    
 
     public WinOrFail WinOrFailState;
 
@@ -117,7 +115,10 @@ public class MainRoleManager :ScriptableObject
     {
         if (CurRollPREveIDs == null)
             CurRollPREveIDs = new List<int>();
-        CurRollPR = new List<RollPR>(OrginalRollPR);
+        if (CurBulletEntries == null)
+            CurBulletEntries = new List<BulletEntry>();
+        if (CurRollPR == null)
+            CurRollPR = new List<RollPR>(OrginalRollPR);
     }
 
     public void InitData()
@@ -130,6 +131,23 @@ public class MainRoleManager :ScriptableObject
         
         WinOrFailState = WinOrFail.InLevel;
     }
+
+    #region 初始化当前词条
+    public void InitCurBulletEntries()
+    {
+        List<BulletEntry> bulletEntryDesign = TrunkManager.Instance.BulletEntryDesignJsons;
+        foreach (var each in CurBulletEntries)
+        {
+            foreach (var eachDesign in bulletEntryDesign)
+            {
+                if (each.ID == eachDesign.ID)
+                {
+                    
+                }
+            }
+        }
+    }
+    #endregion
 
     #region 纯数据层操作
     public void RefreshSpawner(BulletMutMode mode,int BulletID)

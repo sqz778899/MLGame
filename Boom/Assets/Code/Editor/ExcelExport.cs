@@ -19,7 +19,7 @@ public class ExcelExport
         ExportMuliLa();
         ExportRoleDesign();
         ExportPREventDesign();
-        //PREventDesignJson
+        ExportBulletEntry();
     }
 
     #region 游戏设计
@@ -183,7 +183,27 @@ public class ExcelExport
         string content = JsonConvert.SerializeObject(curPREvents,(Formatting) Formatting.Indented);
         File.WriteAllText(PathConfig.PREventDesignJson, content);
     }
-    
+
+    void ExportBulletEntry()
+    {
+        DataSet curTables = GetDataSet();
+        List<BulletEntry> curBulletEntries = new List<BulletEntry>();
+        
+        DataTable curTable = curTables.Tables[5];
+        for (int i = 1; i < curTable.Rows.Count; i++)
+        {
+            BulletEntry curBulletEntry = new BulletEntry();
+            if (curTable.Rows[i][0].ToString() == "") continue;
+            
+            curBulletEntry.ID = int.Parse(curTable.Rows[i][0].ToString());
+            curBulletEntry.Name = curTable.Rows[i][1].ToString();
+            curBulletEntry.Description = curTable.Rows[i][3].ToString();
+            curBulletEntries.Add(curBulletEntry);
+        }
+        
+        string content = JsonConvert.SerializeObject(curBulletEntries,(Formatting) Formatting.Indented);
+        File.WriteAllText(PathConfig.BulletEntryDesignJson, content);
+    }
     DataSet GetDataSet()
     {
         FileStream fileStream = File.Open(GetDesignExcelPath("CommonDesign.xlsx"), FileMode.Open, FileAccess.Read);
