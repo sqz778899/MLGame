@@ -22,6 +22,7 @@ public class MainRoleManager :ScriptableObject
     
     //...............子弹上膛................
     public List<BulletReady> CurBullets;
+    public List<BulletBuff> CurBulletBuffs;
     
     //...............重要数据................
     public int Score;
@@ -119,6 +120,8 @@ public class MainRoleManager :ScriptableObject
             CurBulletEntries = new List<BulletEntry>();
         if (CurRollPR == null)
             CurRollPR = new List<RollPR>(OrginalRollPR);
+        if (CurBulletBuffs == null)
+            CurBulletBuffs = new List<BulletBuff>();
     }
 
     public void InitData()
@@ -128,6 +131,7 @@ public class MainRoleManager :ScriptableObject
         InstanceCurBullets();
         InstanceStandbyBullets();
         InitCurRollPR();
+        InitCurBulletEntries();
         
         WinOrFailState = WinOrFail.InLevel;
     }
@@ -136,9 +140,9 @@ public class MainRoleManager :ScriptableObject
     public void InitCurBulletEntries()
     {
         List<BulletEntry> bulletEntryDesign = TrunkManager.Instance.BulletEntryDesignJsons;
-        foreach (var each in CurBulletEntries)
+        foreach (BulletEntry each in CurBulletEntries)
         {
-            foreach (var eachDesign in bulletEntryDesign)
+            foreach (BulletEntry eachDesign in bulletEntryDesign)
             {
                 if (each.ID == eachDesign.ID)
                 {

@@ -75,6 +75,13 @@ public class BulletReady
         curSlotID = _curSlotID;
         instanceID = _instanceID;
     }
+
+    public ElementalTypes GetType()
+    {
+        BulletData tmpData = new BulletData(bulletID);
+        tmpData.SetDataByID();
+        return tmpData.elementalType;
+    }
 }
 
 [Serializable]

@@ -91,10 +91,3 @@ public class SupremeCharm
         ID = _id;
     }
 }
-
-[Serializable]
-public class BulletEntry:HaveID
-{
-    public string Name;
-    public string Description;
-}
