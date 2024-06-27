@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
-using System;
 using System.Collections.Generic;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class MainRoleManager :ScriptableObject
@@ -23,6 +21,20 @@ public class MainRoleManager :ScriptableObject
     //...............子弹上膛................
     public List<BulletReady> CurBullets;
     public List<BulletBuff> CurBulletBuffs;
+
+    public void RemoveBulletBuff(int ID)
+    {
+        List<int> NeedDelete = new List<int>();
+        //注意从大到小正确排序
+        for (int i = CurBulletBuffs.Count - 1; i >= 0; i--)
+        {
+            if (CurBulletBuffs[i].ID == ID)
+                NeedDelete.Add(i);
+        }
+
+        foreach (int each in NeedDelete)
+            CurBulletBuffs.RemoveAt(each);
+    }
     
     //...............重要数据................
     public int Score;
@@ -611,4 +623,3 @@ public class MainRoleManager :ScriptableObject
     }
     #endregion
 }
-

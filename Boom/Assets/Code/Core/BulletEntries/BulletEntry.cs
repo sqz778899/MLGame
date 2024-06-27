@@ -17,11 +17,11 @@ public class BulletEntry:HaveID
 public class BulletBuff:HaveID
 {
     public Dictionary<int, int> bulletIdToDamage;
-    public int SettleDamage;  //结算的伤害
+    public Dictionary<int, int> indexToSettleDamage;  //结算的伤害
 
     public BulletBuff()
     {
         bulletIdToDamage = new Dictionary<int, int>();
-        SettleDamage = 0;
+        indexToSettleDamage = new Dictionary<int, int>();
     }
 }

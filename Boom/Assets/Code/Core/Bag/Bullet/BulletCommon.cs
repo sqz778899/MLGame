@@ -76,11 +76,11 @@ public class BulletReady
         instanceID = _instanceID;
     }
 
-    public ElementalTypes GetType()
+    public BulletData GetBulletData()
     {
-        BulletData tmpData = new BulletData(bulletID);
-        tmpData.SetDataByID();
-        return tmpData.elementalType;
+        BulletData curData = new BulletData(bulletID);
+        curData.SetDataByID();
+        return curData;
     }
 }
 
