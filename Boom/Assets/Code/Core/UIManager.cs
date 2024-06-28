@@ -58,7 +58,6 @@ public class UIManager : ScriptableObject
     public void InitCharacterScene()
     {
         InitComon();
-        InitTileRoot();
         if (SlotRoot == null)
             SlotRoot = GameObject.Find("SlotRoot");
         if (BulletRoot == null)
@@ -109,7 +108,6 @@ public class UIManager : ScriptableObject
     public void InitSelectLevel()
     {
         InitComon();
-        InitTileRoot();
         ShopRoot = GameObject.Find("ShopRoot");
         REventRoot = GameObject.Find("REventRoot");
         RewardRoot = GameObject.Find("RewardRoot");
@@ -132,6 +130,15 @@ public class UIManager : ScriptableObject
         if (TooltipsRoot == null)
             TooltipsRoot = GameObject.Find("TooltipsRoot");
         
+        TitleRootMono titleRootMono = TitleRoot.GetComponent<TitleRootMono>();
+        TitleGold = titleRootMono.TitleGold;
+        G_CurBulletIcon = titleRootMono.G_CurBulletIcon;
+        G_StandbyIcon = titleRootMono.G_StandbyIcon;
+        G_Help = titleRootMono.G_Help;
+        G_Setting = titleRootMono.G_Setting;
+        if (G_Setting == null)
+            G_Setting = GameObject.Find("GroupSetting");
+        
         //StandByRoot
         if (StandByRoot == null)
             StandByRoot = GameObject.Find("StandByRoot");
@@ -142,22 +149,6 @@ public class UIManager : ScriptableObject
         
         if (G_Bullet == null)
             G_Bullet = GameObject.Find("GroupBullet");
-
-        if (G_Setting == null)
-            G_Setting = GameObject.Find("GroupSetting");
-        
-        if (G_Help == null)
-            G_Help = GameObject.Find("GroupHelp");
     }
-
-    #region MiscInit
-    void InitTileRoot()
-    {
-        TitleRoot = GameObject.Find("TitleRoot");
-        TitleRootMono titleRootMono = TitleRoot.GetComponent<TitleRootMono>();
-        TitleGold = titleRootMono.TitleGold;
-        G_CurBulletIcon = titleRootMono.G_CurBulletIcon;
-        G_StandbyIcon = titleRootMono.G_StandbyIcon;
-    }
-    #endregion
+    
 }

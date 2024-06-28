@@ -2,7 +2,6 @@ using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 
-
 public class DebugTool
 {
     public Canvas ss;

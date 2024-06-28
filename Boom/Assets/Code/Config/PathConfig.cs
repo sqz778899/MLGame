@@ -53,6 +53,7 @@ public static class PathConfig
    public static string TxtHitPB = GetPrepath() + "Res/UI/Prefabs/P_txtHit_01.prefab";
    public static string RollScorePB = GetPrepath() + "Res/Bullet/Prefab/P_RollScore_Template.prefab";
    public static string RewardCoinAsset = GetPrepath() + "Res/UI/Prefabs/Misc/P_RewardCoin_01.prefab";
+   public static string BulletEntryPB = GetPrepath() + "Res/UI/Prefabs/Misc/P_Entry_Template.prefab";
 
    ///.........................GUI.................................
    public static string ShopAsset = GetPrepath() + "Res/UI/Prefabs/P_Shop.prefab";

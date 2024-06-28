@@ -21,7 +21,28 @@ public class MainRoleManager :ScriptableObject
     //...............子弹上膛................
     public List<BulletReady> CurBullets;
     public List<BulletBuff> CurBulletBuffs;
+    public List<BulletEntry> CurBulletEntries;
+    
+    //...............重要数据................
+    public int Score;
+    public int Gold;
+    public int Cost = 5;
+    public List<BulletSpawner> CurBulletSpawners;
+    public List<StandbyData> CurStandbyBullets = new List<StandbyData>();
+    public List<SupremeCharm> SupremeCharms = new List<SupremeCharm>();
 
+    #region 词条相关
+    public void AddEntry(int EntryID)
+    {
+        List<BulletEntry> DesignEntries = TrunkManager.Instance.BulletEntryDesignJsons;
+        foreach (var each in DesignEntries)
+        {
+            if (each.ID == EntryID && !CurBulletEntries.Contains(each))
+                CurBulletEntries.Add(each);
+        }
+
+        InitBulletEntries();
+    }
     public void RemoveBulletBuff(int ID)
     {
         List<int> NeedDelete = new List<int>();
@@ -35,16 +56,14 @@ public class MainRoleManager :ScriptableObject
         foreach (int each in NeedDelete)
             CurBulletBuffs.RemoveAt(each);
     }
+    void InitBulletEntries()
+    {
+        foreach (var each in CurBulletEntries)
+            EntryFunc.InvokeEntry(each.ID);
+        UIManager.Instance.G_Help.GetComponent<HelpMono>().InitBulletEntryDes();
+    }
+    #endregion
     
-    //...............重要数据................
-    public int Score;
-    public int Gold;
-    public int Cost = 5;
-    public List<BulletSpawner> CurBulletSpawners;
-    public List<StandbyData> CurStandbyBullets = new List<StandbyData>();
-    public List<SupremeCharm> SupremeCharms = new List<SupremeCharm>();
-    public List<BulletEntry> CurBulletEntries;
-
     #region 决定商店抽卡概率的部分
     public List<RollPR> CurRollPR;
     public List<int> CurRollPREveIDs = new List<int>();
@@ -143,27 +162,10 @@ public class MainRoleManager :ScriptableObject
         InstanceCurBullets();
         InstanceStandbyBullets();
         InitCurRollPR();
-        InitCurBulletEntries();
+        InitBulletEntries();
         
         WinOrFailState = WinOrFail.InLevel;
     }
-
-    #region 初始化当前词条
-    public void InitCurBulletEntries()
-    {
-        List<BulletEntry> bulletEntryDesign = TrunkManager.Instance.BulletEntryDesignJsons;
-        foreach (BulletEntry each in CurBulletEntries)
-        {
-            foreach (BulletEntry eachDesign in bulletEntryDesign)
-            {
-                if (each.ID == eachDesign.ID)
-                {
-                    
-                }
-            }
-        }
-    }
-    #endregion
 
     #region 纯数据层操作
     public void RefreshSpawner(BulletMutMode mode,int BulletID)
