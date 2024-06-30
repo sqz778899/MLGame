@@ -1,14 +1,14 @@
 {
-  "Score": 42,
-  "Gold": 9999465,
+  "Score": 0,
+  "Gold": 9999930,
   "UserBulletSpawner": [
     {
-      "bulletID": 1,
+      "bulletID": 201,
       "bulletCount": 2
     },
     {
       "bulletID": 2,
-      "bulletCount": 1
+      "bulletCount": 0
     },
     {
       "bulletID": 3,
@@ -17,31 +17,41 @@
   ],
   "UserCurBullets": [
     {
-      "bulletID": 1,
+      "bulletID": 201,
       "curSlotID": 1,
-      "instanceID": -18830
+      "instanceID": -162512
     },
     {
-      "bulletID": 1,
+      "bulletID": 201,
       "curSlotID": 2,
-      "instanceID": -18920
+      "instanceID": -162602
     },
     {
-      "bulletID": 1,
+      "bulletID": 201,
       "curSlotID": 3,
-      "instanceID": -19010
+      "instanceID": -162692
+    },
+    {
+      "bulletID": 2,
+      "curSlotID": 4,
+      "instanceID": -162782
     }
   ],
   "UserStandbyBullet": [
     {
+      "SlotID": 0,
+      "InstanceID": 0,
+      "ID": 0
+    },
+    {
       "SlotID": 1,
-      "InstanceID": -88302,
-      "ID": 1
+      "InstanceID": 0,
+      "ID": 0
     },
     {
       "SlotID": 2,
-      "InstanceID": -88320,
-      "ID": 1
+      "InstanceID": 0,
+      "ID": 0
     },
     {
       "SlotID": 3,
@@ -50,11 +60,6 @@
     },
     {
       "SlotID": 4,
-      "InstanceID": 0,
-      "ID": 0
-    },
-    {
-      "SlotID": 5,
       "InstanceID": 0,
       "ID": 0
     }
@@ -69,14 +74,5 @@
       "IsFinishedLevels": []
     }
   ],
-  "CurRollPREveIDs": [
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1,
-    1
-  ]
+  "CurRollPREveIDs": []
 }

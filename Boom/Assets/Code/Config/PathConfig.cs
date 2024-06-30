@@ -158,9 +158,9 @@ public static class PathConfig
          //T_Bullet_Icon_01
       }
 
-      string curIDStr = ID.ToString("D3");
-      string smallDir = $"Bullet_{curIDStr}/";
-      orginName = orginName + ID.ToString("D3") + ".png";
+      int orignalID = ID % 10;
+      string smallDir = $"Bullet_{orignalID.ToString("D3")}/";
+      orginName = $"{orginName}{ID.ToString("D3")}.png";
       string curImagePath = BulletImageDir + smallDir + orginName;
 
       return curImagePath;

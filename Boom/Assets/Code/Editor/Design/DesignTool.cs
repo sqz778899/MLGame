@@ -39,4 +39,11 @@ public class DesignTool
 
         MainRoleManager.Instance.InitStandbyBulletMats();
     }
+    
+    [Button(ButtonSizes.Large)]
+    //[ButtonGroup("Entry")]
+    void ResetAll()
+    {
+        TrunkManager.Instance.SetSaveFileTemplate();
+    }
 }

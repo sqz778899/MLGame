@@ -450,15 +450,13 @@ public class MainRoleManager :ScriptableObject
         {
             if (CurStandbyBulletMats[i].ID != 0)
             {
-                SDSlots[i].BulletID = CurStandbyBulletMats[i].ID;
                 GameObject StandbyMatIns = BulletManager.Instance.InstanceStandbyMat(CurStandbyBulletMats[i].ID);
-                SDSlots[i].InstanceID = StandbyMatIns.GetInstanceID();
-                StandbyMatIns.transform.position = SDSlots[i].gameObject.transform.position;
+                SDSlots[i].AddIns(StandbyMatIns);
             }
         }
     }
     
-    public bool AddStandbyBullet(int BulletID)
+    public bool AddStandbyBulletMat(int BulletID)
     {
         StandbyData curSD = null;
         foreach (StandbyData each in CurStandbyBulletMats)
@@ -475,7 +473,7 @@ public class MainRoleManager :ScriptableObject
         
         SlotStandbyMat[] SDSlots = UIManager.Instance.
             G_StandbyIcon.GetComponentsInChildren<SlotStandbyMat>();
-        SlotStandbyMat curSlot = SDSlots[curSD.SlotID - 1];
+        SlotStandbyMat curSlot = SDSlots[curSD.SlotID];
         GameObject StandbyMatIns = BulletManager.Instance.InstanceStandbyMat(BulletID);
         curSlot.AddIns(StandbyMatIns);
         
@@ -487,68 +485,20 @@ public class MainRoleManager :ScriptableObject
     {
         RefreshStandbyBulletMats(BulletMutMode.Sub, BulletID,InstanceID);
         GameObject curSD = UIManager.Instance.G_StandbyMat;
-        GameObject curSDSlot = UIManager.Instance.G_StandbyIcon;
 
-        if (InstanceID == -1)//全删
+        for (int i = curSD.transform.childCount-1 ; i >= 0; i--)
         {
-            for (int i = curSD.transform.childCount-1 ; i >= 0; i--)
+            GameObject curBullet = curSD.transform.GetChild(i).gameObject;
+            StandbyBulletMat curSC = curBullet.GetComponentInChildren<StandbyBulletMat>();
+            if (curSC.ID == BulletID)
             {
-                GameObject curBullet = curSD.transform.GetChild(i).gameObject;
-                StandbyBulletMat curSC = curBullet.GetComponentInChildren<StandbyBulletMat>();
-                if (curSC.ID == BulletID)
-                {
-                    foreach (var each in CurStandbyBulletMats)
-                    {
-                        if (each.ID == curSC.ID )
-                        {
-                            each.ID = 0;
-                        }
-                    }
-                    curSC.DestroySelf();
-                }
-            }
-
-            for (int i = curSDSlot.transform.childCount - 1; i >= 0; i--)
-            {
-                GameObject curSlot = curSDSlot.transform.GetChild(i).gameObject;
-                BulletSlot curSC = curSlot.GetComponentInChildren<BulletSlot>();
-                if (curSC.BulletID == BulletID)
-                {
-                    curSC.BulletID = 0;
-                }
+                if (InstanceID == -1)
+                    RefreshStandbyBulletMats(BulletMutMode.Sub, curSC.ID, curBullet.GetInstanceID());
+                else
+                    RefreshStandbyBulletMats(BulletMutMode.Sub, curSC.ID, InstanceID);
             }
         }
-        else//根据InstanceID删一个
-        {
-            for (int i = curSD.transform.childCount-1 ; i >= 0; i--)
-            {
-                GameObject curBullet = curSD.transform.GetChild(i).gameObject;
-                StandbyBulletMat curSC = curBullet.GetComponentInChildren<StandbyBulletMat>();
-                if (curSC.ID == BulletID)
-                {
-                    foreach (var each in CurStandbyBulletMats)
-                    {
-                        if (each.ID == curSC.ID &&
-                            curSC.ID == InstanceID)
-                        {
-                            each.ID = 0;
-                        }
-                    }
-                    curSC.DestroySelf();
-                }
-            }
-
-            for (int i = curSDSlot.transform.childCount - 1; i >= 0; i--)
-            {
-                GameObject curSlot = curSDSlot.transform.GetChild(i).gameObject;
-                BulletSlot curSC = curSlot.GetComponentInChildren<BulletSlot>();
-                if (curSC.BulletID == BulletID && curSC.InstanceID == InstanceID)
-                {
-                    curSC.BulletID = 0;
-                }
-            }
-        }
-        
+        InitStandbyBulletMats();
     }
     #endregion
 

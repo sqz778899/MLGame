@@ -63,20 +63,6 @@ public class BulletManager :ScriptableObject
         bulletbase.InitBulletData();
         return Bullet;
     }
-    
-    //使用假的InstanceID
-    public GameObject InstanceBullet(BulletData bulletData,
-        BulletInsMode bulletInsMode,int InstanceID,Vector3 pos = new Vector3())
-    {
-        GetIns(bulletInsMode, out GameObject Bullet,pos);
-        BulletBase bulletbase = Bullet.GetComponentInChildren<BulletBase>();
-        bulletbase.Ins = Bullet;
-        bulletbase.InstanceID = InstanceID;
-        bulletbase._bulletData = bulletData;
-        bulletbase.bulletInsMode = bulletInsMode;
-        bulletbase.InitBulletData();
-        return Bullet;
-    }
 
     public GameObject InstanceStandbyMat(int bulletID,GameObject curSlot = null)
     {
@@ -91,20 +77,21 @@ public class BulletManager :ScriptableObject
   
     public void BulletUpgrade()
     {
-        GameObject curSD = UIManager.Instance.G_StandbyIcon;
+        //.................检查一下是否有子弹需要升级...............
         Dictionary<int, int> IDCount = new Dictionary<int, int>();
-        List<StandbyBulletMat> bulletFlags = new List<StandbyBulletMat>();
-        for (int i = 0; i < curSD.transform.childCount; i++)
+        List<StandbyData> curSBMs = MainRoleManager.Instance.CurStandbyBulletMats;
+        for (int i = 0; i < curSBMs.Count; i++)
         {
-            GameObject curBullet = curSD.transform.GetChild(i).gameObject;
-            StandbyBulletMat curSC = curBullet.GetComponent<StandbyBulletMat>();
-            if (!IDCount.ContainsKey(curSC.ID))
-                IDCount.Add(curSC.ID,1);
-            else
-                IDCount[curSC.ID] += 1;
-            bulletFlags.Add(curSC);
+            if (curSBMs[i].ID != 0)
+            {
+                if (!IDCount.ContainsKey(curSBMs[i].ID))
+                    IDCount.Add(curSBMs[i].ID,1);
+                else
+                    IDCount[curSBMs[i].ID] += 1;
+            }
         }
-
+        
+        //.................升级...............
         foreach (var each in IDCount)
         {
             if (each.Value == 2)
@@ -114,7 +101,7 @@ public class BulletManager :ScriptableObject
                     if (eachSpawner.bulletID == each.Key)
                     {
                         //Upgrade
-                        MainRoleManager.Instance.SubStandebyBullet(eachSpawner.bulletID);
+                        MainRoleManager.Instance.SubStandebyBullet(each.Key);//DelAll
                         foreach (var eachBullet in MainRoleManager.Instance.CurBullets)
                         {
                             if (eachBullet.bulletID == eachSpawner.bulletID)
@@ -126,8 +113,9 @@ public class BulletManager :ScriptableObject
             }
             if (each.Value == 3)
             {
-                MainRoleManager.Instance.SubStandebyBullet(each.Key);
-                InstanceStandbyMat(each.Key+100);
+                MainRoleManager.Instance.SubStandebyBullet(each.Key);//DelAll
+                MainRoleManager.Instance.AddStandbyBulletMat(each.Key+100);
+                BulletUpgrade();
             }
         }
         Debug.Log("Upgrade !!!!");

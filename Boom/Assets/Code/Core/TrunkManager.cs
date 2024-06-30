@@ -233,7 +233,7 @@ public class TrunkManager: ScriptableObject
         //..............StandbyData.........................
         List<StandbyData> newGameSD = new List<StandbyData>();
         for (int i = 0; i < 5; i++)
-            newGameSD.Add(new StandbyData(0,i+1));
+            newGameSD.Add(new StandbyData(i,0));
         
         _saveFile.UserCurBullets = new List<BulletReady>();
         _saveFile.UserBulletSpawner = UserBulletSpawner;

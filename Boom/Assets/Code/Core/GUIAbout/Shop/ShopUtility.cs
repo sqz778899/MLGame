@@ -20,7 +20,7 @@ public static class ShopUtility
         {
             case RollBulletMatType.Mat:
                 RollBulletMat curSCM = curSCBase as RollBulletMat;
-                bool isAdd = MainRoleManager.Instance.AddStandbyBullet(curSCM.ID);
+                bool isAdd = MainRoleManager.Instance.AddStandbyBulletMat(curSCM.ID);
                 if (!isAdd)
                 {
                     Debug.Log("没有位置了");
@@ -33,7 +33,7 @@ public static class ShopUtility
                 break;
         }
 
-        //BulletManager.Instance.BulletUpgrade();
+        BulletManager.Instance.BulletUpgrade();
         TrunkManager.Instance.SaveFile();
     }
 }
