@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class BuffMono : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPointerClickHandler
+public class TalentMono : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPointerClickHandler
 {
     public int ID;
     public Image imgBuff;
@@ -31,17 +31,17 @@ public class BuffMono : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,I
 
     public void InitBuffData()
     {
-        BuffDataJson curBuffData = BuffMannager.Instance.GetBuffDataByID(ID);
-        imgBuff.sprite = BuffMannager.Instance.GetBuffImageByID(ID);
-        txtTitle.text = curBuffData.name;
-        txtDescription.text = GetDescriptionStr(curBuffData);
+        TalentDataJson curTalentData = TalentMannager.Instance.GetBuffDataByID(ID);
+        imgBuff.sprite = TalentMannager.Instance.GetBuffImageByID(ID);
+        txtTitle.text = curTalentData.name;
+        txtDescription.text = GetDescriptionStr(curTalentData);
     }
 
-    public string GetDescriptionStr(BuffDataJson buffData)
+    public string GetDescriptionStr(TalentDataJson talentData)
     {
         string result = "";
-        CommonAttribute comAttri = buffData.comAttributes;
-        SpeAttribute speAttri = buffData.speAttributes;
+        CommonAttribute comAttri = talentData.comAttributes;
+        SpeAttribute speAttri = talentData.speAttributes;
         //CommonAttribute
         if (comAttri.damage != 0)
         {

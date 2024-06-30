@@ -11,6 +11,9 @@ public class MapControl : MonoBehaviour
 
     void Update()
     {
+        if (UIManager.Instance.IsPauseClick)
+            return;
+        
         // 滚轮缩放地图逻辑
         float scroll = Input.GetAxis("Mouse ScrollWheel") * Sensitive;
         Vector3 curPos = transform.position;

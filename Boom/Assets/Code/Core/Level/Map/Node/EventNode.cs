@@ -8,17 +8,12 @@ public class EventNode:MapNodeBase
     public void EnterEvent()  
     {
         //LoadEvent()
+        UIManager.Instance.SetOtherUIPause();
         string curREventPath = PathConfig.GetREventPath(EventID,CurType);
-        GameObject REventIns =  ResManager.instance.CreatInstance<GameObject>(curREventPath);
+        GameObject REventIns =  ResManager.instance.CreatInstance(curREventPath);
         REventIns.transform.SetParent(UIManager.Instance.REventRoot.transform,false);
         REvent curREvent = REventIns.GetComponent<REvent>();
         curREvent.CurEventNode = this;
         Debug.Log("Random Event");
-    }
-
-    public void QuitEvent()
-    {
-        State = MapNodeState.IsFinish;
-        ChangeState();
     }
 }

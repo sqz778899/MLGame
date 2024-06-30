@@ -44,8 +44,8 @@ public class RollManager: ScriptableObject
             DealProb(ref curBuffPool);
             
             GameObject curBuffPBIns = Instantiate(ResManager.
-                instance.GetAssetCache<GameObject>(PathConfig.BuffPB));
-            BuffMono curSC = curBuffPBIns.GetComponentInChildren<BuffMono>();
+                instance.GetAssetCache<GameObject>(PathConfig.TalentPB));
+            TalentMono curSC = curBuffPBIns.GetComponentInChildren<TalentMono>();
             curSC.ID = curRoll.ID;
             curSC.InitBuffData();
             curBuffPBIns.transform.SetParent(curRoot.transform);
@@ -122,7 +122,8 @@ public class RollManager: ScriptableObject
         return newProbs;
     }
     
-    public RollPR SingleRoll(List<RollPR> rollProbs)
+    public RollPR 
+        SingleRoll(List<RollPR> rollProbs)
     {
         float c = Random.Range(0f, 100f);
         RollPR curProb = null;

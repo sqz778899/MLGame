@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TitleRootMono : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class TitleRootMono : MonoBehaviour
 
    public GameObject G_Help;
    public GameObject G_Setting;
+
+   public List<Image> NeedToControl;
    public void ChangeIcon()
    {
       G_CurBulletIcon.SetActive(!G_CurBulletIcon.activeSelf);

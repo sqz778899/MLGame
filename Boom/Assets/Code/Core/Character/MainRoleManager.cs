@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class MainRoleManager :ScriptableObject
@@ -26,9 +27,10 @@ public class MainRoleManager :ScriptableObject
     //...............重要数据................
     public int Score;
     public int Gold;
-    public int Cost = 5;
+    public int ShopCost = 5;
+    public int RollEntryCost = 5;
     public List<BulletSpawner> CurBulletSpawners;
-    public List<StandbyData> CurStandbyBullets = new List<StandbyData>();
+    public List<StandbyData> CurStandbyBulletMats = new List<StandbyData>();
     public List<SupremeCharm> SupremeCharms = new List<SupremeCharm>();
 
     #region 词条相关
@@ -160,7 +162,7 @@ public class MainRoleManager :ScriptableObject
         InitContainer();
         InstanceSpawners();
         InstanceCurBullets();
-        InstanceStandbyBullets();
+        InitStandbyBulletMats();
         InitCurRollPR();
         InitBulletEntries();
         
@@ -217,26 +219,26 @@ public class MainRoleManager :ScriptableObject
         }
     }
     
-    public void RefreshStandbyBullets(BulletMutMode mode, int BulletID,int InstanceID)
+    public void RefreshStandbyBulletMats(BulletMutMode mode, int BulletID,int InstanceID)
     {
         switch (mode)
         {
             case BulletMutMode.Sub:
-                foreach (var each in CurStandbyBullets)
+                foreach (var each in CurStandbyBulletMats)
                 {
-                    if (each.BulletID == BulletID)
+                    if (each.ID == BulletID)
                     {
-                        each.BulletID = 0;
+                        each.ID = 0;
                         each.InstanceID = 0;
                     }
                 }
                 break;
             case BulletMutMode.Add:
-                foreach (var each in CurStandbyBullets)
+                foreach (var each in CurStandbyBulletMats)
                 {
-                    if (each.BulletID == 0)
+                    if (each.ID == 0)
                     {
-                        each.BulletID = BulletID;
+                        each.ID = BulletID;
                         each.InstanceID = InstanceID;
                         break;
                     }
@@ -435,56 +437,71 @@ public class MainRoleManager :ScriptableObject
         RefreshCurBulletSlots();//....GO层
     }
     
-    public void InstanceStandbyBullets()
+    public void InitStandbyBulletMats()
     {
-        GameObject SDSlotRoot = UIManager.Instance.G_SlotStandby;
-        GameObject SDBulletRoot = UIManager.Instance.G_BulletStandby;
+        GameObject SDBulletRoot = UIManager.Instance.G_StandbyMat;
+        SlotStandbyMat[] SDSlots = UIManager.Instance.
+            G_StandbyIcon.GetComponentsInChildren<SlotStandbyMat>();
         //..............Clear Old Data..................
         for (int i = SDBulletRoot.transform.childCount - 1; i >= 0; i--)
             DestroyImmediate(SDBulletRoot.transform.GetChild(i).gameObject);
         //..............Instance New Data..................
-        for (int i = 0; i < SDSlotRoot.transform.childCount; i++)
+        for (int i = 0; i < SDSlots.Length; i++)
         {
-            GameObject curSlot = SDSlotRoot.transform.GetChild(i).gameObject;
-            BulletSlotStandby curSlotSC = curSlot.GetComponent<BulletSlotStandby>();
-            if (CurStandbyBullets[i].BulletID != 0)
+            if (CurStandbyBulletMats[i].ID != 0)
             {
-                curSlotSC.BulletID = CurStandbyBullets[i].BulletID;
-                //curSlotSC.InstanceID =  CurStandbyBullets[i].;
-                BulletManager.Instance.InstanceStandByBullet(CurStandbyBullets[i].BulletID,curSlot);
+                SDSlots[i].BulletID = CurStandbyBulletMats[i].ID;
+                GameObject StandbyMatIns = BulletManager.Instance.InstanceStandbyMat(CurStandbyBulletMats[i].ID);
+                SDSlots[i].InstanceID = StandbyMatIns.GetInstanceID();
+                StandbyMatIns.transform.position = SDSlots[i].gameObject.transform.position;
             }
         }
     }
     
-    public bool AddStandbyBullet(int BulletID,int InstanceID)
+    public bool AddStandbyBullet(int BulletID)
     {
-        GameObject BulletIns = BulletManager.Instance.InstanceStandByBullet(BulletID);
-        if (BulletIns == null)
-            return false;
+        StandbyData curSD = null;
+        foreach (StandbyData each in CurStandbyBulletMats)
+        {
+            if (each.ID == 0)
+            {
+                curSD = each;
+                break;
+            }
+        }
 
-        RefreshStandbyBullets(BulletMutMode.Add, BulletID,InstanceID);
+        if (curSD == null)
+            return false;
+        
+        SlotStandbyMat[] SDSlots = UIManager.Instance.
+            G_StandbyIcon.GetComponentsInChildren<SlotStandbyMat>();
+        SlotStandbyMat curSlot = SDSlots[curSD.SlotID - 1];
+        GameObject StandbyMatIns = BulletManager.Instance.InstanceStandbyMat(BulletID);
+        curSlot.AddIns(StandbyMatIns);
+        
+        RefreshStandbyBulletMats(BulletMutMode.Add, BulletID,StandbyMatIns.GetInstanceID());
         return true;
     }
 
     public void SubStandebyBullet(int BulletID,int InstanceID = -1)
     {
-        RefreshStandbyBullets(BulletMutMode.Sub, BulletID,InstanceID);
-        GameObject curSD = UIManager.Instance.G_BulletStandby;
-        GameObject curSDSlot = UIManager.Instance.G_SlotStandby;
+        RefreshStandbyBulletMats(BulletMutMode.Sub, BulletID,InstanceID);
+        GameObject curSD = UIManager.Instance.G_StandbyMat;
+        GameObject curSDSlot = UIManager.Instance.G_StandbyIcon;
 
         if (InstanceID == -1)//全删
         {
             for (int i = curSD.transform.childCount-1 ; i >= 0; i--)
             {
                 GameObject curBullet = curSD.transform.GetChild(i).gameObject;
-                StandbyBullet curSC = curBullet.GetComponentInChildren<StandbyBullet>();
-                if (curSC._bulletData.ID == BulletID)
+                StandbyBulletMat curSC = curBullet.GetComponentInChildren<StandbyBulletMat>();
+                if (curSC.ID == BulletID)
                 {
-                    foreach (var each in CurStandbyBullets)
+                    foreach (var each in CurStandbyBulletMats)
                     {
-                        if (each.BulletID == curSC._bulletData.ID )
+                        if (each.ID == curSC.ID )
                         {
-                            each.BulletID = 0;
+                            each.ID = 0;
                         }
                     }
                     curSC.DestroySelf();
@@ -506,15 +523,15 @@ public class MainRoleManager :ScriptableObject
             for (int i = curSD.transform.childCount-1 ; i >= 0; i--)
             {
                 GameObject curBullet = curSD.transform.GetChild(i).gameObject;
-                StandbyBullet curSC = curBullet.GetComponentInChildren<StandbyBullet>();
-                if (curSC._bulletData.ID == BulletID)
+                StandbyBulletMat curSC = curBullet.GetComponentInChildren<StandbyBulletMat>();
+                if (curSC.ID == BulletID)
                 {
-                    foreach (var each in CurStandbyBullets)
+                    foreach (var each in CurStandbyBulletMats)
                     {
-                        if (each.BulletID == curSC._bulletData.ID &&
-                            curSC.InstanceID == InstanceID)
+                        if (each.ID == curSC.ID &&
+                            curSC.ID == InstanceID)
                         {
-                            each.BulletID = 0;
+                            each.ID = 0;
                         }
                     }
                     curSC.DestroySelf();

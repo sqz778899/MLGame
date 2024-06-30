@@ -3,27 +3,27 @@ using System.IO;
 using Newtonsoft.Json;
 using UnityEngine;
 
-public class BuffMannager:ScriptableObject
+public class TalentMannager:ScriptableObject
 {
     #region 单例
-    static BuffMannager s_instance;
+    static TalentMannager s_instance;
     
-    public static BuffMannager Instance
+    public static TalentMannager Instance
     {
         get
         {
             if (s_instance == null)
-                s_instance = ResManager.instance.GetAssetCache<BuffMannager>(PathConfig.BuffMannagerOBJ);
+                s_instance = ResManager.instance.GetAssetCache<TalentMannager>(PathConfig.BuffMannagerOBJ);
             return s_instance;
         }
     }
     #endregion
 
     #region GetInfo
-    public BuffDataJson GetBuffDataByID(int ID)
+    public TalentDataJson GetBuffDataByID(int ID)
     {
-        BuffDataJson curData = null;
-        foreach (BuffDataJson each in TrunkManager.Instance.BuffDesignJsons)
+        TalentDataJson curData = null;
+        foreach (TalentDataJson each in TrunkManager.Instance.BuffDesignJsons)
         {
             if (each.ID == ID)
             {
@@ -36,7 +36,7 @@ public class BuffMannager:ScriptableObject
 
     public Sprite GetBuffImageByID(int ID)
     {
-        BuffDataJson curData = GetBuffDataByID(ID);
+        TalentDataJson curData = GetBuffDataByID(ID);
 
         if (curData == null)
             return null;

@@ -146,4 +146,11 @@ public class MapNodeBase : MonoBehaviour
                 break;
         }
     }
+    
+    public void QuitNode()
+    {
+        State = MapNodeState.IsFinish;
+        UIManager.Instance.ResetOtherUIPause();
+        ChangeState();
+    }
 }

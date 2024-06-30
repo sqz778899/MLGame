@@ -1,7 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class UIManager : ScriptableObject
 {
@@ -18,23 +17,44 @@ public class UIManager : ScriptableObject
     }
     #endregion
     
+    //Global Control
+    public bool IsPauseClick = false;
+
+    public void SetOtherUIPause()
+    {
+        TitleRootMono curSC = TitleRoot.GetComponent<TitleRootMono>();
+        List<Image> btnImgs = curSC.NeedToControl;
+        foreach (var each in btnImgs)
+            each.raycastTarget = false;
+
+        IsPauseClick = true;
+    }
+
+    public void ResetOtherUIPause()
+    {
+        TitleRootMono curSC = TitleRoot.GetComponent<TitleRootMono>();
+        List<Image> btnImgs = curSC.NeedToControl;
+        foreach (var each in btnImgs)
+            each.raycastTarget = true;
+
+        IsPauseClick = false;
+    }
+
     //0.StartGame
     //1.CharacterScene
     //2.Level
     //3.SelectLevel
     //4.SelectRole
     //GroupRoleDes
+    //............CommonRoot.........
     public GameObject TooltipsRoot;
-    public GameObject StandByRoot;
-    
-    public GameObject G_BulletStandby;
-    public GameObject G_SlotStandby;
-    
     public GameObject G_Bullet;
-    public GameObject G_Setting;
-    public GameObject G_Help;
+    public GameObject G_StandbyMat;
+    
     //............GroupTitle.........
     public GameObject TitleRoot;
+    public GameObject G_Setting;
+    public GameObject G_Help;
     public GameObject TitleGold;
     public GameObject G_CurBulletIcon; //侧边栏当前子弹图标
     public GameObject G_StandbyIcon; //侧边栏待机图标
@@ -127,8 +147,11 @@ public class UIManager : ScriptableObject
     
     void InitComon()
     {
-        if (TooltipsRoot == null)
-            TooltipsRoot = GameObject.Find("TooltipsRoot");
+        IsPauseClick = false;
+        
+        #region InitTileRoot相关
+        if (TitleRoot == null)
+            TitleRoot = GameObject.Find("TitleRoot");
         
         TitleRootMono titleRootMono = TitleRoot.GetComponent<TitleRootMono>();
         TitleGold = titleRootMono.TitleGold;
@@ -138,17 +161,17 @@ public class UIManager : ScriptableObject
         G_Setting = titleRootMono.G_Setting;
         if (G_Setting == null)
             G_Setting = GameObject.Find("GroupSetting");
+        #endregion
         
-        //StandByRoot
-        if (StandByRoot == null)
-            StandByRoot = GameObject.Find("StandByRoot");
-        if (G_SlotStandby == null)
-            G_SlotStandby = StandByRoot.transform.GetChild(0).gameObject;
-        if (G_BulletStandby == null)
-            G_BulletStandby = StandByRoot.transform.GetChild(1).gameObject;
+        //............CommonRoot.........
+        if (TooltipsRoot == null)
+            TooltipsRoot = GameObject.Find("TooltipsRoot");
+        
+        if (G_StandbyMat == null)
+            G_StandbyMat = GameObject.Find("G_StandbyMat");
         
         if (G_Bullet == null)
-            G_Bullet = GameObject.Find("GroupBullet");
+            G_Bullet = GameObject.Find("G_Bullet");
     }
     
 }

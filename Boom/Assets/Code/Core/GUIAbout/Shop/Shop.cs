@@ -21,7 +21,6 @@ public class Shop:GUIBase
     //90概率 Score
     //10概率 Bullet
     Vector2Int ScoreRange = new Vector2Int(3, 9);
-    int Cost = 5;
     #endregion
 
     #region Roll
@@ -32,7 +31,7 @@ public class Shop:GUIBase
             Instance.DealProb(MainRoleManager.Instance.CurRollPR);
         
         //Cal gold
-        int curCost = MainRoleManager.Instance.Cost;
+        int curCost = MainRoleManager.Instance.ShopCost;
         int curGold = MainRoleManager.Instance.Gold;
         if (curGold < curCost)
             return;
@@ -57,17 +56,18 @@ public class Shop:GUIBase
             //GetIns
             GameObject curRollIns = null;
             if (curProb.ID == 0)
+            {
                 curRollIns = ResManager.instance.IntanceAsset(PathConfig.RollScorePB);
+                RollScore curSC = curRollIns.GetComponent<RollScore>();
+                int curScore = Random.Range(ScoreRange.x, ScoreRange.y+1);
+                curSC.Score = curScore;
+            }
             else
-                curRollIns = BulletManager.Instance.InstanceBullet(curProb.ID,BulletInsMode.Roll);
+                curRollIns = BulletManager.Instance.InstanceRollBulletMat(curProb.ID,BulletInsMode.Mat);
 
             Transform curPivot = ShopSlotRoot.transform.GetChild(i);
             curRollIns.transform.SetParent(RollInsRoot.transform,false);
             curRollIns.transform.position = curPivot.position;
-            RollBullet curSC = curRollIns.GetComponentInChildren<RollBullet>();
-            int curScore = Random.Range(ScoreRange.x, ScoreRange.y+1);
-            curSC.Score = curScore;
-            curSC.Cost = Cost;
         }
         
         TrunkManager.Instance.SaveFile();
@@ -105,7 +105,7 @@ public class Shop:GUIBase
     #endregion
     public override void QuitSelf()
     {
-        CurShopNode.QuitShop();
+        CurShopNode.QuitNode();
         base.QuitSelf();
     }
 }

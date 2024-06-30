@@ -13,9 +13,9 @@ public class ResManager : Singleton<ResManager>
        return ABManager.instance.LoadRes<T>(FileName) as T;
     }
 
-    public T CreatInstance<T>(string AssetPath) where T : Object
+    public GameObject CreatInstance(string AssetPath)
     {
-        return GameObject.Instantiate(GetAssetCache<T>(AssetPath));
+        return GameObject.Instantiate(GetAssetCache<GameObject>(AssetPath));
     }
 
     public GameObject IntanceAsset(string AssetPath)

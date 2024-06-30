@@ -21,7 +21,7 @@ public class TrunkManager: ScriptableObject
 
     #region 策划数据
     List<BulletDataJson> _bulletDesignJsons;
-    List<BuffDataJson> _buffDesignJsons;
+    List<TalentDataJson> _buffDesignJsons;
     List<LevelBuff> _levelBuffDesignJsons;
     List<RoleBase> _roleDesignJsons;
     List<RollPREvent> _prDesignJsons;
@@ -36,7 +36,7 @@ public class TrunkManager: ScriptableObject
         }
     }
     
-    public List<BuffDataJson> BuffDesignJsons
+    public List<TalentDataJson> BuffDesignJsons
     {
         get
         {
@@ -91,10 +91,10 @@ public class TrunkManager: ScriptableObject
         return BulletDataJsons;
     }
     
-    public List<BuffDataJson> LoadBuffData()
+    public List<TalentDataJson> LoadBuffData()
     {
         string BuffDesignString = File.ReadAllText(PathConfig.BuffDesignJson);
-        List<BuffDataJson> BuffDataJsons = JsonConvert.DeserializeObject<List<BuffDataJson>>(BuffDesignString);
+        List<TalentDataJson> BuffDataJsons = JsonConvert.DeserializeObject<List<TalentDataJson>>(BuffDesignString);
         return BuffDataJsons;
     }
 
@@ -150,7 +150,7 @@ public class TrunkManager: ScriptableObject
         }
         MainRoleManager.Instance.CurBulletSpawners = _saveFile.UserBulletSpawner;
         MainRoleManager.Instance.CurBullets = _saveFile.UserCurBullets;
-        MainRoleManager.Instance.CurStandbyBullets = _saveFile.UserStandbyBullet;
+        MainRoleManager.Instance.CurStandbyBulletMats = _saveFile.UserStandbyBullet;
         MainRoleManager.Instance.CurRollPREveIDs = _saveFile.CurRollPREveIDs;
         #endregion
         
@@ -181,7 +181,7 @@ public class TrunkManager: ScriptableObject
         List<int> SupremeCharms = new List<int>();
         foreach (var each in MainRoleManager.Instance.SupremeCharms)
             SupremeCharms.Add(each.ID);
-        _saveFile.UserStandbyBullet = MainRoleManager.Instance.CurStandbyBullets;
+        _saveFile.UserStandbyBullet = MainRoleManager.Instance.CurStandbyBulletMats;
         _saveFile.SupremeCharms = SupremeCharms;
         #endregion
 

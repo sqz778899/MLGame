@@ -208,8 +208,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4289440683
-  m_fontColor: {r: 0.6698113, g: 0.6698113, b: 0.6698113, a: 1}
+    rgba: 4290361785
+  m_fontColor: {r: 0.7254902, g: 0.7254902, b: 0.7254902, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -277,7 +277,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5411677431298388218}
-  - component: {fileID: 6544568419839203023}
+  - component: {fileID: 4174673540412088642}
   m_Layer: 5
   m_Name: P_RollScore_Template
   m_TagString: Untagged
@@ -306,7 +306,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6544568419839203023
+--- !u!114 &4174673540412088642
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -315,18 +315,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7724673867914250162}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 873d62595b6849d981dc0f27b844e7e5, type: 3}
+  m_Script: {fileID: 11500000, guid: 871698f5fd4f4d38a95a7da6c057319c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forward: {x: 1, y: 0, z: 0}
-  _bulletData:
-    ID: 0
-    name: 
-    speed: 0
-    damage: 0
-    elementalType: 0
-    imgBullet: {fileID: 0}
-    hitEffect: {fileID: 0}
-  bulletInsMode: 0
-  Cost: 0
+  CurType: 2
+  OrignalColor: {r: 0.7254902, g: 0.7254902, b: 0.7254902, a: 1}
+  _rollCost: {fileID: 1572118040164317178}
+  _rollScore: {fileID: 3789890727379497928}
   Score: 0

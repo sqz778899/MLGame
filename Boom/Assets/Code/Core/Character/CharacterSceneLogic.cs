@@ -46,7 +46,7 @@ public class CharacterSceneLogic : KeyBoardBase
     {
         if ( MainRoleManager.Instance.CurBullets.Count == 0)
         {
-            GameObject curTexttipIns = ResManager.instance.CreatInstance<GameObject>(PathConfig.TexttipAsset);
+            GameObject curTexttipIns = ResManager.instance.CreatInstance(PathConfig.TexttipAsset);
             curTexttipIns.GetComponent<TextTip>().CurText.text = "Non Bullet Ready !";
             curTexttipIns.transform.SetParent(UIManager.Instance.TooltipsRoot.transform,false);
             curTexttipIns.transform.localScale = Vector3.one;

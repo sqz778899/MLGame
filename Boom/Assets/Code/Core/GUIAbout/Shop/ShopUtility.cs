@@ -5,9 +5,9 @@ public static class ShopUtility
     //选中一颗Roll出来的子弹    外部调用所以写这里
     public static void SelOne(GameObject SelGO)
     {
-        RollBullet curSC = SelGO.GetComponentInChildren<RollBullet>();
+        RollBase curSCBase = SelGO.GetComponent<RollBase>();
         //............Cost Money.................
-        int curCost = curSC.Cost;
+        int curCost = MainRoleManager.Instance.ShopCost;
         if (MainRoleManager.Instance.Gold < curCost)
         {
             Debug.Log("No Money");
@@ -16,21 +16,24 @@ public static class ShopUtility
         MainRoleManager.Instance.Gold -= curCost;
         
         //............Deal Data.................
-        if (curSC._bulletData.ID == 0)//Score
+        switch (curSCBase.CurType)
         {
-            MainRoleManager.Instance.Score +=  curSC.Score;
+            case RollBulletMatType.Mat:
+                RollBulletMat curSCM = curSCBase as RollBulletMat;
+                bool isAdd = MainRoleManager.Instance.AddStandbyBullet(curSCM.ID);
+                if (!isAdd)
+                {
+                    Debug.Log("没有位置了");
+                    return;
+                }
+                break;
+            case RollBulletMatType.Score:
+                RollScore curSCS = curSCBase as RollScore;
+                MainRoleManager.Instance.Score +=  curSCS.Score;
+                break;
         }
-        else
-        {
-            bool isAdd = MainRoleManager.Instance.AddStandbyBullet(curSC._bulletData.ID,curSC.InstanceID);
-            if (!isAdd)
-            {
-                Debug.Log("qweqwesxas");
-                return;
-            }
 
-            BulletManager.Instance.BulletUpgrade();
-        }
+        //BulletManager.Instance.BulletUpgrade();
         TrunkManager.Instance.SaveFile();
     }
 }

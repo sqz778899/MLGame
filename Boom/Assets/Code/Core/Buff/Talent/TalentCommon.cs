@@ -14,7 +14,7 @@ public class SpeAttribute
     public int standbyAdd;//加减冷板凳位置
 }
 
-public class BuffDataJson
+public class TalentDataJson
 {
     public int ID;
     public string name;

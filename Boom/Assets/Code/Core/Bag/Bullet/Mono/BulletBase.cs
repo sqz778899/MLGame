@@ -105,9 +105,6 @@ public class BulletBase : MonoBehaviour
             case BulletInsMode.Spawner:
                 SetInfo(this.gameObject);
                 break;
-            case BulletInsMode.Roll:
-                SetInfo(this.gameObject);
-                break;
             case BulletInsMode.EditA:
                 Edit_a.SetActive(true);
                 Edit_b.SetActive(false);

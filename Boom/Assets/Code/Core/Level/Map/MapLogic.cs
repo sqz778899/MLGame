@@ -45,7 +45,7 @@ public class MapLogic : MonoBehaviour
         //.............Local...................
         UIManager.Instance.InitSelectLevel();
         MainRoleManager.Instance.InitContainer();
-        MainRoleManager.Instance.InstanceStandbyBullets();
+        MainRoleManager.Instance.InitStandbyBulletMats();
         MainRoleManager.Instance.SyncBulletIcon();
     }
 

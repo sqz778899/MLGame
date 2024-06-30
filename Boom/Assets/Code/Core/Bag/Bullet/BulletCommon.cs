@@ -18,11 +18,16 @@ public enum BulletInsMode
     EditA = 2,
     EditB = 3,
     Spawner = 4,
-    Roll = 5,
     Standby = 6,
     Thumbnail = 7,
     Icon = 8,
     Mat = 9
+}
+
+public enum RollBulletMatType
+{
+    Mat = 1,
+    Score = 2
 }
 #endregion
 
@@ -36,15 +41,13 @@ public enum ElementalTypes
 }
 
 [Serializable]
-public class StandbyData
+public class StandbyData:HaveID
 {
-    public int BulletID;
     public int SlotID;
     public int InstanceID;
 
-    public StandbyData(int bulletID = 0,int slotID = 0,int instanceID = 0)
+    public StandbyData(int slotID = 0,int instanceID = 0)
     {
-        BulletID = bulletID;
         SlotID = slotID;
         InstanceID = instanceID;
     }

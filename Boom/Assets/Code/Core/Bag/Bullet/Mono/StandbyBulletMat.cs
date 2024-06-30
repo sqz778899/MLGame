@@ -1,9 +1,13 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class StandbyBullet: BulletBase, IPointerDownHandler, IPointerUpHandler, IDragHandler
+public class StandbyBulletMat:MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
+    public int ID;
+    public Image CurImg;
+    
     Vector3 originalPosition;
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -24,6 +28,13 @@ public class StandbyBullet: BulletBase, IPointerDownHandler, IPointerUpHandler, 
         {
             rectTransform.position = worldPoint;
         }
+    }
+    
+    public void InitData(int _id)
+    {
+        ID = _id;
+        CurImg.sprite = ResManager.instance.GetAssetCache<Sprite>(
+            PathConfig.GetBulletImagePath(ID, BulletInsMode.Mat));
     }
 
     public void DestroySelf()

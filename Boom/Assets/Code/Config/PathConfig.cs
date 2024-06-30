@@ -53,7 +53,8 @@ public static class PathConfig
    public static string TxtHitPB = GetPrepath() + "Res/UI/Prefabs/P_txtHit_01.prefab";
    public static string RollScorePB = GetPrepath() + "Res/Bullet/Prefab/P_RollScore_Template.prefab";
    public static string RewardCoinAsset = GetPrepath() + "Res/UI/Prefabs/Misc/P_RewardCoin_01.prefab";
-   public static string BulletEntryPB = GetPrepath() + "Res/UI/Prefabs/Misc/P_Entry_Template.prefab";
+   public static string BulletEntryPB = GetPrepath() + "Res/UI/Buff/Entry/P_Entry_Template.prefab";
+   public static string GetBulletEntryPB = GetPrepath() + "Res/UI/Buff/Entry/P_GetBulletEntry_Template.prefab";
 
    ///.........................GUI.................................
    public static string ShopAsset = GetPrepath() + "Res/UI/Prefabs/P_Shop.prefab";
@@ -70,8 +71,8 @@ public static class PathConfig
    //..........................ScoreMat.............................................
    public static string ScoreMatImage = GetPrepath() + "Res/Bullet/Textures/T_ScoreMat_01.png";
    //..........................Buff.............................................
-   public static string BuffImageDir = GetPrepath() + "Res/UI/Buff/Textures/";
-   public static string BuffPB = GetPrepath() + "Res/UI/Buff/Prefabs/P_Buff_Template.prefab";
+   public static string TalentImageDir = GetPrepath() + "Res/UI/Buff/Talent/Textures/";
+   public static string TalentPB = GetPrepath() + "Res/UI/Buff/Talent/P_Buff_Template.prefab";
    //Assets/Res/UI/Prefabs/P_Shop.prefab
    
    //..........................事件...............................
@@ -114,11 +115,11 @@ public static class PathConfig
          case BulletInsMode.EditB:
             orginName = "P_Bullet_Edit_Template.prefab";
             break;
-         case BulletInsMode.Roll:
-            orginName = "P_Bullet_Roll_Template.prefab";
+         case BulletInsMode.Mat:
+            orginName = "P_BulletRollMat_Template.prefab";
             break;
          case BulletInsMode.Standby:
-            orginName = "P_Bullet_Standby_Template.prefab";
+            orginName = "P_StandbyMat_Template.prefab";
             break;
       }
       string BulletTemplate = BulletAssetDir + orginName;
@@ -127,9 +128,6 @@ public static class PathConfig
 
    public static string GetBulletImagePath(int ID,BulletInsMode bulletInsMode)
    {
-      //temp todo
-      ID = ID % 10;
-      //"T_Bullet_Edit_a_01""T_Bullet_Inner_01"
       string orginName = "";
       switch (bulletInsMode)
       {
@@ -144,9 +142,6 @@ public static class PathConfig
             break;
          case BulletInsMode.EditB:
             orginName = "T_Bullet_Edit_b_";
-            break;
-         case BulletInsMode.Roll:
-            orginName = "T_Bullet_Edit_a_";
             break;
          case BulletInsMode.Standby:
             orginName = "T_Bullet_Edit_a_";
@@ -163,18 +158,18 @@ public static class PathConfig
          //T_Bullet_Icon_01
       }
 
-      string curIDStr = ID.ToString("D2");
+      string curIDStr = ID.ToString("D3");
       string smallDir = $"Bullet_{curIDStr}/";
-      orginName = orginName + ID.ToString("D2") + ".png";
+      orginName = orginName + ID.ToString("D3") + ".png";
       string curImagePath = BulletImageDir + smallDir + orginName;
 
       return curImagePath;
    }
-
+   
    public static string GetBufftImagePath(int ID,string name)
    {
       string orginName = "T_Buff_" + name +"_" +  ID.ToString("D2") + ".png";
-      string curImagePath = BuffImageDir + orginName;
+      string curImagePath = TalentImageDir + orginName;
       
       return curImagePath;
    }

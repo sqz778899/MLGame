@@ -8,6 +8,9 @@ public class SpriteClickHandler : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            if (UIManager.Instance.IsPauseClick)
+                return;
+            
             if (IsClicked())
                 onClick.Invoke();
         }
@@ -23,9 +26,6 @@ public class SpriteClickHandler : MonoBehaviour
 
         foreach (RaycastHit hit in hits)
         {
-            if (hit.transform.tag == "MapEvent")
-                break;
-            
             if (hit.transform == this.transform && hit.transform.tag == "SButton")
                 isClick = true;
         }

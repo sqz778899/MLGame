@@ -50,12 +50,12 @@ public class ExcelExport
     public void ExportBuffDesign()
     {
         DataSet curTables = GetDataSet();
-        List<BuffDataJson> curBuffData = new List<BuffDataJson>();
+        List<TalentDataJson> curBuffData = new List<TalentDataJson>();
         
         DataTable curTable = curTables.Tables[1];
         for (int i = 1; i < curTable.Rows.Count; i++)
         {
-            BuffDataJson curData = new BuffDataJson();
+            TalentDataJson curData = new TalentDataJson();
             CommonAttribute comAttri = new CommonAttribute();
             SpeAttribute speAttri = new SpeAttribute();
             if (curTable.Rows[i][1].ToString() == "") continue;

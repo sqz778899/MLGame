@@ -1241,7 +1241,6 @@ GameObject:
   - component: {fileID: 6078738565356865176}
   - component: {fileID: 512804906503906018}
   - component: {fileID: 5184329427471977157}
-  - component: {fileID: 6375811030225513180}
   m_Layer: 5
   m_Name: imBG
   m_TagString: MapEvent
@@ -1306,27 +1305,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!65 &6375811030225513180
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5859750299806205173}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3249.7676, y: 1841.077, z: 1}
-  m_Center: {x: -2.102215, y: -1.4683394, z: 0}
 --- !u!1 &6492739401787248977
 GameObject:
   m_ObjectHideFlags: 0

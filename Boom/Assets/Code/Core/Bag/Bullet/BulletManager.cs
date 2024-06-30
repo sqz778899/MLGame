@@ -26,7 +26,17 @@ public class BulletManager :ScriptableObject
                 (PathConfig.GetBulletTemplate(bulletInsMode)),pos,
             quaternion.identity);
     }
-   
+
+    public GameObject InstanceRollBulletMat(int ID, BulletInsMode bulletInsMode
+        , Vector3 pos = new Vector3())
+    {
+        GetIns(bulletInsMode, out GameObject RBMIns,pos);
+        RollBulletMat curSC = RBMIns.GetComponent<RollBulletMat>();
+        curSC.ID = ID;
+        curSC.InitImg();
+        return RBMIns;
+    }
+
     public GameObject InstanceBullet(int ID,BulletInsMode bulletInsMode
         ,Vector3 pos = new Vector3())
     {
@@ -68,55 +78,30 @@ public class BulletManager :ScriptableObject
         return Bullet;
     }
 
-    public GameObject InstanceStandByBullet(int bulletID,GameObject curSlot = null)
+    public GameObject InstanceStandbyMat(int bulletID,GameObject curSlot = null)
     {
-        GameObject curSDIns = null;
-        if (curSlot != null)
-        {
-            curSDIns = InstanceBullet(bulletID, BulletInsMode.Standby);
-            curSDIns.transform.SetParent(UIManager.Instance.G_BulletStandby.transform);
-            curSDIns.transform.position = Vector3.zero;
-            curSDIns.transform.localScale = Vector3.one;
-            curSDIns.GetComponent<RectTransform>().anchoredPosition3D =
-                curSlot.GetComponent<RectTransform>().anchoredPosition3D;
-        }
-        else
-        {
-            GameObject SlotGroup = UIManager.Instance.G_SlotStandby;
-            for (int i = 0; i < SlotGroup.transform.childCount; i++)
-            {
-                GameObject tmpSlot = SlotGroup.transform.GetChild(i).gameObject;
-                BulletSlotStandby curSlotSC = tmpSlot.GetComponent<BulletSlotStandby>();
-                if (curSlotSC.BulletID == 0)
-                {
-                    curSlotSC.BulletID = bulletID;
-                    curSDIns = InstanceBullet(bulletID, BulletInsMode.Standby);
-                    curSDIns.transform.SetParent(UIManager.Instance.G_BulletStandby.transform);
-                    curSDIns.transform.position = Vector3.zero;
-                    curSDIns.transform.localScale = Vector3.one;
-                    curSDIns.GetComponent<RectTransform>().anchoredPosition3D =
-                        tmpSlot.GetComponent<RectTransform>().anchoredPosition3D;
-                    break;
-                }
-            }
-        }
-        return curSDIns;
+        GetIns(BulletInsMode.Standby, out GameObject StandbyMatIns);
+        StandbyBulletMat curSC = StandbyMatIns.GetComponent<StandbyBulletMat>();
+        curSC.InitData(bulletID);
+        StandbyMatIns.transform.SetParent(
+            UIManager.Instance.G_StandbyMat.transform,false);
+        return StandbyMatIns;
     }
     #endregion
   
     public void BulletUpgrade()
     {
-        GameObject curSD = UIManager.Instance.G_BulletStandby;
+        GameObject curSD = UIManager.Instance.G_StandbyIcon;
         Dictionary<int, int> IDCount = new Dictionary<int, int>();
-        List<StandbyBullet> bulletFlags = new List<StandbyBullet>();
+        List<StandbyBulletMat> bulletFlags = new List<StandbyBulletMat>();
         for (int i = 0; i < curSD.transform.childCount; i++)
         {
             GameObject curBullet = curSD.transform.GetChild(i).gameObject;
-            StandbyBullet curSC = curBullet.GetComponentInChildren<StandbyBullet>();
-            if (!IDCount.ContainsKey(curSC._bulletData.ID))
-                IDCount.Add(curSC._bulletData.ID,1);
+            StandbyBulletMat curSC = curBullet.GetComponent<StandbyBulletMat>();
+            if (!IDCount.ContainsKey(curSC.ID))
+                IDCount.Add(curSC.ID,1);
             else
-                IDCount[curSC._bulletData.ID] += 1;
+                IDCount[curSC.ID] += 1;
             bulletFlags.Add(curSC);
         }
 
@@ -142,7 +127,7 @@ public class BulletManager :ScriptableObject
             if (each.Value == 3)
             {
                 MainRoleManager.Instance.SubStandebyBullet(each.Key);
-                InstanceStandByBullet(each.Key+100);
+                InstanceStandbyMat(each.Key+100);
             }
         }
         Debug.Log("Upgrade !!!!");

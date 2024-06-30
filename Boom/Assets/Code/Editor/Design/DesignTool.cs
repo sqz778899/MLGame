@@ -26,4 +26,17 @@ public class DesignTool
     {
         MainRoleManager.Instance.CurBulletEntries.Clear();
     }
+    
+    [Button(ButtonSizes.Large)]
+    //[ButtonGroup("Entry")]
+    void ClearStandby()
+    {
+        foreach (var each in MainRoleManager.Instance.CurStandbyBulletMats)
+        {
+            each.ID = 0;
+            each.InstanceID = 0;
+        }
+
+        MainRoleManager.Instance.InitStandbyBulletMats();
+    }
 }
