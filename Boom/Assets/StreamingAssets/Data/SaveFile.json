@@ -1,42 +1,21 @@
 {
   "Score": 0,
-  "Gold": 9999930,
+  "Gold": 10000000,
   "UserBulletSpawner": [
     {
-      "bulletID": 201,
-      "bulletCount": 2
+      "bulletID": 1,
+      "bulletCount": 5
     },
     {
       "bulletID": 2,
-      "bulletCount": 0
+      "bulletCount": 1
     },
     {
       "bulletID": 3,
       "bulletCount": 1
     }
   ],
-  "UserCurBullets": [
-    {
-      "bulletID": 201,
-      "curSlotID": 1,
-      "instanceID": -162512
-    },
-    {
-      "bulletID": 201,
-      "curSlotID": 2,
-      "instanceID": -162602
-    },
-    {
-      "bulletID": 201,
-      "curSlotID": 3,
-      "instanceID": -162692
-    },
-    {
-      "bulletID": 2,
-      "curSlotID": 4,
-      "instanceID": -162782
-    }
-  ],
+  "UserCurBullets": [],
   "UserStandbyBullet": [
     {
       "SlotID": 0,

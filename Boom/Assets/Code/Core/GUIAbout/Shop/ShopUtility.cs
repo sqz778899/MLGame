@@ -26,14 +26,14 @@ public static class ShopUtility
                     Debug.Log("没有位置了");
                     return;
                 }
+                UpgradeMaster.UpgradeBullets(); //子弹升级
                 break;
             case RollBulletMatType.Score:
                 RollScore curSCS = curSCBase as RollScore;
                 MainRoleManager.Instance.Score +=  curSCS.Score;
                 break;
         }
-
-        BulletManager.Instance.BulletUpgrade();
+        
         TrunkManager.Instance.SaveFile();
     }
 }

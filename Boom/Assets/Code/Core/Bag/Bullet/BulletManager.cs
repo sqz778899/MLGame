@@ -74,52 +74,6 @@ public class BulletManager :ScriptableObject
         return StandbyMatIns;
     }
     #endregion
-  
-    public void BulletUpgrade()
-    {
-        //.................检查一下是否有子弹需要升级...............
-        Dictionary<int, int> IDCount = new Dictionary<int, int>();
-        List<StandbyData> curSBMs = MainRoleManager.Instance.CurStandbyBulletMats;
-        for (int i = 0; i < curSBMs.Count; i++)
-        {
-            if (curSBMs[i].ID != 0)
-            {
-                if (!IDCount.ContainsKey(curSBMs[i].ID))
-                    IDCount.Add(curSBMs[i].ID,1);
-                else
-                    IDCount[curSBMs[i].ID] += 1;
-            }
-        }
-        
-        //.................升级...............
-        foreach (var each in IDCount)
-        {
-            if (each.Value == 2)
-            {
-                foreach (var eachSpawner in MainRoleManager.Instance.CurBulletSpawners)
-                {
-                    if (eachSpawner.bulletID == each.Key)
-                    {
-                        //Upgrade
-                        MainRoleManager.Instance.SubStandebyBullet(each.Key);//DelAll
-                        foreach (var eachBullet in MainRoleManager.Instance.CurBullets)
-                        {
-                            if (eachBullet.bulletID == eachSpawner.bulletID)
-                                eachBullet.bulletID += 100;
-                        }
-                        eachSpawner.bulletID += 100;
-                    }
-                }
-            }
-            if (each.Value == 3)
-            {
-                MainRoleManager.Instance.SubStandebyBullet(each.Key);//DelAll
-                MainRoleManager.Instance.AddStandbyBulletMat(each.Key+100);
-                BulletUpgrade();
-            }
-        }
-        Debug.Log("Upgrade !!!!");
-    }
 
     #region 给Tooltip用
     public BulletTooltipInfo GetBulletInfo(int bulletID)
