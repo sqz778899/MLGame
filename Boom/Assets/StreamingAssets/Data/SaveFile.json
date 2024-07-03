@@ -1,9 +1,9 @@
 {
   "Score": 0,
-  "Gold": 10000000,
+  "Gold": 9999815,
   "UserBulletSpawner": [
     {
-      "bulletID": 1,
+      "bulletID": 201,
       "bulletCount": 5
     },
     {
@@ -19,8 +19,8 @@
   "UserStandbyBullet": [
     {
       "SlotID": 0,
-      "InstanceID": 0,
-      "ID": 0
+      "InstanceID": -38492,
+      "ID": 1
     },
     {
       "SlotID": 1,

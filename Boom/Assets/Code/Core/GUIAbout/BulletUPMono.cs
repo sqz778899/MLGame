@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class BulletUPMono :GUIBase
 {
     public int ID;
-
+    
     public Image ImgBefore;
     public Image ImgAfter;
 
@@ -19,5 +19,4 @@ public class BulletUPMono :GUIBase
         ImgAfter.sprite = ResManager.instance.GetAssetCache<Sprite>(
             PathConfig.GetBulletImagePath(ID + 100, BulletInsMode.Spawner));
     }
-
 }

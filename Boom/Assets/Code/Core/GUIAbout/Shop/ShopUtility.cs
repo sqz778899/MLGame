@@ -36,4 +36,18 @@ public static class ShopUtility
         
         TrunkManager.Instance.SaveFile();
     }
+
+    //.获取目标槽位
+    public static Vector3 GetTargetSlotPos()
+    {
+        SlotStandbyMat[] SDSlots = UIManager.Instance.
+            G_StandbyIcon.GetComponentsInChildren<SlotStandbyMat>();
+
+        foreach (var each in SDSlots)
+        {
+            if (each.BulletID == 0)
+                return each.transform.position;
+        }
+        return Vector3.zero;
+    }
 }

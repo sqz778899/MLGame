@@ -445,6 +445,11 @@ public class MainRoleManager :ScriptableObject
         //..............Clear Old Data..................
         for (int i = SDBulletRoot.transform.childCount - 1; i >= 0; i--)
             DestroyImmediate(SDBulletRoot.transform.GetChild(i).gameObject);
+        for (int i = 0; i < SDSlots.Length; i++)
+        {
+            SDSlots[i].BulletID = 0;
+            SDSlots[i].InstanceID = 0;
+        }
         //..............Instance New Data..................
         for (int i = 0; i < SDSlots.Length; i++)
         {
