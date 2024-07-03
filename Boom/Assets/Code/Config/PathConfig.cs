@@ -48,18 +48,18 @@ public static class PathConfig
 
    ///.........................资源类.................................
    public static string TooltipAsset = GetPrepath() + "Res/UI/Prefabs/P_Tooltip_01.prefab";
-   public static string TexttipAsset = GetPrepath() + "Res/UI/Prefabs/P_Tooltip_Text_02.prefab";
+   public static string TexttipAsset = GetPrepath() + "Res/UI/Prefabs/Misc/P_Tooltip_Text_02.prefab";
    public static string DrawLineAsset = GetPrepath() + "Res/Map/Prefabs/P_DrawLine_01.prefab";
-   public static string TxtHitPB = GetPrepath() + "Res/UI/Prefabs/P_txtHit_01.prefab";
+   public static string TxtHitPB = GetPrepath() + "Res/UI/Prefabs/Misc/P_txtHit_01.prefab";
    public static string RollScorePB = GetPrepath() + "Res/Bullet/Prefab/P_RollScore_Template.prefab";
-   public static string RewardCoinAsset = GetPrepath() + "Res/UI/MapAbout/P_RewardCoin_01.prefab";
+   public static string RewardCoinAsset = GetPrepath() + "Res/UI/Prefabs/Misc/P_RewardCoin_01.prefab";
    public static string BulletEntryPB = GetPrepath() + "Res/UI/Buff/Entry/P_Entry_Template.prefab";
-   public static string GetBulletEntryPB = GetPrepath() + "Res/UI/MapAbout/P_GetBulletEntry_Template.prefab";
+   public static string GetBulletEntryPB = GetPrepath() + "Res/UI/Prefabs/Popup/P_GetBulletEntry_Template.prefab";
 
    ///.........................GUI.................................
-   public static string ShopAsset = GetPrepath() + "Res/UI/Prefabs/P_Shop.prefab";
-   public static string  PRDisplayBarPB = GetPrepath() + "Res/UI/MapAbout/PRBar_Template.prefab";
-   public static string  BulletUPPB = GetPrepath() + "Res/UI/MapAbout/P_BulletUP_01.prefab";
+   public static string ShopAsset = GetPrepath() + "Res/UI/Prefabs/Popup/P_Shop.prefab";
+   public static string  PRDisplayBarPB = GetPrepath() + "Res/UI/Prefabs/Misc/PRBar_Template.prefab";
+   public static string  BulletUPPB = GetPrepath() + "Res/UI/Prefabs/Popup/P_BulletUP_01.prefab";
    //...........................角色.................................
    public static string GetRoleImgPath(int ID)
    {
@@ -82,11 +82,11 @@ public static class PathConfig
       string IDStr = ID.ToString("D2");
       string TypeStr = CurType.ToString();
       string PBName = $"P_{TypeStr}_{IDStr}.prefab" ;
-      return GetPrepath() + "Res/UI/MapAbout/REvents/" + PBName;
+      return GetPrepath() + "Res/UI/Prefabs/REvents/" + PBName;
    }
    //..........................MapNode...............................
    public static string MapNodeEvent = GetPrepath() + "Res/Map/Prefabs/P_NodeEvent_01.prefab";
-   public static string MapShop = GetPrepath() + "Res/Map/Prefabs/P_NodeShop_01.prefab";
+   public static string MapShop = GetPrepath() + "Res/Map/Prefabs/Popup/P_NodeShop_01.prefab";
    public static string MapGoldPile = GetPrepath() + "Res/Map/Prefabs/P_NodeCoinsPile_01.prefab";
    public static string MapTreasureBox = GetPrepath() + "Res/Map/Prefabs/P_NodeTreasureBox_01.prefab";
    

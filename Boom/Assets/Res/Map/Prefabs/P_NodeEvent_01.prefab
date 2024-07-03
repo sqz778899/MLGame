@@ -207,6 +207,7 @@ MonoBehaviour:
   OpenFog:
     openFogRadius: 10
     openFogFadeRange: 10
+  CurType: 1
   EventID: 1
 --- !u!1 &4582479987826825846
 GameObject:
