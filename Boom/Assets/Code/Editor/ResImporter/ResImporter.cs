@@ -11,7 +11,7 @@ public class ResImporter : AssetPostprocessor
             assetPath.StartsWith("Assets/Res/UI/") ||
             assetPath.StartsWith("Assets/Res/Character/"))
         {
-            int MaxSize = 2048;
+            int MaxSize = 4096;
             TextureImporter textureImporter = (TextureImporter)assetImporter;
             textureImporter.textureType = TextureImporterType.Sprite;
             textureImporter.mipmapEnabled = false;
