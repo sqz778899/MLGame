@@ -16,7 +16,10 @@ Shader "Boom/Parallax Cloud"
 	SubShader
 	{
 		//当前为透明
-		Tags { "RenderType" = "Transparent" "Queue" = "Transparent-50" "RenderPipeline" = "UniversalRenderPipeline" "LightMode" = "UniversalForward"}
+		Tags { "RenderType" = "Transparent"
+			"Queue" = "Transparent-50"
+			"RenderPipeline" = "UniversalRenderPipeline"
+			"LightMode" = "UniversalForward"}
 
 
 		HLSLINCLUDE
