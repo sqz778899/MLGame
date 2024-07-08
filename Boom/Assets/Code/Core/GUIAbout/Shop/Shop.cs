@@ -10,7 +10,7 @@ public class Shop:GUIBase
     public ShopNode CurShopNode;
 
     const int rowOffet = 756;
-    const int columnOffet = -108;
+    const int columnOffet = -125;
     void Start()
     {
         GetCurPRBarDisplay();
@@ -75,8 +75,8 @@ public class Shop:GUIBase
     #endregion
 
     #region Bar
-    //-1118 -200 //-362 -200
-    //-1118 -308
+    //1086 -151
+    //1086 -276
     void GetCurPRBarDisplay()
     {
         List<RollPR> CurRollPR = MainRoleManager.Instance.CurRollPR;
@@ -89,7 +89,7 @@ public class Shop:GUIBase
                 row++;
                 column = 0;
             }
-            Vector2 curPos = new Vector2(-1118 + row*rowOffet, -200 + column*columnOffet);
+            Vector2 curPos = new Vector2(1086 + row*rowOffet, -151 + column*columnOffet);
             
             GameObject curBar = ResManager.instance.IntanceAsset(PathConfig.PRDisplayBarPB);
             curBar.transform.SetParent(BarRoot.transform,false);

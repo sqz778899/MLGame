@@ -152,6 +152,8 @@ public class UIManager : ScriptableObject
         #region InitTileRoot相关
         if (TitleRoot == null)
             TitleRoot = GameObject.Find("TitleRoot");
+        if (TitleRoot == null)
+            return;
         
         TitleRootMono titleRootMono = TitleRoot.GetComponent<TitleRootMono>();
         TitleGold = titleRootMono.TitleGold;

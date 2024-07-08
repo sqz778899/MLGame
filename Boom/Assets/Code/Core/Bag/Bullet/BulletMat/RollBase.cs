@@ -27,8 +27,16 @@ public class RollBase:MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPo
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        //飘过去
-        StartCoroutine(SelOne(eventData.pointerClick));
+        //如果是分数，不播放动画，如果是材料，有一个小动画
+        if (CurType == RollBulletMatType.Score)
+        {
+            ShopUtility.SelOne(eventData.pointerClick);
+            DestroyImmediate(gameObject);
+        }
+        else
+            //飘过去
+            StartCoroutine(SelOne(eventData.pointerClick));
+     
     }
 
     IEnumerator SelOne(GameObject SelGO)
