@@ -4,38 +4,50 @@ using UnityEngine;
 
 public class DebugTool
 {
-    public Canvas ss;
-    public Vector3 CurScreenP;
+    public GameObject orgin;
+    
     [Button(ButtonSizes.Large)]
     void Debugsss()
     {
         Testss();
-        Debug.Log(Camera.main.nearClipPlane);
-        /*Vector3 s = MyRay(CurScreenP);
-        GameObject p = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        p.transform.position = s;*/
     }
     void Testss()
     {
-        RectTransform rectTransform = ss.GetComponent<RectTransform>();
-
-        Vector3[] corners = new Vector3[4];
-
-        // 获取四个角的位置
-        rectTransform.GetWorldCorners(corners);
-
-        for(int i = 0;i < corners.Length;i++)
-        {
-            Ray curRay = new Ray(corners[i], new Vector3(0, 0, 1));
-            RaycastHit hit;
-            Physics.Raycast(curRay, out hit);
-            
-            // 创建球体并设置位置
-            GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            sphere.name = "Sphere" + i;
-            sphere.transform.position = hit.point;
-        }
+        float maxRadius = 15f;
         
+        float step = 0.5f;
+        float startY = maxRadius;
+        float startX = maxRadius;
+
+        int Count = (int)(maxRadius * 2 / step) + 1;
+        for (int i = 0; i < Count; i++)
+        {
+            for (int j = 0; j < Count; j++)
+            {
+                float x = startX - step * i;
+                float y = startY - step * j;
+                if (CheckIden(x, y,maxRadius))
+                {
+                    CreateSphere(new Vector2(x, y));
+                }
+            }
+        }
+    }
+
+    bool CheckIden(float x, float y,float radius)
+    {
+        bool s = false;
+        if ((x * x + y * y) <= radius*radius)
+        {
+            s = true;
+        }
+        return s;
+    }
+
+    void CreateSphere(Vector2 pos)
+    {
+        GameObject p = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        p.transform.position = pos;
     }
     
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public static class NodeUtility
 {
@@ -21,5 +22,34 @@ public static class NodeUtility
                 break;
         }
         return MapNodeIns;
+    }
+
+    public static Vector2[] CreateLayoutPoints(float radius,float step)
+    {
+        List<Vector2> LayoutPoints = new List<Vector2>();
+        float startY = radius;
+        float startX = radius;
+
+        int Count = (int)(radius * 2 / step) + 1;
+        for (int i = 0; i < Count; i++)
+        {
+            for (int j = 0; j < Count; j++)
+            {
+                float x = startX - step * i;
+                float y = startY - step * j;
+                if (CheckIden(x, y,radius))
+                    LayoutPoints.Add(new Vector2(x, y));
+            }
+        }
+
+        return LayoutPoints.ToArray();
+    }
+    
+    static bool CheckIden(float x, float y,float radius)
+    {
+        bool s = false;
+        if ((x * x + y * y) <= radius*radius)
+            s = true;
+        return s;
     }
 }

@@ -5,7 +5,15 @@ using Random = UnityEngine.Random;
 public class MainNode:MapNodeBase
 {
     public int LevelID;
+    public float Step;
+    public Vector2[] LayoutPoints;
 
+    void Start()
+    {
+        //NodeUtility.CreateLayoutPoints();
+    }
+    
+    
     void Update()
     {
         txtTitle.text = string.Format("LV{0}", LevelID);
@@ -16,19 +24,42 @@ public class MainNode:MapNodeBase
         MSceneManager.Instance.CurMapSate.LevelID = LevelID;
         MSceneManager.Instance.LoadScene(2);
     }
-
-    public void ppp()
+    
+    void Testss()
     {
-        Vector3 myPos = transform.position;
-        float radius = 100;
-        //Random.insideUnitCircle
+        float maxRadius = 15f;
         
-        for (int i = 0; i < 150; i++) {
-            var rand = Random.insideUnitCircle * 3;
-            var obj = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            obj.transform.position = new Vector3(rand.x, 0, rand.y);
-            obj.transform.localScale = Vector3.one * 0.3f;
+        float step = 0.5f;
+        float startY = maxRadius;
+        float startX = maxRadius;
+
+        int Count = (int)(maxRadius * 2 / step) + 1;
+        for (int i = 0; i < Count; i++)
+        {
+            for (int j = 0; j < Count; j++)
+            {
+                float x = startX - step * i;
+                float y = startY - step * j;
+                if (CheckIden(x, y,maxRadius))
+                {
+                    CreateSphere(new Vector2(x, y));
+                }
+            }
         }
+    }
+
+    bool CheckIden(float x, float y,float radius)
+    {
+        bool s = false;
+        if ((x * x + y * y) <= radius*radius)
+            s = true;
+        return s;
+    }
+
+    void CreateSphere(Vector2 pos)
+    {
+        GameObject p = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        p.transform.position = pos;
     }
 
     public void SpawnResNode()
