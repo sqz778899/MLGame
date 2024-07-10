@@ -1,53 +1,49 @@
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 
 public class DebugTool
 {
-    public GameObject orgin;
+    public MainNode MainNode;
+    public Transform testSphere;
     
     [Button(ButtonSizes.Large)]
     void Debugsss()
     {
-        Testss();
-    }
-    void Testss()
-    {
-        float maxRadius = 15f;
-        
-        float step = 0.5f;
-        float startY = maxRadius;
-        float startX = maxRadius;
-
-        int Count = (int)(maxRadius * 2 / step) + 1;
-        for (int i = 0; i < Count; i++)
+        float maxRadius = MainNode.ColCotain.radius;
+        float Step = MainNode.Step;
+        List<Vector3> LayoutPoints = NodeUtility.CreateLayoutPoints(
+            maxRadius,0.1f,MainNode.transform.position.z);
+        GameObject root = new GameObject("Root");
+        foreach (var each in LayoutPoints)
         {
-            for (int j = 0; j < Count; j++)
-            {
-                float x = startX - step * i;
-                float y = startY - step * j;
-                if (CheckIden(x, y,maxRadius))
-                {
-                    CreateSphere(new Vector2(x, y));
-                }
-            }
+            CreateSphere(each,root.transform);
         }
     }
 
-    bool CheckIden(float x, float y,float radius)
-    {
-        bool s = false;
-        if ((x * x + y * y) <= radius*radius)
-        {
-            s = true;
-        }
-        return s;
-    }
-
-    void CreateSphere(Vector2 pos)
+    void CreateSphere(Vector2 pos,Transform root)
     {
         GameObject p = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        p.transform.localScale = new Vector3(0.1f,0.1f,0.1f);
         p.transform.position = pos;
+        p.transform.SetParent(root);
+    }
+    
+    
+    [Button(ButtonSizes.Large)]
+    void Debugsss2()
+    {
+        Vector2 pos = new Vector2(6.5f,1.5f);
+        Debug.Log(MainNode.ColExclude.radius);
+        if (MainNode.ColExclude.bounds.Contains(pos))
+        {
+            Debug.Log("Overlap");
+        }
+        else
+        {
+            Debug.Log("Not Overlap");
+        }
     }
     
 }

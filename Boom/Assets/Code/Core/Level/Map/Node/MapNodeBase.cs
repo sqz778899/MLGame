@@ -21,13 +21,15 @@ public class MapNodeBase : MonoBehaviour
     public TextMeshPro txtTitle;
     //解锁迷雾的参数
     public NodeOpenFog OpenFog;
+    //撒点排除的碰撞体
+    public SphereCollider ColExclude;
 
     void Awake()
     {
         _fxs = Node_FX.GetComponentsInChildren<ParticleSystem>(true);
     }
 
-    void Start()
+    internal virtual void Start()
     {
         ChangeState();
     }

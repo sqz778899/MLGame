@@ -1,22 +1,36 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class MainNode:MapNodeBase
 {
     public int LevelID;
-    public float Step;
-    public Vector2[] LayoutPoints;
-
-    void Start()
-    {
-        //NodeUtility.CreateLayoutPoints();
-    }
+    public float Step = 0.05f;
+    public List<Vector3> LayoutPoints;
     
+    public CircleCollider2D ColCotain;
+    
+    //
+    bool isSpwaned = false;
+
+    internal override void Start()
+    {
+        base.Start();
+        float maxRadius = ColCotain.radius;
+        Debug.Log(transform.position.z);
+        LayoutPoints = NodeUtility.CreateLayoutPoints(maxRadius,Step,transform.position.z);
+        NodeUtility.ExcludePointsPool(ref LayoutPoints, ColExclude);
+    }
     
     void Update()
     {
         txtTitle.text = string.Format("LV{0}", LevelID);
+        if (!isSpwaned)
+        {
+            SpawnResNode();
+            isSpwaned = true;
+        }
     }
 
     public void EnterFight()
@@ -25,60 +39,38 @@ public class MainNode:MapNodeBase
         MSceneManager.Instance.LoadScene(2);
     }
     
-    void Testss()
-    {
-        float maxRadius = 15f;
-        
-        float step = 0.5f;
-        float startY = maxRadius;
-        float startX = maxRadius;
-
-        int Count = (int)(maxRadius * 2 / step) + 1;
-        for (int i = 0; i < Count; i++)
-        {
-            for (int j = 0; j < Count; j++)
-            {
-                float x = startX - step * i;
-                float y = startY - step * j;
-                if (CheckIden(x, y,maxRadius))
-                {
-                    CreateSphere(new Vector2(x, y));
-                }
-            }
-        }
-    }
-
-    bool CheckIden(float x, float y,float radius)
-    {
-        bool s = false;
-        if ((x * x + y * y) <= radius*radius)
-            s = true;
-        return s;
-    }
-
-    void CreateSphere(Vector2 pos)
-    {
-        GameObject p = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        p.transform.position = pos;
-    }
-
+    //生成周围Node
     public void SpawnResNode()
     {
         //Shop   1
-        //Event   1
-        GameObject EventIns = ResManager.instance.CreatInstance(PathConfig.MapNodeEvent);
-        EventNode CurNode = EventIns.GetComponent<EventNode>();
-        //CoinPile  1-2
-        //TreasureBox 1-2
+        //Event   2
+        //CoinPile  3
+        //TreasureBox 4
+        int type = Random.Range(1, 5);
+        SpawnResNodeSingle(type);
     }
-    
-    public class tempsss
+
+    void SpawnResNodeSingle(int type)
     {
-        //map lv1 1
-        //map lv2 1
-        //Event lv1 1
-        //shop lv1 1
+        Vector3 curP = LayoutPoints[Random.Range(0, LayoutPoints.Count)];
+        GameObject curNode = null;
+        switch (type)
+        {
+            case 1:
+                curNode = ResManager.instance.CreatInstance(PathConfig.MapShop);
+                break;
+            case 2:
+                curNode = ResManager.instance.CreatInstance(PathConfig.MapNodeEvent);
+                break;
+            case 3:
+                curNode = ResManager.instance.CreatInstance(PathConfig.MapGoldPile);
+                break;
+            case 4:
+                curNode = ResManager.instance.CreatInstance(PathConfig.MapTreasureBox);
+                break;
+        }
+        
+        curNode.transform.position = curP;
+        curNode.transform.SetParent(UIManager.Instance.MapNode.transform,false);
     }
-    
-    //生成周围Node
 }

@@ -121,6 +121,7 @@ public class UIManager : ScriptableObject
     #endregion
 
     #region 3.MiniMap
+    public GameObject MapNode;
     public GameObject ShopRoot;
     public GameObject REventRoot;
     public GameObject RewardRoot;
@@ -128,6 +129,7 @@ public class UIManager : ScriptableObject
     public void InitSelectLevel()
     {
         InitComon();
+        MapNode = GameObject.Find("MapNode");
         ShopRoot = GameObject.Find("ShopRoot");
         REventRoot = GameObject.Find("REventRoot");
         RewardRoot = GameObject.Find("RewardRoot");

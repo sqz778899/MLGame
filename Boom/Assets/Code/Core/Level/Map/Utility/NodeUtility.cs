@@ -24,9 +24,9 @@ public static class NodeUtility
         return MapNodeIns;
     }
 
-    public static Vector2[] CreateLayoutPoints(float radius,float step)
+    public static List<Vector3> CreateLayoutPoints(float radius,float step,float Z)
     {
-        List<Vector2> LayoutPoints = new List<Vector2>();
+        List<Vector3> LayoutPoints = new List<Vector3>();
         float startY = radius;
         float startX = radius;
 
@@ -38,11 +38,19 @@ public static class NodeUtility
                 float x = startX - step * i;
                 float y = startY - step * j;
                 if (CheckIden(x, y,radius))
-                    LayoutPoints.Add(new Vector2(x, y));
+                    LayoutPoints.Add(new Vector3(x, y,Z));
             }
         }
+        return LayoutPoints;
+    }
 
-        return LayoutPoints.ToArray();
+    public static void ExcludePointsPool(ref List<Vector3> LayoutPoints, Collider ColExclude)
+    {
+        for (int i = LayoutPoints.Count - 1; i >= 0; i--)
+        {
+            if (ColExclude.bounds.Contains(LayoutPoints[i]))
+                LayoutPoints.RemoveAt(i);
+        }
     }
     
     static bool CheckIden(float x, float y,float radius)

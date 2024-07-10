@@ -86,7 +86,7 @@ public static class PathConfig
    }
    //..........................MapNode...............................
    public static string MapNodeEvent = GetPrepath() + "Res/Map/Prefabs/P_NodeEvent_01.prefab";
-   public static string MapShop = GetPrepath() + "Res/Map/Prefabs/Popup/P_NodeShop_01.prefab";
+   public static string MapShop = GetPrepath() + "Res/Map/Prefabs/P_NodeShop_01.prefab";
    public static string MapGoldPile = GetPrepath() + "Res/Map/Prefabs/P_NodeCoinsPile_01.prefab";
    public static string MapTreasureBox = GetPrepath() + "Res/Map/Prefabs/P_NodeTreasureBox_01.prefab";
    
