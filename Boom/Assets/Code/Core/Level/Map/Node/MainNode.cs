@@ -48,10 +48,17 @@ public class MainNode:MapNodeBase
         //TreasureBox 4
         int type = Random.Range(1, 5);
         SpawnResNodeSingle(type);
+        
+        GameObject root = new GameObject("Root");
+        foreach (var each in LayoutPoints)
+        {
+            CreateSphere(each,root.transform);
+        }
     }
 
     void SpawnResNodeSingle(int type)
     {
+        //............Spawn GO..................
         Vector3 curP = LayoutPoints[Random.Range(0, LayoutPoints.Count)];
         GameObject curNode = null;
         switch (type)
@@ -72,5 +79,19 @@ public class MainNode:MapNodeBase
         
         curNode.transform.position = curP;
         curNode.transform.SetParent(UIManager.Instance.MapNode.transform,false);
+        
+        //............Refresh Pool..................
+        MapNodeBase curNodeSC = curNode.GetComponent<MapNodeBase>();
+        Debug.Log(curNodeSC.ColExclude.radius);
+        Debug.Log(curNodeSC.ColExclude.transform.position);
+        NodeUtility.ExcludePointsPool(ref LayoutPoints, curNodeSC.ColExclude);
+    }
+    
+    void CreateSphere(Vector3 pos,Transform root)
+    {
+        GameObject p = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        //p.transform.localScale = new Vector3(0.1f,0.1f,0.1f);
+        p.transform.position = pos;
+        p.transform.SetParent(root);
     }
 }

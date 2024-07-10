@@ -6,26 +6,29 @@ using UnityEngine;
 public class DebugTool
 {
     public MainNode MainNode;
-    public Transform testSphere;
+    public MapNodeBase ExceptNode;
     
     [Button(ButtonSizes.Large)]
     void Debugsss()
     {
         float maxRadius = MainNode.ColCotain.radius;
         float Step = MainNode.Step;
+        Debug.Log(MainNode.transform.position.z);
         List<Vector3> LayoutPoints = NodeUtility.CreateLayoutPoints(
-            maxRadius,0.1f,MainNode.transform.position.z);
+            maxRadius,1f,MainNode.transform.position.z);
         GameObject root = new GameObject("Root");
+        NodeUtility.ExcludePointsPool(ref LayoutPoints, MainNode.ColExclude);
+        NodeUtility.ExcludePointsPool(ref LayoutPoints, ExceptNode.ColExclude);
         foreach (var each in LayoutPoints)
         {
             CreateSphere(each,root.transform);
         }
     }
 
-    void CreateSphere(Vector2 pos,Transform root)
+    void CreateSphere(Vector3 pos,Transform root)
     {
         GameObject p = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        p.transform.localScale = new Vector3(0.1f,0.1f,0.1f);
+        //p.transform.localScale = new Vector3(0.1f,0.1f,0.1f);
         p.transform.position = pos;
         p.transform.SetParent(root);
     }

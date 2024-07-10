@@ -44,12 +44,16 @@ public static class NodeUtility
         return LayoutPoints;
     }
 
-    public static void ExcludePointsPool(ref List<Vector3> LayoutPoints, Collider ColExclude)
+    public static void ExcludePointsPool(ref List<Vector3> LayoutPoints, CircleCollider2D ColExclude)
     {
         for (int i = LayoutPoints.Count - 1; i >= 0; i--)
         {
-            if (ColExclude.bounds.Contains(LayoutPoints[i]))
+            Vector3 curP = LayoutPoints[i];
+            Vector2 newP = new Vector2(curP.x, curP.y);
+            if (ColExclude.OverlapPoint(newP))
+            {
                 LayoutPoints.RemoveAt(i);
+            }
         }
     }
     

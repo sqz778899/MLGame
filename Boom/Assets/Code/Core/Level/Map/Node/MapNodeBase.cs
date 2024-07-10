@@ -22,7 +22,7 @@ public class MapNodeBase : MonoBehaviour
     //解锁迷雾的参数
     public NodeOpenFog OpenFog;
     //撒点排除的碰撞体
-    public SphereCollider ColExclude;
+    public CircleCollider2D ColExclude;
 
     void Awake()
     {
