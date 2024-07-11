@@ -15,7 +15,7 @@ public class DebugTool
         float Step = MainNode.Step;
         Debug.Log(MainNode.transform.position.z);
         List<Vector3> LayoutPoints = NodeUtility.CreateLayoutPoints(
-            maxRadius,1f,MainNode.transform.position.z);
+            maxRadius,1f,MainNode.transform.position);
         GameObject root = new GameObject("Root");
         //NodeUtility.ExcludePointsPool(ref LayoutPoints, MainNode.ColExclude);
         //NodeUtility.ExcludePointsPool(ref LayoutPoints, ExceptNode.ColExclude);

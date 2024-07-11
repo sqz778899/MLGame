@@ -1,10 +1,10 @@
 {
-  "Score": 0,
-  "Gold": 10000000,
+  "Score": 420,
+  "Gold": 9999940,
   "UserBulletSpawner": [
     {
-      "bulletID": 1,
-      "bulletCount": 5
+      "bulletID": 101,
+      "bulletCount": 1
     },
     {
       "bulletID": 2,
@@ -12,15 +12,41 @@
     },
     {
       "bulletID": 3,
-      "bulletCount": 1
+      "bulletCount": 0
     }
   ],
-  "UserCurBullets": [],
+  "UserCurBullets": [
+    {
+      "bulletID": 101,
+      "curSlotID": 1,
+      "instanceID": -325094
+    },
+    {
+      "bulletID": 101,
+      "curSlotID": 2,
+      "instanceID": -328496
+    },
+    {
+      "bulletID": 3,
+      "curSlotID": 3,
+      "instanceID": -330288
+    },
+    {
+      "bulletID": 101,
+      "curSlotID": 4,
+      "instanceID": -331804
+    },
+    {
+      "bulletID": 101,
+      "curSlotID": 5,
+      "instanceID": -333182
+    }
+  ],
   "UserStandbyBullet": [
     {
       "SlotID": 0,
-      "InstanceID": 0,
-      "ID": 0
+      "InstanceID": -347540,
+      "ID": 101
     },
     {
       "SlotID": 1,
@@ -49,9 +75,17 @@
     {
       "CurMapID": 1,
       "MapID": 1,
-      "LevelID": 1,
-      "IsFinishedLevels": []
+      "LevelID": 2,
+      "IsFinishedLevels": [
+        1,
+        2
+      ]
     }
   ],
-  "CurRollPREveIDs": []
+  "CurRollPREveIDs": [
+    1,
+    1,
+    1,
+    1
+  ]
 }

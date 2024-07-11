@@ -24,11 +24,12 @@ public static class NodeUtility
         return MapNodeIns;
     }
 
-    public static List<Vector3> CreateLayoutPoints(float radius,float step,float Z)
+    public static List<Vector3> CreateLayoutPoints(float radius,float step,Vector3 postion)
     {
         List<Vector3> LayoutPoints = new List<Vector3>();
-        float startY = radius;
-        float startX = radius;
+        float startY = radius + postion.y;
+        float startX = radius + postion.x;
+        float startZ = postion.z;
 
         int Count = (int)(radius * 2 / step) + 1;
         for (int i = 0; i < Count; i++)
@@ -37,8 +38,11 @@ public static class NodeUtility
             {
                 float x = startX - step * i;
                 float y = startY - step * j;
-                if (CheckIden(x, y,radius))
-                    LayoutPoints.Add(new Vector3(x, y,Z));
+                Vector3 curPoolPos = new Vector3(x, y, startZ);
+                if (Vector3.Distance(curPoolPos, postion) <= radius)
+                {
+                    LayoutPoints.Add(curPoolPos);
+                }
             }
         }
         return LayoutPoints;
@@ -54,13 +58,5 @@ public static class NodeUtility
             if (Vector2.Distance(newP, curPos) <= ExcludeRadius)
                 LayoutPoints.RemoveAt(i);
         }
-    }
-    
-    static bool CheckIden(float x, float y,float radius)
-    {
-        bool s = false;
-        if ((x * x + y * y) <= radius*radius)
-            s = true;
-        return s;
     }
 }

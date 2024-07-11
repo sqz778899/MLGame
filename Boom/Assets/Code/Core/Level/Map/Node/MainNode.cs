@@ -11,7 +11,7 @@ public class MainNode:MapNodeBase
     //SpaenNode相关
     public float Step = 0.05f;
     public float CotainRaius = 55f;
-    public List<Vector3> LayoutPoints;
+    public List<Vector3> LayoutPoints = new List<Vector3>();
     public Vector2Int ShopNodeCountRange = new Vector2Int(1, 1);
     public Vector2Int EventNodeCountRange = new Vector2Int(1, 2);
     public Vector2Int CoinPileNodeCountRange = new Vector2Int(1, 2);
@@ -38,14 +38,14 @@ public class MainNode:MapNodeBase
     {
         base.Start();
         LayoutPoints = NodeUtility.CreateLayoutPoints(
-            CotainRaius,Step,transform.position.z);
+            CotainRaius,Step,transform.position);
         NodeUtility.ExcludePointsPool(ref LayoutPoints, ExcludeRadius,transform.position);
     }
     
     void Update()
     {
         txtTitle.text = string.Format("LV{0}", LevelID);
-        if (!isSpwaned)
+        if (!isSpwaned && State == MapNodeState.IsFinish)
         {
             SpawnResNode();
             isSpwaned = true;
@@ -69,6 +69,7 @@ public class MainNode:MapNodeBase
         SpawnByType(2,EventNodeCountRange);
         SpawnByType(3,CoinPileNodeCountRange);
         SpawnByType(4,TreasureBoxNodeCountRange);
+        LayoutPoints.Clear();
     }
 
     public void SpawnByType(int type,Vector2Int ShopNodeCountRange)

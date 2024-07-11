@@ -12,4 +12,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfe3de5847756494999c50ba29eace8f, type: 3}
   m_Name: MainRoleManager
   m_EditorClassIdentifier: 
-  bullets: []
+  CurBullets:
+  - bulletID: 1
+    curSlotID: 1
+    instanceID: -263016
+  - bulletID: 3
+    curSlotID: 2
+    instanceID: -265130
+  - bulletID: 1
+    curSlotID: 3
+    instanceID: -266416
+  - bulletID: 2
+    curSlotID: 4
+    instanceID: -271428
+  - bulletID: 1
+    curSlotID: 5
+    instanceID: -273772
+  CurBulletEntries: []
+  Score: 1000
+  Gold: 10000000
+  ShopCost: 5
+  RollEntryCost: 5
+  CurBulletSpawners:
+  - bulletID: 1
+    bulletCount: 2
+  - bulletID: 2
+    bulletCount: 0
+  - bulletID: 3
+    bulletCount: 0
+  CurStandbyBulletMats:
+  - ID: 0
+    SlotID: 0
+    InstanceID: 0
+  - ID: 0
+    SlotID: 1
+    InstanceID: 0
+  - ID: 0
+    SlotID: 2
+    InstanceID: 0
+  - ID: 0
+    SlotID: 3
+    InstanceID: 0
+  - ID: 0
+    SlotID: 4
+    InstanceID: 0
+  SupremeCharms: []
+  CurRollPR:
+  - ID: 0
+    Probability: 0.99
+  - ID: 1
+    Probability: 0.01
+  CurRollPREveIDs: 
+  WinOrFailState: 1

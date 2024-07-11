@@ -96,6 +96,8 @@ public class UIManager : ScriptableObject
     #endregion
 
     #region 2.Level
+
+    public GameObject G_BulletInScene;
     public GameObject GroupBuffRogue;
     public LevelLogicMono LevelLogic;
     //childs
@@ -110,7 +112,10 @@ public class UIManager : ScriptableObject
 
         if (LevelLogic == null)
             LevelLogic = GameObject.Find("LevelLogic").GetComponent<LevelLogicMono>();
-        
+
+        if (G_BulletInScene == null)
+            G_BulletInScene = GameObject.Find("G_BulletInScene");
+
         //...................Childs............................
         GameObject GroupEnemy = GameObject.Find("GroupEnemy");
         EnemyILIns = GroupEnemy.transform.GetChild(0).gameObject;

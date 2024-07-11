@@ -67,7 +67,7 @@ public class LevelLogicMono : MonoBehaviour
     void WinOrFailThisLevel()
     {
         //如果子弹为0，且敌人未死则失败
-        if (UIManager.Instance.G_Bullet.transform.childCount == 0 && 
+        if (UIManager.Instance.G_BulletInScene.transform.childCount == 0 && 
             UIManager.Instance.EnemyILIns != null)
             if ( UIManager.Instance.EnemyILIns.GetComponent<Enemy>().health > 0)
                 MainRoleManager.Instance.WinOrFailState = WinOrFail.Fail;
@@ -122,8 +122,8 @@ public class LevelLogicMono : MonoBehaviour
             if (i == 0)
                 FirstBullet = curBullet;
             
-            if (curBullet != null && UIManager.Instance.G_Bullet != null)
-                curBullet.transform.SetParent(UIManager.Instance.G_Bullet.transform);
+            if (curBullet != null)
+                curBullet.transform.SetParent(UIManager.Instance.G_BulletInScene.transform);
             yield return new WaitForSeconds(delay);  // 在发射下一个子弹之前，等待delay秒
         }
         
