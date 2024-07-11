@@ -6,10 +6,30 @@ using Random = UnityEngine.Random;
 public class MainNode:MapNodeBase
 {
     public int LevelID;
+
+    #region SpaenNode相关
+    //SpaenNode相关
     public float Step = 0.05f;
+    public float CotainRaius = 55f;
     public List<Vector3> LayoutPoints;
+    public Vector2Int ShopNodeCountRange = new Vector2Int(1, 1);
+    public Vector2Int EventNodeCountRange = new Vector2Int(1, 2);
+    public Vector2Int CoinPileNodeCountRange = new Vector2Int(1, 2);
+    public Vector2Int TreasureBoxNodeCountRange = new Vector2Int(1, 2);
+    //Shop   1
+    //Event   2
+    //CoinPile  3
+    //TreasureBox 4
+    #endregion
     
-    public CircleCollider2D ColCotain;
+#if UNITY_EDITOR
+    internal override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, CotainRaius);
+    }
+#endif
     
     //
     bool isSpwaned = false;
@@ -17,10 +37,9 @@ public class MainNode:MapNodeBase
     internal override void Start()
     {
         base.Start();
-        float maxRadius = ColCotain.radius;
-        Debug.Log(transform.position.z);
-        LayoutPoints = NodeUtility.CreateLayoutPoints(maxRadius,Step,transform.position.z);
-        NodeUtility.ExcludePointsPool(ref LayoutPoints, ColExclude);
+        LayoutPoints = NodeUtility.CreateLayoutPoints(
+            CotainRaius,Step,transform.position.z);
+        NodeUtility.ExcludePointsPool(ref LayoutPoints, ExcludeRadius,transform.position);
     }
     
     void Update()
@@ -46,13 +65,18 @@ public class MainNode:MapNodeBase
         //Event   2
         //CoinPile  3
         //TreasureBox 4
-        int type = Random.Range(1, 5);
-        SpawnResNodeSingle(type);
-        
-        GameObject root = new GameObject("Root");
-        foreach (var each in LayoutPoints)
+        SpawnByType(1,ShopNodeCountRange);
+        SpawnByType(2,EventNodeCountRange);
+        SpawnByType(3,CoinPileNodeCountRange);
+        SpawnByType(4,TreasureBoxNodeCountRange);
+    }
+
+    public void SpawnByType(int type,Vector2Int ShopNodeCountRange)
+    {
+        int curShopCount = Random.Range(ShopNodeCountRange.x, ShopNodeCountRange.y + 1);
+        for (int i = 0; i < curShopCount; i++)
         {
-            CreateSphere(each,root.transform);
+            SpawnResNodeSingle(type);
         }
     }
 
@@ -82,16 +106,6 @@ public class MainNode:MapNodeBase
         
         //............Refresh Pool..................
         MapNodeBase curNodeSC = curNode.GetComponent<MapNodeBase>();
-        Debug.Log(curNodeSC.ColExclude.radius);
-        Debug.Log(curNodeSC.ColExclude.transform.position);
-        NodeUtility.ExcludePointsPool(ref LayoutPoints, curNodeSC.ColExclude);
-    }
-    
-    void CreateSphere(Vector3 pos,Transform root)
-    {
-        GameObject p = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        //p.transform.localScale = new Vector3(0.1f,0.1f,0.1f);
-        p.transform.position = pos;
-        p.transform.SetParent(root);
+        NodeUtility.ExcludePointsPool(ref LayoutPoints, curNodeSC.ExcludeRadius,curP);
     }
 }

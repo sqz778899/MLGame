@@ -11,14 +11,14 @@ public class DebugTool
     [Button(ButtonSizes.Large)]
     void Debugsss()
     {
-        float maxRadius = MainNode.ColCotain.radius;
+        float maxRadius = 30;
         float Step = MainNode.Step;
         Debug.Log(MainNode.transform.position.z);
         List<Vector3> LayoutPoints = NodeUtility.CreateLayoutPoints(
             maxRadius,1f,MainNode.transform.position.z);
         GameObject root = new GameObject("Root");
-        NodeUtility.ExcludePointsPool(ref LayoutPoints, MainNode.ColExclude);
-        NodeUtility.ExcludePointsPool(ref LayoutPoints, ExceptNode.ColExclude);
+        //NodeUtility.ExcludePointsPool(ref LayoutPoints, MainNode.ColExclude);
+        //NodeUtility.ExcludePointsPool(ref LayoutPoints, ExceptNode.ColExclude);
         foreach (var each in LayoutPoints)
         {
             CreateSphere(each,root.transform);
@@ -32,21 +32,4 @@ public class DebugTool
         p.transform.position = pos;
         p.transform.SetParent(root);
     }
-    
-    
-    [Button(ButtonSizes.Large)]
-    void Debugsss2()
-    {
-        Vector2 pos = new Vector2(6.5f,1.5f);
-        Debug.Log(MainNode.ColExclude.radius);
-        if (MainNode.ColExclude.bounds.Contains(pos))
-        {
-            Debug.Log("Overlap");
-        }
-        else
-        {
-            Debug.Log("Not Overlap");
-        }
-    }
-    
 }

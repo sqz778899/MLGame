@@ -22,7 +22,7 @@ public class MapNodeBase : MonoBehaviour
     //解锁迷雾的参数
     public NodeOpenFog OpenFog;
     //撒点排除的碰撞体
-    public CircleCollider2D ColExclude;
+    public float ExcludeRadius = 21f;
 
     void Awake()
     {
@@ -155,4 +155,12 @@ public class MapNodeBase : MonoBehaviour
         UIManager.Instance.ResetOtherUIPause();
         ChangeState();
     }
+    
+#if UNITY_EDITOR
+    internal virtual void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, ExcludeRadius);
+    }
+#endif
 }
