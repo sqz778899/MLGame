@@ -1,0 +1,44 @@
+﻿using UnityEngine;
+
+public class BaseMove : MonoBehaviour
+{
+    public float Speed = 10.0f;
+    public float CameraFollowingThreshold = 0;
+
+    Vector3 forward = new Vector3(1, 0, 0);
+    Camera _mCamera;
+
+    internal virtual void Awake()
+    {
+        _mCamera = Camera.main;
+    }
+    
+    internal virtual void Update()
+    {
+        if (Input.GetKey("d"))
+        {
+            MoveForward();
+        }
+        else if (Input.GetKey("a") && _mCamera.WorldToViewportPoint(transform.position).x > 0)
+        {
+            MoveBack();
+        }
+    }
+
+    void MoveForward()
+    {
+        if (_mCamera.transform.position.x < transform.position.x + CameraFollowingThreshold)
+        {
+            _mCamera.transform.Translate( forward * Speed * Time.deltaTime);
+        }
+        transform.Translate( forward * Speed * Time.deltaTime);
+    }
+
+    void MoveBack()
+    {
+        if (_mCamera.WorldToViewportPoint(transform.position).x > 0)
+        {
+            transform.Translate( -forward * Speed * Time.deltaTime);
+        }
+    }
+}

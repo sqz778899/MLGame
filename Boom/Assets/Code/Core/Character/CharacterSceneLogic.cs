@@ -4,12 +4,7 @@ using UnityEngine.Serialization;
 public class CharacterSceneLogic : KeyBoardBase
 {
     public int MapID;
-    CharacterSceneState _curState;
-    
-    public GameObject btnBeReady;
-    public GameObject btnEditBullet;
     public GameObject btnGO;
-    public GameObject G_Role;
 
     void Start()
     {
@@ -23,23 +18,7 @@ public class CharacterSceneLogic : KeyBoardBase
     public void EditBullet()
     {
         //Button
-        btnBeReady?.SetActive(true);
-        btnEditBullet?.SetActive(false);
         btnGO?.SetActive(false);
-        //GUI
-        G_Role?.SetActive(false);
-        _curState = CharacterSceneState.EidtBullet;
-    }
-
-    public void BeReady()
-    {
-        //Button
-        btnBeReady?.SetActive(false);
-        btnEditBullet?.SetActive(true);
-        btnGO?.SetActive(true);
-        //GUI
-        G_Role?.SetActive(true);
-        _curState = CharacterSceneState.Ready;
     }
 
     public void GO()
@@ -59,11 +38,5 @@ public class CharacterSceneLogic : KeyBoardBase
     {
         MSceneManager.Instance.CurMapSate.MapID = MapID;
         MSceneManager.Instance.LoadScene(ScenceID);
-    }
-    
-    public enum CharacterSceneState
-    {
-        EidtBullet,
-        Ready
     }
 }

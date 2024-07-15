@@ -2,15 +2,18 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Enemy : MonoBehaviour
 {
-    public int health = 1;
+    public int MaxHP = 3;
+    public int CurHP = 3;
     public EnemyState EState;
     public DamageState DState;
     //表现相关
     public Animation DeadAni;
     public GameObject txtHitNode;
+    public Collider2D EnemyCol;
     
     //Award...........
     public Award award;
@@ -36,9 +39,10 @@ public class Enemy : MonoBehaviour
     {
         //伤害跳字
         HitText(damage);
-        // 如果血量为0或更少，销毁这个敌人
-        if (health <= 0)
+        CurHP -= damage;
+        if (CurHP <= 0)// 如果血量为0或更少，销毁这个敌人
         {
+            EnemyCol.enabled = false;
             float waitTime = PlayDeadAni() + 1;
             StartCoroutine(Wait(waitTime));
         }

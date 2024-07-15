@@ -22,7 +22,7 @@ public class MSceneManager: ScriptableObject
 
     public MapSate CurMapSate = new MapSate();
     public int CurrentSceneIndex;
-    
+    const int LoadingScene = 5;
 
     public void WinThisLevel()
     {
@@ -32,7 +32,7 @@ public class MSceneManager: ScriptableObject
     public void LoadScene(int SceneID)
     {
         CurrentSceneIndex = SceneID;
-        SceneManager.LoadScene(CurrentSceneIndex);
+        SceneManager.LoadScene(LoadingScene);
         TrunkManager.Instance.SaveFile();
     }
 
@@ -40,13 +40,13 @@ public class MSceneManager: ScriptableObject
     {
         TrunkManager.Instance.SetSaveFileTemplate();
         CurrentSceneIndex = 1;
-        SceneManager.LoadScene(CurrentSceneIndex);
+        SceneManager.LoadScene(LoadingScene);
     }
 
     public void ContinueGame()
     {
         CurrentSceneIndex = 1;
-        SceneManager.LoadScene(CurrentSceneIndex);
+        SceneManager.LoadScene(LoadingScene);
     }
 
     #region Help

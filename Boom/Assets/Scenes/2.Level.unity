@@ -1814,7 +1814,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8443774303296718738}
+  - {fileID: 2137221519135054091}
   - {fileID: 440946031}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1865,8 +1865,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 10
   CameraFollowingThreshold: 3
-  timeScale: 3
-  test01: {fileID: 8973998480229829486}
 --- !u!212 &795135648
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2947,7 +2945,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1443499484}
   - component: {fileID: 1443499486}
-  - component: {fileID: 1443499485}
+  - component: {fileID: 1443499487}
   m_Layer: 0
   m_Name: imConnon
   m_TagString: Untagged
@@ -2970,22 +2968,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1442016718}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1443499485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1443499483}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 560146146c07df540a118aa151f6fb59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Speed: 10
-  CameraFollowingThreshold: 3
-  timeScale: 3
-  test01: {fileID: 8973998480229829486}
 --- !u!212 &1443499486
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3038,6 +3020,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1443499487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443499483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0279737ebeba455d934686c04c67ba76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 10
+  CameraFollowingThreshold: 3
 --- !u!1 &1514026492
 GameObject:
   m_ObjectHideFlags: 0
@@ -3635,7 +3631,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2143159212}
   m_CullTransparentMesh: 1
---- !u!1001 &3499002944718088598
+--- !u!4 &2137221519135054091 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3068142009712373496, guid: 7283ad9b7cf6e7e4f814b3bf442f0af5, type: 3}
+  m_PrefabInstance: {fileID: 3980290654948718579}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &3980290654948718579
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -3643,6 +3644,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 793761040}
     m_Modifications:
+    - target: {fileID: 346375080870614692, guid: 7283ad9b7cf6e7e4f814b3bf442f0af5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3068142009712373496, guid: 7283ad9b7cf6e7e4f814b3bf442f0af5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3802,11 +3807,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1958779161350697352, guid: 6afe8313f6f491e46a229769a95c362b, type: 3}
   m_PrefabInstance: {fileID: 7067689398583574049}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &8443774303296718738 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3068142009712373496, guid: 7283ad9b7cf6e7e4f814b3bf442f0af5, type: 3}
-  m_PrefabInstance: {fileID: 3499002944718088598}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8973998480229829485
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3868,11 +3868,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13fc5bc975799c445aa14123339f629b, type: 3}
---- !u!1 &8973998480229829486 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 151603170076321504, guid: 13fc5bc975799c445aa14123339f629b, type: 3}
-  m_PrefabInstance: {fileID: 8973998480229829485}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8973998480229829487 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 576044077123097464, guid: 13fc5bc975799c445aa14123339f629b, type: 3}

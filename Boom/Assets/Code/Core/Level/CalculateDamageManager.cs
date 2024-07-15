@@ -22,11 +22,10 @@ public class CalculateDamageManager : ScriptableObject
     public void CalDamage(BulletData curBulletData,Enemy curEnemy)
     {
         int curDamage = curBulletData.damage;
-        int curHealth = curEnemy.health;
+        int curHealth = curEnemy.CurHP;
         switch (curBulletData.elementalType)
         {
             case ElementalTypes.Non:
-                curEnemy.health = curHealth - curDamage;
                 curEnemy.TakeDamage(curDamage);
                 break;
             case ElementalTypes.Ice:
@@ -52,7 +51,6 @@ public class CalculateDamageManager : ScriptableObject
             int curFire = curDamageState.Fire;
             int resultDamage = curFire + curDamage * 2;
             curDamageState.Fire = 0;
-            curEnemy.health -= resultDamage;
             curEnemy.TakeDamage(resultDamage);
             return;
         }
@@ -84,7 +82,6 @@ public class CalculateDamageManager : ScriptableObject
                 (curDamage + curDamageState.Fire) >= 5)
             {
                 int resultDamage = (curDamage + curDamageState.Fire + curDamageState.Electric) * 2;
-                curEnemy.health -= resultDamage;
                 curEnemy.TakeDamage(resultDamage);
                 return;
             }
@@ -103,7 +100,6 @@ public class CalculateDamageManager : ScriptableObject
         {
             int resultDamage = curElectric + curDamage;
             curDamageState.Electric += curDamage;
-            curEnemy.health -= resultDamage;
             curEnemy.TakeDamage(resultDamage);
             return;
         }
@@ -115,7 +111,6 @@ public class CalculateDamageManager : ScriptableObject
                 (curDamage + curElectric) >= 5)
             {
                 int resultDamage = (curDamage + curElectric + curDamageState.Fire) * 2;
-                curEnemy.health -= resultDamage;
                 curEnemy.TakeDamage(resultDamage);
                 return;
             }
