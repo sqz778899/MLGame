@@ -47,18 +47,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5c2057c8aebf174cbe3041368d0b664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Ins: {fileID: 0}
   forward: {x: 1, y: 0, z: 0}
+  InstanceID: 0
   _bulletData:
     ID: 0
+    Level: 0
     name: 
-    speed: 0
     damage: 0
+    penetration: 0
     elementalType: 0
-    bulletPrefab: {fileID: 0}
-    bulletEditAPrefab: {fileID: 0}
-    bulletEditBPrefab: {fileID: 0}
-    bulletSpawnerPrefab: {fileID: 0}
+    imgBullet: {fileID: 0}
     hitEffect: {fileID: 0}
+  bulletInsMode: 0
+  Edit_a: {fileID: 0}
+  Edit_b: {fileID: 0}
+  maxDis: 105
 --- !u!70 &1371652625376912822
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -2,10 +2,15 @@ using UnityEngine;
 
 public class BulletInner : BulletBase
 {
+    public float maxDis = 105f;
     void Update()
     {
         // 让子弹沿着Z轴向前移动
         transform.Translate(forward * 10f * Time.deltaTime);
+        if (transform.position.x>maxDis)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)

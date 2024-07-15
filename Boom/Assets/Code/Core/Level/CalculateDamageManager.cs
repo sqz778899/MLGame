@@ -44,83 +44,83 @@ public class CalculateDamageManager : ScriptableObject
     void CalIce(BulletData curBulletData,Enemy curEnemy)
     {
         int curDamage = curBulletData.damage;
-        EnemyState curEnemyState = curEnemy.state;
+        DamageState curDamageState = curEnemy.DState;
         
         //冰遇见火，会极度爆炸，造成大量伤害并且属性积蓄归零
-        if (curEnemyState.Fire != 0)
+        if (curDamageState.Fire != 0)
         {
-            int curFire = curEnemyState.Fire;
+            int curFire = curDamageState.Fire;
             int resultDamage = curFire + curDamage * 2;
-            curEnemyState.Fire = 0;
+            curDamageState.Fire = 0;
             curEnemy.health -= resultDamage;
             curEnemy.TakeDamage(resultDamage);
             return;
         }
         
-        curEnemyState.Ice += curDamage;
+        curDamageState.Ice += curDamage;
     }
 
     void CalFire(BulletData curBulletData, Enemy curEnemy)
     {
         int curDamage = curBulletData.damage;
-        EnemyState curEnemyState = curEnemy.state;
+        DamageState curDamageState = curEnemy.DState;
         
         //火遇见冰，会冷却 todo Debuff
-        if (curEnemyState.Ice != 0)
+        if (curDamageState.Ice != 0)
         {
-            if (curEnemyState.Ice >= curDamage)
-                curEnemyState.Ice -= curDamage;
+            if (curDamageState.Ice >= curDamage)
+                curDamageState.Ice -= curDamage;
             else
             {
-                curEnemyState.Fire += (curDamage - curEnemyState.Ice);
-                curEnemyState.Ice = 0;
+                curDamageState.Fire += (curDamage - curDamageState.Ice);
+                curDamageState.Ice = 0;
             }
             return;
         }
         //雷火无妄
-        if (curEnemyState.Electric != 0)
+        if (curDamageState.Electric != 0)
         {
-            if (curEnemyState.Electric >= 5 &&
-                (curDamage + curEnemyState.Fire) >= 5)
+            if (curDamageState.Electric >= 5 &&
+                (curDamage + curDamageState.Fire) >= 5)
             {
-                int resultDamage = (curDamage + curEnemyState.Fire + curEnemyState.Electric) * 2;
+                int resultDamage = (curDamage + curDamageState.Fire + curDamageState.Electric) * 2;
                 curEnemy.health -= resultDamage;
                 curEnemy.TakeDamage(resultDamage);
                 return;
             }
         }
       
-        curEnemyState.Fire += curDamage;
+        curDamageState.Fire += curDamage;
     }
 
     void CalElectric(BulletData curBulletData, Enemy curEnemy)
     {
         int curDamage = curBulletData.damage;
-        EnemyState curEnemyState = curEnemy.state;
-        int curElectric = curEnemyState.Electric;
+        DamageState curDamageState = curEnemy.DState;
+        int curElectric = curDamageState.Electric;
         
-        if (curEnemyState.Ice != 0)
+        if (curDamageState.Ice != 0)
         {
             int resultDamage = curElectric + curDamage;
-            curEnemyState.Electric += curDamage;
+            curDamageState.Electric += curDamage;
             curEnemy.health -= resultDamage;
             curEnemy.TakeDamage(resultDamage);
             return;
         }
 
-        if (curEnemyState.Fire != 0)
+        if (curDamageState.Fire != 0)
         {
             //雷火无妄
-            if (curEnemyState.Fire >= 5 &&
+            if (curDamageState.Fire >= 5 &&
                 (curDamage + curElectric) >= 5)
             {
-                int resultDamage = (curDamage + curElectric + curEnemyState.Fire) * 2;
+                int resultDamage = (curDamage + curElectric + curDamageState.Fire) * 2;
                 curEnemy.health -= resultDamage;
                 curEnemy.TakeDamage(resultDamage);
                 return;
             }
         }
         
-        curEnemyState.Electric += curDamage;
+        curDamageState.Electric += curDamage;
     }
 }

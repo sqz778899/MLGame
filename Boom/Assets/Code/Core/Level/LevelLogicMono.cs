@@ -37,7 +37,7 @@ public class LevelLogicMono : MonoBehaviour
     public GameObject FailGUI;
 
     public float Distance;
-
+    public Enemy CurEnemy;
     void Start()
     {
         //InitLevel
@@ -46,7 +46,10 @@ public class LevelLogicMono : MonoBehaviour
         isBeginCalculation = false;
         UIManager.Instance.InitCharacterLevel();
         Distance = 0f;
+        CurEnemy = UIManager.Instance.EnemyILIns.GetComponent<Enemy>();
+        MainRoleManager.Instance.WinOrFailState = WinOrFail.InLevel;
     }
+    
     void Update()
     {
         txtScore.text = "Score: " + MainRoleManager.Instance.Score;
@@ -67,10 +70,12 @@ public class LevelLogicMono : MonoBehaviour
     void WinOrFailThisLevel()
     {
         //如果子弹为0，且敌人未死则失败
-        if (UIManager.Instance.G_BulletInScene.transform.childCount == 0 && 
-            UIManager.Instance.EnemyILIns != null)
-            if ( UIManager.Instance.EnemyILIns.GetComponent<Enemy>().health > 0)
-                MainRoleManager.Instance.WinOrFailState = WinOrFail.Fail;
+        if (CurEnemy.EState == EnemyState.dead)
+            MainRoleManager.Instance.WinOrFailState = WinOrFail.Win;
+
+        if (UIManager.Instance.G_BulletInScene.transform.childCount == 0 &&
+            CurEnemy.EState == EnemyState.live)
+            MainRoleManager.Instance.WinOrFailState = WinOrFail.Fail;
         
         switch (MainRoleManager.Instance.WinOrFailState)
         {
