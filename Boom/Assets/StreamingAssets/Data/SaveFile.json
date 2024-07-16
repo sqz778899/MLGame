@@ -1,5 +1,5 @@
 {
-  "Score": 0,
+  "Score": 100,
   "Gold": 10000000,
   "UserBulletSpawner": [
     {
@@ -71,7 +71,9 @@
       "CurMapID": 1,
       "MapID": 1,
       "LevelID": 1,
-      "IsFinishedLevels": []
+      "IsFinishedLevels": [
+        1
+      ]
     }
   ],
   "CurRollPREveIDs": []

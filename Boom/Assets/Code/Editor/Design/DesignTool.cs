@@ -46,4 +46,28 @@ public class DesignTool
     {
         TrunkManager.Instance.SetSaveFileTemplate();
     }
+    
+    [Button(ButtonSizes.Large)]
+    [ButtonGroup("Switch")]
+    void SwichEdit()
+    {
+        SoftSceneMono curSC = GameObject.Find("SoftScene").GetComponent<SoftSceneMono>();
+        curSC.SwitchEditScene();
+    }
+    
+    [Button(ButtonSizes.Large)]
+    [ButtonGroup("Switch")]
+    void SwichMap()
+    {
+        SoftSceneMono curSC = GameObject.Find("SoftScene").GetComponent<SoftSceneMono>();
+        curSC.SwitchMapScene();
+    }
+    
+    [Button(ButtonSizes.Large)]
+    [ButtonGroup("Switch")]
+    void SwichFight()
+    {
+        SoftSceneMono curSC = GameObject.Find("SoftScene").GetComponent<SoftSceneMono>();
+        curSC.SwitchFightScene();
+    }
 }
