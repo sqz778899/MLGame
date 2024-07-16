@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 public class MainNode:MapNodeBase
 {
     public int LevelID;
+    MainSceneMono _mainSceneMono;
 
     #region SpaenNode相关
     //SpaenNode相关
@@ -54,8 +55,11 @@ public class MainNode:MapNodeBase
 
     public void EnterFight()
     {
+        if (_mainSceneMono==null)
+            _mainSceneMono = UIManager.Instance.MainSceneGO.GetComponent<MainSceneMono>();
+        
         MSceneManager.Instance.CurMapSate.LevelID = LevelID;
-        MSceneManager.Instance.LoadScene(2);
+        _mainSceneMono.SwitchFightScene();
     }
     
     //生成周围Node
@@ -103,7 +107,7 @@ public class MainNode:MapNodeBase
         }
         
         curNode.transform.position = curP;
-        curNode.transform.SetParent(UIManager.Instance.MapNode.transform,false);
+        curNode.transform.SetParent(UIManager.Instance.MapRoot.transform,false);
         
         //............Refresh Pool..................
         MapNodeBase curNodeSC = curNode.GetComponent<MapNodeBase>();

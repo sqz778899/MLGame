@@ -51,7 +51,7 @@ public class DesignTool
     [ButtonGroup("Switch")]
     void SwichEdit()
     {
-        SoftSceneMono curSC = GameObject.Find("SoftScene").GetComponent<SoftSceneMono>();
+        MainSceneMono curSC = GameObject.Find("MainScene").GetComponent<MainSceneMono>();
         curSC.SwitchEditScene();
     }
     
@@ -59,7 +59,7 @@ public class DesignTool
     [ButtonGroup("Switch")]
     void SwichMap()
     {
-        SoftSceneMono curSC = GameObject.Find("SoftScene").GetComponent<SoftSceneMono>();
+        MainSceneMono curSC = GameObject.Find("MainScene").GetComponent<MainSceneMono>();
         curSC.SwitchMapScene();
     }
     
@@ -67,7 +67,7 @@ public class DesignTool
     [ButtonGroup("Switch")]
     void SwichFight()
     {
-        SoftSceneMono curSC = GameObject.Find("SoftScene").GetComponent<SoftSceneMono>();
+        MainSceneMono curSC = GameObject.Find("MainScene").GetComponent<MainSceneMono>();
         curSC.SwitchFightScene();
     }
 }

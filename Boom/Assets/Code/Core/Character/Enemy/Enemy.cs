@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
     //Award...........
     public Award award;
     
-    LevelLogicMono _LevelLogic;
+    FightLogic _fightLogic;
 
     void Start()
     {
@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
         else
             DState = new DamageState();
 
-        _LevelLogic = GameObject.Find("LevelLogic").GetComponent<LevelLogicMono>();
+        _fightLogic = GameObject.Find("LevelLogic").GetComponent<FightLogic>();
     }
 
     public void TakeDamage(int damage)
@@ -77,7 +77,7 @@ public class Enemy : MonoBehaviour
     {
         MainRoleManager.Instance.Score += award.score;
         EState = EnemyState.dead;
-        _LevelLogic.isBeginCalculation = true; //通知进行结算
+        _fightLogic.isBeginCalculation = true; //通知进行结算
         Destroy(gameObject);
     }
 }

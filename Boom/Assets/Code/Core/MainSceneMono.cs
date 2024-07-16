@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-public class SoftSceneMono:MonoBehaviour
+public class MainSceneMono:MonoBehaviour
 {
     public Camera MainCamera;
     //GUIEditScene
@@ -8,12 +9,32 @@ public class SoftSceneMono:MonoBehaviour
     public GameObject GUIEditScene;
     //MapScene
     [Header("MapScene")]
+    MapLogic _mapLogic;
     public GameObject GUIMapScene;
     public GameObject MapScene;
     //FightScene
-    [Header("FightScene")]
+    [Header("FightScene")] 
+    FightLogic _fightLogic;
     public GameObject GUIFightScene;
     public GameObject FightScene;
+
+    void Awake()
+    {
+        //.................Global...........................
+        TrunkManager.Instance.LoadSaveFile();
+        //.................Local...........................
+        UIManager.Instance.InitMainScene();
+        MainRoleManager.Instance.InitData();
+    }
+
+    void Start()
+    {
+        if (_mapLogic==null)
+            _mapLogic = UIManager.Instance.MapLogicGO.GetComponent<MapLogic>();
+        if (_fightLogic==null)
+            _fightLogic = UIManager.Instance.MapLogicGO.GetComponent<FightLogic>();
+    }
+
     public void SwitchEditScene()
     {
         FightSceneOff();
@@ -50,6 +71,7 @@ public class SoftSceneMono:MonoBehaviour
         MainCamera.orthographic = true;
         GUIFightScene.SetActive(true);
         FightScene.SetActive(true);
+        _fightLogic.InitData();
     }
     void FightSceneOff()
     {
@@ -62,6 +84,7 @@ public class SoftSceneMono:MonoBehaviour
         MainCamera.orthographic = false;
         GUIMapScene.SetActive(true);
         MapScene.SetActive(true);
+        _mapLogic.InitData();
     }
     
     void MapSceneOff()

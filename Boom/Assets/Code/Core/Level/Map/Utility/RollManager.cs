@@ -19,7 +19,7 @@ public class RollManager: ScriptableObject
     #region RollBuff
     public void OnceRollBuff()
     {
-        GameObject curRoot = UIManager.Instance.GroupBuffRogue;
+        GameObject curRoot = UIManager.Instance.G_Buff;
         int curLevelID = MSceneManager.Instance.CurMapSate.LevelID;
         List<LevelBuff> curDesign = TrunkManager.Instance.LevelBuffDesignJsons;
         LevelBuff curLB = null;
@@ -58,7 +58,7 @@ public class RollManager: ScriptableObject
     public void SelOneBuff(GameObject curBuffIns)
     {
         //Clean Buff
-        GameObject curRoot = UIManager.Instance.GroupBuffRogue;
+        GameObject curRoot = UIManager.Instance.G_Buff;
         for (int i = curRoot.transform.childCount - 1; i >= 0; i--)
         {
             DestroyImmediate(curRoot.transform.GetChild(i).gameObject);

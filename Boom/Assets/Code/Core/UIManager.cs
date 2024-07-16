@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class UIManager : ScriptableObject
@@ -59,6 +60,7 @@ public class UIManager : ScriptableObject
     public GameObject G_CurBulletIcon; //侧边栏当前子弹图标
     public GameObject G_StandbyIcon; //侧边栏待机图标
     
+    
     #region 1.StartGame
 
     public void InitStartGame()
@@ -67,77 +69,50 @@ public class UIManager : ScriptableObject
     }
     #endregion
 
-    #region 1.CharacterScene
+    #region 2.MainScene
+    [FormerlySerializedAs("SoftScene")] public GameObject MainSceneGO;            //切换总闸 
     //1.CharacterScene
-    public GameObject SlotRoot;
-    public GameObject BulletRoot;
-    public GameObject GroupCharacter;
-    public GameObject G_BulletSpawnerSlot;
-    public GameObject G_BulletRoleSlot;
-
-    public void InitCharacterScene()
-    {
-        InitComon();
-        if (SlotRoot == null)
-            SlotRoot = GameObject.Find("SlotRoot");
-        if (BulletRoot == null)
-            BulletRoot = GameObject.Find("BulletRoot");
-
-        if (SlotRoot == null)
-        {
-            Debug.LogError("Error : InitCharacterScene");
-            return;
-        }
-        
-        G_BulletSpawnerSlot = SlotRoot.transform.GetChild(1).gameObject;
-        G_BulletRoleSlot = SlotRoot.transform.GetChild(2).gameObject;
-        G_Bullet = BulletRoot.transform.GetChild(0).gameObject;
-    }
-    #endregion
-
-    #region 2.Level
-
-    public GameObject G_BulletInScene;
-    public GameObject GroupBuffRogue;
-    public LevelLogicMono LevelLogic;
-    //childs
-    public GameObject EnemyILIns;
-    public GameObject CharILIns;
-    public void InitCharacterLevel()
-    {
-        InitComon();
-
-        if (GroupBuffRogue == null)
-            GroupBuffRogue = GameObject.Find("GroupBuffRogue");
-
-        if (LevelLogic == null)
-            LevelLogic = GameObject.Find("LevelLogic").GetComponent<LevelLogicMono>();
-
-        if (G_BulletInScene == null)
-            G_BulletInScene = GameObject.Find("G_BulletInScene");
-
-        //...................Childs............................
-        GameObject GroupEnemy = GameObject.Find("GroupEnemy");
-        EnemyILIns = GroupEnemy.transform.GetChild(0).gameObject;
-        GameObject GroupCharacter = GameObject.Find("GroupCharacter");
-        CharILIns = GroupCharacter.transform.GetChild(0).gameObject;
-        
-    }
-    #endregion
-
-    #region 3.MiniMap
-    public GameObject MapNode;
+    [Header("EditBulletSecne")]
+    public GameObject G_BulletSpawnerSlot;  //子弹孵化器的Group
+    public GameObject G_BulletRoleSlot;     //子弹在人物右侧的Group
+    
+    [FormerlySerializedAs("MapLogic")] [Header("MiniMap")]
+    public GameObject MapLogicGO;
+    public GameObject MapRoot;
     public GameObject ShopRoot;
     public GameObject REventRoot;
     public GameObject RewardRoot;
     
-    public void InitSelectLevel()
+    [Header("FightScene")]
+    public GameObject FightLogicGO;
+    public GameObject G_BulletInScene; //场景内的子弹的父节点
+    public GameObject G_Buff;
+    public GameObject CharILIns;
+
+    public void InitMainScene()
     {
         InitComon();
-        MapNode = GameObject.Find("MapNode");
-        ShopRoot = GameObject.Find("ShopRoot");
-        REventRoot = GameObject.Find("REventRoot");
-        RewardRoot = GameObject.Find("RewardRoot");
+        if (MainSceneGO == null)
+            MainSceneGO = GameObject.Find("MainScene");
+        MainSceneMono curMainSC = MainSceneGO.GetComponent<MainSceneMono>();
+        
+        EditBulletScene CurEditBulletSC = curMainSC.GUIEditScene.GetComponent<EditBulletScene>();
+        G_BulletSpawnerSlot = CurEditBulletSC.G_BulletSpawnerSlot;
+        G_BulletRoleSlot = CurEditBulletSC.G_BulletRoleSlot;
+        G_Bullet = CurEditBulletSC.G_Bullet;
+        
+        MapScene CurMapSC = curMainSC.GUIMapScene.GetComponent<MapScene>();
+        MapLogicGO = CurMapSC.MapLogicGO;
+        MapRoot = CurMapSC.MapNode;
+        ShopRoot = CurMapSC.ShopRoot;
+        REventRoot = CurMapSC.REventRoot;
+        RewardRoot = CurMapSC.RewardRoot;
+        
+        FightScene CurFighSceneSC = curMainSC.GUIFightScene.GetComponent<FightScene>();
+        FightLogicGO = CurFighSceneSC.FightLogicGO;
+        G_BulletInScene = CurFighSceneSC.G_BulletInScene;
+        G_Buff = CurFighSceneSC.G_Buff;
+        CharILIns = CurFighSceneSC.CharILIns;
     }
     #endregion
 

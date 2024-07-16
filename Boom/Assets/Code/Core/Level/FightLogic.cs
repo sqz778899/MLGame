@@ -5,16 +5,17 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
-public class LevelLogicMono : MonoBehaviour
+public class FightLogic : MonoBehaviour
 {
     #region 关卡相关
     public GameObject GroupLevel;
+    public GameObject CurLevel;
 
     void InitLevel()
     {
         int curLevelID = MSceneManager.Instance.CurMapSate.LevelID;
         string curLevelName = string.Format("P_Level_{0}.prefab", curLevelID.ToString("D2"));
-        Instantiate(ResManager.instance.GetAssetCache<GameObject>
+        CurLevel = Instantiate(ResManager.instance.GetAssetCache<GameObject>
             (PathConfig.LevelAssetDir+curLevelName), GroupLevel.transform);
     }
 
@@ -26,10 +27,6 @@ public class LevelLogicMono : MonoBehaviour
     }
     #endregion
 
-    #region 计分板相关
-    public TextMeshProUGUI txtScore;
-    #endregion
-    
     public bool isBeginCameraMove;
     GameObject FirstBullet;
     public bool isBeginCalculation;
@@ -38,26 +35,13 @@ public class LevelLogicMono : MonoBehaviour
 
     public float Distance;
     public Enemy CurEnemy;
-    void Start()
-    {
-        //InitLevel
-        InitLevel();
-        isBeginCameraMove = false;
-        isBeginCalculation = false;
-        UIManager.Instance.InitCharacterLevel();
-        Distance = 0f;
-        CurEnemy = UIManager.Instance.EnemyILIns.GetComponent<Enemy>();
-        MainRoleManager.Instance.WinOrFailState = WinOrFail.InLevel;
-    }
-    
     void Update()
     {
-        txtScore.text = "Score: " + MainRoleManager.Instance.Score;
         if (isBeginCalculation)
             WinOrFailThisLevel();
 
-        if (UIManager.Instance.EnemyILIns != null)
-            Distance = Vector2.Distance(UIManager.Instance.EnemyILIns.transform.position,
+        if (CurEnemy != null)
+            Distance = Vector2.Distance(CurEnemy.transform.position,
                 UIManager.Instance.CharILIns.transform.position);
 
         if (isBeginCameraMove && FirstBullet != null)
@@ -65,6 +49,17 @@ public class LevelLogicMono : MonoBehaviour
             Vector3 s = Camera.main.transform.position;
             Camera.main.transform.position = new Vector3(FirstBullet.transform.position.x,s.y,s.z);
         }
+    }
+    
+    public void InitData()
+    {
+        //InitLevel
+        InitLevel();
+        isBeginCameraMove = false;
+        isBeginCalculation = false;
+        Distance = 0f;
+        CurEnemy = CurLevel.GetComponent<LevelMono>().GetCurEnemy();
+        MainRoleManager.Instance.WinOrFailState = WinOrFail.InLevel;
     }
 
     void WinOrFailThisLevel()

@@ -18,35 +18,32 @@ public class MapLogic : MonoBehaviour
     float[] _FadeRanges = new float[30];
     void Start()
     {
-        /*int curMapID = MSceneManager.Instance.CurMapSate.MapID;
-        string curMapName = string.Format("P_Map_{0}.prefab", curMapID.ToString("D2"));
-        GameObject curMapIns = Instantiate(
-            ResManager.instance.GetAssetCache<GameObject>(PathConfig.LevelAssetDir + curMapName),
-            MapGroup);
-        curMapIns.transform.SetSiblingIndex(0);*/
         _allNodes = MapGroup.GetComponentsInChildren<MapNodeBase>().ToList();
         _mainNodes = new List<MainNode>();
         _otherNodes = new List<MapNodeBase>();
         foreach (var each in _allNodes)
         {
             if (each.Type == MapNodeType.Main)
-            {
                 _mainNodes.Add(each as MainNode);
-            }
             else
-            {
                 _otherNodes.Add(each);
-            }
         }
-        
         RefreshMapNodeState();
-        //.............Global..................
-        TrunkManager.Instance.LoadSaveFile();
-        //.............Local...................
-        UIManager.Instance.InitSelectLevel();
-        MainRoleManager.Instance.InitContainer();
-        MainRoleManager.Instance.InitStandbyBulletMats();
-        MainRoleManager.Instance.SyncBulletIcon();
+    }
+
+    public void InitData()
+    {
+        _allNodes = MapGroup.GetComponentsInChildren<MapNodeBase>().ToList();
+        _mainNodes = new List<MainNode>();
+        _otherNodes = new List<MapNodeBase>();
+        foreach (var each in _allNodes)
+        {
+            if (each.Type == MapNodeType.Main)
+                _mainNodes.Add(each as MainNode);
+            else
+                _otherNodes.Add(each);
+        }
+        RefreshMapNodeState();
     }
 
     void Update()
