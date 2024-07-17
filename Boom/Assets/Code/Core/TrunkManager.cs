@@ -150,6 +150,7 @@ public class TrunkManager: ScriptableObject
         }
         MainRoleManager.Instance.CurBulletSpawners = _saveFile.UserBulletSpawner;
         MainRoleManager.Instance.CurBullets = _saveFile.UserCurBullets;
+        MainRoleManager.Instance.CurBulletEntries = _saveFile.UserBulletEntries;
         MainRoleManager.Instance.CurStandbyBulletMats = _saveFile.UserStandbyBullet;
         MainRoleManager.Instance.CurRollPREveIDs = _saveFile.CurRollPREveIDs;
         #endregion
@@ -178,6 +179,7 @@ public class TrunkManager: ScriptableObject
         _saveFile.Gold = MainRoleManager.Instance.Gold;
         _saveFile.UserBulletSpawner = MainRoleManager.Instance.CurBulletSpawners;
         _saveFile.UserCurBullets = MainRoleManager.Instance.CurBullets;
+        _saveFile.UserBulletEntries = MainRoleManager.Instance.CurBulletEntries;
         List<int> SupremeCharms = new List<int>();
         foreach (var each in MainRoleManager.Instance.SupremeCharms)
             SupremeCharms.Add(each.ID);
@@ -236,9 +238,10 @@ public class TrunkManager: ScriptableObject
             newGameSD.Add(new StandbyData(i,0));
         
         _saveFile.UserCurBullets = new List<BulletReady>();
+        _saveFile.UserBulletEntries = new List<BulletEntry>();
         _saveFile.UserBulletSpawner = UserBulletSpawner;
         _saveFile.Score = 0;
-        _saveFile.Gold = 10000000;
+        _saveFile.Gold = 1000;
         _saveFile.SupremeCharms = new List<int>();
         _saveFile.UserStandbyBullet = newGameSD;
         #endregion

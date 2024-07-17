@@ -71,12 +71,13 @@ public class MainSceneMono:MonoBehaviour
         MainCamera.orthographic = true;
         GUIFightScene.SetActive(true);
         FightScene.SetActive(true);
-        _fightLogic.InitData();
+        _fightLogic?.InitData();
     }
     void FightSceneOff()
     {
         GUIFightScene.SetActive(false);
         FightScene.SetActive(false);
+        _fightLogic?.UnloadData();
     }
     
     void MapSceneOn()
@@ -84,7 +85,7 @@ public class MainSceneMono:MonoBehaviour
         MainCamera.orthographic = false;
         GUIMapScene.SetActive(true);
         MapScene.SetActive(true);
-        _mapLogic.InitData();
+        _mapLogic?.InitData();
     }
     
     void MapSceneOff()

@@ -17,6 +17,7 @@ public class SaveFileJson
     public int Gold;
     public List<BulletSpawner> UserBulletSpawner;
     public List<BulletReady> UserCurBullets;
+    public List<BulletEntry> UserBulletEntries;
     public List<StandbyData> UserStandbyBullet;
     public List<int> UserCurBuff;
     

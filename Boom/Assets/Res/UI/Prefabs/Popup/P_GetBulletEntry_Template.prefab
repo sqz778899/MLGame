@@ -754,7 +754,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5086564266805567951}
   - component: {fileID: 3208224854195052945}
-  - component: {fileID: 7491965862533200637}
   m_Layer: 5
   m_Name: P_GetBulletEntry_Template
   m_TagString: Untagged
@@ -800,22 +799,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurEntryTile: {fileID: 2001952220465232086}
   CurTreasureNode: {fileID: 0}
---- !u!111 &7491965862533200637
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5358577411151755555}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: e03f8fbcd73902a409a7fce95572f90e, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: e03f8fbcd73902a409a7fce95572f90e, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!1 &8786081852006137558
 GameObject:
   m_ObjectHideFlags: 0

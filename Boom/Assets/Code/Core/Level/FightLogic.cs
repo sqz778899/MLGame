@@ -18,13 +18,6 @@ public class FightLogic : MonoBehaviour
         CurLevel = Instantiate(ResManager.instance.GetAssetCache<GameObject>
             (PathConfig.LevelAssetDir+curLevelName), GroupLevel.transform);
     }
-
-    public void LoadSceneWin(int SceneID)
-    {
-        MSceneManager.Instance.WinThisLevel();
-        MainRoleManager.Instance.WinOrFailState = WinOrFail.InLevel;
-        MSceneManager.Instance.LoadScene(SceneID);
-    }
     #endregion
 
     public bool isBeginCameraMove;
@@ -55,11 +48,24 @@ public class FightLogic : MonoBehaviour
     {
         //InitLevel
         InitLevel();
+        FailGUI.SetActive(false);
+        WinGUI.SetActive(false);
         isBeginCameraMove = false;
         isBeginCalculation = false;
         Distance = 0f;
         CurEnemy = CurLevel.GetComponent<LevelMono>().GetCurEnemy();
         MainRoleManager.Instance.WinOrFailState = WinOrFail.InLevel;
+    }
+
+    public void UnloadData()
+    {
+        //清除场景内遗留子弹
+        GameObject root = UIManager.Instance.G_BulletInScene;
+        for (int i = root.transform.childCount - 1; i >= 0; i--)
+        {
+            BulletInner curSC = root.transform.GetChild(i).GetComponent<BulletInner>();
+            curSC.DestroySelf();
+        }
     }
 
     void WinOrFailThisLevel()
@@ -91,6 +97,7 @@ public class FightLogic : MonoBehaviour
         //播放胜利
         WinGUI.SetActive(true);
         isBeginCalculation = false;
+        MSceneManager.Instance.WinThisLevel();
         //给一个随机Buff
         //RollManager.Instance.OnceRollBuff();
         //选完了给一个随机宝物

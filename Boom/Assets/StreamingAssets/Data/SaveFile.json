@@ -1,42 +1,22 @@
 {
-  "Score": 300,
-  "Gold": 10000000,
+  "Score": 0,
+  "Gold": 1000,
   "UserBulletSpawner": [
     {
       "bulletID": 1,
-      "bulletCount": 2
+      "bulletCount": 5
     },
     {
       "bulletID": 2,
-      "bulletCount": 0
+      "bulletCount": 1
     },
     {
       "bulletID": 3,
       "bulletCount": 1
     }
   ],
-  "UserCurBullets": [
-    {
-      "bulletID": 1,
-      "curSlotID": 1,
-      "instanceID": -26020
-    },
-    {
-      "bulletID": 1,
-      "curSlotID": 2,
-      "instanceID": -26110
-    },
-    {
-      "bulletID": 1,
-      "curSlotID": 3,
-      "instanceID": -26200
-    },
-    {
-      "bulletID": 2,
-      "curSlotID": 4,
-      "instanceID": -26290
-    }
-  ],
+  "UserCurBullets": [],
+  "UserBulletEntries": [],
   "UserStandbyBullet": [
     {
       "SlotID": 0,
@@ -70,11 +50,8 @@
     {
       "CurMapID": 1,
       "MapID": 1,
-      "LevelID": 2,
-      "IsFinishedLevels": [
-        1,
-        2
-      ]
+      "LevelID": 1,
+      "IsFinishedLevels": []
     }
   ],
   "CurRollPREveIDs": []
