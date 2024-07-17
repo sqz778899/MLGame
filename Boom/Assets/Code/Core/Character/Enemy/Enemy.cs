@@ -23,6 +23,8 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         InitState(null);
+        if (_fightLogic==null)
+            _fightLogic = UIManager.Instance.FightLogicGO.GetComponent<FightLogic>();
     }
 
     public void InitState(DamageState curState)
@@ -31,8 +33,6 @@ public class Enemy : MonoBehaviour
             DState = curState;
         else
             DState = new DamageState();
-
-        _fightLogic = GameObject.Find("LevelLogic").GetComponent<FightLogic>();
     }
 
     public void TakeDamage(int damage)

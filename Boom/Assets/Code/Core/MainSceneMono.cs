@@ -32,7 +32,7 @@ public class MainSceneMono:MonoBehaviour
         if (_mapLogic==null)
             _mapLogic = UIManager.Instance.MapLogicGO.GetComponent<MapLogic>();
         if (_fightLogic==null)
-            _fightLogic = UIManager.Instance.MapLogicGO.GetComponent<FightLogic>();
+            _fightLogic = UIManager.Instance.FightLogicGO.GetComponent<FightLogic>();
     }
 
     public void SwitchEditScene()

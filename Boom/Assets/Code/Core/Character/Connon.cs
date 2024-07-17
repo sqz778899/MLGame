@@ -1,15 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class Connon : BaseMove
 {
-    FightLogic _fightLogic;
-    
-    internal override void Awake()
-    {
-        base.Awake();
-        _fightLogic =  GameObject.Find("LevelLogic").GetComponent<FightLogic>();
-    }
-    
     internal override void Update()
     {
         base.Update();

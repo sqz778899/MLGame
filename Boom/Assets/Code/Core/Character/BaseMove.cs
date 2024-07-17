@@ -7,10 +7,16 @@ public class BaseMove : MonoBehaviour
 
     Vector3 forward = new Vector3(1, 0, 0);
     Camera _mCamera;
+    internal FightLogic _fightLogic;
 
     internal virtual void Awake()
     {
         _mCamera = Camera.main;
+    }
+    internal virtual void Start()
+    {
+        if (_fightLogic==null)
+            _fightLogic = UIManager.Instance.FightLogicGO.GetComponent<FightLogic>();
     }
     
     internal virtual void Update()
