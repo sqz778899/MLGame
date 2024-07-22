@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6b194f808b1af6499c93410e504af42, type: 3}
+  m_Name: compass_Atlas
+  m_EditorClassIdentifier: 
+  atlasFile: {fileID: 4900000, guid: b63989de2f6737c4bb467da9a2b72264, type: 3}
+  materials:
+  - {fileID: 2100000, guid: f11808d026856e143a83b0bedb42807b, type: 2}
+  - {fileID: 2100000, guid: d79152bce14ab944ab9a9417e02129fc, type: 2}
+  - {fileID: 2100000, guid: 29d3cbc18bcea624297132d37b707045, type: 2}
+  - {fileID: 2100000, guid: 0ae281c9d7181a64f9dfca72e13fda1b, type: 2}
+  - {fileID: 2100000, guid: a33e4db0613edbf4db95b735d6b198a4, type: 2}
+  - {fileID: 2100000, guid: 7c3f401bf8d7e134a8676e8182cd0fd8, type: 2}
+  - {fileID: 2100000, guid: 904e83c404d14df4899627babbb99082, type: 2}
+  - {fileID: 2100000, guid: bf7f06fbffc6b844aa04387f725ac706, type: 2}

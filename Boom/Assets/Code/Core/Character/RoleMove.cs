@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Spine.Unity;
 using UnityEngine;
 
-public class CharacterMove : BaseMove
+public class RoleMove : BaseMove
 {
     
 }

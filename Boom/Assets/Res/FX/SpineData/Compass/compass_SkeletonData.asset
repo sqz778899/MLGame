@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1b3b4b945939a54ea0b23d3396115fb, type: 3}
+  m_Name: compass_SkeletonData
+  m_EditorClassIdentifier: 
+  atlasAssets:
+  - {fileID: 11400000, guid: 7f5c1be7b05e14247b3a7e6152abb217, type: 2}
+  scale: 0.01
+  skeletonJSON: {fileID: 4900000, guid: 617cf0f6e28c37845a4be74a6087cade, type: 3}
+  isUpgradingBlendModeMaterials: 0
+  blendModeMaterials:
+    requiresBlendModeMaterials: 1
+    applyAdditiveMaterial: 1
+    additiveMaterials:
+    - pageName: compass3.png
+      material: {fileID: 2100000, guid: 66ea5235ca59a1d41929a170ac9bc2ec, type: 2}
+    multiplyMaterials:
+    - pageName: compass4.png
+      material: {fileID: 2100000, guid: 7ee23de6996d8c6489fdc9f4e893d107, type: 2}
+    screenMaterials:
+    - pageName: compass6.png
+      material: {fileID: 2100000, guid: a5fd9e2f39759074a84124750b701b71, type: 2}
+    - pageName: compass5.png
+      material: {fileID: 2100000, guid: c5d8e2af0c9c3a64b95f04a2c783a6be, type: 2}
+    - pageName: compass.png
+      material: {fileID: 2100000, guid: 68e720a6fdbb6db459c644c0bfc5ca59, type: 2}
+  skeletonDataModifiers: []
+  fromAnimation: []
+  toAnimation: []
+  duration: []
+  defaultMix: 0.2
+  controller: {fileID: 0}

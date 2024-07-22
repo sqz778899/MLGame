@@ -1,0 +1,230 @@
+
+compass.png
+size: 2033,1570
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bioom_lid
+  rotate: true
+  xy: 2, 723
+  size: 426, 427
+  orig: 427, 428
+  offset: 1, 0
+  index: -1
+box
+  rotate: false
+  xy: 431, 711
+  size: 476, 438
+  orig: 476, 438
+  offset: 0, 0
+  index: -1
+guang_1
+  rotate: false
+  xy: 909, 694
+  size: 482, 455
+  orig: 643, 509
+  offset: 26, 23
+  index: -1
+guang_2
+  rotate: false
+  xy: 2, 129
+  size: 641, 580
+  orig: 712, 693
+  offset: 47, 59
+  index: -1
+guang_3
+  rotate: false
+  xy: 645, 55
+  size: 668, 637
+  orig: 769, 714
+  offset: 87, 28
+  index: -1
+guang_5
+  rotate: true
+  xy: 1315, 2
+  size: 685, 716
+  orig: 837, 792
+  offset: 119, 38
+  index: -1
+lid_air
+  rotate: true
+  xy: 1393, 689
+  size: 460, 468
+  orig: 468, 473
+  offset: 4, 5
+  index: -1
+lid_fire
+  rotate: false
+  xy: 221, 1151
+  size: 417, 417
+  orig: 417, 417
+  offset: 0, 0
+  index: -1
+lid_kim
+  rotate: false
+  xy: 640, 1151
+  size: 417, 417
+  orig: 417, 417
+  offset: 0, 0
+  index: -1
+lid_wat
+  rotate: false
+  xy: 1059, 1151
+  size: 417, 417
+  orig: 417, 417
+  offset: 0, 0
+  index: -1
+lid_wood
+  rotate: false
+  xy: 1478, 1151
+  size: 417, 417
+  orig: 417, 417
+  offset: 0, 0
+  index: -1
+midlee_light
+  rotate: true
+  xy: 2, 1359
+  size: 209, 217
+  orig: 219, 226
+  offset: 4, 5
+  index: -1
+
+compass2.png
+size: 1491,1505
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+circle_1
+  rotate: false
+  xy: 2, 2
+  size: 1487, 1501
+  orig: 1507, 1520
+  offset: 10, 10
+  index: -1
+
+compass3.png
+size: 2036,1363
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+guang_4
+  rotate: true
+  xy: 1364, 529
+  size: 832, 670
+  orig: 898, 861
+  offset: 15, 80
+  index: -1
+word
+  rotate: false
+  xy: 2, 2
+  size: 1360, 1359
+  orig: 1364, 1364
+  offset: 2, 3
+  index: -1
+
+compass4.png
+size: 1748,1690
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bianyuanguang
+  rotate: false
+  xy: 2, 954
+  size: 819, 734
+  orig: 821, 737
+  offset: 0, 3
+  index: -1
+dimian
+  rotate: false
+  xy: 823, 855
+  size: 923, 833
+  orig: 923, 834
+  offset: 0, 0
+  index: -1
+guang_6
+  rotate: false
+  xy: 2, 7
+  size: 876, 846
+  orig: 901, 870
+  offset: 13, 12
+  index: -1
+quan42
+  rotate: true
+  xy: 880, 2
+  size: 851, 858
+  orig: 871, 877
+  offset: 10, 9
+  index: -1
+
+compass5.png
+size: 1164,2026
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+circle_2
+  rotate: false
+  xy: 2, 858
+  size: 1160, 1166
+  orig: 1180, 1185
+  offset: 10, 10
+  index: -1
+dian_guang
+  rotate: true
+  xy: 2, 2
+  size: 854, 889
+  orig: 865, 897
+  offset: 5, 4
+  index: -1
+
+compass6.png
+size: 1163,2009
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+gaoguang_2
+  rotate: false
+  xy: 2, 1052
+  size: 1159, 955
+  orig: 1160, 955
+  offset: 0, 0
+  index: -1
+lin_quan
+  rotate: true
+  xy: 2, 2
+  size: 1048, 1055
+  orig: 1048, 1055
+  offset: 0, 0
+  index: -1
+
+compass7.png
+size: 2018,1022
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+circle_3
+  rotate: false
+  xy: 2, 30
+  size: 990, 990
+  orig: 1010, 1009
+  offset: 10, 9
+  index: -1
+runes
+  rotate: true
+  xy: 994, 2
+  size: 1018, 1022
+  orig: 1019, 1025
+  offset: 1, 0
+  index: -1
+
+compass8.png
+size: 1042,1050
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+veins
+  rotate: false
+  xy: 2, 2
+  size: 1038, 1046
+  orig: 1038, 1046
+  offset: 0, 0
+  index: -1
