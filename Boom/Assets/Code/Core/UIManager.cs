@@ -70,13 +70,13 @@ public class UIManager : ScriptableObject
     #endregion
 
     #region 2.MainScene
-    [FormerlySerializedAs("SoftScene")] public GameObject MainSceneGO;            //切换总闸 
+    public GameObject MainSceneGO;            //切换总闸 
     //1.CharacterScene
     [Header("EditBulletSecne")]
     public GameObject G_BulletSpawnerSlot;  //子弹孵化器的Group
     public GameObject G_BulletRoleSlot;     //子弹在人物右侧的Group
     
-    [FormerlySerializedAs("MapLogic")] [Header("MiniMap")]
+    [Header("MiniMap")]
     public GameObject MapLogicGO;
     public GameObject MapRoot;
     public GameObject ShopRoot;
@@ -87,7 +87,7 @@ public class UIManager : ScriptableObject
     public GameObject FightLogicGO;
     public GameObject G_BulletInScene; //场景内的子弹的父节点
     public GameObject G_Buff;
-    public GameObject CharILIns;
+    public GameObject RoleIns;
 
     public void InitMainScene()
     {
@@ -112,7 +112,7 @@ public class UIManager : ScriptableObject
         FightLogicGO = CurFighSceneSC.FightLogicGO;
         G_BulletInScene = CurFighSceneSC.G_BulletInScene;
         G_Buff = CurFighSceneSC.G_Buff;
-        CharILIns = CurFighSceneSC.CharILIns;
+        RoleIns = CurFighSceneSC.CharILIns;
     }
     #endregion
 

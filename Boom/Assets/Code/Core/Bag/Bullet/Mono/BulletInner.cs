@@ -6,6 +6,7 @@ using UnityEngine;
 public class BulletInner : BulletBase
 {
     public float maxDis = 105f;
+    public bool IsMove = true;
     List<GameObject> FXs;
 
     void Start()
@@ -16,6 +17,10 @@ public class BulletInner : BulletBase
     void Update()
     {
         // 让子弹沿着Z轴向前移动
+        if (!IsMove)
+        {
+            return;
+        }
         transform.Translate(forward * 10f * Time.deltaTime);
         if (transform.position.x>maxDis)
         {
@@ -38,6 +43,7 @@ public class BulletInner : BulletBase
             // 创建击中特效
             if (_bulletData.hitEffect != null)
             {
+                IsMove = false;
                 GameObject curFX = Instantiate(_bulletData.hitEffect, transform.position, transform.rotation);
                 FXs.Add(curFX);
             }

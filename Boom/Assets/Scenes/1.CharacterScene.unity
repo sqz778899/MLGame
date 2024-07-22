@@ -2693,7 +2693,7 @@ MonoBehaviour:
   FightLogicGO: {fileID: 948206930}
   G_BulletInScene: {fileID: 440946030}
   G_Buff: {fileID: 2005356939}
-  CharILIns: {fileID: 795135645}
+  CharILIns: {fileID: 1041207399}
 --- !u!1 &619563495
 GameObject:
   m_ObjectHideFlags: 0
@@ -3139,6 +3139,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 10
   CameraFollowingThreshold: 3
+  Ani: {fileID: 0}
+  State: 0
 --- !u!212 &795135648
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4810,6 +4812,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 10
   CameraFollowingThreshold: 3
+  Ani: {fileID: 1023880183}
+  State: 0
 --- !u!1 &1053527071
 GameObject:
   m_ObjectHideFlags: 0

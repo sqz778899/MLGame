@@ -40,7 +40,7 @@ public class BulletMove : MonoBehaviour
 
     float CurDistance()
     {
-        return Math.Abs(transform.position.x - UIManager.Instance.CharILIns.transform.position.x);
+        return Math.Abs(transform.position.x - UIManager.Instance.RoleIns.transform.position.x);
     }
 
 
@@ -76,7 +76,7 @@ public class BulletMove : MonoBehaviour
         float temp = 0.3f;
         IsMove = false;
         yield return new WaitForSeconds(temp); 
-        Vector3 targetPos = UIManager.Instance.CharILIns.transform.position;
+        Vector3 targetPos = UIManager.Instance.RoleIns.transform.position;
         if (CurDistance() > Distance)
         {
             Walk();
@@ -113,7 +113,7 @@ public class BulletMove : MonoBehaviour
     
     void CalState()
     {
-        float curDis = transform.position.x - UIManager.Instance.CharILIns.transform.position.x;
+        float curDis = transform.position.x - UIManager.Instance.RoleIns.transform.position.x;
         if (curDis > 0)
             _state = CurMoveState.Front;
         else if (curDis == 0)

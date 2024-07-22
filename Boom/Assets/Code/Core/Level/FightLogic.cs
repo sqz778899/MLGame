@@ -35,7 +35,7 @@ public class FightLogic : MonoBehaviour
 
         if (CurEnemy != null)
             Distance = Vector2.Distance(CurEnemy.transform.position,
-                UIManager.Instance.CharILIns.transform.position);
+                UIManager.Instance.RoleIns.transform.position);
 
         if (isBeginCameraMove && FirstBullet != null)
         {
@@ -113,6 +113,7 @@ public class FightLogic : MonoBehaviour
     }
     public void Fire(Vector3 pos)
     {
+        UIManager.Instance.RoleIns.GetComponent<RoleMove>().Fire();
         StartCoroutine(FireWithDelay(pos, delay));
     }
     
@@ -125,7 +126,8 @@ public class FightLogic : MonoBehaviour
         for (int i = 0; i < bulletDatas.Count; i++)
         {
             BulletReady curB = bulletDatas[i];
-            GameObject curBullet = BulletManager.Instance.InstanceBullet(curB.bulletID,BulletInsMode.Inner,pos);
+            GameObject curBullet = BulletManager.Instance.
+                InstanceBullet(curB.bulletID,BulletInsMode.Inner,pos);
             if (i == 0)
                 FirstBullet = curBullet;
             
