@@ -81,7 +81,7 @@ public class BulletManager :ScriptableObject
         BulletDataJson curDsData = TrunkManager.Instance.GetBulletDesignData(bulletID);
         BulletTooltipInfo tInfo = new BulletTooltipInfo();
         tInfo.bulletImage = ResManager.instance.GetAssetCache<Sprite>(
-            PathConfig.GetBulletImagePath(bulletID, BulletInsMode.Thumbnail));
+            PathConfig.GetBulletImageOrSpinePath(bulletID, BulletInsMode.Thumbnail));
         tInfo.name = curDsData.name;
         string ElementalType = ((ElementalTypes)curDsData.elementalType).ToString();
         tInfo.description = string.Format("Lv: {0}\nDamage: {1}\nElement: {2}",

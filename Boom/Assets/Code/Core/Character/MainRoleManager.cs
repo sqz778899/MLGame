@@ -359,7 +359,7 @@ public class MainRoleManager :ScriptableObject
             {
                 curImg.color = Color.white;
                 curImg.sprite = ResManager.instance.GetAssetCache<
-                    Sprite>(PathConfig.GetBulletImagePath(curBulletReady.bulletID, BulletInsMode.Icon));
+                    Sprite>(PathConfig.GetBulletImageOrSpinePath(curBulletReady.bulletID, BulletInsMode.Icon));
             }
         }
     }

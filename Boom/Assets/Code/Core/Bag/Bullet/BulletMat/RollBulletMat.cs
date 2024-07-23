@@ -20,7 +20,7 @@ public class RollBulletMat : RollBase
     public void InitImg()
     {
         CurImg.sprite = ResManager.instance.GetAssetCache<Sprite>(
-            PathConfig.GetBulletImagePath(ID, BulletInsMode.Mat));
+            PathConfig.GetBulletImageOrSpinePath(ID, BulletInsMode.Mat));
     }
 }
     

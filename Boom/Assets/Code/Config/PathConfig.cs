@@ -68,6 +68,7 @@ public static class PathConfig
    
    //..........................子弹.............................................
    public static string BulletImageDir = GetPrepath() + "Res/Bullet/Textures/";
+   public static string BulletSpineDir = GetPrepath() + "Res/Bullet/SpineData/";
    public static string BulletAssetDir = GetPrepath() + "Res/Bullet/Prefab/"; 
    //..........................ScoreMat.............................................
    public static string ScoreMatImage = GetPrepath() + "Res/Bullet/Textures/T_ScoreMat_01.png";
@@ -127,13 +128,17 @@ public static class PathConfig
       return BulletTemplate;
    }
 
-   public static string GetBulletImagePath(int ID,BulletInsMode bulletInsMode)
+   public static string GetBulletImageOrSpinePath(int ID,BulletInsMode bulletInsMode)
    {
       string orginName = "";
+      string suffix = ".png";
+      string curDir = BulletImageDir;
       switch (bulletInsMode)
       {
          case BulletInsMode.Inner:
-            orginName = "T_Bullet_Inner_";
+            curDir = BulletSpineDir;
+            suffix = ".asset";
+            orginName = "bullet_";//bullet_001_SkeletonData
             break;
          case BulletInsMode.Spawner:
             orginName = "T_Bullet_Edit_a_";
@@ -161,8 +166,12 @@ public static class PathConfig
 
       int orignalID = ID % 10;
       string smallDir = $"Bullet_{orignalID.ToString("D3")}/";
-      orginName = $"{orginName}{ID.ToString("D3")}.png";
-      string curImagePath = BulletImageDir + smallDir + orginName;
+      if (suffix == ".asset")
+         orginName = $"{orginName}{ID.ToString("D3")}_SkeletonData{suffix}";
+      else
+         orginName = $"{orginName}{ID.ToString("D3")}{suffix}";
+      
+      string curImagePath = curDir + smallDir + orginName;
 
       return curImagePath;
    }

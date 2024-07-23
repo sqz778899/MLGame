@@ -67,7 +67,6 @@ public class RoleMove : BaseMove
     {
         float anitime = 0f;
         AniUtility.PlayAttack(Ani,ref anitime);
-        Debug.Log("anitime:" + anitime);
         yield return new WaitForSeconds(anitime);
         State = RoleState.Idle;
     }

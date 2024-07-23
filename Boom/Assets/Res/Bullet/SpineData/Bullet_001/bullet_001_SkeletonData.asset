@@ -10,19 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1b3b4b945939a54ea0b23d3396115fb, type: 3}
-  m_Name: hit_SkeletonData
+  m_Name: bullet_001_SkeletonData
   m_EditorClassIdentifier: 
   atlasAssets:
-  - {fileID: 11400000, guid: e87dc16e2d070574cba2b2345667d649, type: 2}
+  - {fileID: 11400000, guid: 5c37ee8dd4bf0ab40899fd90052a5453, type: 2}
   scale: 0.01
-  skeletonJSON: {fileID: 4900000, guid: 8dcc4e33a881a3c4f95d1813bc920025, type: 3}
+  skeletonJSON: {fileID: 4900000, guid: 48d7acacb793c364e8ab05c6d6b87664, type: 3}
   isUpgradingBlendModeMaterials: 0
   blendModeMaterials:
-    requiresBlendModeMaterials: 1
+    requiresBlendModeMaterials: 0
     applyAdditiveMaterial: 1
-    additiveMaterials:
-    - pageName: hit.png
-      material: {fileID: 2100000, guid: 922a22585ac179e48b26498b866c47bd, type: 2}
+    additiveMaterials: []
     multiplyMaterials: []
     screenMaterials: []
   skeletonDataModifiers: []

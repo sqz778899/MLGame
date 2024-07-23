@@ -34,7 +34,7 @@ public class StandbyBulletMat:MonoBehaviour, IPointerDownHandler, IPointerUpHand
     {
         ID = _id;
         CurImg.sprite = ResManager.instance.GetAssetCache<Sprite>(
-            PathConfig.GetBulletImagePath(ID, BulletInsMode.Mat));
+            PathConfig.GetBulletImageOrSpinePath(ID, BulletInsMode.Mat));
     }
 
     public void DestroySelf()

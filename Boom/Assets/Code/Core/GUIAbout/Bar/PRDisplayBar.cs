@@ -30,7 +30,7 @@ public class PRDisplayBar : MonoBehaviour
         
         string curImagePath = "";
         if (ID != 0)
-            curImagePath = PathConfig.GetBulletImagePath(ID, BulletInsMode.Mat);
+            curImagePath = PathConfig.GetBulletImageOrSpinePath(ID, BulletInsMode.Mat);
         else
             curImagePath = PathConfig.ScoreMatImage;
         

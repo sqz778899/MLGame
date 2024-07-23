@@ -72,12 +72,16 @@ public class MainSceneMono:MonoBehaviour
         GUIFightScene.SetActive(true);
         FightScene.SetActive(true);
         _fightLogic?.InitData();
+        UIManager.Instance.G_CurBulletIcon?.SetActive(false);
+        UIManager.Instance.G_StandbyIcon?.SetActive(false);
     }
     void FightSceneOff()
     {
         GUIFightScene.SetActive(false);
         FightScene.SetActive(false);
         _fightLogic?.UnloadData();
+        UIManager.Instance.G_CurBulletIcon?.SetActive(true);
+        UIManager.Instance.G_StandbyIcon?.SetActive(true);
     }
     
     void MapSceneOn()

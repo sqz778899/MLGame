@@ -14,9 +14,9 @@ public class BulletUPMono :GUIBase
     {
         ID = _id;
         ImgBefore.sprite = ResManager.instance.GetAssetCache<Sprite>(
-            PathConfig.GetBulletImagePath(ID, BulletInsMode.Spawner));
+            PathConfig.GetBulletImageOrSpinePath(ID, BulletInsMode.Spawner));
         
         ImgAfter.sprite = ResManager.instance.GetAssetCache<Sprite>(
-            PathConfig.GetBulletImagePath(ID + 100, BulletInsMode.Spawner));
+            PathConfig.GetBulletImageOrSpinePath(ID + 100, BulletInsMode.Spawner));
     }
 }

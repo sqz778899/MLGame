@@ -62,7 +62,6 @@ public class UIManager : ScriptableObject
     
     
     #region 1.StartGame
-
     public void InitStartGame()
     {
         InitComon();

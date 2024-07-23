@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Spine.Unity;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -100,6 +101,7 @@ public class BulletData
     //..............Instance..............
     public Sprite imgBullet;     //....image自动根据ID设置
     public GameObject hitEffect; // 击中效果预制体
+    public SkeletonDataAsset bulletSpineAsset; // 子弹Spine资产
 
     public void SetDataByID(BulletInsMode bulletInsMode = BulletInsMode.EditA)
     {
@@ -120,7 +122,10 @@ public class BulletData
         penetration = curData.penetration;
         elementalType = (ElementalTypes)curData.elementalType;
 
-        imgBullet = ResManager.instance.GetAssetCache<Sprite>(PathConfig.GetBulletImagePath(ID, bulletInsMode));
+        imgBullet = ResManager.instance.GetAssetCache<Sprite>
+            (PathConfig.GetBulletImageOrSpinePath(ID, bulletInsMode));
+        bulletSpineAsset = ResManager.instance.GetAssetCache<SkeletonDataAsset>
+            (PathConfig.GetBulletImageOrSpinePath(ID,bulletInsMode));
         //实例化Prefab
         hitEffect = ResManager.instance.GetAssetCache<GameObject>(
             PathConfig.FXAssetDir + curData.hitEffectName + ".prefab");
