@@ -8,6 +8,7 @@ public class RoleMove : BaseMove
 {
     [Header("SpineAbout")]
     public SkeletonAnimation Ani;
+    public SkeletonAnimation AttackFX;
     public RoleState State;
 
     internal override void Update()
@@ -61,6 +62,18 @@ public class RoleMove : BaseMove
     {
         State = RoleState.Attack;
         StartCoroutine(FireIEnu());
+        StartCoroutine(PlayAttackFX());
+    }
+
+    IEnumerator PlayAttackFX()
+    {
+        AttackFX.gameObject.SetActive(true);
+        float fxtime = 0f;
+        AniUtility.PlayAttack(AttackFX,ref fxtime);
+        yield return new WaitForSeconds(fxtime);
+        AttackFX.state.ClearTracks();
+        AttackFX.skeleton.SetToSetupPose();
+        AttackFX.gameObject.SetActive(false);
     }
 
     IEnumerator FireIEnu()

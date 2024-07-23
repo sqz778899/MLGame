@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6b194f808b1af6499c93410e504af42, type: 3}
-  m_Name: fazhen_Atlas
+  m_Name: spfx_magic_circle_01_Atlas
   m_EditorClassIdentifier: 
-  atlasFile: {fileID: 4900000, guid: a23a8d064931cf94f963a52a4fd0cf3b, type: 3}
+  atlasFile: {fileID: 4900000, guid: 046291ebcdb1022488ec595466601b3f, type: 3}
   materials:
-  - {fileID: 2100000, guid: 9354b18be9a5f14448fcb16fae67ebc9, type: 2}
+  - {fileID: 2100000, guid: 00c919c6349abb943acd529cadded909, type: 2}

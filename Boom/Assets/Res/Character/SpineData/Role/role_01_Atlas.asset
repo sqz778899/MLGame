@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6b194f808b1af6499c93410e504af42, type: 3}
-  m_Name: ren_Atlas
+  m_Name: role_01_Atlas
   m_EditorClassIdentifier: 
-  atlasFile: {fileID: 4900000, guid: 3e1fdf9992c553f4aa7134a617514101, type: 3}
+  atlasFile: {fileID: 4900000, guid: 7db5e43d31dd75544b7e248785462596, type: 3}
   materials:
-  - {fileID: 2100000, guid: 2593b24facb1f0f4ea58fa5ab5aa0f77, type: 2}
+  - {fileID: 2100000, guid: 785ab0f195e1241449c529b00b954ac3, type: 2}

@@ -1,10 +1,11 @@
-﻿using Spine.Unity;
+﻿using Spine;
+using Spine.Unity;
 
 public static class AniUtility
 {
     #region 动画名字定义
     const string Idle = "idle";
-    const string Attack = "attack";
+    const string AttackBegin = "attack_begin";
     const string Run = "run";
     #endregion
 
@@ -23,7 +24,7 @@ public static class AniUtility
     
     public static void PlayAttack(SkeletonAnimation curAni,ref float anitime,float timeScale=1f)
     {
-        PlayCommon(curAni, timeScale, Attack);
+        PlayCommon(curAni, timeScale, AttackBegin);
         anitime = curAni.state.GetCurrent(0).Animation.Duration;
     }
     
