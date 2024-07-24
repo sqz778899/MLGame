@@ -7,126 +7,49 @@ using UnityEngine;
 
 public class BulletMove : MonoBehaviour
 {
-    public float Distance = 1;
+    public float Distance = 3;
+    public float Speed = 10.0f;
     SkeletonAnimation _ain;
-    float _orginTimeScale;
-    
-    CurMoveState _state;
-    CurMoveState _preState;
+    Vector3 forward = new Vector3(1, 0, 0);
     
     bool IsMove = true;
     
-    void Awake()
-    {
-        _ain = transform.GetChild(0).GetComponent<SkeletonAnimation>();
-        _orginTimeScale = _ain.timeScale;
-    }
-
     void Start()
     {
-        Idle();
+        _ain = transform.GetChild(0).GetComponent<SkeletonAnimation>();
+        AniUtility.PlayIdle(_ain);
     }
     
     void Update()
     {
-        CalState();
-        if (IsMove)
-        {
-            _preState = _state;
-            StartCoroutine(Move());
-        }
+        Move();
     }
     
-
     float CurDistance()
     {
-        return Math.Abs(transform.position.x - UIManager.Instance.RoleIns.transform.position.x);
+        return transform.position.x - UIManager.Instance.RoleIns.transform.position.x;
     }
-
-
-    void Idle()
+    void Move()
     {
-        if (_ain.AnimationName != "Idle")
+        float dis = CurDistance();
+        if(Math.Abs(dis) > Distance)
         {
-            _ain.AnimationName = "Idle";
-            _ain.timeScale = _orginTimeScale;
-        }
-    }
-
-    void Walk()
-    {
-        if (_ain.AnimationName != "Walk")
-        {
-            _ain.AnimationName = "Walk";
-            _ain.timeScale = _orginTimeScale * 3;
-        }    
-    }
-
-    void TrunAround(float face)
-    {
-        if (_preState != _state)
-        {
-            _preState = _state;
-            _ain.skeleton.ScaleX = face;
-        }
-    }
-
-    IEnumerator Move()
-    {
-        float temp = 0.3f;
-        IsMove = false;
-        yield return new WaitForSeconds(temp); 
-        Vector3 targetPos = UIManager.Instance.RoleIns.transform.position;
-        if (CurDistance() > Distance)
-        {
-            Walk();
-            switch (_state)
+            AniUtility.PlayRun(_ain);
+            if (dis < 0)
             {
-                case CurMoveState.Back:
-                    TrunAround(1);
-                    transform.DOMoveX(targetPos.x - 1,temp);
-                    //transform.position = new Vector3(targetPos.x - 1, targetPos.y, targetPos.z);
-                    break;
-                case CurMoveState.Front:
-                    TrunAround(-1);
-                    transform.DOMoveX(targetPos.x + 1,temp);
-                    //transform.position = new Vector3(targetPos.x + 1, targetPos.y, targetPos.z);
-                    break;
+                AniUtility.TrunAround(_ain,1);
+                transform.Translate( forward * Speed * Time.deltaTime);
+            }
+            else
+            {
+                AniUtility.TrunAround(_ain,-1);
+                transform.Translate( -forward * Speed * Time.deltaTime);
             }
         }
-        if (CurDistance() == Distance)
-        {
-            Idle();
-        }
-        if (CurDistance() < Distance)
-        {
-            Idle();
-            switch (_state)
-            {
-                case CurMoveState.Front:
-                    _ain.skeleton.ScaleX = -1;
-                    break;
-            }
-        }
-        IsMove = true;
-    }
-    
-    void CalState()
-    {
-        float curDis = transform.position.x - UIManager.Instance.RoleIns.transform.position.x;
-        if (curDis > 0)
-            _state = CurMoveState.Front;
-        else if (curDis == 0)
-            _state = CurMoveState.Mid;
         else
-            _state = CurMoveState.Back;
-      
+        {
+            AniUtility.PlayIdle(_ain);
+        }
     }
     
-    enum CurMoveState
-    {
-        Back,
-        Mid,
-        Front
-    }
 }

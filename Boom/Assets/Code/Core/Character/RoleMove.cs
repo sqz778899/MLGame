@@ -49,12 +49,14 @@ public class RoleMove : BaseMove
     internal override void MoveForward()
     {
         base.MoveForward();
+        AniUtility.TrunAround(Ani,1);
         AniUtility.PlayRun(Ani);
     }
 
     internal override void MoveBack()
     {
         base.MoveBack();
+        AniUtility.TrunAround(Ani,-1);
         AniUtility.PlayRun(Ani);
     }
 

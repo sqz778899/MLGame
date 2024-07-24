@@ -32,4 +32,9 @@ public static class AniUtility
     {
         PlayCommon(curAni, timeScale, Run);
     }
+    
+    public static void TrunAround(SkeletonAnimation curAni,float face)
+    {
+        curAni.skeleton.ScaleX = face;
+    }
 }

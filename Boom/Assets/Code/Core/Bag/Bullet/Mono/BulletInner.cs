@@ -1,31 +1,41 @@
 using System;
 using System.Collections;
+using Spine.Unity;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletInner : BulletBase
 {
-    public float maxDis = 105f;
+    public float FollowDis = 3;
+    public float RunSpeed = 10.0f;
+    
+    public float DisabearDis = 105f;
+    
     public bool IsMove = true;
+    
+    SkeletonAnimation _ain;
     List<GameObject> FXs;
 
     void Start()
     {
+        _ain = transform.GetChild(0).GetComponent<SkeletonAnimation>();
+        AniUtility.PlayIdle(_ain);
         FXs = new List<GameObject>();
     }
 
     void Update()
     {
-        // 让子弹沿着Z轴向前移动
+        Run(); //在界面跟着主角跑
+        /*// 让子弹沿着Z轴向前移动
         if (!IsMove)
         {
             return;
         }
         transform.Translate(forward * 10f * Time.deltaTime);
-        if (transform.position.x>maxDis)
+        if (transform.position.x > DisabearDis)
         {
             Destroy(gameObject);
-        }
+        }*/
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -60,5 +70,31 @@ public class BulletInner : BulletBase
         }
         // 销毁子弹
         Destroy(gameObject);
+    }
+    
+    void Run()
+    {
+        float dis = CurDistance();
+        if(Math.Abs(dis) > FollowDis)
+        {
+            AniUtility.PlayRun(_ain);
+            if (dis < 0)
+            {
+                AniUtility.TrunAround(_ain,1);
+                transform.Translate( forward * RunSpeed * Time.deltaTime);
+            }
+            else
+            {
+                AniUtility.TrunAround(_ain,-1);
+                transform.Translate( -forward * RunSpeed * Time.deltaTime);
+            }
+        }
+        else
+            AniUtility.PlayIdle(_ain);
+    }
+    
+    float CurDistance()
+    {
+        return transform.position.x - UIManager.Instance.RoleIns.transform.position.x;
     }
 }

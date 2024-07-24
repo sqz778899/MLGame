@@ -11,6 +11,6 @@ public class DebugTool
     [Button(ButtonSizes.Large)]
     void Debugsss()
     {
-     
+        BulletManager.Instance.InstanceBullet(1, BulletInsMode.Inner);
     }
 }

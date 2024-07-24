@@ -30,13 +30,16 @@ public class FightLogic : MonoBehaviour
     public Enemy CurEnemy;
     void Update()
     {
+        //开始结算关卡
         if (isBeginCalculation)
             WinOrFailThisLevel();
-
+        
+        //实时计算与敌人的距离
         if (CurEnemy != null)
             Distance = Vector2.Distance(CurEnemy.transform.position,
                 UIManager.Instance.RoleIns.transform.position);
-
+        
+        //摄像机跟随子弹命中敌人动画
         if (isBeginCameraMove && FirstBullet != null)
         {
             Vector3 s = Camera.main.transform.position;
@@ -55,6 +58,23 @@ public class FightLogic : MonoBehaviour
         Distance = 0f;
         CurEnemy = CurLevel.GetComponent<LevelMono>().GetCurEnemy();
         MainRoleManager.Instance.WinOrFailState = WinOrFail.InLevel;
+        CreateBulletInner();
+    }
+
+    //在开始战斗的时候，根据角色槽位的子弹，创建五个跟着他跑的傻逼嘻嘻的小子弹
+    void CreateBulletInner()
+    {
+        Vector3 startPos = new Vector3(-1.5f, -0.64f, 1f);
+        for (int i = 0; i < MainRoleManager.Instance.CurBullets.Count; i++)
+        {
+            BulletReady curB = MainRoleManager.Instance.CurBullets[i];
+            GameObject bulletIns = BulletManager.Instance.
+                InstanceBullet(curB.bulletID, BulletInsMode.Inner);
+            BulletInner curSC = bulletIns.GetComponent<BulletInner>();
+            float offsetX = startPos.x -i * 1.5f;
+            curSC.FollowDis = Mathf.Abs(offsetX);
+            bulletIns.transform.position = new Vector3(offsetX,startPos.y,startPos.z + i);
+        }
     }
 
     public void UnloadData()

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Spine.Unity;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class BulletBase : MonoBehaviour
@@ -52,24 +53,14 @@ public class BulletBase : MonoBehaviour
             if (curRoot.transform.GetChild(i).name == "GroupStar")
                 GroupStar = curRoot.transform.GetChild(i).gameObject;
         }
-        //...........GroupStar...................
+        //...........Set Image&&SpineAsset...................
         if (bulletInsMode == BulletInsMode.Inner)
         {
-            SpriteRenderer targetSprite = null;
-            SpriteRenderer[] allRenderers = curRoot.GetComponentsInChildren<SpriteRenderer>();
-            foreach (var each in allRenderers)
-            {
-                if (each.gameObject.name == "imgBullet")
-                {
-                    targetSprite = each;
-                    break;
-                }
-            }
-
-            if (targetSprite == null)
+            SkeletonAnimation SkeleSC = curRoot.GetComponentInChildren<SkeletonAnimation>();
+            if (SkeleSC == null)
                 return;
             
-            targetSprite.sprite = _bulletData.imgBullet;
+            SkeleSC.skeletonDataAsset = _bulletData.bulletSpineAsset;
         }
         else
         {

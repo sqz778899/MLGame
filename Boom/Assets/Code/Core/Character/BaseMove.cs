@@ -3,9 +3,9 @@
 public class BaseMove : MonoBehaviour
 {
     public float Speed = 10.0f;
-    float CameraFollowingThreshold = -3;
+    public float CameraFollowingThreshold = -3;
 
-    Vector3 forward = new Vector3(1, 0, 0);
+    internal Vector3 forward = new Vector3(1, 0, 0);
     internal Camera _mCamera;
     internal FightLogic _fightLogic;
 
