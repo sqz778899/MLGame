@@ -28,6 +28,7 @@ public class FightLogic : MonoBehaviour
 
     public float Distance;
     public Enemy CurEnemy;
+    public RoleInner CurRole;
     void Update()
     {
         //开始结算关卡
@@ -38,6 +39,9 @@ public class FightLogic : MonoBehaviour
         if (CurEnemy != null)
             Distance = Vector2.Distance(CurEnemy.transform.position,
                 UIManager.Instance.RoleIns.transform.position);
+        
+        //开火
+        CheckForKeyPress();
         
         //摄像机跟随子弹命中敌人动画
         if (isBeginCameraMove && FirstBullet != null)
@@ -57,24 +61,9 @@ public class FightLogic : MonoBehaviour
         isBeginCalculation = false;
         Distance = 0f;
         CurEnemy = CurLevel.GetComponent<LevelMono>().GetCurEnemy();
+        CurRole = UIManager.Instance.RoleIns.GetComponent<RoleInner>();
+        CurRole.InitData();
         MainRoleManager.Instance.WinOrFailState = WinOrFail.InLevel;
-        CreateBulletInner();
-    }
-
-    //在开始战斗的时候，根据角色槽位的子弹，创建五个跟着他跑的傻逼嘻嘻的小子弹
-    void CreateBulletInner()
-    {
-        Vector3 startPos = new Vector3(-1.5f, -0.64f, 1f);
-        for (int i = 0; i < MainRoleManager.Instance.CurBullets.Count; i++)
-        {
-            BulletReady curB = MainRoleManager.Instance.CurBullets[i];
-            GameObject bulletIns = BulletManager.Instance.
-                InstanceBullet(curB.bulletID, BulletInsMode.Inner);
-            BulletInner curSC = bulletIns.GetComponent<BulletInner>();
-            float offsetX = startPos.x -i * 1.5f;
-            curSC.FollowDis = Mathf.Abs(offsetX);
-            bulletIns.transform.position = new Vector3(offsetX,startPos.y,startPos.z + i);
-        }
     }
 
     public void UnloadData()
@@ -126,15 +115,15 @@ public class FightLogic : MonoBehaviour
     #region 开火相关
     public float delay = 0.3f;
     
-    public void CheckForKeyPress(Vector3 pos)
+    public void CheckForKeyPress()
     {
         if (Input.GetKeyDown(KeyCode.Space))
-            Fire(pos);
+            FireInvoke();
     }
-    public void Fire(Vector3 pos)
+    public void FireInvoke()
     {
-        UIManager.Instance.RoleIns.GetComponent<RoleMove>().Fire();
-        StartCoroutine(FireWithDelay(pos, delay));
+        CurRole.Fire();
+        //StartCoroutine(FireWithDelay(pos, delay));
     }
     
     public IEnumerator FireWithDelay(Vector3 pos, float delay)

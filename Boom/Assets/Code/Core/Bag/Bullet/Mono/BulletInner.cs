@@ -11,8 +11,6 @@ public class BulletInner : BulletBase
     
     public float DisabearDis = 105f;
     
-    public bool IsMove = true;
-    
     SkeletonAnimation _ain;
     List<GameObject> FXs;
 
@@ -53,7 +51,6 @@ public class BulletInner : BulletBase
             // 创建击中特效
             if (_bulletData.hitEffect != null)
             {
-                IsMove = false;
                 GameObject curFX = Instantiate(_bulletData.hitEffect, transform.position, transform.rotation);
                 FXs.Add(curFX);
             }
@@ -75,19 +72,20 @@ public class BulletInner : BulletBase
     void Run()
     {
         float dis = CurDistance();
+        //..............面向...................
+        if (dis < 0)
+            AniUtility.TrunAround(_ain, 1);
+        else
+            AniUtility.TrunAround(_ain, -1);
+        
+        //..............移动方向...................
         if(Math.Abs(dis) > FollowDis)
         {
             AniUtility.PlayRun(_ain);
             if (dis < 0)
-            {
-                AniUtility.TrunAround(_ain,1);
                 transform.Translate( forward * RunSpeed * Time.deltaTime);
-            }
             else
-            {
-                AniUtility.TrunAround(_ain,-1);
                 transform.Translate( -forward * RunSpeed * Time.deltaTime);
-            }
         }
         else
             AniUtility.PlayIdle(_ain);

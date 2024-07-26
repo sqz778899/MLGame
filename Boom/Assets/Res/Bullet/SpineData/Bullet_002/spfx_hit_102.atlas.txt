@@ -1,0 +1,125 @@
+
+spfx_hit_102.png
+size: 1997,1792
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+lingt/light00000
+  rotate: false
+  xy: 559, 285
+  size: 151, 243
+  orig: 1000, 563
+  offset: 463, 174
+  index: -1
+lingt/light00001
+  rotate: true
+  xy: 2, 2
+  size: 261, 363
+  orig: 1000, 563
+  offset: 439, 99
+  index: -1
+lingt/light00002
+  rotate: true
+  xy: 1108, 27
+  size: 395, 463
+  orig: 1000, 563
+  offset: 432, 58
+  index: -1
+lingt/light00003
+  rotate: false
+  xy: 1555, 1282
+  size: 440, 508
+  orig: 1000, 563
+  offset: 412, 29
+  index: -1
+smoke/smoke00000
+  rotate: false
+  xy: 712, 295
+  size: 129, 233
+  orig: 1000, 563
+  offset: 485, 183
+  index: -1
+smoke/smoke00001
+  rotate: true
+  xy: 1570, 675
+  size: 438, 412
+  orig: 1000, 563
+  offset: 387, 104
+  index: -1
+smoke/smoke00002
+  rotate: true
+  xy: 1078, 424
+  size: 628, 490
+  orig: 1000, 563
+  offset: 301, 57
+  index: -1
+smoke/smoke00003
+  rotate: true
+  xy: 2, 265
+  size: 731, 555
+  orig: 1000, 563
+  offset: 223, 7
+  index: -1
+smoke/smoke00004
+  rotate: true
+  xy: 2, 998
+  size: 792, 536
+  orig: 1000, 563
+  offset: 176, 27
+  index: -1
+smoke/smoke00005
+  rotate: true
+  xy: 540, 1135
+  size: 655, 502
+  orig: 1000, 563
+  offset: 311, 41
+  index: -1
+stong/stone00000
+  rotate: false
+  xy: 1555, 1115
+  size: 256, 165
+  orig: 1000, 563
+  offset: 395, 208
+  index: -1
+stong/stone00001
+  rotate: true
+  xy: 1573, 240
+  size: 433, 415
+  orig: 1000, 563
+  offset: 392, 92
+  index: -1
+stong/stone00002
+  rotate: true
+  xy: 559, 530
+  size: 522, 497
+  orig: 1000, 563
+  offset: 346, 48
+  index: -1
+stong/stone00003
+  rotate: true
+  xy: 1044, 1162
+  size: 628, 509
+  orig: 1000, 563
+  offset: 294, 36
+  index: -1
+stong/stone00004
+  rotate: false
+  xy: 367, 151
+  size: 709, 112
+  orig: 1000, 563
+  offset: 220, 34
+  index: -1
+stong/stone00005
+  rotate: false
+  xy: 367, 53
+  size: 739, 96
+  orig: 1000, 563
+  offset: 195, 43
+  index: -1
+stong/stone00006
+  rotate: false
+  xy: 540, 1054
+  size: 745, 79
+  orig: 1000, 563
+  offset: 195, 45
+  index: -1

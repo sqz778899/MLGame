@@ -1,17 +1,12 @@
 ﻿using System;
+using DG.Tweening;
 using UnityEngine;
 
-public class Connon : BaseMove
+public class Connon : MonoBehaviour
 {
-    internal override void Update()
+    float AppearanceTime = 0.5f;
+    public void Appear(Vector3 targetPos)
     {
-        base.Update();
-        //快捷键响应
-        _fightLogic.CheckForKeyPress(transform.position);
-    }
-    
-    public void Fire()
-    {
-        _fightLogic.Fire(transform.position);
+        transform.DOMove(targetPos, AppearanceTime);
     }
 }
