@@ -6,6 +6,7 @@ public static class AniUtility
     #region 动画名字定义
     const string Idle = "idle";
     const string AttackBegin = "attack_begin";
+    const string Attacking = "attacking";
     const string Run = "run";
     #endregion
 
@@ -26,6 +27,11 @@ public static class AniUtility
     {
         PlayCommon(curAni, timeScale, AttackBegin);
         anitime = curAni.state.GetCurrent(0).Animation.Duration;
+    }
+    
+    public static void PlayAttacking(SkeletonAnimation curAni,float timeScale=1f)
+    {
+        PlayCommon(curAni, timeScale, Attacking);
     }
     
     public static void PlayRun(SkeletonAnimation curAni,float timeScale=1f)

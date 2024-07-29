@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Connon : MonoBehaviour
 {
-    float AppearanceTime = 0.5f;
+    public float AppearanceTime = 0.5f;
     public void Appear(Vector3 targetPos)
     {
         transform.DOMove(targetPos, AppearanceTime);

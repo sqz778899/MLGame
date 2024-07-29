@@ -70,6 +70,9 @@ public static class PathConfig
    public static string BulletImageDir = GetPrepath() + "Res/Bullet/Textures/";
    public static string BulletSpineDir = GetPrepath() + "Res/Bullet/SpineData/";
    public static string BulletAssetDir = GetPrepath() + "Res/Bullet/Prefab/"; 
+   public static string BulletSpfxTemplate = GetPrepath() + "Res/Bullet/Prefab/P_Bullet_Inner_Spfx_Template.prefab"; 
+
+   //P_Bullet_Inner_spfx_Template
    //..........................ScoreMat.............................................
    public static string ScoreMatImage = GetPrepath() + "Res/Bullet/Textures/T_ScoreMat_01.png";
    //..........................Buff.............................................
@@ -178,6 +181,16 @@ public static class PathConfig
       return curImagePath;
    }
    
+   //spfx_hit_001_SkeletonData
+   public static string GetBulletSpfxPath(int ID)
+   {
+      int orignalID = ID % 10;
+      string smallDir = $"Bullet_{orignalID.ToString("D3")}/";
+      string curDir = BulletSpineDir;
+      string finnal = $"{curDir}{smallDir}spfx_hit_{ID.ToString("D3")}_SkeletonData.asset";
+      return finnal;
+   }
+
    public static string GetBufftImagePath(int ID,string name)
    {
       string orginName = "T_Buff_" + name +"_" +  ID.ToString("D2") + ".png";

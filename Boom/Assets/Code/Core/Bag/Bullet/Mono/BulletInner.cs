@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Spine.Unity;
 using System.Collections.Generic;
+using Spine.Unity.Editor;
 using UnityEngine;
 
 public class BulletInner : BulletBase
@@ -10,30 +11,36 @@ public class BulletInner : BulletBase
     public float RunSpeed = 10.0f;
     
     public float DisabearDis = 105f;
+    public BulletInnerState _state;
     
     SkeletonAnimation _ain;
+    public float AniScale = 1f;
     List<GameObject> FXs;
 
     void Start()
     {
+        _state = BulletInnerState.Common;
         _ain = transform.GetChild(0).GetComponent<SkeletonAnimation>();
-        AniUtility.PlayIdle(_ain);
+        AniUtility.PlayIdle(_ain,AniScale);
         FXs = new List<GameObject>();
     }
 
     void Update()
     {
-        Run(); //在界面跟着主角跑
-        /*// 让子弹沿着Z轴向前移动
-        if (!IsMove)
+        switch (_state)
         {
-            return;
+            case BulletInnerState.Common:
+                Run();//在界面跟着主角跑
+                break;
+            case BulletInnerState.AttackBegin:
+                break;
+            case BulletInnerState.Attacking:// 让子弹沿着Z轴向前移动
+                transform.Translate(forward * 10f * Time.deltaTime);
+                break;
+            case BulletInnerState.Dead:
+                Destroy(gameObject);
+                break;
         }
-        transform.Translate(forward * 10f * Time.deltaTime);
-        if (transform.position.x > DisabearDis)
-        {
-            Destroy(gameObject);
-        }*/
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -51,8 +58,7 @@ public class BulletInner : BulletBase
             // 创建击中特效
             if (_bulletData.hitEffect != null)
             {
-                GameObject curFX = Instantiate(_bulletData.hitEffect, transform.position, transform.rotation);
-                FXs.Add(curFX);
+                StartCoroutine(PlayHitFX());
             }
             //延迟销毁子弹
             gameObject.transform.GetChild(0).gameObject.SetActive(false);
@@ -68,6 +74,31 @@ public class BulletInner : BulletBase
         // 销毁子弹
         Destroy(gameObject);
     }
+
+    #region 攻击
+
+    public IEnumerator Attack()
+    {
+        _state = BulletInnerState.AttackBegin;
+        float aniTime = 0f;
+        AniUtility.PlayAttack(_ain,ref aniTime,AniScale);
+        yield return new WaitForSeconds(aniTime);
+        _state = BulletInnerState.Attacking;
+        AniUtility.PlayAttacking(_ain,AniScale);
+    }
+
+    public IEnumerator PlayHitFX()
+    {
+        GameObject curFX = Instantiate(_bulletData.hitEffect, transform.position, transform.rotation);
+        SkeletonAnimation curSpfxSC = curFX.GetComponentInChildren<SkeletonAnimation>();
+        curSpfxSC.skeletonDataAsset = _bulletData.hitSpfxAsset;
+        SpineEditorUtilities.ReloadSkeletonDataAssetAndComponent(curSpfxSC);
+        float aniTime = 0f;
+        AniUtility.PlayAttack(curSpfxSC,ref aniTime,AniScale);
+        FXs.Add(curFX);
+        yield return new WaitForSeconds(aniTime);
+    }
+    #endregion
     
     void Run()
     {
@@ -81,14 +112,14 @@ public class BulletInner : BulletBase
         //..............移动方向...................
         if(Math.Abs(dis) > FollowDis)
         {
-            AniUtility.PlayRun(_ain);
+            AniUtility.PlayRun(_ain,AniScale);
             if (dis < 0)
                 transform.Translate( forward * RunSpeed * Time.deltaTime);
             else
                 transform.Translate( -forward * RunSpeed * Time.deltaTime);
         }
         else
-            AniUtility.PlayIdle(_ain);
+            AniUtility.PlayIdle(_ain,AniScale);
     }
     
     float CurDistance()

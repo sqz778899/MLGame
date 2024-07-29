@@ -11,6 +11,7 @@ public class RoleInner : BaseMove
     public SkeletonAnimation Ani;
     public SkeletonAnimation AttackFX;
     [Header("Others")]
+    public float FireDelay = 0.3f;
     public RoleState State;
     public List<BulletInner> Bullets;
     public Transform ConnonNode;
@@ -35,6 +36,7 @@ public class RoleInner : BaseMove
             float offsetX = startPos.x -i * 1.5f;
             curSC.FollowDis = Mathf.Abs(offsetX);
             bulletIns.transform.position = new Vector3(offsetX,startPos.y,startPos.z + i);
+            bulletIns.transform.SetParent(transform.parent,false);
             Bullets.Add(curSC);
         }
     }
@@ -75,12 +77,13 @@ public class RoleInner : BaseMove
         }
     }
 
-    void CreateConnon()
+    void CreateConnon(ref float AniTime)
     {
         //CreateConnon();
         GameObject ConnonIns = ResManager.instance.IntanceAsset(PathConfig.ConnonPB);
         ConnonIns.transform.SetParent(ConnonNode,false);
         Connon curSC = ConnonIns.GetComponent<Connon>();
+        AniTime = curSC.AppearanceTime;
         Vector3 tmp = ConnonNode.transform.position;
         Vector3 targetPos = new Vector3(tmp.x,0.1f,tmp.z);
         curSC.Appear(targetPos);
@@ -124,7 +127,22 @@ public class RoleInner : BaseMove
         float anitime = 0f;
         AniUtility.PlayAttack(Ani,ref anitime); // 播放攻击动画
         yield return new WaitForSeconds(anitime);
-        CreateConnon();
+
+        float connonAniTime = 0f;
+        CreateConnon(ref connonAniTime);
         State = RoleState.Idle;
+        yield return new WaitForSeconds(anitime);
+        StartCoroutine(FireWithDelay(FireDelay));
+    }
+
+    public IEnumerator FireWithDelay(float delay)
+    {
+        Debug.Log("fire");
+        for (int i = 0; i < Bullets.Count; i++)
+        {
+            BulletInner curBullet = Bullets[i];
+            StartCoroutine(curBullet.Attack());
+            yield return new WaitForSeconds(delay);  // 在发射下一个子弹之前，等待delay秒
+        }
     }
 }

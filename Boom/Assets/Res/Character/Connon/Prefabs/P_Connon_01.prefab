@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2310925830185620453}
+  - component: {fileID: 2233602297793310843}
   m_Layer: 0
   m_Name: P_Connon_01
   m_TagString: Untagged
@@ -32,6 +33,18 @@ Transform:
   - {fileID: 6045412728612670842}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2233602297793310843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3892233258821936652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0279737ebeba455d934686c04c67ba76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5997456466535094284
 GameObject:
   m_ObjectHideFlags: 0
@@ -42,7 +55,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6045412728612670842}
   - component: {fileID: 5427875073963671297}
-  - component: {fileID: 6602688400731676301}
   m_Layer: 0
   m_Name: imConnon
   m_TagString: Untagged
@@ -117,15 +129,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6602688400731676301
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5997456466535094284}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0279737ebeba455d934686c04c67ba76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

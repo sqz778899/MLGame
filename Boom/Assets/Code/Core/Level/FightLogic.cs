@@ -112,9 +112,7 @@ public class FightLogic : MonoBehaviour
         //选完了给一个随机宝物
     }
 
-    #region 开火相关
-    public float delay = 0.3f;
-    
+    #region 开火相关;
     public void CheckForKeyPress()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -123,32 +121,6 @@ public class FightLogic : MonoBehaviour
     public void FireInvoke()
     {
         CurRole.Fire();
-        //StartCoroutine(FireWithDelay(pos, delay));
-    }
-    
-    public IEnumerator FireWithDelay(Vector3 pos, float delay)
-    {
-        Debug.Log("fire");
-        List<BulletReady> bulletDatas = MainRoleManager.Instance.CurBullets;
-        
-        //
-        for (int i = 0; i < bulletDatas.Count; i++)
-        {
-            BulletReady curB = bulletDatas[i];
-            GameObject curBullet = BulletManager.Instance.
-                InstanceBullet(curB.bulletID,BulletInsMode.Inner,pos);
-            if (i == 0)
-                FirstBullet = curBullet;
-            
-            if (curBullet != null)
-                curBullet.transform.SetParent(UIManager.Instance.G_BulletInScene.transform);
-            yield return new WaitForSeconds(delay);  // 在发射下一个子弹之前，等待delay秒
-        }
-        
-        //.......Camera Move.............
-        isBeginCameraMove = true;
-        //........Enemy Die..............
-        isBeginCalculation = true;     //发射子弹之后，关卡开启结算模式
     }
     #endregion
 }

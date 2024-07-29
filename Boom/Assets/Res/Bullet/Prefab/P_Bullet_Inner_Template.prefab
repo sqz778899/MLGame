@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 0}
+  skeletonDataAsset: {fileID: 11400000, guid: ca89111f8f10bd342af48298d7cc49d5, type: 2}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
@@ -187,7 +187,8 @@ MonoBehaviour:
   FollowDis: 3
   RunSpeed: 10
   DisabearDis: 105
-  IsMove: 1
+  _state: 0
+  AniScale: 1
 --- !u!70 &1371652625376912822
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -220,8 +221,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.81, y: 0.4}
+  m_Offset: {x: 0.05958996, y: 4.220944}
+  m_Size: {x: 6.4584665, y: 5.838769}
   m_Direction: 1
 --- !u!50 &2754457306518854066
 Rigidbody2D:

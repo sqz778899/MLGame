@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using Spine.Unity;
+using Spine.Unity.Editor;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -42,11 +44,15 @@ public class BulletManager :ScriptableObject
     {
         GetIns(bulletInsMode, out GameObject Bullet,pos);
         BulletBase bulletbase = Bullet.GetComponentInChildren<BulletBase>();
+        SkeletonAnimation curAniSC = Bullet.GetComponentInChildren<SkeletonAnimation>();
+        //curAniSC?.Initialize(true);
         bulletbase.Ins = Bullet;
         bulletbase._bulletData.ID = ID;
         bulletbase.InstanceID = Bullet.GetInstanceID();
         bulletbase.bulletInsMode = bulletInsMode;
         bulletbase.InitBulletData();
+        if (curAniSC != null)
+            SpineEditorUtilities.ReloadSkeletonDataAssetAndComponent(curAniSC);
         return Bullet;
     }
     

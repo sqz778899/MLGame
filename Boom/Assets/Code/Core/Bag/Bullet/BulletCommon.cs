@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Spine.Unity;
+using Spine.Unity.Editor;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -102,6 +103,7 @@ public class BulletData
     public Sprite imgBullet;     //....image自动根据ID设置
     public GameObject hitEffect; // 击中效果预制体
     public SkeletonDataAsset bulletSpineAsset; // 子弹Spine资产
+    public SkeletonDataAsset hitSpfxAsset; // 子弹击中效果子弹Spine资产资产
 
     public void SetDataByID(BulletInsMode bulletInsMode = BulletInsMode.EditA)
     {
@@ -128,7 +130,9 @@ public class BulletData
             (PathConfig.GetBulletImageOrSpinePath(ID,bulletInsMode));
         //实例化Prefab
         hitEffect = ResManager.instance.GetAssetCache<GameObject>(
-            PathConfig.FXAssetDir + curData.hitEffectName + ".prefab");
+            PathConfig.BulletSpfxTemplate);
+        hitSpfxAsset = ResManager.instance.GetAssetCache<SkeletonDataAsset>
+            (PathConfig.GetBulletSpfxPath(ID));
     }
 
     public BulletDataJson GetJsonData()
@@ -162,6 +166,15 @@ public class BulletDataJson
     public int elementalType;
     
     public string hitEffectName;
+}
+
+//在场内子弹的状态
+public enum BulletInnerState
+{
+    Common,
+    AttackBegin,
+    Attacking,
+    Dead
 }
 
 public class BulletTooltipInfo
