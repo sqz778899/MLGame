@@ -20,6 +20,8 @@ public class FightLogic : MonoBehaviour
     }
     #endregion
 
+    [Header("Display")] 
+    public float waitCalculateTime = 3f;
     public bool isBeginCameraMove;
     GameObject FirstBullet;
     public bool isBeginCalculation;

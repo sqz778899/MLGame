@@ -3088,7 +3088,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2137221519135054091}
+  - {fileID: 2305625800759019660}
   - {fileID: 440946031}
   m_Father: {fileID: 1355511864}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3940,6 +3940,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GroupLevel: {fileID: 793761039}
   CurLevel: {fileID: 0}
+  waitCalculateTime: 3
   isBeginCameraMove: 0
   isBeginCalculation: 0
   WinGUI: {fileID: 1640516205}
@@ -8479,10 +8480,10 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2137221519135054091 stripped
+--- !u!4 &2305625800759019660 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3068142009712373496, guid: 7283ad9b7cf6e7e4f814b3bf442f0af5, type: 3}
-  m_PrefabInstance: {fileID: 3849170949797340788}
+  m_PrefabInstance: {fileID: 5953479806420799868}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &2669966181988847010
 MonoBehaviour:
@@ -8529,7 +8530,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1546901207394599221}
   m_Mesh: {fileID: 0}
---- !u!1001 &3849170949797340788
+--- !u!224 &4942072621293910694 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1958779161350697352, guid: 6afe8313f6f491e46a229769a95c362b, type: 3}
+  m_PrefabInstance: {fileID: 7382103598090288387}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5953479806420799868
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8537,6 +8543,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 793761040}
     m_Modifications:
+    - target: {fileID: 1699779987482901366, guid: 7283ad9b7cf6e7e4f814b3bf442f0af5, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3068142009712373496, guid: 7283ad9b7cf6e7e4f814b3bf442f0af5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -8590,11 +8600,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7283ad9b7cf6e7e4f814b3bf442f0af5, type: 3}
---- !u!224 &4942072621293910694 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1958779161350697352, guid: 6afe8313f6f491e46a229769a95c362b, type: 3}
-  m_PrefabInstance: {fileID: 7382103598090288387}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7026116902569578274
 MonoBehaviour:
   m_ObjectHideFlags: 0

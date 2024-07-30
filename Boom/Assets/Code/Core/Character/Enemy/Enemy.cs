@@ -3,6 +3,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Spine.Unity;
 
 public class Enemy : MonoBehaviour
 {
@@ -11,10 +12,12 @@ public class Enemy : MonoBehaviour
     public EnemyState EState;
     public DamageState DState;
     //表现相关
-    public Animation DeadAni;
     public GameObject txtHitNode;
     public Collider2D EnemyCol;
+    [Header("SpineAbout")]
+    public SkeletonAnimation Ani;
     
+    [Header("Award")]
     //Award...........
     public Award award;
     
@@ -22,9 +25,28 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
+        EState = EnemyState.live;
         InitState(null);
         if (_fightLogic==null)
             _fightLogic = UIManager.Instance.FightLogicGO.GetComponent<FightLogic>();
+    }
+
+    void Update()
+    {
+        switch (EState)
+        {
+            case EnemyState.live:
+                if (CurHP == MaxHP)
+                    AniUtility.PlayIdle(Ani);
+                else
+                    AniUtility.PlayIdle01(Ani);
+                break;
+            case EnemyState.hit:
+                break;
+            case EnemyState.dead:
+                AniUtility.PlayDead01(Ani);
+                break;
+        }
     }
 
     public void InitState(DamageState curState)
@@ -37,18 +59,38 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        EState = EnemyState.hit;
         //伤害跳字
         HitText(damage);
         CurHP -= damage;
-        if (CurHP <= 0)// 如果血量为0或更少，销毁这个敌人
+        float hitTime = 0f;
+        AniUtility.PlayHit01(Ani,ref hitTime); //播放受击动画
+        
+        if (CurHP <= 0)// 如果血量为0或更少，则开始死亡结算
         {
-            EnemyCol.enabled = false;
-            float waitTime = PlayDeadAni() + 1;
-            StartCoroutine(Wait(waitTime));
+            StopAllCoroutines();
+            EState = EnemyState.dead;
+            StartCoroutine(ChangeCalculation());
         }
+        else
+            StartCoroutine(ChangeHitState(hitTime)); //没死等一下播放完动画，切一下Idle状态
+    }
+    
+    //等待播放Hit动画，没死就切一下Idle状态
+    public IEnumerator ChangeHitState(float hitTime)
+    {
+        yield return new WaitForSeconds(hitTime);
+        EState = EnemyState.live;
+    }
+    
+    //等待结算时间，时间到之后开启结算。。。。。
+    public IEnumerator ChangeCalculation()
+    {
+        yield return new WaitForSeconds(_fightLogic.waitCalculateTime);
+        MainRoleManager.Instance.Score += award.score;
+        _fightLogic.isBeginCalculation = true; //通知进行结算
     }
 
-    #region Animation
     void HitText(int damage)
     {
         GameObject txtHitIns = Instantiate(ResManager.instance
@@ -56,28 +98,5 @@ public class Enemy : MonoBehaviour
         txtHitIns.GetComponent<TextMeshPro>().text = "-" + damage;
         Animation curAni = txtHitIns.GetComponent<Animation>();
         curAni.Play();
-    }
-    
-    //DeadAnimation
-    float PlayDeadAni()
-    {
-        float time = DeadAni.clip.length;
-        DeadAni.Play();
-        return time;
-    }
-    #endregion
-    
-
-    IEnumerator Wait(float time)
-    {
-        yield return new WaitForSeconds(time);
-        DestroySelf();
-    }
-    void DestroySelf()
-    {
-        MainRoleManager.Instance.Score += award.score;
-        EState = EnemyState.dead;
-        _fightLogic.isBeginCalculation = true; //通知进行结算
-        Destroy(gameObject);
     }
 }

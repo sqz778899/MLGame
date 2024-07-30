@@ -15,5 +15,6 @@
 public enum EnemyState
 {
     live = 1,
-    dead = 2
+    hit = 2,
+    dead = 3
 }
