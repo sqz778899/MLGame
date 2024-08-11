@@ -2,8 +2,10 @@ using System;
 using System.Collections;
 using Spine.Unity;
 using System.Collections.Generic;
+using DG.Tweening;
 using Spine.Unity.Editor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class BulletInner : BulletBase
 {
@@ -77,12 +79,23 @@ public class BulletInner : BulletBase
 
     #region 攻击
 
-    public IEnumerator Attack()
+    public IEnumerator Attack(Connon CurConnon)
     {
+        //...............填弹...........
         _state = BulletInnerState.AttackBegin;
         float aniTime = 0f;
+        Vector3 curScale = transform.localScale;
         AniUtility.PlayAttack(_ain,ref aniTime,AniScale);
+        Transform fillBulletTarget = CurConnon.FillNode.transform;
+        transform.DOMove(fillBulletTarget.position, aniTime);
+        transform.DOScale(curScale * 0.5f , aniTime);
+        //DOFade();
+
+        float connonAnitime = 0f;
+        CurConnon.Attack(ref connonAnitime);
         yield return new WaitForSeconds(aniTime);
+        transform.DOScale(curScale, 0.1f);
+        
         _state = BulletInnerState.Attacking;
         AniUtility.PlayAttacking(_ain,AniScale);
     }

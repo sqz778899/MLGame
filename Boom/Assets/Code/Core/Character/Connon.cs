@@ -1,12 +1,24 @@
 ﻿using System;
+using Spine.Unity;
 using DG.Tweening;
 using UnityEngine;
 
 public class Connon : MonoBehaviour
 {
-    public float AppearanceTime = 0.5f;
-    public void Appear(Vector3 targetPos)
+    [Header("SpineAbout")]
+    public SkeletonAnimation Ani;
+    public AnimationCurve AniCurve;
+    [Header("子弹相关")] 
+    public Transform FillNode; //装填自己的子弹的位置
+    
+    public void Appear(Vector3 targetPos,ref float aniTime)
     {
-        transform.DOMove(targetPos, AppearanceTime);
+        AniUtility.PlayAppear(Ani, ref aniTime);
+        transform.DOMove(targetPos, aniTime).SetEase(AniCurve);
+    }
+    
+    public void Attack(ref float aniTime)
+    {
+        AniUtility.PlayAttack(Ani, ref aniTime);
     }
 }

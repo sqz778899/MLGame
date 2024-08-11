@@ -14,6 +14,7 @@ public class RoleInner : BaseMove
     public float FireDelay = 0.3f;
     public RoleState State;
     public List<BulletInner> Bullets;
+    public Connon CurConnon;
     public Transform ConnonNode;
 
     #region 初始化数据
@@ -79,15 +80,14 @@ public class RoleInner : BaseMove
 
     void CreateConnon(ref float AniTime)
     {
-        //CreateConnon();
         GameObject ConnonIns = ResManager.instance.IntanceAsset(PathConfig.ConnonPB);
         ConnonIns.transform.SetParent(ConnonNode,false);
         Connon curSC = ConnonIns.GetComponent<Connon>();
-        AniTime = curSC.AppearanceTime;
+        
         Vector3 tmp = ConnonNode.transform.position;
-        Vector3 targetPos = new Vector3(tmp.x,0.1f,tmp.z);
-        curSC.Appear(targetPos);
-        //PlayConnonAni();
+        Vector3 targetPos = new Vector3(tmp.x,-1f,tmp.z);
+        curSC.Appear(targetPos,ref AniTime);
+        CurConnon = curSC;
     }
 
     internal override void MoveForward()
@@ -124,14 +124,16 @@ public class RoleInner : BaseMove
 
     IEnumerator FireIEnu()
     {
+        //.................播放角色攻击动画.......................
         float anitime = 0f;
         AniUtility.PlayAttack(Ani,ref anitime); // 播放攻击动画
         yield return new WaitForSeconds(anitime);
 
+        //.................创建大炮............................
         float connonAniTime = 0f;
         CreateConnon(ref connonAniTime);
         State = RoleState.Idle;
-        yield return new WaitForSeconds(anitime);
+        yield return new WaitForSeconds(connonAniTime);
         StartCoroutine(FireWithDelay(FireDelay));
     }
 
@@ -141,7 +143,7 @@ public class RoleInner : BaseMove
         for (int i = 0; i < Bullets.Count; i++)
         {
             BulletInner curBullet = Bullets[i];
-            StartCoroutine(curBullet.Attack());
+            StartCoroutine(curBullet.Attack(CurConnon));
             yield return new WaitForSeconds(delay);  // 在发射下一个子弹之前，等待delay秒
         }
     }

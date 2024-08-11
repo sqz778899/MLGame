@@ -14,6 +14,8 @@ public static class AniUtility
     
     public const string Hit01 = "hit_01"; //受击动画
     public const string Dead01 = "dead_01"; //死亡动画
+    
+    public const string Appear = "appear"; //出现动画
     #endregion
 
     public static void PlayCommon(SkeletonAnimation curAni,float timeScale,string AniType,bool isloop)
@@ -53,6 +55,12 @@ public static class AniUtility
     public static void PlayAttack(SkeletonAnimation curAni,ref float anitime,float timeScale=1f)
     {
         PlayCommon(curAni, timeScale, AttackBegin,false);
+        anitime = curAni.state.GetCurrent(0).Animation.Duration;
+    }
+    
+    public static void PlayAppear(SkeletonAnimation curAni,ref float anitime,float timeScale=1f)
+    {
+        PlayCommon(curAni, timeScale, Appear,false);
         anitime = curAni.state.GetCurrent(0).Animation.Duration;
     }
     
