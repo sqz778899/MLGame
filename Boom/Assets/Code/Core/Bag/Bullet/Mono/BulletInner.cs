@@ -79,9 +79,21 @@ public class BulletInner : BulletBase
 
     #region 攻击
 
-    public IEnumerator Attack(Connon CurConnon)
+    public IEnumerator ReadyToAttack(Vector3 targetPos)
     {
         //...............填弹...........
+        _state = BulletInnerState.AttackBegin;
+        float aniTime = 0f;
+        Vector3 curScale = transform.localScale;
+        AniUtility.PlayAttack(_ain,ref aniTime,AniScale);
+        transform.DOMove(targetPos, aniTime);
+        transform.DOScale(curScale * 0.5f , aniTime);
+        yield return new WaitForSeconds(10);
+    }
+
+    public void Attack()
+    {
+        /*//...............填弹...........
         _state = BulletInnerState.AttackBegin;
         float aniTime = 0f;
         Vector3 curScale = transform.localScale;
@@ -89,12 +101,17 @@ public class BulletInner : BulletBase
         Transform fillBulletTarget = CurConnon.FillNode.transform;
         transform.DOMove(fillBulletTarget.position, aniTime);
         transform.DOScale(curScale * 0.5f , aniTime);
-        //DOFade();
+        //.........Connon.Reload();
+        float connonReloadTime = 0f;
+        CurConnon.Reload(ref connonReloadTime);
+        yield return new WaitForSeconds(connonReloadTime);
+        //DOFade();*/
 
-        float connonAnitime = 0f;
-        CurConnon.Attack(ref connonAnitime);
-        yield return new WaitForSeconds(aniTime);
-        transform.DOScale(curScale, 0.1f);
+        /*float connonAttackTime = 0f;
+        CurConnon.Attack(ref connonAttackTime);
+        anitime = connonAttackTime;
+        yield return new WaitForSeconds(connonAttackTime);*/
+        //transform.DOScale(curScale, 0.1f);
         
         _state = BulletInnerState.Attacking;
         AniUtility.PlayAttacking(_ain,AniScale);

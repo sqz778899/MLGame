@@ -10,6 +10,7 @@ public static class AniUtility
     public const string Idle01 = "idle_01";//受伤之后的Idle
     public const string AttackBegin = "attack_begin";
     public const string Attacking = "attacking";
+    public const string Reload = "reload";
     public const string Run = "run";
     
     public const string Hit01 = "hit_01"; //受击动画
@@ -18,16 +19,21 @@ public static class AniUtility
     public const string Appear = "appear"; //出现动画
     #endregion
 
-    public static void PlayCommon(SkeletonAnimation curAni,float timeScale,string AniType,bool isloop)
+    public static void PlayCommon(SkeletonAnimation curAni,float timeScale,string AniType,bool isloop,bool isReset=false)
     {
         if (curAni.AnimationName != AniType || curAni.loop != isloop)
         {
             curAni.loop = isloop;
             curAni.AnimationState.SetAnimation(0, AniType,isloop);
-            Debug.Log(AniType + isloop);
-            curAni.AnimationName = AniType;
-            curAni.timeScale = timeScale;
         }
+
+        if (isReset)
+        {
+            curAni.AnimationState.SetAnimation(0, AniType,isloop);
+        }
+        
+        curAni.AnimationName = AniType;
+        curAni.timeScale = timeScale;
     }
     
     public static void PlayResetAni(SkeletonAnimation curAni,float timeScale,string AniType)
@@ -52,9 +58,15 @@ public static class AniUtility
         PlayCommon(curAni, timeScale, Dead01,false);
     }
 
-    public static void PlayAttack(SkeletonAnimation curAni,ref float anitime,float timeScale=1f)
+    public static void PlayAttack(SkeletonAnimation curAni,ref float anitime,float timeScale=1f,bool isReset=false)
     {
-        PlayCommon(curAni, timeScale, AttackBegin,false);
+        PlayCommon(curAni, timeScale, AttackBegin,false,isReset);
+        anitime = curAni.state.GetCurrent(0).Animation.Duration;
+    }
+    
+    public static void PlayReload(SkeletonAnimation curAni,ref float anitime,float timeScale=1f)
+    {
+        PlayCommon(curAni, timeScale, Reload,false);
         anitime = curAni.state.GetCurrent(0).Animation.Duration;
     }
     

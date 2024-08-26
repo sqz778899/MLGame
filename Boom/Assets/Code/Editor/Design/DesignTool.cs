@@ -70,4 +70,11 @@ public class DesignTool
         MainSceneMono curSC = GameObject.Find("MainScene").GetComponent<MainSceneMono>();
         curSC.SwitchFightScene();
     }
+
+    [Title("局内调试")]
+    [Button("重置子弹",ButtonSizes.Large)]
+    void SetBullet()
+    {
+        UIManager.Instance.RoleIns.GetComponent<RoleInner>().InitData();
+    }
 }

@@ -140,11 +140,31 @@ public class RoleInner : BaseMove
     public IEnumerator FireWithDelay(float delay)
     {
         Debug.Log("fire");
+        //填弹药动画
+        float connonReloadTime = 0f;
+        CurConnon.Reload(ref connonReloadTime);
+        yield return new WaitForSeconds(connonReloadTime);  //大炮装填子弹动画
+        //...
+        
+        //进行子弹装填
         for (int i = 0; i < Bullets.Count; i++)
         {
             BulletInner curBullet = Bullets[i];
-            StartCoroutine(curBullet.Attack(CurConnon));
+            StartCoroutine(curBullet.ReadyToAttack(CurConnon.FillNode.transform.position));
             yield return new WaitForSeconds(delay);  // 在发射下一个子弹之前，等待delay秒
         }
+        //播放大炮攻击动画
+        
+        for (int i = 0; i < Bullets.Count; i++)
+        {
+            BulletInner curBullet = Bullets[i];
+            //填弹药动画
+            float connonAttackTime = 0f;
+            CurConnon.Attack(ref connonAttackTime);
+            curBullet.Attack();
+            yield return new WaitForSeconds(connonAttackTime);  // 在发射下一个子弹之前，等待delay秒
+        }
+        yield return new WaitForSeconds(5);
+        DestroyImmediate(CurConnon.gameObject);
     }
 }

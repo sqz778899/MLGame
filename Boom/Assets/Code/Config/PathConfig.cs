@@ -79,7 +79,7 @@ public static class PathConfig
    public static string TalentImageDir = GetPrepath() + "Res/UI/Buff/Talent/Textures/";
    public static string TalentPB = GetPrepath() + "Res/UI/Buff/Talent/P_Buff_Template.prefab";
    //..........................Connon.............................................
-   public static string ConnonPB = GetPrepath() + "Res/Character/Connon/Prefabs/P_Connon_01.prefab";
+   public static string ConnonPB = GetPrepath() + "Res/Character/SpineData/Connon01/P_Connon_01.prefab";
    //Assets/Res/UI/Prefabs/P_Shop.prefab
    
    //..........................事件...............................

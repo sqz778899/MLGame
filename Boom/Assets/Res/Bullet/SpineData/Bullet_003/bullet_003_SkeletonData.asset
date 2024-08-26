@@ -18,9 +18,11 @@ MonoBehaviour:
   skeletonJSON: {fileID: 4900000, guid: 807026eeb5acc8641b5a35f87188cb4b, type: 3}
   isUpgradingBlendModeMaterials: 0
   blendModeMaterials:
-    requiresBlendModeMaterials: 0
+    requiresBlendModeMaterials: 1
     applyAdditiveMaterial: 1
-    additiveMaterials: []
+    additiveMaterials:
+    - pageName: bullet_003.png
+      material: {fileID: 2100000, guid: 248a33cf8d6fdd84cbc1a0a409264849, type: 2}
     multiplyMaterials: []
     screenMaterials: []
   skeletonDataModifiers: []

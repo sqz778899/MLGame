@@ -17,8 +17,14 @@ public class Connon : MonoBehaviour
         transform.DOMove(targetPos, aniTime).SetEase(AniCurve);
     }
     
+    
+    public void Reload(ref float aniTime)
+    {
+        AniUtility.PlayReload(Ani, ref aniTime);
+    }
+    
     public void Attack(ref float aniTime)
     {
-        AniUtility.PlayAttack(Ani, ref aniTime);
+        AniUtility.PlayAttack(Ani, ref aniTime,isReset:true);
     }
 }
