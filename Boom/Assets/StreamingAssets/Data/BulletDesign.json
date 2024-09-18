@@ -36,7 +36,7 @@
     "hitEffectName": "FX_Bullet02_hit"
   },
   {
-    "ID": 202,
+    "ID": 102,
     "Level": 2,
     "name": "Ice02",
     "damage": 3,
@@ -45,7 +45,7 @@
     "hitEffectName": "FX_Bullet02_hit"
   },
   {
-    "ID": 302,
+    "ID": 202,
     "Level": 3,
     "name": "Ice03",
     "damage": 6,
@@ -63,7 +63,7 @@
     "hitEffectName": "FX_Bullet03_hit"
   },
   {
-    "ID": 203,
+    "ID": 103,
     "Level": 2,
     "name": "Fire02",
     "damage": 2,
@@ -72,7 +72,7 @@
     "hitEffectName": "FX_Bullet03_hit"
   },
   {
-    "ID": 303,
+    "ID": 203,
     "Level": 3,
     "name": "Fire03",
     "damage": 7,

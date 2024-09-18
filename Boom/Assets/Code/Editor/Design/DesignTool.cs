@@ -115,7 +115,7 @@ public class DesignTool
     [ButtonGroup("添加黏土子弹")]
     void SetClayBulletLv3()
     {
-        TempAddBullet(102);
+        TempAddBullet(201);
     }
     
     

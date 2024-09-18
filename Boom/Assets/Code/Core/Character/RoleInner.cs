@@ -161,14 +161,14 @@ public class RoleInner : BaseMove
             StartCoroutine(curBullet.ReadyToAttack(CurConnon.FillNode.transform.position));
             yield return new WaitForSeconds(delay);  // 在发射下一个子弹之前，等待delay秒
         }
-        //播放大炮攻击动画
         
+        //播放大炮攻击动画
         for (int i = 0; i < Bullets.Count; i++)
         {
             BulletInner curBullet = Bullets[i];
             //填弹药动画
             float connonAttackTime = 0f;
-            CurConnon.Attack(ref connonAttackTime);
+            CurConnon.Attack(curBullet,ref connonAttackTime);
             curBullet.Attack();
             yield return new WaitForSeconds(connonAttackTime);  // 在发射下一个子弹之前，等待delay秒
         }

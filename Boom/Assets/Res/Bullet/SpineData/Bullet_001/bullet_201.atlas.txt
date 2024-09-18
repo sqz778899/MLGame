@@ -1,117 +1,271 @@
 
 bullet_201.png
-size: 833,1003
+size: 1635,1032
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-body
+SM/aa/aa_00
+  rotate: false
+  xy: 704, 2
+  size: 169, 71
+  orig: 300, 300
+  offset: 61, 17
+  index: -1
+SM/aa/aa_01
   rotate: true
-  xy: 2, 384
-  size: 617, 597
-  orig: 617, 597
+  xy: 1212, 354
+  size: 212, 77
+  orig: 300, 300
+  offset: 39, 35
+  index: -1
+SM/aa/aa_02
+  rotate: false
+  xy: 1291, 322
+  size: 237, 98
+  orig: 300, 300
+  offset: 32, 28
+  index: -1
+SM/aa/aa_03
+  rotate: false
+  xy: 1165, 116
+  size: 256, 91
+  orig: 300, 300
+  offset: 20, 46
+  index: -1
+SM/aa/aa_04
+  rotate: true
+  xy: 461, 171
+  size: 268, 115
+  orig: 300, 300
+  offset: 12, 39
+  index: -1
+SM/aa/aa_05
+  rotate: false
+  xy: 1005, 568
+  size: 268, 95
+  orig: 300, 300
+  offset: 12, 144
+  index: -1
+SM/aa/aa_06
+  rotate: true
+  xy: 1530, 325
+  size: 249, 103
+  orig: 300, 300
+  offset: 19, 155
+  index: -1
+SM/aa/aa_07
+  rotate: false
+  xy: 1108, 33
+  size: 221, 81
+  orig: 300, 300
+  offset: 39, 170
+  index: -1
+SM/aa/aa_08
+  rotate: false
+  xy: 578, 171
+  size: 178, 74
+  orig: 300, 300
+  offset: 60, 196
+  index: -1
+SM/aa/aa_09
+  rotate: false
+  xy: 1527, 573
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
+body
+  rotate: false
+  xy: 2, 441
+  size: 589, 589
+  orig: 589, 589
   offset: 0, 0
   index: -1
 eyelid_1
   rotate: false
-  xy: 391, 146
-  size: 375, 73
-  orig: 375, 73
+  xy: 593, 624
+  size: 410, 255
+  orig: 410, 255
   offset: 0, 0
   index: -1
 eyes_1
   rotate: false
-  xy: 2, 15
-  size: 387, 204
-  orig: 387, 204
-  offset: 0, 0
+  xy: 1005, 665
+  size: 362, 214
+  orig: 364, 216
+  offset: 1, 1
   index: -1
 eyes_2
   rotate: false
-  xy: 2, 221
-  size: 705, 161
-  orig: 822, 188
+  xy: 593, 881
+  size: 732, 149
+  orig: 849, 188
   offset: 117, 7
   index: -1
 eyes_3
-  rotate: true
-  xy: 601, 636
-  size: 365, 222
-  orig: 365, 222
+  rotate: false
+  xy: 593, 418
+  size: 367, 204
+  orig: 369, 206
+  offset: 1, 1
+  index: -1
+eyes_3(2)
+  rotate: false
+  xy: 578, 247
+  size: 336, 169
+  orig: 336, 169
   offset: 0, 0
   index: -1
 foot
   rotate: false
-  xy: 737, 78
+  xy: 1407, 31
   size: 85, 42
   orig: 85, 42
   offset: 0, 0
   index: -1
-gaoguang
-  rotate: true
-  xy: 709, 360
-  size: 274, 110
-  orig: 473, 110
-  offset: 0, 0
-  index: -1
 hand
   rotate: true
-  xy: 601, 388
+  xy: 1494, 11
   size: 49, 52
   orig: 50, 54
   offset: 1, 1
   index: -1
-lowarm
+heiguang
   rotate: true
-  xy: 690, 15
+  xy: 2, 9
+  size: 430, 457
+  orig: 430, 461
+  offset: 0, 4
+  index: -1
+lowarm
+  rotate: false
+  xy: 1589, 922
   size: 36, 108
   orig: 40, 115
   offset: 4, 6
   index: -1
 lowleg
   rotate: false
-  xy: 659, 465
+  xy: 704, 76
   size: 48, 93
   orig: 48, 95
   offset: 0, 2
   index: -1
 mouth_1
-  rotate: true
-  xy: 690, 53
+  rotate: false
+  xy: 1537, 601
   size: 91, 45
   orig: 92, 45
   offset: 0, 0
   index: -1
 mouth_2
+  rotate: false
+  xy: 1369, 648
+  size: 235, 235
+  orig: 261, 261
+  offset: 13, 13
+  index: -1
+smoke/1
+  rotate: false
+  xy: 1327, 885
+  size: 260, 145
+  orig: 500, 300
+  offset: 107, 19
+  index: -1
+smoke/8
+  rotate: false
+  xy: 1327, 885
+  size: 260, 145
+  orig: 500, 300
+  offset: 107, 19
+  index: -1
+smoke/10
   rotate: true
-  xy: 709, 228
-  size: 130, 122
-  orig: 130, 122
-  offset: 0, 0
+  xy: 1523, 62
+  size: 258, 95
+  orig: 500, 300
+  offset: 99, 32
+  index: -1
+smoke/11
+  rotate: false
+  xy: 1165, 209
+  size: 247, 111
+  orig: 500, 300
+  offset: 99, 36
+  index: -1
+smoke/12
+  rotate: false
+  xy: 875, 119
+  size: 253, 84
+  orig: 500, 300
+  offset: 99, 38
+  index: -1
+smoke/2
+  rotate: false
+  xy: 916, 205
+  size: 247, 163
+  orig: 500, 300
+  offset: 103, 21
+  index: -1
+smoke/3
+  rotate: false
+  xy: 962, 370
+  size: 248, 196
+  orig: 500, 300
+  offset: 105, 15
+  index: -1
+smoke/4
+  rotate: false
+  xy: 461, 2
+  size: 241, 167
+  orig: 500, 300
+  offset: 106, 13
+  index: -1
+smoke/5
+  rotate: false
+  xy: 1291, 422
+  size: 234, 152
+  orig: 500, 300
+  offset: 109, 15
+  index: -1
+smoke/6
+  rotate: false
+  xy: 875, 26
+  size: 231, 91
+  orig: 500, 300
+  offset: 109, 17
+  index: -1
+smoke/7
+  rotate: true
+  xy: 1423, 75
+  size: 245, 98
+  orig: 500, 300
+  offset: 101, 13
+  index: -1
+smoke/9
+  rotate: false
+  xy: 1275, 576
+  size: 260, 70
+  orig: 500, 300
+  offset: 103, 40
   index: -1
 stone
-  rotate: true
-  xy: 601, 560
+  rotate: false
+  xy: 1331, 42
   size: 74, 72
   orig: 74, 72
   offset: 0, 0
   index: -1
-tongren
-  rotate: false
-  xy: 391, 2
-  size: 297, 142
-  orig: 297, 142
-  offset: 0, 0
-  index: -1
 uparm
-  rotate: false
-  xy: 768, 122
+  rotate: true
+  xy: 758, 191
   size: 54, 104
   orig: 54, 105
   offset: 0, 1
   index: -1
 upleg
-  rotate: false
-  xy: 601, 439
+  rotate: true
+  xy: 754, 113
   size: 56, 119
   orig: 56, 119
   offset: 0, 0
