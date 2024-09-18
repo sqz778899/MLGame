@@ -1,5 +1,6 @@
 Shader "Spine/Skeleton" {
 	Properties {
+		_Transparency("Transparency", Range(0,1)) = 1
 		_Cutoff ("Shadow alpha cutoff", Range(0,1)) = 0.1
 		[NoScaleOffset] _MainTex ("Main Texture", 2D) = "black" {}
 		[Toggle(_STRAIGHT_ALPHA_INPUT)] _StraightAlphaInput("Straight Alpha Texture", Int) = 0
@@ -60,6 +61,7 @@ Shader "Spine/Skeleton" {
 				o.vertexColor = v.vertexColor;
 				return o;
 			}
+			half _Transparency;
 
 			float4 frag (VertexOutput i) : SV_Target {
 				float4 texColor = tex2D(_MainTex, i.uv);
@@ -67,8 +69,8 @@ Shader "Spine/Skeleton" {
 				#if defined(_STRAIGHT_ALPHA_INPUT)
 				texColor.rgb *= texColor.a;
 				#endif
-
-				return (texColor * i.vertexColor);
+				
+				return (texColor * i.vertexColor * _Transparency);
 			}
 			ENDCG
 		}

@@ -16,6 +16,13 @@ public class BulletInner : BulletBase
     public BulletInnerState _state;
     
     SkeletonAnimation _ain;
+    List<Material> materials
+    {
+        get 
+        {
+            return new List<Material>(_ain.skeletonDataAsset.atlasAssets[0].Materials);
+        }
+    }
     public float AniScale = 1f;
     List<GameObject> FXs;
 
@@ -25,6 +32,8 @@ public class BulletInner : BulletBase
         _ain = transform.GetChild(0).GetComponent<SkeletonAnimation>();
         AniUtility.PlayIdle(_ain,AniScale);
         FXs = new List<GameObject>();
+        foreach (Material material in materials)
+            material.SetFloat("_Transparency", 1);
     }
 
     void Update()
@@ -88,32 +97,40 @@ public class BulletInner : BulletBase
         AniUtility.PlayAttack(_ain,ref aniTime,AniScale);
         transform.DOMove(targetPos, aniTime);
         transform.DOScale(curScale * 0.5f , aniTime);
+        StartCoroutine(FadeOut(aniTime));
         yield return new WaitForSeconds(10);
+    }
+    
+    // 渐隐效果
+    IEnumerator FadeOut(float duration)
+    {
+        // 开始渐隐效果
+        for (float t = 0; t < duration; t += Time.deltaTime)
+        {
+            float alpha = 1 - t / duration;
+
+            // 修改每个材质的透明度
+            foreach (Material material in materials)
+            {
+                if (material == null)
+                    continue;
+                material.SetFloat("_Transparency", alpha);
+            }
+
+            yield return null;
+        }
+
+        // 确保透明度为0
+        foreach (Material material in materials)
+            material.SetFloat("_Transparency", 0);
     }
 
     public void Attack()
     {
-        /*//...............填弹...........
-        _state = BulletInnerState.AttackBegin;
-        float aniTime = 0f;
-        Vector3 curScale = transform.localScale;
-        AniUtility.PlayAttack(_ain,ref aniTime,AniScale);
-        Transform fillBulletTarget = CurConnon.FillNode.transform;
-        transform.DOMove(fillBulletTarget.position, aniTime);
-        transform.DOScale(curScale * 0.5f , aniTime);
-        //.........Connon.Reload();
-        float connonReloadTime = 0f;
-        CurConnon.Reload(ref connonReloadTime);
-        yield return new WaitForSeconds(connonReloadTime);
-        //DOFade();*/
-
-        /*float connonAttackTime = 0f;
-        CurConnon.Attack(ref connonAttackTime);
-        anitime = connonAttackTime;
-        yield return new WaitForSeconds(connonAttackTime);*/
-        //transform.DOScale(curScale, 0.1f);
-        
+        StopAllCoroutines();
         _state = BulletInnerState.Attacking;
+        foreach (Material material in materials)
+            material.SetFloat("_Transparency", 1);
         AniUtility.PlayAttacking(_ain,AniScale);
     }
 

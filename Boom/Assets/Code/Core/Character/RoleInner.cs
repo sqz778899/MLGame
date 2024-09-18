@@ -20,6 +20,14 @@ public class RoleInner : BaseMove
     #region 初始化数据
     public void InitData()
     {
+        if (Bullets != null)
+        {
+            if (Bullets.Count > 0)
+            {
+                for (int i = 0; i < Bullets.Count; i++)
+                    DestroyImmediate(Bullets[i].gameObject);
+            }
+        }
         Bullets = new List<BulletInner>();
         CreateBulletInner();
     }
