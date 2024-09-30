@@ -55,6 +55,7 @@ public class FightLogic : MonoBehaviour
     
     public void InitData()
     {
+        Camera.main.transform.position = new Vector3(0,1,-10);
         //InitLevel
         InitLevel();
         FailGUI.SetActive(false);

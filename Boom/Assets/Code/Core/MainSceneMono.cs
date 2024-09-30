@@ -59,7 +59,7 @@ public class MainSceneMono:MonoBehaviour
     #region 独立小开关
     void EditSceneOn()
     {
-        MainCamera.orthographic = true;
+        Camera.main.transform.position = new Vector3(0,1,-10);
         GUIEditScene.SetActive(true);
     }
     void EditSceneOff()
@@ -68,7 +68,6 @@ public class MainSceneMono:MonoBehaviour
     }
     void FightSceneOn()
     {
-        MainCamera.orthographic = true;
         GUIFightScene.SetActive(true);
         FightScene.SetActive(true);
         _fightLogic?.InitData();
@@ -86,7 +85,6 @@ public class MainSceneMono:MonoBehaviour
     
     void MapSceneOn()
     {
-        MainCamera.orthographic = false;
         GUIMapScene.SetActive(true);
         MapScene.SetActive(true);
         _mapLogic?.InitData();

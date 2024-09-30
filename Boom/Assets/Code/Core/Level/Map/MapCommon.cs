@@ -9,6 +9,12 @@ public enum MapNodeState
     IsFinish = 3,
 }
 
+public enum MapRoomState
+{
+    UnFinish = 1,
+    IsFinish = 2,
+}
+
 [Serializable]
 public class MapSate
 {
@@ -27,13 +33,6 @@ public enum MapNodeType
     GoldPile = 5
 }
 
-[Serializable]
-public class NodeOpenFog
-{
-    public Vector3 position = Vector3.Zero;
-    public float openFogRadius = 10;
-    public float openFogFadeRange = 10;
-}
 
 public enum MapEventType
 {

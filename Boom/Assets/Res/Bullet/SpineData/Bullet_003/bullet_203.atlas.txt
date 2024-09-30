@@ -1,125 +1,195 @@
 
 bullet_203.png
-size: 1312,668
+size: 1911,1413
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-body
+1
   rotate: true
-  xy: 2, 49
-  size: 617, 597
-  orig: 617, 597
-  offset: 0, 0
-  index: -1
-eyelid_1
-  rotate: true
-  xy: 1214, 128
-  size: 375, 73
-  orig: 375, 73
-  offset: 0, 0
-  index: -1
-eyes_1
-  rotate: false
-  xy: 825, 299
-  size: 387, 204
-  orig: 387, 204
-  offset: 0, 0
-  index: -1
-eyes_2
-  rotate: false
-  xy: 601, 505
-  size: 705, 161
-  orig: 822, 188
-  offset: 117, 7
-  index: -1
-eyes_3
-  rotate: true
-  xy: 601, 138
-  size: 365, 222
-  orig: 365, 222
-  offset: 0, 0
-  index: -1
-foot
-  rotate: false
-  xy: 205, 5
-  size: 85, 42
-  orig: 85, 42
-  offset: 0, 0
-  index: -1
-gaoguang
-  rotate: false
-  xy: 601, 26
-  size: 274, 110
-  orig: 473, 110
-  offset: 0, 0
-  index: -1
-guang
-  rotate: false
-  xy: 877, 2
-  size: 149, 151
-  orig: 173, 177
-  offset: 12, 13
-  index: -1
-hand
-  rotate: true
-  xy: 1123, 21
-  size: 49, 52
-  orig: 50, 54
-  offset: 1, 1
-  index: -1
-lowarm
-  rotate: true
-  xy: 95, 11
-  size: 36, 108
-  orig: 40, 115
-  offset: 4, 6
-  index: -1
-lowleg
-  rotate: true
-  xy: 1028, 22
-  size: 48, 93
-  orig: 48, 95
-  offset: 0, 2
-  index: -1
-mouth_1
-  rotate: false
   xy: 2, 2
-  size: 91, 45
-  orig: 92, 45
+  size: 970, 1150
+  orig: 970, 1150
   offset: 0, 0
   index: -1
-mouth_2
-  rotate: false
-  xy: 1180, 4
-  size: 130, 122
-  orig: 130, 122
-  offset: 0, 0
-  index: -1
-stone
+S1
   rotate: true
-  xy: 1028, 79
-  size: 74, 72
-  orig: 74, 72
+  xy: 2, 1351
+  size: 60, 241
+  orig: 60, 241
   offset: 0, 0
   index: -1
-tongren
-  rotate: false
-  xy: 825, 155
-  size: 297, 142
-  orig: 297, 142
+S2
+  rotate: true
+  xy: 368, 1341
+  size: 70, 95
+  orig: 70, 95
   offset: 0, 0
   index: -1
-uparm
-  rotate: false
-  xy: 1124, 72
-  size: 54, 104
-  orig: 54, 105
+S3
+  rotate: true
+  xy: 245, 1344
+  size: 67, 121
+  orig: 67, 122
   offset: 0, 1
   index: -1
-upleg
+S4
+  rotate: true
+  xy: 617, 1273
+  size: 138, 225
+  orig: 138, 225
+  offset: 0, 0
+  index: -1
+guang1
+  rotate: true
+  xy: 1410, 948
+  size: 463, 499
+  orig: 463, 499
+  offset: 0, 0
+  index: -1
+light_2
+  rotate: true
+  xy: 844, 974
+  size: 437, 564
+  orig: 437, 564
+  offset: 0, 0
+  index: -1
+shi_2
+  rotate: true
+  xy: 465, 1290
+  size: 121, 150
+  orig: 125, 156
+  offset: 3, 3
+  index: -1
+
+bullet_2032.png
+size: 1946,1154
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+2
   rotate: false
-  xy: 1124, 178
-  size: 56, 119
-  orig: 56, 119
+  xy: 2, 2
+  size: 970, 1150
+  orig: 970, 1150
+  offset: 0, 0
+  index: -1
+3
+  rotate: false
+  xy: 974, 2
+  size: 970, 1150
+  orig: 970, 1150
+  offset: 0, 0
+  index: -1
+
+bullet_2033.png
+size: 1946,1154
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+4
+  rotate: false
+  xy: 2, 2
+  size: 970, 1150
+  orig: 970, 1150
+  offset: 0, 0
+  index: -1
+5
+  rotate: false
+  xy: 974, 2
+  size: 970, 1150
+  orig: 970, 1150
+  offset: 0, 0
+  index: -1
+
+bullet_2034.png
+size: 1946,1154
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+6
+  rotate: false
+  xy: 2, 2
+  size: 970, 1150
+  orig: 970, 1150
+  offset: 0, 0
+  index: -1
+7
+  rotate: false
+  xy: 974, 2
+  size: 970, 1150
+  orig: 970, 1150
+  offset: 0, 0
+  index: -1
+
+bullet_2035.png
+size: 1946,1154
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+f00000
+  rotate: false
+  xy: 2, 2
+  size: 970, 1150
+  orig: 970, 1150
+  offset: 0, 0
+  index: -1
+f00001
+  rotate: false
+  xy: 974, 2
+  size: 970, 1150
+  orig: 970, 1150
+  offset: 0, 0
+  index: -1
+
+bullet_2036.png
+size: 1946,1154
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+f00002
+  rotate: false
+  xy: 2, 2
+  size: 970, 1150
+  orig: 970, 1150
+  offset: 0, 0
+  index: -1
+f00003
+  rotate: false
+  xy: 974, 2
+  size: 970, 1150
+  orig: 970, 1150
+  offset: 0, 0
+  index: -1
+
+bullet_2037.png
+size: 1946,1154
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+f00004
+  rotate: false
+  xy: 2, 2
+  size: 970, 1150
+  orig: 970, 1150
+  offset: 0, 0
+  index: -1
+f00005
+  rotate: false
+  xy: 974, 2
+  size: 970, 1150
+  orig: 970, 1150
+  offset: 0, 0
+  index: -1
+
+bullet_2038.png
+size: 974,1154
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+f00006
+  rotate: false
+  xy: 2, 2
+  size: 970, 1150
+  orig: 970, 1150
   offset: 0, 0
   index: -1

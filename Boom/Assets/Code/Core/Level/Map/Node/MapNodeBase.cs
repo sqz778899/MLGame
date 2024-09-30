@@ -16,14 +16,6 @@ public class MapNodeBase : MonoBehaviour
     public GameObject Node_FX;
     ParticleSystem[] _fxs;
 
-    public List<RollPR> BuffProbabilityPool;
-
-    public TextMeshPro txtTitle;
-    //解锁迷雾的参数
-    public NodeOpenFog OpenFog;
-    //撒点排除的碰撞体
-    public float ExcludeRadius = 21f;
-
     void Awake()
     {
         _fxs = Node_FX.GetComponentsInChildren<ParticleSystem>(true);
@@ -67,7 +59,7 @@ public class MapNodeBase : MonoBehaviour
                 foreach (var each in _fxs)
                     each.Stop();
                 Node_Finish.SetActive(false);
-                OpenFog = GlobalGameDataManager.Instance.LockedPara;
+        
                 break;
             case MapNodeState.UnLocked:
                 Bubble.SetActive(true);
@@ -76,10 +68,6 @@ public class MapNodeBase : MonoBehaviour
                 foreach (var each in _fxs)
                     each.Play();
                 Node_Finish.SetActive(false);
-                if (Type == MapNodeType.Main)
-                {
-                    OpenFog = GlobalGameDataManager.Instance.GetUnlockedPara();
-                }
                 break;
             case MapNodeState.IsFinish:
                 Bubble.SetActive(false);
@@ -88,10 +76,6 @@ public class MapNodeBase : MonoBehaviour
                 foreach (var each in _fxs)
                     each.Stop();
                 Node_Finish.SetActive(true);
-                if (Type == MapNodeType.Main)
-                {
-                    OpenFog = GlobalGameDataManager.Instance.GetUnlockedPara();
-                }
                 break;
         }
     }
@@ -107,7 +91,6 @@ public class MapNodeBase : MonoBehaviour
                 curMainBlock.SetBlockDefault();
                 foreach (var each in _fxs)
                     each.Play();
-                OpenFog = GlobalGameDataManager.Instance.LockedPara;
                 break;
             case MapNodeState.IsFinish:
                 Bubble.SetActive(false);
@@ -115,7 +98,6 @@ public class MapNodeBase : MonoBehaviour
                 Node_Locked.SetActive(true);
                 foreach (var each in _fxs)
                     each.Stop();
-                OpenFog = GlobalGameDataManager.Instance.LockedPara;
                 break;
         }
     }
@@ -136,7 +118,6 @@ public class MapNodeBase : MonoBehaviour
                 Node_Finish.SetActive(false);
                 foreach (var each in _fxs)
                     each.Play();
-                OpenFog = GlobalGameDataManager.Instance.LockedPara;
                 break;
             case MapNodeState.IsFinish:
                 Bubble.SetActive(false);
@@ -144,7 +125,6 @@ public class MapNodeBase : MonoBehaviour
                 Node_Finish.SetActive(true);
                 foreach (var each in _fxs)
                     each.Stop();
-                OpenFog = GlobalGameDataManager.Instance.LockedPara;
                 break;
         }
     }
@@ -155,12 +135,4 @@ public class MapNodeBase : MonoBehaviour
         UIManager.Instance.ResetOtherUIPause();
         ChangeState();
     }
-    
-#if UNITY_EDITOR
-    internal virtual void OnDrawGizmos()
-    {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, ExcludeRadius);
-    }
-#endif
 }

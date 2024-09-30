@@ -10,7 +10,7 @@ public class MapLogic : MonoBehaviour
     public Transform MapGroup;
     
     List<MapNodeBase> _allNodes;
-    List<MainNode> _mainNodes;
+    List<FightNode> _mainNodes;
     List<MapNodeBase> _otherNodes;
 
     Vector4[] _UnLockNodeCenters = new Vector4[30];
@@ -19,12 +19,12 @@ public class MapLogic : MonoBehaviour
     void Start()
     {
         _allNodes = MapGroup.GetComponentsInChildren<MapNodeBase>().ToList();
-        _mainNodes = new List<MainNode>();
+        _mainNodes = new List<FightNode>();
         _otherNodes = new List<MapNodeBase>();
         foreach (var each in _allNodes)
         {
             if (each.Type == MapNodeType.Main)
-                _mainNodes.Add(each as MainNode);
+                _mainNodes.Add(each as FightNode);
             else
                 _otherNodes.Add(each);
         }
@@ -34,12 +34,12 @@ public class MapLogic : MonoBehaviour
     public void InitData()
     {
         _allNodes = MapGroup.GetComponentsInChildren<MapNodeBase>().ToList();
-        _mainNodes = new List<MainNode>();
+        _mainNodes = new List<FightNode>();
         _otherNodes = new List<MapNodeBase>();
         foreach (var each in _allNodes)
         {
             if (each.Type == MapNodeType.Main)
-                _mainNodes.Add(each as MainNode);
+                _mainNodes.Add(each as FightNode);
             else
                 _otherNodes.Add(each);
         }
@@ -48,37 +48,12 @@ public class MapLogic : MonoBehaviour
 
     void Update()
     {
-        SetOpenFogPara();
     }
-
-    void SetOpenFogPara()
-    {
-        for (int i = 0; i < 30; i++)
-        {
-            if (i < _allNodes.Count && _allNodes[i] != null)
-            {
-                NodeOpenFog openFog = _allNodes[i].OpenFog;
-                _UnLockNodeCenters[i] = _allNodes[i].transform.position + 
-                                        GlobalGameDataManager.Instance.openFogOffset;
-                _UnLockNodeRadiuss[i] = openFog.openFogRadius;
-                _FadeRanges[i] = openFog.openFogFadeRange;
-            }
-            else
-            {
-                _UnLockNodeCenters[i] = Vector4.zero;
-                _UnLockNodeRadiuss[i] = 0;
-                _FadeRanges[i] = 0;
-            }
-        }
-        Shader.SetGlobalVectorArray("_UnLockNodeCenters", _UnLockNodeCenters);
-        Shader.SetGlobalFloatArray("_UnLockNodeRadiuss", _UnLockNodeRadiuss);
-        Shader.SetGlobalFloatArray("_FadeRanges", _FadeRanges);
-    }
-
+    
     public void RefreshMapNodeState()
     {
         List<int> IsFinishedLevels = MSceneManager.Instance.CurMapSate.IsFinishedLevels;
-        foreach (MainNode eachNode in _mainNodes)
+        foreach (FightNode eachNode in _mainNodes)
         {
             foreach (int eachIsFinishedLevel in IsFinishedLevels)
             {
@@ -95,7 +70,7 @@ public class MapLogic : MonoBehaviour
         {
             int nextLevelID = MSceneManager.Instance.CurMapSate.LevelID + 1;
             MapNodeBase nextNodeBase = null;
-            foreach (MainNode eachNode in _mainNodes)
+            foreach (FightNode eachNode in _mainNodes)
             {
                 if (eachNode.LevelID == nextLevelID)
                     nextNodeBase = eachNode;

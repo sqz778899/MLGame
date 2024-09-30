@@ -24,6 +24,13 @@ public class MainRoleManager :ScriptableObject
     public List<BulletBuff> CurBulletBuffs;
     public List<BulletEntry> CurBulletEntries;
     
+    [Header("游戏进程相关")]
+    public int CurLevelID;
+    public int CurMapNodeID;
+    public List<int> FinishedLevelIDs;
+    public List<int> FinishedMapNodeIDs;
+    
+    [Header("重要数据")]
     //...............重要数据................
     public int Score;
     public int Gold;
@@ -155,6 +162,15 @@ public class MainRoleManager :ScriptableObject
             CurRollPR = new List<RollPR>(OrginalRollPR);
         if (CurBulletBuffs == null)
             CurBulletBuffs = new List<BulletBuff>();
+        //"游戏进程相关"
+        if (CurLevelID == 0)
+            CurLevelID = 1;
+        if (CurMapNodeID == 0)
+            CurMapNodeID = 1;
+        if (FinishedLevelIDs == null)
+            FinishedLevelIDs = new List<int>();
+        if (FinishedMapNodeIDs == null)
+            FinishedMapNodeIDs = new List<int>();
     }
 
     public void InitData()

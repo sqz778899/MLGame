@@ -24,13 +24,13 @@ public class NewMapController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             // 计算摄像机到地图平面的距离
-            dragOrigin = GetClickPos();
+            dragOrigin = ClickMaster.instance.GetClickPosInMap();
         }
         
         // 检测鼠标拖拽事件，并计算新的地图位置
         if (Input.GetMouseButton(0))
         {
-            Vector3 currentWorldPoint = GetClickPos();
+            Vector3 currentWorldPoint = ClickMaster.instance.GetClickPosInMap();
             if (dragOrigin == Vector3.zero || currentWorldPoint == Vector3.zero)//不知道为啥，Unity有时候捕捉不到鼠标输入的坐标
                 return;
             
@@ -40,13 +40,5 @@ public class NewMapController : MonoBehaviour
             transform.position += offset ;
             dragOrigin = currentWorldPoint;
         }
-    }
-    
-    Vector3 GetClickPos()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        // 进行射线检测
-        Physics.Raycast(ray, out RaycastHit hit);
-        return hit.point;
     }
 }
