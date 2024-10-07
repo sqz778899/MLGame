@@ -23,9 +23,9 @@ public class ResManager : Singleton<ResManager>
         GameObject RollScoreIns = GameObject.Instantiate(GetAssetCache<GameObject>(AssetPath));
         return RollScoreIns;
     }
-    
-   
-   static string GetFileNameByPath(string CurPath)
+
+
+    static string GetFileNameByPath(string CurPath)
    {
       CurPath = CurPath.Replace("\\","/");
       var x = CurPath.Split('/');

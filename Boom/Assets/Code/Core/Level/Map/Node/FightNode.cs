@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 
 public class FightNode:MapNodeBase
 {
-    public int LevelID;
+    public GameObject LevelMap;
     MainSceneMono _mainSceneMono;
 
     public void EnterFight()
@@ -13,7 +13,7 @@ public class FightNode:MapNodeBase
         if (_mainSceneMono==null)
             _mainSceneMono = UIManager.Instance.MainSceneGO.GetComponent<MainSceneMono>();
         
-        MSceneManager.Instance.CurMapSate.LevelID = LevelID;
+        MainRoleManager.Instance.CurMapSate.CurMapNodeID = MapNodeID;
         _mainSceneMono.SwitchFightScene();
     }
 }

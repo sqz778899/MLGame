@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,10 @@ public class MapRoomNode : MonoBehaviour
         //获取地图节点
         _arrows = GetComponentsInChildren<ArrowNode>();
         _mapNodes = GetComponentsInChildren<MapNodeBase>();
+    }
+
+    void Update()
+    {
         OnOffArrows();
     }
 

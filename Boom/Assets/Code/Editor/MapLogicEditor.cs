@@ -4,20 +4,20 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(Test))]
+[CustomEditor(typeof(MapLogic))]
 [CanEditMultipleObjects]
-public class TestEditor : Editor
+public class MapLogicEditor : Editor
 {
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
         
-        if (GUILayout.Button("GenerateData"))
+        if (GUILayout.Button("GenerateNodeIDs"))
         {
-            var mtarget = target as Test;
-            mtarget.HasEvents();
+            var mtarget = target as MapLogic;
+            mtarget.InitMapData();
+            mtarget.SetAllIDs();
         }
     }
-   
-}   
+}
 #endif

@@ -4526,9 +4526,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0eb1b696718d36049a7ae473d125b8fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Distance: 150
-  GenRange: {x: 1.5, y: 2.5}
-  ScaleRange: {x: 0.2, y: 0.21}
 --- !u!1 &7028164925420021338
 GameObject:
   m_ObjectHideFlags: 0
@@ -6860,11 +6857,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7291240283817990165, guid: 8a8809792445aaa4ab4fd12202699af9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.2
+      value: 14.71
       objectReference: {fileID: 0}
     - target: {fileID: 7291240283817990165, guid: 8a8809792445aaa4ab4fd12202699af9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.6297233
+      value: 1.17
       objectReference: {fileID: 0}
     - target: {fileID: 7291240283817990165, guid: 8a8809792445aaa4ab4fd12202699af9, type: 3}
       propertyPath: m_LocalPosition.z

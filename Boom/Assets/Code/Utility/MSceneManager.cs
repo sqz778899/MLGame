@@ -19,16 +19,10 @@ public class MSceneManager: ScriptableObject
         }
     }
     #endregion
-
-    public MapSate CurMapSate = new MapSate();
+    
     public int CurrentSceneIndex;
     const int LoadingScene = 5;
 
-    public void WinThisLevel()
-    {
-        CurMapSate.IsFinishedLevels.Add(CurMapSate.LevelID);
-    }
-    
     public void LoadScene(int SceneID)
     {
         CurrentSceneIndex = SceneID;

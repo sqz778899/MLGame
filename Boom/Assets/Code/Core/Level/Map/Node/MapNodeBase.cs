@@ -5,20 +5,20 @@ using UnityEngine;
 
 public class MapNodeBase : MonoBehaviour
 {
+    public int MapNodeID;
     public MapNodeState State;
     public MapNodeType Type;
     
     public GameObject Node_Main;
-    public GameObject Bubble;
-    public GameObject Node_Locked;
     public GameObject Node_Finish;
     
     public GameObject Node_FX;
     ParticleSystem[] _fxs;
 
-    void Awake()
+    void Awake()    
     {
-        _fxs = Node_FX.GetComponentsInChildren<ParticleSystem>(true);
+        if (Node_FX !=null) 
+            _fxs = Node_FX.GetComponentsInChildren<ParticleSystem>(true);
     }
 
     internal virtual void Start()
@@ -28,7 +28,7 @@ public class MapNodeBase : MonoBehaviour
     
     public void ChangeState()
     {
-        if (_fxs == null)
+        if (_fxs == null && Node_FX!= null)
             _fxs = Node_FX.GetComponentsInChildren<ParticleSystem>(true);
 
         switch (Type)
@@ -52,29 +52,12 @@ public class MapNodeBase : MonoBehaviour
     {
         switch (State)
         {
-            case MapNodeState.Locked:
-                Bubble.SetActive(false);
-                Node_Locked.SetActive(true);
-                Node_Main.SetActive(true);
-                foreach (var each in _fxs)
-                    each.Stop();
-                Node_Finish.SetActive(false);
-        
-                break;
             case MapNodeState.UnLocked:
-                Bubble.SetActive(true);
-                Node_Locked.SetActive(false);
                 Node_Main.SetActive(true);
-                foreach (var each in _fxs)
-                    each.Play();
                 Node_Finish.SetActive(false);
                 break;
             case MapNodeState.IsFinish:
-                Bubble.SetActive(false);
-                Node_Locked.SetActive(false);
                 Node_Main.SetActive(false);
-                foreach (var each in _fxs)
-                    each.Stop();
                 Node_Finish.SetActive(true);
                 break;
         }
@@ -86,16 +69,12 @@ public class MapNodeBase : MonoBehaviour
         switch (State)
         {
             case MapNodeState.UnLocked:
-                Bubble.SetActive(true);
-                Node_Locked.SetActive(false);
                 curMainBlock.SetBlockDefault();
                 foreach (var each in _fxs)
                     each.Play();
                 break;
             case MapNodeState.IsFinish:
-                Bubble.SetActive(false);
                 curMainBlock.SetBlockFinish();
-                Node_Locked.SetActive(true);
                 foreach (var each in _fxs)
                     each.Stop();
                 break;
@@ -113,14 +92,12 @@ public class MapNodeBase : MonoBehaviour
         switch (State)
         {
             case MapNodeState.UnLocked:
-                Bubble.SetActive(true);
                 Node_Main.SetActive(true);
                 Node_Finish.SetActive(false);
                 foreach (var each in _fxs)
                     each.Play();
                 break;
             case MapNodeState.IsFinish:
-                Bubble.SetActive(false);
                 Node_Main.SetActive(false);
                 Node_Finish.SetActive(true);
                 foreach (var each in _fxs)

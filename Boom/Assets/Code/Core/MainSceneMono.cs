@@ -87,7 +87,7 @@ public class MainSceneMono:MonoBehaviour
     {
         GUIMapScene.SetActive(true);
         MapScene.SetActive(true);
-        _mapLogic?.InitData();
+        _mapLogic?.InitMapData();
     }
     
     void MapSceneOff()

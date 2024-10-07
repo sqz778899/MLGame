@@ -25,11 +25,8 @@ public class MainRoleManager :ScriptableObject
     public List<BulletEntry> CurBulletEntries;
     
     [Header("游戏进程相关")]
-    public int CurLevelID;
-    public int CurMapNodeID;
-    public List<int> FinishedLevelIDs;
-    public List<int> FinishedMapNodeIDs;
-    
+    public MapSate CurMapSate;
+
     [Header("重要数据")]
     //...............重要数据................
     public int Score;
@@ -152,6 +149,13 @@ public class MainRoleManager :ScriptableObject
 
     public WinOrFail WinOrFailState;
 
+    #region 游戏进程相关
+    public void WinThisLevel()
+    {
+        CurMapSate.IsFinishedMapNodes.Add(CurMapSate.CurMapNodeID);
+    }
+    #endregion
+
     public void InitContainer()
     {
         if (CurRollPREveIDs == null)
@@ -163,14 +167,8 @@ public class MainRoleManager :ScriptableObject
         if (CurBulletBuffs == null)
             CurBulletBuffs = new List<BulletBuff>();
         //"游戏进程相关"
-        if (CurLevelID == 0)
-            CurLevelID = 1;
-        if (CurMapNodeID == 0)
-            CurMapNodeID = 1;
-        if (FinishedLevelIDs == null)
-            FinishedLevelIDs = new List<int>();
-        if (FinishedMapNodeIDs == null)
-            FinishedMapNodeIDs = new List<int>();
+        if (CurMapSate == null)
+            CurMapSate = new MapSate();
     }
 
     public void InitData()

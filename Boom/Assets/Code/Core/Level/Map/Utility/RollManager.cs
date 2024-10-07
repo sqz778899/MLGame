@@ -20,7 +20,7 @@ public class RollManager: ScriptableObject
     public void OnceRollBuff()
     {
         GameObject curRoot = UIManager.Instance.G_Buff;
-        int curLevelID = MSceneManager.Instance.CurMapSate.LevelID;
+        int curLevelID = MainRoleManager.Instance.CurMapSate.CurMapNodeID;
         List<LevelBuff> curDesign = TrunkManager.Instance.LevelBuffDesignJsons;
         LevelBuff curLB = null;
         foreach (var each in curDesign)

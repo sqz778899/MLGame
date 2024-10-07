@@ -9,6 +9,8 @@ public static class AniUtility
     public const string Idle = "idle";
     public const string Idle01 = "idle_01";//受伤之后的Idle
     public const string AttackBegin = "attack_begin";
+    public const string AttackBegin_1 = "attack_begin_1";
+    public const string AttackBegin_2 = "attack_begin_2";
     public const string Attacking = "attacking";
     public const string Reload = "reload";
     public const string Run = "run";
@@ -19,17 +21,23 @@ public static class AniUtility
     public const string Appear = "appear"; //出现动画
     #endregion
 
-    public static void PlayCommon(SkeletonAnimation curAni,float timeScale,string AniType,bool isloop,bool isReset=false)
+    public static void PlayCommon(SkeletonAnimation curAni,float timeScale,string AniType,bool isloop,bool isReset=false,int trackIndex=0)
     {
+        #region 容错
+        //动画不存在的话直接Return
+        if (curAni.Skeleton == null) return;
+        if (curAni.Skeleton.Data.FindAnimation(AniType) == null) return;
+        #endregion
+        
         if (curAni.AnimationName != AniType || curAni.loop != isloop)
         {
             curAni.loop = isloop;
-            curAni.AnimationState.SetAnimation(0, AniType,isloop);
+            curAni.AnimationState.SetAnimation(trackIndex, AniType,isloop);
         }
 
         if (isReset)
         {
-            curAni.AnimationState.SetAnimation(0, AniType,isloop);
+            curAni.AnimationState.SetAnimation(trackIndex, AniType,isloop);
         }
         
         curAni.AnimationName = AniType;
@@ -61,6 +69,8 @@ public static class AniUtility
     public static void PlayAttack(SkeletonAnimation curAni,ref float anitime,float timeScale=1f,bool isReset=false)
     {
         PlayCommon(curAni, timeScale, AttackBegin,false,isReset);
+        PlayCommon(curAni, timeScale, AttackBegin_1,false,isReset,0);
+        PlayCommon(curAni, timeScale, AttackBegin_2,false,isReset,1);
         anitime = curAni.state.GetCurrent(0).Animation.Duration;
     }
     

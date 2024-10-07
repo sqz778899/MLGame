@@ -1,86 +1,90 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-//[ExecuteAlways]
 public class MapLogic : MonoBehaviour
 {
-    public Transform MapGroup;
+    public GameObject MapNodeRoot;
+    [Header("地图内角色")]
+    public GameObject Role;
+    [Header("地图节点")]
+    public List<GameObject> MapRooms;
+    MapRoomNode[] _allMapRooms;
+    MapNodeBase[] _allMapNodes;
     
-    List<MapNodeBase> _allNodes;
-    List<FightNode> _mainNodes;
-    List<MapNodeBase> _otherNodes;
-
-    Vector4[] _UnLockNodeCenters = new Vector4[30];
-    float[] _UnLockNodeRadiuss = new float[30];
-    float[] _FadeRanges = new float[30];
+    public GameObject CurMapRoom;
+    
     void Start()
     {
-        _allNodes = MapGroup.GetComponentsInChildren<MapNodeBase>().ToList();
-        _mainNodes = new List<FightNode>();
-        _otherNodes = new List<MapNodeBase>();
-        foreach (var each in _allNodes)
-        {
-            if (each.Type == MapNodeType.Main)
-                _mainNodes.Add(each as FightNode);
-            else
-                _otherNodes.Add(each);
-        }
-        RefreshMapNodeState();
+        InitMapData();
     }
 
-    public void InitData()
+    public GameObject GetMapNodeByID(int mapNodeID)
     {
-        _allNodes = MapGroup.GetComponentsInChildren<MapNodeBase>().ToList();
-        _mainNodes = new List<FightNode>();
-        _otherNodes = new List<MapNodeBase>();
-        foreach (var each in _allNodes)
+        GameObject mapNode = null;
+        foreach (var each in _allMapNodes)
         {
-            if (each.Type == MapNodeType.Main)
-                _mainNodes.Add(each as FightNode);
-            else
-                _otherNodes.Add(each);
-        }
-        RefreshMapNodeState();
-    }
-
-    void Update()
-    {
-    }
-    
-    public void RefreshMapNodeState()
-    {
-        List<int> IsFinishedLevels = MSceneManager.Instance.CurMapSate.IsFinishedLevels;
-        foreach (FightNode eachNode in _mainNodes)
-        {
-            foreach (int eachIsFinishedLevel in IsFinishedLevels)
+            if (each.MapNodeID == mapNodeID)
             {
-                if (eachNode.LevelID == eachIsFinishedLevel)
-                {
-                    eachNode.State = MapNodeState.IsFinish;
-                    eachNode.ChangeState();
-                }
+                mapNode = each.gameObject;
+                break;
+            }
+        }
+        return mapNode;
+    }
+
+    public void InitMapData()
+    {
+        //获取地图房间节点
+        MapRooms = new List<GameObject>();
+        _allMapRooms = MapNodeRoot.GetComponentsInChildren<MapRoomNode>();
+        foreach (var each in _allMapRooms)
+            MapRooms.Add(each.gameObject);
+        _allMapNodes = MapNodeRoot.GetComponentsInChildren<MapNodeBase>();//获取全部地图节点
+
+        //更新地图节点状态
+        MapSate CurMapSate = MainRoleManager.Instance.CurMapSate;
+        foreach (var eachFinishedNodeID in CurMapSate.IsFinishedMapNodes)
+        {
+            foreach (var eachMapNode in _allMapNodes)
+            {
+                if (eachMapNode.MapNodeID == eachFinishedNodeID)
+                    eachMapNode.QuitNode();
             }
         }
         
-        //..................下一关.......................
-        if (IsFinishedLevels.Contains(MSceneManager.Instance.CurMapSate.LevelID))
+        //设置角色位置
+        SetRolePos();
+    }
+    
+    public void SetRolePos()
+    {
+        //设置角色位置
+        foreach (var each in _allMapRooms)
         {
-            int nextLevelID = MSceneManager.Instance.CurMapSate.LevelID + 1;
-            MapNodeBase nextNodeBase = null;
-            foreach (FightNode eachNode in _mainNodes)
+            if (each.RoomID == MainRoleManager.Instance.CurMapSate.CurRoomID)
             {
-                if (eachNode.LevelID == nextLevelID)
-                    nextNodeBase = eachNode;
-            }
-
-            if (nextNodeBase != null)
-            {
-                nextNodeBase.State = MapNodeState.UnLocked;
-                nextNodeBase.ChangeState();
+                Debug.Log($"{each.gameObject.name}  {each.transform.position}");
+                Role.transform.position = new Vector3(each.transform.position.x,
+                    each.transform.position.y - 3.59f, Role.transform.position.z);
+                CurMapRoom = each.gameObject;
+                break;
             }
         }
+        
+        //设置摄像机位置
+        Vector3 newCameraPos = new Vector3(Role.transform.position.x, Role.transform.position.y + 3.59f, Camera.main.transform.position.z);
+        Camera.main.transform.DOMove(newCameraPos, 0.5f);
+    }
+
+    public void SetAllIDs()
+    {
+        for (int i = 0; i < _allMapRooms.Length; i++)
+            _allMapRooms[i].RoomID = i + 1;
+        
+        for (int i = 0; i < _allMapNodes.Length; i++)
+            _allMapNodes[i].MapNodeID = i + 1;
     }
 }

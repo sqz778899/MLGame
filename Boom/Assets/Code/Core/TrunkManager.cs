@@ -166,7 +166,7 @@ public class TrunkManager: ScriptableObject
                 break;
             }
         }
-        MSceneManager.Instance.CurMapSate = curMapSate;
+        MainRoleManager.Instance.CurMapSate = curMapSate;
         #endregion
 
         LoadUserConfig();
@@ -190,7 +190,7 @@ public class TrunkManager: ScriptableObject
         #region Map
         List<MapSate> UserMapSate = new List<MapSate>();
         MapSate curMapState = new MapSate();
-        curMapState = MSceneManager.Instance.CurMapSate;
+        curMapState = MainRoleManager.Instance.CurMapSate;
         UserMapSate.Add(curMapState);
         _saveFile.UserMapSate = UserMapSate;
         #endregion
@@ -250,9 +250,9 @@ public class TrunkManager: ScriptableObject
         List<MapSate> curMapSate = new List<MapSate>();
         MapSate curMap = new MapSate();
         curMap.CurMapID = 1;
-        curMap.MapID = 1;
-        curMap.LevelID = 1;
-        curMap.IsFinishedLevels = new List<int>();
+        curMap.CurMapNodeID = 1;
+        curMap.IsFinishedRooms = new List<int>();
+        curMap.IsFinishedMapNodes = new List<int>();
         curMapSate.Add(curMap);
         _saveFile.UserMapSate = curMapSate;
         #endregion

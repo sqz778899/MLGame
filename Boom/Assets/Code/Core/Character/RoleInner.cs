@@ -153,11 +153,11 @@ public class RoleInner : BaseMove
         CurConnon.Reload(ref connonReloadTime);
         yield return new WaitForSeconds(connonReloadTime);  //大炮装填子弹动画
         //...
-        
         //进行子弹装填
         for (int i = 0; i < Bullets.Count; i++)
         {
             BulletInner curBullet = Bullets[i];
+            CurConnon.AllBullets.Add(Bullets[i]);//并且把弹药数据装填进大炮
             StartCoroutine(curBullet.ReadyToAttack(CurConnon.FillNode.transform.position));
             yield return new WaitForSeconds(delay);  // 在发射下一个子弹之前，等待delay秒
         }
@@ -165,14 +165,12 @@ public class RoleInner : BaseMove
         //播放大炮攻击动画
         for (int i = 0; i < Bullets.Count; i++)
         {
-            BulletInner curBullet = Bullets[i];
             //填弹药动画
             float connonAttackTime = 0f;
-            CurConnon.Attack(curBullet,ref connonAttackTime);
-            curBullet.Attack();
+            CurConnon.Attack(i,ref connonAttackTime);
             yield return new WaitForSeconds(connonAttackTime);  // 在发射下一个子弹之前，等待delay秒
         }
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(2);
         DestroyImmediate(CurConnon.gameObject);
     }
 }

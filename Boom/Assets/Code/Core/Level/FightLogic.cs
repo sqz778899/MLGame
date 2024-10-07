@@ -7,16 +7,29 @@ using UnityEngine;
 
 public class FightLogic : MonoBehaviour
 {
+    [Header("MapLogic")] 
+    public MapLogic _mapLogic;
+
+    void Start()
+    {
+        _mapLogic = UIManager.Instance.MapLogicGO.GetComponent<MapLogic>();
+    }
+
     #region 关卡相关
     public GameObject GroupLevel;
     public GameObject CurLevel;
-
+    
     void InitLevel()
     {
-        int curLevelID = MSceneManager.Instance.CurMapSate.LevelID;
-        string curLevelName = string.Format("P_Level_{0}.prefab", curLevelID.ToString("D2"));
-        CurLevel = Instantiate(ResManager.instance.GetAssetCache<GameObject>
-            (PathConfig.LevelAssetDir+curLevelName), GroupLevel.transform);
+        //加载关卡
+        int curMapNodeID = MainRoleManager.Instance.CurMapSate.CurMapNodeID;
+        GameObject curMapGO = _mapLogic.GetMapNodeByID(curMapNodeID);
+        FightNode curFightNode = curMapGO.GetComponent<FightNode>(); //战斗加载必然是战斗节点
+        CurLevel = Instantiate(curFightNode.LevelMap, GroupLevel.transform);
+        
+        //设置角色位置
+        Vector3 curRolePos = UIManager.Instance.RoleIns.transform.position;
+        UIManager.Instance.RoleIns.transform.position = new Vector3(0, curRolePos.y, 0);
     }
     #endregion
 
@@ -78,6 +91,9 @@ public class FightLogic : MonoBehaviour
             BulletInner curSC = root.transform.GetChild(i).GetComponent<BulletInner>();
             curSC.DestroySelf();
         }
+        //卸载战斗场景
+        if (CurLevel != null)
+            DestroyImmediate(CurLevel);
     }
 
     void WinOrFailThisLevel()
@@ -109,7 +125,7 @@ public class FightLogic : MonoBehaviour
         //播放胜利
         WinGUI.SetActive(true);
         isBeginCalculation = false;
-        MSceneManager.Instance.WinThisLevel();
+        MainRoleManager.Instance.WinThisLevel();
         //给一个随机Buff
         //RollManager.Instance.OnceRollBuff();
         //选完了给一个随机宝物
