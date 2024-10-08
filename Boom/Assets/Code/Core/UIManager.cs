@@ -59,8 +59,7 @@ public class UIManager : ScriptableObject
     public GameObject TitleGold;
     public GameObject G_CurBulletIcon; //侧边栏当前子弹图标
     public GameObject G_StandbyIcon; //侧边栏待机图标
-    
-    
+
     #region 1.StartGame
     public void InitStartGame()
     {

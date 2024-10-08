@@ -12,5 +12,9 @@ public class SlotIDCalculate : MonoBehaviour
         BulletSlot[] bulletSlots = gameObject.GetComponentsInChildren<BulletSlot>();
         for (int i = 0; i < bulletSlots.Length; i++)
             bulletSlots[i].SlotID = i + 1;
+        
+        BagSlot[] bagSlots = gameObject.GetComponentsInChildren<BagSlot>();
+        for (int i = 0; i < bagSlots.Length; i++)
+            bagSlots[i].SlotID = i + 1;
     }
 }
