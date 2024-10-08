@@ -14,12 +14,10 @@ public class NewMapController : MonoBehaviour
         
         // 滚轮缩放地图逻辑
         float scroll = Input.GetAxis("Mouse ScrollWheel") * Sensitive;
-        Vector3 curScale = transform.localScale;
-        Vector3 curScaleAdd = new Vector3(scroll,scroll,scroll);
-        curScale += curScaleAdd;
-        if (curScale.x > MinMaxZ.x && curScale.x < MinMaxZ.y) //缩放
-            transform.localScale = curScale;
-
+        float newSize = Camera.main.orthographicSize - scroll;
+        if (newSize > MinMaxZ.x && newSize < MinMaxZ.y)
+            Camera.main.orthographicSize = newSize;
+        
         // 检测鼠标按下事件，记录按下时鼠标的世界坐标
         if (Input.GetMouseButtonDown(0))
         {
