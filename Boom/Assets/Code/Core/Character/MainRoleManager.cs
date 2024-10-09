@@ -35,6 +35,7 @@ public class MainRoleManager :ScriptableObject
     public int RollEntryCost = 5;
     public List<BulletSpawner> CurBulletSpawners;
     public List<StandbyData> CurStandbyBulletMats = new List<StandbyData>();
+    public List<Item> BagItems = new List<Item>();
     public List<SupremeCharm> SupremeCharms = new List<SupremeCharm>();
 
     #region 词条相关
@@ -184,18 +185,19 @@ public class MainRoleManager :ScriptableObject
     }
 
     #region 纯数据层操作
-    public void RefreshSpawner(BulletMutMode mode,int BulletID)
+    //更新当前子弹生成器数据
+    public void RefreshSpawner(MutMode mode,int BulletID)
     {
         switch (mode)
         {
-            case BulletMutMode.Sub:
+            case MutMode.Sub:
                 foreach (var each in CurBulletSpawners)
                 {
                     if (each.bulletID == BulletID)
                         each.bulletCount -= 1;
                 }
                 break;
-            case BulletMutMode.Add:
+            case MutMode.Add:
                 foreach (var each in CurBulletSpawners)
                 {
                     if (each.bulletID == BulletID)
@@ -205,12 +207,13 @@ public class MainRoleManager :ScriptableObject
         }
     }
 
-    public void RefreshCurBullets(BulletMutMode mode, int BulletID,int SlotID = -1,int InstanceID = -1,
+    //更新当前子弹数据
+    public void RefreshCurBullets(MutMode mode, int BulletID,int SlotID = -1,int InstanceID = -1,
         BulletInsMode bulletInsMode = BulletInsMode.EditA)
     {
         switch (mode)
         {
-            case BulletMutMode.Sub:
+            case MutMode.Sub:
                 for (int i = CurBullets.Count - 1; i >= 0; i--)
                 {
                     if (CurBullets[i].bulletID == BulletID &&
@@ -221,7 +224,7 @@ public class MainRoleManager :ScriptableObject
                     }
                 }
                 break;
-            case BulletMutMode.Add:
+            case MutMode.Add:
                 if (SlotID == -1)
                 {
                     Debug.LogError("未设置SlotID");
@@ -233,11 +236,12 @@ public class MainRoleManager :ScriptableObject
         }
     }
     
-    public void RefreshStandbyBulletMats(BulletMutMode mode, int BulletID,int InstanceID)
+    //更新当前备用子弹数据
+    public void RefreshStandbyBulletMats(MutMode mode, int BulletID,int InstanceID)
     {
         switch (mode)
         {
-            case BulletMutMode.Sub:
+            case MutMode.Sub:
                 foreach (var each in CurStandbyBulletMats)
                 {
                     if (each.ID == BulletID)
@@ -247,7 +251,7 @@ public class MainRoleManager :ScriptableObject
                     }
                 }
                 break;
-            case BulletMutMode.Add:
+            case MutMode.Add:
                 foreach (var each in CurStandbyBulletMats)
                 {
                     if (each.ID == 0)
@@ -261,21 +265,41 @@ public class MainRoleManager :ScriptableObject
         }
     }
 
-    public void RefreshSupremeCharms(BulletMutMode mode, int CharmID)
+    //更新当前至尊符文数据
+    public void RefreshSupremeCharms(MutMode mode, int CharmID)
     {
         switch (mode)
         {
-            case BulletMutMode.Sub:
+            case MutMode.Sub:
                 foreach (var each in SupremeCharms)
                 {
                     if (each.ID == CharmID)
                         SupremeCharms.Remove(each);
                 }
                 break;
-            case BulletMutMode.Add:
+            case MutMode.Add:
                 SupremeCharm newCharm = new SupremeCharm(CharmID);
                 newCharm.GetSupremeCharmByID();
                 SupremeCharms.Add(newCharm);
+                break;
+        }
+    }
+    
+    //更新当前背包内物品数据
+    public void RefreshBagItems(MutMode mode, int ItemID)
+    {
+        switch (mode)
+        {
+            case MutMode.Sub:
+                foreach (var each in BagItems)
+                {
+                    if (each.ID == ItemID)
+                        BagItems.Remove(each);
+                }
+                break;
+            case MutMode.Add:
+                Item newItem = new Item(ItemID);
+                BagItems.Add(newItem);
                 break;
         }
     }
@@ -437,14 +461,14 @@ public class MainRoleManager :ScriptableObject
         {
             DraggableBullet targetSC = targetIns.GetComponentInChildren<DraggableBullet>();
             //挪出来
-            RefreshCurBullets(BulletMutMode.Sub, targetSC._bulletData.ID,targetSlotID,targetSC.InstanceID);
-            RefreshCurBullets(BulletMutMode.Add,targetSC._bulletData.ID,curSlotID,targetSC.InstanceID);
+            RefreshCurBullets(MutMode.Sub, targetSC._bulletData.ID,targetSlotID,targetSC.InstanceID);
+            RefreshCurBullets(MutMode.Add,targetSC._bulletData.ID,curSlotID,targetSC.InstanceID);
             targetIns.transform.position = curSlot.transform.position;
             targetIns.GetComponentInChildren<DraggableBullet>().curSlotID = curSlotID;
         }
         //移进去
-        RefreshCurBullets(BulletMutMode.Sub, curSC._bulletData.ID,curSlotID,curSC.InstanceID);  //....数据层
-        RefreshCurBullets(BulletMutMode.Add, curSC._bulletData.ID,targetSlotID,curSC.InstanceID); //....数据层
+        RefreshCurBullets(MutMode.Sub, curSC._bulletData.ID,curSlotID,curSC.InstanceID);  //....数据层
+        RefreshCurBullets(MutMode.Add, curSC._bulletData.ID,targetSlotID,curSC.InstanceID); //....数据层
         curIns.transform.position = targetSlot.transform.position;
         curIns.GetComponentInChildren<DraggableBullet>().curSlotID = targetSlotID;
         
@@ -496,13 +520,13 @@ public class MainRoleManager :ScriptableObject
         GameObject StandbyMatIns = BulletManager.Instance.InstanceStandbyMat(BulletID);
         curSlot.AddIns(StandbyMatIns);
         
-        RefreshStandbyBulletMats(BulletMutMode.Add, BulletID,StandbyMatIns.GetInstanceID());
+        RefreshStandbyBulletMats(MutMode.Add, BulletID,StandbyMatIns.GetInstanceID());
         return true;
     }
 
     public void SubStandebyBullet(int BulletID,int InstanceID = -1)
     {
-        RefreshStandbyBulletMats(BulletMutMode.Sub, BulletID,InstanceID);
+        RefreshStandbyBulletMats(MutMode.Sub, BulletID,InstanceID);
         GameObject curSD = UIManager.Instance.G_StandbyMat;
 
         for (int i = curSD.transform.childCount-1 ; i >= 0; i--)
@@ -512,9 +536,9 @@ public class MainRoleManager :ScriptableObject
             if (curSC.ID == BulletID)
             {
                 if (InstanceID == -1)
-                    RefreshStandbyBulletMats(BulletMutMode.Sub, curSC.ID, curBullet.GetInstanceID());
+                    RefreshStandbyBulletMats(MutMode.Sub, curSC.ID, curBullet.GetInstanceID());
                 else
-                    RefreshStandbyBulletMats(BulletMutMode.Sub, curSC.ID, InstanceID);
+                    RefreshStandbyBulletMats(MutMode.Sub, curSC.ID, InstanceID);
             }
         }
         InitStandbyBulletMats();
@@ -538,28 +562,28 @@ public class MainRoleManager :ScriptableObject
 
     public void TmpHongSpawner(int bulletID)
     {
-        RefreshSpawner(BulletMutMode.Sub,bulletID);
+        RefreshSpawner(MutMode.Sub,bulletID);
         RefreshSpawnerIns();
     }
     public void AddBullet(int bulletID,int slotID,int instanceID)
     {
-        RefreshCurBullets(BulletMutMode.Add,bulletID,slotID,instanceID);
-        RefreshSpawner(BulletMutMode.Sub,bulletID);
+        RefreshCurBullets(MutMode.Add,bulletID,slotID,instanceID);
+        RefreshSpawner(MutMode.Sub,bulletID);
         RefreshSpawnerIns();
         RefreshCurBulletSlots();
     }
     
     public void AddBulletOnlyData(int bulletID,int slotID,int instanceID)
     {
-        RefreshCurBullets(BulletMutMode.Add,bulletID,slotID,instanceID);
+        RefreshCurBullets(MutMode.Add,bulletID,slotID,instanceID);
         RefreshCurBulletSlots();
        // RefreshSpawner(BulletMutMode.Sub,bulletID);
     }
 
     public void SubBullet(int bulletID,int instanceID)
     {
-        RefreshCurBullets(BulletMutMode.Sub,bulletID,InstanceID:instanceID);
-        RefreshSpawner(BulletMutMode.Add,bulletID);
+        RefreshCurBullets(MutMode.Sub,bulletID,InstanceID:instanceID);
+        RefreshSpawner(MutMode.Add,bulletID);
         RefreshSpawnerIns();
         RefreshCurBulletSlots();
     }

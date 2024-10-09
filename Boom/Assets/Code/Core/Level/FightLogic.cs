@@ -69,7 +69,7 @@ public class FightLogic : MonoBehaviour
     public void InitData()
     {
         Camera.main.transform.position = new Vector3(0,1,-10);
-        Camera.main.orthographicSize = 2;
+        Camera.main.orthographicSize = 5;
         //InitLevel
         InitLevel();
         FailGUI.SetActive(false);

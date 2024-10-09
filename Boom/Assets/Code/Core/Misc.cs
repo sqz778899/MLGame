@@ -73,6 +73,24 @@ public class Award
 }
 
 [Serializable]
+public class Item
+{
+    public int ID;
+    public int rare;
+    public string name;
+    
+    void InitItemDataByID()
+    {
+        
+    }
+    public Item(int _id)
+    {
+        ID = _id;
+        InitItemDataByID();
+    }
+}
+
+[Serializable]
 public class SupremeCharm
 {
     public int ID;
