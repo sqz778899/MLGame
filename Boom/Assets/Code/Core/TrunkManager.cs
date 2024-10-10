@@ -21,6 +21,7 @@ public class TrunkManager: ScriptableObject
 
     #region 策划数据
     List<BulletDataJson> _bulletDesignJsons;
+    List<ItemJson> _itemDesignJsons;
     List<TalentDataJson> _buffDesignJsons;
     List<LevelBuff> _levelBuffDesignJsons;
     List<RoleBase> _roleDesignJsons;
@@ -33,6 +34,16 @@ public class TrunkManager: ScriptableObject
             if (_bulletDesignJsons == null)
                 _bulletDesignJsons = LoadBulletData();
             return _bulletDesignJsons;
+        }
+    }
+    
+    public List<ItemJson> ItemDesignJsons
+    {
+        get
+        {
+            if (_itemDesignJsons == null)
+                _itemDesignJsons = LoadItemData();
+            return _itemDesignJsons;
         }
     }
     
@@ -89,6 +100,13 @@ public class TrunkManager: ScriptableObject
         string BulletDesignString = File.ReadAllText(PathConfig.BulletDesignJson);
         List<BulletDataJson> BulletDataJsons = JsonConvert.DeserializeObject<List<BulletDataJson>>(BulletDesignString);
         return BulletDataJsons;
+    }
+    
+    public List<ItemJson> LoadItemData()
+    {
+        string ItemDesignString = File.ReadAllText(PathConfig.ItemDesignJson);
+        List<ItemJson> ItemDataJsons = JsonConvert.DeserializeObject<List<ItemJson>>(ItemDesignString);
+        return ItemDataJsons;
     }
     
     public List<TalentDataJson> LoadBuffData()

@@ -7,4 +7,5 @@ public class SlotBase : MonoBehaviour
     public int SlotID;
     public int BulletID;
     public int InstanceID;
+    public SlotType SlotType;
 }

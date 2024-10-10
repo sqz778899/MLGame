@@ -14,6 +14,7 @@ public class ExcelExport
     void ExportDesignData()
     {
         ExportBullet();
+        ExportItem();
         ExportBuffDesign();
         ExportLevelBuffDesign();
         ExportMuliLa();
@@ -45,6 +46,41 @@ public class ExcelExport
         
         string content01 = JsonConvert.SerializeObject(curBulletDesign,(Formatting) Formatting.Indented);
         File.WriteAllText(PathConfig.BulletDesignJson, content01);
+    }
+    
+    public void ExportItem()
+    {
+        DataSet curTables = GetDataSet();
+        DataTable curTable = null;
+        for (int i = 0; i < curTables.Tables.Count; i++)
+        {
+            if (curTables.Tables[i].TableName == "ItemDesign")
+            {
+                curTable = curTables.Tables[i];
+                break;
+            }
+        }
+
+        if (curTable == null)
+        {
+            Debug.LogError("没有找到\"ItemDesign\"表");
+            return;
+        }
+       
+        List<ItemJson> curItemDesign = new List<ItemJson>();
+        for (int i = 1; i < curTable.Rows.Count; i++)
+        {
+            ItemJson curItem = new ItemJson();
+            if (curTable.Rows[i][1].ToString() == "") continue;
+            curItem.ID = int.Parse(curTable.Rows[i][0].ToString());
+            curItem.rare = int.Parse(curTable.Rows[i][1].ToString());
+            curItem.name = curTable.Rows[i][2].ToString();
+            curItem.resName = curTable.Rows[i][3].ToString();
+            curItemDesign.Add(curItem);
+        }
+        
+        string content01 = JsonConvert.SerializeObject(curItemDesign,(Formatting) Formatting.Indented);
+        File.WriteAllText(PathConfig.ItemDesignJson, content01);
     }
 
     public void ExportBuffDesign()
@@ -183,6 +219,7 @@ public class ExcelExport
         string content = JsonConvert.SerializeObject(curPREvents,(Formatting) Formatting.Indented);
         File.WriteAllText(PathConfig.PREventDesignJson, content);
     }
+    
 
     void ExportBulletEntry()
     {

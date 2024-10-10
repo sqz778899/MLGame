@@ -23,6 +23,8 @@ public class MainRoleManager :ScriptableObject
     public List<BulletReady> CurBullets;
     public List<BulletBuff> CurBulletBuffs;
     public List<BulletEntry> CurBulletEntries;
+    //...............元素均衡................
+    public List<Item> CurItems = new List<Item>();
     
     [Header("游戏进程相关")]
     public MapSate CurMapSate;
@@ -302,6 +304,19 @@ public class MainRoleManager :ScriptableObject
                 BagItems.Add(newItem);
                 break;
         }
+    }
+    
+    //更新当前元素均衡数据
+    public void RefreshCurItems()
+    {
+        CurItems = new List<Item>();
+        foreach (var each in BagItems)
+        {
+            if (each.slotType == (int)SlotType.ElementSlot)
+                CurItems.Add(each);
+        }
+
+        Debug.Log("元素均衡");
     }
     #endregion
 

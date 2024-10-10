@@ -78,6 +78,9 @@ public class Item
     public int ID;
     public int rare;
     public string name;
+    //游戏内相关属性
+    public int slotID;
+    public int slotType;
     
     void InitItemDataByID()
     {
@@ -88,6 +91,14 @@ public class Item
         ID = _id;
         InitItemDataByID();
     }
+}
+
+public class ItemJson
+{
+    public int ID;
+    public int rare;
+    public string name;
+    public string resName;
 }
 
 [Serializable]
@@ -108,4 +119,12 @@ public class SupremeCharm
     {
         ID = _id;
     }
+}
+
+//Slot的类型
+public enum SlotType
+{
+    BagSlot = 1,
+    BulletSlot = 2,
+    ElementSlot = 3,
 }
