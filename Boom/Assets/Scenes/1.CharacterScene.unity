@@ -174,9 +174,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 54
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &2983491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -696,9 +696,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 38
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &38536131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1258,9 +1258,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 56
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &126558238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1350,9 +1350,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 28
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &144319257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1715,9 +1715,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 925198553}
-  - {fileID: 381437862}
+  m_Children: []
   m_Father: {fileID: 331870814}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -2436,9 +2434,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 66
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &227643807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2528,9 +2526,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 37
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &235331836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2864,9 +2862,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 42
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &250601304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3589,9 +3587,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 63
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &335625319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3681,9 +3679,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 23
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &350258639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3817,9 +3815,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 17
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &365656374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3909,9 +3907,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 21
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &368070128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4001,9 +3999,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 18
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &373511109
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4041,81 +4039,6 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 373511106}
-  m_CullTransparentMesh: 1
---- !u!1 &381437861
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 381437862}
-  - component: {fileID: 381437864}
-  - component: {fileID: 381437863}
-  m_Layer: 5
-  m_Name: Image (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &381437862
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 381437861}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 184197938}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1057, y: 646}
-  m_SizeDelta: {x: 156, y: 168}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &381437863
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 381437861}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: dae6694e210a0f941987ffbfdb3295af, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &381437864
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 381437861}
   m_CullTransparentMesh: 1
 --- !u!1 &383608404
 GameObject:
@@ -4318,9 +4241,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 8
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &384606965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4447,6 +4370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77d5da3c21f37734197b7819efb27784, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SlotType: 0
 --- !u!1 &394264482
 GameObject:
   m_ObjectHideFlags: 0
@@ -4498,9 +4422,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 3
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &394264485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4841,9 +4765,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 71
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &419537974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5483,9 +5407,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 1
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!1 &489362683
 GameObject:
   m_ObjectHideFlags: 0
@@ -5537,9 +5461,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 4
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &489362686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5759,9 +5683,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 51
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &515291753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5851,9 +5775,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 46
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &527804485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5943,9 +5867,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 33
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &530537724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6035,9 +5959,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 25
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &532378634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6279,9 +6203,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 65
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &558102596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6371,9 +6295,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 60
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &567494760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6602,7 +6526,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 3
-  BulletID: 0
+  MainID: 0
   InstanceID: 0
   SlotType: 0
 --- !u!114 &607008198
@@ -6734,9 +6658,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 14
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &630255335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6826,9 +6750,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 29
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &630557489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7159,9 +7083,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 19
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &675893172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7326,9 +7250,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 15
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &692155728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7418,9 +7342,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 67
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &713572334
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7510,9 +7434,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 62
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &717119320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7788,6 +7712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77d5da3c21f37734197b7819efb27784, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SlotType: 0
 --- !u!1 &766431953
 GameObject:
   m_ObjectHideFlags: 0
@@ -8266,9 +8191,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 2
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &836928110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8452,8 +8377,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1473255741}
-  - {fileID: 331870814}
   - {fileID: 4942072621293910694}
+  - {fileID: 331870814}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -8716,6 +8641,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77d5da3c21f37734197b7819efb27784, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SlotType: 1
 --- !u!1 &918295914
 GameObject:
   m_ObjectHideFlags: 0
@@ -8803,9 +8729,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 36
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &921838344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8844,97 +8770,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 921838341}
   m_CullTransparentMesh: 1
---- !u!1 &925198552
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 925198553}
-  - component: {fileID: 925198555}
-  - component: {fileID: 925198554}
-  - component: {fileID: 925198556}
-  m_Layer: 5
-  m_Name: Image
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &925198553
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 925198552}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 184197938}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1245, y: 653}
-  m_SizeDelta: {x: 156, y: 168}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &925198554
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 925198552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f146c2e2f60875742a8cc21adad753e8, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &925198555
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 925198552}
-  m_CullTransparentMesh: 1
---- !u!114 &925198556
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 925198552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8417122c01f2ee043a15c547a28b104e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ItermID: 0
-  InstanceID: 0
-  CurItemSlotType: 0
 --- !u!1001 &927874907
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9052,9 +8887,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 20
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &941061021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9235,9 +9070,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 32
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &944942599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9951,9 +9786,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 57
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &1017173901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10043,9 +9878,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 59
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &1017950762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10495,9 +10330,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 68
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &1044132902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10737,9 +10572,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 70
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &1062407606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10913,9 +10748,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 6
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &1075631333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11153,9 +10988,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 30
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &1082683221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11415,9 +11250,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 47
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &1156081196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11609,9 +11444,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 26
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &1189117281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12025,9 +11860,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 27
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &1336230786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12554,9 +12389,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 72
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &1353780115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12679,9 +12514,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 22
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &1362038918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12837,9 +12672,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 11
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &1381260843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13229,9 +13064,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 43
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &1395384876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13321,7 +13156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 1
-  BulletID: 0
+  MainID: 0
   InstanceID: 0
   SlotType: 0
 --- !u!114 &1395612360
@@ -13573,9 +13408,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 35
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &1413637147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13782,7 +13617,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 2
-  BulletID: 0
+  MainID: 0
   InstanceID: 0
   SlotType: 0
 --- !u!114 &1462438984
@@ -14625,9 +14460,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 61
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &1579212060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14717,9 +14552,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 55
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &1584367434
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14809,9 +14644,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 53
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &1584985513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14932,9 +14767,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 44
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &1630429689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15305,9 +15140,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 58
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &1689261587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15622,9 +15457,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 69
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &1711890172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15714,9 +15549,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 9
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &1715012870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15806,9 +15641,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 45
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &1727044146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15932,6 +15767,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77d5da3c21f37734197b7819efb27784, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SlotType: 0
 --- !u!1 &1748393770
 GameObject:
   m_ObjectHideFlags: 0
@@ -16360,9 +16196,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 49
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &1795767888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16578,9 +16414,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 13
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &1809582471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16761,9 +16597,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 41
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &1814830408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17069,9 +16905,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 7
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &1835853389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17161,9 +16997,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 34
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &1836730180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17364,9 +17200,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 5
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &1847836930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17675,9 +17511,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 48
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &1873183796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17767,9 +17603,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 10
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &1880190283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17859,9 +17695,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 12
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &1889384046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17951,9 +17787,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 24
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &1899732530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18134,9 +17970,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 39
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &1915322282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18310,9 +18146,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 50
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &1925525625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19352,9 +19188,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 16
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &2006812927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19403,7 +19239,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2030016655}
   m_Layer: 5
-  m_Name: ElementPanelRoot
+  m_Name: ElementSlotRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19668,9 +19504,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 52
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &2081358996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19851,9 +19687,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 40
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &2116022506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19943,9 +19779,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 64
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &2122403177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20129,9 +19965,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 31
-  BulletID: 0
-  InstanceID: 0
-  SlotType: 0
+  MainID: -1
+  InstanceID: -1
+  SlotType: 1
 --- !u!114 &2138537909
 MonoBehaviour:
   m_ObjectHideFlags: 0

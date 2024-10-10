@@ -166,6 +166,13 @@ public class TrunkManager: ScriptableObject
             curCharm.GetSupremeCharmByID();
             MainRoleManager.Instance.SupremeCharms.Add(curCharm);
         }
+        
+        //读取Item
+        for (int i = 0; i < _saveFile.UserItems.Count; i++)
+        {
+            Item curItem = _saveFile.UserItems[i];
+            ItemManager.InitSaveFileItem(curItem);
+        }
         MainRoleManager.Instance.CurBulletSpawners = _saveFile.UserBulletSpawner;
         MainRoleManager.Instance.CurBullets = _saveFile.UserCurBullets;
         MainRoleManager.Instance.CurBulletEntries = _saveFile.UserBulletEntries;
@@ -201,6 +208,15 @@ public class TrunkManager: ScriptableObject
         List<int> SupremeCharms = new List<int>();
         foreach (var each in MainRoleManager.Instance.SupremeCharms)
             SupremeCharms.Add(each.ID);
+        
+        //存储数据信息
+        List<Item> UserItems = new List<Item>();
+        foreach (var each in MainRoleManager.Instance.CurItems)
+            UserItems.Add(each);
+        foreach (var each in MainRoleManager.Instance.BagItems)
+            UserItems.Add(each);
+        _saveFile.UserItems = UserItems;
+
         _saveFile.UserStandbyBullet = MainRoleManager.Instance.CurStandbyBulletMats;
         _saveFile.SupremeCharms = SupremeCharms;
         #endregion
@@ -254,6 +270,11 @@ public class TrunkManager: ScriptableObject
         List<StandbyData> newGameSD = new List<StandbyData>();
         for (int i = 0; i < 5; i++)
             newGameSD.Add(new StandbyData(i,0));
+        
+        //...................Items.................................
+        _saveFile.UserItems = new List<Item>();
+        ItemManager.InstanceItemByID(1);
+        ItemManager.InstanceItemByID(2);
         
         _saveFile.UserCurBullets = new List<BulletReady>();
         _saveFile.UserBulletEntries = new List<BulletEntry>();

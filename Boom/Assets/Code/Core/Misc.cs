@@ -84,7 +84,15 @@ public class Item
     
     void InitItemDataByID()
     {
-        
+        List<ItemJson> itemDesignJsons = TrunkManager.Instance.ItemDesignJsons;
+        foreach (var each in itemDesignJsons)
+        {
+            if (each.ID == ID)
+            {
+                rare = each.rare;
+                name = each.name;
+            }
+        }
     }
     public Item(int _id)
     {

@@ -21,6 +21,7 @@ public class SaveFileJson
     public List<StandbyData> UserStandbyBullet;
     public List<int> UserCurBuff;
     
+    public List<Item> UserItems;
     public List<int> SupremeCharms;
     public List<MapSate> UserMapSate;
 

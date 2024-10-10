@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class SlotIDCalculate : MonoBehaviour
 {
+    public SlotType SlotType;
     void Start()
     {
         InitSlotID();
@@ -15,6 +16,12 @@ public class SlotIDCalculate : MonoBehaviour
         
         SlotBase[] bagSlots = gameObject.GetComponentsInChildren<SlotBase>();
         for (int i = 0; i < bagSlots.Length; i++)
-            bagSlots[i].SlotID = i + 1;
+        {
+            SlotBase curBase = bagSlots[i];
+            curBase.SlotID = i + 1;
+            curBase.MainID = -1;
+            curBase.InstanceID = -1;
+            curBase.SlotType = SlotType;
+        }
     }
 }

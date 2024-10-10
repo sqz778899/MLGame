@@ -51,6 +51,9 @@ public class UIManager : ScriptableObject
     public GameObject TooltipsRoot;
     public GameObject G_Bullet;
     public GameObject G_StandbyMat;
+    public GameObject BagRoot; //背包根节点
+    public GameObject ElementSlotRoot; //元素均衡槽根节点
+    public GameObject ItemRoot; //道具根节点
     
     //............GroupTitle.........
     public GameObject TitleRoot;
@@ -154,6 +157,14 @@ public class UIManager : ScriptableObject
         
         if (G_Bullet == null)
             G_Bullet = GameObject.Find("G_Bullet");
+        
+        if (BagRoot == null)
+            BagRoot = GameObject.Find("BagSlotRoot");
+
+        if (ItemRoot == null)
+            ItemRoot = GameObject.Find("ItemRoot");
+
+        if (ElementSlotRoot == null)
+            ElementSlotRoot = GameObject.Find("ElementSlotRoot");
     }
-    
 }

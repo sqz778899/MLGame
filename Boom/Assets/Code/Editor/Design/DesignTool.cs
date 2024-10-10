@@ -5,8 +5,34 @@ using UnityEngine;
 
 public class DesignTool
 {
+    #region 存档测试
+    [Title("存档测试")]
+    [Button("默认存档",ButtonSizes.Large),PropertyOrder(0)]
+    void ResetAll()
+    {
+        TrunkManager.Instance.SetSaveFileTemplate();
+    }
+    
+    [Button("存档",ButtonSizes.Large),PropertyOrder(0)]
+    [ButtonGroup("存档")]
+    void SaveFile()
+    {
+        TrunkManager.Instance.SaveFile();
+    }
+    
+    [Button("读档",ButtonSizes.Large),PropertyOrder(0)]
+    [ButtonGroup("存档")]
+    void LoadFile()
+    {
+        TrunkManager.Instance.LoadSaveFile();
+    }
+    #endregion
+    
+    #region 词条测试
+    [Title("词条测试")]
+    [PropertyOrder(1)]
     public int EntryID;
-    [Button(ButtonSizes.Large)]
+    [Button(ButtonSizes.Large),PropertyOrder(1)]
     [ButtonGroup("Entry")]
     void AddEntry()
     {
@@ -20,14 +46,14 @@ public class DesignTool
         UIManager.Instance.G_Help.GetComponent<HelpMono>().InitBulletEntryDes();
     }
     
-    [Button(ButtonSizes.Large)]
+    [Button(ButtonSizes.Large),PropertyOrder(1)]
     [ButtonGroup("Entry")]
     void ClearEntry()
     {
         MainRoleManager.Instance.CurBulletEntries.Clear();
     }
     
-    [Button(ButtonSizes.Large)]
+    [Button(ButtonSizes.Large),PropertyOrder(1)]
     //[ButtonGroup("Entry")]
     void ClearStandby()
     {
@@ -39,15 +65,11 @@ public class DesignTool
 
         MainRoleManager.Instance.InitStandbyBulletMats();
     }
-    
-    [Button(ButtonSizes.Large)]
-    //[ButtonGroup("Entry")]
-    void ResetAll()
-    {
-        TrunkManager.Instance.SetSaveFileTemplate();
-    }
-    
-    [Button(ButtonSizes.Large)]
+    #endregion
+
+    #region 切换场景
+    [Title("切换场景")] [PropertyOrder(2)]  public int swith;
+    [Button(ButtonSizes.Large),PropertyOrder(2)]
     [ButtonGroup("Switch")]
     void SwichEdit()
     {
@@ -55,7 +77,7 @@ public class DesignTool
         curSC.SwitchEditScene();
     }
     
-    [Button(ButtonSizes.Large)]
+    [Button(ButtonSizes.Large),PropertyOrder(2)]
     [ButtonGroup("Switch")]
     void SwichMap()
     {
@@ -63,14 +85,16 @@ public class DesignTool
         curSC.SwitchMapScene();
     }
     
-    [Button(ButtonSizes.Large)]
+    [Button(ButtonSizes.Large),PropertyOrder(2)]
     [ButtonGroup("Switch")]
     void SwichFight()
     {
         MainSceneMono curSC = GameObject.Find("MainScene").GetComponent<MainSceneMono>();
         curSC.SwitchFightScene();
     }
+    #endregion
 
+    #region 局内调试
     [Title("局内调试")]
     [Button("重置子弹",ButtonSizes.Large)]
     void SetBullet()
@@ -159,4 +183,15 @@ public class DesignTool
     {
         TempAddBullet(203);
     }
+    #endregion
+
+    [Title("道具测试")]
+    [PropertyOrder(111)]
+    public int ItemID;
+    [Button("获得道具",ButtonSizes.Large),PropertyOrder(111)]
+    void AddItem()
+    {
+        ItemManager.InstanceItemByID(ItemID);
+    }
+    
 }

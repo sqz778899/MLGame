@@ -7,8 +7,14 @@ public class ItemDrag : ItermBase
 {
     internal override void DropSlot()
     {
+        //同步新的Slot信息
         _dragIns.transform.position = _curSlot.transform.position;
+        _curSlot.MainID = CurItem.ID;
+        _curSlot.InstanceID = InstanceID;
         CurItemSlotType = _curSlot.SlotType;//GO层同步
+        //清除旧的Slot信息
+        ItemManager.ClearBagSlotByID(SlotID);
+        SlotID = _curSlot.SlotID;
         //数据层同步
         SetItemData();
         MainRoleManager.Instance.RefreshCurItems();
