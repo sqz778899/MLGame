@@ -115,6 +115,7 @@ public static class ItemManager
         //同步新的Slot信息
         curItemIns.transform.position = curSlot.transform.position;
         curSlot.MainID = CurItem.ID;
+        curSC.SlotID = curSlot.SlotID;
         curSlot.InstanceID = curSC.InstanceID;
         curSC.CurItemSlotType = curSlotType;
         

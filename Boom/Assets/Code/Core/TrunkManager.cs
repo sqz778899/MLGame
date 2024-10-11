@@ -209,7 +209,7 @@ public class TrunkManager: ScriptableObject
         foreach (var each in MainRoleManager.Instance.SupremeCharms)
             SupremeCharms.Add(each.ID);
         
-        //存储数据信息
+        //存储Item数据信息
         List<Item> UserItems = new List<Item>();
         foreach (var each in MainRoleManager.Instance.CurItems)
             UserItems.Add(each);

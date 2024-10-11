@@ -20,10 +20,11 @@ public class MainSceneMono:MonoBehaviour
 
     void Awake()
     {
+        UIManager.Instance.InitMainScene();
         //.................Global...........................
         TrunkManager.Instance.LoadSaveFile();
         //.................Local...........................
-        UIManager.Instance.InitMainScene();
+        //UIManager.Instance.InitMainScene();
         MainRoleManager.Instance.InitData();
     }
 
