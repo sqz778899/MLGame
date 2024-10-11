@@ -307,16 +307,20 @@ public class MainRoleManager :ScriptableObject
     }
     
     //更新当前元素均衡数据
-    public void RefreshCurItems()
+    public void RefreshAllItems()
     {
         CurItems = new List<Item>();
-        foreach (var each in BagItems)
+        BagItems = new List<Item>();
+        ItemBase[] allItem = UIManager.Instance.ItemRoot.GetComponentsInChildren<ItemBase>();
+        foreach (var each in allItem)
         {
-            if (each.slotType == (int)SlotType.ElementSlot)
-                CurItems.Add(each);
+            if (each.CurItemSlotType == SlotType.ElementSlot)
+                CurItems.Add(each.CurItem);
+            if (each.CurItemSlotType == SlotType.BagSlot)
+                BagItems.Add(each.CurItem);
         }
-
-        Debug.Log("元素均衡");
+        
+        Debug.Log($"{allItem.Length}元素均衡");
     }
     #endregion
 

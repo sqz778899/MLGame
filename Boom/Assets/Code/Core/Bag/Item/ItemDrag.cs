@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ItemDrag : ItermBase
+public class ItemDrag : ItemBase
 {
     internal override void DropSlot()
     {
@@ -17,12 +17,18 @@ public class ItemDrag : ItermBase
         SlotID = _curSlot.SlotID;
         //数据层同步
         SetItemData();
-        MainRoleManager.Instance.RefreshCurItems();
+        MainRoleManager.Instance.RefreshAllItems();
     }
     
     internal override void NonFindSlot()
     {
         // 如果没有找到槽位，那么物品回到原始位置
         _dragIns.transform.position = originalPosition;
+    }
+
+    internal override void RightClick()
+    {
+        DisplayRightClickMenu(_eventData);
+        Debug.Log("Right!!");
     }
 }

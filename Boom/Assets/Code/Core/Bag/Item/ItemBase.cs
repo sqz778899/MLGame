@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItermBase : DragBase
+public class ItemBase : DragBase
 {
     public Item CurItem;
     public int InstanceID;

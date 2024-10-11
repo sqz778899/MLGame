@@ -66,7 +66,7 @@ public static class ItemManager
         curItemIns.transform.SetParent(UIManager.Instance.ItemRoot.transform,false);
         Sprite curItemSprite = ResManager.instance.GetAssetCache<Sprite>(PathConfig.ItemImageDir + curItemJson.resName + ".png");
         curItemIns.GetComponent<Image>().sprite = curItemSprite;
-        ItermBase curSC = curItemIns.GetComponent<ItermBase>();
+        ItemBase curSC = curItemIns.GetComponent<ItemBase>();
         curSC.CurItem = new Item(ItemID);
         curSC.InstanceID = curItemIns.GetInstanceID();
         
@@ -104,7 +104,7 @@ public static class ItemManager
         ItemJson curItemJson = GetItemJsonByID(CurItem.ID);
         Sprite curItemSprite = ResManager.instance.GetAssetCache<Sprite>(PathConfig.ItemImageDir + curItemJson.resName + ".png");
         curItemIns.GetComponent<Image>().sprite = curItemSprite;
-        ItermBase curSC = curItemIns.GetComponent<ItermBase>();
+        ItemBase curSC = curItemIns.GetComponent<ItemBase>();
         curSC.CurItem = CurItem;
         curSC.InstanceID = curItemIns.GetInstanceID();
         
@@ -129,5 +129,12 @@ public static class ItemManager
                 MainRoleManager.Instance.CurItems.Add(curSC.CurItem);
                 break;
         }
+    }
+
+    public static void DeleteItem(GameObject ItemIns)
+    {
+        GameObject.DestroyImmediate(ItemIns);
+        MainRoleManager.Instance.RefreshAllItems();
+        TrunkManager.Instance.SaveFile();
     }
 }

@@ -11,6 +11,8 @@ public class DragBase : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
     internal SlotBase _curSlot; //当前拖拽物所在的Slot
     //ToolTips相关
     internal GameObject TooltipsGO;
+    internal GameObject RightClickMenuGO;
+    internal PointerEventData _eventData;
     bool IsToolTipsDisplay;
     
     internal virtual void Start()
@@ -22,13 +24,23 @@ public class DragBase : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
     //鼠标按下时
     public virtual void OnPointerDown(PointerEventData eventData)
     {
-        originalPosition = _dragIns.transform.position;
+        _eventData = eventData;
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            originalPosition = _dragIns.transform.position;
+        }
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            RightClick();
+        }
         DestroyTooltips();
     }
 
     //鼠标松开时
     public virtual void OnPointerUp(PointerEventData eventData)
     {
+        if (eventData.button == PointerEventData.InputButton.Right)
+            return;
         DestroyTooltips();
         IsToolTipsDisplay = true;
         // 在释放鼠标按钮时，我们检查这个位置下是否有一个Slot
@@ -60,8 +72,15 @@ public class DragBase : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
     {
     }
 
+    //右击
+    internal virtual void RightClick()
+    {
+    }
+
     public virtual void OnDrag(PointerEventData eventData)
     {
+        if (eventData.button == PointerEventData.InputButton.Right)
+            return;
         // 在拖动时，我们把子弹位置设置为鼠标位置
         Vector3 worldPos = GetWPosByMouse(eventData);
         _dragIns.GetComponent<RectTransform>().position = worldPos;
@@ -91,18 +110,17 @@ public class DragBase : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
             eventData.position, eventData.pressEventCamera, out worldPoint);
         return worldPoint;
     }
+    
     #region Tooltips说明窗口
     internal void DisplayTooltips(PointerEventData eventData)
     {
         // 加载Tooltips
         if (TooltipsGO == null)
         {
-            TooltipsGO = Instantiate(ResManager.instance
-                .GetAssetCache<GameObject>(PathConfig.TooltipAsset));
+            TooltipsGO = ResManager.instance.CreatInstance(PathConfig.TooltipAsset);
             CommonTooltip curTip = TooltipsGO.GetComponentInChildren<CommonTooltip>();
             //curTip.SyncInfo(_bulletData.ID,ItemTypes.Bullet);
-            TooltipsGO.transform.SetParent(UIManager.Instance.TooltipsRoot.transform);
-            TooltipsGO.transform.localScale = Vector3.one;
+            TooltipsGO.transform.SetParent(UIManager.Instance.TooltipsRoot.transform,false);
         }
         // 把Tooltips的位置设置为鼠标位置
         TooltipsGO.transform.position = GetWPosByMouse(eventData);
@@ -113,6 +131,30 @@ public class DragBase : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
         for (int i = UIManager.Instance.TooltipsRoot.transform.childCount - 1; i >= 0; i--)
         {
             DestroyImmediate(UIManager.Instance.TooltipsRoot
+                .transform.GetChild(i).gameObject);
+        }
+    }
+    #endregion
+
+    #region 右击菜单
+    internal void DisplayRightClickMenu(PointerEventData eventData)
+    {
+        if (RightClickMenuGO == null)
+        {
+            RightClickMenuGO = ResManager.instance.CreatInstance(PathConfig.RightClickMenu);
+            RightClickMenuGO.transform.SetParent(
+                UIManager.Instance.RightClickMenuRoot.transform,false);
+        }
+        RightClickMenu curSc = RightClickMenuGO.GetComponent<RightClickMenu>();
+        curSc.CurIns = eventData.pointerEnter;
+        RightClickMenuGO.transform.position = GetWPosByMouse(eventData);
+    }
+    
+    internal void DestroyRightClickMenu()
+    {
+        for (int i = UIManager.Instance.RightClickMenuRoot.transform.childCount - 1; i >= 0; i--)
+        {
+            DestroyImmediate(UIManager.Instance.RightClickMenuRoot
                 .transform.GetChild(i).gameObject);
         }
     }

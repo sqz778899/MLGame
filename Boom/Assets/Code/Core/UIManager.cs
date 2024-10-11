@@ -49,8 +49,10 @@ public class UIManager : ScriptableObject
     //GroupRoleDes
     //............CommonRoot.........
     public GameObject TooltipsRoot;
+    public GameObject RightClickMenuRoot;
     public GameObject G_Bullet;
     public GameObject G_StandbyMat;
+
     public GameObject BagRoot; //背包根节点
     public GameObject ElementSlotRoot; //元素均衡槽根节点
     public GameObject ItemRoot; //道具根节点
@@ -151,6 +153,9 @@ public class UIManager : ScriptableObject
         //............CommonRoot.........
         if (TooltipsRoot == null)
             TooltipsRoot = GameObject.Find("TooltipsRoot");
+        
+        if (RightClickMenuRoot == null)
+            RightClickMenuRoot = GameObject.Find("RightClickMenuRoot");
         
         if (G_StandbyMat == null)
             G_StandbyMat = GameObject.Find("G_StandbyMat");

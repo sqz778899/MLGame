@@ -63,6 +63,7 @@ public static class PathConfig
    public static string ShopAsset = GetPrepath() + "Res/UI/Prefabs/Popup/P_Shop.prefab";
    public static string  PRDisplayBarPB = GetPrepath() + "Res/UI/Prefabs/Misc/PRBar_Template.prefab";
    public static string  BulletUPPB = GetPrepath() + "Res/UI/Prefabs/Popup/P_BulletUP_01.prefab";
+   public static string RightClickMenu = GetPrepath() + "Res/UI/Prefabs/RightClickMenu.prefab";
    //...........................角色.................................
    public static string GetRoleImgPath(int ID)
    {
