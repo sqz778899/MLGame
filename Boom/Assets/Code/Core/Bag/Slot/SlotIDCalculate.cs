@@ -3,11 +3,7 @@ using UnityEngine;
 public class SlotIDCalculate : MonoBehaviour
 {
     public SlotType SlotType;
-    void Start()
-    {
-        InitSlotID();
-    }
-
+    
     public void InitSlotID()
     {
         BulletSlot[] bulletSlots = gameObject.GetComponentsInChildren<BulletSlot>();

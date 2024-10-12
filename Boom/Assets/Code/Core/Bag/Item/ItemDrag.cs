@@ -31,4 +31,10 @@ public class ItemDrag : ItemBase
         DisplayRightClickMenu(_eventData);
         Debug.Log("Right!!");
     }
+    
+    internal override void SetTooltipInfo()
+    {
+        CommonTooltip curTip = TooltipsGO.GetComponentInChildren<CommonTooltip>();
+        curTip.SyncInfo(CurItem.ID,TipTypes.Item);
+    }
 }

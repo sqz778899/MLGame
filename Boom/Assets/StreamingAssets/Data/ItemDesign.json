@@ -3,12 +3,60 @@
     "ID": 1,
     "rare": 1,
     "name": "易拉罐",
-    "resName": "T_Item_Can_01"
+    "resName": "T_Item_Can_01",
+    "waterElement": 0,
+    "fireElement": 1,
+    "thunderElement": 0,
+    "lightElement": 0,
+    "darkElement": 0,
+    "maxDamage": 50
   },
   {
     "ID": 2,
     "rare": 1,
     "name": "马桶搋子",
-    "resName": "T_Item_ToiletPlunger_02"
+    "resName": "T_Item_ToiletPlunger_02",
+    "waterElement": 1,
+    "fireElement": 0,
+    "thunderElement": 0,
+    "lightElement": 0,
+    "darkElement": 0,
+    "maxDamage": 50
+  },
+  {
+    "ID": 3,
+    "rare": 1,
+    "name": "生锈菜刀",
+    "resName": "T_Item_ToiletPlunger_02",
+    "waterElement": 0,
+    "fireElement": 0,
+    "thunderElement": 1,
+    "lightElement": 0,
+    "darkElement": 0,
+    "maxDamage": 50
+  },
+  {
+    "ID": 4,
+    "rare": 2,
+    "name": "折断魔杖",
+    "resName": "T_Item_ToiletPlunger_02",
+    "waterElement": 1,
+    "fireElement": 0,
+    "thunderElement": 1,
+    "lightElement": 0,
+    "darkElement": 0,
+    "maxDamage": 150
+  },
+  {
+    "ID": 5,
+    "rare": 3,
+    "name": "小块秘银",
+    "resName": "T_Item_ToiletPlunger_02",
+    "waterElement": 0,
+    "fireElement": 0,
+    "thunderElement": 0,
+    "lightElement": 4,
+    "darkElement": 3,
+    "maxDamage": 300
   }
 ]

@@ -60,14 +60,15 @@ public static class ItemManager
             Debug.LogError("ItemID 未找到");
             return;
         }
-        
+        //
+        Item curItem = new Item(ItemID);
         //实例化GO
         GameObject curItemIns = ResManager.instance.CreatInstance(PathConfig.ItemPB);
         curItemIns.transform.SetParent(UIManager.Instance.ItemRoot.transform,false);
-        Sprite curItemSprite = ResManager.instance.GetAssetCache<Sprite>(PathConfig.ItemImageDir + curItemJson.resName + ".png");
+        Sprite curItemSprite = ResManager.instance.GetAssetCache<Sprite>(curItem.resAllPath);
         curItemIns.GetComponent<Image>().sprite = curItemSprite;
         ItemBase curSC = curItemIns.GetComponent<ItemBase>();
-        curSC.CurItem = new Item(ItemID);
+        curSC.CurItem = curItem;
         curSC.InstanceID = curItemIns.GetInstanceID();
         
         //在背包找到一个位置，把GO放进去
@@ -101,8 +102,7 @@ public static class ItemManager
         //实例化GO
         GameObject curItemIns = ResManager.instance.CreatInstance(PathConfig.ItemPB);
         curItemIns.transform.SetParent(UIManager.Instance.ItemRoot.transform,false);
-        ItemJson curItemJson = GetItemJsonByID(CurItem.ID);
-        Sprite curItemSprite = ResManager.instance.GetAssetCache<Sprite>(PathConfig.ItemImageDir + curItemJson.resName + ".png");
+        Sprite curItemSprite = ResManager.instance.GetAssetCache<Sprite>(CurItem.resAllPath);
         curItemIns.GetComponent<Image>().sprite = curItemSprite;
         ItemBase curSC = curItemIns.GetComponent<ItemBase>();
         curSC.CurItem = CurItem;

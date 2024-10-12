@@ -119,7 +119,7 @@ public class BulletBase : MonoBehaviour
             TooltipsGO = Instantiate(ResManager.instance
                 .GetAssetCache<GameObject>(PathConfig.TooltipAsset));
             CommonTooltip curTip = TooltipsGO.GetComponentInChildren<CommonTooltip>();
-            curTip.SyncInfo(_bulletData.ID,ItemTypes.Bullet);
+            curTip.SyncInfo(_bulletData.ID,TipTypes.Bullet);
             TooltipsGO.transform.SetParent(UIManager.Instance.TooltipsRoot.transform);
             TooltipsGO.transform.localScale = Vector3.one;
         }

@@ -50,6 +50,27 @@
       "ID": 1,
       "rare": 1,
       "name": "易拉罐",
+      "resAllPath": "Assets/Res/UI/Item/Textures/T_Item_Can_01.png",
+      "waterElement": 0,
+      "fireElement": 1,
+      "thunderElement": 0,
+      "lightElement": 0,
+      "darkElement": 0,
+      "maxDamage": 50,
+      "slotID": 2,
+      "slotType": 1
+    },
+    {
+      "ID": 2,
+      "rare": 1,
+      "name": "马桶搋子",
+      "resAllPath": "Assets/Res/UI/Item/Textures/T_Item_ToiletPlunger_02.png",
+      "waterElement": 1,
+      "fireElement": 0,
+      "thunderElement": 0,
+      "lightElement": 0,
+      "darkElement": 0,
+      "maxDamage": 50,
       "slotID": 1,
       "slotType": 1
     }

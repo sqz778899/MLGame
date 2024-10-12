@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using TMPro;
 
-public enum ItemTypes
+public enum TipTypes
 {
-    Bullet = 1
+    Bullet = 1,
+    Item = 2,
 }
 
 #region 多语言相关
@@ -78,6 +79,15 @@ public class Item
     public int ID;
     public int rare;
     public string name;
+    public string resAllPath;
+
+    public int waterElement;
+    public int fireElement;
+    public int thunderElement;
+    public int lightElement;
+    public int darkElement;
+    
+    public int maxDamage;
     //游戏内相关属性
     public int slotID;
     public int slotType;
@@ -91,6 +101,13 @@ public class Item
             {
                 rare = each.rare;
                 name = each.name;
+                resAllPath = PathConfig.ItemImageDir + each.resName + ".png";
+                waterElement = each.waterElement;
+                fireElement = each.fireElement;
+                thunderElement = each.thunderElement;
+                lightElement = each.lightElement;
+                darkElement = each.darkElement;
+                maxDamage = each.maxDamage;
             }
         }
     }
@@ -107,6 +124,14 @@ public class ItemJson
     public int rare;
     public string name;
     public string resName;
+    
+    public int waterElement;
+    public int fireElement;
+    public int thunderElement;
+    public int lightElement;
+    public int darkElement;
+    
+    public int maxDamage;
 }
 
 [Serializable]

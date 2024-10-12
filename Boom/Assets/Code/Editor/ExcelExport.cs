@@ -71,16 +71,32 @@ public class ExcelExport
         for (int i = 1; i < curTable.Rows.Count; i++)
         {
             ItemJson curItem = new ItemJson();
+            var s = curTable.Rows[i][1];
             if (curTable.Rows[i][1].ToString() == "") continue;
             curItem.ID = int.Parse(curTable.Rows[i][0].ToString());
             curItem.rare = int.Parse(curTable.Rows[i][1].ToString());
             curItem.name = curTable.Rows[i][2].ToString();
-            curItem.resName = curTable.Rows[i][3].ToString();
+            curItem.waterElement = GetCellInt(curTable.Rows[i][3].ToString());
+            curItem.fireElement = GetCellInt(curTable.Rows[i][4].ToString());
+            curItem.thunderElement = GetCellInt(curTable.Rows[i][5].ToString());
+            curItem.lightElement = GetCellInt(curTable.Rows[i][6].ToString());
+            curItem.darkElement = GetCellInt(curTable.Rows[i][7].ToString());
+            curItem.maxDamage = GetCellInt(curTable.Rows[i][8].ToString());
+            
+            curItem.resName = curTable.Rows[i][9].ToString();
             curItemDesign.Add(curItem);
         }
         
         string content01 = JsonConvert.SerializeObject(curItemDesign,(Formatting) Formatting.Indented);
         File.WriteAllText(PathConfig.ItemDesignJson, content01);
+    }
+
+    int GetCellInt(string curStr)
+    {
+        if (curStr == "")
+            return 0;
+        else
+            return int.Parse(curStr);
     }
 
     public void ExportBuffDesign()

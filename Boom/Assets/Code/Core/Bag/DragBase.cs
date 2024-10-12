@@ -118,12 +118,16 @@ public class DragBase : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
         if (TooltipsGO == null)
         {
             TooltipsGO = ResManager.instance.CreatInstance(PathConfig.TooltipAsset);
-            CommonTooltip curTip = TooltipsGO.GetComponentInChildren<CommonTooltip>();
-            //curTip.SyncInfo(_bulletData.ID,ItemTypes.Bullet);
-            TooltipsGO.transform.SetParent(UIManager.Instance.TooltipsRoot.transform,false);
+            TooltipsGO.transform.SetParent(
+                UIManager.Instance.TooltipsRoot.transform,false);
         }
+        SetTooltipInfo();
         // 把Tooltips的位置设置为鼠标位置
         TooltipsGO.transform.position = GetWPosByMouse(eventData);
+    }
+    
+    internal virtual void SetTooltipInfo()
+    {
     }
     
     internal void DestroyTooltips()
