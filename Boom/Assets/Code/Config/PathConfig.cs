@@ -58,6 +58,7 @@ public static class PathConfig
    public static string GetBulletEntryPB = GetPrepath() + "Res/UI/Prefabs/Popup/P_GetBulletEntry_Template.prefab";
    public static string ItemImageDir = GetPrepath() + "Res/UI/Item/Textures/";
    public static string ItemPB = GetPrepath() + "Res/UI/Item/Prefabs/P_Item_Template_01.prefab";
+   public static string ItemThumbnailPB = GetPrepath() + "Res/UI/Item/Prefabs/P_ItemThumbnail_Template_01.prefab";
 
    ///.........................GUI.................................
    public static string ShopAsset = GetPrepath() + "Res/UI/Prefabs/Popup/P_Shop.prefab";

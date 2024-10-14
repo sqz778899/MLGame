@@ -35,6 +35,28 @@ public class ItemDrag : ItemBase
     internal override void SetTooltipInfo()
     {
         CommonTooltip curTip = TooltipsGO.GetComponentInChildren<CommonTooltip>();
-        curTip.SyncInfo(CurItem.ID,TipTypes.Item);
+        string des = GetItemAttriInfo(CurItem);
+        curTip.txtTitle.text = CurItem.name;
+        curTip.txtDescription.text = des;
+        GameObject ThumbnailIns = ItemManager.InstanceItemThumbnailByID(CurItem);
+        ThumbnailIns.transform.SetParent(curTip.ThumbnailNode,false);
+    }
+    
+    string GetItemAttriInfo(Item curItem)
+    {
+        string str = "";
+        if (curItem.waterElement != 0)
+            str += "<color=\"red\">水元素: " + curItem.waterElement + "\n";
+        if (curItem.fireElement != 0)
+            str += $"<color=FF4F00><font=\"NotoSans\" material=\"NotoSans Outline\">火元素: <color=#FFFFFF><size=80%><font=\"Impact SDF\">{curItem.fireElement}\n";
+        if (curItem.thunderElement != 0)
+            str += "<color=\"red\">雷元素: " + curItem.thunderElement + "\n";
+        if (curItem.lightElement != 0)
+            str += "<color=\"red\">光元素: " + curItem.lightElement + "\n";
+        if (curItem.darkElement != 0)
+            str += "<color=\"red\">暗元素: " + curItem.darkElement + "\n";
+        
+        str += "<color=\"red\">max: " + curItem.maxDamage;
+        return str;
     }
 }

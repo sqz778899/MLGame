@@ -120,8 +120,8 @@ public class DragBase : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
             TooltipsGO = ResManager.instance.CreatInstance(PathConfig.TooltipAsset);
             TooltipsGO.transform.SetParent(
                 UIManager.Instance.TooltipsRoot.transform,false);
+            SetTooltipInfo();
         }
-        SetTooltipInfo();
         // 把Tooltips的位置设置为鼠标位置
         TooltipsGO.transform.position = GetWPosByMouse(eventData);
     }

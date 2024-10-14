@@ -96,6 +96,18 @@ public static class ItemManager
         //MainRoleManager.Instance.RefreshCurItems();
         //curTargetSlot
     }
+    
+    public static GameObject InstanceItemThumbnailByID(Item curItem)
+    {
+        //实例化GO
+        GameObject curItemIns = ResManager.instance.CreatInstance(PathConfig.ItemThumbnailPB);
+        Sprite curItemSprite = ResManager.instance.GetAssetCache<Sprite>(curItem.resAllPath);
+        curItemIns.GetComponent<Image>().sprite = curItemSprite;
+        ItemBase curSC = curItemIns.GetComponent<ItemBase>();
+        curSC.CurItem = curItem;
+        curSC.InstanceID = curItemIns.GetInstanceID();
+        return curItemIns;
+    }
 
     public static void InitSaveFileItem(Item CurItem)
     {
