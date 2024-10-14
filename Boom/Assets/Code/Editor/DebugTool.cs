@@ -5,12 +5,15 @@ using UnityEngine;
 
 public class DebugTool
 {
-    public Enemy curEnemy;
+    public int accountElement;
+    public int maxSub;
+    public float elementRatio;
     
     
     [Button(ButtonSizes.Large)]
     void Debugsss()
     {
-        BulletManager.Instance.InstanceBullet(1, BulletInsMode.Inner);
+        float s = Mathf.Lerp(0, 100, elementRatio);
+        Debug.Log(s);
     }
 }

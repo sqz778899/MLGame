@@ -40,6 +40,25 @@ public class MainRoleManager :ScriptableObject
     public List<Item> BagItems = new List<Item>();
     public List<SupremeCharm> SupremeCharms = new List<SupremeCharm>();
 
+    [Header("人物属性")] 
+    public int WaterElement;
+    public int FireElement;
+    public int ThunderElement;
+    public int LightElement;
+    public int DarkElement;
+
+    public int DebuffMaxDamage;
+
+    [Header("伤害倍率")]
+    public int WaterDamage;
+    public int FireDamage;
+    public int ThunderDamage;
+    public int LightDamage;
+    public int DarkDamage;
+    public int MaxDamage;
+
+    ItemAttribute _attrInfo;
+    
     #region 词条相关
     public void AddEntry(int EntryID)
     {
@@ -182,6 +201,7 @@ public class MainRoleManager :ScriptableObject
         InitStandbyBulletMats();
         InitCurRollPR();
         InitBulletEntries();
+        RefreshAllItems();
         
         WinOrFailState = WinOrFail.InLevel;
     }
@@ -319,8 +339,53 @@ public class MainRoleManager :ScriptableObject
             if (each.CurItemSlotType == SlotType.BagSlot)
                 BagItems.Add(each.CurItem);
         }
+
+        _attrInfo = new ItemAttribute();
+        //把元素均衡界面的属性，同步到角色身上
+        foreach (var each in CurItems)
+        {
+            _attrInfo.waterElement += each.attribute.waterElement;
+            _attrInfo.fireElement += each.attribute.fireElement;
+            _attrInfo.thunderElement += each.attribute.thunderElement;
+            _attrInfo.lightElement += each.attribute.lightElement;
+            _attrInfo.darkElement += each.attribute.darkElement;
+            //
+            _attrInfo.extraWaterDamage += each.attribute.extraWaterDamage;
+            _attrInfo.extraFireDamage += each.attribute.extraFireDamage;
+            _attrInfo.extraThunderDamage += each.attribute.extraThunderDamage;
+            _attrInfo.extraLightDamage += each.attribute.extraLightDamage;
+            _attrInfo.extraDarkDamage += each.attribute.extraDarkDamage;
+            _attrInfo.maxDamage += each.attribute.maxDamage;
+        }
+
+        WaterElement = _attrInfo.waterElement;
+        FireElement = _attrInfo.fireElement;
+        ThunderElement = _attrInfo.thunderElement;
+        LightElement = _attrInfo.lightElement;
+        DarkElement = _attrInfo.darkElement;
+
+        WaterDamage = _attrInfo.extraWaterDamage;
+        FireDamage = _attrInfo.extraFireDamage;
+        ThunderDamage = _attrInfo.extraThunderDamage;
+        LightDamage = _attrInfo.extraLightDamage;
+        DarkDamage = _attrInfo.extraDarkDamage;
+
+        MaxDamage = _attrInfo.maxDamage;
+        //
         
         Debug.Log($"{allItem.Length}元素均衡");
+    }
+
+    //
+    void LElementBalance()
+    {
+        int accountElement = WaterElement + FireElement + ThunderElement;
+        int maxSub = Mathf.Abs(WaterElement - FireElement);
+        maxSub = Mathf.Max(maxSub,Mathf.Abs(FireElement - ThunderElement));
+        maxSub = Mathf.Max(maxSub,Mathf.Abs(ThunderElement - WaterElement));
+        float elementRatio = (float)maxSub / accountElement;
+        DebuffMaxDamage = (int)Mathf.Lerp(0, 100, elementRatio);
+        //lerp 0 - 100;
     }
     #endregion
 

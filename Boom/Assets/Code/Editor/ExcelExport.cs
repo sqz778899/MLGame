@@ -76,14 +76,21 @@ public class ExcelExport
             curItem.ID = int.Parse(curTable.Rows[i][0].ToString());
             curItem.rare = int.Parse(curTable.Rows[i][1].ToString());
             curItem.name = curTable.Rows[i][2].ToString();
-            curItem.waterElement = GetCellInt(curTable.Rows[i][3].ToString());
-            curItem.fireElement = GetCellInt(curTable.Rows[i][4].ToString());
-            curItem.thunderElement = GetCellInt(curTable.Rows[i][5].ToString());
-            curItem.lightElement = GetCellInt(curTable.Rows[i][6].ToString());
-            curItem.darkElement = GetCellInt(curTable.Rows[i][7].ToString());
-            curItem.maxDamage = GetCellInt(curTable.Rows[i][8].ToString());
+            curItem.attribute.waterElement = GetCellInt(curTable.Rows[i][3].ToString());
+            curItem.attribute.fireElement = GetCellInt(curTable.Rows[i][4].ToString());
+            curItem.attribute.thunderElement = GetCellInt(curTable.Rows[i][5].ToString());
+            curItem.attribute.lightElement = GetCellInt(curTable.Rows[i][6].ToString());
+            curItem.attribute.darkElement = GetCellInt(curTable.Rows[i][7].ToString());
+            //
+            curItem.attribute.extraWaterDamage = GetCellInt(curTable.Rows[i][8].ToString());
+            curItem.attribute.extraFireDamage = GetCellInt(curTable.Rows[i][9].ToString());
+            curItem.attribute.extraThunderDamage = GetCellInt(curTable.Rows[i][10].ToString());
+            curItem.attribute.extraLightDamage = GetCellInt(curTable.Rows[i][11].ToString());
+            curItem.attribute.extraDarkDamage = GetCellInt(curTable.Rows[i][12].ToString());
             
-            curItem.resName = curTable.Rows[i][9].ToString();
+            curItem.attribute.maxDamage = GetCellInt(curTable.Rows[i][13].ToString());
+            
+            curItem.resName = curTable.Rows[i][14].ToString();
             curItemDesign.Add(curItem);
         }
         

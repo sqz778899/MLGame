@@ -73,6 +73,54 @@ public class Award
     public SupremeCharm supremeCharm;
 }
 
+public class ElementState
+{
+    //元素均衡
+    public bool ELBalance;
+    public int ELBalenceLV;
+    //元素沸腾
+    public bool ELEbullitionWater;
+    public bool ELEbullitionWaterLV;
+    //元素精纯
+    public bool ELPureWater;
+    public bool ELPureWaterLV;
+}
+
+[Serializable]
+public class ItemAttribute
+{
+    public int waterElement;
+    public int fireElement;
+    public int thunderElement;
+    public int lightElement;
+    public int darkElement;
+
+    public int extraWaterDamage;
+    public int extraFireDamage;
+    public int extraThunderDamage;
+    public int extraLightDamage;
+    public int extraDarkDamage;
+    
+    public int maxDamage;
+
+    public ItemAttribute()
+    {
+        waterElement = 0;
+        fireElement = 0;
+        thunderElement = 0;
+        lightElement = 0;
+        darkElement = 0;
+        
+        //
+        extraWaterDamage = 0;
+        extraFireDamage = 0;
+        extraThunderDamage = 0;
+        extraLightDamage = 0;
+        extraDarkDamage = 0;
+        maxDamage = 0;
+    }
+}
+
 [Serializable]
 public class Item
 {
@@ -81,19 +129,14 @@ public class Item
     public string name;
     public string resAllPath;
 
-    public int waterElement;
-    public int fireElement;
-    public int thunderElement;
-    public int lightElement;
-    public int darkElement;
-    
-    public int maxDamage;
+    public ItemAttribute attribute;
     //游戏内相关属性
     public int slotID;
     public int slotType;
     
     void InitItemDataByID()
     {
+        attribute = new ItemAttribute();
         List<ItemJson> itemDesignJsons = TrunkManager.Instance.ItemDesignJsons;
         foreach (var each in itemDesignJsons)
         {
@@ -102,12 +145,18 @@ public class Item
                 rare = each.rare;
                 name = each.name;
                 resAllPath = PathConfig.ItemImageDir + each.resName + ".png";
-                waterElement = each.waterElement;
-                fireElement = each.fireElement;
-                thunderElement = each.thunderElement;
-                lightElement = each.lightElement;
-                darkElement = each.darkElement;
-                maxDamage = each.maxDamage;
+                attribute.waterElement = each.attribute.waterElement;
+                attribute.fireElement = each.attribute.fireElement;
+                attribute.thunderElement = each.attribute.thunderElement;
+                attribute.lightElement = each.attribute.lightElement;
+                attribute.darkElement = each.attribute.darkElement;
+                //
+                attribute.extraWaterDamage = each.attribute.extraWaterDamage;
+                attribute.extraFireDamage = each.attribute.extraFireDamage;
+                attribute.extraThunderDamage = each.attribute.extraThunderDamage;
+                attribute.extraLightDamage = each.attribute.extraLightDamage;
+                attribute.extraDarkDamage = each.attribute.extraDarkDamage;
+                attribute.maxDamage = each.attribute.maxDamage;
             }
         }
     }
@@ -125,13 +174,16 @@ public class ItemJson
     public string name;
     public string resName;
     
-    public int waterElement;
-    public int fireElement;
-    public int thunderElement;
-    public int lightElement;
-    public int darkElement;
+    public ItemAttribute attribute;
     
-    public int maxDamage;
+    public ItemJson()
+    {
+        ID = -1;
+        rare = -1;
+        name = "";
+        resName = "";
+        attribute = new ItemAttribute();
+    }
 }
 
 [Serializable]
