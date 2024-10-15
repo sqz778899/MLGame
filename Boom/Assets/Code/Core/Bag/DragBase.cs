@@ -53,7 +53,7 @@ public class DragBase : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
             if (curSlotSC!=null)
             {
                 _curSlot = curSlotSC;
-                DropSlot();
+                VOnDrop();
                 NonHappen = false;
                 break;
             }
@@ -64,12 +64,14 @@ public class DragBase : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
     }
     
     //拖拽物如果找的Slot,则执行的逻辑
-    internal virtual void DropSlot()
+    internal virtual void VOnDrop()
     {
     }
     
     internal virtual void NonFindSlot()
     {
+        // 如果没有找到槽位，那么物品回到原始位置
+        _dragIns.transform.position = originalPosition;
     }
 
     //右击
@@ -77,16 +79,21 @@ public class DragBase : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
     {
     }
 
-    public virtual void OnDrag(PointerEventData eventData)
+    public void OnDrag(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Right)
             return;
+        _eventData = eventData;
         // 在拖动时，我们把子弹位置设置为鼠标位置
         Vector3 worldPos = GetWPosByMouse(eventData);
         _dragIns.GetComponent<RectTransform>().position = worldPos;
         //拖动不显示Tooltips说明菜单
         DestroyTooltips();
-        //IsToolTipsDisplay = false;
+        VOnDrag();
+    }
+    
+    internal virtual void VOnDrag()
+    {
     }
 
     public virtual void OnPointerExit(PointerEventData eventData)

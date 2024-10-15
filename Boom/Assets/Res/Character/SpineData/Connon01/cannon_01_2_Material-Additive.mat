@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: cannon_01_Material-Additive
+  m_Name: cannon_01_2_Material-Additive
   m_Shader: {fileID: 4800000, guid: 53efa1d97f5d9f74285d4330cda14e36, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -29,7 +29,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 017f9fb7ddf14f8418aa309b720b9c85, type: 3}
+        m_Texture: {fileID: 2800000, guid: 42a30f2a78318e84692603ac8f09f4f9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []

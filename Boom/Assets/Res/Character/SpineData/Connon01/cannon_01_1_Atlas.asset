@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6b194f808b1af6499c93410e504af42, type: 3}
-  m_Name: cannon_01_Atlas
+  m_Name: cannon_01_1_Atlas
   m_EditorClassIdentifier: 
-  atlasFile: {fileID: 4900000, guid: 79d34a4a0e700ca45b41defc8e62e165, type: 3}
+  atlasFile: {fileID: 4900000, guid: 1882b40d483a9ab4582dd6cca6be0e8c, type: 3}
   materials:
-  - {fileID: 2100000, guid: 8a792c3b43faa0d41ae5a55f5f4b3497, type: 2}
+  - {fileID: 2100000, guid: a768b2aee10f89a489289630ab0c4d6d, type: 2}

@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class ItemDrag : ItemBase
 {
-    internal override void DropSlot()
+    internal override void VOnDrop()
     {
         //同步新的Slot信息
         _dragIns.transform.position = _curSlot.transform.position;
@@ -19,17 +19,21 @@ public class ItemDrag : ItemBase
         SetItemData();
         MainRoleManager.Instance.RefreshAllItems();
     }
-    
-    internal override void NonFindSlot()
+
+    internal override void VOnDrag()
     {
-        // 如果没有找到槽位，那么物品回到原始位置
-        _dragIns.transform.position = originalPosition;
+        ClocsBG();
     }
 
+    internal override void NonFindSlot()
+    {
+        base.NonFindSlot();
+        SetItemBG();//设置背景
+    }
+    
     internal override void RightClick()
     {
         DisplayRightClickMenu(_eventData);
-        Debug.Log("Right!!");
     }
     
     internal override void SetTooltipInfo()

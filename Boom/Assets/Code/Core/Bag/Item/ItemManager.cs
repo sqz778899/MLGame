@@ -51,6 +51,7 @@ public static class ItemManager
         curSlot.InstanceID = -1;
     }
     
+    //初始化Item
     public static void InstanceItemByID(int ItemID)
     {
         ItemJson curItemJson = GetItemJsonByID(ItemID);
@@ -63,13 +64,9 @@ public static class ItemManager
         //
         Item curItem = new Item(ItemID);
         //实例化GO
-        GameObject curItemIns = ResManager.instance.CreatInstance(PathConfig.ItemPB);
-        curItemIns.transform.SetParent(UIManager.Instance.ItemRoot.transform,false);
-        Sprite curItemSprite = ResManager.instance.GetAssetCache<Sprite>(curItem.resAllPath);
-        curItemIns.GetComponent<Image>().sprite = curItemSprite;
-        ItemBase curSC = curItemIns.GetComponent<ItemBase>();
-        curSC.CurItem = curItem;
-        curSC.InstanceID = curItemIns.GetInstanceID();
+        GameObject curItemIns = null;
+        ItemBase curItemSc = null;
+        InitItemIns(curItem,PathConfig.ItemPB, ref curItemIns, ref curItemSc);
         
         //在背包找到一个位置，把GO放进去
         SlotBase[] allSlot = UIManager.Instance.BagRoot.GetComponentsInChildren<SlotBase>();
@@ -86,39 +83,32 @@ public static class ItemManager
         //同步新的Slot信息
         curItemIns.transform.position = curTargetSlot.transform.position;
         curTargetSlot.MainID = ItemID;
-        curTargetSlot.InstanceID = curSC.InstanceID;
-        curSC.CurItemSlotType = SlotType.BagSlot;
+        curTargetSlot.InstanceID = curItemSc.InstanceID;
+        curItemSc.CurItemSlotType = SlotType.BagSlot;
         //清除旧的Slot信息
-        curSC.SlotID = curTargetSlot.SlotID;
+        curItemSc.SlotID = curTargetSlot.SlotID;
         //数据层同步
-        curSC.SetItemData(curTargetSlot);
-        MainRoleManager.Instance.BagItems.Add(curSC.CurItem);
-        //MainRoleManager.Instance.RefreshCurItems();
-        //curTargetSlot
+        curItemSc.SetItemData(curTargetSlot);
+        MainRoleManager.Instance.BagItems.Add(curItemSc.CurItem);
     }
     
-    public static GameObject InstanceItemThumbnailByID(Item curItem)
+    //初始化Item缩略图
+    public static GameObject InstanceItemThumbnailByID(Item CurItem)
     {
         //实例化GO
-        GameObject curItemIns = ResManager.instance.CreatInstance(PathConfig.ItemThumbnailPB);
-        Sprite curItemSprite = ResManager.instance.GetAssetCache<Sprite>(curItem.resAllPath);
-        curItemIns.GetComponent<Image>().sprite = curItemSprite;
-        ItemBase curSC = curItemIns.GetComponent<ItemBase>();
-        curSC.CurItem = curItem;
-        curSC.InstanceID = curItemIns.GetInstanceID();
+        GameObject curItemIns = null;
+        ItemBase curItemSc = null;
+        InitItemIns(CurItem, PathConfig.ItemThumbnailPB,ref curItemIns, ref curItemSc);
         return curItemIns;
     }
 
+    //读档Item
     public static void InitSaveFileItem(Item CurItem)
     {
         //实例化GO
-        GameObject curItemIns = ResManager.instance.CreatInstance(PathConfig.ItemPB);
-        curItemIns.transform.SetParent(UIManager.Instance.ItemRoot.transform,false);
-        Sprite curItemSprite = ResManager.instance.GetAssetCache<Sprite>(CurItem.resAllPath);
-        curItemIns.GetComponent<Image>().sprite = curItemSprite;
-        ItemBase curSC = curItemIns.GetComponent<ItemBase>();
-        curSC.CurItem = CurItem;
-        curSC.InstanceID = curItemIns.GetInstanceID();
+        GameObject curItemIns = null;
+        ItemBase curItemSc = null;
+        InitItemIns(CurItem,PathConfig.ItemPB, ref curItemIns, ref curItemSc);
         
         //找到这个Item对应的Slot槽位
         SlotType curSlotType = (SlotType)CurItem.slotType;
@@ -127,20 +117,20 @@ public static class ItemManager
         //同步新的Slot信息
         curItemIns.transform.position = curSlot.transform.position;
         curSlot.MainID = CurItem.ID;
-        curSC.SlotID = curSlot.SlotID;
-        curSlot.InstanceID = curSC.InstanceID;
-        curSC.CurItemSlotType = curSlotType;
-        
+        curItemSc.SlotID = curSlot.SlotID;
+        curSlot.InstanceID = curItemSc.InstanceID;
+        curItemSc.CurItemSlotType = curSlotType;
         //数据层同步到RoleManager，作为总管理
         switch (curSlotType)
         {
             case SlotType.BagSlot:
-                MainRoleManager.Instance.BagItems.Add(curSC.CurItem);
+                MainRoleManager.Instance.BagItems.Add(curItemSc.CurItem);
                 break;
             case SlotType.ElementSlot:
-                MainRoleManager.Instance.CurItems.Add(curSC.CurItem);
+                MainRoleManager.Instance.CurItems.Add(curItemSc.CurItem);
                 break;
         }
+        curItemSc.SetItemBG();
     }
 
     public static void DeleteItem(GameObject ItemIns)
@@ -148,5 +138,17 @@ public static class ItemManager
         GameObject.DestroyImmediate(ItemIns);
         MainRoleManager.Instance.RefreshAllItems();
         TrunkManager.Instance.SaveFile();
+    }
+    
+    static void InitItemIns(Item CurItem,string assetPath,ref GameObject itemIns,ref ItemBase itemSc)
+    {
+        //实例化GO
+        itemIns = ResManager.instance.CreatInstance(assetPath);
+        itemIns.transform.SetParent(UIManager.Instance.ItemRoot.transform,false);
+        Sprite curItemSprite = ResManager.instance.GetAssetCache<Sprite>(CurItem.resAllPath);
+        itemSc = itemIns.GetComponent<ItemBase>();
+        itemSc.ItemSprite.sprite = curItemSprite;
+        itemSc.CurItem = CurItem;
+        itemSc.InstanceID = itemIns.GetInstanceID();
     }
 }

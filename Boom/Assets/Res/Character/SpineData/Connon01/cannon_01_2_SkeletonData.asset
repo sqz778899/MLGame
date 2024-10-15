@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1b3b4b945939a54ea0b23d3396115fb, type: 3}
-  m_Name: cannon_01_SkeletonData
+  m_Name: cannon_01_2_SkeletonData
   m_EditorClassIdentifier: 
   atlasAssets:
-  - {fileID: 11400000, guid: 8fb42d6af22f9254caa1ade17fef1ce8, type: 2}
+  - {fileID: 11400000, guid: 1180e09d590e50a4291135a4492a9cf1, type: 2}
   scale: 0.01
-  skeletonJSON: {fileID: 4900000, guid: 094018c4563ded3459cd95fd516ced52, type: 3}
+  skeletonJSON: {fileID: 4900000, guid: 101d65e6e05384e4aba30dc90236253b, type: 3}
   isUpgradingBlendModeMaterials: 0
   blendModeMaterials:
     requiresBlendModeMaterials: 1
     applyAdditiveMaterial: 1
     additiveMaterials:
-    - pageName: cannon_01.png
-      material: {fileID: 2100000, guid: 63032a99edc534e4485c616d4d5d249d, type: 2}
+    - pageName: cannon_01_2.png
+      material: {fileID: 2100000, guid: ffb8666ee5965974092e7926cc871a19, type: 2}
     multiplyMaterials: []
     screenMaterials: []
   skeletonDataModifiers: []
