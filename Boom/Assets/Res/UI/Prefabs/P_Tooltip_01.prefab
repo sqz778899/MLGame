@@ -68,7 +68,7 @@ MonoBehaviour:
   m_text: 'Lv: 1\nDamage: 1\nElement: Non'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f1c451a708465df4fb8c93a002a75950, type: 2}
-  m_sharedMaterial: {fileID: 6890372616448345952, guid: f1c451a708465df4fb8c93a002a75950, type: 2}
+  m_sharedMaterial: {fileID: 3777385337331790916, guid: f1c451a708465df4fb8c93a002a75950, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -369,7 +369,7 @@ MonoBehaviour:
   m_text: Bullet Lv.1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f1c451a708465df4fb8c93a002a75950, type: 2}
-  m_sharedMaterial: {fileID: 6890372616448345952, guid: f1c451a708465df4fb8c93a002a75950, type: 2}
+  m_sharedMaterial: {fileID: 3777385337331790916, guid: f1c451a708465df4fb8c93a002a75950, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -429,7 +429,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -25.943535, w: 0}
+  m_margin: {x: 0, y: 0, z: -147.35858, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

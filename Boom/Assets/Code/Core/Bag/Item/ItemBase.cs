@@ -35,6 +35,7 @@ public class ItemBase : DragBase
         CurItem.slotID = slot.SlotID;
         CurItem.slotType = (int)slot.SlotType;
         SetItemBG();
+        SetRareColor();
     }
 
     public void SetRareColor()

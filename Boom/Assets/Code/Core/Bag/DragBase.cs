@@ -157,7 +157,7 @@ public class DragBase : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
                 UIManager.Instance.RightClickMenuRoot.transform,false);
         }
         RightClickMenu curSc = RightClickMenuGO.GetComponent<RightClickMenu>();
-        curSc.CurIns = eventData.pointerEnter;
+        curSc.CurIns = eventData.pointerEnter.transform.parent.gameObject;
         RightClickMenuGO.transform.position = GetWPosByMouse(eventData);
     }
     

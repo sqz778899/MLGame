@@ -131,6 +131,7 @@ public static class ItemManager
                 break;
         }
         curItemSc.SetItemBG();
+        curItemSc.SetRareColor();
     }
 
     public static void DeleteItem(GameObject ItemIns)

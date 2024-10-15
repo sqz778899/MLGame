@@ -56,9 +56,9 @@ MonoBehaviour:
   ItemBGInElement: {fileID: 346373297690352967}
   RareColor: {r: 1, g: 1, b: 1, a: 0}
   Rare1: {r: 0.5411765, g: 0.5411765, b: 0.5411765, a: 1}
-  Rare2: {r: 0, g: 0, b: 0, a: 0}
-  Rare3: {r: 0, g: 0, b: 0, a: 0}
-  Rare4: {r: 0, g: 0, b: 0, a: 0}
+  Rare2: {r: 0.27411884, g: 0.45285472, b: 0.7924528, a: 1}
+  Rare3: {r: 0.6115514, g: 0.31149873, b: 0.7075472, a: 1}
+  Rare4: {r: 0.9150943, g: 0.78728676, b: 0.3856057, a: 1}
   CurItem:
     ID: 0
     rare: 0
