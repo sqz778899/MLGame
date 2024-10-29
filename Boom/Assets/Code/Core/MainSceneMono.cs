@@ -11,7 +11,6 @@ public class MainSceneMono:MonoBehaviour
     MapLogic _mapLogic;
     public GameObject GUIMapScene;
     public GameObject MapScene;
-    public GameObject GUIBag;
     //FightScene
     [Header("FightScene")] 
     FightLogic _fightLogic;
@@ -55,18 +54,6 @@ public class MainSceneMono:MonoBehaviour
         EditSceneOff();
         MapSceneOff();
         FightSceneOn();
-    }
-
-    public void OpenBag()
-    {
-        GUIBag.SetActive(true);
-        UIManager.Instance.IsPauseClick = true;
-    }
-    
-    public void CloseBag()
-    {
-        GUIBag.SetActive(false);
-        UIManager.Instance.IsPauseClick = false;
     }
 
     #region 独立小开关

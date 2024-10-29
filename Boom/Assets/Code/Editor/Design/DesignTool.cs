@@ -191,6 +191,6 @@ public class DesignTool
     [Button("获得道具",ButtonSizes.Large),PropertyOrder(111)]
     void AddItem()
     {
-        ItemManager.InstanceItemByID(ItemID);
+        MainRoleManager.Instance.AddItem(ItemID);
     }
 }

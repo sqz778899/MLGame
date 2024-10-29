@@ -273,9 +273,9 @@ public class TrunkManager: ScriptableObject
         
         //...................Items.................................
         _saveFile.UserItems = new List<Item>();
-        ItemManager.InstanceItemByID(1);
-        ItemManager.InstanceItemByID(2);
-        
+        MainRoleManager.Instance.AddItem(1);
+        MainRoleManager.Instance.AddItem(2);
+
         _saveFile.UserCurBullets = new List<BulletReady>();
         _saveFile.UserBulletEntries = new List<BulletEntry>();
         _saveFile.UserBulletSpawner = UserBulletSpawner;

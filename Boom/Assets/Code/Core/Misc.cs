@@ -71,6 +71,7 @@ public class Award
     public int score;
     public int gold;
     public SupremeCharm supremeCharm;
+    public List<int> Items;
 }
 
 public class ElementState

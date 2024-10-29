@@ -15,7 +15,7 @@ public static class ItemManager
                 allSlot = UIManager.Instance.ElementSlotRoot.GetComponentsInChildren<SlotBase>();
                 break;
             default:
-                allSlot = UIManager.Instance.BagRoot.GetComponentsInChildren<SlotBase>();
+                allSlot = UIManager.Instance.G_Bag.GetComponentsInChildren<SlotBase>();
                 break;
         }
         foreach (var each in allSlot)
@@ -61,15 +61,14 @@ public static class ItemManager
             Debug.LogError("ItemID 未找到");
             return;
         }
-        //
-        Item curItem = new Item(ItemID);
         //实例化GO
+        Item curItem = new Item(ItemID);
         GameObject curItemIns = null;
         ItemBase curItemSc = null;
         InitItemIns(curItem,PathConfig.ItemPB, ref curItemIns, ref curItemSc);
         
         //在背包找到一个位置，把GO放进去
-        SlotBase[] allSlot = UIManager.Instance.BagRoot.GetComponentsInChildren<SlotBase>();
+        SlotBase[] allSlot = UIManager.Instance.G_Bag.GetComponentsInChildren<SlotBase>();
         SlotBase curTargetSlot = null;
         foreach (var each in allSlot)
         {
@@ -89,7 +88,6 @@ public static class ItemManager
         curItemSc.SlotID = curTargetSlot.SlotID;
         //数据层同步
         curItemSc.SetItemData(curTargetSlot);
-        MainRoleManager.Instance.BagItems.Add(curItemSc.CurItem);
     }
     
     //初始化Item缩略图

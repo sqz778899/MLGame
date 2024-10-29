@@ -11,11 +11,24 @@ public class TitleRootMono : MonoBehaviour
 
    public GameObject G_Help;
    public GameObject G_Setting;
+   
+   public GameObject G_Bag;//背包
 
    public List<Image> NeedToControl;
    public void ChangeIcon()
    {
       G_CurBulletIcon.SetActive(!G_CurBulletIcon.activeSelf);
       G_StandbyIcon.SetActive(!G_StandbyIcon.activeSelf);
+   }
+   
+   //开启关闭背包
+   public void OpenBag()
+   {
+      G_Bag.SetActive(true);
+   }
+   
+   public void CloseBag()
+   {
+      G_Bag.SetActive(false);
    }
 }

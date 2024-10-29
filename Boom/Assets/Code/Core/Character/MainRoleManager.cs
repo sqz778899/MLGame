@@ -390,6 +390,11 @@ public class MainRoleManager :ScriptableObject
     #endregion
 
     #region 场景内GO操作
+    public void InstanceItem(int ItemID)
+    {
+        ItemManager.InstanceItemByID(ItemID);
+    }
+    
     public void InstanceSpawners()
     {
         //..............Clear Old Data..................
@@ -630,6 +635,14 @@ public class MainRoleManager :ScriptableObject
     #endregion
 
     #region 外部可以调用的操作组封装
+    //添加道具
+    public void AddItem(int ItemID)
+    {
+        //数据层加进来了
+        RefreshBagItems(MutMode.Add, ItemID);
+        //GO层
+        InstanceItem(ItemID);
+    }
 
     public bool InstanceIDIsInCurBullet(int instanceID)
     {

@@ -53,7 +53,7 @@ public class UIManager : ScriptableObject
     public GameObject G_Bullet;
     public GameObject G_StandbyMat;
 
-    public GameObject BagRoot; //背包根节点
+    public GameObject G_Bag; //背包根节点
     public GameObject ElementSlotRoot; //元素均衡槽根节点
     public GameObject ItemRoot; //道具根节点
     
@@ -146,11 +146,17 @@ public class UIManager : ScriptableObject
         G_StandbyIcon = titleRootMono.G_StandbyIcon;
         G_Help = titleRootMono.G_Help;
         G_Setting = titleRootMono.G_Setting;
+        G_Bag = titleRootMono.G_Bag;
         if (G_Setting == null)
             G_Setting = GameObject.Find("GroupSetting");
         #endregion
         
         //............CommonRoot.........
+        if (ItemRoot == null)
+            ItemRoot = G_Bag.GetComponent<Bag>().ItermRoot;
+        if (ElementSlotRoot == null)
+            ElementSlotRoot = G_Bag.GetComponent<Bag>().ElementSlotRoot;
+        
         if (TooltipsRoot == null)
             TooltipsRoot = GameObject.Find("TooltipsRoot");
         
@@ -162,14 +168,5 @@ public class UIManager : ScriptableObject
         
         if (G_Bullet == null)
             G_Bullet = GameObject.Find("G_Bullet");
-        
-        if (BagRoot == null)
-            BagRoot = GameObject.Find("BagSlotRoot");
-
-        if (ItemRoot == null)
-            ItemRoot = GameObject.Find("ItemRoot");
-
-        if (ElementSlotRoot == null)
-            ElementSlotRoot = GameObject.Find("ElementSlotRoot");
     }
 }

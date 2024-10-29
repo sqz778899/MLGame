@@ -9,7 +9,8 @@ using Event = Spine.Event;
 public class Connon : MonoBehaviour
 {
     [Header("SpineAbout")]
-    public SkeletonAnimation Ani;
+    public SkeletonAnimation Ani01;
+    public SkeletonAnimation Ani02;
     public AnimationCurve AniCurve;
     [Header("子弹相关")] 
     public List<BulletInner> AllBullets;
@@ -23,7 +24,7 @@ public class Connon : MonoBehaviour
     void Start()
     {
         // 监听 Spine 动画中的事件
-        Ani.AnimationState.Event += SpEventFire;
+        Ani01.AnimationState.Event += SpEventFire;
         AllBullets = new List<BulletInner>();
     }
     
@@ -53,27 +54,29 @@ public class Connon : MonoBehaviour
     
     public void Appear(Vector3 targetPos,ref float aniTime)
     {
-        AniUtility.PlayAppear(Ani, ref aniTime);
+        AniUtility.PlayAppear(Ani01, ref aniTime);
         transform.DOMove(targetPos, aniTime).SetEase(AniCurve);
     }
 
     public void Reload(ref float aniTime)
     {
-        AniUtility.PlayReload(Ani, ref aniTime);
+        AniUtility.PlayReload(Ani01, ref aniTime);
     }
     
     public void Attack(int bulletIndex,ref float aniTime)
     {
+        Ani02.gameObject.SetActive(true);//把后层的炮显示出来
         // 设置标志，表示即将进行开火攻击
         isFiring = true;
         curBulletIndex = bulletIndex;
         //bulletInner.Attack();
-        AniUtility.PlayAttack(Ani, ref aniTime,isReset:true);
+        AniUtility.PlayAttack(Ani01, ref aniTime,isReset:true);
+        AniUtility.PlayAttack(Ani02, ref aniTime,isReset:true);
     }
     
     void OnDestroy()
     {
         // 移除事件监听器，防止内存泄漏
-        Ani.AnimationState.Event -= SpEventFire;
+        Ani01.AnimationState.Event -= SpEventFire;
     }
 }

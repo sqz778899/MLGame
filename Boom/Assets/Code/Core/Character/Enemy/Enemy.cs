@@ -75,6 +75,18 @@ public class Enemy : MonoBehaviour
         else
             StartCoroutine(ChangeHitState(hitTime)); //没死等一下播放完动画，切一下Idle状态
     }
+
+    //爆装备了
+    public void GetAward()
+    {
+        foreach (var each in award.Items)
+        {
+            //1）添加Item到数据&&GO层
+            MainRoleManager.Instance.AddItem(each);
+            //2) 展示Item
+            //ItemManager.InstanceItemByID();
+        }
+    }
     
     //等待播放Hit动画，没死就切一下Idle状态
     public IEnumerator ChangeHitState(float hitTime)
