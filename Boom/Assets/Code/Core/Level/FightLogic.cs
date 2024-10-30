@@ -126,19 +126,14 @@ public class FightLogic : MonoBehaviour
     void WinTheLevel()
     {
         //播放胜利
-        ShowAward();
         WinGUI.SetActive(true);
+        GUIWin s = WinGUI.GetComponent<GUIWin>();
+        s.Win(CurAward);
         isBeginCalculation = false;
         MainRoleManager.Instance.WinThisLevel();
         //给一个随机Buff
         //RollManager.Instance.OnceRollBuff();
         //选完了给一个随机宝物
-    }
-
-    //展示奖励
-    void ShowAward()
-    {
-        
     }
 
     #region 开火相关;

@@ -119,7 +119,7 @@ public class BulletInner : BulletBase
 
             yield return null;
         }
-
+        gameObject.SetActive(false);
         // 确保透明度为0
         foreach (Material material in materials)
             material.SetFloat("_Transparency", 0);
@@ -127,6 +127,7 @@ public class BulletInner : BulletBase
 
     public void Attack()
     {
+        gameObject.SetActive(true);
         StopAllCoroutines();
         _state = BulletInnerState.Attacking;
         foreach (Material material in materials)

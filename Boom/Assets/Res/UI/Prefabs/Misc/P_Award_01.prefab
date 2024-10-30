@@ -36,7 +36,7 @@ RectTransform:
   m_AnchoredPosition: {x: 403, y: -83}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &6515397127894885640
+--- !u!1 &4438605297877357762
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,52 +44,50 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4487929410299941869}
-  - component: {fileID: 4982685974275935735}
-  - component: {fileID: 8655154390259570266}
-  - component: {fileID: 7977333614651711740}
+  - component: {fileID: 8346739221207080789}
+  - component: {fileID: 4463655840946263982}
+  - component: {fileID: 2351175917016959420}
   m_Layer: 5
-  m_Name: P_Award_01
+  m_Name: txt_Award
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &4487929410299941869
+--- !u!224 &8346739221207080789
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6515397127894885640}
+  m_GameObject: {fileID: 4438605297877357762}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5064730409472511884}
-  m_Father: {fileID: 0}
+  m_Children: []
+  m_Father: {fileID: 4487929410299941869}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &4982685974275935735
+--- !u!222 &4463655840946263982
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6515397127894885640}
+  m_GameObject: {fileID: 4438605297877357762}
   m_CullTransparentMesh: 1
---- !u!114 &8655154390259570266
+--- !u!114 &2351175917016959420
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6515397127894885640}
+  m_GameObject: {fileID: 4438605297877357762}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -172,7 +170,45 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &7977333614651711740
+--- !u!1 &6515397127894885640
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4487929410299941869}
+  - component: {fileID: 923844819898782404}
+  m_Layer: 5
+  m_Name: P_Award_01
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4487929410299941869
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6515397127894885640}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8346739221207080789}
+  - {fileID: 5064730409472511884}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &923844819898782404
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -181,9 +217,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 6515397127894885640}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbe9157745fbd8743ab57995c18cfabc, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ea8ee56ee980e14496699a2524738fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  txtAward: {fileID: 0}
+  awardItem:
+    ID: 0
+    rare: 0
+    name: 
+    resAllPath: 
+    attribute:
+      waterElement: 0
+      fireElement: 0
+      thunderElement: 0
+      lightElement: 0
+      darkElement: 0
+      extraWaterDamage: 0
+      extraFireDamage: 0
+      extraThunderDamage: 0
+      extraLightDamage: 0
+      extraDarkDamage: 0
+      maxDamage: 0
+    slotID: 0
+    slotType: 0
 --- !u!1 &8008208221059720855
 GameObject:
   m_ObjectHideFlags: 0

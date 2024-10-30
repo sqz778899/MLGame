@@ -55,17 +55,18 @@ public class Connon : MonoBehaviour
     public void Appear(Vector3 targetPos,ref float aniTime)
     {
         AniUtility.PlayAppear(Ani01, ref aniTime);
+        AniUtility.PlayAppear(Ani02, ref aniTime);
         transform.DOMove(targetPos, aniTime).SetEase(AniCurve);
     }
 
     public void Reload(ref float aniTime)
     {
         AniUtility.PlayReload(Ani01, ref aniTime);
+        AniUtility.PlayReload(Ani02, ref aniTime);
     }
     
     public void Attack(int bulletIndex,ref float aniTime)
     {
-        Ani02.gameObject.SetActive(true);//把后层的炮显示出来
         // 设置标志，表示即将进行开火攻击
         isFiring = true;
         curBulletIndex = bulletIndex;
