@@ -12,5 +12,15 @@ public class ArrowNode : SpriteClickHandler
     {
         MainRoleManager.Instance.CurMapSate.CurRoomID = mapRoomNode.RoomID;
         UIManager.Instance.MapLogicGO.GetComponent<MapLogic>().SetRolePos();
+        TrunkManager.Instance.IsGamePause = true;
+        StartCoroutine(CreatDialogueFight());
     }
+    
+    IEnumerator CreatDialogueFight()
+    {
+        yield return new WaitForSeconds(1);
+        DislogueManager.CreatDialogueFight(mapRoomNode.RoomID);
+        TrunkManager.Instance.IsGamePause = false;
+    }
+    
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
+using UnityEditor;
 using UnityEngine;
 
 public class TrunkManager: ScriptableObject
@@ -147,6 +148,9 @@ public class TrunkManager: ScriptableObject
     
     public SaveFileJson _saveFile = new SaveFileJson();
     public UserConfig _userConfig = new UserConfig();
+
+    //游戏状态
+    public bool IsGamePause = false;
 
     //RandomEvent
     public List<int> RandomEvents = new List<int>();
