@@ -21,7 +21,7 @@ public static class EXDOBezier
     static Vector3[] BezierPath(Vector3 startPos,Vector3 controlPos,Vector3 endPos)
     {
         Vector3[] path = new Vector3[10];
-        for (int i = 0; i <= 10; i++)
+        for (int i = 1; i <= 10; i++)
         {
             float t = i / 10f;
             path[i - 1] = Bezier(startPos,controlPos,endPos,t);

@@ -7,21 +7,35 @@ using Random = UnityEngine.Random;
 
 public class EffectManager : MonoBehaviour
 {
+    public GameObject Root;
+    public GameObject StartPosIns;
+    public GameObject TargetPosIns;
+
+    [Header("金币诞生动画时长")] public Vector2 spawntimeRange;
+    [Header("金币诞生数量")] public int num;
+    [Header("金币诞生球半径")]  public float radius;
+    [Header("金币飞行贝塞尔控制点偏移")] public Vector2 flyRangeOffset; 
+    [Header("金币飞行动画时长")] public Vector2 flyTimeRange; 
+    public void sss()
+    {
+        PlayAwardEffect(StartPosIns.transform.position, TargetPosIns.transform.position,num);
+    }
     public void PlayAwardEffect(Vector3 startPos,Vector3 targetPos,int num = 20,Action onFinish = null)
     {
         Sequence seq = DOTween.Sequence();
-        int val = Random.Range(-300, 300);
+        float val = Random.Range(flyRangeOffset.x,flyRangeOffset.y);
         for (int i = 0; i < num; i++)
         {
-            GameObject awardIns = ResManager.instance.CreatInstance("PathConfig.AwardEffect");
-            awardIns.transform.SetParent(transform,false);
-            float randomTime = Random.Range(0.4f, 0.6f);
+            GameObject awardIns = ResManager.instance.CreatInstance(PathConfig.AwardCoin);
+            awardIns.transform.SetParent(Root.transform,false);
+            float randomTime = Random.Range(spawntimeRange.x, spawntimeRange.y);
             awardIns.transform.position = startPos;
             seq.Insert(0,awardIns.transform.DOMove(
-                startPos + Random.insideUnitSphere*200,randomTime).SetEase(Ease.OutSine));
-            Vector3 cpos = new Vector3(startPos.x + val,startPos.y + val,startPos.z);
-            seq.Insert(randomTime,awardIns.transform.DOBezier(startPos,cpos,targetPos,
-                Random.Range(0.8f,1.2f), () =>
+                startPos + Random.insideUnitSphere * radius,randomTime).SetEase(Ease.OutSine));
+            Vector3 cpos = new Vector3(awardIns.transform.position.x + val,
+                awardIns.transform.position.y + val,awardIns.transform.position.z);
+            seq.Insert(randomTime,awardIns.transform.DOBezier(awardIns.transform.position,cpos,targetPos,
+                Random.Range(flyTimeRange.x,flyTimeRange.y), () =>
                 {
                     Destroy(awardIns);
                     onFinish?.Invoke();
