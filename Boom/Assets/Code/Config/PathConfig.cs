@@ -108,6 +108,9 @@ public static class PathConfig
    //..........................全局大关卡...............................
    public static string LevelAssetDir = GetPrepath() + "Res/Levels/";
    
+   //..........................通用材质球..............................
+   public static string MatOutLine = GetPrepath() + "Res/Shader/CommonMaterial/OutLine.mat";
+   
    #region Function
    public static string GetFondPath(MultiLaEN MultiLa)
    {
