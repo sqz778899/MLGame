@@ -18,20 +18,12 @@ public class FightLogic : MonoBehaviour
     }
 
     #region 关卡相关
-    public GameObject GroupLevel;
-    public GameObject CurLevel;
-    
+    LevelMono CurLevel;
+
     void InitLevel()
     {
         //加载关卡
-        int curMapNodeID = MainRoleManager.Instance.CurMapSate.CurMapNodeID;
-        //GameObject curMapGO = _mapLogic.GetMapNodeByID(curMapNodeID);
-        //FightNode curFightNode = curMapGO.GetComponent<FightNode>(); //战斗加载必然是战斗节点
-        //CurLevel = Instantiate(curFightNode.LevelMap, GroupLevel.transform);
-        
-        //设置角色位置
-        Vector3 curRolePos = UIManager.Instance.RoleIns.transform.position;
-        UIManager.Instance.RoleIns.transform.position = new Vector3(0, curRolePos.y, 0);
+        CurLevel = LevelManager.LoadLevel(MainRoleManager.Instance.CurMapSate.CurMapNodeID);
     }
     #endregion
 
@@ -79,7 +71,7 @@ public class FightLogic : MonoBehaviour
         isBeginCameraMove = false;
         isBeginCalculation = false;
         Distance = 0f;
-        CurEnemy = CurLevel.GetComponent<LevelMono>().GetCurEnemy();
+        CurEnemy = CurLevel.CurEnemy;
         CurRole = UIManager.Instance.RoleIns.GetComponent<RoleInner>();
         CurRole.InitData();
         MainRoleManager.Instance.WinOrFailState = WinOrFail.InLevel;

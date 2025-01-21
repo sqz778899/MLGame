@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class LevelMono : MonoBehaviour
 {
-    public GameObject G_Enemy;
+    Enemy _curEnemy;
 
-    public Enemy GetCurEnemy()
+    public Enemy CurEnemy
     {
-        return G_Enemy.transform.GetChild(0).GetComponent<Enemy>();
+        get
+        {
+            if (_curEnemy == null) 
+                _curEnemy = G_Enemy.transform.GetChild(0).GetComponent<Enemy>();
+            return _curEnemy;
+        }   
     }
+    public GameObject G_Enemy;
 }

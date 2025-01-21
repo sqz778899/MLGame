@@ -69,7 +69,9 @@ public class MainSceneMono:MonoBehaviour
     void FightSceneOn()
     {
         GUIFightScene.SetActive(true);
-        FightScene.SetActive(true);
+        for (int i = 0; i < FightScene.transform.childCount; i++)
+            FightScene.transform.GetChild(i).gameObject.SetActive(true);
+       
         _fightLogic?.InitData();
         UIManager.Instance.G_CurBulletIcon?.SetActive(false);
         UIManager.Instance.G_StandbyIcon?.SetActive(false);
@@ -77,7 +79,8 @@ public class MainSceneMono:MonoBehaviour
     void FightSceneOff()
     {
         GUIFightScene.SetActive(false);
-        FightScene.SetActive(false);
+        for (int i = 0; i < FightScene.transform.childCount; i++)
+            FightScene.transform.GetChild(i).gameObject.SetActive(false);
         _fightLogic?.UnloadData();
         UIManager.Instance.G_CurBulletIcon?.SetActive(true);
         UIManager.Instance.G_StandbyIcon?.SetActive(true);

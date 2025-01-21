@@ -57,6 +57,8 @@ public class UIManager : ScriptableObject
     public GameObject ElementSlotRoot; //元素均衡槽根节点
     public GameObject ItemRoot; //道具根节点
     public GameObject EffectRoot; //特效根节点
+    public GameObject LevelRoot;//关卡根节点
+    public GameObject Level; //放置关卡的节点
     
     //............GroupTitle.........
     public GameObject TitleRoot;
@@ -172,5 +174,11 @@ public class UIManager : ScriptableObject
         
         if(EffectRoot == null)
             EffectRoot = GameObject.Find("EffectRoot");
+
+        if (LevelRoot == null)
+        {
+            LevelRoot = GameObject.Find("LevelRoot");
+            Level = LevelRoot.transform.GetChild(0).gameObject;
+        }
     }
 }

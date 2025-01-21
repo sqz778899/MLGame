@@ -4,23 +4,13 @@ using UnityEngine;
 
 public class TreasureNode:MapNodeBase
 {
-    public float UIFadeTime = 0.3f;
+    public Sprite TreasureOpened;
     public void OpenTreasureBox()
     {
-
-        GameObject curGBEIns = ResManager.instance.CreatInstance(PathConfig.GetBulletEntryPB);
-        curGBEIns.transform.SetParent(UIManager.Instance.RewardRoot.transform,false);
-        //.........................UI淡入淡出动画..................
-        RectTransform curRect = curGBEIns.GetComponent<RectTransform>();
-        RectTransformUtility.ScreenPointToWorldPointInRectangle(curRect, Input.mousePosition, Camera.main,out Vector3 worldPoint);
-        curGBEIns.transform.position = worldPoint;
-        curRect.DOMove(new Vector3(0,0,worldPoint.z),UIFadeTime);
-        
-        GetBEMono curSC = curGBEIns.GetComponent<GetBEMono>();
-        curSC.CurTreasureNode = this;
-        curSC.RollAnEntry();
+        //抽宝石
+        spriteRenderer.sprite = TreasureOpened;
         //GetBulletEntryPB
-        UIManager.Instance.SetOtherUIPause();
+        //UIManager.Instance.SetOtherUIPause();
         Debug.Log("Open Tressure Box !!");
     }
 }
