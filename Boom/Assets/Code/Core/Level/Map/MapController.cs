@@ -11,7 +11,7 @@ public class MapControl : MonoBehaviour
 
     void Update()
     {
-        if (UIManager.Instance.IsPauseClick)
+        if (UIManager.Instance.IsLockedClick)
             return;
         
         // 滚轮缩放地图逻辑

@@ -4,6 +4,6 @@
     public override void QuitSelf()
     {
         base.QuitSelf();
-        CurEventNode.QuitNode();
+        //CurEventNode.QuitNode();
     }
 }

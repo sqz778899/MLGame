@@ -32,11 +32,11 @@ public class Shop:GUIBase
         
         //Cal gold
         int curCost = MainRoleManager.Instance.ShopCost;
-        int curGold = MainRoleManager.Instance.Gold;
+        int curGold = MainRoleManager.Instance.Coins;
         if (curGold < curCost)
             return;
 
-        MainRoleManager.Instance.Gold -= curCost;
+        MainRoleManager.Instance.Coins -= curCost;
         //Clean Ins
         int preRollIns = RollInsRoot.transform.childCount;
         for (int i = preRollIns - 1; i >= 0; i--)
@@ -105,7 +105,7 @@ public class Shop:GUIBase
     #endregion
     public override void QuitSelf()
     {
-        CurShopNode.QuitNode();
+        //CurShopNode.QuitNode();
         base.QuitSelf();
     }
 }

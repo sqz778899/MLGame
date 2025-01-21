@@ -11,7 +11,7 @@ public class MapNodeEditor: Editor
         MapNodeBase myScript = (MapNodeBase)target;
         if(GUILayout.Button("Change Node State"))
         {
-            myScript.ChangeState();
+            //myScript.ChangeState();
         }
     }
 }

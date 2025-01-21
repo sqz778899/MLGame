@@ -8,12 +8,12 @@ public static class ShopUtility
         RollBase curSCBase = SelGO.GetComponent<RollBase>();
         //............Cost Money.................
         int curCost = MainRoleManager.Instance.ShopCost;
-        if (MainRoleManager.Instance.Gold < curCost)
+        if (MainRoleManager.Instance.Coins < curCost)
         {
             Debug.Log("No Money");
             return;
         }
-        MainRoleManager.Instance.Gold -= curCost;
+        MainRoleManager.Instance.Coins -= curCost;
         
         //............Deal Data.................
         switch (curSCBase.CurType)

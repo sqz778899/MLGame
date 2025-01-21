@@ -112,6 +112,11 @@ public static class PathConfig
    public static string MatOutLine = GetPrepath() + "Res/Shader/CommonMaterial/OutLine.mat";
    
    #region Function
+
+   public static string GetLevelPath(int levelID)
+   {
+      return LevelAssetDir + $"P_Level_{levelID.ToString("00")}";
+   }
    public static string GetFondPath(MultiLaEN MultiLa)
    {
       return GetPrepath() + string.Format("Res/UI/Fond/{0}.asset",MultiLa.ToString());

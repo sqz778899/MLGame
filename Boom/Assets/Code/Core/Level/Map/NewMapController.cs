@@ -9,7 +9,7 @@ public class NewMapController : MonoBehaviour
     Vector3 dragOrigin; // 用于存储地图原始位置
     void Update()
     {
-        if (UIManager.Instance.IsPauseClick)
+        if (UIManager.Instance.IsLockedClick)
             return;
         
         // 滚轮缩放地图逻辑

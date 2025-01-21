@@ -163,7 +163,7 @@ public class TrunkManager: ScriptableObject
 
         #region Character
         MainRoleManager.Instance.Score = _saveFile.Score;
-        MainRoleManager.Instance.Gold = _saveFile.Gold;
+        MainRoleManager.Instance.Coins = _saveFile.Gold;
         for (int i = 0; i < _saveFile.SupremeCharms.Count; i++)
         {
             SupremeCharm curCharm = new SupremeCharm(_saveFile.SupremeCharms[i]);
@@ -205,7 +205,7 @@ public class TrunkManager: ScriptableObject
     {
         #region Character
         _saveFile.Score = MainRoleManager.Instance.Score;
-        _saveFile.Gold = MainRoleManager.Instance.Gold;
+        _saveFile.Gold = MainRoleManager.Instance.Coins;
         _saveFile.UserBulletSpawner = MainRoleManager.Instance.CurBulletSpawners;
         _saveFile.UserCurBullets = MainRoleManager.Instance.CurBullets;
         _saveFile.UserBulletEntries = MainRoleManager.Instance.CurBulletEntries;

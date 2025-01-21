@@ -21,20 +21,6 @@ public class MapLogic : MonoBehaviour
         InitMapData();
     }
 
-    public GameObject GetMapNodeByID(int mapNodeID)
-    {
-        GameObject mapNode = null;
-        foreach (var each in _allMapNodes)
-        {
-            if (each.MapNodeID == mapNodeID)
-            {
-                mapNode = each.gameObject;
-                break;
-            }
-        }
-        return mapNode;
-    }
-
     public void InitMapData()
     {
         //获取地图房间节点
@@ -43,17 +29,6 @@ public class MapLogic : MonoBehaviour
         foreach (var each in _allMapRooms)
             MapRooms.Add(each.gameObject);
         _allMapNodes = MapNodeRoot.GetComponentsInChildren<MapNodeBase>();//获取全部地图节点
-
-        //更新地图节点状态
-        MapSate CurMapSate = MainRoleManager.Instance.CurMapSate;
-        foreach (var eachFinishedNodeID in CurMapSate.IsFinishedMapNodes)
-        {
-            foreach (var eachMapNode in _allMapNodes)
-            {
-                if (eachMapNode.MapNodeID == eachFinishedNodeID)
-                    eachMapNode.QuitNode();
-            }
-        }
         
         //设置角色位置
         SetRolePos();
@@ -83,8 +58,5 @@ public class MapLogic : MonoBehaviour
     {
         for (int i = 0; i < _allMapRooms.Length; i++)
             _allMapRooms[i].RoomID = i + 1;
-        
-        for (int i = 0; i < _allMapNodes.Length; i++)
-            _allMapNodes[i].MapNodeID = i + 1;
     }
 }

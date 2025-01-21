@@ -39,7 +39,7 @@ public class PREvent01: MonoBehaviour
     public void EndEvent()
     {
         REvent curR = GetComponent<REvent>();
-        curR.CurEventNode.GetComponent<EventNode>().QuitNode();
+        //curR.CurEventNode.GetComponent<EventNode>().QuitNode();
         DestroyImmediate(this.gameObject);
     }
 }

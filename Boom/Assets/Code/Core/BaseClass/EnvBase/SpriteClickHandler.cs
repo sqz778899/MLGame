@@ -7,50 +7,76 @@ public class SpriteClickHandler : MonoBehaviour
     public UnityEvent onClick = new UnityEvent();
     
     [Header("显示相关")]
-    Color normalColor;
+    [ColorUsage(true, true)] 
+    public Color OutlineColor;
     public Color HeighLightColor = Color.white;
-    internal Vector3 originalScale;
+    
+    internal Color defaultColor;
+    internal Material defaultMat;
+    internal Vector3 defaultScale;
+    internal Material outLineMat
+    {
+        get
+        {
+            if (_outLineMat == null)
+                _outLineMat = ResManager.instance.GetAssetCache<Material>(PathConfig.MatOutLine);
+            return _outLineMat;
+        }
+    }
+    Material _outLineMat;
+
+    [Header("功能相关")]
+    public bool IsLocked = false;
     
     internal virtual void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        normalColor = spriteRenderer.color;
-        originalScale = transform.localScale;
+        defaultColor = spriteRenderer.color;
+        defaultMat = spriteRenderer.material;
+        defaultScale = transform.localScale;
     }
     void Update()
     {
-        if (UIManager.Instance.IsPauseClick)
+        if (TrunkManager.Instance.IsGamePause)
+            return;
+        if (UIManager.Instance.IsLockedClick)
+            return;
+        if(IsLocked)
             return;
         
         // 高亮显示
         if (IsMouseIn())
         {
-            spriteRenderer.color = HeighLightColor;// 将精灵高亮显示
-            if (Input.GetMouseButtonDown(0))
-            {
-                transform.localScale = originalScale * 0.8f;
-            }
+            OnMouseEnter();
             if (Input.GetMouseButtonUp(0))
-            {
-                transform.localScale = originalScale;
                 onClick.Invoke();
-            }
         }
         else
-            spriteRenderer.color = normalColor;// 取消高亮显示
+            OnMouseExit();
+    }
+
+    #region 虚函数们
+    internal virtual void OnMouseEnter()
+    {
     }
     
+    internal virtual void OnMouseExit()
+    {
+    }
+    #endregion
+
+    #region 射线检测
     bool IsMouseIn()
     {
         // 转换鼠标位置到世界坐标
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         // 发射一条从鼠标位置出发的射线
         RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
-        //Debug.Log(hit.collider.gameObject);
         // 检查是否命中了我们的精灵
         if (hit.collider != null && hit.collider.gameObject == spriteRenderer.gameObject)
             return true;
         else
             return false;
     }
+    #endregion
 }

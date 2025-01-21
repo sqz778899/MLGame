@@ -3,29 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class HeightLightEnv : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
+public class HeightLightEnv : SpriteClickHandler
 {
     [ColorUsage(true, true)] 
     public Color OutlineColor;
-
-    Material _OutLineMat;
-    Material OutLineMat
+    //需要切换的材质球
+    Material _defaultMat;
+    Material outLineMat;
+    Material _outLineMat
     {
         get
         {
-            if (_OutLineMat == null)
-                _OutLineMat = ResManager.instance.GetAssetCache<Material>(PathConfig.MatOutLine);
-            return _OutLineMat;
+            if (outLineMat == null)
+                outLineMat = ResManager.instance.GetAssetCache<Material>(PathConfig.MatOutLine);
+            return outLineMat;
         }
     }
     
-    public void OnPointerEnter(PointerEventData eventData)
+    void Start()
     {
-        throw new System.NotImplementedException();
+        base.Start();
+        _defaultMat = spriteRenderer.material;
     }
     
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        throw new System.NotImplementedException();
-    }
 }

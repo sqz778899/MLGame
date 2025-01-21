@@ -12,17 +12,17 @@ public class GetBEMono:MonoBehaviour
     public void GetEntry()
     {
         MainRoleManager.Instance.AddEntry(curBE.ID);
-        CurTreasureNode.QuitNode();
+        //CurTreasureNode.QuitNode();
         DestroyImmediate(this.gameObject);
     }
 
     public void RefreshEntry()
     {
         int curCost = MainRoleManager.Instance.RollEntryCost;
-        if (MainRoleManager.Instance.Gold < curCost)
+        if (MainRoleManager.Instance.Coins < curCost)
             return;
         
-        MainRoleManager.Instance.Gold -= curCost;
+        MainRoleManager.Instance.Coins -= curCost;
         RollAnEntry(curBE); //保证刷新的词条和上一个词条不一样
     }
 

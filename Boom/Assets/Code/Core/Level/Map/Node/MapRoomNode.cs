@@ -8,21 +8,63 @@ public class MapRoomNode : MonoBehaviour
 {
     [Header("重要属性")]
     public MapRoomState State;
+    MapRoomState preState;
+   
     public int RoomID;
-    ArrowNode[] _arrows;
-    MapNodeBase[] _mapNodes;
+    
+    GameObject resRoot;
+    GameObject _resRoot
+    {
+        get
+        {
+            if (resRoot == null)
+            {
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    var expr = transform.GetChild(i).name == "ResRoot";
+                    if (expr)
+                    {
+                        resRoot = transform.GetChild(i).gameObject;
+                        break;
+                    }
+                }
+            }
+            return resRoot;
+        }
+    }
+    
+    //Room节点下全部资产信息
+    ArrowNode[] _arrows;     //全部的箭头
+    MapNodeBase[] _resources; //全部的资源
+    
     void Start()
     {
         //获取地图节点
         _arrows = GetComponentsInChildren<ArrowNode>();
-        _mapNodes = GetComponentsInChildren<MapNodeBase>();
+        _resources = _resRoot.GetComponentsInChildren<MapNodeBase>();
     }
 
     void Update()
     {
-        OnOffArrows();
+        if (State == MapRoomState.IsFinish && preState != MapRoomState.IsFinish)
+        {
+            //解锁资源
+            ShowArrows();
+            for (int i = 0; i < _resources.Length; i++)
+                _resources[i].IsLocked = false;
+            preState = State;
+        }
+        else if (State != MapRoomState.IsFinish)
+        {
+            //锁定资源
+            HideArrows();
+            for (int i = 0; i < _resources.Length; i++)
+                _resources[i].IsLocked = true;
+            preState = State;
+        }
     }
 
+    #region 箭头相关
     void HideArrows()
     {
         foreach (var each in _arrows)
@@ -34,18 +76,5 @@ public class MapRoomNode : MonoBehaviour
         foreach (var each in _arrows)
             each.gameObject.SetActive(true);
     }
-    
-    void OnOffArrows()
-    {
-        bool isAllFinish = true;
-        foreach (var each in _mapNodes)
-        {
-            if (each.State != MapNodeState.IsFinish)
-                isAllFinish = false;
-        }
-        if (isAllFinish)
-            ShowArrows();
-        else
-            HideArrows();
-    }
+    #endregion
 }

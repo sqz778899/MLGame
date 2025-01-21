@@ -19,7 +19,7 @@ public class UIManager : ScriptableObject
     #endregion
     
     //Global Control
-    public bool IsPauseClick = false;
+    public bool IsLockedClick = false;
 
     public void SetOtherUIPause()
     {
@@ -28,7 +28,7 @@ public class UIManager : ScriptableObject
         foreach (var each in btnImgs)
             each.raycastTarget = false;
 
-        IsPauseClick = true;
+        IsLockedClick = true;
     }
 
     public void ResetOtherUIPause()
@@ -38,7 +38,7 @@ public class UIManager : ScriptableObject
         foreach (var each in btnImgs)
             each.raycastTarget = true;
 
-        IsPauseClick = false;
+        IsLockedClick = false;
     }
 
     //0.StartGame
@@ -56,6 +56,7 @@ public class UIManager : ScriptableObject
     public GameObject G_Bag; //背包根节点
     public GameObject ElementSlotRoot; //元素均衡槽根节点
     public GameObject ItemRoot; //道具根节点
+    public GameObject EffectRoot; //特效根节点
     
     //............GroupTitle.........
     public GameObject TitleRoot;
@@ -132,7 +133,7 @@ public class UIManager : ScriptableObject
     
     void InitComon()
     {
-        IsPauseClick = false;
+        IsLockedClick = false;
         
         #region InitTileRoot相关
         if (TitleRoot == null)
@@ -168,5 +169,8 @@ public class UIManager : ScriptableObject
         
         if (G_Bullet == null)
             G_Bullet = GameObject.Find("G_Bullet");
+        
+        if(EffectRoot == null)
+            EffectRoot = GameObject.Find("EffectRoot");
     }
 }

@@ -16,17 +16,27 @@ public class EffectManager : MonoBehaviour
     [Header("金币诞生球半径")]  public float radius;
     [Header("金币飞行贝塞尔控制点偏移")] public Vector2 flyRangeOffset; 
     [Header("金币飞行动画时长")] public Vector2 flyTimeRange; 
-    public void sss()
+    
+    public void CreatEffect(string effectName,Vector3 startPos)
     {
-        PlayAwardEffect(StartPosIns.transform.position, TargetPosIns.transform.position,num);
+        string insPath = "";
+        switch (effectName)
+        {
+            case "CoinsPile":
+                insPath = PathConfig.AwardCoin;
+                break;
+        }
+
+        PlayAwardEffect(startPos, insPath);
     }
-    public void PlayAwardEffect(Vector3 startPos,Vector3 targetPos,int num = 20,Action onFinish = null)
+    
+    public void PlayAwardEffect(Vector3 startPos,string resPath,int num = 20,Action onFinish = null)
     {
         Sequence seq = DOTween.Sequence();
         float val = Random.Range(flyRangeOffset.x,flyRangeOffset.y);
         for (int i = 0; i < num; i++)
         {
-            GameObject awardIns = ResManager.instance.CreatInstance(PathConfig.AwardCoin);
+            GameObject awardIns = ResManager.instance.CreatInstance(resPath);
             awardIns.transform.SetParent(Root.transform,false);
             float randomTime = Random.Range(spawntimeRange.x, spawntimeRange.y);
             awardIns.transform.position = startPos;
@@ -34,7 +44,8 @@ public class EffectManager : MonoBehaviour
                 startPos + Random.insideUnitSphere * radius,randomTime).SetEase(Ease.OutSine));
             Vector3 cpos = new Vector3(awardIns.transform.position.x + val,
                 awardIns.transform.position.y + val,awardIns.transform.position.z);
-            seq.Insert(randomTime,awardIns.transform.DOBezier(awardIns.transform.position,cpos,targetPos,
+            seq.Insert(randomTime,awardIns.transform.DOBezier(awardIns.transform.position,cpos,
+                TargetPosIns.transform.position,
                 Random.Range(flyTimeRange.x,flyTimeRange.y), () =>
                 {
                     Destroy(awardIns);

@@ -7,8 +7,6 @@ public class TreasureNode:MapNodeBase
     public float UIFadeTime = 0.3f;
     public void OpenTreasureBox()
     {
-        State = MapNodeState.IsFinish;
-        ChangeState();
 
         GameObject curGBEIns = ResManager.instance.CreatInstance(PathConfig.GetBulletEntryPB);
         curGBEIns.transform.SetParent(UIManager.Instance.RewardRoot.transform,false);

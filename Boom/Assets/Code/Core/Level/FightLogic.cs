@@ -25,9 +25,9 @@ public class FightLogic : MonoBehaviour
     {
         //加载关卡
         int curMapNodeID = MainRoleManager.Instance.CurMapSate.CurMapNodeID;
-        GameObject curMapGO = _mapLogic.GetMapNodeByID(curMapNodeID);
-        FightNode curFightNode = curMapGO.GetComponent<FightNode>(); //战斗加载必然是战斗节点
-        CurLevel = Instantiate(curFightNode.LevelMap, GroupLevel.transform);
+        //GameObject curMapGO = _mapLogic.GetMapNodeByID(curMapNodeID);
+        //FightNode curFightNode = curMapGO.GetComponent<FightNode>(); //战斗加载必然是战斗节点
+        //CurLevel = Instantiate(curFightNode.LevelMap, GroupLevel.transform);
         
         //设置角色位置
         Vector3 curRolePos = UIManager.Instance.RoleIns.transform.position;

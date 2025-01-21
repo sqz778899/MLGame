@@ -32,7 +32,7 @@ public class MainRoleManager :ScriptableObject
     [Header("重要数据")]
     //...............重要数据................
     public int Score;
-    public int Gold;
+    public int Coins;
     public int ShopCost = 5;
     public int RollEntryCost = 5;
     public List<BulletSpawner> CurBulletSpawners;

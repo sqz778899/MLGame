@@ -3,13 +3,6 @@ using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine.Serialization;
 
-public enum MapNodeState
-{
-    UnLocked = 1,
-    Locked = 2,
-    IsFinish = 3,
-}
-
 public enum MapRoomState
 {
     UnFinish = 1,
