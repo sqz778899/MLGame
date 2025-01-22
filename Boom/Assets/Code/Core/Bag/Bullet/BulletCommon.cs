@@ -154,6 +154,9 @@ public class BulletData
         ID = _id;
     }
 }
+
+[Serializable]
+
 #endregion
 
 public class BulletDataJson

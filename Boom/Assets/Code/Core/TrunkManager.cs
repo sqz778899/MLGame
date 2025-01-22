@@ -28,6 +28,7 @@ public class TrunkManager: ScriptableObject
     List<RoleBase> _roleDesignJsons;
     List<RollPREvent> _prDesignJsons;
     List<BulletEntry> _bulletEntryDesignJsons;
+    List<GemJson> _gemDesignJsons;
     public List<BulletDataJson> BulletDesignJsons
     {
         get
@@ -96,6 +97,16 @@ public class TrunkManager: ScriptableObject
         }
     }
     
+    public List<GemJson> GemDesignJsons
+    {
+        get
+        {
+            if (_gemDesignJsons == null)
+                _gemDesignJsons = LoadGemData();
+            return _gemDesignJsons;
+        }
+    }
+    
     public List<BulletDataJson> LoadBulletData()
     {
         string BulletDesignString = File.ReadAllText(PathConfig.BulletDesignJson);
@@ -143,6 +154,13 @@ public class TrunkManager: ScriptableObject
         string BulletEntryDesignStr = File.ReadAllText(PathConfig.BulletEntryDesignJson);
         List<BulletEntry> BulletEntryJsons = JsonConvert.DeserializeObject<List<BulletEntry>>(BulletEntryDesignStr);
         return BulletEntryJsons;
+    }
+    
+    public List<GemJson> LoadGemData()
+    {
+        string GemDesignStr = File.ReadAllText(PathConfig.GemDesignJson);
+        List<GemJson> GemDesignJsons = JsonConvert.DeserializeObject<List<GemJson>>(GemDesignStr);
+        return GemDesignJsons;
     }
     #endregion
     

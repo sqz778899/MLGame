@@ -22,6 +22,7 @@ public class SaveFileJson
     public List<int> UserCurBuff;
     
     public List<Item> UserItems;
+    public List<GemJson> UserGems;
     public List<int> SupremeCharms;
     public List<MapSate> UserMapSate;
 
@@ -42,7 +43,6 @@ public class UserConfig
     }
 }
 #endregion
-
 
 public class LevelBuff
 {

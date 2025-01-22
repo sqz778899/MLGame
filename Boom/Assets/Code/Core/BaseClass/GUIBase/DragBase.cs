@@ -24,6 +24,7 @@ public class DragBase : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
     //鼠标按下时
     public virtual void OnPointerDown(PointerEventData eventData)
     {
+        UIManager.Instance.IsLockedClick = true;
         _eventData = eventData;
         if (eventData.button == PointerEventData.InputButton.Left)
         {
@@ -39,6 +40,7 @@ public class DragBase : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
     //鼠标松开时
     public virtual void OnPointerUp(PointerEventData eventData)
     {
+        UIManager.Instance.IsLockedClick = false;
         if (eventData.button == PointerEventData.InputButton.Right)
             return;
         DestroyTooltips();

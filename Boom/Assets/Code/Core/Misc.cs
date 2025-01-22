@@ -213,4 +213,5 @@ public enum SlotType
     BagSlot = 1,
     BulletSlot = 2,
     ElementSlot = 3,
+    GemSlot = 4,
 }

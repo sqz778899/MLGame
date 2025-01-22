@@ -9,14 +9,7 @@ public class FightLogic : MonoBehaviour
 {
     [Header("Award")] 
     public Award CurAward;
-    [Header("MapLogic")] 
-    public MapLogic _mapLogic;
-
-    void Start()
-    {
-        _mapLogic = UIManager.Instance.MapLogicGO.GetComponent<MapLogic>();
-    }
-
+    
     #region 关卡相关
     LevelMono CurLevel;
 
@@ -128,7 +121,7 @@ public class FightLogic : MonoBehaviour
         //选完了给一个随机宝物
     }
 
-    #region 开火相关;
+    #region 开火相关
     public void CheckForKeyPress()
     {
         if (Input.GetKeyDown(KeyCode.Space))

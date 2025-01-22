@@ -31,6 +31,7 @@ public static class PathConfig
    public static string PREventDesignJson = GetDataPrepath() + "Data/PREventDesign.json";
    public static string BulletEntryDesignJson = GetDataPrepath() + "Data/BulletEntryDesign.json";
    public static string ItemDesignJson = GetDataPrepath() + "Data/ItemDesign.json";
+   public static string GemDesignJson = GetDataPrepath() + "Data/GemDesign.json";
    //........................Misc...........................................
    public static string MiscDir = GetPrepath() + "Res/UI/Misc/";
    public static string FXAssetDir = GetPrepath() + "Res/FX/Prefab/";
@@ -112,11 +113,18 @@ public static class PathConfig
    public static string MatOutLine = GetPrepath() + "Res/Shader/CommonMaterial/OutLine.mat";
    
    #region Function
-
+   //获得关卡的路径
    public static string GetLevelPath(int levelID)
    {
       return LevelAssetDir + $"P_Level_{levelID.ToString("00")}.prefab";
    }
+   
+   public static string GetGemPath(string name)
+   {
+      return ItemImageDir + $"{name}.png";
+   }
+   
+   //获得字体的路径
    public static string GetFondPath(MultiLaEN MultiLa)
    {
       return GetPrepath() + string.Format("Res/UI/Fond/{0}.asset",MultiLa.ToString());

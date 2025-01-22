@@ -21,6 +21,8 @@ public class ExcelExport
         ExportRoleDesign();
         ExportPREventDesign();
         ExportBulletEntry();
+        ExportGemDesign();
+        AssetDatabase.Refresh();
     }
 
     #region 游戏设计
@@ -264,6 +266,37 @@ public class ExcelExport
         string content = JsonConvert.SerializeObject(curBulletEntries,(Formatting) Formatting.Indented);
         File.WriteAllText(PathConfig.BulletEntryDesignJson, content);
     }
+    
+    public void ExportGemDesign()
+    {
+        DataSet curTables = GetDataSet();
+        List<GemJson> curGemDesign = new List<GemJson>();
+        DataTable curTable = curTables.Tables["GemDesign"];
+       
+        for (int i = 1; i < curTable.Rows.Count; i++)
+        {
+            GemJson curData = new GemJson();
+            if (curTable.Rows[i][1].ToString() == "") continue;
+            curData.ID = int.Parse(curTable.Rows[i][0].ToString());
+            curData.Name = curTable.Rows[i][1].ToString();
+            curData.Attribute.Damage = 
+                string.IsNullOrEmpty(curTable.Rows[i][2].ToString()) ? 0 
+                : int.Parse(curTable.Rows[i][2].ToString());
+            curData.Attribute.Piercing = 
+                string.IsNullOrEmpty(curTable.Rows[i][3].ToString()) ? 0 
+                : int.Parse(curTable.Rows[i][3].ToString());
+            curData.Attribute.Resonance = 
+                string.IsNullOrEmpty(curTable.Rows[i][4].ToString()) ? 0 
+                : int.Parse(curTable.Rows[i][4].ToString());
+            curData.ImageName = curTable.Rows[i][5].ToString();
+            curGemDesign.Add(curData);
+        }
+        
+        string content01 = JsonConvert.SerializeObject(curGemDesign,
+            (Formatting) Formatting.Indented);
+        File.WriteAllText(PathConfig.GemDesignJson, content01);
+    }
+    
     DataSet GetDataSet()
     {
         FileStream fileStream = File.Open(GetDesignExcelPath("CommonDesign.xlsx"), FileMode.Open, FileAccess.Read);

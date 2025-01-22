@@ -21,8 +21,10 @@ public class MainRoleManager :ScriptableObject
     
     //...............子弹上膛................
     public List<BulletReady> CurBullets;
+    public List<BulletSlotRole> CurBulletSlotRoles;
     public List<BulletBuff> CurBulletBuffs;
     public List<BulletEntry> CurBulletEntries;
+    
     //...............元素均衡................
     public List<Item> CurItems = new List<Item>();
     
@@ -188,6 +190,8 @@ public class MainRoleManager :ScriptableObject
             CurRollPR = new List<RollPR>(OrginalRollPR);
         if (CurBulletBuffs == null)
             CurBulletBuffs = new List<BulletBuff>();
+        if(CurBulletSlotRoles == null)
+            CurBulletSlotRoles = new List<BulletSlotRole>();
         //"游戏进程相关"
         if (CurMapSate == null)
             CurMapSate = new MapSate();
