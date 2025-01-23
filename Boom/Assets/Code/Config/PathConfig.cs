@@ -80,15 +80,17 @@ public static class PathConfig
    public static string BulletImageDir = GetPrepath() + "Res/Bullet/Textures/";
    public static string BulletSpineDir = GetPrepath() + "Res/Bullet/SpineData/";
    public static string BulletAssetDir = GetPrepath() + "Res/Bullet/Prefab/"; 
-   public static string BulletSpfxTemplate = GetPrepath() + "Res/Bullet/Prefab/P_Bullet_Inner_Spfx_Template.prefab"; 
-
-   //P_Bullet_Inner_spfx_Template
-   //..........................ScoreMat.............................................
+   public static string BulletSpfxTemplate = GetPrepath() + "Res/Bullet/Prefab/P_Bullet_Inner_Spfx_Template.prefab";
+   
+   //...........................Gem.............................................
+   public static string GemTemplate = GetPrepath() + "Res/UI/Gem/Prefabs/P_Gem_Template_01.prefab";
+   
+   //..........................ScoreMat.........................................
    public static string ScoreMatImage = GetPrepath() + "Res/Bullet/Textures/T_ScoreMat_01.png";
    //..........................Buff.............................................
    public static string TalentImageDir = GetPrepath() + "Res/UI/Buff/Talent/Textures/";
    public static string TalentPB = GetPrepath() + "Res/UI/Buff/Talent/P_Buff_Template.prefab";
-   //..........................Connon.............................................
+   //..........................Connon...........................................
    public static string ConnonPB = GetPrepath() + "Res/Character/SpineData/Connon01/P_Connon_01.prefab";
    //Assets/Res/UI/Prefabs/P_Shop.prefab
    

@@ -19,5 +19,9 @@ public class SlotIDCalculate : MonoBehaviour
             curBase.InstanceID = -1;
             curBase.SlotType = SlotType;
         }
+        
+        GemSlot[] gemSlots = gameObject.GetComponentsInChildren<GemSlot>();
+        for (int i = 0; i < gemSlots.Length; i++)
+            gemSlots[i].SlotID = i + 1;
     }
 }

@@ -396,7 +396,7 @@ public class MainRoleManager :ScriptableObject
     #region 场景内GO操作
     public void InstanceItem(int ItemID)
     {
-        ItemManager.InstanceItemByID(ItemID);
+        ItemManager.AddItem(ItemID);
     }
     
     public void InstanceSpawners()

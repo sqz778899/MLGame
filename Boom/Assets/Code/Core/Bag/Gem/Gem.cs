@@ -12,18 +12,34 @@ public class Gem : DragBase
     
     //游戏内相关属性
     public int slotID;
-    public SlotType slotType;
+    public SlotType CurGemInSlotType;//此时宝石所在的Slot类型
     
     //
     int preID;
-    void Start()
+    internal override void Start()
     {
+        base.Start();
         SyncData();
     }
     void Update()
     {
         if (ID != preID)
             SyncData();
+    }
+    
+    internal override void VOnDrop()
+    {
+        //同步新的Slot信息
+        _dragIns.transform.position = _curSlot.transform.position;
+        _curSlot.MainID = ID;
+        _curSlot.InstanceID = InstanceID;
+        CurGemInSlotType = _curSlot.SlotType;//GO层同步
+        //清除旧的Slot信息
+        //ItemManager.ClearBagSlotByID(SlotID);
+        //SlotID = _curSlot.SlotID;
+        //数据层同步
+        //SetItemData();
+        MainRoleManager.Instance.RefreshAllItems();
     }
 
     public void SyncData()
