@@ -10,7 +10,7 @@ public class AwardText : MonoBehaviour
 
     public void SyncAwardText(int ItemID)
     {
-        Item curItem = new Item(ItemID);
-        txtAward.text = curItem.name; 
+        ItemSS curItemSs = new ItemSS(ItemID);
+        txtAward.text = curItemSs.name; 
     }
 }

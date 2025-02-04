@@ -14,7 +14,7 @@ public static class UpgradeMaster
         PreBulletSpawners = new List<int>();
         foreach (var each in MainRoleManager.Instance.CurBulletSpawners)
         {
-            PreBulletSpawners.Add(each.bulletID);
+            PreBulletSpawners.Add(each.ID);
         }
 
         if (IsUpgrade())
@@ -33,7 +33,7 @@ public static class UpgradeMaster
         int bulletID = -1;
         for (int i = 0; i < PreBulletSpawners.Count; i++)
         {
-            if (MainRoleManager.Instance.CurBulletSpawners[i].bulletID != PreBulletSpawners[i])
+            if (MainRoleManager.Instance.CurBulletSpawners[i].ID != PreBulletSpawners[i])
             {
                 bulletID = PreBulletSpawners[i];
                 break;
@@ -67,17 +67,17 @@ public static class UpgradeMaster
             {
                 foreach (var eachSpawner in MainRoleManager.Instance.CurBulletSpawners)
                 {
-                    if (eachSpawner.bulletID == each.Key)
+                    if (eachSpawner.ID == each.Key)
                     {
                         _isUpgrade = true;
                         //Upgrade
                         MainRoleManager.Instance.SubStandebyBullet(each.Key);//DelAll
                         foreach (var eachBullet in MainRoleManager.Instance.CurBullets)
                         {
-                            if (eachBullet.bulletID == eachSpawner.bulletID)
-                                eachBullet.bulletID += 100;
+                            if (eachBullet.ID == eachSpawner.ID)
+                                eachBullet.ID += 100;
                         }
-                        eachSpawner.bulletID += 100;
+                        eachSpawner.ID += 100;
                     }
                 }
             }

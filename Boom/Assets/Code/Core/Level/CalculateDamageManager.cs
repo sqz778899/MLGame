@@ -19,30 +19,30 @@ public class CalculateDamageManager : ScriptableObject
     }
     #endregion
 
-    public void CalDamage(BulletData curBulletData,Enemy curEnemy)
+    public void CalDamage(Bullet bullet,Enemy curEnemy)
     {
-        int curDamage = curBulletData.damage;
+        int curDamage = bullet.Damage;
         int curHealth = curEnemy.CurHP;
-        switch (curBulletData.elementalType)
+        switch (bullet.ElementalType)
         {
             case ElementalTypes.Non:
                 curEnemy.TakeDamage(curDamage);
                 break;
             case ElementalTypes.Ice:
-                CalIce(curBulletData, curEnemy);
+                CalIce(bullet, curEnemy);
                 break;
             case ElementalTypes.Fire:
-                CalFire(curBulletData, curEnemy);
+                CalFire(bullet, curEnemy);
                 break;
             case ElementalTypes.Electric:
-                CalElectric(curBulletData, curEnemy);
+                CalElectric(bullet, curEnemy);
                 break;
         }
     }
 
-    void CalIce(BulletData curBulletData,Enemy curEnemy)
+    void CalIce(Bullet bullet,Enemy curEnemy)
     {
-        int curDamage = curBulletData.damage;
+        int curDamage = bullet.Damage;
         DamageState curDamageState = curEnemy.DState;
         
         //冰遇见火，会极度爆炸，造成大量伤害并且属性积蓄归零
@@ -58,9 +58,9 @@ public class CalculateDamageManager : ScriptableObject
         curDamageState.Ice += curDamage;
     }
 
-    void CalFire(BulletData curBulletData, Enemy curEnemy)
+    void CalFire(Bullet bullet, Enemy curEnemy)
     {
-        int curDamage = curBulletData.damage;
+        int curDamage = bullet.Damage;
         DamageState curDamageState = curEnemy.DState;
         
         //火遇见冰，会冷却 todo Debuff
@@ -90,9 +90,9 @@ public class CalculateDamageManager : ScriptableObject
         curDamageState.Fire += curDamage;
     }
 
-    void CalElectric(BulletData curBulletData, Enemy curEnemy)
+    void CalElectric(Bullet bullet, Enemy curEnemy)
     {
-        int curDamage = curBulletData.damage;
+        int curDamage = bullet.Damage;
         DamageState curDamageState = curEnemy.DState;
         int curElectric = curDamageState.Electric;
         

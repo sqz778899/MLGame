@@ -3,16 +3,46 @@
   "Gold": 1000,
   "UserBulletSpawner": [
     {
-      "bulletID": 1,
-      "bulletCount": 5
+      "Level": 1,
+      "ElementalType": 1,
+      "Damage": 1,
+      "Piercing": 0,
+      "Resonance": 0,
+      "SpawnerCount": 5,
+      "HitEffectName": "FX_Bullet01_hit",
+      "ID": 1,
+      "InstanceID": 0,
+      "Name": "Basic01",
+      "SlotID": 0,
+      "SlotType": 0
     },
     {
-      "bulletID": 2,
-      "bulletCount": 1
+      "Level": 1,
+      "ElementalType": 2,
+      "Damage": 1,
+      "Piercing": 0,
+      "Resonance": 0,
+      "SpawnerCount": 1,
+      "HitEffectName": "FX_Bullet02_hit",
+      "ID": 2,
+      "InstanceID": 0,
+      "Name": "Ice01",
+      "SlotID": 0,
+      "SlotType": 0
     },
     {
-      "bulletID": 3,
-      "bulletCount": 1
+      "Level": 1,
+      "ElementalType": 3,
+      "Damage": 1,
+      "Piercing": 0,
+      "Resonance": 0,
+      "SpawnerCount": 1,
+      "HitEffectName": "FX_Bullet03_hit",
+      "ID": 3,
+      "InstanceID": 0,
+      "Name": "Fire01",
+      "SlotID": 0,
+      "SlotType": 0
     }
   ],
   "UserCurBullets": [],
@@ -47,32 +77,9 @@
   "UserCurBuff": null,
   "UserItems": [
     {
-      "ID": 2,
-      "rare": 1,
-      "name": "马桶搋子",
-      "resAllPath": "Assets/Res/UI/Item/Textures/T_Item_ToiletPlunger_01.png",
-      "attribute": {
-        "waterElement": 1,
-        "fireElement": 0,
-        "thunderElement": 0,
-        "lightElement": 0,
-        "darkElement": 0,
-        "extraWaterDamage": 10,
-        "extraFireDamage": 0,
-        "extraThunderDamage": 0,
-        "extraLightDamage": 0,
-        "extraDarkDamage": 0,
-        "maxDamage": 40
-      },
-      "slotID": 1,
-      "slotType": 3
-    },
-    {
-      "ID": 1,
-      "rare": 1,
-      "name": "易拉罐",
-      "resAllPath": "Assets/Res/UI/Item/Textures/T_Item_Can_01.png",
-      "attribute": {
+      "Rare": 1,
+      "ImageName": "T_Item_Can_01",
+      "Attribute": {
         "waterElement": 0,
         "fireElement": 1,
         "thunderElement": 0,
@@ -85,99 +92,16 @@
         "extraDarkDamage": 0,
         "maxDamage": 30
       },
-      "slotID": 2,
-      "slotType": 1
-    },
-    {
-      "ID": 3,
-      "rare": 1,
-      "name": "生锈菜刀",
-      "resAllPath": "Assets/Res/UI/Item/Textures/T_Item_KitchenKnife_01.png",
-      "attribute": {
-        "waterElement": 0,
-        "fireElement": 0,
-        "thunderElement": 1,
-        "lightElement": 0,
-        "darkElement": 0,
-        "extraWaterDamage": 0,
-        "extraFireDamage": 0,
-        "extraThunderDamage": 35,
-        "extraLightDamage": 0,
-        "extraDarkDamage": 0,
-        "maxDamage": 35
-      },
-      "slotID": 3,
-      "slotType": 1
-    },
-    {
-      "ID": 4,
-      "rare": 2,
-      "name": "折断魔杖",
-      "resAllPath": "Assets/Res/UI/Item/Textures/T_Item_BreakWand_01.png",
-      "attribute": {
-        "waterElement": 1,
-        "fireElement": 0,
-        "thunderElement": 1,
-        "lightElement": 0,
-        "darkElement": 0,
-        "extraWaterDamage": 30,
-        "extraFireDamage": 30,
-        "extraThunderDamage": 30,
-        "extraLightDamage": 0,
-        "extraDarkDamage": 0,
-        "maxDamage": 100
-      },
-      "slotID": 6,
-      "slotType": 1
-    },
-    {
-      "ID": 5,
-      "rare": 3,
-      "name": "小块秘银",
-      "resAllPath": "Assets/Res/UI/Item/Textures/T_Item_Mithril _01.png",
-      "attribute": {
-        "waterElement": 0,
-        "fireElement": 0,
-        "thunderElement": 0,
-        "lightElement": 4,
-        "darkElement": 3,
-        "extraWaterDamage": 0,
-        "extraFireDamage": 0,
-        "extraThunderDamage": 0,
-        "extraLightDamage": 200,
-        "extraDarkDamage": 200,
-        "maxDamage": 300
-      },
-      "slotID": 5,
-      "slotType": 1
-    },
-    {
       "ID": 1,
-      "rare": 1,
-      "name": "易拉罐",
-      "resAllPath": "Assets/Res/UI/Item/Textures/T_Item_Can_01.png",
-      "attribute": {
-        "waterElement": 0,
-        "fireElement": 1,
-        "thunderElement": 0,
-        "lightElement": 0,
-        "darkElement": 0,
-        "extraWaterDamage": 0,
-        "extraFireDamage": 20,
-        "extraThunderDamage": 0,
-        "extraLightDamage": 0,
-        "extraDarkDamage": 0,
-        "maxDamage": 30
-      },
-      "slotID": 1,
-      "slotType": 1
+      "InstanceID": -215524,
+      "Name": "易拉罐",
+      "SlotID": 1,
+      "SlotType": 1
     },
     {
-      "ID": 2,
-      "rare": 1,
-      "name": "马桶搋子",
-      "resAllPath": "Assets/Res/UI/Item/Textures/T_Item_ToiletPlunger_01.png",
-      "attribute": {
+      "Rare": 1,
+      "ImageName": "T_Item_ToiletPlunger_01",
+      "Attribute": {
         "waterElement": 1,
         "fireElement": 0,
         "thunderElement": 0,
@@ -190,71 +114,43 @@
         "extraDarkDamage": 0,
         "maxDamage": 40
       },
-      "slotID": 4,
-      "slotType": 1
-    },
-    {
       "ID": 2,
-      "rare": 1,
-      "name": "马桶搋子",
-      "resAllPath": "Assets/Res/UI/Item/Textures/T_Item_ToiletPlunger_01.png",
-      "attribute": {
-        "waterElement": 1,
-        "fireElement": 0,
-        "thunderElement": 0,
-        "lightElement": 0,
-        "darkElement": 0,
-        "extraWaterDamage": 10,
-        "extraFireDamage": 0,
-        "extraThunderDamage": 0,
-        "extraLightDamage": 0,
-        "extraDarkDamage": 0,
-        "maxDamage": 40
+      "InstanceID": -215554,
+      "Name": "马桶搋子",
+      "SlotID": 2,
+      "SlotType": 1
+    }
+  ],
+  "UserGems": [
+    {
+      "ImageName": "T_Gem_Damage_01",
+      "Attribute": {
+        "Damage": 1,
+        "Piercing": 0,
+        "Resonance": 0
       },
-      "slotID": 7,
-      "slotType": 1
+      "IsInLay": false,
+      "BulletSlotIndex": -1,
+      "ID": 1,
+      "InstanceID": -216394,
+      "Name": "伤害宝石",
+      "SlotID": 1,
+      "SlotType": 4
     },
     {
-      "ID": 2,
-      "rare": 1,
-      "name": "马桶搋子",
-      "resAllPath": "Assets/Res/UI/Item/Textures/T_Item_ToiletPlunger_01.png",
-      "attribute": {
-        "waterElement": 1,
-        "fireElement": 0,
-        "thunderElement": 0,
-        "lightElement": 0,
-        "darkElement": 0,
-        "extraWaterDamage": 10,
-        "extraFireDamage": 0,
-        "extraThunderDamage": 0,
-        "extraLightDamage": 0,
-        "extraDarkDamage": 0,
-        "maxDamage": 40
+      "ImageName": "T_Gem_Piercing_01",
+      "Attribute": {
+        "Damage": 0,
+        "Piercing": 1,
+        "Resonance": 0
       },
-      "slotID": 8,
-      "slotType": 1
-    },
-    {
-      "ID": 5,
-      "rare": 4,
-      "name": "瓦迪的元素壶",
-      "resAllPath": "Assets/Res/UI/Item/Textures/T_Item_Pot_01.png",
-      "attribute": {
-        "waterElement": 16,
-        "fireElement": 25,
-        "thunderElement": 50,
-        "lightElement": 33,
-        "darkElement": 20,
-        "extraWaterDamage": 0,
-        "extraFireDamage": 0,
-        "extraThunderDamage": 0,
-        "extraLightDamage": 0,
-        "extraDarkDamage": 0,
-        "maxDamage": 600
-      },
-      "slotID": 9,
-      "slotType": 1
+      "IsInLay": false,
+      "BulletSlotIndex": -1,
+      "ID": 10,
+      "InstanceID": -216406,
+      "Name": "穿透宝石",
+      "SlotID": 2,
+      "SlotType": 4
     }
   ],
   "SupremeCharms": [],
@@ -262,7 +158,7 @@
     {
       "CurMapID": 1,
       "CurRoomID": 1,
-      "CurMapNodeID": 0,
+      "CurMapNodeID": 1,
       "IsFinishedMaps": [],
       "IsFinishedRooms": [],
       "IsFinishedMapNodes": []

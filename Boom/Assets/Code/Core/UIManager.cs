@@ -50,12 +50,8 @@ public class UIManager : ScriptableObject
     //............CommonRoot.........
     public GameObject TooltipsRoot;
     public GameObject RightClickMenuRoot;
-    public GameObject G_Bullet;
     public GameObject G_StandbyMat;
-
-    public GameObject G_Bag; //背包根节点
-    public GameObject ElementSlotRoot; //元素均衡槽根节点
-    public GameObject ItemRoot; //道具根节点
+    
     public GameObject EffectRoot; //特效根节点
     public GameObject LevelRoot;//关卡根节点
     public GameObject Level; //放置关卡的节点
@@ -78,9 +74,17 @@ public class UIManager : ScriptableObject
     #region 2.MainScene
     public GameObject MainSceneGO;            //切换总闸 
     //1.CharacterScene
-    [Header("EditBulletSecne")]
+    [Header("Bag")]
+    //Bag Bullet
     public GameObject G_BulletSpawnerSlot;  //子弹孵化器的Group
-    public GameObject G_BulletRoleSlot;     //子弹在人物右侧的Group
+    //Bag Item
+    public GameObject BagItemRootGO;           //道具根节点
+    public GameObject EquipItemRootGO;       //元素均衡槽根节点
+    //Bag Gem
+    public GameObject BagGemRootGO;            //宝石根节点
+    //Bag Common
+    public GameObject DragObjRoot;            //拖动物品时候的悬浮父节点
+    public GameObject BagReadySlotRootGO;     //子弹在人物右侧的Group
     
     [Header("MiniMap")]
     public GameObject MapLogicGO;
@@ -101,11 +105,6 @@ public class UIManager : ScriptableObject
         if (MainSceneGO == null)
             MainSceneGO = GameObject.Find("MainScene");
         MainSceneMono curMainSC = MainSceneGO.GetComponent<MainSceneMono>();
-        
-        EditBulletScene CurEditBulletSC = curMainSC.GUIEditScene.GetComponent<EditBulletScene>();
-        G_BulletSpawnerSlot = CurEditBulletSC.G_BulletSpawnerSlot;
-        G_BulletRoleSlot = CurEditBulletSC.G_BulletRoleSlot;
-        G_Bullet = CurEditBulletSC.G_Bullet;
         
         MapScene CurMapSC = curMainSC.GUIMapScene.GetComponent<MapScene>();
         MapLogicGO = CurMapSC.MapLogicGO;
@@ -136,7 +135,7 @@ public class UIManager : ScriptableObject
     void InitComon()
     {
         IsLockedClick = false;
-        
+        InitGUIBag();
         #region InitTileRoot相关
         if (TitleRoot == null)
             TitleRoot = GameObject.Find("TitleRoot");
@@ -149,16 +148,11 @@ public class UIManager : ScriptableObject
         G_StandbyIcon = titleRootMono.G_StandbyIcon;
         G_Help = titleRootMono.G_Help;
         G_Setting = titleRootMono.G_Setting;
-        G_Bag = titleRootMono.G_Bag;
         if (G_Setting == null)
             G_Setting = GameObject.Find("GroupSetting");
         #endregion
         
         //............CommonRoot.........
-        if (ItemRoot == null)
-            ItemRoot = G_Bag.GetComponent<Bag>().ItermRoot;
-        if (ElementSlotRoot == null)
-            ElementSlotRoot = G_Bag.GetComponent<Bag>().ElementSlotRoot;
         
         if (TooltipsRoot == null)
             TooltipsRoot = GameObject.Find("TooltipsRoot");
@@ -169,8 +163,8 @@ public class UIManager : ScriptableObject
         if (G_StandbyMat == null)
             G_StandbyMat = GameObject.Find("G_StandbyMat");
         
-        if (G_Bullet == null)
-            G_Bullet = GameObject.Find("G_Bullet");
+        if (DragObjRoot == null)
+            DragObjRoot = GameObject.Find("G_Bullet");
         
         if(EffectRoot == null)
             EffectRoot = GameObject.Find("EffectRoot");
@@ -180,5 +174,31 @@ public class UIManager : ScriptableObject
             LevelRoot = GameObject.Find("LevelRoot");
             Level = LevelRoot.transform.GetChild(0).gameObject;
         }
+    }
+
+    void InitGUIBag()
+    {
+        if(MainSceneGO == null)
+            MainSceneGO = GameObject.Find("MainScene");
+        if(MainSceneGO == null)
+            return;
+        
+        MainSceneMono curMainSC = MainSceneGO.GetComponent<MainSceneMono>();
+        BagRoot bagRootSC = curMainSC.GUIBagRoot.GetComponent<BagRoot>();
+        BagReadySlotRootGO = bagRootSC.BagReadySlotGO;
+        DragObjRoot = bagRootSC.DragObjRootGO;
+        
+        #region 初始化背包子弹编辑界面的GUI逻辑
+        BagBulletRoot bagBulletRootSC = bagRootSC.BagBulletRootGO.GetComponent<BagBulletRoot>();
+        G_BulletSpawnerSlot = bagBulletRootSC.G_BulletSpawnerSlot;
+        #endregion
+
+        #region 初始化BagItem界面
+        BagItemRootGO = bagRootSC.BagItemRootGO;
+        BagItemRoot BagItemRootSC = BagItemRootGO.GetComponent<BagItemRoot>();
+        EquipItemRootGO = BagItemRootSC.ElementSlotRootGO; //元素均衡槽根节点
+        #endregion
+
+        BagGemRootGO = bagRootSC.BagGemRootGO;
     }
 }

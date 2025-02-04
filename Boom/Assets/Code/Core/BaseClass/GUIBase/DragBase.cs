@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DragBase : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, 
+public class DragBase : ItemBase, IPointerDownHandler, IPointerUpHandler, 
     IDragHandler,IPointerExitHandler,IPointerMoveHandler
 {
+    //其他属性
     internal GameObject _dragIns; //当前拖拽物
     internal Vector3 originalPosition; //拖拽物原始位置
     internal SlotBase _curSlot; //当前拖拽物所在的Slot
+
+    internal Transform originalParent;//拖拽中的物品原始父层级
+    internal Transform dragObjParent; //拖拽中的物品所在的父层级
+    
+    //
+    RectTransform rectTransform;
     //ToolTips相关
     internal GameObject TooltipsGO;
     internal GameObject RightClickMenuGO;
@@ -18,13 +25,21 @@ public class DragBase : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
     internal virtual void Start()
     {
         _dragIns = gameObject;
+        rectTransform = GetComponent<RectTransform>();
+        dragObjParent = UIManager.Instance.DragObjRoot.transform;
         IsToolTipsDisplay = true;
     }
+    
+    public override void SyncData() {}//实现一下继承的抽象类
 
     //鼠标按下时
     public virtual void OnPointerDown(PointerEventData eventData)
     {
         UIManager.Instance.IsLockedClick = true;
+        //改变父层级
+        originalParent = _dragIns.transform.parent;
+        _dragIns.transform.SetParent(dragObjParent);
+        
         _eventData = eventData;
         if (eventData.button == PointerEventData.InputButton.Left)
         {
@@ -41,6 +56,7 @@ public class DragBase : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
     public virtual void OnPointerUp(PointerEventData eventData)
     {
         UIManager.Instance.IsLockedClick = false;
+        
         if (eventData.button == PointerEventData.InputButton.Right)
             return;
         DestroyTooltips();
@@ -51,12 +67,14 @@ public class DragBase : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
         bool NonHappen = true; // 发生Slot drop down 逻辑
         foreach (RaycastResult result in results)
         {
-            SlotBase curSlotSC = result.gameObject.GetComponent<SlotBase>();
-            if (curSlotSC!=null)
+            if (result.gameObject.TryGetComponent(out SlotBase curSlotSC))
             {
                 _curSlot = curSlotSC;
+                _dragIns.transform.position = _curSlot.transform.position; //同步位置
+                _dragIns.transform.SetParent(_curSlot.transform, true);//改变父层级
                 VOnDrop();
                 NonHappen = false;
+                curSlotSC.SOnDrop();
                 break;
             }
         }
@@ -74,11 +92,14 @@ public class DragBase : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
     {
         // 如果没有找到槽位，那么物品回到原始位置
         _dragIns.transform.position = originalPosition;
+        //还原父层级
+        _dragIns.transform.SetParent(originalParent,true);
     }
 
     //右击
     internal virtual void RightClick()
     {
+        DisplayRightClickMenu(_eventData);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -113,10 +134,8 @@ public class DragBase : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
     //捕捉鼠标位置转化为世界空间位置
     Vector3 GetWPosByMouse(PointerEventData eventData)
     {
-        RectTransform rectTransform = transform.GetComponent<RectTransform>();
-        Vector3 worldPoint;
         RectTransformUtility.ScreenPointToWorldPointInRectangle(rectTransform, 
-            eventData.position, eventData.pressEventCamera, out worldPoint);
+            eventData.position, eventData.pressEventCamera, out Vector3 worldPoint);
         return worldPoint;
     }
     
@@ -158,9 +177,11 @@ public class DragBase : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
             RightClickMenuGO.transform.SetParent(
                 UIManager.Instance.RightClickMenuRoot.transform,false);
         }
-        RightClickMenu curSc = RightClickMenuGO.GetComponent<RightClickMenu>();
-        curSc.CurIns = eventData.pointerEnter.transform.parent.gameObject;
-        RightClickMenuGO.transform.position = GetWPosByMouse(eventData);
+        if (RightClickMenuGO.TryGetComponent(out RightClickMenu curSc))
+        {
+            curSc.CurIns = eventData.pointerEnter?.transform.parent?.gameObject;
+            RightClickMenuGO.transform.position = GetWPosByMouse(eventData);
+        }
     }
     
     internal void DestroyRightClickMenu()

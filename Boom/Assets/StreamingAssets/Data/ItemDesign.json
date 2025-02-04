@@ -1,10 +1,9 @@
 [
   {
-    "ID": 1,
-    "rare": 1,
-    "name": "易拉罐",
-    "resName": "T_Item_Can_01",
-    "attribute": {
+    "Rare": 1,
+    "Name": "易拉罐",
+    "ImageName": "T_Item_Can_01",
+    "Attribute": {
       "waterElement": 0,
       "fireElement": 1,
       "thunderElement": 0,
@@ -16,14 +15,17 @@
       "extraLightDamage": 0,
       "extraDarkDamage": 0,
       "maxDamage": 30
-    }
+    },
+    "ID": 1,
+    "InstanceID": -1,
+    "SlotID": 0,
+    "SlotType": 0
   },
   {
-    "ID": 2,
-    "rare": 1,
-    "name": "马桶搋子",
-    "resName": "T_Item_ToiletPlunger_01",
-    "attribute": {
+    "Rare": 1,
+    "Name": "马桶搋子",
+    "ImageName": "T_Item_ToiletPlunger_01",
+    "Attribute": {
       "waterElement": 1,
       "fireElement": 0,
       "thunderElement": 0,
@@ -35,14 +37,17 @@
       "extraLightDamage": 0,
       "extraDarkDamage": 0,
       "maxDamage": 40
-    }
+    },
+    "ID": 2,
+    "InstanceID": -1,
+    "SlotID": 0,
+    "SlotType": 0
   },
   {
-    "ID": 3,
-    "rare": 1,
-    "name": "生锈菜刀",
-    "resName": "T_Item_KitchenKnife_01",
-    "attribute": {
+    "Rare": 1,
+    "Name": "生锈菜刀",
+    "ImageName": "T_Item_KitchenKnife_01",
+    "Attribute": {
       "waterElement": 0,
       "fireElement": 0,
       "thunderElement": 1,
@@ -54,14 +59,17 @@
       "extraLightDamage": 0,
       "extraDarkDamage": 0,
       "maxDamage": 35
-    }
+    },
+    "ID": 3,
+    "InstanceID": -1,
+    "SlotID": 0,
+    "SlotType": 0
   },
   {
-    "ID": 4,
-    "rare": 2,
-    "name": "折断魔杖",
-    "resName": "T_Item_BreakWand_01",
-    "attribute": {
+    "Rare": 2,
+    "Name": "折断魔杖",
+    "ImageName": "T_Item_BreakWand_01",
+    "Attribute": {
       "waterElement": 1,
       "fireElement": 0,
       "thunderElement": 1,
@@ -73,14 +81,17 @@
       "extraLightDamage": 0,
       "extraDarkDamage": 0,
       "maxDamage": 100
-    }
+    },
+    "ID": 4,
+    "InstanceID": -1,
+    "SlotID": 0,
+    "SlotType": 0
   },
   {
-    "ID": 5,
-    "rare": 3,
-    "name": "小块秘银",
-    "resName": "T_Item_Mithril _01",
-    "attribute": {
+    "Rare": 3,
+    "Name": "小块秘银",
+    "ImageName": "T_Item_Mithril _01",
+    "Attribute": {
       "waterElement": 0,
       "fireElement": 0,
       "thunderElement": 0,
@@ -92,14 +103,17 @@
       "extraLightDamage": 200,
       "extraDarkDamage": 200,
       "maxDamage": 300
-    }
+    },
+    "ID": 5,
+    "InstanceID": -1,
+    "SlotID": 0,
+    "SlotType": 0
   },
   {
-    "ID": 5,
-    "rare": 4,
-    "name": "瓦迪的元素壶",
-    "resName": "T_Item_Pot_01",
-    "attribute": {
+    "Rare": 4,
+    "Name": "瓦迪的元素壶",
+    "ImageName": "T_Item_Pot_01",
+    "Attribute": {
       "waterElement": 16,
       "fireElement": 25,
       "thunderElement": 50,
@@ -111,6 +125,10 @@
       "extraLightDamage": 0,
       "extraDarkDamage": 0,
       "maxDamage": 600
-    }
+    },
+    "ID": 5,
+    "InstanceID": -1,
+    "SlotID": 0,
+    "SlotType": 0
   }
 ]

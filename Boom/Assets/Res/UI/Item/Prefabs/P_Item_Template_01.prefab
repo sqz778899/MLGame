@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 741252958351894732}
-  - component: {fileID: 4241238537150228815}
+  - component: {fileID: 5859342663554968164}
   m_Layer: 5
   m_Name: P_Item_Template_01
   m_TagString: Untagged
@@ -24,7 +24,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2621614607781689709}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -39,7 +39,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4241238537150228815
+--- !u!114 &5859342663554968164
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -48,9 +48,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 2621614607781689709}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8417122c01f2ee043a15c547a28b104e, type: 3}
+  m_Script: {fileID: 11500000, guid: 0bca688204ea3084d8e73e9ab59dc89e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ID: 0
+  InstanceID: 0
+  SlotID: 0
+  SlotType: 0
+  preID: 0
+  Rare: 0
+  Name: 
+  Attribute:
+    waterElement: 0
+    fireElement: 0
+    thunderElement: 0
+    lightElement: 0
+    darkElement: 0
+    extraWaterDamage: 0
+    extraFireDamage: 0
+    extraThunderDamage: 0
+    extraLightDamage: 0
+    extraDarkDamage: 0
+    maxDamage: 0
   ItemSprite: {fileID: 7565019352125093693}
   ItemBGInBag: {fileID: 8670285074962067189}
   ItemBGInElement: {fileID: 346373297690352967}
@@ -59,28 +78,6 @@ MonoBehaviour:
   Rare2: {r: 0.27411884, g: 0.45285472, b: 0.7924528, a: 1}
   Rare3: {r: 0.6115514, g: 0.31149873, b: 0.7075472, a: 1}
   Rare4: {r: 0.9150943, g: 0.78728676, b: 0.3856057, a: 1}
-  CurItem:
-    ID: 0
-    rare: 0
-    name: 
-    resAllPath: 
-    attribute:
-      waterElement: 0
-      fireElement: 0
-      thunderElement: 0
-      lightElement: 0
-      darkElement: 0
-      extraWaterDamage: 0
-      extraFireDamage: 0
-      extraThunderDamage: 0
-      extraLightDamage: 0
-      extraDarkDamage: 0
-      maxDamage: 0
-    slotID: 0
-    slotType: 0
-  InstanceID: 0
-  SlotID: 0
-  CurItemSlotType: 0
 --- !u!1 &4516936844340576216
 GameObject:
   m_ObjectHideFlags: 0

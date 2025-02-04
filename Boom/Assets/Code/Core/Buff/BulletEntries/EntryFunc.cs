@@ -32,7 +32,7 @@ public static class EntryFunc
         bool IsPassed = true;
         foreach (var each in MainRoleManager.Instance.CurBullets)
         {
-            if (each.GetBulletData().elementalType != ElementalTypes.Non)
+            if (each.ElementalType != (int)ElementalTypes.Non)
                 IsPassed = false;
         }
 
@@ -45,7 +45,7 @@ public static class EntryFunc
         
         HashSet<int> set = new HashSet<int>();
         foreach (var each in MainRoleManager.Instance.CurBullets)
-            set.Add(each.bulletID);
+            set.Add(each.ID);
 
         foreach (var each in set)
             bulletIdToDamage.Add(each,1);
@@ -60,18 +60,18 @@ public static class EntryFunc
         int ID = 2;
         
         MainRoleManager.Instance.RemoveBulletBuff(ID);
-        List<BulletReady> CurBullets = MainRoleManager.Instance.CurBullets;
+        List<BulletJson> CurBullets = MainRoleManager.Instance.CurBullets;
         for (int i = 0; i < CurBullets.Count; i++)
         {
             if (CurBullets.Count > i + 1)
             {
-                if (CurBullets[i].GetBulletData().elementalType == ElementalTypes.Ice &&
-                    CurBullets[i + 1].GetBulletData().elementalType == ElementalTypes.Fire)
+                if (CurBullets[i].ElementalType == (int)ElementalTypes.Ice &&
+                    CurBullets[i + 1].ElementalType == (int)ElementalTypes.Fire)
                 {
                     BulletBuff curBuff = new BulletBuff();
-                    BulletReady curBullet = CurBullets[i];
-                    BulletReady nextBullet = CurBullets[i + 1];
-                    int allDamage = curBullet.GetBulletData().damage + nextBullet.GetBulletData().damage;
+                    BulletJson curBullet = CurBullets[i];
+                    BulletJson nextBullet = CurBullets[i + 1];
+                    int allDamage = curBullet.Damage + nextBullet.Damage;
                     curBuff.indexToSettleDamage.Add(i + 1,allDamage);
                 }
             }
@@ -86,9 +86,9 @@ public static class EntryFunc
         MainRoleManager.Instance.RemoveBulletBuff(ID);
         bool IsPassed = true;
         List<int> numbers = new List<int>();
-        List<BulletReady> CurBullets = MainRoleManager.Instance.CurBullets;
+        List<BulletJson> CurBullets = MainRoleManager.Instance.CurBullets;
         for (int i = 0; i < CurBullets.Count; i++)
-            numbers.Add(CurBullets[i].bulletID);
+            numbers.Add(CurBullets[i].ID);
       
         HashSet<int> set = new HashSet<int>();
         foreach (var num in numbers)
@@ -103,7 +103,7 @@ public static class EntryFunc
             curBuff.ID = ID;
             Dictionary<int, int> bulletIdToDamage = new Dictionary<int, int>();
             foreach (var each in MainRoleManager.Instance.CurBullets)
-                bulletIdToDamage.Add(each.bulletID,5);
+                bulletIdToDamage.Add(each.ID,5);
             curBuff.bulletIdToDamage = bulletIdToDamage;
             MainRoleManager.Instance.CurBulletBuffs.Add(curBuff);
         }
@@ -117,11 +117,11 @@ public static class EntryFunc
         
         bool IsPassed = false;
         int buffLevel = 0;
-        List<BulletReady> CurBullets = MainRoleManager.Instance.CurBullets;
+        List<BulletJson> CurBullets = MainRoleManager.Instance.CurBullets;
         for (int i = 0; i < CurBullets.Count; i++)
         {
-            BulletData curData = CurBullets[i].GetBulletData();
-            if (curData.elementalType == ElementalTypes.Non)
+            BulletJson curData = CurBullets[i];
+            if (curData.ElementalType == (int)ElementalTypes.Non)
             {
                 if (curData.Level == 2)
                 {
@@ -144,8 +144,8 @@ public static class EntryFunc
         HashSet<int> set = new HashSet<int>();
         for (int i = 0; i < CurBullets.Count; i++)
         {
-            if (CurBullets[i].GetBulletData().elementalType == ElementalTypes.Non)
-                set.Add(CurBullets[i].bulletID);
+            if (CurBullets[i].ElementalType == (int)ElementalTypes.Non)
+                set.Add(CurBullets[i].ID);
         }
         if (buffLevel == 2)
         {

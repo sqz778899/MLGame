@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Spine.Unity;
 using Spine.Unity.Editor;
 using Unity.Mathematics;
@@ -43,33 +44,19 @@ public class BulletManager :ScriptableObject
         ,Vector3 pos = new Vector3())
     {
         GetIns(bulletInsMode, out GameObject Bullet,pos);
-        BulletBase bulletbase = Bullet.GetComponentInChildren<BulletBase>();
+        Bullet bulletbase = Bullet.GetComponentInChildren<Bullet>();
         SkeletonAnimation curAniSC = Bullet.GetComponentInChildren<SkeletonAnimation>();
         //curAniSC?.Initialize(true);
         bulletbase.Ins = Bullet;
-        bulletbase._bulletData.ID = ID;
+        bulletbase.ID = ID;
         bulletbase.InstanceID = Bullet.GetInstanceID();
-        bulletbase.bulletInsMode = bulletInsMode;
-        bulletbase.InitBulletData();
+        bulletbase.BulletInsMode = bulletInsMode;
+        bulletbase.SyncData();
         if (curAniSC != null)
             SpineEditorUtilities.ReloadSkeletonDataAssetAndComponent(curAniSC);
         return Bullet;
     }
     
-    //使用真的InstanceID
-    public GameObject InstanceBullet(BulletData bulletData,
-        BulletInsMode bulletInsMode,Vector3 pos = new Vector3())
-    {
-        GetIns(bulletInsMode, out GameObject Bullet,pos);
-        BulletBase bulletbase = Bullet.GetComponentInChildren<BulletBase>();
-        bulletbase.Ins = Bullet;
-        bulletbase.InstanceID = Bullet.GetInstanceID();
-        bulletbase._bulletData = bulletData;
-        bulletbase.bulletInsMode = bulletInsMode;
-        bulletbase.InitBulletData();
-        return Bullet;
-    }
-
     public GameObject InstanceStandbyMat(int bulletID,GameObject curSlot = null)
     {
         GetIns(BulletInsMode.Standby, out GameObject StandbyMatIns);
@@ -84,14 +71,17 @@ public class BulletManager :ScriptableObject
     #region 给Tooltip用
     public BulletTooltipInfo GetBulletInfo(int bulletID)
     {
-        BulletDataJson curDsData = TrunkManager.Instance.GetBulletDesignData(bulletID);
+        BulletJson curDsData = TrunkManager.Instance.GetBulletDesignData(bulletID);
+        if (curDsData == null) return null;
+      
         BulletTooltipInfo tInfo = new BulletTooltipInfo();
         tInfo.bulletImage = ResManager.instance.GetAssetCache<Sprite>(
             PathConfig.GetBulletImageOrSpinePath(bulletID, BulletInsMode.Thumbnail));
-        tInfo.name = curDsData.name;
-        string ElementalType = ((ElementalTypes)curDsData.elementalType).ToString();
+        tInfo.name = curDsData.Name;    
+        //tInfo.name = curDsData.Name;
+        string ElementalType = ((ElementalTypes)curDsData.ElementalType).ToString();
         tInfo.description = string.Format("Lv: {0}\nDamage: {1}\nElement: {2}",
-            curDsData.Level,curDsData.damage,ElementalType);
+            curDsData.Level,curDsData.Damage,ElementalType);
         return tInfo;
     }
 

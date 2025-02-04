@@ -11,17 +11,18 @@ public enum WinOrFail
 #endregion
 
 #region 存档相关
+[Serializable]
 public class SaveFileJson
 {
     public int Score;
     public int Gold;
-    public List<BulletSpawner> UserBulletSpawner;
-    public List<BulletReady> UserCurBullets;
+    public List<BulletJson> UserBulletSpawner;
+    public List<BulletJson> UserCurBullets;
     public List<BulletEntry> UserBulletEntries;
     public List<StandbyData> UserStandbyBullet;
     public List<int> UserCurBuff;
     
-    public List<Item> UserItems;
+    public List<ItemJson> UserItems;
     public List<GemJson> UserGems;
     public List<int> SupremeCharms;
     public List<MapSate> UserMapSate;

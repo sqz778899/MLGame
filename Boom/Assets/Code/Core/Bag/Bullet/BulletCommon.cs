@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using Spine.Unity;
-using Spine.Unity.Editor;
-using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 #region 一些枚举类
 public enum MutMode
@@ -54,122 +48,8 @@ public class StandbyData:HaveID
         InstanceID = instanceID;
     }
 }
-
-[Serializable]
-public class BulletSpawner
-{
-    public int bulletID;
-    public int bulletCount;
-    public BulletSpawner(int _bulletID = 0,int _bulletCount = 0)
-    {
-        bulletID = _bulletID;
-        bulletCount = _bulletCount;
-    }
-}
-
-[Serializable]
-public class BulletReady
-{
-    public int bulletID;
-    public int curSlotID;
-    public int instanceID;
-    public BulletReady(int _bulletID,int _curSlotID,int _instanceID = -1)
-    {
-        bulletID = _bulletID;
-        curSlotID = _curSlotID;
-        instanceID = _instanceID;
-    }
-
-    public BulletData GetBulletData()
-    {
-        BulletData curData = new BulletData(bulletID);
-        curData.SetDataByID();
-        return curData;
-    }
-}
-
-[Serializable]
-public class BulletData
-{
-    //.............Attribute..............
-    public int ID;
-    public int Level;
-    public string name;
-    public int damage;
-    public int penetration;
-    public ElementalTypes elementalType;
-    
-    //..............Instance..............
-    public Sprite imgBullet;     //....image自动根据ID设置
-    public GameObject hitEffect; // 击中效果预制体
-    public SkeletonDataAsset bulletSpineAsset; // 子弹Spine资产
-    public SkeletonDataAsset hitSpfxAsset; // 子弹击中效果子弹Spine资产资产
-
-    public void SetDataByID(BulletInsMode bulletInsMode = BulletInsMode.EditA)
-    {
-        BulletDataJson curData = null;
-        List<BulletDataJson> BulletDesignJsons = TrunkManager.Instance.BulletDesignJsons;
-        foreach (BulletDataJson eachDesignJson in BulletDesignJsons)
-        {
-            if (eachDesignJson.ID == ID)
-            {
-                curData = eachDesignJson;
-                break;
-            }
-        }
-        ID = curData.ID;
-        Level = curData.Level;
-        name = curData.name;
-        damage = curData.damage;
-        penetration = curData.penetration;
-        elementalType = (ElementalTypes)curData.elementalType;
-
-        imgBullet = ResManager.instance.GetAssetCache<Sprite>
-            (PathConfig.GetBulletImageOrSpinePath(ID, bulletInsMode));
-        bulletSpineAsset = ResManager.instance.GetAssetCache<SkeletonDataAsset>
-            (PathConfig.GetBulletImageOrSpinePath(ID,bulletInsMode));
-        //实例化Prefab
-        hitEffect = ResManager.instance.GetAssetCache<GameObject>(
-            PathConfig.BulletSpfxTemplate);
-        hitSpfxAsset = ResManager.instance.GetAssetCache<SkeletonDataAsset>
-            (PathConfig.GetBulletSpfxPath(ID));
-    }
-
-    public BulletDataJson GetJsonData()
-    {
-        if (ID == null)
-            return null;
-
-        BulletDataJson curDataJson = null;
-        foreach (BulletDataJson perDataJson in TrunkManager.Instance.BulletDesignJsons)
-        {
-            if (ID == perDataJson.ID)
-                curDataJson = perDataJson;
-        }
-        return curDataJson;
-    }
-
-    public BulletData(int _id)
-    {
-        ID = _id;
-    }
-}
-
-[Serializable]
-
 #endregion
 
-public class BulletDataJson
-{
-    public int ID;
-    public int Level;
-    public string name;
-    public int damage;
-    public int penetration;
-    public int elementalType;
-    
-    public string hitEffectName;
-}
 
 //在场内子弹的状态
 public enum BulletInnerState

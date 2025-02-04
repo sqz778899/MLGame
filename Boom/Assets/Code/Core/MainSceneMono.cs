@@ -4,6 +4,8 @@ using UnityEngine;
 public class MainSceneMono:MonoBehaviour
 {
     //GUIEditScene
+    [Header("BagRoot")]
+    public GameObject GUIBagRoot;
     [Header("GUIEditScene")]
     public GameObject GUIEditScene;
     //MapScene

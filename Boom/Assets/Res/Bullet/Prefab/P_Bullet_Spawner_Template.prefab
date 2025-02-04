@@ -293,6 +293,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3550475874872731627}
+  - component: {fileID: 6676177174455874396}
   m_Layer: 5
   m_Name: P_Bullet_Spawner_Template
   m_TagString: Untagged
@@ -313,6 +314,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4867039856259110931}
+  - {fileID: 426107729241396049}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -320,6 +322,39 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6676177174455874396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3800383386113728593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dc2ee539f03a37409343e10b7d88c93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 0
+  Name: 
+  InstanceID: 0
+  SlotID: 0
+  SlotType: 0
+  _level: 0
+  Damage: 0
+  Piercing: 0
+  Resonance: 0
+  ElementalType: 0
+  Ins: {fileID: 0}
+  Edit_a: {fileID: 0}
+  Edit_b: {fileID: 0}
+  _bulletInsMode: 0
+  HitEffect: {fileID: 0}
+  BulletSpineAsset: {fileID: 0}
+  HitSpfxAsset: {fileID: 0}
+  SelfGems: []
+  Count: 0
+  childBulletIns: {fileID: 0}
+  txtCount: {fileID: 7225459898815611356}
 --- !u!1 &3847564016434351185
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,11 +386,11 @@ RectTransform:
   - {fileID: 6040184905469869275}
   - {fileID: 1741591373455212439}
   - {fileID: 3001553890567405733}
-  m_Father: {fileID: 4867039856259110931}
+  m_Father: {fileID: 3550475874872731627}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -21.1}
+  m_AnchoredPosition: {x: 0, y: -8.800074}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4781008694240630157
@@ -446,7 +481,6 @@ GameObject:
   - component: {fileID: 7684855849994658922}
   - component: {fileID: 7000740942022823373}
   - component: {fileID: 5732162747966191305}
-  - component: {fileID: 9204701857050898957}
   m_Layer: 5
   m_Name: imgBullet
   m_TagString: Untagged
@@ -467,7 +501,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2034359263348376232}
-  - {fileID: 426107729241396049}
   m_Father: {fileID: 3550475874872731627}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -553,31 +586,3 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 55
---- !u!114 &9204701857050898957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6981210054020481451}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dc2ee539f03a37409343e10b7d88c93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  forward: {x: 1, y: 0, z: 0}
-  InstanceID: 0
-  _bulletData:
-    ID: 1
-    Level: 0
-    name: 
-    damage: 0
-    penetration: 0
-    elementalType: 0
-    imgBullet: {fileID: 0}
-    hitEffect: {fileID: 0}
-  bulletInsMode: 0
-  GroupStar: {fileID: 3847564016434351185}
-  Count: 5
-  childBulletIns: {fileID: 0}
-  txtCount: {fileID: 7225459898815611356}

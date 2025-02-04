@@ -4,37 +4,38 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DraggableBulletSpawner : BulletBase, IPointerDownHandler, 
+public class DraggableBulletSpawner : Bullet, IPointerDownHandler, 
     IPointerUpHandler, IDragHandler,IPointerExitHandler,IPointerMoveHandler
 {
     public int Count;
     public GameObject childBulletIns;
     public TextMeshProUGUI txtCount;
 
-    void Start()
+    internal void Start()
     {
+        base.Start();
         childBulletIns = null;
     }
 
     void Update()
     {
-        base.Update();
         txtCount.text = "X" + Count;
     }
+    
     public void OnPointerDown(PointerEventData eventData)
     {
         DestroyTooltips();
         if (childBulletIns == null && Count > 0)
         {
-            childBulletIns = BulletManager.Instance.InstanceBullet(_bulletData,BulletInsMode.EditA,transform.parent.position);
-            childBulletIns.transform.SetParent(UIManager.Instance.G_Bullet.transform);
+            childBulletIns = BulletManager.Instance.InstanceBullet(ID,BulletInsMode.EditA,transform.parent.position);
+            childBulletIns.transform.SetParent(UIManager.Instance.DragObjRoot.transform);
             childBulletIns.transform.localScale = Vector3.one;
             DraggableBullet DraBuSC = childBulletIns.GetComponentInChildren<DraggableBullet>();
             DraBuSC.originalPosition = transform.position;
-            MainRoleManager.Instance.TmpHongSpawner(_bulletData.ID);
+            MainRoleManager.Instance.TmpHongSpawner(ID);
+            MainRoleManager.Instance.RefreshAllItems();
         }
     }
-    
 
     public void OnPointerUp(PointerEventData eventData)
     {

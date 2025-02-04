@@ -7,7 +7,7 @@ using Spine.Unity.Editor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class BulletInner : BulletBase
+public class BulletInner : Bullet
 {
     public float FollowDis = 3;
     public float RunSpeed = 10.0f;
@@ -26,8 +26,9 @@ public class BulletInner : BulletBase
     public float AniScale = 1f;
     List<GameObject> FXs;
 
-    void Start()
+    internal override void Start()
     {
+        base.Start();
         _state = BulletInnerState.Common;
         _ain = transform.GetChild(0).GetComponent<SkeletonAnimation>();
         AniUtility.PlayIdle(_ain,AniScale);
@@ -63,11 +64,11 @@ public class BulletInner : BulletBase
             Enemy enemy = other.GetComponent<Enemy>();
             if (enemy != null)
             {
-                CalculateDamageManager.Instance.CalDamage(_bulletData,enemy);
+                CalculateDamageManager.Instance.CalDamage(this,enemy);
             }
 
             // 创建击中特效
-            if (_bulletData.hitEffect != null)
+            if (HitEffect != null)
             {
                 StartCoroutine(PlayHitFX());
             }
@@ -137,9 +138,9 @@ public class BulletInner : BulletBase
 
     public IEnumerator PlayHitFX()
     {
-        GameObject curFX = Instantiate(_bulletData.hitEffect, transform.position, transform.rotation);
+        GameObject curFX = Instantiate(HitEffect, transform.position, transform.rotation);
         SkeletonAnimation curSpfxSC = curFX.GetComponentInChildren<SkeletonAnimation>();
-        curSpfxSC.skeletonDataAsset = _bulletData.hitSpfxAsset;
+        curSpfxSC.skeletonDataAsset = HitSpfxAsset;
         SpineEditorUtilities.ReloadSkeletonDataAssetAndComponent(curSpfxSC);
         float aniTime = 0f;
         AniUtility.PlayAttack(curSpfxSC,ref aniTime,AniScale);

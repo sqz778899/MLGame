@@ -6,4 +6,9 @@ public class SlotBase : MonoBehaviour
     public int MainID;
     public int InstanceID;
     public SlotType SlotType;
+
+    public virtual void SOnDrop()
+    {
+        
+    }
 }

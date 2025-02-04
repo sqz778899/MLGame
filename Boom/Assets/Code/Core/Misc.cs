@@ -87,43 +87,10 @@ public class ElementState
     public bool ELPureWaterLV;
 }
 
-[Serializable]
-public class ItemAttribute
-{
-    public int waterElement;
-    public int fireElement;
-    public int thunderElement;
-    public int lightElement;
-    public int darkElement;
 
-    public int extraWaterDamage;
-    public int extraFireDamage;
-    public int extraThunderDamage;
-    public int extraLightDamage;
-    public int extraDarkDamage;
-    
-    public int maxDamage;
-
-    public ItemAttribute()
-    {
-        waterElement = 0;
-        fireElement = 0;
-        thunderElement = 0;
-        lightElement = 0;
-        darkElement = 0;
-        
-        //
-        extraWaterDamage = 0;
-        extraFireDamage = 0;
-        extraThunderDamage = 0;
-        extraLightDamage = 0;
-        extraDarkDamage = 0;
-        maxDamage = 0;
-    }
-}
 
 [Serializable]
-public class Item
+public class ItemSS
 {
     public int ID;
     public int rare;
@@ -143,49 +110,31 @@ public class Item
         {
             if (each.ID == ID)
             {
-                rare = each.rare;
-                name = each.name;
-                resAllPath = PathConfig.ItemImageDir + each.resName + ".png";
-                attribute.waterElement = each.attribute.waterElement;
-                attribute.fireElement = each.attribute.fireElement;
-                attribute.thunderElement = each.attribute.thunderElement;
-                attribute.lightElement = each.attribute.lightElement;
-                attribute.darkElement = each.attribute.darkElement;
+                rare = each.Rare;
+                name = each.Name;
+                resAllPath = PathConfig.ItemImageDir + each.ImageName + ".png";
+                attribute.waterElement = each.Attribute.waterElement;
+                attribute.fireElement = each.Attribute.fireElement;
+                attribute.thunderElement = each.Attribute.thunderElement;
+                attribute.lightElement = each.Attribute.lightElement;
+                attribute.darkElement = each.Attribute.darkElement;
                 //
-                attribute.extraWaterDamage = each.attribute.extraWaterDamage;
-                attribute.extraFireDamage = each.attribute.extraFireDamage;
-                attribute.extraThunderDamage = each.attribute.extraThunderDamage;
-                attribute.extraLightDamage = each.attribute.extraLightDamage;
-                attribute.extraDarkDamage = each.attribute.extraDarkDamage;
-                attribute.maxDamage = each.attribute.maxDamage;
+                attribute.extraWaterDamage = each.Attribute.extraWaterDamage;
+                attribute.extraFireDamage = each.Attribute.extraFireDamage;
+                attribute.extraThunderDamage = each.Attribute.extraThunderDamage;
+                attribute.extraLightDamage = each.Attribute.extraLightDamage;
+                attribute.extraDarkDamage = each.Attribute.extraDarkDamage;
+                attribute.maxDamage = each.Attribute.maxDamage;
             }
         }
     }
-    public Item(int _id)
+    public ItemSS(int _id)
     {
         ID = _id;
         InitItemDataByID();
     }
 }
 
-public class ItemJson
-{
-    public int ID;
-    public int rare;
-    public string name;
-    public string resName;
-    
-    public ItemAttribute attribute;
-    
-    public ItemJson()
-    {
-        ID = -1;
-        rare = -1;
-        name = "";
-        resName = "";
-        attribute = new ItemAttribute();
-    }
-}
 
 [Serializable]
 public class SupremeCharm
@@ -213,5 +162,6 @@ public enum SlotType
     BagSlot = 1,
     BulletSlot = 2,
     ElementSlot = 3,
-    GemSlot = 4,
+    GemBagSlot = 4,
+    GemInlaySlot = 5,
 }

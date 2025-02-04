@@ -29,20 +29,21 @@ public class ExcelExport
     public void ExportBullet()
     {
         DataSet curTables = GetDataSet();
-        List<BulletDataJson> curBulletDesign = new List<BulletDataJson>();
+        List<BulletJson> curBulletDesign = new List<BulletJson>();
         DataTable curTable = curTables.Tables[0];
        
         for (int i = 1; i < curTable.Rows.Count; i++)
         {
-            BulletDataJson curData = new BulletDataJson();
+            BulletJson curData = new BulletJson();
             if (curTable.Rows[i][1].ToString() == "") continue;
             curData.ID = int.Parse(curTable.Rows[i][0].ToString());
             curData.Level = int.Parse(curTable.Rows[i][1].ToString());
-            curData.name = curTable.Rows[i][2].ToString();
-            curData.damage = int.Parse(curTable.Rows[i][3].ToString());
-            curData.penetration = int.Parse(curTable.Rows[i][4].ToString());
-            curData.elementalType = int.Parse(curTable.Rows[i][5].ToString());
-            curData.hitEffectName = curTable.Rows[i][6].ToString();
+            curData.Name = curTable.Rows[i][2].ToString();
+            curData.Damage = int.Parse(curTable.Rows[i][3].ToString());
+            curData.Piercing = int.Parse(curTable.Rows[i][4].ToString());
+            curData.Resonance = 0;
+            curData.ElementalType = int.Parse(curTable.Rows[i][5].ToString());
+            curData.HitEffectName = curTable.Rows[i][6].ToString();
             curBulletDesign.Add(curData);
         }
         
@@ -76,23 +77,23 @@ public class ExcelExport
             var s = curTable.Rows[i][1];
             if (curTable.Rows[i][1].ToString() == "") continue;
             curItem.ID = int.Parse(curTable.Rows[i][0].ToString());
-            curItem.rare = int.Parse(curTable.Rows[i][1].ToString());
-            curItem.name = curTable.Rows[i][2].ToString();
-            curItem.attribute.waterElement = GetCellInt(curTable.Rows[i][3].ToString());
-            curItem.attribute.fireElement = GetCellInt(curTable.Rows[i][4].ToString());
-            curItem.attribute.thunderElement = GetCellInt(curTable.Rows[i][5].ToString());
-            curItem.attribute.lightElement = GetCellInt(curTable.Rows[i][6].ToString());
-            curItem.attribute.darkElement = GetCellInt(curTable.Rows[i][7].ToString());
+            curItem.Rare = int.Parse(curTable.Rows[i][1].ToString());
+            curItem.Name = curTable.Rows[i][2].ToString();
+            curItem.Attribute.waterElement = GetCellInt(curTable.Rows[i][3].ToString());
+            curItem.Attribute.fireElement = GetCellInt(curTable.Rows[i][4].ToString());
+            curItem.Attribute.thunderElement = GetCellInt(curTable.Rows[i][5].ToString());
+            curItem.Attribute.lightElement = GetCellInt(curTable.Rows[i][6].ToString());
+            curItem.Attribute.darkElement = GetCellInt(curTable.Rows[i][7].ToString());
             //
-            curItem.attribute.extraWaterDamage = GetCellInt(curTable.Rows[i][8].ToString());
-            curItem.attribute.extraFireDamage = GetCellInt(curTable.Rows[i][9].ToString());
-            curItem.attribute.extraThunderDamage = GetCellInt(curTable.Rows[i][10].ToString());
-            curItem.attribute.extraLightDamage = GetCellInt(curTable.Rows[i][11].ToString());
-            curItem.attribute.extraDarkDamage = GetCellInt(curTable.Rows[i][12].ToString());
+            curItem.Attribute.extraWaterDamage = GetCellInt(curTable.Rows[i][8].ToString());
+            curItem.Attribute.extraFireDamage = GetCellInt(curTable.Rows[i][9].ToString());
+            curItem.Attribute.extraThunderDamage = GetCellInt(curTable.Rows[i][10].ToString());
+            curItem.Attribute.extraLightDamage = GetCellInt(curTable.Rows[i][11].ToString());
+            curItem.Attribute.extraDarkDamage = GetCellInt(curTable.Rows[i][12].ToString());
             
-            curItem.attribute.maxDamage = GetCellInt(curTable.Rows[i][13].ToString());
+            curItem.Attribute.maxDamage = GetCellInt(curTable.Rows[i][13].ToString());
             
-            curItem.resName = curTable.Rows[i][14].ToString();
+            curItem.ImageName = curTable.Rows[i][14].ToString();
             curItemDesign.Add(curItem);
         }
         

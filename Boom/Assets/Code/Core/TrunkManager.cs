@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Newtonsoft.Json;
 using UnityEditor;
 using UnityEngine;
@@ -21,7 +22,7 @@ public class TrunkManager: ScriptableObject
     #endregion
 
     #region 策划数据
-    List<BulletDataJson> _bulletDesignJsons;
+    List<BulletJson> _bulletDesignJsons;
     List<ItemJson> _itemDesignJsons;
     List<TalentDataJson> _buffDesignJsons;
     List<LevelBuff> _levelBuffDesignJsons;
@@ -29,11 +30,11 @@ public class TrunkManager: ScriptableObject
     List<RollPREvent> _prDesignJsons;
     List<BulletEntry> _bulletEntryDesignJsons;
     List<GemJson> _gemDesignJsons;
-    public List<BulletDataJson> BulletDesignJsons
+    public List<BulletJson> BulletDesignJsons
     {
         get
         {
-            if (_bulletDesignJsons == null)
+            if (_bulletDesignJsons == null|| _bulletDesignJsons.Count == 0)
                 _bulletDesignJsons = LoadBulletData();
             return _bulletDesignJsons;
         }
@@ -43,8 +44,9 @@ public class TrunkManager: ScriptableObject
     {
         get
         {
-            if (_itemDesignJsons == null)
-                _itemDesignJsons = LoadItemData();
+            _itemDesignJsons = LoadItemData();
+            /*if (_itemDesignJsons == null||_itemDesignJsons.Count ==0)
+                _itemDesignJsons = LoadItemData();*/
             return _itemDesignJsons;
         }
     }
@@ -53,7 +55,7 @@ public class TrunkManager: ScriptableObject
     {
         get
         {
-            if (_buffDesignJsons == null)
+            if (_buffDesignJsons == null||_bulletDesignJsons.Count == 0)
                 _buffDesignJsons = LoadBuffData();
             return _buffDesignJsons;
         }
@@ -63,7 +65,7 @@ public class TrunkManager: ScriptableObject
     {
         get
         {
-            if (_levelBuffDesignJsons == null)
+            if (_levelBuffDesignJsons == null || _levelBuffDesignJsons.Count == 0)
                 _levelBuffDesignJsons = LoadLevelBuffData();
             return _levelBuffDesignJsons;
         }
@@ -73,7 +75,7 @@ public class TrunkManager: ScriptableObject
     {
         get
         {
-            if (_roleDesignJsons == null)
+            if (_roleDesignJsons == null || _roleDesignJsons.Count == 0)
                 _roleDesignJsons = LoadRoleBaseData();
             return _roleDesignJsons;
         }
@@ -83,7 +85,8 @@ public class TrunkManager: ScriptableObject
     {
         get
         {
-            _prDesignJsons = LoadPRDesignData();
+            if (_prDesignJsons == null || _prDesignJsons.Count == 0)
+                _prDesignJsons = LoadPRDesignData();
             return _prDesignJsons;
         }
     }
@@ -92,7 +95,8 @@ public class TrunkManager: ScriptableObject
     {
         get
         {
-            _bulletEntryDesignJsons = LoadBulletEntryDesignData();
+            if (_bulletEntryDesignJsons == null || _bulletEntryDesignJsons.Count == 0)
+                _bulletEntryDesignJsons = LoadBulletEntryDesignData();
             return _bulletEntryDesignJsons;
         }
     }
@@ -101,16 +105,16 @@ public class TrunkManager: ScriptableObject
     {
         get
         {
-            if (_gemDesignJsons == null)
+            if (_gemDesignJsons == null || _gemDesignJsons.Count == 0)
                 _gemDesignJsons = LoadGemData();
             return _gemDesignJsons;
         }
     }
     
-    public List<BulletDataJson> LoadBulletData()
+    public List<BulletJson> LoadBulletData()
     {
         string BulletDesignString = File.ReadAllText(PathConfig.BulletDesignJson);
-        List<BulletDataJson> BulletDataJsons = JsonConvert.DeserializeObject<List<BulletDataJson>>(BulletDesignString);
+        List<BulletJson> BulletDataJsons = JsonConvert.DeserializeObject<List<BulletJson>>(BulletDesignString);
         return BulletDataJsons;
     }
     
@@ -192,9 +196,16 @@ public class TrunkManager: ScriptableObject
         //读取Item
         for (int i = 0; i < _saveFile.UserItems.Count; i++)
         {
-            Item curItem = _saveFile.UserItems[i];
-            ItemManager.InitSaveFileItem(curItem);
+            ItemJson curItem = _saveFile.UserItems[i];
+            BagItemManager<Item>.InitSaveFileObject(curItem,SlotType.BagSlot);
         }
+        //读取Gem
+        for (int i = 0; i < _saveFile.UserGems.Count; i++)
+        {
+            GemJson curGem = _saveFile.UserGems[i];
+            BagItemManager<Gem>.InitSaveFileObject(curGem,SlotType.GemBagSlot);
+        }
+        
         MainRoleManager.Instance.CurBulletSpawners = _saveFile.UserBulletSpawner;
         MainRoleManager.Instance.CurBullets = _saveFile.UserCurBullets;
         MainRoleManager.Instance.CurBulletEntries = _saveFile.UserBulletEntries;
@@ -232,13 +243,60 @@ public class TrunkManager: ScriptableObject
             SupremeCharms.Add(each.ID);
         
         //存储Item数据信息
-        List<Item> UserItems = new List<Item>();
-        foreach (var each in MainRoleManager.Instance.CurItems)
-            UserItems.Add(each);
-        foreach (var each in MainRoleManager.Instance.BagItems)
-            UserItems.Add(each);
-        _saveFile.UserItems = UserItems;
+        List<ItemJson> UserItems = new List<ItemJson>();
+        foreach (var each in MainRoleManager.Instance.BagItems.Concat(MainRoleManager.Instance.EquipItems))
+        {
+            UserItems.Add(new ItemJson
+            {
+                ID = each.ID,          
+                InstanceID = each.InstanceID,
+                Rare = each.Rare,
+                Name = each.Name,
+                ImageName = each.ImageName,
+                SlotID = each.SlotID,
+                SlotType = each.SlotType,
+                Attribute = new ItemAttribute
+                {
+                    waterElement = each.Attribute.waterElement,
+                    fireElement = each.Attribute.fireElement,
+                    thunderElement = each.Attribute.thunderElement,
+                    lightElement = each.Attribute.lightElement,
+                    darkElement = each.Attribute.darkElement,
 
+                    extraWaterDamage = each.Attribute.extraWaterDamage,
+                    extraFireDamage = each.Attribute.extraFireDamage,
+                    extraThunderDamage = each.Attribute.extraThunderDamage,
+                    extraLightDamage = each.Attribute.extraLightDamage,
+                    extraDarkDamage = each.Attribute.extraDarkDamage,
+
+                    maxDamage = each.Attribute.maxDamage
+                }
+            });
+        }
+        _saveFile.UserItems = UserItems;
+        
+        //存储Gem信息
+        List<GemJson> UserGems = new List<GemJson>();
+        foreach (var each in MainRoleManager.Instance.BagGems.Concat(MainRoleManager.Instance.InLayGems))
+        {
+            UserGems.Add(new GemJson
+            {
+                ID = each.ID,
+                InstanceID = each.InstanceID,
+                Name = each.Name,
+                Attribute = new GemAttribute
+                {
+                    Damage = each.Attribute.Damage,
+                    Piercing = each.Attribute.Piercing,
+                    Resonance = each.Attribute.Resonance
+                },
+                ImageName = each.ImageName,
+                SlotID = each.SlotID,
+                SlotType = each.SlotType
+            });
+        }
+        _saveFile.UserGems = UserGems;
+        
         _saveFile.UserStandbyBullet = MainRoleManager.Instance.CurStandbyBulletMats;
         _saveFile.SupremeCharms = SupremeCharms;
         #endregion
@@ -283,10 +341,21 @@ public class TrunkManager: ScriptableObject
         _saveFile = new SaveFileJson();
         #region Character
         //................UserBulletSpawner...........................
-        List<BulletSpawner> UserBulletSpawner = new List<BulletSpawner>();
-        UserBulletSpawner.Add(new BulletSpawner(1,5));
-        UserBulletSpawner.Add(new BulletSpawner(2,1));
-        UserBulletSpawner.Add(new BulletSpawner(3,1));
+        List<BulletJson> UserBulletSpawner = new List<BulletJson>();
+        BulletJson spawner01 = new BulletJson{ID=1};
+        spawner01.SyncData();
+        spawner01.SpawnerCount = 5;
+        UserBulletSpawner.Add(spawner01);
+        
+        BulletJson spawner02 = new BulletJson{ID=2};
+        spawner02.SyncData();
+        spawner02.SpawnerCount = 1;
+        UserBulletSpawner.Add(spawner02);
+        
+        BulletJson spawner03 = new BulletJson{ID=3};
+        spawner03.SyncData();
+        spawner03.SpawnerCount = 1;
+        UserBulletSpawner.Add(spawner03);
         
         //..............StandbyData.........................
         List<StandbyData> newGameSD = new List<StandbyData>();
@@ -294,11 +363,13 @@ public class TrunkManager: ScriptableObject
             newGameSD.Add(new StandbyData(i,0));
         
         //...................Items.................................
-        _saveFile.UserItems = new List<Item>();
+        _saveFile.UserItems = new List<ItemJson>();
         MainRoleManager.Instance.AddItem(1);
         MainRoleManager.Instance.AddItem(2);
+        //...................Gems..................................
+        _saveFile.UserGems = new List<GemJson>();
 
-        _saveFile.UserCurBullets = new List<BulletReady>();
+        _saveFile.UserCurBullets = new List<BulletJson>();
         _saveFile.UserBulletEntries = new List<BulletEntry>();
         _saveFile.UserBulletSpawner = UserBulletSpawner;
         _saveFile.Score = 0;
@@ -328,10 +399,10 @@ public class TrunkManager: ScriptableObject
     #endregion
 
     #region MyRegion
-    public BulletDataJson GetBulletDesignData(int BulletID)
+    public BulletJson GetBulletDesignData(int BulletID)
     {
-        BulletDataJson curData = null;
-        foreach (BulletDataJson each in BulletDesignJsons)
+        BulletJson curData = null;
+        foreach (BulletJson each in BulletDesignJsons)
         {
             if (each.ID == BulletID)
             {

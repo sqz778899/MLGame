@@ -2,35 +2,36 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandler, 
+public class DraggableBullet : Bullet, IPointerDownHandler, IPointerUpHandler, 
     IDragHandler,IPointerExitHandler,IPointerMoveHandler
 {
-    public int curSlotID = 0;
     public Vector3 originalPosition;
     BulletInsMode preBulletInsMode;
     bool IsToolTipsDisplay;
 
-    void Start()
+    internal void Start()
     {
+        base.Start();
         IsToolTipsDisplay = true;
-        preBulletInsMode = bulletInsMode;
-        InitBulletData();
+        preBulletInsMode = BulletInsMode;
+        SyncData();
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         // 记录下我们开始拖动时的位置
-        preBulletInsMode = bulletInsMode;
+        preBulletInsMode = BulletInsMode;
         originalPosition = Ins.transform.position;
         DestroyTooltips();
+        MainRoleManager.Instance.RefreshAllItems();
     }
 
     void DragOneBullet(PointerEventData eventData)
     {
-        if (bulletInsMode == BulletInsMode.EditB)
+        if (BulletInsMode == BulletInsMode.EditB)
         {
-            bulletInsMode = BulletInsMode.EditA;
-            InitBulletData();
+            BulletInsMode = BulletInsMode.EditA;
+            SyncData();
         }
         // 在拖动时，我们把子弹位置设置为鼠标位置
         RectTransform rectTransform = Ins.GetComponent<RectTransform>();
@@ -48,9 +49,9 @@ public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandle
             .G_BulletSpawnerSlot.GetComponentsInChildren<DraggableBulletSpawner>();
         foreach (var each in allSpawner)
         {
-            if (each._bulletData.ID == _bulletData.ID)
+            if (each.ID == ID)
             {
-                MainRoleManager.Instance.SubBullet(_bulletData.ID,InstanceID);
+                MainRoleManager.Instance.SubBullet(ID,InstanceID);
                 Destroy(Ins);
             }
         }
@@ -69,8 +70,8 @@ public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandle
         {
             if (result.gameObject.CompareTag("BulletSlotRole"))
             {
-                bulletInsMode = BulletInsMode.EditB;
-                InitBulletData();
+                BulletInsMode = BulletInsMode.EditB;
+                SyncData();
                 BulletSlot curSlotSC = result.gameObject.GetComponent<BulletSlot>();
                 bool InstanceIDIsInCurBullet = MainRoleManager.Instance.InstanceIDIsInCurBullet(InstanceID);
                 if (curSlotSC.BulletID == 0)
@@ -78,20 +79,20 @@ public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandle
                     if (!InstanceIDIsInCurBullet)
                     {
                         //Add逻辑
-                        MainRoleManager.Instance.AddBulletOnlyData(_bulletData.ID,curSlotSC.SlotID,InstanceID);
-                        Ins.transform.SetParent(UIManager.Instance.G_Bullet.transform,false);
+                        MainRoleManager.Instance.AddBulletOnlyData(ID,curSlotSC.SlotID,InstanceID);
+                        Ins.transform.SetParent(UIManager.Instance.DragObjRoot.transform,false);
                         Ins.transform.position = curSlotSC.transform.position;
                     }
                     else
                     {
                         //空拖逻辑
-                        MainRoleManager.Instance.BulletInterchangePos(curSlotID, curSlotSC.SlotID);
+                        MainRoleManager.Instance.BulletInterchangePos(SlotID, curSlotSC.SlotID);
                     }
                 }
                 else if(InstanceIDIsInCurBullet)
                 {
                     //交换逻辑
-                    MainRoleManager.Instance.BulletInterchangePos(curSlotID, curSlotSC.SlotID);
+                    MainRoleManager.Instance.BulletInterchangePos(SlotID, curSlotSC.SlotID);
                 }
                 else
                 {
@@ -114,8 +115,8 @@ public class DraggableBullet : BulletBase, IPointerDownHandler, IPointerUpHandle
         {
             if (preBulletInsMode == BulletInsMode.EditB)
             {
-                bulletInsMode = BulletInsMode.EditB;
-                InitBulletData();
+                BulletInsMode = BulletInsMode.EditB;
+                SyncData();
             }
             Ins.transform.position = originalPosition;
         }

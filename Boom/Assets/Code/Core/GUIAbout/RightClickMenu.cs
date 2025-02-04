@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -12,7 +9,7 @@ public class RightClickMenu : MonoBehaviour,IPointerExitHandler
     {
         if (CurIns==null)
             return;
-        ItemManager.DeleteItem(CurIns);
+        BagItemManager<ItemBase>.DeleteObject(CurIns);
         Destroy(gameObject);
     }
 

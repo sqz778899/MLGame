@@ -113,8 +113,8 @@ public class DesignTool
 
     void TempAddBullet(int bulletID)
     {
-        BulletReady Ins = new BulletReady(bulletID,0);
-        List<BulletReady> CurBullets = MainRoleManager.Instance.CurBullets;
+        BulletJson Ins = new BulletJson();
+        List<BulletJson> CurBullets = MainRoleManager.Instance.CurBullets;
         if (CurBullets.Count < 5)
             CurBullets.Add(Ins);
         else
@@ -186,11 +186,19 @@ public class DesignTool
     #endregion
 
     [Title("道具测试")]
-    [PropertyOrder(111)]
+    [PropertyOrder(100)]
     public int ItemID;
     [Button("获得道具",ButtonSizes.Large),PropertyOrder(111)]
     void AddItem()
     {
         MainRoleManager.Instance.AddItem(ItemID);
+    }
+    [Title("宝石测试")]
+    [PropertyOrder(101)]
+    public int GemID;
+    [Button("获得宝石",ButtonSizes.Large),PropertyOrder(111)]
+    void AddGem()
+    {
+        MainRoleManager.Instance.AddGem(GemID);
     }
 }
