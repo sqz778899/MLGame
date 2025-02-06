@@ -660,8 +660,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 14
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &82349711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -752,8 +752,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 33
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -960,8 +960,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 3
-  BulletID: 0
-  InstanceID: 0
+  MainID: 0
+  SlotType: 0
+  ChildIns: {fileID: 0}
 --- !u!114 &100966186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1087,8 +1088,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 3
   MainID: -1
-  InstanceID: -1
   SlotType: 3
+  ChildIns: {fileID: 0}
 --- !u!114 &110754624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1293,8 +1294,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 46
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -1599,8 +1600,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 64
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &142655723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1691,8 +1692,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 22
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &143726230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1783,8 +1784,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 18
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &146780601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1875,8 +1876,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 15
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -2008,8 +2009,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 4
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -2169,9 +2170,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb3f314f0e3401e9e7ccbe56e7e4d67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SlotID: 5
-  BulletID: 0
-  InstanceID: 0
+  SlotID: 11
+  MainID: -1
+  SlotType: 6
+  ChildIns: {fileID: 0}
   GemSlots: []
 --- !u!114 &162620751
 MonoBehaviour:
@@ -2264,8 +2266,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 1
   MainID: 1
-  InstanceID: -215524
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &165691708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2356,8 +2358,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 26
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -2450,8 +2452,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 10
-  BulletID: 0
-  InstanceID: 0
+  MainID: 0
+  SlotType: 0
+  ChildIns: {fileID: 0}
 --- !u!114 &172955877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2542,8 +2545,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 11
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -2637,8 +2640,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 24
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -2941,8 +2944,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 47
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &194438219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3470,8 +3473,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 39
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -4000,8 +4003,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 34
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -4133,8 +4136,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 8
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -4190,8 +4193,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 66
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &252122716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4281,8 +4284,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 11
-  BulletID: 0
-  InstanceID: 0
+  MainID: 0
+  SlotType: 0
+  ChildIns: {fileID: 0}
 --- !u!114 &252133325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4373,8 +4377,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 72
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &254952329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4465,8 +4469,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 65
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &255722569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4574,8 +4578,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 16
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &273362103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4704,8 +4708,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 5
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -5143,8 +5147,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 19
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -5238,8 +5242,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 42
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &307751364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5330,8 +5334,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 34
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &311514900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5611,8 +5615,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 3
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -5668,8 +5672,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 61
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &360358630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5818,8 +5822,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 55
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &381253295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6160,8 +6164,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 7
-  BulletID: 0
-  InstanceID: 0
+  MainID: 0
+  SlotType: 0
+  ChildIns: {fileID: 0}
 --- !u!114 &417935000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6252,8 +6257,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 58
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -6347,8 +6352,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 29
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &431051579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6671,8 +6676,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 43
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &460157305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6902,8 +6907,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 62
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &468956920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6994,8 +6999,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 46
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &474678605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7154,8 +7159,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 41
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -7594,8 +7599,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 39
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &517050275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7685,8 +7690,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 5
-  BulletID: 0
-  InstanceID: 0
+  MainID: 0
+  SlotType: 0
+  ChildIns: {fileID: 0}
 --- !u!114 &541576149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7777,8 +7783,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 59
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -7872,8 +7878,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 69
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -8072,8 +8078,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 23
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &559162606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8164,8 +8170,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 49
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &562439591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8457,8 +8463,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 28
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -8552,8 +8558,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 48
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &628708559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8835,8 +8841,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 1
   MainID: -1
-  InstanceID: -1
   SlotType: 5
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 1
   CurGem: {fileID: 0}
   ChildScale: {x: 0.7, y: 0.7, z: 0.7}
@@ -8968,8 +8974,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 1
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -9350,8 +9356,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 9
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -9407,8 +9413,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 18
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -9540,8 +9546,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 6
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -9672,8 +9678,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 63
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -9767,8 +9773,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 48
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -9862,8 +9868,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 65
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -9957,8 +9963,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 72
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -10203,8 +10209,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 35
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &726800066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10562,8 +10568,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 42
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -10692,8 +10698,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 2
   MainID: -1
-  InstanceID: -1
   SlotType: 5
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 1
   CurGem: {fileID: 0}
   ChildScale: {x: 0.7, y: 0.7, z: 0.7}
@@ -10787,8 +10793,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 33
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &767347689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10877,10 +10883,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d02ef3081096def458f821896f75092a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SlotID: 1
+  SlotID: 4
   MainID: -1
-  InstanceID: -1
   SlotType: 5
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 2
   CurGem: {fileID: 0}
   ChildScale: {x: 0.7, y: 0.7, z: 0.7}
@@ -11198,8 +11204,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 59
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &827555545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11467,8 +11473,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 15
-  BulletID: 0
-  InstanceID: 0
+  MainID: 0
+  SlotType: 0
+  ChildIns: {fileID: 0}
 --- !u!114 &834368746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11559,8 +11566,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 71
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &835162144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11962,8 +11969,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 36
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &856552227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12054,8 +12061,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 37
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -12193,8 +12200,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 38
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &870675549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12285,8 +12292,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 53
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &886878954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12812,8 +12819,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 58
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &923869722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12969,8 +12976,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 14
-  BulletID: 0
-  InstanceID: 0
+  MainID: 0
+  SlotType: 0
+  ChildIns: {fileID: 0}
 --- !u!114 &942829182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13061,8 +13069,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 54
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &943179980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13197,8 +13205,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 55
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -13291,8 +13299,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 13
-  BulletID: 0
-  InstanceID: 0
+  MainID: 0
+  SlotType: 0
+  ChildIns: {fileID: 0}
 --- !u!114 &948093396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13539,8 +13548,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 13
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &982943195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13631,8 +13640,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 21
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &991562199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14073,8 +14082,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 56
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1018567205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14471,8 +14480,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 12
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -14603,8 +14612,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 6
   MainID: -1
-  InstanceID: -1
   SlotType: 3
+  ChildIns: {fileID: 0}
 --- !u!114 &1029378138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14705,8 +14714,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 49
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -14876,8 +14885,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 2
   MainID: 2
-  InstanceID: -215554
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1054747513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14968,8 +14977,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 10
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1066805005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15208,8 +15217,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 68
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1092146232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15754,8 +15763,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 54
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -15849,8 +15858,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 40
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -16203,8 +16212,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 43
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -16298,8 +16307,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 31
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -16393,8 +16402,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 5
   MainID: -1
-  InstanceID: -1
   SlotType: 3
+  ChildIns: {fileID: 0}
 --- !u!114 &1182285247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16485,8 +16494,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 24
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1189334777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16577,8 +16586,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 25
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -16672,8 +16681,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 17
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -16767,8 +16776,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 27
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -16862,8 +16871,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 4
   MainID: -1
-  InstanceID: -1
   SlotType: 3
+  ChildIns: {fileID: 0}
 --- !u!114 &1227841198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16993,8 +17002,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 26
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1237064203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17136,8 +17145,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 31
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1244180224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17228,8 +17237,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 66
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -17475,8 +17484,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 9
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1269731158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17567,8 +17576,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 14
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -17662,8 +17671,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 67
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -17755,10 +17764,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d02ef3081096def458f821896f75092a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SlotID: 2
+  SlotID: 5
   MainID: -1
-  InstanceID: -1
   SlotType: 5
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 2
   CurGem: {fileID: 0}
   ChildScale: {x: 0.7, y: 0.7, z: 0.7}
@@ -17852,8 +17861,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 44
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -17947,8 +17956,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 67
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1288893302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18074,8 +18083,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 28
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1297989944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18243,8 +18252,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 56
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -19049,8 +19058,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 60
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1362320978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19179,8 +19188,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 2
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -19436,8 +19445,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 32
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -19530,8 +19539,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 8
-  BulletID: 0
-  InstanceID: 0
+  MainID: 0
+  SlotType: 0
+  ChildIns: {fileID: 0}
 --- !u!114 &1384212438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19622,8 +19632,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 30
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1385775481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20129,8 +20139,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 10
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -20578,8 +20588,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 51
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -20999,9 +21009,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb3f314f0e3401e9e7ccbe56e7e4d67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SlotID: 2
-  BulletID: 0
-  InstanceID: 0
+  SlotID: 5
+  MainID: -1
+  SlotType: 6
+  ChildIns: {fileID: 0}
   GemSlots: []
 --- !u!114 &1501758413
 MonoBehaviour:
@@ -21566,8 +21577,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 27
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1518840566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21788,8 +21799,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 64
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -21883,8 +21894,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 23
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -21978,8 +21989,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 68
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -22073,8 +22084,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 57
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -22168,8 +22179,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 69
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1546359368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22260,8 +22271,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 17
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1553750917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22619,8 +22630,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 71
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -22714,8 +22725,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 6
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1598110927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22806,8 +22817,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 44
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1598578307
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22898,8 +22909,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 5
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1613427811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23120,8 +23131,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 2
   MainID: -1
-  InstanceID: -1
   SlotType: 3
+  ChildIns: {fileID: 0}
 --- !u!114 &1663404564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23212,8 +23223,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 19
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1663428565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23462,8 +23473,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 45
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1673548311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23554,8 +23565,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 20
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1675027522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23646,8 +23657,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 63
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1678807560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23738,8 +23749,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 1
   MainID: -1
-  InstanceID: -1
   SlotType: 3
+  ChildIns: {fileID: 0}
 --- !u!114 &1681378839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23829,8 +23840,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 9
-  BulletID: 0
-  InstanceID: 0
+  MainID: 0
+  SlotType: 0
+  ChildIns: {fileID: 0}
 --- !u!114 &1682894338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23920,8 +23932,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 12
-  BulletID: 0
-  InstanceID: 0
+  MainID: 0
+  SlotType: 0
+  ChildIns: {fileID: 0}
 --- !u!114 &1710322658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24012,8 +24025,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 8
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1713228520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24104,8 +24117,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 70
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1715776077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24380,8 +24393,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 36
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -24475,8 +24488,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 3
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1747963366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24604,8 +24617,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 7
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1757224798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24801,8 +24814,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 4
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1760051301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24930,8 +24943,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 1
-  BulletID: 0
-  InstanceID: 0
+  MainID: 0
+  SlotType: 0
+  ChildIns: {fileID: 0}
 --- !u!1 &1770892998
 GameObject:
   m_ObjectHideFlags: 0
@@ -24984,8 +24998,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 52
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1770893001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25129,8 +25143,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 21
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -25224,8 +25238,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 25
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1783311974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25315,8 +25329,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 6
-  BulletID: 0
-  InstanceID: 0
+  MainID: 0
+  SlotType: 0
+  ChildIns: {fileID: 0}
 --- !u!114 &1788063077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25440,9 +25455,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb3f314f0e3401e9e7ccbe56e7e4d67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SlotID: 3
-  BulletID: 0
-  InstanceID: 0
+  SlotID: 9
+  MainID: -1
+  SlotType: 6
+  ChildIns: {fileID: 0}
   GemSlots: []
 --- !u!114 &1804508753
 MonoBehaviour:
@@ -25574,8 +25590,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 1
-  BulletID: 0
-  InstanceID: 0
+  MainID: -1
+  SlotType: 6
+  ChildIns: {fileID: 0}
   GemSlots: []
 --- !u!1001 &1820901144
 PrefabInstance:
@@ -25695,8 +25712,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 60
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -25945,8 +25962,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 40
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1858581970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26072,8 +26089,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 50
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1880943309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26164,8 +26181,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 45
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -26259,8 +26276,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 15
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1898947361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26351,8 +26368,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 52
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -26446,8 +26463,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 32
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1903470981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26537,8 +26554,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 4
-  BulletID: 0
-  InstanceID: 0
+  MainID: 0
+  SlotType: 0
+  ChildIns: {fileID: 0}
 --- !u!114 &1904985292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26670,8 +26688,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 47
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -26765,8 +26783,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 37
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1921609341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26856,8 +26874,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SlotID: 2
-  BulletID: 0
-  InstanceID: 0
+  MainID: 0
+  SlotType: 0
+  ChildIns: {fileID: 0}
 --- !u!114 &1937169516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26948,8 +26967,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 41
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1944476016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27040,8 +27059,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 12
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1945182389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27308,8 +27327,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 35
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -27403,8 +27422,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 53
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -27536,8 +27555,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 7
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -27780,8 +27799,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 51
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &1986729297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27872,8 +27891,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 38
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -27967,8 +27986,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 29
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -28357,8 +28376,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 30
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -28452,8 +28471,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 61
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -28547,8 +28566,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 57
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &2000483247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28639,8 +28658,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 50
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -28769,8 +28788,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 70
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -28939,8 +28958,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 13
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -29133,10 +29152,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d02ef3081096def458f821896f75092a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SlotID: 3
+  SlotID: 6
   MainID: -1
-  InstanceID: -1
   SlotType: 5
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 2
   CurGem: {fileID: 0}
   ChildScale: {x: 0.7, y: 0.7, z: 0.7}
@@ -29305,8 +29324,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 3
   MainID: -1
-  InstanceID: -1
   SlotType: 5
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 1
   CurGem: {fileID: 0}
   ChildScale: {x: 0.7, y: 0.7, z: 0.7}
@@ -29400,8 +29419,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 16
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -29495,8 +29514,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 20
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -29627,9 +29646,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb3f314f0e3401e9e7ccbe56e7e4d67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SlotID: 4
-  BulletID: 0
-  InstanceID: 0
+  SlotID: 10
+  MainID: -1
+  SlotType: 6
+  ChildIns: {fileID: 0}
   GemSlots: []
 --- !u!114 &2087331871
 MonoBehaviour:
@@ -29756,8 +29776,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 62
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}
@@ -29945,8 +29965,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 11
   MainID: -1
-  InstanceID: -1
   SlotType: 1
+  ChildIns: {fileID: 0}
 --- !u!114 &2135575172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30037,8 +30057,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SlotID: 22
   MainID: -1
-  InstanceID: -1
   SlotType: 4
+  ChildIns: {fileID: 0}
   BulletSlotIndex: 0
   CurGem: {fileID: 0}
   ChildScale: {x: 1, y: 1, z: 1}

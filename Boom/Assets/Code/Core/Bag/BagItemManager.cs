@@ -32,7 +32,6 @@ public static class BagItemManager<T> where T:ItemBase
         // 绑定到槽位
         objectIns.transform.SetParent(curTargetSlot.transform,false);
         curTargetSlot.MainID = objectID;
-        curTargetSlot.InstanceID = objectSC.InstanceID;
         objectSC.SlotType = slotType;
         objectSC.SlotID = curTargetSlot.SlotID;
         //数据层同步
@@ -59,13 +58,7 @@ public static class BagItemManager<T> where T:ItemBase
         // 找到对应的Slot槽位
         SlotBase curSlot = SlotManager.GetBagSlotByID(curObjectJson.SlotID, slotType);
         if (curSlot == null) return;
-
-        curObjectIns.transform.SetParent(curSlot.transform, false);
-        curSlot.MainID = curObjectJson.ID;
-        curObjectSC.SlotID = curSlot.SlotID;
-        curSlot.InstanceID = curObjectSC.InstanceID;
-        curObjectSC.SlotType = slotType;
-        curSlot.SOnDrop();
+        curSlot.SOnDrop(curObjectIns,slotType);
 
         // 同步到 MainRoleManager
         curObjectJson.InstanceID = curObjectSC.InstanceID;

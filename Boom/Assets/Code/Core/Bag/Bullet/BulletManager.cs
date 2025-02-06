@@ -44,6 +44,11 @@ public class BulletManager :ScriptableObject
         ,Vector3 pos = new Vector3())
     {
         GetIns(bulletInsMode, out GameObject Bullet,pos);
+        if (bulletInsMode == BulletInsMode.Spawner)
+        {
+            DraggableBulletSpawner bulletSpawner = Bullet.GetComponentInChildren<DraggableBulletSpawner>();
+            bulletSpawner.ID = ID;
+        }
         Bullet bulletbase = Bullet.GetComponentInChildren<Bullet>();
         SkeletonAnimation curAniSC = Bullet.GetComponentInChildren<SkeletonAnimation>();
         //curAniSC?.Initialize(true);

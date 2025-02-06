@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public static class SlotManager
@@ -8,8 +9,8 @@ public static class SlotManager
     public static void ClearBagSlotByID(int SlotID,SlotType slotType)
     {
         SlotBase curSlot = GetBagSlotByID(SlotID,slotType);
+        if (curSlot == null) return;
         curSlot.MainID = -1;
-        curSlot.InstanceID = -1;
     }
     
     //根据SlotId 和 SlotType 拿到背包的Slot
@@ -17,13 +18,17 @@ public static class SlotManager
     {
         SlotBase curTargetSlot = null;
         SlotBase[] allSlot;
+      
         switch (slotType)
         {
             case SlotType.GemBagSlot:
                 allSlot = UIManager.Instance.BagGemRootGO.GetComponentsInChildren<SlotBase>();
                 break;
             case SlotType.GemInlaySlot:
-                allSlot = UIManager.Instance.BagReadySlotRootGO.GetComponentsInChildren<SlotBase>();
+                allSlot = UIManager.Instance.BagReadySlotRootGO.GetComponentsInChildren<GemSlot>();
+                break;
+            case SlotType.CurBulletSlot:
+                allSlot = UIManager.Instance.BagReadySlotRootGO.GetComponentsInChildren<BulletSlotRole>();
                 break;
             case SlotType.ElementSlot:
                 allSlot = UIManager.Instance.EquipItemRootGO.GetComponentsInChildren<SlotBase>();

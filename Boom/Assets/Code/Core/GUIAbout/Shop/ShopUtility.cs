@@ -45,7 +45,7 @@ public static class ShopUtility
 
         foreach (var each in SDSlots)
         {
-            if (each.BulletID == 0)
+            if (each.MainID == 0)
                 return each.transform.position;
         }
         return Vector3.zero;

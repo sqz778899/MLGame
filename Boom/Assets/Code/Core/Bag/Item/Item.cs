@@ -36,14 +36,10 @@ public class Item : DragBase
     
     internal override void VOnDrop()
     {
-        //同步新的Slot信息
-        _curSlot.MainID = ID;
-        _curSlot.InstanceID = InstanceID;
-        SlotType = _curSlot.SlotType;//GO层同步
-        SlotID = _curSlot.SlotID;
         //清除旧的Slot信息
-        SlotManager.ClearBagSlotByID(SlotID,SlotType.GemBagSlot);
-        
+        SlotManager.ClearBagSlotByID(SlotID,SlotType.BagSlot);
+        //同步新的Slot信息，这一步会改变SlotID,所以放在后面
+        _curSlot.SOnDrop(_dragIns,SlotType.BagSlot);
         //数据层同步
         MainRoleManager.Instance.MoveItem(this);
         SyncData();

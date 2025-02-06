@@ -21,29 +21,28 @@ public class Gem : DragBase
     
     internal override void VOnDrop()
     {
-        //同步新的Slot信息
-        _curSlot.MainID = ID;
-        _curSlot.InstanceID = InstanceID;
-        SlotType = _curSlot.SlotType;//GO层同步
-        SlotID = _curSlot.SlotID;
-        //
         switch (_curSlot.SlotType)
         {
             case SlotType.GemBagSlot:
                 IsInLay = false;
                 BulletSlotIndex = -1;
                 SlotManager.ClearBagSlotByID(SlotID,SlotType.GemBagSlot);//清除旧的Slot信息
+                _curSlot.SOnDrop(_dragIns,SlotType.GemBagSlot);
                 break;
             case SlotType.GemInlaySlot:
                 IsInLay = true;
                 GemSlot gemSlot = (GemSlot)_curSlot;
                 BulletSlotIndex = gemSlot.BulletSlotIndex;
                 SlotManager.ClearBagSlotByID(SlotID,SlotType.GemInlaySlot);
+                _curSlot.SOnDrop(_dragIns,SlotType.GemInlaySlot);
+                break;
+            default:
+                IsInLay = false;
+                BulletSlotIndex = -1;
+                SlotManager.ClearBagSlotByID(SlotID,SlotType.GemBagSlot);//清除旧的Slot信息
+                _curSlot.SOnDrop(_dragIns,SlotType.GemBagSlot);
                 break;
         }
-        //数据层同步
-        //MainRoleManager.Instance.MoveGem(this);
-        //SetItemData();
         MainRoleManager.Instance.RefreshAllItems();
     }
     

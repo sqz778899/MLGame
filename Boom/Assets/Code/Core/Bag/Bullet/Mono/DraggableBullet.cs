@@ -2,47 +2,8 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DraggableBullet : Bullet, IPointerDownHandler, IPointerUpHandler, 
-    IDragHandler,IPointerExitHandler,IPointerMoveHandler
+public class DraggableBullet : Bullet
 {
-    public Vector3 originalPosition;
-    BulletInsMode preBulletInsMode;
-    bool IsToolTipsDisplay;
-
-    internal void Start()
-    {
-        base.Start();
-        IsToolTipsDisplay = true;
-        preBulletInsMode = BulletInsMode;
-        SyncData();
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        // 记录下我们开始拖动时的位置
-        preBulletInsMode = BulletInsMode;
-        originalPosition = Ins.transform.position;
-        DestroyTooltips();
-        MainRoleManager.Instance.RefreshAllItems();
-    }
-
-    void DragOneBullet(PointerEventData eventData)
-    {
-        if (BulletInsMode == BulletInsMode.EditB)
-        {
-            BulletInsMode = BulletInsMode.EditA;
-            SyncData();
-        }
-        // 在拖动时，我们把子弹位置设置为鼠标位置
-        RectTransform rectTransform = Ins.GetComponent<RectTransform>();
-        Vector3 worldPoint;
-        if (RectTransformUtility.ScreenPointToWorldPointInRectangle(rectTransform, eventData.position, eventData.pressEventCamera, out worldPoint))
-        {
-            rectTransform.position = worldPoint;
-        }
-        DestroyTooltips();
-    }
-
     void ReturnToSpawner()
     {
         DraggableBulletSpawner[] allSpawner = UIManager.Instance
@@ -56,9 +17,19 @@ public class DraggableBullet : Bullet, IPointerDownHandler, IPointerUpHandler,
             }
         }
     }
-    
+
+    public override void OnPointerDown(PointerEventData eventData)
+    {
+        base.OnPointerDown(eventData);
+        BulletInsMode = BulletInsMode.EditA;
+    }
+
     public void DropOneBullet(PointerEventData eventData)
     {
+        UIManager.Instance.IsLockedClick = false;
+        
+        if (eventData.button == PointerEventData.InputButton.Right)
+            return;
         DestroyTooltips();
         IsToolTipsDisplay = true;
         // 在释放鼠标按钮时，我们检查这个位置下是否有一个子弹槽
@@ -66,38 +37,51 @@ public class DraggableBullet : Bullet, IPointerDownHandler, IPointerUpHandler,
         EventSystem.current.RaycastAll(eventData, results);
 
         bool NonHappen = true; // 发生逻辑，如果未发生，则之后子弹弹回原位
-        foreach (RaycastResult result in results)
+        foreach (RaycastResult result in results)  
         {
             if (result.gameObject.CompareTag("BulletSlotRole"))
             {
                 BulletInsMode = BulletInsMode.EditB;
-                SyncData();
                 BulletSlot curSlotSC = result.gameObject.GetComponent<BulletSlot>();
-                bool InstanceIDIsInCurBullet = MainRoleManager.Instance.InstanceIDIsInCurBullet(InstanceID);
-                if (curSlotSC.BulletID == 0)
+                //MainRoleManager.Instance.AddBulletOnlyData(ID,curSlotSC.SlotID,InstanceID);
+                if (curSlotSC.MainID == -1)
                 {
-                    if (!InstanceIDIsInCurBullet)
-                    {
-                        //Add逻辑
-                        MainRoleManager.Instance.AddBulletOnlyData(ID,curSlotSC.SlotID,InstanceID);
-                        Ins.transform.SetParent(UIManager.Instance.DragObjRoot.transform,false);
-                        Ins.transform.position = curSlotSC.transform.position;
-                    }
-                    else
-                    {
-                        //空拖逻辑
-                        MainRoleManager.Instance.BulletInterchangePos(SlotID, curSlotSC.SlotID);
-                    }
-                }
-                else if(InstanceIDIsInCurBullet)
-                {
-                    //交换逻辑
-                    MainRoleManager.Instance.BulletInterchangePos(SlotID, curSlotSC.SlotID);
+                    _curSlot = curSlotSC;
+                    //清除旧的Slot信息
+                    SlotManager.ClearBagSlotByID(SlotID,SlotType.CurBulletSlot);
+                    //同步新的Slot信息
+                    _curSlot.SOnDrop(Ins,SlotType.CurBulletSlot);
+                    MainRoleManager.Instance.RefreshAllItems();
                 }
                 else
                 {
-                    ReturnToSpawner();
+                    //
+                    GameObject orIns = curSlotSC.ChildIns;
+                    _curSlot.SOnDrop(orIns,SlotType.CurBulletSlot);
+                    curSlotSC.SOnDrop(Ins,SlotType.CurBulletSlot);
+                    MainRoleManager.Instance.RefreshAllItems();
+                    //MainRoleManager.Instance.BulletInterchangePos(SlotID, curSlotSC.SlotID);
                 }
+                /*//bool InstanceIDIsInCurBullet = MainRoleManager.Instance.InstanceIDIsInCurBullet(InstanceID);
+                if (curSlotSC.MainID == 0)
+                {
+                    //Add逻辑
+                    MainRoleManager.Instance.AddBulletOnlyData(ID,curSlotSC.SlotID,InstanceID);
+                    _curSlot = curSlotSC;
+                    SlotID = curSlotSC.SlotID;
+                    Ins.transform.position = curSlotSC.transform.position;
+                    Ins.transform.SetParent(result.gameObject.transform,true);
+                    /*else
+                    {
+                        //空拖逻辑
+                        MainRoleManager.Instance.BulletInterchangePos(SlotID, curSlotSC.SlotID);
+                    }#1#
+                }
+                else
+                {
+                    //交换逻辑
+                    //MainRoleManager.Instance.BulletInterchangePos(SlotID, curSlotSC.SlotID);
+                }*/
                 NonHappen = false;
             }
 
@@ -113,43 +97,17 @@ public class DraggableBullet : Bullet, IPointerDownHandler, IPointerUpHandler,
         // 如果这个位置下没有子弹槽，我们就将子弹位置恢复到原来的位置
         if (NonHappen)
         {
-            if (preBulletInsMode == BulletInsMode.EditB)
-            {
-                BulletInsMode = BulletInsMode.EditB;
-                SyncData();
-            }
+            BulletInsMode = BulletInsMode.EditB;
             Ins.transform.position = originalPosition;
+            _dragIns.transform.SetParent(originalParent,true);
         }
-    }
-    
-    public void OnDrag(PointerEventData eventData)
-    {
-        DragOneBullet(eventData);
-        DestroyTooltips();
-        IsToolTipsDisplay = false;
-    }
-    
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        DropOneBullet(eventData);
-        DestroyTooltips();
-    }
-    
-    public void OnPointerMove(PointerEventData eventData)
-    {
-        if (!IsToolTipsDisplay) return;
         
-        RectTransform rectTransform = transform.GetComponent<RectTransform>();
-        Vector3 worldPoint;
-        if (RectTransformUtility.ScreenPointToWorldPointInRectangle(rectTransform, 
-                eventData.position, eventData.pressEventCamera, out worldPoint))
-        {
-            DisplayTooltips(worldPoint);
-        }
+        MainRoleManager.Instance.RefreshAllItems();
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public override void OnPointerUp(PointerEventData eventData)
     {
+        DropOneBullet(eventData);
         DestroyTooltips();
     }
 }

@@ -13,14 +13,13 @@ public class DragBase : ItemBase, IPointerDownHandler, IPointerUpHandler,
 
     internal Transform originalParent;//拖拽中的物品原始父层级
     internal Transform dragObjParent; //拖拽中的物品所在的父层级
-    
     //
     RectTransform rectTransform;
     //ToolTips相关
     internal GameObject TooltipsGO;
     internal GameObject RightClickMenuGO;
     internal PointerEventData _eventData;
-    bool IsToolTipsDisplay;
+    internal bool IsToolTipsDisplay;
     
     internal virtual void Start()
     {
@@ -39,7 +38,7 @@ public class DragBase : ItemBase, IPointerDownHandler, IPointerUpHandler,
         //改变父层级
         originalParent = _dragIns.transform.parent;
         _dragIns.transform.SetParent(dragObjParent);
-        
+
         _eventData = eventData;
         if (eventData.button == PointerEventData.InputButton.Left)
         {
@@ -69,13 +68,15 @@ public class DragBase : ItemBase, IPointerDownHandler, IPointerUpHandler,
         {
             if (result.gameObject.TryGetComponent(out SlotBase curSlotSC))
             {
-                _curSlot = curSlotSC;
-                _dragIns.transform.position = _curSlot.transform.position; //同步位置
-                _dragIns.transform.SetParent(_curSlot.transform, true);//改变父层级
-                VOnDrop();
-                NonHappen = false;
-                curSlotSC.SOnDrop();
-                break;
+                if (curSlotSC is BulletSlot) continue;
+                
+                if (curSlotSC.MainID == -1)
+                {
+                    _curSlot = curSlotSC;
+                    VOnDrop();
+                    NonHappen = false;
+                    break;
+                }
             }
         }
         // 如果这个位置下没有Slot，我们就将拖拽物恢复到原来的位置
@@ -84,16 +85,14 @@ public class DragBase : ItemBase, IPointerDownHandler, IPointerUpHandler,
     }
     
     //拖拽物如果找的Slot,则执行的逻辑
-    internal virtual void VOnDrop()
-    {
-    }
+    internal virtual void VOnDrop(){}
     
     internal virtual void NonFindSlot()
     {
         // 如果没有找到槽位，那么物品回到原始位置
         _dragIns.transform.position = originalPosition;
-        //还原父层级
-        _dragIns.transform.SetParent(originalParent,true);
+        _curSlot.MainID = ID;
+        _dragIns.transform.SetParent(originalParent,true);//还原父层级
     }
 
     //右击
@@ -102,7 +101,7 @@ public class DragBase : ItemBase, IPointerDownHandler, IPointerUpHandler,
         DisplayRightClickMenu(_eventData);
     }
 
-    public void OnDrag(PointerEventData eventData)
+    public virtual void OnDrag(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Right)
             return;
@@ -115,9 +114,7 @@ public class DragBase : ItemBase, IPointerDownHandler, IPointerUpHandler,
         VOnDrag();
     }
     
-    internal virtual void VOnDrag()
-    {
-    }
+    internal virtual void VOnDrag(){}
 
     public virtual void OnPointerExit(PointerEventData eventData)
     {

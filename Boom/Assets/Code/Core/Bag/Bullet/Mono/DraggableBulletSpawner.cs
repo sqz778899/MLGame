@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System.Linq;
 
-public class DraggableBulletSpawner : Bullet, IPointerDownHandler, 
-    IPointerUpHandler, IDragHandler,IPointerExitHandler,IPointerMoveHandler
+public class DraggableBulletSpawner :Bullet
 {
     public int Count;
     public GameObject childBulletIns;
     public TextMeshProUGUI txtCount;
 
-    internal void Start()
+    internal override void Start()
     {
         base.Start();
         childBulletIns = null;
@@ -22,7 +22,7 @@ public class DraggableBulletSpawner : Bullet, IPointerDownHandler,
         txtCount.text = "X" + Count;
     }
     
-    public void OnPointerDown(PointerEventData eventData)
+    public override void OnPointerDown(PointerEventData eventData)
     {
         DestroyTooltips();
         if (childBulletIns == null && Count > 0)
@@ -30,14 +30,14 @@ public class DraggableBulletSpawner : Bullet, IPointerDownHandler,
             childBulletIns = BulletManager.Instance.InstanceBullet(ID,BulletInsMode.EditA,transform.parent.position);
             childBulletIns.transform.SetParent(UIManager.Instance.DragObjRoot.transform);
             childBulletIns.transform.localScale = Vector3.one;
-            DraggableBullet DraBuSC = childBulletIns.GetComponentInChildren<DraggableBullet>();
+            Bullet DraBuSC = childBulletIns.GetComponentInChildren<Bullet>();
             DraBuSC.originalPosition = transform.position;
             MainRoleManager.Instance.TmpHongSpawner(ID);
             MainRoleManager.Instance.RefreshAllItems();
         }
     }
 
-    public void OnPointerUp(PointerEventData eventData)
+    public override void OnPointerUp(PointerEventData eventData)
     {
         DestroyTooltips();
         if (Count >= 0 && childBulletIns != null)
@@ -47,40 +47,27 @@ public class DraggableBulletSpawner : Bullet, IPointerDownHandler,
         }
     }
 
-    public void OnDrag(PointerEventData eventData)
+    public override void OnDrag(PointerEventData eventData)
     {
         DestroyTooltips();
         if (Count >= 0 && childBulletIns != null)
         {
-            DragOneBullet(eventData, childBulletIns.transform);
+            // 在拖动时，我们把子弹位置设置为鼠标位置
+            RectTransform rectTransform = childBulletIns.transform.GetComponent<RectTransform>();
+            Vector3 worldPoint;
+            if (RectTransformUtility.ScreenPointToWorldPointInRectangle(rectTransform, 
+                    eventData.position, eventData.pressEventCamera, out worldPoint))
+                rectTransform.position = worldPoint;
         }
     }
-    public void OnPointerMove(PointerEventData eventData)
+    public override void OnPointerMove(PointerEventData eventData)
     {
         RectTransform rectTransform = transform.GetComponent<RectTransform>();
         Vector3 worldPoint;
-        if (RectTransformUtility.ScreenPointToWorldPointInRectangle(rectTransform, eventData.position, eventData.pressEventCamera, out worldPoint))
+        if (RectTransformUtility.ScreenPointToWorldPointInRectangle(rectTransform, 
+                eventData.position, eventData.pressEventCamera, out worldPoint))
         {
             DisplayTooltips(worldPoint);
         }
     }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        DestroyTooltips();
-    }
-    
-    #region MyRegion
-    void DragOneBullet(PointerEventData eventData,Transform curTrans)
-    {
-        // 在拖动时，我们把子弹位置设置为鼠标位置
-        RectTransform rectTransform = curTrans.GetComponent<RectTransform>();
-        Vector3 worldPoint;
-        if (RectTransformUtility.ScreenPointToWorldPointInRectangle(rectTransform, eventData.position, eventData.pressEventCamera, out worldPoint))
-        {
-            rectTransform.position = worldPoint;
-        }
-    }
-    #endregion
-    
 }

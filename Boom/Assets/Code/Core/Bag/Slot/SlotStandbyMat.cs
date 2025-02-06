@@ -5,8 +5,7 @@ public class SlotStandbyMat: BulletSlot
     public void AddIns(GameObject StandbyMat)
     {
         StandbyBulletMat curSC = StandbyMat.GetComponent<StandbyBulletMat>();
-        BulletID = curSC.ID;
-        InstanceID = StandbyMat.GetInstanceID();
+        MainID = curSC.ID;
 
         RectTransform curRect = GetComponent<RectTransform>();
         RectTransform StandebyMatRect = StandbyMat.GetComponent<RectTransform>();

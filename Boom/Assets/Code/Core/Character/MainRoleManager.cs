@@ -381,12 +381,14 @@ public class MainRoleManager :ScriptableObject
             GetComponentsInChildren<Gem>().Select(gem => gem.ToJosn()));
 
         CurBullets = new List<BulletJson>();
-        CurBullets.AddRange(UIManager.Instance.BagReadySlotRootGO.
-            GetComponentsInChildren<Bullet>().Select(bullet => bullet.ToJosn()));
+        Bullet[] CurBulletSC = UIManager.Instance.BagReadySlotRootGO
+            .GetComponentsInChildren<Bullet>();
+        CurBullets.AddRange(CurBulletSC.Select(bullet => bullet.ToJosn()));
 
         InLayGems = new List<GemJson>();
-        InLayGems.AddRange(UIManager.Instance.BagReadySlotRootGO.
-            GetComponentsInChildren<Gem>().Select(gem => gem.ToJosn()));
+        Gem[] InLayGemSC = UIManager.Instance.BagReadySlotRootGO
+            .GetComponentsInChildren<Gem>();
+        InLayGems.AddRange(InLayGemSC.Select(gem => gem.ToJosn()));
         #endregion
 
         #region 属性添加
@@ -411,6 +413,16 @@ public class MainRoleManager :ScriptableObject
         #endregion
 
         #region 宝石镶嵌槽的添加
+        foreach (var each in CurBulletSC)
+        {
+            each.InLayGems.Clear();
+            foreach (var eachGem in InLayGemSC)
+            {
+                if (each.SlotID == eachGem.BulletSlotIndex)
+                    each.InLayGems.Add(eachGem);
+            }
+        }
+        
         foreach (var eachBullet in CurBullets)
         {
             eachBullet.InLayGems.Clear();
@@ -453,7 +465,7 @@ public class MainRoleManager :ScriptableObject
             {
                 if (curSpawnerFindID == slots[i].SlotID)
                 {
-                    slots[i].BulletID = each.ID;
+                    slots[i].MainID = each.ID;
                     GameObject newSpawnerIns = BulletManager.Instance.
                         InstanceBullet(each.ID,BulletInsMode.Spawner);
                     var curSC = newSpawnerIns.GetComponentInChildren<DraggableBulletSpawner>();
@@ -498,9 +510,8 @@ public class MainRoleManager :ScriptableObject
             GameObject curSlot = roleSlotRoot.transform.GetChild(each.SlotID - 1).gameObject;//找到对应的Slot
             BulletSlot curSlotSC = curSlot.GetComponentInChildren<BulletSlot>();
             curSC.SlotID = each.SlotID;
-            curSlotSC.BulletID = each.ID;
-            curSlotSC.InstanceID = each.InstanceID;
-            
+            curSlotSC.MainID = each.ID;
+
             BulletIns.transform.SetParent(UIManager.Instance.DragObjRoot.transform,false);
             BulletIns.transform.position = curSlot.transform.position;
         }
@@ -541,8 +552,7 @@ public class MainRoleManager :ScriptableObject
         BulletSlot[] bulletSlots = roleSlotRoot.GetComponentsInChildren<BulletSlot>();
         foreach (BulletSlot each in bulletSlots)
         {
-            each.BulletID = 0;
-            each.InstanceID = 0;
+            each.MainID = -1;
         }
 
         //2)设置Slot的BulletID
@@ -554,8 +564,7 @@ public class MainRoleManager :ScriptableObject
             {
                 if (each.SlotID == curSlotSC.SlotID)
                 {
-                    curSlotSC.BulletID = each.ID;
-                    curSlotSC.InstanceID = each.InstanceID;
+                    curSlotSC.MainID = each.ID;
                 }
             }
         }
@@ -616,8 +625,7 @@ public class MainRoleManager :ScriptableObject
             DestroyImmediate(SDBulletRoot.transform.GetChild(i).gameObject);
         for (int i = 0; i < SDSlots.Length; i++)
         {
-            SDSlots[i].BulletID = 0;
-            SDSlots[i].InstanceID = 0;
+            SDSlots[i].MainID = -1;
         }
         //..............Instance New Data..................
         for (int i = 0; i < SDSlots.Length; i++)
@@ -719,14 +727,7 @@ public class MainRoleManager :ScriptableObject
         RefreshSpawner(MutMode.Sub,bulletID);
         RefreshSpawnerIns();
     }
-    public void AddBullet(int bulletID,int slotID,int instanceID)
-    {
-        RefreshCurBullets(MutMode.Add,bulletID,slotID,instanceID);
-        RefreshSpawner(MutMode.Sub,bulletID);
-        RefreshSpawnerIns();
-        RefreshCurBulletSlots();
-    }
-    
+
     public void AddBulletOnlyData(int bulletID,int slotID,int instanceID)
     {
         RefreshCurBullets(MutMode.Add,bulletID,slotID,instanceID);

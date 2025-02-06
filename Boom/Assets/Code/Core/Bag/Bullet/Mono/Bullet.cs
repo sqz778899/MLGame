@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using System.Linq;
 using Spine.Unity;
 
-public class Bullet : ItemBase
+public class Bullet : DragBase
 {
     [Header("重要属性")]
     public int _level;
@@ -57,6 +57,7 @@ public class Bullet : ItemBase
     
     internal virtual void Start()
     {
+        base.Start();
         InLayGems = new List<Gem>();
     }
 

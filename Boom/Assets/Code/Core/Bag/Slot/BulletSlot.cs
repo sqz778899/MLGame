@@ -2,9 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletSlot : MonoBehaviour
+public class BulletSlot : SlotBase
 {
-   public int SlotID;
-   public int BulletID;
-   public int InstanceID;
 }

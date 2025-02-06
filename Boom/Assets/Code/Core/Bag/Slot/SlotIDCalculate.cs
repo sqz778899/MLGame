@@ -16,7 +16,6 @@ public class SlotIDCalculate : MonoBehaviour
             SlotBase curBase = bagSlots[i];
             curBase.SlotID = i + 1;
             curBase.MainID = -1;
-            curBase.InstanceID = -1;
             curBase.SlotType = SlotType;
         }
         
