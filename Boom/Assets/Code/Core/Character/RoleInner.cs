@@ -40,7 +40,7 @@ public class RoleInner : BaseMove
         {
             BulletJson curB = MainRoleManager.Instance.CurBullets[i];
             GameObject bulletIns = BulletManager.Instance.
-                InstanceBullet(curB.ID, BulletInsMode.Inner);
+                InstanceBullet(curB, BulletInsMode.Inner);
             BulletInner curSC = bulletIns.GetComponent<BulletInner>();
             float offsetX = startPos.x -i * 1.5f;
             curSC.FollowDis = Mathf.Abs(offsetX);

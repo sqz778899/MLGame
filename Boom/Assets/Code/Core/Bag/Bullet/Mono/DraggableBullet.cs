@@ -46,18 +46,18 @@ public class DraggableBullet : Bullet
                 //MainRoleManager.Instance.AddBulletOnlyData(ID,curSlotSC.SlotID,InstanceID);
                 if (curSlotSC.MainID == -1)
                 {
-                    _curSlot = curSlotSC;
+                    CurSlot = curSlotSC;
                     //清除旧的Slot信息
                     SlotManager.ClearBagSlotByID(SlotID,SlotType.CurBulletSlot);
                     //同步新的Slot信息
-                    _curSlot.SOnDrop(Ins,SlotType.CurBulletSlot);
+                    CurSlot.SOnDrop(Ins,SlotType.CurBulletSlot);
                     MainRoleManager.Instance.RefreshAllItems();
                 }
                 else
                 {
                     //
                     GameObject orIns = curSlotSC.ChildIns;
-                    _curSlot.SOnDrop(orIns,SlotType.CurBulletSlot);
+                    CurSlot.SOnDrop(orIns,SlotType.CurBulletSlot);
                     curSlotSC.SOnDrop(Ins,SlotType.CurBulletSlot);
                     MainRoleManager.Instance.RefreshAllItems();
                     //MainRoleManager.Instance.BulletInterchangePos(SlotID, curSlotSC.SlotID);

@@ -21,7 +21,7 @@ public abstract class ItemBase : MonoBehaviour
         }
     }
     protected virtual void OnIDChanged() { }
-    
+    public SlotBase CurSlot; //当前拖拽物所在的Slot
     public string Name;
     public int InstanceID;
     public int SlotID;
@@ -181,8 +181,12 @@ public class BulletJson : ItemJsonBase
     public int Damage;
     public int Piercing;
     public int Resonance;
-    //额外宝石
-    public List<int> InLayGems;
+    //额外属性
+    public int FinalDamage;
+    public int FinalPiercing;
+    public int FinalResonance;
+
+    public bool IsResonance = false;
     //如果是Spawner，则有Count
     public int SpawnerCount;
     
@@ -205,7 +209,6 @@ public class BulletJson : ItemJsonBase
         Resonance = _resonance;
         SpawnerCount = _spawnerCount;
         HitEffectName = _hitEffectName;
-        InLayGems = new List<int>();
     }
 
     public void SyncData()

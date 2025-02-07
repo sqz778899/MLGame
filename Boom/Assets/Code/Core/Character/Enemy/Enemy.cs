@@ -9,11 +9,12 @@ public class Enemy : MonoBehaviour
 {
     public int MaxHP = 3;
     public int CurHP = 3;
+    //功能相关
     public EnemyState EState;
     public DamageState DState;
+    bool isDying = false;
     //表现相关
     public GameObject txtHitNode;
-    public Collider2D EnemyCol;
     [Header("SpineAbout")]
     public SkeletonAnimation Ani;
     
@@ -59,6 +60,8 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (EState == EnemyState.dead) return; // 防止重复触发死亡状态
+        
         EState = EnemyState.hit;
         //伤害跳字
         HitText(damage);

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 
 public class DragBase : ItemBase, IPointerDownHandler, IPointerUpHandler, 
     IDragHandler,IPointerExitHandler,IPointerMoveHandler
@@ -9,7 +10,6 @@ public class DragBase : ItemBase, IPointerDownHandler, IPointerUpHandler,
     //其他属性
     internal GameObject _dragIns; //当前拖拽物
     internal Vector3 originalPosition; //拖拽物原始位置
-    internal SlotBase _curSlot; //当前拖拽物所在的Slot
 
     internal Transform originalParent;//拖拽中的物品原始父层级
     internal Transform dragObjParent; //拖拽中的物品所在的父层级
@@ -72,7 +72,8 @@ public class DragBase : ItemBase, IPointerDownHandler, IPointerUpHandler,
                 
                 if (curSlotSC.MainID == -1)
                 {
-                    _curSlot = curSlotSC;
+                    SlotManager.ClearBagSlotByID(SlotID,CurSlot.SlotType);//清除旧的Slot信息
+                    CurSlot = curSlotSC;//再换Slot信息
                     VOnDrop();
                     NonHappen = false;
                     break;
@@ -91,7 +92,7 @@ public class DragBase : ItemBase, IPointerDownHandler, IPointerUpHandler,
     {
         // 如果没有找到槽位，那么物品回到原始位置
         _dragIns.transform.position = originalPosition;
-        _curSlot.MainID = ID;
+        CurSlot.MainID = ID;
         _dragIns.transform.SetParent(originalParent,true);//还原父层级
     }
 

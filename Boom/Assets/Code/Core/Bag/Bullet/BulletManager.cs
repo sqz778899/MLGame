@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Spine.Unity;
 using Spine.Unity.Editor;
 using Unity.Mathematics;
@@ -50,13 +51,43 @@ public class BulletManager :ScriptableObject
             bulletSpawner.ID = ID;
         }
         Bullet bulletbase = Bullet.GetComponentInChildren<Bullet>();
-        SkeletonAnimation curAniSC = Bullet.GetComponentInChildren<SkeletonAnimation>();
         //curAniSC?.Initialize(true);
         bulletbase.Ins = Bullet;
         bulletbase.ID = ID;
         bulletbase.InstanceID = Bullet.GetInstanceID();
         bulletbase.BulletInsMode = bulletInsMode;
-        bulletbase.SyncData();
+        SkeletonAnimation curAniSC = Bullet.GetComponentInChildren<SkeletonAnimation>();
+        if (curAniSC != null)
+            SpineEditorUtilities.ReloadSkeletonDataAssetAndComponent(curAniSC);
+        return Bullet;
+    }
+    
+    public GameObject InstanceBullet(BulletJson curBulletJson,BulletInsMode bulletInsMode
+        ,Vector3 pos = new Vector3())
+    {
+        //先把地址上这个变量记一下，不然下面就变了
+        int _finalDamage = curBulletJson.FinalDamage;
+        int _finalPiercing = curBulletJson.FinalPiercing;
+        int _finalResonance = curBulletJson.FinalResonance;
+        
+        GetIns(bulletInsMode, out GameObject Bullet,pos);
+        if (bulletInsMode == BulletInsMode.Spawner)
+        {
+            DraggableBulletSpawner bulletSpawner = Bullet.GetComponentInChildren<DraggableBulletSpawner>();
+            bulletSpawner.ID = curBulletJson.ID;
+        }
+        Bullet bulletbase = Bullet.GetComponentInChildren<Bullet>();
+        SkeletonAnimation curAniSC = Bullet.GetComponentInChildren<SkeletonAnimation>();
+        //curAniSC?.Initialize(true);
+        bulletbase.Ins = Bullet;
+        bulletbase.ID = curBulletJson.ID;
+        bulletbase.InstanceID = Bullet.GetInstanceID();
+        bulletbase.BulletInsMode = bulletInsMode;
+        //同步宝石数据
+        bulletbase.FinalDamage = _finalDamage;
+        bulletbase.FinalPiercing = _finalPiercing;
+        bulletbase.FinalResonance = _finalResonance;
+        
         if (curAniSC != null)
             SpineEditorUtilities.ReloadSkeletonDataAssetAndComponent(curAniSC);
         return Bullet;

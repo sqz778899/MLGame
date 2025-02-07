@@ -39,7 +39,7 @@ public class Item : DragBase
         //清除旧的Slot信息
         SlotManager.ClearBagSlotByID(SlotID,SlotType.BagSlot);
         //同步新的Slot信息，这一步会改变SlotID,所以放在后面
-        _curSlot.SOnDrop(_dragIns,SlotType.BagSlot);
+        CurSlot.SOnDrop(_dragIns,SlotType.BagSlot);
         //数据层同步
         MainRoleManager.Instance.MoveItem(this);
         SyncData();

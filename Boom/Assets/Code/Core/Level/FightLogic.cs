@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class FightLogic : MonoBehaviour
 {
+    Dictionary<WinOrFail, Action> stateActions;
     [Header("Award")] 
     public Award CurAward;
     
@@ -27,32 +28,40 @@ public class FightLogic : MonoBehaviour
     public bool isBeginCalculation;
     public GameObject WinGUI;
     public GameObject FailGUI;
-
     public float Distance;
-    public Enemy CurEnemy;
+
+    [Header("角色")] 
+    public List<Enemy> CurEnemys;
     public RoleInner CurRole;
+
+    void Start()
+    {
+        stateActions = new Dictionary<WinOrFail, Action>
+        {
+            { WinOrFail.InLevel, () => {} }, // 空操作
+            { WinOrFail.Win, WinTheLevel },
+            { WinOrFail.Fail, () =>
+                {
+                    FailGUI.SetActive(true);
+                    isBeginCalculation = false;
+                }
+            }
+        };
+    }
+    
     void Update()
     {
         //开始结算关卡
         if (isBeginCalculation)
             WinOrFailThisLevel();
-        
         //实时计算与敌人的距离
-        if (CurEnemy != null)
-            Distance = Vector2.Distance(CurEnemy.transform.position,
-                UIManager.Instance.RoleIns.transform.position);
-        
+        UpdateDistance();
         //开火
-        CheckForKeyPress();
-        
+        HandleInput();
         //摄像机跟随子弹命中敌人动画
-        if (isBeginCameraMove && FirstBullet != null)
-        {
-            Vector3 s = Camera.main.transform.position;
-            Camera.main.transform.position = new Vector3(FirstBullet.transform.position.x,s.y,s.z);
-        }
+        HandleCameraFollow();
     }
-    
+
     public void InitData()
     {
         Camera.main.transform.position = new Vector3(0,1,-10);
@@ -64,7 +73,7 @@ public class FightLogic : MonoBehaviour
         isBeginCameraMove = false;
         isBeginCalculation = false;
         Distance = 0f;
-        CurEnemy = CurLevel.CurEnemy;
+        CurEnemys = CurLevel.CurEnemy;
         CurRole = UIManager.Instance.RoleIns.GetComponent<RoleInner>();
         CurRole.InitData();
         MainRoleManager.Instance.WinOrFailState = WinOrFail.InLevel;
@@ -84,29 +93,50 @@ public class FightLogic : MonoBehaviour
             DestroyImmediate(CurLevel);
     }
 
+    #region UpDate中的各种状态
+    void HandleCameraFollow()
+    {
+        if (!isBeginCameraMove || FirstBullet == null) return;
+    
+        Vector3 cameraPos = Camera.main.transform.position;
+        Camera.main.transform.position = new Vector3(FirstBullet.transform.position.x, cameraPos.y, cameraPos.z);
+    }
+    
+    void HandleInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Space)) 
+            CurRole.Fire();
+    }
+    
+    void UpdateDistance()
+    {
+        if(CurEnemys == null) return;
+        if (CurEnemys.Count == 0) return;
+        
+        Distance = Vector2.Distance(CurEnemys[0].transform.position,
+            CurRole.transform.position);
+    }
+    
     void WinOrFailThisLevel()
     {
-        //如果子弹为0，且敌人未死则失败
-        if (CurEnemy.EState == EnemyState.dead)
+        bool isEnemyLive = false; 
+        foreach (var each in CurEnemys)
+        {
+            if (each.EState == EnemyState.live)
+            {
+                isEnemyLive = true;
+            }
+        }
+        if (!isEnemyLive)
             MainRoleManager.Instance.WinOrFailState = WinOrFail.Win;
-
+        //如果子弹为0，且敌人未死则失败
         if (UIManager.Instance.G_BulletInScene.transform.childCount == 0 &&
-            CurEnemy.EState == EnemyState.live)
+            isEnemyLive)
             MainRoleManager.Instance.WinOrFailState = WinOrFail.Fail;
         
-        switch (MainRoleManager.Instance.WinOrFailState)
-        {
-            case WinOrFail.InLevel:
-                break;
-            case WinOrFail.Win:
-                WinTheLevel();
-                break;
-            case WinOrFail.Fail:
-                FailGUI.SetActive(true);
-                isBeginCalculation = false;
-                break;
-        }
+        stateActions[MainRoleManager.Instance.WinOrFailState]?.Invoke();
     }
+    
     //胜利
     void WinTheLevel()
     {
@@ -119,17 +149,6 @@ public class FightLogic : MonoBehaviour
         //给一个随机Buff
         //RollManager.Instance.OnceRollBuff();
         //选完了给一个随机宝物
-    }
-
-    #region 开火相关
-    public void CheckForKeyPress()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-            FireInvoke();
-    }
-    public void FireInvoke()
-    {
-        CurRole.Fire();
     }
     #endregion
 }

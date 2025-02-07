@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,11 +23,16 @@ public class Bullet : DragBase
         }
     }
     
-    public int Damage;
+    public int Damage;     //基础伤
     public int Piercing;
     public int Resonance;
-    public ElementalTypes ElementalType;
     
+    public int FinalDamage; //最终伤害
+    public int FinalPiercing;
+    public int FinalResonance;
+    public ElementalTypes ElementalType;
+    public bool IsResonance = false;
+
     [Header("重要资产")]
     public GameObject Ins;
     public GameObject Edit_a;
@@ -48,19 +54,18 @@ public class Bullet : DragBase
     public GameObject HitEffect; // 击中效果预制体
     public SkeletonDataAsset BulletSpineAsset; // 子弹Spine资产
     public SkeletonDataAsset HitSpfxAsset; // 子弹击中效果子弹Spine资产资产
-    //
-    public List<Gem> InLayGems; //宝石镶嵌槽
+    //宝石镶嵌
+    List<Gem> InLayGems;
+
     //辅助功能
     internal Vector3 forward = new Vector3(1, 0, 0);
-    internal GameObject TooltipsGO;
     GameObject GroupStar;
-    
-    internal virtual void Start()
+
+    void Awake()
     {
-        base.Start();
         InLayGems = new List<Gem>();
     }
-
+    
     #region 同步数据
     protected override void OnIDChanged()
     {
@@ -136,6 +141,36 @@ public class Bullet : DragBase
                 PathConfig.GetBulletImageOrSpinePath(ID, BulletInsMode));
         }
     }
+    
+    //同步镶嵌槽的宝石数据
+    public void AddGem(Gem gem)
+    {
+        if (gem == null) return;
+        InLayGems.Add(gem);
+        SyncGemAttributes();
+    }
+
+    public void ClearGem()
+    {
+        InLayGems.Clear();
+        SyncGemAttributes();
+    }
+    
+    void SyncGemAttributes()
+    {  
+        FinalDamage = Damage;
+        FinalPiercing = Piercing;
+        FinalResonance = Resonance;
+
+        foreach (var gem in InLayGems)  
+        {  
+            if (gem == null) continue;  
+
+            FinalDamage += gem.Attribute.Damage;
+            FinalPiercing += gem.Attribute.Piercing;
+            FinalResonance += gem.Attribute.Resonance;
+        }
+    }
     public override void SyncData()
     {
         InstanceID = gameObject.GetInstanceID();
@@ -157,6 +192,7 @@ public class Bullet : DragBase
             (PathConfig.GetBulletSpfxPath(ID));
         InitBulletData();
         SetStart(Level);
+        //SyncGemAttributes();
     }
     
     public BulletJson ToJosn()
@@ -168,6 +204,9 @@ public class Bullet : DragBase
         designJson.InstanceID = InstanceID;
         designJson.SlotID = SlotID;
         designJson.SlotType = (int)SlotType;
+        designJson.FinalDamage = FinalDamage;
+        designJson.FinalPiercing = FinalPiercing;
+        designJson.FinalResonance = FinalResonance;
         return designJson;
     }
     #endregion

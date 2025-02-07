@@ -21,8 +21,7 @@ public class CalculateDamageManager : ScriptableObject
 
     public void CalDamage(Bullet bullet,Enemy curEnemy)
     {
-        int curDamage = bullet.Damage;
-        int curHealth = curEnemy.CurHP;
+        int curDamage = bullet.FinalDamage;
         switch (bullet.ElementalType)
         {
             case ElementalTypes.Non:

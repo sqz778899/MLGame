@@ -12,28 +12,26 @@ public class BulletInner : Bullet
     public float FollowDis = 3;
     public float RunSpeed = 10.0f;
     
-    public float DisabearDis = 105f;
     public BulletInnerState _state;
     
     SkeletonAnimation _ain;
-    List<Material> materials
-    {
-        get 
-        {
-            return new List<Material>(_ain.skeletonDataAsset.atlasAssets[0].Materials);
-        }
-    }
+    List<Material> _materials;
     public float AniScale = 1f;
     List<GameObject> FXs;
+
+    [Header("重要属性")] 
+    int _piercingCount; //穿透的敌人的数量
+    int _resonance;
 
     internal override void Start()
     {
         base.Start();
         _state = BulletInnerState.Common;
         _ain = transform.GetChild(0).GetComponent<SkeletonAnimation>();
+        _materials = new List<Material>(_ain.skeletonDataAsset.atlasAssets[0].Materials);
         AniUtility.PlayIdle(_ain,AniScale);
         FXs = new List<GameObject>();
-        foreach (Material material in materials)
+        foreach (Material material in _materials)
             material.SetFloat("_Transparency", 1);
     }
 
@@ -49,46 +47,50 @@ public class BulletInner : Bullet
             case BulletInnerState.Attacking:// 让子弹沿着Z轴向前移动
                 transform.Translate(forward * 10f * Time.deltaTime);
                 break;
+            case BulletInnerState.AttackingStop:// 让子弹沿着Z轴向前移动
+                break;
             case BulletInnerState.Dead:
                 Destroy(gameObject);
                 break;
         }
     }
 
+    #region 击中敌人相关
     void OnTriggerEnter2D(Collider2D other)
     {
-        // 检测子弹是否触碰到敌人（敌人需要有 "Enemy" 标签）
-        if (other.CompareTag("Enemy"))
-        {
-            // 如果有敌人，将其血量减少
-            Enemy enemy = other.GetComponent<Enemy>();
-            if (enemy != null)
-            {
-                CalculateDamageManager.Instance.CalDamage(this,enemy);
-            }
-
-            // 创建击中特效
-            if (HitEffect != null)
-            {
-                StartCoroutine(PlayHitFX());
-            }
-            //延迟销毁子弹
-            gameObject.transform.GetChild(0).gameObject.SetActive(false);
-        }
+        if (!other.CompareTag("Enemy")) return;
+        
+        //穿透敌人的数量
+        if (_piercingCount >= FinalPiercing)
+            _state = BulletInnerState.AttackingStop;
+        
+        // 如果有敌人，将其血量减少
+        HandleEnemyHit(other.GetComponent<Enemy>());
+        HandleHitEffect();
+        HandleBulletDisappear();
+        _piercingCount++;
     }
-
-    public void DestroySelf()
+    
+    //击中敌人
+    void HandleEnemyHit(Enemy enemy)
     {
-        for (int i = FXs.Count - 1; i >= 0; i--)
-        {
-            Destroy(FXs[i]);
-        }
-        // 销毁子弹
-        Destroy(gameObject);
+        if (enemy != null)
+            CalculateDamageManager.Instance.CalDamage(this, enemy);
     }
+    
+    void HandleHitEffect()
+    {
+        if (HitEffect != null)
+            StartCoroutine(PlayHitFX());
+    }
+    
+    void HandleBulletDisappear()
+    {
+        gameObject.transform.GetChild(0).gameObject.SetActive(false);
+    }
+    #endregion
 
     #region 攻击
-
     public IEnumerator ReadyToAttack(Vector3 targetPos)
     {
         //...............填弹...........
@@ -99,7 +101,13 @@ public class BulletInner : Bullet
         transform.DOMove(targetPos, aniTime);
         transform.DOScale(curScale * 0.5f , aniTime);
         StartCoroutine(FadeOut(aniTime));
-        yield return new WaitForSeconds(10);
+        
+        float elapsed = 0f;
+        while (elapsed < 10f && _state == BulletInnerState.AttackBegin)
+        {
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
     }
     
     // 渐隐效果
@@ -111,7 +119,7 @@ public class BulletInner : Bullet
             float alpha = 1 - t / duration;
 
             // 修改每个材质的透明度
-            foreach (Material material in materials)
+            foreach (Material material in _materials)
             {
                 if (material == null)
                     continue;
@@ -122,7 +130,7 @@ public class BulletInner : Bullet
         }
         gameObject.SetActive(false);
         // 确保透明度为0
-        foreach (Material material in materials)
+        foreach (Material material in _materials)
             material.SetFloat("_Transparency", 0);
     }
 
@@ -131,7 +139,7 @@ public class BulletInner : Bullet
         gameObject.SetActive(true);
         StopAllCoroutines();
         _state = BulletInnerState.Attacking;
-        foreach (Material material in materials)
+        foreach (Material material in _materials)
             material.SetFloat("_Transparency", 1);
         AniUtility.PlayAttacking(_ain,AniScale);
     }
@@ -148,31 +156,40 @@ public class BulletInner : Bullet
         yield return new WaitForSeconds(aniTime);
     }
     #endregion
-    
+
+    #region 跑步相关
     void Run()
     {
         float dis = CurDistance();
+        bool shouldMove = Mathf.Abs(dis) > FollowDis;
+        
         //..............面向...................
         if (dis < 0)
-            AniUtility.TrunAround(_ain, 1);
+            AniUtility.TrunAround(_ain, 1); // 面朝左
         else
-            AniUtility.TrunAround(_ain, -1);
+            AniUtility.TrunAround(_ain, -1); // 面朝右
         
         //..............移动方向...................
-        if(Math.Abs(dis) > FollowDis)
+        if (shouldMove)
         {
-            AniUtility.PlayRun(_ain,AniScale);
-            if (dis < 0)
-                transform.Translate( forward * RunSpeed * Time.deltaTime);
-            else
-                transform.Translate( -forward * RunSpeed * Time.deltaTime);
+            AniUtility.PlayRun(_ain, AniScale);
+            float moveDistance = RunSpeed * Time.deltaTime;
+            transform.Translate(forward * (dis < 0 ? moveDistance : -moveDistance));
         }
         else
-            AniUtility.PlayIdle(_ain,AniScale);
+            AniUtility.PlayIdle(_ain, AniScale);
     }
     
     float CurDistance()
     {
         return transform.position.x - UIManager.Instance.RoleIns.transform.position.x;
+    }
+    #endregion
+    
+    public void DestroySelf()
+    {
+        FXs?.ForEach(Destroy);
+        // 销毁子弹
+        Destroy(gameObject);
     }
 }

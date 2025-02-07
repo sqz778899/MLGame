@@ -38,7 +38,8 @@ public class MainRoleManager :ScriptableObject
     //...............Item................
     //子弹
     public List<BulletJson> CurBullets = new List<BulletJson>(); //当前上膛的子弹
-    public List<BulletJson> CurBulletSpawners;                //全部的子弹
+    Dictionary<BulletJson, Bullet> CurBulletsPair;
+    public List<BulletJson> CurBulletSpawners;                   //全部的子弹
     //道具
     public List<ItemJson> BagItems = new List<ItemJson>();
     public List<ItemJson> EquipItems = new List<ItemJson>();
@@ -48,6 +49,7 @@ public class MainRoleManager :ScriptableObject
     
     public List<SupremeCharm> SupremeCharms = new List<SupremeCharm>();
 
+    #region 人物属性
     [Header("人物属性")] 
     public int WaterElement;
     public int FireElement;
@@ -64,6 +66,7 @@ public class MainRoleManager :ScriptableObject
     public int DarkDamage;
     public int MaxDamage;
     ItemAttribute _attrInfo;
+    #endregion
     
     #region 在数据层挪移道具
     public void MoveItem(Item curItem)
@@ -205,6 +208,33 @@ public class MainRoleManager :ScriptableObject
     }
     #endregion
 
+    //子弹关系
+    public void ProcessBulletRelations()
+    {
+        //处理共振
+        if (CurBullets.Count >= 2)
+        {
+            for (int i = 1; i < CurBullets.Count; i++)
+            {
+                BulletJson preBullet = CurBullets[i - 1];
+                BulletJson nextBullet = CurBullets[i];
+                if (preBullet.FinalResonance == 0 || nextBullet.FinalResonance == 0) continue;
+
+                bool isResonance = false;
+                int preRemainder = preBullet.ID % 100;
+                int nextRemainder = nextBullet.ID % 100;
+                if (nextRemainder == preRemainder)//符合共振条件
+                {
+                    preBullet.IsResonance = true;
+                    nextBullet.IsResonance = true;
+                    CurBulletsPair[preBullet].IsResonance = true;
+                    CurBulletsPair[nextBullet].IsResonance = true;
+                }
+                //if(preBullet)
+            }
+        }
+    }
+    
     public void InitContainer()
     {
         if (CurRollPREveIDs == null)
@@ -215,6 +245,8 @@ public class MainRoleManager :ScriptableObject
             CurRollPR = new List<RollPR>(OrginalRollPR);
         if (CurBulletBuffs == null)
             CurBulletBuffs = new List<BulletBuff>();
+        if (CurBulletsPair == null)
+            CurBulletsPair = new Dictionary<BulletJson, Bullet>();
         //"游戏进程相关"
         if (CurMapSate == null)
             CurMapSate = new MapSate();
@@ -379,16 +411,33 @@ public class MainRoleManager :ScriptableObject
         BagGems = new List<GemJson>();
         BagGems.AddRange(UIManager.Instance.BagGemRootGO.
             GetComponentsInChildren<Gem>().Select(gem => gem.ToJosn()));
-
+        
+        //宝石镶嵌属性一并同步
         CurBullets = new List<BulletJson>();
         Bullet[] CurBulletSC = UIManager.Instance.BagReadySlotRootGO
             .GetComponentsInChildren<Bullet>();
-        CurBullets.AddRange(CurBulletSC.Select(bullet => bullet.ToJosn()));
 
         InLayGems = new List<GemJson>();
         Gem[] InLayGemSC = UIManager.Instance.BagReadySlotRootGO
             .GetComponentsInChildren<Gem>();
         InLayGems.AddRange(InLayGemSC.Select(gem => gem.ToJosn()));
+        foreach (var each in CurBulletSC)
+        {
+            each.ClearGem();
+            foreach (var eachGem in InLayGemSC)
+            {
+                if (each.SlotID == eachGem.BulletSlotIndex)
+                    each.AddGem(eachGem);
+            }
+        }
+
+        CurBulletsPair.Clear();
+        foreach (var each in CurBulletSC)
+        {
+            BulletJson curJson = each.ToJosn();
+            CurBullets.Add(curJson);
+            CurBulletsPair[curJson] = each;
+        }
         #endregion
 
         #region 属性添加
@@ -410,28 +459,6 @@ public class MainRoleManager :ScriptableObject
         DarkDamage = _attrInfo.extraDarkDamage;
 
         MaxDamage = _attrInfo.maxDamage;
-        #endregion
-
-        #region 宝石镶嵌槽的添加
-        foreach (var each in CurBulletSC)
-        {
-            each.InLayGems.Clear();
-            foreach (var eachGem in InLayGemSC)
-            {
-                if (each.SlotID == eachGem.BulletSlotIndex)
-                    each.InLayGems.Add(eachGem);
-            }
-        }
-        
-        foreach (var eachBullet in CurBullets)
-        {
-            eachBullet.InLayGems.Clear();
-            foreach (var eachGem in InLayGems)
-            {
-                if (eachBullet.SlotID == eachGem.BulletSlotIndex)
-                    eachBullet.InLayGems.Add(eachGem.ID);
-            }
-        }
         #endregion
     }
 
@@ -504,16 +531,10 @@ public class MainRoleManager :ScriptableObject
         {
             GameObject BulletIns = BulletManager.Instance.InstanceBullet(each.ID,BulletInsMode.EditB);
             each.InstanceID = BulletIns.GetComponentInChildren<Bullet>().InstanceID; //读取存档，要把InstanceID同步
-            
-            DraggableBullet curSC = BulletIns.GetComponentInChildren<DraggableBullet>();
             //...................SetSlot.......................
             GameObject curSlot = roleSlotRoot.transform.GetChild(each.SlotID - 1).gameObject;//找到对应的Slot
             BulletSlot curSlotSC = curSlot.GetComponentInChildren<BulletSlot>();
-            curSC.SlotID = each.SlotID;
-            curSlotSC.MainID = each.ID;
-
-            BulletIns.transform.SetParent(UIManager.Instance.DragObjRoot.transform,false);
-            BulletIns.transform.position = curSlot.transform.position;
+            curSlotSC.SOnDrop(BulletIns,SlotType.CurBulletSlot);
         }
 
         SyncBulletIcon();
@@ -584,37 +605,6 @@ public class MainRoleManager :ScriptableObject
         SyncBulletIcon();
     }
 
-    /// <summary>
-    /// 满足两个逻辑，一个是子弹空拖动，一个是子弹交换拖动
-    /// </summary>
-    /// <param name="curSlotID"></param>
-    /// <param name="targetSlotID"></param>
-    public void BulletInterchangePos(int curSlotID,int targetSlotID)
-    {
-        GameObject curSlot = GetSlot(curSlotID, SlotKind.SlotRole);
-        GameObject targetSlot = GetSlot(targetSlotID, SlotKind.SlotRole);
-        GameObject curIns = GetReadyBulletBySlotID(curSlotID);
-        DraggableBullet curSC = curIns.GetComponentInChildren<DraggableBullet>();
-        GameObject targetIns = GetReadyBulletBySlotID(targetSlotID);
-        
-        if (targetIns != null)//子弹交换逻辑
-        {
-            DraggableBullet targetSC = targetIns.GetComponentInChildren<DraggableBullet>();
-            //挪出来
-            RefreshCurBullets(MutMode.Sub, targetSC.ID,targetSlotID,targetSC.InstanceID);
-            RefreshCurBullets(MutMode.Add,targetSC.ID,curSlotID,targetSC.InstanceID);
-            targetIns.transform.position = curSlot.transform.position;
-            targetIns.GetComponentInChildren<DraggableBullet>().SlotID = curSlotID;
-        }
-        //移进去
-        RefreshCurBullets(MutMode.Sub, curSC.ID,curSlotID,curSC.InstanceID);  //....数据层
-        RefreshCurBullets(MutMode.Add, curSC.ID,targetSlotID,curSC.InstanceID); //....数据层
-        curIns.transform.position = targetSlot.transform.position;
-        curIns.GetComponentInChildren<DraggableBullet>().SlotID = targetSlotID;
-        
-        RefreshCurBulletSlots();//....GO层
-    }
-    
     public void InitStandbyBulletMats()
     {
         GameObject SDBulletRoot = UIManager.Instance.G_StandbyMat;
@@ -709,30 +699,10 @@ public class MainRoleManager :ScriptableObject
         RefreshGemData(MutMode.Add,gemJson);
     }
 
-    public bool InstanceIDIsInCurBullet(int instanceID)
-    {
-        bool instanceIDIsInCurBullet = false;
-        //如果这个Instance有了，证明是在RoleSlot内空拖行为，删掉原来的数据再更新
-        for (int i = CurBullets.Count - 1; i >= 0; i--)
-        {
-            BulletJson preData = CurBullets[i];
-            if (preData.InstanceID == instanceID)
-                instanceIDIsInCurBullet = true;
-        }
-        return instanceIDIsInCurBullet;
-    }
-
     public void TmpHongSpawner(int bulletID)
     {
         RefreshSpawner(MutMode.Sub,bulletID);
         RefreshSpawnerIns();
-    }
-
-    public void AddBulletOnlyData(int bulletID,int slotID,int instanceID)
-    {
-        RefreshCurBullets(MutMode.Add,bulletID,slotID,instanceID);
-        RefreshCurBulletSlots();
-       // RefreshSpawner(BulletMutMode.Sub,bulletID);
     }
 
     public void SubBullet(int bulletID,int instanceID)

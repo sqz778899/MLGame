@@ -34,8 +34,8 @@ public static class BagItemManager<T> where T:ItemBase
         curTargetSlot.MainID = objectID;
         objectSC.SlotType = slotType;
         objectSC.SlotID = curTargetSlot.SlotID;
-        //数据层同步
-        //curItemSc.SetItemData(curTargetSlot);
+        objectSC.CurSlot = curTargetSlot;
+        //objectSC
     }
     
     // 删除物品或宝石

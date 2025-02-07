@@ -57,6 +57,7 @@ public enum BulletInnerState
     Common,
     AttackBegin,
     Attacking,
+    AttackingStop,
     Dead
 }
 

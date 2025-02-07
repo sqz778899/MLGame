@@ -106,9 +106,12 @@ public class DesignTool
     [ButtonGroup("调试总功能")]
     void SetEnemyHp()
     {
-        Enemy curEnemy = UIManager.Instance.FightLogicGO.GetComponent<FightLogic>().CurEnemy;
-        curEnemy.CurHP = 9999;
-        curEnemy.MaxHP = 9999;
+        List<Enemy> curEnemys = UIManager.Instance.FightLogicGO.GetComponent<FightLogic>().CurEnemys;
+        foreach (var each in curEnemys)
+        {
+            each.CurHP = 9999;
+            each.MaxHP = 9999;
+        }
     }
 
     void TempAddBullet(int bulletID)

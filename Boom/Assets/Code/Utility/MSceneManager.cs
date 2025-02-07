@@ -27,7 +27,6 @@ public class MSceneManager: ScriptableObject
     {
         CurrentSceneIndex = SceneID;
         SceneManager.LoadScene(LoadingScene);
-        TrunkManager.Instance.SaveFile();
     }
 
     public void NewGame()
