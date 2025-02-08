@@ -84,9 +84,11 @@ public class Gem : DragBase
     
     public GemJson ToJosn()
     {
-        GemJson gemJson = TrunkManager.Instance.GemDesignJsons
+        GemJson gemJson = new GemJson();
+        GemJson gemDesignJson = TrunkManager.Instance.GemDesignJsons
             .FirstOrDefault(each => each.ID == ID) ?? new GemJson();
-        
+
+        gemJson.CopyFrom(gemDesignJson);
         //同步在游戏内的变量
         gemJson.InstanceID = InstanceID;
         gemJson.SlotID = SlotID;

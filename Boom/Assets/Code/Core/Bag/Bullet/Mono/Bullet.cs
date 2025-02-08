@@ -174,15 +174,15 @@ public class Bullet : DragBase
     public override void SyncData()
     {
         InstanceID = gameObject.GetInstanceID();
-        BulletJson bulletJson = ToJosn();
+        BulletJson bulletJson = TrunkManager.Instance.BulletDesignJsons
+            .FirstOrDefault(each => each.ID == ID) ?? new BulletJson();
         Level = bulletJson.Level;
         Name = bulletJson.Name;
         Damage = bulletJson.Damage;
         Piercing = bulletJson.Piercing;
         Resonance = bulletJson.Resonance;
+        
         ElementalType = (ElementalTypes)bulletJson.ElementalType;
-        /*ItemSprite.sprite = ResManager.instance.GetAssetCache<Sprite>
-            (PathConfig.GetBulletImageOrSpinePath(ID, BulletInsMode));*/
         BulletSpineAsset = ResManager.instance.GetAssetCache<SkeletonDataAsset>
             (PathConfig.GetBulletImageOrSpinePath(ID,BulletInsMode));
         //实例化Prefab
@@ -192,22 +192,24 @@ public class Bullet : DragBase
             (PathConfig.GetBulletSpfxPath(ID));
         InitBulletData();
         SetStart(Level);
-        //SyncGemAttributes();
+        SyncGemAttributes();
     }
     
     public BulletJson ToJosn()
     {
+        BulletJson curBulletJson = new BulletJson();
         BulletJson designJson = TrunkManager.Instance.BulletDesignJsons
             .FirstOrDefault(each => each.ID == ID) ?? new BulletJson();
         
+        curBulletJson.CopyFrom(designJson);
         //同步在游戏内的变量
-        designJson.InstanceID = InstanceID;
-        designJson.SlotID = SlotID;
-        designJson.SlotType = (int)SlotType;
-        designJson.FinalDamage = FinalDamage;
-        designJson.FinalPiercing = FinalPiercing;
-        designJson.FinalResonance = FinalResonance;
-        return designJson;
+        curBulletJson.InstanceID = InstanceID;
+        curBulletJson.SlotID = SlotID;
+        curBulletJson.SlotType = (int)SlotType;
+        curBulletJson.FinalDamage = FinalDamage;
+        curBulletJson.FinalPiercing = FinalPiercing;
+        curBulletJson.FinalResonance = FinalResonance;
+        return curBulletJson;
     }
     #endregion
 

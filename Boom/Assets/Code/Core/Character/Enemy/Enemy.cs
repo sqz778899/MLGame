@@ -1,20 +1,21 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Spine.Unity;
 
-public class Enemy : MonoBehaviour
+public class Enemy : EnemyBase
 {
-    public int MaxHP = 3;
-    public int CurHP = 3;
-    //功能相关
-    public EnemyState EState;
-    public DamageState DState;
-    bool isDying = false;
-    //表现相关
-    public GameObject txtHitNode;
+    public HealthBar CurHealthBar;
+
+    [Header("盾牌")]
+    public List<int> ShieldsHPs = new List<int>();
+
+    [Header("Node相关")]
+    public GameObject ShieldsNode;
+   
     [Header("SpineAbout")]
     public SkeletonAnimation Ani;
     
@@ -26,12 +27,9 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        EState = EnemyState.live;
-        InitState(null);
-        if (_fightLogic==null)
-            _fightLogic = UIManager.Instance.FightLogicGO.GetComponent<FightLogic>();
+        InitData();
     }
-
+    
     void Update()
     {
         switch (EState)
@@ -50,33 +48,47 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void InitState(DamageState curState)
+    public void InitData()
     {
-        if (curState!=null)
-            DState = curState;
-        else
-            DState = new DamageState();
+        CurHP = MaxHP = 3;
+        EState = EnemyState.live;
+        if (_fightLogic==null)
+            _fightLogic = UIManager.Instance.FightLogicGO.GetComponent<FightLogic>();
+        CurHealthBar.InitHealthBar(this); //初始化血条
+        SetShields();//初始化盾牌
     }
 
-    public void TakeDamage(int damage)
+    //设置盾牌数量和每个盾牌的血量
+    public void SetShields()
     {
-        if (EState == EnemyState.dead) return; // 防止重复触发死亡状态
-        
-        EState = EnemyState.hit;
-        //伤害跳字
-        HitText(damage);
-        CurHP -= damage;
+        for (int i = 0; i < ShieldsHPs.Count; i++)
+        {
+            GameObject ShieldIns = ResManager.instance.CreatInstance(PathConfig.ShieldPB);
+            ShieldMono curMono = ShieldIns.GetComponent<ShieldMono>();
+            curMono.InitShield(ShieldsHPs[i]);
+            ShieldIns.transform.SetParent(ShieldsNode.transform,false);
+            float curStep = i * curMono.InsStep;
+            ShieldIns.transform.localPosition = new Vector3(curStep,0,0);
+        }
+    }
+    
+    //伤害
+    public override void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
         float hitTime = 0f;
-        AniUtility.PlayHit01(Ani,ref hitTime); //播放受击动画
-        
-        if (CurHP <= 0)// 如果血量为0或更少，则开始死亡结算
+        AniUtility.PlayHit01(Ani, ref hitTime);
+
+        if (CurHP <= 0)
         {
             StopAllCoroutines();
             EState = EnemyState.dead;
             StartCoroutine(ChangeCalculation());
         }
         else
-            StartCoroutine(ChangeHitState(hitTime)); //没死等一下播放完动画，切一下Idle状态
+        {
+            StartCoroutine(ChangeHitState(hitTime)); // 伤害后切换回 idle 状态
+        }
     }
 
     //爆装备了
@@ -90,7 +102,8 @@ public class Enemy : MonoBehaviour
             //ItemManager.InstanceItemByID();
         }
     }
-    
+
+    #region 表现相关
     //等待播放Hit动画，没死就切一下Idle状态
     public IEnumerator ChangeHitState(float hitTime)
     {
@@ -106,6 +119,7 @@ public class Enemy : MonoBehaviour
         _fightLogic.isBeginCalculation = true; //通知进行结算
     }
 
+    //伤害跳字
     void HitText(int damage)
     {
         GameObject txtHitIns = Instantiate(ResManager.instance
@@ -114,4 +128,5 @@ public class Enemy : MonoBehaviour
         Animation curAni = txtHitIns.GetComponent<Animation>();
         curAni.Play();
     }
+    #endregion
 }

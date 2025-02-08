@@ -82,6 +82,22 @@ public class GemJson : ItemJsonBase
         IsInLay = false;
         BulletSlotIndex = -1;
     }
+    
+    public void CopyFrom(GemJson other)
+    {
+        if (other == null) return;
+
+        ID = other.ID;
+        InstanceID = other.InstanceID;
+        Name = other.Name;
+        Attribute = new GemAttribute(other.Attribute.Damage,
+            other.Attribute.Piercing,other.Attribute.Resonance);  // 假设 GemAttribute 有复制构造函数
+        ImageName = other.ImageName;
+        SlotID = other.SlotID;
+        SlotType = other.SlotType;
+        IsInLay = other.IsInLay;
+        BulletSlotIndex = other.BulletSlotIndex;
+    }
 }
 #endregion
 
@@ -167,6 +183,40 @@ public class ItemJson:ItemJsonBase
         SlotID = _SlotID;
         SlotType = _SlotType;
     }
+    
+    public void CopyFrom(ItemJson other)
+    {
+        if (other == null) return;
+
+        // 复制基础字段
+        this.ID = other.ID;
+        this.InstanceID = other.InstanceID;
+        this.Rare = other.Rare;
+        this.Name = other.Name;
+        this.ImageName = other.ImageName;
+        this.SlotID = other.SlotID;
+        this.SlotType = other.SlotType;
+
+        // 复制 Attribute
+        // 如果 Attribute 不是 null，那么我们直接聚合它，假如你是想合并多个 ItemJson 的属性，调用 Aggregate。
+        // 否则，直接赋值。
+        if (other.Attribute != null)
+        {
+            this.Attribute = new ItemAttribute(
+                other.Attribute.waterElement,
+                other.Attribute.fireElement,
+                other.Attribute.thunderElement,
+                other.Attribute.lightElement,
+                other.Attribute.darkElement,
+                other.Attribute.extraWaterDamage,
+                other.Attribute.extraFireDamage,
+                other.Attribute.extraThunderDamage,
+                other.Attribute.extraLightDamage,
+                other.Attribute.extraDarkDamage,
+                other.Attribute.maxDamage
+            );
+        }
+    }
 }
 #endregion
 
@@ -209,6 +259,29 @@ public class BulletJson : ItemJsonBase
         Resonance = _resonance;
         SpawnerCount = _spawnerCount;
         HitEffectName = _hitEffectName;
+    }
+
+    public void CopyFrom(BulletJson other)
+    {
+        if (other == null) return;
+
+        // 复制基础字段
+        this.ID = other.ID;
+        this.InstanceID = other.InstanceID;
+        this.Name = other.Name;
+        this.SlotID = other.SlotID;
+        this.SlotType = other.SlotType;
+        this.Level = other.Level;
+        this.ElementalType = other.ElementalType;
+        this.Damage = other.Damage;
+        this.Piercing = other.Piercing;
+        this.Resonance = other.Resonance;
+        this.FinalDamage = other.FinalDamage;
+        this.FinalPiercing = other.FinalPiercing;
+        this.FinalResonance = other.FinalResonance;
+        this.IsResonance = other.IsResonance;
+        this.SpawnerCount = other.SpawnerCount;
+        this.HitEffectName = other.HitEffectName;
     }
 
     public void SyncData()

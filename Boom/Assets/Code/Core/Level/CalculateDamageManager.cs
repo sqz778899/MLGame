@@ -19,7 +19,7 @@ public class CalculateDamageManager : ScriptableObject
     }
     #endregion
 
-    public void CalDamage(Bullet bullet,Enemy curEnemy)
+    public void CalDamage(Bullet bullet,EnemyBase curEnemy)
     {
         int curDamage = bullet.FinalDamage;
         switch (bullet.ElementalType)
@@ -39,7 +39,7 @@ public class CalculateDamageManager : ScriptableObject
         }
     }
 
-    void CalIce(Bullet bullet,Enemy curEnemy)
+    void CalIce(Bullet bullet,EnemyBase curEnemy)
     {
         int curDamage = bullet.Damage;
         DamageState curDamageState = curEnemy.DState;
@@ -57,7 +57,7 @@ public class CalculateDamageManager : ScriptableObject
         curDamageState.Ice += curDamage;
     }
 
-    void CalFire(Bullet bullet, Enemy curEnemy)
+    void CalFire(Bullet bullet, EnemyBase curEnemy)
     {
         int curDamage = bullet.Damage;
         DamageState curDamageState = curEnemy.DState;
@@ -89,7 +89,7 @@ public class CalculateDamageManager : ScriptableObject
         curDamageState.Fire += curDamage;
     }
 
-    void CalElectric(Bullet bullet, Enemy curEnemy)
+    void CalElectric(Bullet bullet, EnemyBase curEnemy)
     {
         int curDamage = bullet.Damage;
         DamageState curDamageState = curEnemy.DState;

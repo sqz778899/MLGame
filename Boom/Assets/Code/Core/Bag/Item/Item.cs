@@ -139,9 +139,11 @@ public class Item : DragBase
 
     public ItemJson ToJosn()
     {
-        ItemJson itemJson = TrunkManager.Instance.ItemDesignJsons
+        ItemJson itemJson = new ItemJson();
+        ItemJson itemDesignJson = TrunkManager.Instance.ItemDesignJsons
             .FirstOrDefault(each => each.ID == ID) ?? new ItemJson();
 
+        itemJson.CopyFrom(itemDesignJson);
         //同步在游戏内的变量
         itemJson.InstanceID = InstanceID;
         itemJson.SlotID = SlotID;

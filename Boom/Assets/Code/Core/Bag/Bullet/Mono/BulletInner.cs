@@ -58,21 +58,26 @@ public class BulletInner : Bullet
     #region 击中敌人相关
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (!other.CompareTag("Enemy")) return;
+        // 白名单标签
+        string[] whiteListTags = { "Enemy" };  // 你可以在这里定义多个标签
         
-        //穿透敌人的数量
-        if (_piercingCount >= FinalPiercing)
-            _state = BulletInnerState.AttackingStop;
-        
-        // 如果有敌人，将其血量减少
-        HandleEnemyHit(other.GetComponent<Enemy>());
-        HandleHitEffect();
-        HandleBulletDisappear();
-        _piercingCount++;
+        // 检查触发的对象的标签是否在白名单中
+        if (Array.Exists(whiteListTags, tag => other.CompareTag(tag)))
+        {
+            //穿透敌人的数量
+            if (_piercingCount >= FinalPiercing)
+                _state = BulletInnerState.AttackingStop;
+
+            // 如果有敌人，将其血量减少
+            HandleEnemyHit(other.GetComponent<EnemyBase>());
+            HandleHitEffect();
+            HandleBulletDisappear();
+            _piercingCount++;
+        }
     }
     
     //击中敌人
-    void HandleEnemyHit(Enemy enemy)
+    void HandleEnemyHit(EnemyBase enemy)
     {
         if (enemy != null)
             CalculateDamageManager.Instance.CalDamage(this, enemy);
