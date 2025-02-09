@@ -2170,7 +2170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb3f314f0e3401e9e7ccbe56e7e4d67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SlotID: 17
+  SlotID: 5
   MainID: -1
   SlotType: 6
   ChildIns: {fileID: 0}
@@ -3757,7 +3757,7 @@ MonoBehaviour:
   MainID: -1
   SlotType: 5
   ChildIns: {fileID: 0}
-  BulletSlotIndex: 2
+  BulletSlotIndex: 3
   ChildScale: {x: 0.7, y: 0.7, z: 0.7}
 --- !u!114 &236246511
 MonoBehaviour:
@@ -5759,7 +5759,7 @@ MonoBehaviour:
   MainID: -1
   SlotType: 5
   ChildIns: {fileID: 0}
-  BulletSlotIndex: 2
+  BulletSlotIndex: 4
   ChildScale: {x: 0.7, y: 0.7, z: 0.7}
 --- !u!114 &344841809
 MonoBehaviour:
@@ -6003,7 +6003,7 @@ MonoBehaviour:
   MainID: -1
   SlotType: 5
   ChildIns: {fileID: 0}
-  BulletSlotIndex: 2
+  BulletSlotIndex: 4
   ChildScale: {x: 0.7, y: 0.7, z: 0.7}
 --- !u!114 &376483616
 MonoBehaviour:
@@ -7527,7 +7527,7 @@ MonoBehaviour:
   MainID: -1
   SlotType: 5
   ChildIns: {fileID: 0}
-  BulletSlotIndex: 2
+  BulletSlotIndex: 3
   ChildScale: {x: 0.7, y: 0.7, z: 0.7}
 --- !u!114 &495945994
 MonoBehaviour:
@@ -16652,7 +16652,7 @@ MonoBehaviour:
   MainID: -1
   SlotType: 5
   ChildIns: {fileID: 0}
-  BulletSlotIndex: 2
+  BulletSlotIndex: 5
   ChildScale: {x: 0.7, y: 0.7, z: 0.7}
 --- !u!114 &1177766417
 MonoBehaviour:
@@ -17118,7 +17118,7 @@ MonoBehaviour:
   MainID: -1
   SlotType: 5
   ChildIns: {fileID: 0}
-  BulletSlotIndex: 2
+  BulletSlotIndex: 4
   ChildScale: {x: 0.7, y: 0.7, z: 0.7}
 --- !u!114 &1211270638
 MonoBehaviour:
@@ -21240,7 +21240,7 @@ MonoBehaviour:
   MainID: -1
   SlotType: 5
   ChildIns: {fileID: 0}
-  BulletSlotIndex: 2
+  BulletSlotIndex: 5
   ChildScale: {x: 0.7, y: 0.7, z: 0.7}
 --- !u!114 &1472218394
 MonoBehaviour:
@@ -21621,7 +21621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb3f314f0e3401e9e7ccbe56e7e4d67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SlotID: 5
+  SlotID: 2
   MainID: -1
   SlotType: 6
   ChildIns: {fileID: 0}
@@ -26063,7 +26063,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb3f314f0e3401e9e7ccbe56e7e4d67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SlotID: 9
+  SlotID: 3
   MainID: -1
   SlotType: 6
   ChildIns: {fileID: 0}
@@ -27841,7 +27841,7 @@ MonoBehaviour:
   MainID: -1
   SlotType: 5
   ChildIns: {fileID: 0}
-  BulletSlotIndex: 2
+  BulletSlotIndex: 3
   ChildScale: {x: 0.7, y: 0.7, z: 0.7}
 --- !u!114 &1947272657
 MonoBehaviour:
@@ -30107,7 +30107,7 @@ MonoBehaviour:
   MainID: -1
   SlotType: 5
   ChildIns: {fileID: 0}
-  BulletSlotIndex: 2
+  BulletSlotIndex: 5
   ChildScale: {x: 0.7, y: 0.7, z: 0.7}
 --- !u!114 &2061435924
 MonoBehaviour:
@@ -30427,7 +30427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb3f314f0e3401e9e7ccbe56e7e4d67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SlotID: 13
+  SlotID: 4
   MainID: -1
   SlotType: 6
   ChildIns: {fileID: 0}

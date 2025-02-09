@@ -11,6 +11,7 @@
       "FinalDamage": 0,
       "FinalPiercing": 0,
       "FinalResonance": 0,
+      "IsResonance": false,
       "SpawnerCount": 5,
       "HitEffectName": "FX_Bullet01_hit",
       "ID": 1,
@@ -28,6 +29,7 @@
       "FinalDamage": 0,
       "FinalPiercing": 0,
       "FinalResonance": 0,
+      "IsResonance": false,
       "SpawnerCount": 1,
       "HitEffectName": "FX_Bullet02_hit",
       "ID": 2,
@@ -45,6 +47,7 @@
       "FinalDamage": 0,
       "FinalPiercing": 0,
       "FinalResonance": 0,
+      "IsResonance": false,
       "SpawnerCount": 1,
       "HitEffectName": "FX_Bullet03_hit",
       "ID": 3,
@@ -84,8 +87,173 @@
     }
   ],
   "UserCurBuff": null,
-  "UserItems": [],
-  "UserGems": [],
+  "UserItems": [
+    {
+      "Rare": 1,
+      "ImageName": "T_Item_Can_01",
+      "Attribute": {
+        "waterElement": 0,
+        "fireElement": 1,
+        "thunderElement": 0,
+        "lightElement": 0,
+        "darkElement": 0,
+        "extraWaterDamage": 0,
+        "extraFireDamage": 20,
+        "extraThunderDamage": 0,
+        "extraLightDamage": 0,
+        "extraDarkDamage": 0,
+        "maxDamage": 30
+      },
+      "ID": 1,
+      "InstanceID": -215524,
+      "Name": "易拉罐",
+      "SlotID": 1,
+      "SlotType": 1
+    },
+    {
+      "Rare": 1,
+      "ImageName": "T_Item_Can_01",
+      "Attribute": {
+        "waterElement": 0,
+        "fireElement": 1,
+        "thunderElement": 0,
+        "lightElement": 0,
+        "darkElement": 0,
+        "extraWaterDamage": 0,
+        "extraFireDamage": 20,
+        "extraThunderDamage": 0,
+        "extraLightDamage": 0,
+        "extraDarkDamage": 0,
+        "maxDamage": 30
+      },
+      "ID": 1,
+      "InstanceID": -143944,
+      "Name": "易拉罐",
+      "SlotID": 1,
+      "SlotType": 1
+    },
+    {
+      "Rare": 1,
+      "ImageName": "T_Item_ToiletPlunger_01",
+      "Attribute": {
+        "waterElement": 1,
+        "fireElement": 0,
+        "thunderElement": 0,
+        "lightElement": 0,
+        "darkElement": 0,
+        "extraWaterDamage": 10,
+        "extraFireDamage": 0,
+        "extraThunderDamage": 0,
+        "extraLightDamage": 0,
+        "extraDarkDamage": 0,
+        "maxDamage": 40
+      },
+      "ID": 2,
+      "InstanceID": -215554,
+      "Name": "马桶搋子",
+      "SlotID": 2,
+      "SlotType": 1
+    },
+    {
+      "Rare": 1,
+      "ImageName": "T_Item_ToiletPlunger_01",
+      "Attribute": {
+        "waterElement": 1,
+        "fireElement": 0,
+        "thunderElement": 0,
+        "lightElement": 0,
+        "darkElement": 0,
+        "extraWaterDamage": 10,
+        "extraFireDamage": 0,
+        "extraThunderDamage": 0,
+        "extraLightDamage": 0,
+        "extraDarkDamage": 0,
+        "maxDamage": 40
+      },
+      "ID": 2,
+      "InstanceID": -143974,
+      "Name": "马桶搋子",
+      "SlotID": 2,
+      "SlotType": 1
+    }
+  ],
+  "UserGems": [
+    {
+      "ImageName": "T_Gem_Resonance_01",
+      "Attribute": {
+        "Damage": 0,
+        "Piercing": 0,
+        "Resonance": 1
+      },
+      "IsInLay": false,
+      "BulletSlotIndex": -1,
+      "ID": 20,
+      "InstanceID": -144004,
+      "Name": "共振宝石",
+      "SlotID": 1,
+      "SlotType": 4
+    },
+    {
+      "ImageName": "T_Gem_Resonance_01",
+      "Attribute": {
+        "Damage": 0,
+        "Piercing": 0,
+        "Resonance": 1
+      },
+      "IsInLay": false,
+      "BulletSlotIndex": -1,
+      "ID": 20,
+      "InstanceID": -144016,
+      "Name": "共振宝石",
+      "SlotID": 2,
+      "SlotType": 4
+    },
+    {
+      "ImageName": "T_Gem_Resonance_01",
+      "Attribute": {
+        "Damage": 0,
+        "Piercing": 0,
+        "Resonance": 1
+      },
+      "IsInLay": false,
+      "BulletSlotIndex": -1,
+      "ID": 20,
+      "InstanceID": -144430,
+      "Name": "共振宝石",
+      "SlotID": 3,
+      "SlotType": 4
+    },
+    {
+      "ImageName": "T_Gem_Resonance_01",
+      "Attribute": {
+        "Damage": 0,
+        "Piercing": 0,
+        "Resonance": 1
+      },
+      "IsInLay": false,
+      "BulletSlotIndex": -1,
+      "ID": 20,
+      "InstanceID": -144442,
+      "Name": "共振宝石",
+      "SlotID": 4,
+      "SlotType": 4
+    },
+    {
+      "ImageName": "T_Gem_Resonance_01",
+      "Attribute": {
+        "Damage": 0,
+        "Piercing": 0,
+        "Resonance": 1
+      },
+      "IsInLay": false,
+      "BulletSlotIndex": -1,
+      "ID": 20,
+      "InstanceID": -144454,
+      "Name": "共振宝石",
+      "SlotID": 5,
+      "SlotType": 4
+    }
+  ],
   "SupremeCharms": [],
   "UserMapSate": [
     {

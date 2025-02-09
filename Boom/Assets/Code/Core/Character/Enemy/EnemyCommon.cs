@@ -39,7 +39,8 @@ public class EnemyBase : MonoBehaviour
             curHP = Mathf.Clamp(value, 0, MaxHP);  // 防止当前血量大于最大血量或者小于0
         }
     }
-    public int MaxHP { get; set; }
+
+    public int MaxHP;
     
     [Header("功能相关")]
     public EnemyState EState;

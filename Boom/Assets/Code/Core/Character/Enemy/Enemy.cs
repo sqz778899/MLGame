@@ -50,7 +50,7 @@ public class Enemy : EnemyBase
 
     public void InitData()
     {
-        CurHP = MaxHP = 3;
+        CurHP = MaxHP;
         EState = EnemyState.live;
         if (_fightLogic==null)
             _fightLogic = UIManager.Instance.FightLogicGO.GetComponent<FightLogic>();
@@ -86,9 +86,7 @@ public class Enemy : EnemyBase
             StartCoroutine(ChangeCalculation());
         }
         else
-        {
             StartCoroutine(ChangeHitState(hitTime)); // 伤害后切换回 idle 状态
-        }
     }
 
     //爆装备了

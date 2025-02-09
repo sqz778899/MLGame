@@ -211,27 +211,39 @@ public class MainRoleManager :ScriptableObject
     //子弹关系
     public void ProcessBulletRelations()
     {
+        if (CurBullets.Count < 2) return;
         //处理共振
-        if (CurBullets.Count >= 2)
+        int resonanceCount = 0;
+        for (int i = 1; i < CurBullets.Count; i++)
         {
-            for (int i = 1; i < CurBullets.Count; i++)
+            BulletJson preBullet = CurBullets[i - 1];
+            BulletJson nextBullet = CurBullets[i];
+            if (preBullet.FinalResonance == 0 || nextBullet.FinalResonance == 0)//不符合共振条件
             {
-                BulletJson preBullet = CurBullets[i - 1];
-                BulletJson nextBullet = CurBullets[i];
-                if (preBullet.FinalResonance == 0 || nextBullet.FinalResonance == 0) continue;
-
-                bool isResonance = false;
-                int preRemainder = preBullet.ID % 100;
-                int nextRemainder = nextBullet.ID % 100;
-                if (nextRemainder == preRemainder)//符合共振条件
-                {
-                    preBullet.IsResonance = true;
-                    nextBullet.IsResonance = true;
-                    CurBulletsPair[preBullet].IsResonance = true;
-                    CurBulletsPair[nextBullet].IsResonance = true;
-                }
-                //if(preBullet)
+                resonanceCount = 0;
+                continue;//不符合共振条件
             }
+
+            bool isResonance = false;
+            int preRemainder = preBullet.ID % 100;
+            int nextRemainder = nextBullet.ID % 100;
+            if (nextRemainder == preRemainder)//符合共振条件
+            {
+                resonanceCount++;
+                preBullet.IsResonance = true;
+                nextBullet.IsResonance = true;
+                CurBulletsPair[preBullet].IsResonance = true;
+                //开始添加共振伤害
+                Bullet nextBulletSC = CurBulletsPair[nextBullet];
+                nextBulletSC.IsResonance = true;
+                nextBulletSC.FinalDamage += nextBulletSC.FinalResonance * resonanceCount;
+                nextBullet.FinalDamage += nextBullet.FinalResonance * resonanceCount;
+            }
+            else
+            {
+                resonanceCount = 0;
+            }
+            //if(preBullet)
         }
     }
     
@@ -460,19 +472,11 @@ public class MainRoleManager :ScriptableObject
 
         MaxDamage = _attrInfo.maxDamage;
         #endregion
-    }
 
-    //
-    void LElementBalance()
-    {
-        int accountElement = WaterElement + FireElement + ThunderElement;
-        int maxSub = Mathf.Abs(WaterElement - FireElement);
-        maxSub = Mathf.Max(maxSub,Mathf.Abs(FireElement - ThunderElement));
-        maxSub = Mathf.Max(maxSub,Mathf.Abs(ThunderElement - WaterElement));
-        float elementRatio = (float)maxSub / accountElement;
-        DebuffMaxDamage = (int)Mathf.Lerp(0, 100, elementRatio);
-        //lerp 0 - 100;
+        //刷新子弹关系
+        ProcessBulletRelations();
     }
+    
     #endregion
 
     #region 场景内GO操作
