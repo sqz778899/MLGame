@@ -212,6 +212,9 @@ public class MainRoleManager :ScriptableObject
     public void ProcessBulletRelations()
     {
         if (CurBullets.Count < 2) return;
+
+        ResonanceSlotCol[] ss = UIManager.Instance.BagReadySlotRootGO.
+            GetComponentsInChildren<ResonanceSlotCol>();
         //处理共振
         int resonanceCount = 0;
         for (int i = 1; i < CurBullets.Count; i++)
