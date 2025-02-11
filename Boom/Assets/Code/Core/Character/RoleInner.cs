@@ -78,10 +78,10 @@ public class RoleInner : BaseMove
                 AniUtility.PlayIdle(Ani);
                 break;
             case RoleState.MoveForward:
-                MoveForward();
+                Move(forward);
                 break;
             case RoleState.MoveBack:
-                MoveBack();
+                Move(-forward);
                 break;
         }
     }
@@ -98,19 +98,13 @@ public class RoleInner : BaseMove
         CurConnon = curSC;
     }
 
-    internal override void MoveForward()
+    internal override void Move(Vector3 direction)
     {
-        base.MoveForward();
-        AniUtility.TrunAround(Ani,1);
+        base.Move(direction);
+        AniUtility.TrunAround(Ani,direction.x);//朝向
         AniUtility.PlayRun(Ani);
     }
-
-    internal override void MoveBack()
-    {
-        base.MoveBack();
-        AniUtility.TrunAround(Ani,-1);
-        AniUtility.PlayRun(Ani);
-    }
+    
 
     public void Fire()
     {

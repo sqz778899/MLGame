@@ -20,15 +20,4 @@ public class TitleRootMono : MonoBehaviour
       G_CurBulletIcon.SetActive(!G_CurBulletIcon.activeSelf);
       G_StandbyIcon.SetActive(!G_StandbyIcon.activeSelf);
    }
-   
-   //开启关闭背包
-   public void OpenBag()
-   {
-      G_Bag.SetActive(true);
-   }
-   
-   public void CloseBag()
-   {
-      G_Bag.SetActive(false);
-   }
 }

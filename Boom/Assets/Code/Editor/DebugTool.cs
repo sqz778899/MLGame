@@ -5,15 +5,16 @@ using UnityEngine;
 
 public class DebugTool
 {
-    public int accountElement;
-    public int maxSub;
-    public float elementRatio;
-    
-    
+    public GameObject Root;
+
     [Button(ButtonSizes.Large)]
-    void Debugsss()
+    void DealMissingScript()
     {
-        float s = Mathf.Lerp(0, 100, elementRatio);
-        Debug.Log(s);
+        Transform[] allTrans = Root.GetComponentsInChildren<Transform>(true);
+        foreach (var each in allTrans)
+        {
+            GameObjectUtility.RemoveMonoBehavioursWithMissingScript(each.gameObject);
+        }
+        //GameObjectUtility.RemoveMonoBehavioursWithMissingScript()
     }
 }

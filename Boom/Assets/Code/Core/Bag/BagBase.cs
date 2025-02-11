@@ -40,6 +40,7 @@ public abstract class ItemJsonBase
     public int SlotType;
 }
 
+
 #region 宝石类
 //和GO解绑的纯数据
 [Serializable]

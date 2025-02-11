@@ -3,6 +3,7 @@ Shader "Unlit/OutLine"
     Properties
     {
         [PerRendererData]_MainTex ("Texture", 2D) = "white" {}
+        _BaseColor ("Base Color", Color) = (1,1,1,1)
         _OutLine ("OutLine", Float) = 1
         [HDR]_Color ("OutLine Color", Color) = (1,1,1,1)
     }
@@ -41,6 +42,7 @@ Shader "Unlit/OutLine"
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
+            half4 _BaseColor;
             half4 _Color;
             half _OutLine;
             
@@ -55,7 +57,7 @@ Shader "Unlit/OutLine"
             fixed4 frag (v2f i) : SV_Target
             {
                 // sample the texture
-                fixed4 col = tex2D(_MainTex, i.uv);
+                fixed4 col = tex2D(_MainTex, i.uv) * _BaseColor;
 
                 float2 uv_up = i.uv + _MainTex_ST * float2(0,1) * _OutLine;
                 float2 uv_down = i.uv + _MainTex_ST * float2(0,-1) * _OutLine;

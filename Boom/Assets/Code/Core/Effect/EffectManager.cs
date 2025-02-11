@@ -8,45 +8,50 @@ using Random = UnityEngine.Random;
 public class EffectManager : MonoBehaviour
 {
     public GameObject Root;
-    public GameObject StartPosIns;
-    public GameObject TargetPosIns;
-
-    [Header("金币诞生动画时长")] public Vector2 spawntimeRange;
-    [Header("金币诞生数量")] public int num;
-    [Header("金币诞生球半径")]  public float radius;
-    [Header("金币飞行贝塞尔控制点偏移")] public Vector2 flyRangeOffset; 
-    [Header("金币飞行动画时长")] public Vector2 flyTimeRange; 
+    [Header("目标GO")] 
+    public GameObject CoinsTarget;
+    public GameObject RoomKeysTarget;
     
-    public void CreatEffect(string effectName,Vector3 startPos)
+    public void CreatEffect(EParameter EPara)
     {
         string insPath = "";
-        switch (effectName)
+        Vector3 targetpos;
+        switch (EPara.CurEffectType)
         {
-            case "CoinsPile":
+            case EffectType.CoinsPile:
                 insPath = PathConfig.AwardCoin;
+                targetpos = CoinsTarget.transform.position;
+                break;
+            case EffectType.RoomKeys:
+                insPath = PathConfig.AwardRoomKey;
+                targetpos = RoomKeysTarget.transform.position;
+                break;
+            default:
+                insPath = PathConfig.AwardCoin;
+                targetpos = CoinsTarget.transform.position;
                 break;
         }
 
-        PlayAwardEffect(startPos, insPath);
+        PlayAwardEffect(EPara,targetpos, insPath);
     }
     
-    public void PlayAwardEffect(Vector3 startPos,string resPath,int num = 20,Action onFinish = null)
+    public void PlayAwardEffect(EParameter EPara,Vector3 targetpos,string resPath,Action onFinish = null)
     {
         Sequence seq = DOTween.Sequence();
-        float val = Random.Range(flyRangeOffset.x,flyRangeOffset.y);
-        for (int i = 0; i < num; i++)
+        float val = Random.Range(EPara.FlyRangeOffset.x,EPara.FlyRangeOffset.y);
+        for (int i = 0; i < EPara.InsNum; i++)
         {
             GameObject awardIns = ResManager.instance.CreatInstance(resPath);
             awardIns.transform.SetParent(Root.transform,false);
-            float randomTime = Random.Range(spawntimeRange.x, spawntimeRange.y);
-            awardIns.transform.position = startPos;
+            float randomTime = Random.Range(EPara.SpawntimeRange.x,EPara.SpawntimeRange.y);
+            awardIns.transform.position = EPara.StartPos;
             seq.Insert(0,awardIns.transform.DOMove(
-                startPos + Random.insideUnitSphere * radius,randomTime).SetEase(Ease.OutSine));
+                EPara.StartPos + Random.insideUnitSphere * EPara.Radius,randomTime).SetEase(Ease.OutSine));
             Vector3 cpos = new Vector3(awardIns.transform.position.x + val,
                 awardIns.transform.position.y + val,awardIns.transform.position.z);
-            seq.Insert(randomTime,awardIns.transform.DOBezier(awardIns.transform.position,cpos,
-                TargetPosIns.transform.position,
-                Random.Range(flyTimeRange.x,flyTimeRange.y), () =>
+            seq.Insert(randomTime,awardIns.transform.DOBezier(
+                awardIns.transform.position,cpos, targetpos,
+                Random.Range(EPara.FlyTimeRange.x,EPara.FlyTimeRange.y), () =>
                 {
                     Destroy(awardIns);
                     onFinish?.Invoke();
@@ -58,5 +63,33 @@ public class EffectManager : MonoBehaviour
         {
             onFinish?.Invoke();
         });
+    }
+}
+
+public enum EffectType
+{
+    CoinsPile,
+    RoomKeys
+}
+[Serializable]
+public class EParameter
+{
+    public EffectType CurEffectType;
+    public Vector3 StartPos;        //开始位置
+    public int InsNum;              //实例的数量
+    public Vector2 SpawntimeRange;  //诞生动画时长
+    public float Radius;            // 诞生球半径
+    public Vector2 FlyRangeOffset;  // 贝塞尔控制点偏移
+    public Vector2 FlyTimeRange;    //飞行动画时长
+
+    public EParameter()
+    {
+        CurEffectType = EffectType.CoinsPile;
+        StartPos = Vector3.zero;
+        InsNum = 1;
+        SpawntimeRange = new Vector2(0.3f, 0.4f);
+        Radius = 1;
+        FlyRangeOffset = new Vector2(-1, 1);
+        FlyTimeRange = new Vector2(0.4f, 0.6f);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine.Serialization;
 
 #region 输赢条件相关
 public enum WinOrFail
@@ -15,7 +16,8 @@ public enum WinOrFail
 public class SaveFileJson
 {
     public int Score;
-    public int Gold;
+    public int Coins;
+    public int RoomKeys;
     public List<BulletJson> UserBulletSpawner;
     public List<BulletJson> UserCurBullets;
     public List<BulletEntry> UserBulletEntries;

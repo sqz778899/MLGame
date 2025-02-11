@@ -31,6 +31,7 @@ public class MainRoleManager :ScriptableObject
     //...............重要数据................
     public int Score;
     public int Coins;
+    public int RoomKeys;
     public int ShopCost = 5;
     public int RollEntryCost = 5;
     public List<StandbyData> CurStandbyBulletMats = new List<StandbyData>();
@@ -46,7 +47,6 @@ public class MainRoleManager :ScriptableObject
     //宝石
     public List<GemJson> BagGems = new List<GemJson>();
     public List<GemJson> InLayGems = new List<GemJson>();
-    
     public List<SupremeCharm> SupremeCharms = new List<SupremeCharm>();
 
     #region 人物属性
@@ -213,9 +213,11 @@ public class MainRoleManager :ScriptableObject
     {
         if (CurBullets.Count < 2) return;
 
-        ResonanceSlotCol[] ss = UIManager.Instance.BagReadySlotRootGO.
+        ResonanceSlotCol[] ResonanceSlotCols = UIManager.Instance.BagReadySlotRootGO.
             GetComponentsInChildren<ResonanceSlotCol>();
         //处理共振
+        Dictionary<int,List<int>> ResonanceClusterDict = new Dictionary<int, List<int>>();
+        int clusterCount = 1;
         int resonanceCount = 0;
         for (int i = 1; i < CurBullets.Count; i++)
         {
@@ -241,12 +243,40 @@ public class MainRoleManager :ScriptableObject
                 nextBulletSC.IsResonance = true;
                 nextBulletSC.FinalDamage += nextBulletSC.FinalResonance * resonanceCount;
                 nextBullet.FinalDamage += nextBullet.FinalResonance * resonanceCount;
+                //构建共振簇
+                if (ResonanceClusterDict.ContainsKey(clusterCount))
+                    ResonanceClusterDict[clusterCount].Add(nextBullet.SlotID);
+                else
+                    ResonanceClusterDict[clusterCount] = new List<int>{preBullet.SlotID,nextBullet.SlotID};
             }
             else
             {
                 resonanceCount = 0;
             }
-            //if(preBullet)
+
+            if (resonanceCount == 0)//说明共振被中断了，要重新开始
+            {
+                clusterCount++;
+            }
+        }
+        
+        //处理共振簇
+        foreach (var slotCol in ResonanceSlotCols)
+        {
+            slotCol.CloseEffect();
+        }
+
+        foreach (var each in ResonanceClusterDict)
+        {
+            foreach (var slotCol in ResonanceSlotCols)
+            {
+                if (each.Value.Count != slotCol.ResonanceSlots.Count) continue;
+
+                if (each.Value.OrderBy(x => x).SequenceEqual(slotCol.ResonanceSlots.OrderBy(x => x)))
+                {
+                    slotCol.OpenEffect();
+                }
+            }
         }
     }
     
