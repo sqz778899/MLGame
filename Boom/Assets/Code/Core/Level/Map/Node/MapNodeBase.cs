@@ -8,14 +8,25 @@ public class MapNodeBase : SpriteClickHandler
     [Header("飞行特效参数")] 
     public EParameter EPara;
     
-    internal EffectManager effectManager;
-    internal EffectManager _effectManager
+    MapLogic _mapLogic;
+    internal MapLogic MMapLogic
     {
         get
         {
-            if (effectManager==null)
-                effectManager = UIManager.Instance.EffectRoot.GetComponent<EffectManager>();
-            return effectManager;
+            if (_mapLogic == null)
+                _mapLogic = UIManager.Instance.MapLogicGO.GetComponent<MapLogic>();
+            return _mapLogic;
+        }   
+    }
+    
+    EffectManager _effectManager;
+    internal EffectManager MEffectManager
+    {
+        get
+        {
+            if (_effectManager==null)
+                _effectManager = UIManager.Instance.EffectRoot.GetComponent<EffectManager>();
+            return _effectManager;
         }
     }
     internal override void OnMouseEnter()

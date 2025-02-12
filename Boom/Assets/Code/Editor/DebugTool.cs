@@ -17,4 +17,12 @@ public class DebugTool
         }
         //GameObjectUtility.RemoveMonoBehavioursWithMissingScript()
     }
+
+    public Transform TestTrans;
+    [Button(ButtonSizes.Large)]
+    void LogSS()
+    {
+        Debug.Log($"WorldPos {TestTrans.position}");
+        Debug.Log($"LocalPos {TestTrans.localPosition}");
+    }
 }

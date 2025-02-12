@@ -1,22 +1,25 @@
 using UnityEditor;
 using Sirenix.OdinInspector.Editor;
 
-public class MiscToolBox : OdinMenuEditorWindow
+namespace Code.Editor
 {
-    [MenuItem("Tools/myTool")]
-    private static void OpenWindow()
+    public class MiscToolBox : OdinMenuEditorWindow
     {
-        GetWindow<MiscToolBox>().Show();
-    }
+        [MenuItem("Tools/myTool")]
+        private static void OpenWindow()
+        {
+            GetWindow<MiscToolBox>().Show();
+        }
 
-    protected override OdinMenuTree BuildMenuTree()
-    {
-        var tree = new OdinMenuTree();
-        tree.Selection.SupportsMultiSelect = false;
-        tree.Add("ExcelExport", new ExcelExport());
-        tree.Add("DesignTool", new DesignTool());
-        tree.Add("FXTranslate", new FXTranslateEditor());
-        tree.Add("Debug", new DebugTool());
-        return tree;
+        protected override OdinMenuTree BuildMenuTree()
+        {
+            var tree = new OdinMenuTree();
+            tree.Selection.SupportsMultiSelect = false;
+            tree.Add("ExcelExport", new ExcelExport());
+            tree.Add("DesignTool", new DesignTool());
+            tree.Add("FXTranslate", new FXTranslateEditor());
+            tree.Add("Debug", new DebugTool());
+            return tree;
+        }
     }
 }

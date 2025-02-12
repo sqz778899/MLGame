@@ -1,11 +1,22 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ArrowNode : MapNodeBase
 {
     [Header("重要属性")]
-    public MapRoomNode mapRoomNode;
-
+    public MapRoomNode TargetRoom;
+    MapRoomNode _curRoom;
+    MapRoomNode curRoom
+    {
+        get
+        {
+            if (_curRoom == null)
+                _curRoom = transform.parent.parent.GetComponent<MapRoomNode>();
+            return _curRoom;
+        }
+    }
+    
     internal override void OnMouseEnter()
     {
         spriteRenderer.color = HeighLightColor;// 将精灵高亮显示
@@ -20,19 +31,27 @@ public class ArrowNode : MapNodeBase
         spriteRenderer.color = defaultColor;// 取消高亮显示
     }
     
+    //去下一个房间
     public void GoToOtherNode()
     {
-        MainRoleManager.Instance.CurMapSate.CurRoomID = mapRoomNode.RoomID;
-        UIManager.Instance.MapLogicGO.GetComponent<MapLogic>().SetRolePos();
+        MainRoleManager.Instance.CurMapSate.CurRoomID = TargetRoom.RoomID;
+        MMapLogic.SetRolePos();
         TrunkManager.Instance.IsGamePause = true;
         StartCoroutine(CreatDialogueFight());
+    }
+    
+    //回到现在的房间
+    public void ReturnRoom()
+    {
+        MainRoleManager.Instance.CurMapSate.CurRoomID = curRoom.RoomID;
+        MMapLogic.SetRolePos();
     }
     
     IEnumerator CreatDialogueFight()
     {
         yield return new WaitForSeconds(0.8f);
-        DislogueManager.CreatDialogueFight(mapRoomNode.RoomID);
+        GameObject dialogueIns = DialogueManager.CreatDialogueFight(TargetRoom.RoomID);
+        dialogueIns.GetComponent<DialogueFight>().CurArrow = this;
         TrunkManager.Instance.IsGamePause = false;
     }
-    
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class DislogueManager
+public static class DialogueManager
 {
     static GameObject DialogueRoot;
 
@@ -14,12 +14,13 @@ public static class DislogueManager
     }
     
     //对话框的类型
-    public static void CreatDialogueFight(int MapNodeID)
+    public static GameObject CreatDialogueFight(int MapNodeID)
     {
         InitDialogueRoot();
         GameObject DialogueFightIns = ResManager.instance.CreatInstance(PathConfig.DialogueFightPB);
         DialogueFight CurFight = DialogueFightIns.GetComponent<DialogueFight>();
         CurFight.MapNodeID = MapNodeID;
         DialogueFightIns.transform.SetParent(DialogueRoot.transform,false);
+        return DialogueFightIns;
     }
 }

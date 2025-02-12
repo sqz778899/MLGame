@@ -9,7 +9,7 @@ public class CoinsPileNode: MapNodeBase
     {
         EPara.InsNum = CoinsNum;
         EPara.StartPos = transform.position;
-        _effectManager.CreatEffect(EPara);
+        MEffectManager.CreatEffect(EPara);
         DestroyImmediate(gameObject);
         MainRoleManager.Instance.Coins += CoinsNum;
     }

@@ -5,10 +5,17 @@ using UnityEngine;
 public class DialogueFight : MonoBehaviour
 {
     public int MapNodeID;
+    
+    public ArrowNode CurArrow;
     public void EnterFight()
     {
         MainSceneMono _mainSceneMono = UIManager.Instance.MainSceneGO.GetComponent<MainSceneMono>();
         MainRoleManager.Instance.CurMapSate.CurMapID = MapNodeID;
         _mainSceneMono.SwitchFightScene();
+    }
+
+    public void RetureRoom()
+    {
+        CurArrow.ReturnRoom();
     }
 }

@@ -10,7 +10,7 @@ public class RoomKeyNode : MapNodeBase
     {
         EPara.InsNum = RoomKeysNum;
         EPara.StartPos = transform.position;
-        _effectManager.CreatEffect(EPara);
+        MEffectManager.CreatEffect(EPara);
         DestroyImmediate(gameObject);
         MainRoleManager.Instance.RoomKeys += RoomKeysNum;
     }

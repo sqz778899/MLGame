@@ -1,30 +1,35 @@
 ﻿using System.Collections.Generic;
 
-public static class ExcellUtility
+namespace Code.Editor
 {
-    public static List<int> GetListInt(string CellStr)
+    public static class ExcellUtility
     {
-        List<int> curList = new List<int>();
-        string[] tmp = CellStr.Split(";");
-        for (int i = 0; i < tmp.Length; i++)
+        public static List<int> GetListInt(string CellStr)
         {
-            int rInt = -1;
-            int.TryParse(tmp[i],out rInt);
-            curList.Add(rInt);
+            List<int> curList = new List<int>();
+            string[] tmp = CellStr.Split(";");
+            for (int i = 0; i < tmp.Length; i++)
+            {
+                int rInt = -1;
+                int.TryParse(tmp[i], out rInt);
+                curList.Add(rInt);
+            }
+
+            return curList;
         }
-        return curList;
-    }
-    
-    public static List<float> GetListFloat(string CellStr)
-    {
-        List<float> curList = new List<float>();
-        string[] tmp = CellStr.Split(";");
-        for (int i = 0; i < tmp.Length; i++)
+
+        public static List<float> GetListFloat(string CellStr)
         {
-            float rFloat = -1f;
-            float.TryParse(tmp[i],out rFloat);
-            curList.Add(rFloat);
+            List<float> curList = new List<float>();
+            string[] tmp = CellStr.Split(";");
+            for (int i = 0; i < tmp.Length; i++)
+            {
+                float rFloat = -1f;
+                float.TryParse(tmp[i], out rFloat);
+                curList.Add(rFloat);
+            }
+
+            return curList;
         }
-        return curList;
     }
 }
