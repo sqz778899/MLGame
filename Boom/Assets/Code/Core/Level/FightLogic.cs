@@ -17,7 +17,7 @@ public class FightLogic : MonoBehaviour
     void InitLevel()
     {
         //加载关卡
-        CurLevel = LevelManager.LoadLevel(MainRoleManager.Instance.CurMapSate.CurMapNodeID);
+        CurLevel = LevelManager.LoadLevel(MainRoleManager.Instance.CurMapSate.CurMapID);
     }
     #endregion
 

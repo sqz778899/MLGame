@@ -1,34 +1,27 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 public class MapRoomNode : MonoBehaviour
 {
     [Header("重要属性")]
+    public int RoomID;
     public MapRoomState State;
     MapRoomState preState;
-   
-    public int RoomID;
-    
+    public Transform CameraStartPos;
+    public Transform RoleStartPos;
+
     GameObject resRoot;
     GameObject _resRoot
     {
         get
         {
             if (resRoot == null)
-            {
-                for (int i = 0; i < transform.childCount; i++)
-                {
-                    var expr = transform.GetChild(i).name == "ResRoot";
-                    if (expr)
-                    {
-                        resRoot = transform.GetChild(i).gameObject;
-                        break;
-                    }
-                }
-            }
+                resRoot = transform.Cast<Transform>()
+                    .FirstOrDefault(t => t.name == "ResRoot")?.gameObject;
             return resRoot;
         }
     }

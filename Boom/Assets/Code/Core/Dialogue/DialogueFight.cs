@@ -8,7 +8,7 @@ public class DialogueFight : MonoBehaviour
     public void EnterFight()
     {
         MainSceneMono _mainSceneMono = UIManager.Instance.MainSceneGO.GetComponent<MainSceneMono>();
-        MainRoleManager.Instance.CurMapSate.CurMapNodeID = MapNodeID;
+        MainRoleManager.Instance.CurMapSate.CurMapID = MapNodeID;
         _mainSceneMono.SwitchFightScene();
     }
 }

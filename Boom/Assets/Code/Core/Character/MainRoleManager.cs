@@ -204,7 +204,7 @@ public class MainRoleManager :ScriptableObject
     #region 游戏进程相关
     public void WinThisLevel()
     {
-        CurMapSate.IsFinishedMapNodes.Add(CurMapSate.CurMapNodeID);
+        CurMapSate.IsFinishedRooms.Add(CurMapSate.CurRoomID);
     }
     #endregion
 

@@ -385,9 +385,7 @@ public class TrunkManager: ScriptableObject
         List<MapSate> curMapSate = new List<MapSate>();
         MapSate curMap = new MapSate();
         curMap.CurMapID = 1;
-        curMap.CurMapNodeID = 1;
         curMap.IsFinishedRooms = new List<int>();
-        curMap.IsFinishedMapNodes = new List<int>();
         curMapSate.Add(curMap);
         _saveFile.UserMapSate = curMapSate;
         #endregion

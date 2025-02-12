@@ -50,7 +50,8 @@ public class MapLogic : MonoBehaviour
         }
         
         //设置摄像机位置
-        Vector3 newCameraPos = new Vector3(Role.transform.position.x, Role.transform.position.y + 3.59f, Camera.main.transform.position.z);
+        Vector3 newCameraPos = new Vector3(Role.transform.position.x, 
+            Role.transform.position.y + 3.59f, Camera.main.transform.position.z);
         Camera.main.transform.DOMove(newCameraPos, 0.5f);
     }
 
