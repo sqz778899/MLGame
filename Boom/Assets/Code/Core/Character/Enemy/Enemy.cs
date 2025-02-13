@@ -48,6 +48,7 @@ public class Enemy : EnemyBase
         }
     }
 
+    #region 主要逻辑
     public void InitData()
     {
         CurHP = MaxHP;
@@ -100,7 +101,19 @@ public class Enemy : EnemyBase
             //ItemManager.InstanceItemByID();
         }
     }
+    #endregion
+    
+    #region 中间数据相关
+    public EnemyMiddleData ToMiddleData() => new (MaxHP, ShieldsHPs);
 
+    public void LoadMiddleData(EnemyMiddleData _enemyMidData)
+    {
+        MaxHP = _enemyMidData.HP;
+        ShieldsHPs.Clear();
+        ShieldsHPs.AddRange(_enemyMidData.ShieldsHPs); 
+    }
+    #endregion
+    
     #region 表现相关
     //等待播放Hit动画，没死就切一下Idle状态
     public IEnumerator ChangeHitState(float hitTime)

@@ -14,12 +14,10 @@ public static class DialogueManager
     }
     
     //对话框的类型
-    public static GameObject CreatDialogueFight(int MapNodeID)
+    public static GameObject CreatDialogueFight()
     {
         InitDialogueRoot();
         GameObject DialogueFightIns = ResManager.instance.CreatInstance(PathConfig.DialogueFightPB);
-        DialogueFight CurFight = DialogueFightIns.GetComponent<DialogueFight>();
-        CurFight.MapNodeID = MapNodeID;
         DialogueFightIns.transform.SetParent(DialogueRoot.transform,false);
         return DialogueFightIns;
     }

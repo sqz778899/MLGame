@@ -1,0 +1,271 @@
+
+enemy_02.png
+size: 2021,1845
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+arm_L
+  rotate: false
+  xy: 653, 27
+  size: 632, 534
+  orig: 632, 534
+  offset: 0, 0
+  index: -1
+arm_R
+  rotate: true
+  xy: 1304, 547
+  size: 530, 552
+  orig: 530, 552
+  offset: 0, 0
+  index: -1
+arm_R_2
+  rotate: true
+  xy: 750, 563
+  size: 514, 552
+  orig: 514, 552
+  offset: 0, 0
+  index: -1
+blood_1/blood00017
+  rotate: true
+  xy: 2, 582
+  size: 496, 746
+  orig: 496, 747
+  offset: 0, 1
+  index: -1
+blood_1/blood00018
+  rotate: true
+  xy: 1462, 1562
+  size: 281, 557
+  orig: 282, 557
+  offset: 1, 0
+  index: -1
+blood_1/blood00019
+  rotate: true
+  xy: 837, 1563
+  size: 280, 623
+  orig: 280, 624
+  offset: 0, 1
+  index: -1
+blood_1/blood00020
+  rotate: true
+  xy: 137, 1564
+  size: 279, 698
+  orig: 281, 699
+  offset: 1, 0
+  index: -1
+eyebrow
+  rotate: false
+  xy: 2, 1760
+  size: 133, 83
+  orig: 134, 84
+  offset: 1, 0
+  index: -1
+head
+  rotate: true
+  xy: 591, 1080
+  size: 481, 634
+  orig: 484, 638
+  offset: 2, 0
+  index: -1
+head_2
+  rotate: true
+  xy: 1227, 1079
+  size: 481, 632
+  orig: 484, 638
+  offset: 2, 2
+  index: -1
+head_3
+  rotate: true
+  xy: 2, 1093
+  size: 469, 587
+  orig: 484, 638
+  offset: 14, 0
+  index: -1
+leg_L
+  rotate: true
+  xy: 1287, 2
+  size: 543, 685
+  orig: 543, 685
+  offset: 0, 0
+  index: -1
+leg_R
+  rotate: true
+  xy: 2, 48
+  size: 532, 649
+  orig: 532, 649
+  offset: 0, 0
+  index: -1
+
+enemy_022.png
+size: 1434,1709
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+blood_1/blood00007
+  rotate: false
+  xy: 2, 2
+  size: 1430, 1705
+  orig: 1432, 1706
+  offset: 0, 0
+  index: -1
+
+enemy_023.png
+size: 1642,2042
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+blood_1/blood00002
+  rotate: false
+  xy: 2, 2
+  size: 845, 672
+  orig: 847, 673
+  offset: 1, 0
+  index: -1
+blood_1/blood00005
+  rotate: false
+  xy: 2, 676
+  size: 1638, 1364
+  orig: 1638, 1365
+  offset: 0, 1
+  index: -1
+body
+  rotate: true
+  xy: 849, 52
+  size: 622, 771
+  orig: 622, 771
+  offset: 0, 0
+  index: -1
+
+enemy_024.png
+size: 1701,1351
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+blood_1/blood00012
+  rotate: false
+  xy: 2, 6
+  size: 916, 719
+  orig: 917, 720
+  offset: 0, 0
+  index: -1
+blood_1/blood00014
+  rotate: true
+  xy: 920, 2
+  size: 723, 779
+  orig: 723, 779
+  offset: 0, 0
+  index: -1
+body_2
+  rotate: true
+  xy: 2, 727
+  size: 622, 771
+  orig: 622, 771
+  offset: 0, 0
+  index: -1
+body_3
+  rotate: true
+  xy: 775, 727
+  size: 622, 771
+  orig: 622, 771
+  offset: 0, 0
+  index: -1
+
+enemy_025.png
+size: 1498,1998
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+blood_1/blood00004
+  rotate: false
+  xy: 2, 775
+  size: 1371, 1221
+  orig: 1371, 1221
+  offset: 0, 0
+  index: -1
+blood_1/blood00015
+  rotate: false
+  xy: 2, 2
+  size: 762, 771
+  orig: 764, 773
+  offset: 1, 1
+  index: -1
+blood_1/blood00016
+  rotate: true
+  xy: 766, 31
+  size: 742, 730
+  orig: 742, 732
+  offset: 0, 1
+  index: -1
+
+enemy_026.png
+size: 1979,1518
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+blood_1/blood00006
+  rotate: false
+  xy: 2, 165
+  size: 1082, 1351
+  orig: 1082, 1351
+  offset: 0, 0
+  index: -1
+blood_1/blood00011
+  rotate: true
+  xy: 1086, 2
+  size: 1514, 891
+  orig: 1515, 891
+  offset: 0, 0
+  index: -1
+
+enemy_027.png
+size: 1853,1903
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+blood_1/blood00009
+  rotate: true
+  xy: 923, 1000
+  size: 901, 928
+  orig: 903, 929
+  offset: 1, 1
+  index: -1
+blood_1/blood00010
+  rotate: true
+  xy: 2, 2
+  size: 996, 1025
+  orig: 997, 1027
+  offset: 1, 1
+  index: -1
+blood_1/blood00013
+  rotate: false
+  xy: 2, 1060
+  size: 919, 841
+  orig: 920, 843
+  offset: 1, 1
+  index: -1
+
+enemy_028.png
+size: 1074,1066
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+blood_1/blood00008
+  rotate: true
+  xy: 2, 2
+  size: 1062, 1070
+  orig: 1062, 1071
+  offset: 0, 0
+  index: -1
+
+enemy_029.png
+size: 1309,1111
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+blood_1/blood00003
+  rotate: false
+  xy: 2, 2
+  size: 1305, 1107
+  orig: 1306, 1107
+  offset: 0, 0
+  index: -1

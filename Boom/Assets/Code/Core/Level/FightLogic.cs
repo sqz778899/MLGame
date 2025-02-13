@@ -17,7 +17,7 @@ public class FightLogic : MonoBehaviour
     void InitLevel()
     {
         //加载关卡
-        CurLevel = LevelManager.LoadLevel(MainRoleManager.Instance.CurMapSate.CurMapID);
+        CurLevel = LevelManager.LoadLevel();
     }
     #endregion
 
@@ -31,11 +31,12 @@ public class FightLogic : MonoBehaviour
     public float Distance;
 
     [Header("角色")] 
-    public List<Enemy> CurEnemys;
+    public Enemy CurEnemy;
     public RoleInner CurRole;
 
     void Start()
     {
+        TrunkManager.Instance.IsGamePause = false;
         stateActions = new Dictionary<WinOrFail, Action>
         {
             { WinOrFail.InLevel, () => {} }, // 空操作
@@ -73,7 +74,7 @@ public class FightLogic : MonoBehaviour
         isBeginCameraMove = false;
         isBeginCalculation = false;
         Distance = 0f;
-        CurEnemys = CurLevel.CurEnemy;
+        CurEnemy = CurLevel.CurEnemy;
         CurRole = UIManager.Instance.RoleIns.GetComponent<RoleInner>();
         CurRole.InitData();
         MainRoleManager.Instance.WinOrFailState = WinOrFail.InLevel;
@@ -110,28 +111,19 @@ public class FightLogic : MonoBehaviour
     
     void UpdateDistance()
     {
-        if(CurEnemys == null) return;
-        if (CurEnemys.Count == 0) return;
+        if(CurEnemy == null) return;
         
-        Distance = Vector2.Distance(CurEnemys[0].transform.position,
+        Distance = Vector2.Distance(CurEnemy.transform.position,
             CurRole.transform.position);
     }
     
     void WinOrFailThisLevel()
     {
-        bool isEnemyLive = false; 
-        foreach (var each in CurEnemys)
-        {
-            if (each.EState == EnemyState.live)
-            {
-                isEnemyLive = true;
-            }
-        }
-        if (!isEnemyLive)
+        if (CurEnemy.EState == EnemyState.dead)
             MainRoleManager.Instance.WinOrFailState = WinOrFail.Win;
         //如果子弹为0，且敌人未死则失败
         if (UIManager.Instance.G_BulletInScene.transform.childCount == 0 &&
-            isEnemyLive)
+            CurEnemy.EState == EnemyState.live)
             MainRoleManager.Instance.WinOrFailState = WinOrFail.Fail;
         
         stateActions[MainRoleManager.Instance.WinOrFailState]?.Invoke();

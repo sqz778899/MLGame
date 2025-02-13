@@ -219,7 +219,7 @@ public class TrunkManager: ScriptableObject
         MapSate curMapSate = null;
         foreach (var eachMapSate in UserMapSate)
         {
-            if (eachMapSate.CurMapID == 1)
+            if (eachMapSate.CurLevelID == 1)
             {
                 curMapSate = eachMapSate;
                 break;
@@ -384,7 +384,7 @@ public class TrunkManager: ScriptableObject
         #region Map
         List<MapSate> curMapSate = new List<MapSate>();
         MapSate curMap = new MapSate();
-        curMap.CurMapID = 1;
+        curMap.CurLevelID = 1;
         curMap.IsFinishedRooms = new List<int>();
         curMapSate.Add(curMap);
         _saveFile.UserMapSate = curMapSate;

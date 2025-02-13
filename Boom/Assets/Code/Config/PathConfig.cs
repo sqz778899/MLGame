@@ -70,8 +70,10 @@ public static class PathConfig
    public static string AwardCoin = GetPrepath() + "Res/UI/Prefabs/Misc/P_Award_Coin_01.prefab";
    public static string AwardRoomKey = GetPrepath() + "Res/UI/Prefabs/Misc/P_Award_RoomKey_01.prefab";
    public static string DialogueFightPB = GetPrepath() + "Res/UI/Prefabs/Misc/P_Dialogue_Fight_Template.prefab";
+   public static string ObserveHPPB = GetPrepath() + "Res/Character/Image/Enemy/P_ObserveHP_01.prefab";
    
    //...........................角色.................................
+   public static string EnemyPB = GetPrepath() + "Res/Character/SpineData/Enemy01/P_Enemy_01.prefab";
    public static string ShieldPB = GetPrepath() + "Res/Character/Image/Enemy/P_Shield_01.prefab";
    public static string GetRoleImgPath(int ID)
    {

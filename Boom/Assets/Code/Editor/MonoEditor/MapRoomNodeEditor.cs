@@ -24,7 +24,7 @@ public class MapRoomNodeEditor: Editor
         if(GUILayout.Button("Reset Map Room Node"))
         {
             //设定Room的摄像机位置
-            MapRoot.transform.position = new Vector3(0, 0, 100);
+            Camera.main.transform.position = new Vector3(0, 1, -10);
         }
         if(GUILayout.Button("Set Pos Data"))
         {
@@ -37,14 +37,15 @@ public class MapRoomNodeEditor: Editor
                     (true).FirstOrDefault(t => t.name == "RoleStartPos");
             
             //设定Room的摄像机位置
-            myScript.CameraStartPos.position = new Vector3(0, 0, MapRoot.transform.position.z);
-            myScript.RoleStartPos.position = new Vector3(0.067f, -0.55f, -1);
+            myScript.CameraStartPos.position = new Vector3(Camera.main.transform.position.x,
+                Camera.main.transform.position.y, MapRoot.transform.position.z);
+            myScript.RoleStartPos.position = myScript.CameraStartPos.position + new Vector3(0, -1.6f, -1);
         }
         if(GUILayout.Button("Set Camera"))
         {
             //设定Room的摄像机位置
-            MapRoot.transform.position = new Vector3(-myScript.CameraStartPos.position.x,
-                -myScript.CameraStartPos.position.y, MapRoot.transform.position.z);
+            Camera.main.transform.position = new Vector3(myScript.CameraStartPos.position.x,
+                myScript.CameraStartPos.position.y, -10);
         }
     }
 }

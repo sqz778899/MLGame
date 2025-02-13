@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6b194f808b1af6499c93410e504af42, type: 3}
+  m_Name: enemy_02_Atlas
+  m_EditorClassIdentifier: 
+  atlasFile: {fileID: 4900000, guid: aafcbbacb912baf43a37f0589ee56039, type: 3}
+  materials:
+  - {fileID: 2100000, guid: 064896cc43525534ba11d99babef559b, type: 2}
+  - {fileID: 2100000, guid: c41661939787dff4b9a86232dfd2cfc7, type: 2}
+  - {fileID: 2100000, guid: fc69cad243f77794d96eebff8da74489, type: 2}
+  - {fileID: 2100000, guid: 968f05ad11bd623429baee287b86ecf4, type: 2}
+  - {fileID: 2100000, guid: 2cb9f6421fd9cc6458e4f359e511221f, type: 2}
+  - {fileID: 2100000, guid: aac787406d02f6c46aba2d8fe132751f, type: 2}
+  - {fileID: 2100000, guid: 74043c1f46b0827449923680f9ebe9f1, type: 2}
+  - {fileID: 2100000, guid: 04e9f025e2d667a4ca2fa174703d7c9f, type: 2}
+  - {fileID: 2100000, guid: bd2130c7a9d42be468eb7465da00fcf8, type: 2}

@@ -26,6 +26,13 @@ public class MainRoleManager :ScriptableObject
     
     [Header("游戏进程相关")]
     public MapSate CurMapSate;
+    public EnemyMiddleData CurEnemyMidData;
+
+    public void InitFightData(EnemyMiddleData _enemyMidData,int _levelID)
+    {
+        CurEnemyMidData = _enemyMidData;
+        CurMapSate.CurLevelID = _levelID;
+    }
 
     [Header("重要数据")]
     //...............重要数据................

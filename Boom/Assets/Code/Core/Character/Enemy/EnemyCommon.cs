@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using TMPro;
 
 public class DamageState
@@ -20,6 +21,20 @@ public enum EnemyState
     live = 1,
     hit = 2,
     dead = 3
+}
+
+public struct EnemyMiddleData
+{
+    public int HP;
+    public List<int> ShieldsHPs;
+
+    public EnemyMiddleData(int _hp = 1, List<int> _shields = null)
+    {
+        HP = _hp;
+        if (_shields == null)
+            _shields = new List<int>();
+        ShieldsHPs = _shields;
+    }
 }
 
 public enum HealthBarType

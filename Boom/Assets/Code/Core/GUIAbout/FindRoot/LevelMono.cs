@@ -5,16 +5,16 @@ using UnityEngine;
 
 public class LevelMono : MonoBehaviour
 {
-    List<Enemy> _curEnemy;
-
-    public List<Enemy> CurEnemy
+    public Enemy CurEnemy;
+    public GameObject EnemyRoot;
+    
+    public void SetEnemy(EnemyMiddleData _midData)
     {
-        get
-        {
-            if (_curEnemy == null) 
-                _curEnemy = G_Enemy.transform.GetComponentsInChildren<Enemy>().ToList();
-            return _curEnemy;
-        }   
+        GameObject EnmeyIns = ResManager.instance.CreatInstance(PathConfig.EnemyPB);
+        Enemy curEnemySC = EnmeyIns.GetComponent<Enemy>();
+        CurEnemy = curEnemySC;
+        curEnemySC.LoadMiddleData(_midData);
+        EnmeyIns.transform.SetParent(EnemyRoot.transform,false);
+        EnmeyIns.transform.position = new Vector3(14,-0.45f,0);
     }
-    public GameObject G_Enemy;
 }

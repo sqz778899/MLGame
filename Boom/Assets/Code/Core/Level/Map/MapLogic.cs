@@ -39,12 +39,9 @@ public class MapLogic : MonoBehaviour
 
         //设置角色&&摄像机位置
         Role.transform.position = curRoom.RoleStartPos.position;
-        Vector3 newCameraPos = new Vector3(-curRoom.CameraStartPos.position.x,
-            -curRoom.CameraStartPos.position.y, MapNodeRoot.transform.position.z);
-        MapNodeRoot.transform.DOMove(newCameraPos, 0.5f);
-        /*Vector3 newCameraPos = new Vector3(curRoom.RoleStartPos.position.x
-            ,curRoom.RoleStartPos.position.y,Camera.main.transform.position.z);
-        Camera.main.transform.DOMove(newCameraPos, 0.5f);*/
+        Vector3 newCameraPos = new Vector3(curRoom.CameraStartPos.position.x,
+            curRoom.CameraStartPos.position.y, Camera.main.transform.position.z);
+        Camera.main.transform.DOMove(newCameraPos, 0.5f);
     }
 
     public void SetAllIDs()

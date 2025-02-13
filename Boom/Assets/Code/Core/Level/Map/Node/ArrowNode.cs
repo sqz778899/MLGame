@@ -4,7 +4,8 @@ using UnityEngine.Serialization;
 
 public class ArrowNode : MapNodeBase
 {
-    [Header("重要属性")]
+    [Header("重要属性")] 
+    public Enemy CurEnemy;
     public MapRoomNode TargetRoom;
     MapRoomNode _curRoom;
     MapRoomNode curRoom
@@ -50,8 +51,10 @@ public class ArrowNode : MapNodeBase
     IEnumerator CreatDialogueFight()
     {
         yield return new WaitForSeconds(0.8f);
-        GameObject dialogueIns = DialogueManager.CreatDialogueFight(TargetRoom.RoomID);
-        dialogueIns.GetComponent<DialogueFight>().CurArrow = this;
+        GameObject dialogueIns = DialogueManager.CreatDialogueFight();
+        DialogueFight dialogueSC = dialogueIns.GetComponent<DialogueFight>();
+        dialogueSC.InitData(this);
+           
         TrunkManager.Instance.IsGamePause = false;
     }
 }
