@@ -93,7 +93,6 @@ public class RollManager: ScriptableObject
     //................把概率重新分布.................
     public void DealProb(ref List<RollPR> OriginProbs)
     {
-        List<RollPR> newProbs = new List<RollPR>();
         List<float> orProb = new List<float>();
         foreach (var each in OriginProbs)
             orProb.Add(each.Probability);
@@ -122,8 +121,7 @@ public class RollManager: ScriptableObject
         return newProbs;
     }
     
-    public RollPR 
-        SingleRoll(List<RollPR> rollProbs)
+    public RollPR SingleRoll(List<RollPR> rollProbs)
     {
         float c = Random.Range(0f, 100f);
         RollPR curProb = null;
