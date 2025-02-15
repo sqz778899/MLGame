@@ -16,6 +16,7 @@ public class MapLogic : MonoBehaviour
     
     void Start()
     {
+        MainRoleManager.Instance.MainRoleIns = Role;
         InitMapData();
     }
 

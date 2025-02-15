@@ -20,11 +20,12 @@ public class MainRoleManager :ScriptableObject
     }
     #endregion
     
-    //...............子弹上膛................
+    //...............子弹上膛temp................
     public List<BulletBuff> CurBulletBuffs;
     public List<BulletEntry> CurBulletEntries;
-    
-    [Header("游戏进程相关")]
+
+    [Header("游戏进程相关")] 
+    public GameObject MainRoleIns;
     public MapSate CurMapSate;
     public EnemyMiddleData CurEnemyMidData;
 

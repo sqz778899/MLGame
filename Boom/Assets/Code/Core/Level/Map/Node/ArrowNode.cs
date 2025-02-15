@@ -4,7 +4,7 @@ using UnityEngine.Serialization;
 
 public class ArrowNode : MapNodeBase
 {
-    [Header("重要属性")] 
+    [Header("重要属性")]
     public Enemy CurEnemy;
     public MapRoomNode TargetRoom;
     MapRoomNode _curRoom;
@@ -40,7 +40,14 @@ public class ArrowNode : MapNodeBase
         TrunkManager.Instance.IsGamePause = true;
         StartCoroutine(CreatDialogueFight());
     }
-    
+
+    public void GoToLockedRoom()
+    {
+        if (MainRoleManager.Instance.RoomKeys == 0) return;
+        MainRoleManager.Instance.CurMapSate.CurRoomID = TargetRoom.RoomID;
+        MMapLogic.SetRolePos();
+    }
+
     //回到现在的房间
     public void ReturnRoom()
     {

@@ -16,6 +16,7 @@ public class RoleInner : BaseMove
     public List<BulletInner> Bullets;
     public Connon CurConnon;
     public Transform ConnonNode;
+    public Transform TextNode;
 
     #region 初始化数据
     public void InitData()
