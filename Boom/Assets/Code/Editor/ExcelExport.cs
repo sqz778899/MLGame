@@ -5,6 +5,7 @@ using UnityEngine;
 using Excel;
 using System.Data;
 using System.IO;
+using System.Linq;
 using Newtonsoft.Json;
 using Unity.VisualScripting;
 
@@ -24,11 +25,11 @@ namespace Code.Editor
             ExportPREventDesign();
             ExportBulletEntry();
             ExportGemDesign();
+            ExportDialogue(); //对话相关
             AssetDatabase.Refresh();
         }
 
         #region 游戏设计
-
         public void ExportBullet()
         {
             DataSet curTables = GetDataSet();
@@ -57,15 +58,8 @@ namespace Code.Editor
         public void ExportItem()
         {
             DataSet curTables = GetDataSet();
-            DataTable curTable = null;
-            for (int i = 0; i < curTables.Tables.Count; i++)
-            {
-                if (curTables.Tables[i].TableName == "ItemDesign")
-                {
-                    curTable = curTables.Tables[i];
-                    break;
-                }
-            }
+            DataTable curTable = curTables.Tables.Cast<DataTable>()
+                .FirstOrDefault(t => t.TableName == "ItemDesign");
 
             if (curTable == null)
             {
@@ -304,15 +298,6 @@ namespace Code.Editor
                 (Formatting)Formatting.Indented);
             File.WriteAllText(PathConfig.GemDesignJson, content01);
         }
-
-        DataSet GetDataSet()
-        {
-            FileStream fileStream = File.Open(GetDesignExcelPath("CommonDesign.xlsx"), FileMode.Open, FileAccess.Read);
-            IExcelDataReader excelDataReader = ExcelReaderFactory.CreateOpenXmlReader(fileStream);
-            DataSet result = excelDataReader.AsDataSet();
-            return result;
-        }
-
         #endregion
 
         #region 多语言
@@ -352,6 +337,46 @@ namespace Code.Editor
 
         #endregion
 
+        #region 对话相关
+        void SetPerDialoguesData(ref Dictionary<string,List<DiaSingle>> curDict ,DataTable curTable)
+        {
+            List<DiaSingle> dialogues = new List<DiaSingle>();
+            for (int i = 1; i < curTable.Rows.Count; i++)
+            {
+                DiaSingle curData = new DiaSingle();
+                if (curTable.Rows[i][1].ToString() == "") continue;
+                curData.Sign = curTable.Rows[i][0].ToString();
+                curData.ID = int.Parse(curTable.Rows[i][1].ToString());
+                curData.Name = curTable.Rows[i][2].ToString();
+                curData.IsLeft = int.Parse(curTable.Rows[i][3].ToString());
+                curData.NextIdex = int.Parse(curTable.Rows[i][4].ToString());
+                curData.Content = curTable.Rows[i][5].ToString();
+                dialogues.Add(curData);
+            }
+            curDict[curTable.TableName] = dialogues;
+        }
+        
+        void ExportDialogue()
+        {
+            DataSet curTables = GetDataSet("BeginnerTutorial.xlsx");
+            
+            Dictionary<string,List<DiaSingle>> curDiaDesignDict = new Dictionary<string, List<DiaSingle>>();
+            for (int i = 0; i < curTables.Tables.Count; i++)
+                SetPerDialoguesData(ref curDiaDesignDict,curTables.Tables[i]);
+
+            string content01 = JsonConvert.SerializeObject(curDiaDesignDict, (Formatting)Formatting.Indented);
+            File.WriteAllText(PathConfig.DialogueDesignJson, content01);
+        }
+        #endregion
+
+        DataSet GetDataSet(string excelFileName = "CommonDesign.xlsx")
+        {
+            FileStream fileStream = File.Open(GetDesignExcelPath(excelFileName), FileMode.Open, FileAccess.Read);
+            IExcelDataReader excelDataReader = ExcelReaderFactory.CreateOpenXmlReader(fileStream);
+            DataSet result = excelDataReader.AsDataSet();
+            return result;
+        }
+        
         string GetDesignExcelPath(string excelName)
         {
             string diskDir = Application.streamingAssetsPath.Replace(

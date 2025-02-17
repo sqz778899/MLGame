@@ -1,7 +1,6 @@
 [
   {
     "Rare": 1,
-    "Name": "易拉罐",
     "ImageName": "T_Item_Can_01",
     "Attribute": {
       "waterElement": 0,
@@ -18,12 +17,12 @@
     },
     "ID": 1,
     "InstanceID": -1,
+    "Name": "易拉罐",
     "SlotID": 0,
     "SlotType": 0
   },
   {
     "Rare": 1,
-    "Name": "马桶搋子",
     "ImageName": "T_Item_ToiletPlunger_01",
     "Attribute": {
       "waterElement": 1,
@@ -40,12 +39,12 @@
     },
     "ID": 2,
     "InstanceID": -1,
+    "Name": "马桶搋子",
     "SlotID": 0,
     "SlotType": 0
   },
   {
     "Rare": 1,
-    "Name": "生锈菜刀",
     "ImageName": "T_Item_KitchenKnife_01",
     "Attribute": {
       "waterElement": 0,
@@ -62,12 +61,12 @@
     },
     "ID": 3,
     "InstanceID": -1,
+    "Name": "生锈菜刀",
     "SlotID": 0,
     "SlotType": 0
   },
   {
     "Rare": 2,
-    "Name": "折断魔杖",
     "ImageName": "T_Item_BreakWand_01",
     "Attribute": {
       "waterElement": 1,
@@ -84,12 +83,12 @@
     },
     "ID": 4,
     "InstanceID": -1,
+    "Name": "折断魔杖",
     "SlotID": 0,
     "SlotType": 0
   },
   {
     "Rare": 3,
-    "Name": "小块秘银",
     "ImageName": "T_Item_Mithril _01",
     "Attribute": {
       "waterElement": 0,
@@ -106,12 +105,12 @@
     },
     "ID": 5,
     "InstanceID": -1,
+    "Name": "小块秘银",
     "SlotID": 0,
     "SlotType": 0
   },
   {
     "Rare": 4,
-    "Name": "瓦迪的元素壶",
     "ImageName": "T_Item_Pot_01",
     "Attribute": {
       "waterElement": 16,
@@ -128,6 +127,7 @@
     },
     "ID": 5,
     "InstanceID": -1,
+    "Name": "瓦迪的元素壶",
     "SlotID": 0,
     "SlotType": 0
   }

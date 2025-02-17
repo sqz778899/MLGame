@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6db6d97e977b2f4fb31211b32721169, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxHP: 0
   EState: 0
   txtHitNode: {fileID: 6381881405559485386}
   CurHealthBar: {fileID: 248491858651689384}
@@ -245,8 +246,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.21, y: 0.21, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.147, y: 0.147, z: 0.147}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7291240283817990165}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

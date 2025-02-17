@@ -29,8 +29,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6011829391295837015}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3b0e9a5eceea2bb45af97e56a87741a9, type: 2}
+  - {fileID: 2100000, guid: a116234e48c43bd44a156831d7d7a8a9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -168,25 +168,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5c2057c8aebf174cbe3041368d0b664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ins: {fileID: 0}
-  forward: {x: 1, y: 0, z: 0}
+  _id: 0
+  CurSlot: {fileID: 0}
+  Name: 
   InstanceID: 0
-  _bulletData:
-    ID: 0
-    Level: 0
-    name: 
-    damage: 0
-    penetration: 0
-    elementalType: 0
-    imgBullet: {fileID: 0}
-    hitEffect: {fileID: 0}
-    bulletSpineAsset: {fileID: 0}
-  bulletInsMode: 0
+  SlotID: 0
+  SlotType: 0
+  _level: 0
+  Damage: 0
+  Piercing: 0
+  Resonance: 0
+  FinalDamage: 0
+  FinalPiercing: 0
+  FinalResonance: 0
+  ElementalType: 0
+  IsResonance: 0
+  Ins: {fileID: 0}
   Edit_a: {fileID: 0}
   Edit_b: {fileID: 0}
+  _bulletInsMode: 0
+  HitEffect: {fileID: 0}
+  BulletSpineAsset: {fileID: 0}
+  HitSpfxAsset: {fileID: 0}
   FollowDis: 3
   RunSpeed: 10
-  DisabearDis: 105
   _state: 0
   AniScale: 1
 --- !u!70 &1371652625376912822

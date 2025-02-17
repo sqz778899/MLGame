@@ -1,0 +1,46 @@
+{
+  "Beginner01": [
+    {
+      "ID": 0,
+      "Sign": "#",
+      "Name": "大聪明",
+      "IsLeft": 1,
+      "NextIdex": 1,
+      "Content": "好饿，好想回家吃饭，只要上到顶层就能出去了。"
+    },
+    {
+      "ID": 1,
+      "Sign": "#",
+      "Name": "大聪明",
+      "IsLeft": 1,
+      "NextIdex": -1,
+      "Content": "加油上到顶层吧。。。"
+    }
+  ],
+  "Beginner02": [
+    {
+      "ID": 0,
+      "Sign": "#",
+      "Name": "黏土子弹",
+      "IsLeft": 2,
+      "NextIdex": 1,
+      "Content": "你好，法师先生，我是奇迹子弹——黏土子弹"
+    },
+    {
+      "ID": 1,
+      "Sign": "#",
+      "Name": "黏土子弹",
+      "IsLeft": 2,
+      "NextIdex": 2,
+      "Content": "我在这个塔里呆了很久了，这里根本没有吃的！好饿啊，先生。"
+    },
+    {
+      "ID": 2,
+      "Sign": "#",
+      "Name": "黏土子弹",
+      "IsLeft": 2,
+      "NextIdex": -1,
+      "Content": "请带我出去吧，先生，出口就在顶层！"
+    }
+  ]
+}

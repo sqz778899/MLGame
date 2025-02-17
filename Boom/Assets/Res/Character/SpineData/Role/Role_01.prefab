@@ -181,7 +181,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.21, y: 0.21, z: 0.21}
+  m_LocalScale: {x: 0.147, y: 0.147, z: 0.147}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8101873972447596806}
@@ -321,7 +321,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 10
-  CameraFollowingThreshold: 0
   Ani: {fileID: 8681690380965878804}
   AttackFX: {fileID: 2038608115054527295}
   FireDelay: 0.3
@@ -329,3 +328,4 @@ MonoBehaviour:
   Bullets: []
   CurConnon: {fileID: 0}
   ConnonNode: {fileID: 540186184363741075}
+  TextNode: {fileID: 0}

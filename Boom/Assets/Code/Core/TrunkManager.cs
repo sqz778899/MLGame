@@ -30,6 +30,8 @@ public class TrunkManager: ScriptableObject
     List<RollPREvent> _prDesignJsons;
     List<BulletEntry> _bulletEntryDesignJsons;
     List<GemJson> _gemDesignJsons;
+    
+    Dictionary<string,List<DiaSingle>> _dialogueDesignJsons;//对话相关
     public List<BulletJson> BulletDesignJsons
     {
         get
@@ -109,6 +111,24 @@ public class TrunkManager: ScriptableObject
                 _gemDesignJsons = LoadGemData();
             return _gemDesignJsons;
         }
+    }
+
+    public Dictionary<string, List<DiaSingle>> DialogueDesignJsons
+    {
+        get
+        {
+            if (_dialogueDesignJsons == null || _dialogueDesignJsons.Count == 0)
+                _dialogueDesignJsons = LoadDialogueDesignData();
+            return _dialogueDesignJsons;
+        }
+    }
+
+    public Dictionary<string, List<DiaSingle>> LoadDialogueDesignData()
+    {
+        string dialogueString = File.ReadAllText(PathConfig.DialogueDesignJson);
+        Dictionary<string, List<DiaSingle>> dialogueJson = JsonConvert.
+            DeserializeObject<Dictionary<string, List<DiaSingle>>>(dialogueString);
+        return dialogueJson;
     }
     
     public List<BulletJson> LoadBulletData()

@@ -7,6 +7,10 @@ public class ArrowNode : MapNodeBase
     [Header("重要属性")]
     public Enemy CurEnemy;
     public MapRoomNode TargetRoom;
+
+    [Header("横向房间专用")]
+    public GameObject ArrowUnlocked;
+    
     MapRoomNode _curRoom;
     MapRoomNode curRoom
     {
@@ -40,14 +44,28 @@ public class ArrowNode : MapNodeBase
         TrunkManager.Instance.IsGamePause = true;
         StartCoroutine(CreatDialogueFight());
     }
-
+    
     public void GoToLockedRoom()
     {
-        if (MainRoleManager.Instance.RoomKeys == 0) return;
         MainRoleManager.Instance.CurMapSate.CurRoomID = TargetRoom.RoomID;
         MMapLogic.SetRolePos();
     }
-
+    
+    public void GoToLockedRoomWithKey()
+    {
+        if (MainRoleManager.Instance.RoomKeys == 0)
+        {
+            return;
+        }
+        MainRoleManager.Instance.RoomKeys -= 1;
+        
+        ArrowUnlocked.SetActive(true);
+        MainRoleManager.Instance.CurMapSate.CurRoomID = TargetRoom.RoomID;
+        MMapLogic.SetRolePos();
+        gameObject.SetActive(false);
+    }
+    
+    
     //回到现在的房间
     public void ReturnRoom()
     {
