@@ -9,28 +9,26 @@ public class DialoguePortraitConfig : ScriptableObject
 {
     [SerializeField]
     public List<StringSpritePair> NameToPortrait;
-    
-    
-    private Dictionary<string, Sprite> dict = new Dictionary<string, Sprite>();
+    Dictionary<string, Sprite> dict = new Dictionary<string, Sprite>();
 
-    public Dictionary<string, Sprite> GetDictionary()
+    public Dictionary<string, Sprite> GetDictionary() => dict;
+    
+    void Awake()
     {
-        return dict;
+        SyncDictionary();  // 确保在对象启用时同步字典
     }
 
     void OnEnable()
     {
-        SyncDictionary();
+        //SyncDictionary();
     }
-
+#if UNITY_EDITOR
     void OnValidate()
     {
         SyncDictionary();
-#if UNITY_EDITOR
-        EditorUtility.SetDirty(this);
         AssetDatabase.SaveAssetIfDirty(this);
-#endif
     }
+#endif
 
     void SyncDictionary()
     {
@@ -41,6 +39,20 @@ public class DialoguePortraitConfig : ScriptableObject
                 dict.Add(pair.key, pair.value);
         }
     }
+    
+    #region 单例
+    static DialoguePortraitConfig s_instance;
+    public static DialoguePortraitConfig Instance
+    {
+        get
+        {
+            if (s_instance == null)
+                s_instance = ResManager.instance.GetAssetCache<DialoguePortraitConfig>(PathConfig.DialogueNamePortraitOBJ);
+            
+            return s_instance;
+        }
+    }
+    #endregion
 }
 
 

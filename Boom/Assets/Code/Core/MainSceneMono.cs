@@ -39,6 +39,8 @@ public class MainSceneMono:MonoBehaviour
 
     public void SwitchEditScene()
     {
+        if (UIManager.Instance.IsLockedClick) return;
+        
         FightSceneOff();
         MapSceneOff();
         EditSceneOn();
@@ -46,6 +48,8 @@ public class MainSceneMono:MonoBehaviour
     
     public void SwitchMapScene()
     {
+        if (UIManager.Instance.IsLockedClick) return;
+        
         EditSceneOff();
         FightSceneOff();
         MapSceneOn();
@@ -53,6 +57,8 @@ public class MainSceneMono:MonoBehaviour
     
     public void SwitchFightScene()
     {
+        if (UIManager.Instance.IsLockedClick) return;
+        
         EditSceneOff();
         MapSceneOff();
         FightSceneOn();

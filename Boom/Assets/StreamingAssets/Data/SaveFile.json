@@ -1,6 +1,6 @@
 {
-  "Score": 0,
-  "Coins": 1000,
+  "Score": 3,
+  "Coins": 935,
   "RoomKeys": 0,
   "UserBulletSpawner": [
     {
@@ -16,10 +16,10 @@
       "SpawnerCount": 5,
       "HitEffectName": "FX_Bullet01_hit",
       "ID": 1,
-      "InstanceID": 0,
+      "InstanceID": -1,
       "Name": "Basic01",
-      "SlotID": 0,
-      "SlotType": 0
+      "SlotID": -1,
+      "SlotType": -1
     },
     {
       "Level": 1,
@@ -34,10 +34,10 @@
       "SpawnerCount": 1,
       "HitEffectName": "FX_Bullet02_hit",
       "ID": 2,
-      "InstanceID": 0,
+      "InstanceID": -1,
       "Name": "Ice01",
-      "SlotID": 0,
-      "SlotType": 0
+      "SlotID": -1,
+      "SlotType": -1
     },
     {
       "Level": 1,
@@ -52,10 +52,10 @@
       "SpawnerCount": 1,
       "HitEffectName": "FX_Bullet03_hit",
       "ID": 3,
-      "InstanceID": 0,
+      "InstanceID": -1,
       "Name": "Fire01",
-      "SlotID": 0,
-      "SlotType": 0
+      "SlotID": -1,
+      "SlotType": -1
     }
   ],
   "UserCurBullets": [],
@@ -88,17 +88,281 @@
     }
   ],
   "UserCurBuff": null,
-  "UserItems": [],
+  "UserItems": [
+    {
+      "Rare": 1,
+      "ImageName": "T_Item_Can_01",
+      "Attribute": {
+        "waterElement": 0,
+        "fireElement": 1,
+        "thunderElement": 0,
+        "lightElement": 0,
+        "darkElement": 0,
+        "extraWaterDamage": 0,
+        "extraFireDamage": 20,
+        "extraThunderDamage": 0,
+        "extraLightDamage": 0,
+        "extraDarkDamage": 0,
+        "maxDamage": 30
+      },
+      "ID": 1,
+      "InstanceID": -215524,
+      "Name": "易拉罐",
+      "SlotID": 1,
+      "SlotType": 1
+    },
+    {
+      "Rare": 1,
+      "ImageName": "T_Item_Can_01",
+      "Attribute": {
+        "waterElement": 0,
+        "fireElement": 1,
+        "thunderElement": 0,
+        "lightElement": 0,
+        "darkElement": 0,
+        "extraWaterDamage": 0,
+        "extraFireDamage": 20,
+        "extraThunderDamage": 0,
+        "extraLightDamage": 0,
+        "extraDarkDamage": 0,
+        "maxDamage": 30
+      },
+      "ID": 1,
+      "InstanceID": -234522,
+      "Name": "易拉罐",
+      "SlotID": 1,
+      "SlotType": 1
+    },
+    {
+      "Rare": 1,
+      "ImageName": "T_Item_Can_01",
+      "Attribute": {
+        "waterElement": 0,
+        "fireElement": 1,
+        "thunderElement": 0,
+        "lightElement": 0,
+        "darkElement": 0,
+        "extraWaterDamage": 0,
+        "extraFireDamage": 20,
+        "extraThunderDamage": 0,
+        "extraLightDamage": 0,
+        "extraDarkDamage": 0,
+        "maxDamage": 30
+      },
+      "ID": 1,
+      "InstanceID": -234552,
+      "Name": "易拉罐",
+      "SlotID": 1,
+      "SlotType": 1
+    },
+    {
+      "Rare": 1,
+      "ImageName": "T_Item_ToiletPlunger_01",
+      "Attribute": {
+        "waterElement": 1,
+        "fireElement": 0,
+        "thunderElement": 0,
+        "lightElement": 0,
+        "darkElement": 0,
+        "extraWaterDamage": 10,
+        "extraFireDamage": 0,
+        "extraThunderDamage": 0,
+        "extraLightDamage": 0,
+        "extraDarkDamage": 0,
+        "maxDamage": 40
+      },
+      "ID": 2,
+      "InstanceID": -215554,
+      "Name": "马桶搋子",
+      "SlotID": 2,
+      "SlotType": 1
+    },
+    {
+      "Rare": 1,
+      "ImageName": "T_Item_ToiletPlunger_01",
+      "Attribute": {
+        "waterElement": 1,
+        "fireElement": 0,
+        "thunderElement": 0,
+        "lightElement": 0,
+        "darkElement": 0,
+        "extraWaterDamage": 10,
+        "extraFireDamage": 0,
+        "extraThunderDamage": 0,
+        "extraLightDamage": 0,
+        "extraDarkDamage": 0,
+        "maxDamage": 40
+      },
+      "ID": 2,
+      "InstanceID": -234582,
+      "Name": "马桶搋子",
+      "SlotID": 2,
+      "SlotType": 1
+    },
+    {
+      "Rare": 1,
+      "ImageName": "T_Item_ToiletPlunger_01",
+      "Attribute": {
+        "waterElement": 1,
+        "fireElement": 0,
+        "thunderElement": 0,
+        "lightElement": 0,
+        "darkElement": 0,
+        "extraWaterDamage": 10,
+        "extraFireDamage": 0,
+        "extraThunderDamage": 0,
+        "extraLightDamage": 0,
+        "extraDarkDamage": 0,
+        "maxDamage": 40
+      },
+      "ID": 2,
+      "InstanceID": -234612,
+      "Name": "马桶搋子",
+      "SlotID": 2,
+      "SlotType": 1
+    },
+    {
+      "Rare": 1,
+      "ImageName": "T_Item_Can_01",
+      "Attribute": {
+        "waterElement": 0,
+        "fireElement": 1,
+        "thunderElement": 0,
+        "lightElement": 0,
+        "darkElement": 0,
+        "extraWaterDamage": 0,
+        "extraFireDamage": 20,
+        "extraThunderDamage": 0,
+        "extraLightDamage": 0,
+        "extraDarkDamage": 0,
+        "maxDamage": 30
+      },
+      "ID": 1,
+      "InstanceID": -366666,
+      "Name": "易拉罐",
+      "SlotID": 3,
+      "SlotType": 1
+    },
+    {
+      "Rare": 1,
+      "ImageName": "T_Item_Can_01",
+      "Attribute": {
+        "waterElement": 0,
+        "fireElement": 1,
+        "thunderElement": 0,
+        "lightElement": 0,
+        "darkElement": 0,
+        "extraWaterDamage": 0,
+        "extraFireDamage": 20,
+        "extraThunderDamage": 0,
+        "extraLightDamage": 0,
+        "extraDarkDamage": 0,
+        "maxDamage": 30
+      },
+      "ID": 1,
+      "InstanceID": -234642,
+      "Name": "易拉罐",
+      "SlotID": 3,
+      "SlotType": 1
+    },
+    {
+      "Rare": 1,
+      "ImageName": "T_Item_Can_01",
+      "Attribute": {
+        "waterElement": 0,
+        "fireElement": 1,
+        "thunderElement": 0,
+        "lightElement": 0,
+        "darkElement": 0,
+        "extraWaterDamage": 0,
+        "extraFireDamage": 20,
+        "extraThunderDamage": 0,
+        "extraLightDamage": 0,
+        "extraDarkDamage": 0,
+        "maxDamage": 30
+      },
+      "ID": 1,
+      "InstanceID": -234672,
+      "Name": "易拉罐",
+      "SlotID": 3,
+      "SlotType": 1
+    },
+    {
+      "Rare": 1,
+      "ImageName": "T_Item_ToiletPlunger_01",
+      "Attribute": {
+        "waterElement": 1,
+        "fireElement": 0,
+        "thunderElement": 0,
+        "lightElement": 0,
+        "darkElement": 0,
+        "extraWaterDamage": 10,
+        "extraFireDamage": 0,
+        "extraThunderDamage": 0,
+        "extraLightDamage": 0,
+        "extraDarkDamage": 0,
+        "maxDamage": 40
+      },
+      "ID": 2,
+      "InstanceID": -366696,
+      "Name": "马桶搋子",
+      "SlotID": 4,
+      "SlotType": 1
+    },
+    {
+      "Rare": 1,
+      "ImageName": "T_Item_ToiletPlunger_01",
+      "Attribute": {
+        "waterElement": 1,
+        "fireElement": 0,
+        "thunderElement": 0,
+        "lightElement": 0,
+        "darkElement": 0,
+        "extraWaterDamage": 10,
+        "extraFireDamage": 0,
+        "extraThunderDamage": 0,
+        "extraLightDamage": 0,
+        "extraDarkDamage": 0,
+        "maxDamage": 40
+      },
+      "ID": 2,
+      "InstanceID": -234702,
+      "Name": "马桶搋子",
+      "SlotID": 4,
+      "SlotType": 1
+    },
+    {
+      "Rare": 1,
+      "ImageName": "T_Item_ToiletPlunger_01",
+      "Attribute": {
+        "waterElement": 1,
+        "fireElement": 0,
+        "thunderElement": 0,
+        "lightElement": 0,
+        "darkElement": 0,
+        "extraWaterDamage": 10,
+        "extraFireDamage": 0,
+        "extraThunderDamage": 0,
+        "extraLightDamage": 0,
+        "extraDarkDamage": 0,
+        "maxDamage": 40
+      },
+      "ID": 2,
+      "InstanceID": -234732,
+      "Name": "马桶搋子",
+      "SlotID": 4,
+      "SlotType": 1
+    }
+  ],
   "UserGems": [],
   "SupremeCharms": [],
   "UserMapSate": [
     {
-      "CurMapID": 1,
+      "CurLevelID": 1,
       "CurRoomID": 1,
-      "CurMapNodeID": 1,
       "IsFinishedMaps": [],
-      "IsFinishedRooms": [],
-      "IsFinishedMapNodes": []
+      "IsFinishedLevels": [],
+      "IsFinishedRooms": []
     }
   ],
   "CurRollPREveIDs": []

@@ -21,3 +21,9 @@ public struct DiaSingle
         Content = _content;
     }
 }
+
+public enum DiaState
+{
+    Start = 1,
+    Clossed = 2
+}

@@ -29,6 +29,16 @@ public class MapNodeBase : SpriteClickHandler
             return _effectManager;
         }
     }
+    
+    internal virtual void FloatingGetItemText(string Content,int Count = 1)
+    {
+        GameObject textIns = ResManager.instance.CreatInstance(PathConfig.TxtGetItemPB);
+        Transform textNode = MainRoleManager.Instance.MainRoleIns.GetComponent<RoleInner>().TextNode;
+        textIns.transform.SetParent(textNode.transform,false);
+        FloatingDamageText textSc = textIns.GetComponent<FloatingDamageText>();
+        textSc.AnimateText($"{Content} + {Count}",new Color(218f/255f,218f/255f,218f/255f,1f));
+    }
+    
     internal override void OnMouseEnter()
     {
         outLineMat.SetColor("_BaseColor",defaultColor);

@@ -60,28 +60,7 @@ public class DraggableBullet : Bullet
                     CurSlot.SOnDrop(orIns,SlotType.CurBulletSlot);
                     curSlotSC.SOnDrop(Ins,SlotType.CurBulletSlot);
                     MainRoleManager.Instance.RefreshAllItems();
-                    //MainRoleManager.Instance.BulletInterchangePos(SlotID, curSlotSC.SlotID);
                 }
-                /*//bool InstanceIDIsInCurBullet = MainRoleManager.Instance.InstanceIDIsInCurBullet(InstanceID);
-                if (curSlotSC.MainID == 0)
-                {
-                    //Add逻辑
-                    MainRoleManager.Instance.AddBulletOnlyData(ID,curSlotSC.SlotID,InstanceID);
-                    _curSlot = curSlotSC;
-                    SlotID = curSlotSC.SlotID;
-                    Ins.transform.position = curSlotSC.transform.position;
-                    Ins.transform.SetParent(result.gameObject.transform,true);
-                    /*else
-                    {
-                        //空拖逻辑
-                        MainRoleManager.Instance.BulletInterchangePos(SlotID, curSlotSC.SlotID);
-                    }#1#
-                }
-                else
-                {
-                    //交换逻辑
-                    //MainRoleManager.Instance.BulletInterchangePos(SlotID, curSlotSC.SlotID);
-                }*/
                 NonHappen = false;
             }
 

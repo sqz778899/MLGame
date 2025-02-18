@@ -10,6 +10,8 @@ public class MapLogic : MonoBehaviour
     public GameObject MapNodeRoot;
     [Header("地图内角色")]
     public GameObject Role;
+    [Header("对话系统脚本")]
+    public Dialogue CurDialogue;
     [Header("地图节点")]
     public List<GameObject> MapRooms;
     MapRoomNode[] _allMapRooms;
@@ -18,6 +20,9 @@ public class MapLogic : MonoBehaviour
     {
         MainRoleManager.Instance.MainRoleIns = Role;
         InitMapData();
+        
+        Dialogue curDia = CurDialogue;
+        curDia.LoadDialogue("Beginner01");
     }
 
     public void InitMapData()

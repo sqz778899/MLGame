@@ -7,20 +7,6 @@ using UnityEngine;
 
 public class TrunkManager: ScriptableObject
 {
-    #region 单例
-    static TrunkManager s_instance;
-    
-    public static TrunkManager Instance
-    {
-        get
-        {
-            if (s_instance == null)
-                s_instance = ResManager.instance.GetAssetCache<TrunkManager>(PathConfig.TrunkManagerOBJ);
-            return s_instance;
-        }
-    }
-    #endregion
-
     #region 策划数据
     List<BulletJson> _bulletDesignJsons;
     List<ItemJson> _itemDesignJsons;
@@ -386,8 +372,8 @@ public class TrunkManager: ScriptableObject
         
         //...................Items.................................
         _saveFile.UserItems = new List<ItemJson>();
-        MainRoleManager.Instance.AddItem(1);
-        MainRoleManager.Instance.AddItem(2);
+        //MainRoleManager.Instance.AddItem(1);
+        //MainRoleManager.Instance.AddItem(2);
         //...................Gems..................................
         _saveFile.UserGems = new List<GemJson>();
 
@@ -432,6 +418,20 @@ public class TrunkManager: ScriptableObject
             }
         }
         return curData;
+    }
+    #endregion
+    
+    #region 单例
+    static TrunkManager s_instance;
+    public static TrunkManager Instance
+    {
+        get
+        {
+            if (s_instance == null)
+                s_instance = ResManager.instance.GetAssetCache<TrunkManager>(PathConfig.TrunkManagerOBJ);
+            
+            return s_instance;
+        }
     }
     #endregion
 }

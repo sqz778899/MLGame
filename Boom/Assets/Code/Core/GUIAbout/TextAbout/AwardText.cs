@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -10,7 +11,8 @@ public class AwardText : MonoBehaviour
 
     public void SyncAwardText(int ItemID)
     {
-        ItemSS curItemSs = new ItemSS(ItemID);
-        txtAward.text = curItemSs.name; 
+        ItemJson itemDesignJson = TrunkManager.Instance.ItemDesignJsons
+            .FirstOrDefault(each => each.ID == ItemID) ?? new ItemJson();
+        txtAward.text = itemDesignJson.Name; 
     }
 }

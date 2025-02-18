@@ -7,6 +7,9 @@ public class BaseMove : MonoBehaviour
     internal Vector3 forward = new Vector3(1, 0, 0);
     internal Camera _mCamera;
     internal FightLogic _fightLogic;
+    
+    [Header("移动范围设置")]
+    public Collider2D roomCollider; 
 
     internal virtual void Awake()
     {
@@ -18,13 +21,23 @@ public class BaseMove : MonoBehaviour
     {
         // 延迟初始化 FightLogic 组件
         if (_fightLogic == null)
-        {
             _fightLogic = UIManager.Instance.FightLogicGO.GetComponent<FightLogic>();
-        }
     }
 
     internal virtual void Update()
     {
+        Vector3 direction = Vector3.zero;
+        if (Input.GetKey("d")) direction = Vector3.right;
+        else if (Input.GetKey("a")) direction = Vector3.left;
+        else if (Input.GetKey("w")) direction = Vector3.up;
+        else if (Input.GetKey("s")) direction = Vector3.down;
+
+        if (direction != Vector3.zero)
+        {
+            Move(direction);
+        }
+        
+        /*
         // 检测按键，并根据输入来移动
         if (Input.GetKey("d"))
         {
@@ -37,7 +50,7 @@ public class BaseMove : MonoBehaviour
             {
                 Move(-Vector3.forward);  // 向后移动
             }
-        }
+        }*/
     }
 
     internal virtual void Move(Vector3 direction)

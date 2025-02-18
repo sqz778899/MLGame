@@ -25,11 +25,13 @@ public enum EnemyState
 
 public struct EnemyMiddleData
 {
+    public int ID;
     public int HP;
     public List<int> ShieldsHPs;
 
-    public EnemyMiddleData(int _hp = 1, List<int> _shields = null)
+    public EnemyMiddleData(int _ID = 1,int _hp = 1, List<int> _shields = null)
     {
+        ID = _ID;
         HP = _hp;
         if (_shields == null)
             _shields = new List<int>();
@@ -44,7 +46,8 @@ public enum HealthBarType
 }
 public class EnemyBase : MonoBehaviour
 {
-    [Header("血量")]
+    [Header("基础属性")] 
+    public int ID;
     int curHP;
     public int CurHP
     {

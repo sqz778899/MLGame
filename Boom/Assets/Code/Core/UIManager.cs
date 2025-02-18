@@ -5,19 +5,6 @@ using UnityEngine.UI;
 
 public class UIManager : ScriptableObject
 {
-    #region 单例
-    static UIManager s_instance;
-    public static UIManager Instance
-    {
-        get
-        {
-            if (s_instance == null)
-                s_instance = ResManager.instance.GetAssetCache<UIManager>(PathConfig.UIManagerOBJ);
-            return s_instance;
-        }
-    }
-    #endregion
-    
     //Global Control
     public bool IsLockedClick = false;
 
@@ -201,4 +188,18 @@ public class UIManager : ScriptableObject
 
         BagGemRootGO = bagRootSC.BagGemRootGO;
     }
+    
+    #region 单例
+    static UIManager s_instance;
+    public static UIManager Instance
+    {
+        get
+        {
+            if (s_instance == null)
+                s_instance = ResManager.instance.GetAssetCache<UIManager>(PathConfig.UIManagerOBJ);
+            
+            return s_instance;
+        }
+    }
+    #endregion
 }

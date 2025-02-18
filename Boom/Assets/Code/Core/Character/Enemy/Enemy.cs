@@ -57,6 +57,11 @@ public class Enemy : EnemyBase
             _fightLogic = UIManager.Instance.FightLogicGO.GetComponent<FightLogic>();
         CurHealthBar.InitHealthBar(this); //初始化血条
         SetShields();//初始化盾牌
+
+        SkeletonDataAsset curSkeletonDataAsset = ResManager.instance.
+            GetAssetCache<SkeletonDataAsset>(PathConfig.GetEnemySkelentonDataPath(ID));
+        Ani.skeletonDataAsset = curSkeletonDataAsset;
+        Ani.Initialize(true);
     }
 
     //设置盾牌数量和每个盾牌的血量
@@ -104,13 +109,15 @@ public class Enemy : EnemyBase
     #endregion
     
     #region 中间数据相关
-    public EnemyMiddleData ToMiddleData() => new (MaxHP, ShieldsHPs);
+    public EnemyMiddleData ToMiddleData() => new (ID,MaxHP, ShieldsHPs);
 
     public void LoadMiddleData(EnemyMiddleData _enemyMidData)
     {
+        ID = _enemyMidData.ID;
         MaxHP = _enemyMidData.HP;
         ShieldsHPs.Clear();
         ShieldsHPs.AddRange(_enemyMidData.ShieldsHPs); 
+        InitData();
     }
     #endregion
     

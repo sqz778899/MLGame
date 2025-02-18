@@ -113,12 +113,9 @@ public class DesignTool
 
     void TempAddBullet(int bulletID)
     {
-        BulletJson Ins = new BulletJson();
-        List<BulletJson> CurBullets = MainRoleManager.Instance.CurBullets;
-        if (CurBullets.Count < 5)
-            CurBullets.Add(Ins);
-        else
-            CurBullets[0] = Ins;
+        if (MainRoleManager.Instance.CurBullets.Count >= 5)
+            MainRoleManager.Instance.CurBullets.RemoveAt(0);
+        MainRoleManager.Instance.RefreshCurBullets(MutMode.Add, bulletID);
         UIManager.Instance.RoleIns.GetComponent<RoleInner>().InitData();
     }
     [Button("添加黏土子弹Lv1",ButtonSizes.Large)]

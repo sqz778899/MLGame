@@ -49,7 +49,8 @@ public static class PathConfig
    public static string BulletManagerOBJ = GetPrepath() + "Res/Bullet/BulletManager.asset";
    public static string CalculateDamageManagerOBJ = GetPrepath() + "Res/Manager/CalculateDamageManager.asset";
    public static string MultiLaOBJ =  GetPrepath() + "Res/Manager/MultiLa.asset";
-
+   
+   public static string DialogueNamePortraitOBJ =  GetPrepath() + "Res/Manager/DialogueNamePortraitConfig.asset";
    ///.........................资源类.................................
    public static string TooltipAsset = GetPrepath() + "Res/UI/Prefabs/P_Tooltip_01.prefab";
    public static string TexttipAsset = GetPrepath() + "Res/UI/Prefabs/Misc/P_Tooltip_Text_02.prefab";
@@ -77,6 +78,11 @@ public static class PathConfig
    
    //...........................角色.................................
    public static string EnemyPB = GetPrepath() + "Res/Character/SpineData/Enemy01/P_Enemy_01.prefab";
+
+   public static string GetEnemySkelentonDataPath(int ID)
+   {
+      return GetPrepath() + $"Res/Character/SpineData/Enemy{ID.ToString("D2")}/enemy_{ID.ToString("D2")}_SkeletonData.asset";
+   }
    public static string ShieldPB = GetPrepath() + "Res/Character/Image/Enemy/P_Shield_01.prefab";
    public static string GetRoleImgPath(int ID)
    {

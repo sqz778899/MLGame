@@ -4,11 +4,15 @@ using UnityEngine.Serialization;
 
 public class Shop:GUIBase
 {
+    [Header("基本资产")]
     public GameObject RollInsRoot;
     public GameObject ShopSlotRoot;
     public GameObject BarRoot;
+    
+    [Header("基本属性")]
     public ShopNode CurShopNode;
-
+    public ShopType CurShopType;
+    
     const int rowOffet = 756;
     const int columnOffet = -125;
     void Start()
@@ -103,6 +107,7 @@ public class Shop:GUIBase
     
 
     #endregion
+    
     public override void QuitSelf()
     {
         //CurShopNode.QuitNode();

@@ -13,15 +13,9 @@ public class TreasureNode:MapNodeBase
     {
         //抽宝石
         spriteRenderer.sprite = TreasureOpened;
-        //获得物品跳字
-        GameObject textIns = ResManager.instance.CreatInstance(PathConfig.TxtGetItemPB);
-        Transform textNode = MainRoleManager.Instance.MainRoleIns.GetComponent<RoleInner>().TextNode;
-        textIns.transform.SetParent(textNode.transform,false);
-        FloatingDamageText textSc = textIns.GetComponent<FloatingDamageText>();
-        
         GemJson gemDesignJson = TrunkManager.Instance.GemDesignJsons
             .FirstOrDefault(each => each.ID == GemID) ?? new GemJson();
-        textSc.AnimateText($"{gemDesignJson.Name} + 1",new Color(218f/255f,218f/255f,218f/255f,1f));
+        FloatingGetItemText(gemDesignJson.Name);
         MainRoleManager.Instance.AddGem(GemID);
         Debug.Log("Open Tressure Box !!");
     }

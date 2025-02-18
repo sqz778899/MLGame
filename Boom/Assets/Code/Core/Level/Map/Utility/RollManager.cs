@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class RollManager: ScriptableObject
@@ -70,20 +71,19 @@ public class RollManager: ScriptableObject
     #region SomeFunc
     public List<float> NormalizeProb(List<float> Probs)
     {
-        List<float> normalProbs = new List<float>();
+        // 1. 计算所有概率的总和
+        float total = Probs.Sum();
+        // 2. 如果总和为 0，返回 null 或其他适当值
+        if (total == 0) return null;
+        // 3. 计算新的比例，确保总和为 max
+        float newRatio = 100f / total;
+        // 4. 初始化列表，开始累计概率
         float start = 0f;
-        float max = 100f;
-        float account = 0;
-        
-        for (int i = 0; i < Probs.Count; i++)
-            account += Probs[i];
-
-        if (account == 0) return null;
-        
-        float newRatio = 1/(account / max);
-        for (int i = 0; i < Probs.Count; i++)
+        List<float> normalProbs = new List<float>(Probs.Count);
+        // 5. 计算归一化后的累计概率
+        foreach (var prob in Probs)
         {
-            float newP = Probs[i] * newRatio;
+            float newP = prob * newRatio;
             start += newP;
             normalProbs.Add(start);
         }

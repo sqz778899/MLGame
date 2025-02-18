@@ -65,6 +65,13 @@ public enum ScreenRes
 //gold
 //insignias
 
+public enum ShopType
+{
+    All = 0,
+    GemShop = 1,
+    BulletShop = 2
+}
+
 [Serializable]
 public class Award
 {
@@ -86,55 +93,6 @@ public class ElementState
     public bool ELPureWater;
     public bool ELPureWaterLV;
 }
-
-
-
-[Serializable]
-public class ItemSS
-{
-    public int ID;
-    public int rare;
-    public string name;
-    public string resAllPath;
-
-    public ItemAttribute attribute;
-    //游戏内相关属性
-    public int slotID;
-    public int slotType;
-    
-    void InitItemDataByID()
-    {
-        attribute = new ItemAttribute();
-        List<ItemJson> itemDesignJsons = TrunkManager.Instance.ItemDesignJsons;
-        foreach (var each in itemDesignJsons)
-        {
-            if (each.ID == ID)
-            {
-                rare = each.Rare;
-                name = each.Name;
-                resAllPath = PathConfig.ItemImageDir + each.ImageName + ".png";
-                attribute.waterElement = each.Attribute.waterElement;
-                attribute.fireElement = each.Attribute.fireElement;
-                attribute.thunderElement = each.Attribute.thunderElement;
-                attribute.lightElement = each.Attribute.lightElement;
-                attribute.darkElement = each.Attribute.darkElement;
-                //
-                attribute.extraWaterDamage = each.Attribute.extraWaterDamage;
-                attribute.extraFireDamage = each.Attribute.extraFireDamage;
-                attribute.extraThunderDamage = each.Attribute.extraThunderDamage;
-                attribute.extraLightDamage = each.Attribute.extraLightDamage;
-                attribute.extraDarkDamage = each.Attribute.extraDarkDamage;
-                attribute.maxDamage = each.Attribute.maxDamage;
-            }
-        }
-    }
-    public ItemSS(int _id)
-    {
-        ID = _id;
-        InitItemDataByID();
-    }
-}
-
 
 [Serializable]
 public class SupremeCharm

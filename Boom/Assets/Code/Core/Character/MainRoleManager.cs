@@ -6,20 +6,6 @@ using UnityEngine.UI;
 
 public class MainRoleManager :ScriptableObject
 {
-    #region 单例
-    static MainRoleManager s_instance;
-    
-    public static MainRoleManager Instance
-    {
-        get
-        {
-            if (s_instance == null)
-                s_instance = ResManager.instance.GetAssetCache<MainRoleManager>(PathConfig.MainRoleManagerOBJ);
-            return s_instance;
-        }
-    }
-    #endregion
-    
     //...............子弹上膛temp................
     public List<BulletBuff> CurBulletBuffs;
     public List<BulletEntry> CurBulletEntries;
@@ -325,46 +311,33 @@ public class MainRoleManager :ScriptableObject
         switch (mode)
         {
             case MutMode.Sub:
-                foreach (var each in CurBulletSpawners)
-                {
-                    if (each.ID == BulletID)
-                        each.SpawnerCount -= 1;
-                }
+                CurBulletSpawners.FirstOrDefault(b => b.ID == BulletID).SpawnerCount -= 1;
                 break;
             case MutMode.Add:
-                foreach (var each in CurBulletSpawners)
-                {
-                    if (each.ID == BulletID)
-                        each.SpawnerCount += 1;
-                }
+                CurBulletSpawners.FirstOrDefault(b => b.ID == BulletID).SpawnerCount += 1;
                 break;
         }
     }
 
     //更新当前子弹数据
-    public void RefreshCurBullets(MutMode mode, int BulletID,int SlotID = -1,int InstanceID = -1,
-        BulletInsMode bulletInsMode = BulletInsMode.EditA)
+    public void RefreshCurBullets(MutMode mode, int BulletID,int InstanceID = -1)
     {
         switch (mode)
         {
             case MutMode.Sub:
-                for (int i = CurBullets.Count - 1; i >= 0; i--)
-                {
-                    if (CurBullets[i].ID == BulletID &&
-                        CurBullets[i].InstanceID == InstanceID)
-                    {
-                        CurBullets.RemoveAt(i);
-                        break;
-                    }
-                }
+                BulletJson bulletToRemove = CurBullets
+                    .FirstOrDefault(b => b.ID == BulletID && b.InstanceID == InstanceID);
+                if (bulletToRemove != null)
+                    CurBullets.Remove(bulletToRemove);
                 break;
             case MutMode.Add:
-                if (SlotID == -1)
-                {
-                    Debug.LogError("未设置SlotID");
-                    return;
-                }
-                BulletJson curData = new BulletJson();
+                if (CurBullets.Count >= 5) return;
+
+                int SlotID = Enumerable.Range(1, 5)
+                    .FirstOrDefault(i => !CurBullets.Any(b => b.SlotID == i));
+                
+                BulletJson curData = new BulletJson(BulletID,_slotID: SlotID);
+                curData.SyncData();
                 CurBullets.Add(curData);
                 break;
         }
@@ -553,7 +526,7 @@ public class MainRoleManager :ScriptableObject
     public void RefreshSpawnerIns()
     {
         DraggableBulletSpawner[] oldSpawner = UIManager.Instance
-            .G_BulletSpawnerSlot.GetComponentsInChildren<DraggableBulletSpawner>();
+            .G_BulletSpawnerSlot.GetComponentsInChildren<DraggableBulletSpawner>(true);
         foreach (BulletJson each in CurBulletSpawners)
         {
             foreach (var perSpawner in oldSpawner)
@@ -749,6 +722,12 @@ public class MainRoleManager :ScriptableObject
         RefreshSpawner(MutMode.Sub,bulletID);
         RefreshSpawnerIns();
     }
+    
+    public void AddSpawner(int bulletID)
+    {
+        RefreshSpawner(MutMode.Add,bulletID);
+        RefreshSpawnerIns();
+    }
 
     public void SubBullet(int bulletID,int instanceID)
     {
@@ -802,6 +781,20 @@ public class MainRoleManager :ScriptableObject
                 curIns = curbullet;
         }
         return curIns;
+    }
+    #endregion
+    
+    #region 单例
+    static MainRoleManager s_instance;
+    public static MainRoleManager Instance
+    {
+        get
+        {
+            if (s_instance == null)
+                s_instance = ResManager.instance.GetAssetCache<MainRoleManager>(PathConfig.MainRoleManagerOBJ);
+            
+            return s_instance;
+        }
     }
     #endregion
 }

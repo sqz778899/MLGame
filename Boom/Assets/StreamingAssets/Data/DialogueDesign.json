@@ -42,5 +42,23 @@
       "NextIdex": -1,
       "Content": "请带我出去吧，先生，出口就在顶层！"
     }
+  ],
+  "Beginner03": [
+    {
+      "ID": 0,
+      "Sign": "#",
+      "Name": "黏土子弹",
+      "IsLeft": 2,
+      "NextIdex": 1,
+      "Content": "啊啊啊，带我出去，饿死我了"
+    },
+    {
+      "ID": 1,
+      "Sign": "#",
+      "Name": "黏土子弹",
+      "IsLeft": 2,
+      "NextIdex": -1,
+      "Content": "我想出去吃土，最好是种过紫蔷薇和竹夹桃的"
+    }
   ]
 }
