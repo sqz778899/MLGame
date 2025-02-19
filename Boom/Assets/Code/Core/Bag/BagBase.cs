@@ -38,6 +38,7 @@ public abstract class ItemJsonBase
     public string Name;
     public int SlotID;
     public int SlotType;
+    public int Price;
 }
 
 
@@ -64,7 +65,7 @@ public class GemJson : ItemJsonBase
     public string ImageName;
     public GemAttribute Attribute;
     public bool IsInLay;
-    public int BulletSlotIndex; 
+    public int BulletSlotIndex;
     
     public GemJson(int id = -1, int instanceID = -1, 
         string name = "", GemAttribute attribute = null, 
@@ -82,6 +83,7 @@ public class GemJson : ItemJsonBase
         //是否镶嵌
         IsInLay = false;
         BulletSlotIndex = -1;
+        Price = 0;
     }
     
     public void CopyFrom(GemJson other)
@@ -98,6 +100,7 @@ public class GemJson : ItemJsonBase
         SlotType = other.SlotType;
         IsInLay = other.IsInLay;
         BulletSlotIndex = other.BulletSlotIndex;
+        Price = other.Price;
     }
 }
 #endregion
@@ -183,6 +186,7 @@ public class ItemJson:ItemJsonBase
         Attribute = _attribute;
         SlotID = _SlotID;
         SlotType = _SlotType;
+        Price = 0;
     }
     
     public void CopyFrom(ItemJson other)
@@ -260,6 +264,7 @@ public class BulletJson : ItemJsonBase
         Resonance = _resonance;
         SpawnerCount = _spawnerCount;
         HitEffectName = _hitEffectName;
+        Price = 0;
     }
 
     public void CopyFrom(BulletJson other)

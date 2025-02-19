@@ -19,7 +19,8 @@
     "InstanceID": -1,
     "Name": "易拉罐",
     "SlotID": 0,
-    "SlotType": 0
+    "SlotType": 0,
+    "Price": 0
   },
   {
     "Rare": 1,
@@ -41,7 +42,8 @@
     "InstanceID": -1,
     "Name": "马桶搋子",
     "SlotID": 0,
-    "SlotType": 0
+    "SlotType": 0,
+    "Price": 0
   },
   {
     "Rare": 1,
@@ -63,7 +65,8 @@
     "InstanceID": -1,
     "Name": "生锈菜刀",
     "SlotID": 0,
-    "SlotType": 0
+    "SlotType": 0,
+    "Price": 0
   },
   {
     "Rare": 2,
@@ -85,7 +88,8 @@
     "InstanceID": -1,
     "Name": "折断魔杖",
     "SlotID": 0,
-    "SlotType": 0
+    "SlotType": 0,
+    "Price": 0
   },
   {
     "Rare": 3,
@@ -107,7 +111,8 @@
     "InstanceID": -1,
     "Name": "小块秘银",
     "SlotID": 0,
-    "SlotType": 0
+    "SlotType": 0,
+    "Price": 0
   },
   {
     "Rare": 4,
@@ -129,6 +134,7 @@
     "InstanceID": -1,
     "Name": "瓦迪的元素壶",
     "SlotID": 0,
-    "SlotType": 0
+    "SlotType": 0,
+    "Price": 0
   }
 ]

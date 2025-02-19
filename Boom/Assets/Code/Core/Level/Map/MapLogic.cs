@@ -44,6 +44,7 @@ public class MapLogic : MonoBehaviour
             each => each.RoomID == MainRoleManager.Instance.CurMapSate.CurRoomID);
 
         //设置角色&&摄像机位置
+        Role.GetComponent<RoleInMap>().CurRoom = curRoom;
         Role.transform.position = curRoom.RoleStartPos.position;
         Vector3 newCameraPos = new Vector3(curRoom.CameraStartPos.position.x,
             curRoom.CameraStartPos.position.y, Camera.main.transform.position.z);

@@ -8,7 +8,7 @@ public class UIManager : ScriptableObject
     //Global Control
     public bool IsLockedClick = false;
 
-    public void SetOtherUIPause()
+    /*public void SetOtherUIPause()
     {
         TitleRootMono curSC = TitleRoot.GetComponent<TitleRootMono>();
         List<Image> btnImgs = curSC.NeedToControl;
@@ -26,7 +26,7 @@ public class UIManager : ScriptableObject
             each.raycastTarget = true;
 
         IsLockedClick = false;
-    }
+    }*/
 
     //0.StartGame
     //1.CharacterScene

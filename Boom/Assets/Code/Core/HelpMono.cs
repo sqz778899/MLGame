@@ -26,7 +26,7 @@ public class HelpMono : GUIBase
         List<BulletEntry> curBullets = MainRoleManager.Instance.CurBulletEntries;
         for (int i = 0; i < curBullets.Count; i++)
         {
-            GameObject curPB = ResManager.instance.IntanceAsset(PathConfig.BulletEntryPB);
+            GameObject curPB = ResManager.instance.CreatInstance(PathConfig.BulletEntryPB);
             EntryDes curScript = curPB.GetComponent<EntryDes>();
             curScript.GlobalDes = CurEntryDes;
             curScript.InitData(curBullets[i].ID);

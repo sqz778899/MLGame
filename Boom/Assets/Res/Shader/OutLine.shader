@@ -67,7 +67,7 @@ Shader "Unlit/OutLine"
                 float w = tex2D(_MainTex, uv_up).a * tex2D(_MainTex, uv_down).a
                 * tex2D(_MainTex, uv_left).a * tex2D(_MainTex, uv_right).a;
        
-                col.rgb = lerp(_Color,col.rgb,w);
+                col.rgb = lerp(_Color.rgb,col.rgb,w);
               
                 // apply fog
                 return col;

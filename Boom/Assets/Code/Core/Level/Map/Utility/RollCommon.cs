@@ -8,9 +8,16 @@ public class HaveID
 }
 
 [Serializable]
-public class RollPR:HaveID
+public struct RollPR
 {
+    public int ID;
     public float Probability;
+
+    public RollPR(int ID = -1, float Probability = -1)
+    {
+        this.ID = ID;
+        this.Probability = Probability;
+    }
 }
 
 [Serializable]

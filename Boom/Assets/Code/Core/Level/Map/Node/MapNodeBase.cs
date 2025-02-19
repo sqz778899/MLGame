@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class MapNodeBase : SpriteClickHandler
 {
+    
+    public Transform NodeTextNode;
     [Header("飞行特效参数")] 
     public EParameter EPara;
     
@@ -29,15 +31,29 @@ public class MapNodeBase : SpriteClickHandler
             return _effectManager;
         }
     }
-    
-    internal virtual void FloatingGetItemText(string Content,int Count = 1)
+
+    #region 浮动消息滑块
+    void SetFloatingIns(Transform textNode,out FloatingDamageText textSc)
     {
         GameObject textIns = ResManager.instance.CreatInstance(PathConfig.TxtGetItemPB);
-        Transform textNode = MainRoleManager.Instance.MainRoleIns.GetComponent<RoleInner>().TextNode;
+        textSc = textIns.GetComponent<FloatingDamageText>();
         textIns.transform.SetParent(textNode.transform,false);
-        FloatingDamageText textSc = textIns.GetComponent<FloatingDamageText>();
-        textSc.AnimateText($"{Content} + {Count}",new Color(218f/255f,218f/255f,218f/255f,1f));
     }
+    
+    internal virtual void FloatingGetItemText(string Content)
+    {
+        Transform textNode = MainRoleManager.Instance.MainRoleIns.GetComponent<RoleInMap>().TextNode;
+        SetFloatingIns(textNode,out FloatingDamageText textSc);
+        textSc.AnimateText($"{Content}",new Color(218f/255f,218f/255f,218f/255f,1f));
+    }
+    
+    internal virtual void FloatingText(string Content)
+    {
+        //NodeTextNode
+        SetFloatingIns(NodeTextNode,out FloatingDamageText textSc);
+        textSc.AnimateText($"{Content}",new Color(218f/255f,218f/255f,218f/255f,1f));
+    }
+    #endregion
     
     internal override void OnMouseEnter()
     {

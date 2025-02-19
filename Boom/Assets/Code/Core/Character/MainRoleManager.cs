@@ -144,7 +144,7 @@ public class MainRoleManager :ScriptableObject
         RollPR rubbish = CurRollPR[0];
         List<RollPREvent> PRDesignJsons = TrunkManager.Instance.PRDesignJsons; //策划数据
         //遍历所有当前事件，把概率都加入到当前概率中。
-        for (int i = 0; i < CurRollPREveIDs.Count; i++)
+        /*for (int i = 0; i < CurRollPREveIDs.Count; i++)
         {
             int curEID = CurRollPREveIDs[i];
             RollPREvent curPRE = ComFunc.GetSingle(PRDesignJsons, curEID);
@@ -183,7 +183,7 @@ public class MainRoleManager :ScriptableObject
                     }
                 }
             }
-        }
+        }*/
     }
 
     public void AddPREve(int EveID)

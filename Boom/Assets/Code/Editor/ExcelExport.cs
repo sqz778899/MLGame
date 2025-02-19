@@ -290,7 +290,9 @@ namespace Code.Editor
                     string.IsNullOrEmpty(curTable.Rows[i][4].ToString())
                         ? 0
                         : int.Parse(curTable.Rows[i][4].ToString());
-                curData.ImageName = curTable.Rows[i][5].ToString();
+                curData.Price = string.IsNullOrEmpty(curTable.Rows[i][5].ToString()) ? 0
+                        : int.Parse(curTable.Rows[i][5].ToString());
+                curData.ImageName = curTable.Rows[i][6].ToString();
                 curGemDesign.Add(curData);
             }
 

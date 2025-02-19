@@ -13,12 +13,7 @@ public class FightLogic : MonoBehaviour
     
     #region 关卡相关
     LevelMono CurLevel;
-
-    void InitLevel()
-    {
-        //加载关卡
-        CurLevel = LevelManager.LoadLevel();
-    }
+    void InitLevel() => CurLevel = LevelManager.LoadLevel();
     #endregion
 
     [Header("Display")] 
@@ -33,10 +28,12 @@ public class FightLogic : MonoBehaviour
     [Header("角色")] 
     public Enemy CurEnemy;
     public RoleInner CurRole;
+    bool _isAttacked;
 
     void Start()
     {
         TrunkManager.Instance.IsGamePause = false;
+        _isAttacked = false;
         stateActions = new Dictionary<WinOrFail, Action>
         {
             { WinOrFail.InLevel, () => {} }, // 空操作
@@ -105,8 +102,11 @@ public class FightLogic : MonoBehaviour
     
     void HandleInput()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) 
+        if (Input.GetKeyDown(KeyCode.Space) && !_isAttacked)
+        {
+            _isAttacked = true;
             CurRole.Fire();
+        }
     }
     
     void UpdateDistance()

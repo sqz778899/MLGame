@@ -57,7 +57,10 @@ public static class PathConfig
    public static string DrawLineAsset = GetPrepath() + "Res/Map/Prefabs/P_DrawLine_01.prefab";
    public static string TxtHitPB = GetPrepath() + "Res/UI/Prefabs/Misc/P_txtHit_01.prefab";
    public static string TxtGetItemPB = GetPrepath() + "Res/UI/Prefabs/Misc/P_TextGetItem_01.prefab";
+   //商店
    public static string RollScorePB = GetPrepath() + "Res/Bullet/Prefab/P_RollScore_Template.prefab";
+   public static string RollGemPB = GetPrepath() + "Res/UI/Gem/Prefabs/P_GemInShop_Template.prefab";
+   
    public static string RewardCoinAsset = GetPrepath() + "Res/UI/Prefabs/Misc/P_RewardCoin_01.prefab";
    public static string BulletEntryPB = GetPrepath() + "Res/UI/Buff/Entry/P_Entry_Template.prefab";
    public static string GetBulletEntryPB = GetPrepath() + "Res/UI/Prefabs/Popup/P_GetBulletEntry_Template.prefab";
@@ -126,6 +129,7 @@ public static class PathConfig
    
    //..........................通用材质球..............................
    public static string MatOutLine = GetPrepath() + "Res/Shader/CommonMaterial/OutLine.mat";
+   public static string MatUIOutLine = GetPrepath() + "Res/Shader/CommonMaterial/UIOutLine.mat";
    
    #region Function
    //获得关卡的路径

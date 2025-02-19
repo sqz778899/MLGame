@@ -17,14 +17,7 @@ public class ResManager : Singleton<ResManager>
     {
         return GameObject.Instantiate(GetAssetCache<GameObject>(AssetPath));
     }
-
-    public GameObject IntanceAsset(string AssetPath)
-    {
-        GameObject RollScoreIns = GameObject.Instantiate(GetAssetCache<GameObject>(AssetPath));
-        return RollScoreIns;
-    }
-
-
+    
     static string GetFileNameByPath(string CurPath)
    {
       CurPath = CurPath.Replace("\\","/");

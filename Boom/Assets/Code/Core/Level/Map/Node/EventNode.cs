@@ -8,7 +8,7 @@ public class EventNode:MapNodeBase
     public void EnterEvent()  
     {
         //LoadEvent()
-        UIManager.Instance.SetOtherUIPause();
+        UIManager.Instance.IsLockedClick = false;
         string curREventPath = PathConfig.GetREventPath(EventID,CurType);
         GameObject REventIns =  ResManager.instance.CreatInstance(curREventPath);
         REventIns.transform.SetParent(UIManager.Instance.REventRoot.transform,false);

@@ -33,8 +33,21 @@ public static class ShopUtility
                 MainRoleManager.Instance.Score +=  curSCS.Score;
                 break;
         }
+    }
+
+    public static bool SelOne(GemInShop SelGem)
+    {
+        //............Cost Money.................
+        if (MainRoleManager.Instance.Coins < SelGem.Price)
+        {
+            Debug.Log("No Money");
+            return false;
+        }
+        MainRoleManager.Instance.Coins -= SelGem.Price;
         
-        TrunkManager.Instance.SaveFile();
+        //...........Buy This One................
+        MainRoleManager.Instance.AddGem(SelGem.ID);
+        return true;
     }
 
     //.获取目标槽位

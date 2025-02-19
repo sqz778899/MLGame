@@ -1,22 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
-using DG.Tweening;
 using Spine.Unity;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class RoleInner : BaseMove
 {
     [Header("SpineAbout")]
-    public SkeletonAnimation Ani;
     public SkeletonAnimation AttackFX;
     [Header("Others")]
     public float FireDelay = 0.3f;
-    public RoleState State;
     public List<BulletInner> Bullets;
     public Connon CurConnon;
     public Transform ConnonNode;
-    public Transform TextNode;
 
     #region 初始化数据
     public void InitData()
@@ -51,45 +46,10 @@ public class RoleInner : BaseMove
         }
     }
     #endregion
-
-    internal override void Update()
-    {
-        if (Input.GetKey("d"))
-        {
-            State = RoleState.MoveForward;
-        }
-        else if (Input.GetKey("a") &&
-                 _mCamera.WorldToViewportPoint(transform.position).x > 0)
-        {
-            State = RoleState.MoveBack;
-        }
-        else if (State == RoleState.Attack)
-        {
-            
-        }
-        else
-        {
-            State = RoleState.Idle;
-        }
-       
-
-        switch (State)
-        {
-            case RoleState.Idle:
-                AniUtility.PlayIdle(Ani);
-                break;
-            case RoleState.MoveForward:
-                Move(forward);
-                break;
-            case RoleState.MoveBack:
-                Move(-forward);
-                break;
-        }
-    }
-
+    
     void CreateConnon(ref float AniTime)
     {
-        GameObject ConnonIns = ResManager.instance.IntanceAsset(PathConfig.ConnonPB);
+        GameObject ConnonIns = ResManager.instance.CreatInstance(PathConfig.ConnonPB);
         ConnonIns.transform.SetParent(ConnonNode,false);
         Connon curSC = ConnonIns.GetComponent<Connon>();
         
@@ -98,15 +58,7 @@ public class RoleInner : BaseMove
         curSC.Appear(targetPos,ref AniTime);
         CurConnon = curSC;
     }
-
-    internal override void Move(Vector3 direction)
-    {
-        base.Move(direction);
-        AniUtility.TrunAround(Ani,direction.x);//朝向
-        AniUtility.PlayRun(Ani);
-    }
     
-
     public void Fire()
     {
         State = RoleState.Attack;

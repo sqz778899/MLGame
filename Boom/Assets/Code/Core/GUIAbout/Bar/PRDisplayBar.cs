@@ -24,9 +24,6 @@ public class PRDisplayBar : MonoBehaviour
             if (each.ID == ID)
                 CurRollPr = each;
         }
-
-        if (CurRollPr == null)
-            CurRollPr = new RollPR { ID = ID, Probability = 0 };
         
         string curImagePath = "";
         if (ID != 0)

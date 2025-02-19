@@ -43,10 +43,7 @@ public class Gem : DragBase
         MainRoleManager.Instance.RefreshAllItems();
     }
     
-    protected override void OnIDChanged()
-    {
-        SyncData();
-    }
+    protected override void OnIDChanged() =>  SyncData();
 
     #region ToolTips相关
     internal override void SetTooltipInfo()

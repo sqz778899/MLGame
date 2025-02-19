@@ -19,6 +19,8 @@ public static class AniUtility
     public const string Dead01 = "dead_01"; //死亡动画
     
     public const string Appear = "appear"; //出现动画
+    
+    public const string Roll = "roll"; //商店刷新动画
     #endregion
 
     public static void PlayCommon(SkeletonAnimation curAni,float timeScale,string AniType,bool isloop,bool isReset=false,int trackIndex=0)
@@ -48,6 +50,13 @@ public static class AniUtility
     {
         curAni.AnimationState.SetAnimation(0, AniType,curAni.loop);
         curAni.AnimationName = AniType;
+        curAni.timeScale = timeScale;
+    }
+    
+    public static void PlayResetAni(SkeletonGraphic curAni,float timeScale,string AniType)
+    {
+        curAni.AnimationState.SetAnimation(0, AniType,curAni.startingLoop);
+        curAni.startingAnimation = AniType;
         curAni.timeScale = timeScale;
     }
     
@@ -100,6 +109,21 @@ public static class AniUtility
     public static void PlayRun(SkeletonAnimation curAni,float timeScale=1f)
     {
         PlayCommon(curAni, timeScale, Run,true);
+    }
+
+    public static void UIPlayRoll(SkeletonGraphic curAni, ref float anitime)
+    {
+        PlayResetAni(curAni, curAni.timeScale, Roll);
+        curAni.AnimationState.SetAnimation(0, Roll,curAni.startingLoop);
+        curAni.startingAnimation = Roll;
+        anitime = curAni.AnimationState.GetCurrent(0).Animation.Duration * 1/curAni.timeScale;
+    }
+    
+    public static void UIPlayIdle2(SkeletonGraphic curAni)
+    {
+        PlayResetAni(curAni, curAni.timeScale, "idle_2");
+        curAni.AnimationState.SetAnimation(0, "idle_2",curAni.startingLoop);
+        curAni.startingAnimation = "idle_2";
     }
     
     public static void TrunAround(SkeletonAnimation curAni,float face)

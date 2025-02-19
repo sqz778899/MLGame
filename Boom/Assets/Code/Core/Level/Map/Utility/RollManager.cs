@@ -42,7 +42,7 @@ public class RollManager: ScriptableObject
         {
             RollPR curRoll = SingleRoll(curBuffPool);
             curBuffPool.Remove(curRoll);
-            DealProb(ref curBuffPool);
+            //DealProb(ref curBuffPool);
             
             GameObject curBuffPBIns = Instantiate(ResManager.
                 instance.GetAssetCache<GameObject>(PathConfig.TalentPB));
@@ -91,40 +91,27 @@ public class RollManager: ScriptableObject
     }
     
     //................把概率重新分布.................
-    public void DealProb(ref List<RollPR> OriginProbs)
-    {
-        List<float> orProb = new List<float>();
-        foreach (var each in OriginProbs)
-            orProb.Add(each.Probability);
-        List<float> normalizeProb = NormalizeProb(orProb);
-
-        for (int i = 0; i < OriginProbs.Count; i++)
-        {
-            OriginProbs[i].Probability = normalizeProb[i];
-        }
-    }
     public List<RollPR> DealProb(List<RollPR> OriginProbs)
     {
-        List<RollPR> newProbs = new List<RollPR>();
         List<float> orProb = new List<float>();
         foreach (var each in OriginProbs)
             orProb.Add(each.Probability);
         List<float> normalizeProb = NormalizeProb(orProb);
 
+        List<RollPR> TargetProbs = new List<RollPR>();
         for (int i = 0; i < OriginProbs.Count; i++)
         {
-            RollPR tmp = new RollPR();
-            tmp.ID = OriginProbs[i].ID;
-            tmp.Probability = normalizeProb[i];
-            newProbs.Add(tmp);
+            RollPR targetProb = new RollPR(OriginProbs[i].ID, normalizeProb[i]);
+            TargetProbs.Add(targetProb);
         }
-        return newProbs;
+        
+        return TargetProbs;
     }
     
     public RollPR SingleRoll(List<RollPR> rollProbs)
     {
         float c = Random.Range(0f, 100f);
-        RollPR curProb = null;
+        RollPR curProb = new RollPR();
         for (int j = 0; j < rollProbs.Count; j++)
         {
             float min = 0;

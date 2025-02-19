@@ -55,6 +55,8 @@ public class ArrowNode : MapNodeBase
     {
         if (MainRoleManager.Instance.RoomKeys == 0)
         {
+            FloatingText("锁上了");
+            FloatingGetItemText("我需要一把钥匙");
             return;
         }
         MainRoleManager.Instance.RoomKeys -= 1;

@@ -11,6 +11,7 @@ public class EffectManager : MonoBehaviour
     [Header("目标GO")] 
     public GameObject CoinsTarget;
     public GameObject RoomKeysTarget;
+    public GameObject BagTarget;
     
     public void CreatEffect(EParameter EPara)
     {
@@ -34,28 +35,20 @@ public class EffectManager : MonoBehaviour
 
         PlayAwardEffect(EPara,targetpos, insPath);
     }
+
+    public void CreatEffect(EParameter EPara,GameObject Ins)
+    {
+        PlayShopEffect(EPara,BagTarget.transform.position, Ins);
+    }
     
-    public void PlayAwardEffect(EParameter EPara,Vector3 targetpos,string resPath,Action onFinish = null)
+    void PlayAwardEffect(EParameter EPara,Vector3 targetpos,string resPath,Action onFinish = null)
     {
         Sequence seq = DOTween.Sequence();
         float val = Random.Range(EPara.FlyRangeOffset.x,EPara.FlyRangeOffset.y);
         for (int i = 0; i < EPara.InsNum; i++)
         {
             GameObject awardIns = ResManager.instance.CreatInstance(resPath);
-            awardIns.transform.SetParent(Root.transform,false);
-            float randomTime = Random.Range(EPara.SpawntimeRange.x,EPara.SpawntimeRange.y);
-            awardIns.transform.position = EPara.StartPos;
-            seq.Insert(0,awardIns.transform.DOMove(
-                EPara.StartPos + Random.insideUnitSphere * EPara.Radius,randomTime).SetEase(Ease.OutSine));
-            Vector3 cpos = new Vector3(awardIns.transform.position.x + val,
-                awardIns.transform.position.y + val,awardIns.transform.position.z);
-            seq.Insert(randomTime,awardIns.transform.DOBezier(
-                awardIns.transform.position,cpos, targetpos,
-                Random.Range(EPara.FlyTimeRange.x,EPara.FlyTimeRange.y), () =>
-                {
-                    Destroy(awardIns);
-                    onFinish?.Invoke();
-                }));
+            SetEffectSe(awardIns,EPara,targetpos,val,ref seq,onFinish);
         }
 
         seq.SetUpdate(true);
@@ -64,12 +57,46 @@ public class EffectManager : MonoBehaviour
             onFinish?.Invoke();
         });
     }
+
+    void PlayShopEffect(EParameter EPara, Vector3 targetpos, GameObject ins, Action onFinish = null)
+    {
+        Sequence seq = DOTween.Sequence();
+        float val = Random.Range(EPara.FlyRangeOffset.x,EPara.FlyRangeOffset.y);
+        SetEffectSe(ins,EPara,targetpos,val,ref seq,onFinish);
+        seq.SetUpdate(true);
+        seq.AppendCallback(() =>
+        {
+            onFinish?.Invoke();
+        });
+    }
+    
+    void SetEffectSe(GameObject awardIns,EParameter EPara,Vector3 targetpos,float val,ref Sequence seq,Action onFinish = null)
+    {
+        awardIns.transform.SetParent(Root.transform,false);
+        float randomTime = Random.Range(EPara.SpawntimeRange.x,EPara.SpawntimeRange.y);
+        awardIns.transform.position = EPara.StartPos;
+        if (EPara.CurEffectType != EffectType.Shop)
+        {
+            seq.Insert(0,awardIns.transform.DOMove(
+                EPara.StartPos + Random.insideUnitSphere * EPara.Radius,randomTime).SetEase(Ease.OutSine));
+        }
+        Vector3 cpos = new Vector3(awardIns.transform.position.x + val,
+            awardIns.transform.position.y + val,awardIns.transform.position.z);
+        seq.Insert(randomTime,awardIns.transform.DOBezier(
+            awardIns.transform.position,cpos, targetpos,
+            Random.Range(EPara.FlyTimeRange.x,EPara.FlyTimeRange.y), () =>
+            {
+                Destroy(awardIns);
+                onFinish?.Invoke();
+            }));
+    }
 }
 
 public enum EffectType
 {
     CoinsPile,
-    RoomKeys
+    RoomKeys,
+    Shop
 }
 [Serializable]
 public class EParameter

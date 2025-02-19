@@ -4,29 +4,22 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 
-public class DragBase : ItemBase, IPointerDownHandler, IPointerUpHandler, 
-    IDragHandler,IPointerExitHandler,IPointerMoveHandler
+public class DragBase : ToolTipsBase, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
     //其他属性
+    [Header("拖拽相关")]
     internal GameObject _dragIns; //当前拖拽物
     internal Vector3 originalPosition; //拖拽物原始位置
-
     internal Transform originalParent;//拖拽中的物品原始父层级
     internal Transform dragObjParent; //拖拽中的物品所在的父层级
-    //
-    RectTransform rectTransform;
-    //ToolTips相关
-    internal GameObject TooltipsGO;
-    internal GameObject RightClickMenuGO;
-    internal PointerEventData _eventData;
-    internal bool IsToolTipsDisplay;
     
-    internal virtual void Start()
+    internal PointerEventData _eventData;
+    
+    internal override void Start()
     {
+        base.Start();
         _dragIns = gameObject;
-        rectTransform = GetComponent<RectTransform>();
         dragObjParent = UIManager.Instance.DragObjRoot.transform;
-        IsToolTipsDisplay = true;
     }
     
     public override void SyncData() {}//实现一下继承的抽象类
@@ -116,79 +109,5 @@ public class DragBase : ItemBase, IPointerDownHandler, IPointerUpHandler,
     }
     
     internal virtual void VOnDrag(){}
-
-    public virtual void OnPointerExit(PointerEventData eventData)
-    {
-        DestroyTooltips();
-    }
-
-    public virtual void OnPointerMove(PointerEventData eventData)
-    {
-        if (!IsToolTipsDisplay) return;
-        
-        DisplayTooltips(eventData);
-    }
     
-    //捕捉鼠标位置转化为世界空间位置
-    Vector3 GetWPosByMouse(PointerEventData eventData)
-    {
-        RectTransformUtility.ScreenPointToWorldPointInRectangle(rectTransform, 
-            eventData.position, eventData.pressEventCamera, out Vector3 worldPoint);
-        return worldPoint;
-    }
-    
-    #region Tooltips说明窗口
-    internal void DisplayTooltips(PointerEventData eventData)
-    {
-        // 加载Tooltips
-        if (TooltipsGO == null)
-        {
-            TooltipsGO = ResManager.instance.CreatInstance(PathConfig.TooltipAsset);
-            TooltipsGO.transform.SetParent(
-                UIManager.Instance.TooltipsRoot.transform,false);
-            SetTooltipInfo();
-        }
-        // 把Tooltips的位置设置为鼠标位置
-        TooltipsGO.transform.position = GetWPosByMouse(eventData);
-    }
-    
-    internal virtual void SetTooltipInfo()
-    {
-    }
-    
-    internal void DestroyTooltips()
-    {
-        for (int i = UIManager.Instance.TooltipsRoot.transform.childCount - 1; i >= 0; i--)
-        {
-            DestroyImmediate(UIManager.Instance.TooltipsRoot
-                .transform.GetChild(i).gameObject);
-        }
-    }
-    #endregion
-
-    #region 右击菜单
-    internal void DisplayRightClickMenu(PointerEventData eventData)
-    {
-        if (RightClickMenuGO == null)
-        {
-            RightClickMenuGO = ResManager.instance.CreatInstance(PathConfig.RightClickMenu);
-            RightClickMenuGO.transform.SetParent(
-                UIManager.Instance.RightClickMenuRoot.transform,false);
-        }
-        if (RightClickMenuGO.TryGetComponent(out RightClickMenu curSc))
-        {
-            curSc.CurIns = eventData.pointerEnter?.transform.parent?.gameObject;
-            RightClickMenuGO.transform.position = GetWPosByMouse(eventData);
-        }
-    }
-    
-    internal void DestroyRightClickMenu()
-    {
-        for (int i = UIManager.Instance.RightClickMenuRoot.transform.childCount - 1; i >= 0; i--)
-        {
-            DestroyImmediate(UIManager.Instance.RightClickMenuRoot
-                .transform.GetChild(i).gameObject);
-        }
-    }
-    #endregion
 }

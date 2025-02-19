@@ -15,7 +15,7 @@ public class TreasureNode:MapNodeBase
         spriteRenderer.sprite = TreasureOpened;
         GemJson gemDesignJson = TrunkManager.Instance.GemDesignJsons
             .FirstOrDefault(each => each.ID == GemID) ?? new GemJson();
-        FloatingGetItemText(gemDesignJson.Name);
+        FloatingGetItemText(gemDesignJson.Name + 1);
         MainRoleManager.Instance.AddGem(GemID);
         Debug.Log("Open Tressure Box !!");
     }
