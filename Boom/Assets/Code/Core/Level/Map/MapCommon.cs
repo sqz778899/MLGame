@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine.Serialization;
 
-public enum MapRoomState
+public enum   MapRoomState
 {
-    UnFinish = 1,
-    IsFinish = 2,
+    IsLocked = 1,
+    Unlocked = 2
 }
 
 [Serializable]
@@ -15,6 +15,7 @@ public class MapSate
     //public int CurMapID;
     public int CurLevelID;
     public int CurRoomID;
+    public int TargetRoomID;
     //
     public List<int> IsFinishedMaps;//已经完成的Map
     public List<int> IsFinishedLevels;//已经完成的Map
@@ -25,6 +26,7 @@ public class MapSate
         //CurMapID = 1;
         CurLevelID = 1;
         CurRoomID = 1;
+        TargetRoomID = 1;
         IsFinishedMaps = new List<int>();
         IsFinishedLevels = new List<int>();
         IsFinishedRooms = new List<int>();

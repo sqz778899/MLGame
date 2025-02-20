@@ -62,7 +62,7 @@ public class FightLogic : MonoBehaviour
 
     public void InitData()
     {
-        Camera.main.transform.position = new Vector3(0,1,-10);
+        Camera.main.transform.position = new Vector3(2.5f,1,-10);
         Camera.main.orthographicSize = 5;
         //InitLevel
         InitLevel();
@@ -137,7 +137,7 @@ public class FightLogic : MonoBehaviour
         GUIWin s = WinGUI.GetComponent<GUIWin>();
         s.Win(CurAward);
         isBeginCalculation = false;
-        MainRoleManager.Instance.WinThisLevel();
+        //MainRoleManager.Instance.WinThisLevel();
         //给一个随机Buff
         //RollManager.Instance.OnceRollBuff();
         //选完了给一个随机宝物

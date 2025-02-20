@@ -10,11 +10,8 @@ public class RoleInMap : BaseMove
         get { return _curRoom; }
         set
         {
-            if (_curRoom == null || _curRoom != value)
-            {
-                InitRoomBounds();
-                _curRoom = value;
-            }
+            _curRoom = value;
+            InitRoomBounds();
         }
     }
 
@@ -30,7 +27,7 @@ public class RoleInMap : BaseMove
         InitRoomBounds();
     }
 
-    void InitRoomBounds()
+    public void InitRoomBounds()
     {
         if (CurRoom != null)
         {

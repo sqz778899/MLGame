@@ -34,9 +34,4 @@ public class DialogueFight : MonoBehaviour
         MainRoleManager.Instance.InitFightData(CurArrow.CurEnemy.ToMiddleData(),LevelID);
         _mainSceneMono.SwitchFightScene();
     }
-
-    public void RetureRoom()
-    {
-        CurArrow.ReturnRoom();
-    }
 }

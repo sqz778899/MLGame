@@ -41,8 +41,7 @@ public class SpriteClickHandler : MonoBehaviour
             return;
         if (UIManager.Instance.IsLockedClick)
             return;
-        if(IsLocked)
-            return;
+        if(IsLocked) return;
         
         // 高亮显示
         if (IsMouseIn())

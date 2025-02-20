@@ -18,11 +18,11 @@ public class DebugTool
         //GameObjectUtility.RemoveMonoBehavioursWithMissingScript()
     }
 
-    public Transform TestTrans;
+    public MapRoomNode CurMapRoomNode;
+    public MapRoomState State;
     [Button(ButtonSizes.Large)]
     void LogSS()
     {
-        Debug.Log($"WorldPos {TestTrans.position}");
-        Debug.Log($"LocalPos {TestTrans.localPosition}");
+        CurMapRoomNode.State = State;
     }
 }

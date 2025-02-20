@@ -16,7 +16,7 @@ public class ArrowNode : MapNodeBase
     {
         get
         {
-            if (_curRoom == null)
+            if (!_curRoom)
                 _curRoom = transform.parent.parent.GetComponent<MapRoomNode>();
             return _curRoom;
         }
@@ -31,28 +31,29 @@ public class ArrowNode : MapNodeBase
             transform.localScale = defaultScale;
     }
 
-    internal override void OnMouseExit()
-    {
-        spriteRenderer.color = defaultColor;// 取消高亮显示
-    }
+    internal override void OnMouseExit() => spriteRenderer.color = defaultColor;
     
     //去下一个房间
     public void GoToOtherNode()
     {
-        MainRoleManager.Instance.CurMapSate.CurRoomID = TargetRoom.RoomID;
-        MMapLogic.SetRolePos();
-        TrunkManager.Instance.IsGamePause = true;
-        StartCoroutine(CreatDialogueFight());
+        if (IsLocked) return;
+        MainRoleManager.Instance.CurMapSate.TargetRoomID = TargetRoom.RoomID;
+        
+        GameObject dialogueIns = DialogueManager.CreatDialogueFight();
+        DialogueFight dialogueSC = dialogueIns.GetComponent<DialogueFight>();
+        dialogueSC.InitData(this);
     }
     
     public void GoToLockedRoom()
     {
+        if (IsLocked) return;
         MainRoleManager.Instance.CurMapSate.CurRoomID = TargetRoom.RoomID;
         MMapLogic.SetRolePos();
     }
     
     public void GoToLockedRoomWithKey()
     {
+        if (IsLocked) return;
         if (MainRoleManager.Instance.RoomKeys == 0)
         {
             FloatingText("锁上了");
@@ -65,23 +66,5 @@ public class ArrowNode : MapNodeBase
         MainRoleManager.Instance.CurMapSate.CurRoomID = TargetRoom.RoomID;
         MMapLogic.SetRolePos();
         gameObject.SetActive(false);
-    }
-    
-    
-    //回到现在的房间
-    public void ReturnRoom()
-    {
-        MainRoleManager.Instance.CurMapSate.CurRoomID = curRoom.RoomID;
-        MMapLogic.SetRolePos();
-    }
-    
-    IEnumerator CreatDialogueFight()
-    {
-        yield return new WaitForSeconds(0.8f);
-        GameObject dialogueIns = DialogueManager.CreatDialogueFight();
-        DialogueFight dialogueSC = dialogueIns.GetComponent<DialogueFight>();
-        dialogueSC.InitData(this);
-           
-        TrunkManager.Instance.IsGamePause = false;
     }
 }

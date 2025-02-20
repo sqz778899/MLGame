@@ -19,10 +19,11 @@ public class MapLogic : MonoBehaviour
     void Start()
     {
         MainRoleManager.Instance.MainRoleIns = Role;
+        MainRoleManager.Instance.CurMapLogic = this;
         InitMapData();
         
         Dialogue curDia = CurDialogue;
-        curDia.LoadDialogue("Beginner01");
+        curDia.LoadDialogue("Beginner01");//新手教程对话
     }
 
     public void InitMapData()
@@ -42,9 +43,11 @@ public class MapLogic : MonoBehaviour
         //找到当前房间的节点
         MapRoomNode curRoom = _allMapRooms.FirstOrDefault(
             each => each.RoomID == MainRoleManager.Instance.CurMapSate.CurRoomID);
-
+        curRoom.State = MapRoomState.Unlocked;
+        
         //设置角色&&摄像机位置
         Role.GetComponent<RoleInMap>().CurRoom = curRoom;
+        //Role.GetComponent<RoleInMap>().InitRoomBounds();
         Role.transform.position = curRoom.RoleStartPos.position;
         Vector3 newCameraPos = new Vector3(curRoom.CameraStartPos.position.x,
             curRoom.CameraStartPos.position.y, Camera.main.transform.position.z);

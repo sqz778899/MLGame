@@ -17,6 +17,7 @@ public class BulletMapNode : MapNodeBase
         _ain = transform.GetChild(0).GetComponent<SkeletonAnimation>();
         AniUtility.PlayIdle(_ain);
         _renderer = transform.GetChild(0).GetComponent<Renderer>();
+        OnMouseExit();
     }
 
     internal override void OnMouseEnter()

@@ -12,6 +12,7 @@ public class MainRoleManager :ScriptableObject
 
     [Header("游戏进程相关")] 
     public GameObject MainRoleIns;
+    public MapLogic CurMapLogic;
     public MapSate CurMapSate;
     public EnemyMiddleData CurEnemyMidData;
 
@@ -199,6 +200,8 @@ public class MainRoleManager :ScriptableObject
     public void WinThisLevel()
     {
         CurMapSate.IsFinishedRooms.Add(CurMapSate.CurRoomID);
+        CurMapSate.CurRoomID = CurMapSate.TargetRoomID; //切换当前房间
+        CurMapLogic.SetRolePos();
     }
     #endregion
 

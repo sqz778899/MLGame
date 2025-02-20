@@ -57,6 +57,8 @@ public class MapNodeBase : SpriteClickHandler
     
     internal override void OnMouseEnter()
     {
+        if(IsLocked) return;
+        
         outLineMat.SetColor("_BaseColor",defaultColor);
         outLineMat.SetColor("_Color",OutlineColor);
         spriteRenderer.material = outLineMat;// 高亮勾边
