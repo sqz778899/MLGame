@@ -38,6 +38,7 @@ public class RoleInMap : BaseMove
 
     internal override void Move(Vector3 direction)
     {
+        if (UIManager.Instance.IsLockedClick) return;
         Vector3 newPosition = transform.position + direction * Speed * Time.deltaTime;
         // 限制角色在房间范围内
         newPosition.x = Mathf.Clamp(newPosition.x, _roomBounds.min.x, _roomBounds.max.x);

@@ -21,9 +21,6 @@ public class MapLogic : MonoBehaviour
         MainRoleManager.Instance.MainRoleIns = Role;
         MainRoleManager.Instance.CurMapLogic = this;
         InitMapData();
-        
-        Dialogue curDia = CurDialogue;
-        curDia.LoadDialogue("Beginner01");//新手教程对话
     }
 
     public void InitMapData()

@@ -42,6 +42,8 @@ public class ArrowNode : MapNodeBase
         GameObject dialogueIns = DialogueManager.CreatDialogueFight();
         DialogueFight dialogueSC = dialogueIns.GetComponent<DialogueFight>();
         dialogueSC.InitData(this);
+        IsLocked = true;
+        UIManager.Instance.IsLockedClick = true;
     }
     
     public void GoToLockedRoom()

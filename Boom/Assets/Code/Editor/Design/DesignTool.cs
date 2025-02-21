@@ -93,6 +93,30 @@ public class DesignTool
         MainSceneMono curSC = GameObject.Find("MainScene").GetComponent<MainSceneMono>();
         curSC.SwitchFightScene();
     }
+    
+    [Button(ButtonSizes.Large),PropertyOrder(2)]
+    [ButtonGroup("SwichBag")]
+    void SwichBullet()
+    {
+        GameObject BagRootGO = GameObject.Find("BagRoot");
+        BagRootGO.GetComponent<BagRoot>().SwichBullet();
+    }
+    
+    [Button(ButtonSizes.Large),PropertyOrder(2)]
+    [ButtonGroup("SwichBag")]
+    void SwichGem()
+    {
+        GameObject BagRootGO = GameObject.Find("BagRoot");
+        BagRootGO.GetComponent<BagRoot>().SwichGem();
+    }
+    
+    [Button(ButtonSizes.Large),PropertyOrder(2)]
+    [ButtonGroup("SwichBag")]
+    void SwichItem()
+    {
+        GameObject BagRootGO = GameObject.Find("BagRoot");
+        BagRootGO.GetComponent<BagRoot>().SwichItem();
+    }
     #endregion
 
     #region 局内调试

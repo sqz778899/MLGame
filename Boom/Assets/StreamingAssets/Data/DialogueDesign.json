@@ -14,7 +14,7 @@
       "Name": "大聪明",
       "IsLeft": 1,
       "NextIdex": -1,
-      "Content": "加油上到顶层吧。。。"
+      "Content": "旁边有个奇迹子弹。。。"
     }
   ],
   "Beginner02": [
@@ -44,6 +44,24 @@
     }
   ],
   "Beginner03": [
+    {
+      "ID": 0,
+      "Sign": "#",
+      "Name": "大聪明",
+      "IsLeft": 1,
+      "NextIdex": 1,
+      "Content": "我需要装备新得到的子弹"
+    },
+    {
+      "ID": 1,
+      "Sign": "#",
+      "Name": "大聪明",
+      "IsLeft": 1,
+      "NextIdex": -1,
+      "Content": "加油上到顶层吧。。。"
+    }
+  ],
+  "Beginner04": [
     {
       "ID": 0,
       "Sign": "#",

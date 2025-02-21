@@ -103,6 +103,8 @@ public static class PathConfig
    
    //..........................ScoreMat.........................................
    public static string ScoreMatImage = GetPrepath() + "Res/Bullet/Textures/T_ScoreMat_01.png";
+   public static string HoleMat = GetPrepath() + "Res/Shader/CommonMaterial/HoleMat.mat";
+   
    //..........................Buff.............................................
    public static string TalentImageDir = GetPrepath() + "Res/UI/Buff/Talent/Textures/";
    public static string TalentPB = GetPrepath() + "Res/UI/Buff/Talent/P_Buff_Template.prefab";

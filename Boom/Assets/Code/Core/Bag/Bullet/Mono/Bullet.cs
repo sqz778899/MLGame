@@ -67,10 +67,8 @@ public class Bullet : DragBase
     }
     
     #region 同步数据
-    protected override void OnIDChanged()
-    {
-        SyncData();
-    }
+    protected override void OnIDChanged() => SyncData();
+    
     void InitBulletData()
     {
         switch (BulletInsMode)

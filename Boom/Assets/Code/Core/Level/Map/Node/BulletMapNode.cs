@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,32 +12,34 @@ public class BulletMapNode : MapNodeBase
     public string DialogueName;
     SkeletonAnimation _ain;
     Renderer _renderer;
-
-    void Start()
+    
+    void Awake()
     {
         _ain = transform.GetChild(0).GetComponent<SkeletonAnimation>();
         AniUtility.PlayIdle(_ain);
         _renderer = transform.GetChild(0).GetComponent<Renderer>();
-        OnMouseExit();
+        SpineQuitHighLight();
     }
 
+    internal override void Start() {}
+    
     internal override void OnMouseEnter()
     {
-        uint layerToAdd = 1u << 1;
-        _renderer.renderingLayerMask |= layerToAdd;
+        if (UIManager.Instance.IsLockedClick) return;
+        SpineHighLight();
     }
 
     internal override void OnMouseExit()
     {
-        uint layerToRemove = 1u << 1;
-        _renderer.renderingLayerMask &= ~layerToRemove;
+        if (UIManager.Instance.IsLockedClick) return;
+        SpineQuitHighLight();
     }
 
     public void JoinYou()
     {
-        Dialogue curDia = MMapLogic.CurDialogue;
-        curDia.LoadDialogue(DialogueName);
-        curDia.OnDialogueEnd += OnDiaCallBack;
+        SpineQuitHighLight();
+        MMapLogic.CurDialogue.LoadDialogue(DialogueName);
+        MMapLogic.CurDialogue.OnDialogueEnd += OnDiaCallBack;
     }
 
     void OnDiaCallBack()
@@ -47,4 +50,18 @@ public class BulletMapNode : MapNodeBase
         FloatingGetItemText(bulletDesignJson.Name);
         Destroy(gameObject);
     }
+
+    #region 一些私有方法
+    void SpineHighLight()
+    {
+        uint layerToAdd = 1u << 1;
+        _renderer.renderingLayerMask |= layerToAdd;
+    }
+    
+    public void SpineQuitHighLight()
+    {
+        uint layerToRemove = 1u << 1;
+        _renderer.renderingLayerMask &= ~layerToRemove;
+    }
+    #endregion
 }

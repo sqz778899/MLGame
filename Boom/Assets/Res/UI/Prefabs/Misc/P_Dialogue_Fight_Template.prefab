@@ -342,7 +342,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2190559485501102264}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: GUIBase, Assembly-CSharp
         m_MethodName: CloseWindow
         m_Mode: 1
@@ -609,9 +609,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2190559485501102264}
-        m_TargetAssemblyTypeName: GUIBase, Assembly-CSharp
-        m_MethodName: CloseWindow
+      - m_Target: {fileID: 5381996307075279182}
+        m_TargetAssemblyTypeName: DialogueFight, Assembly-CSharp
+        m_MethodName: QuitSelf
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -802,7 +802,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3517791712274836711}
   - component: {fileID: 5381996307075279182}
-  - component: {fileID: 2190559485501102264}
   m_Layer: 5
   m_Name: P_Dialogue_Fight_Template
   m_TagString: Untagged
@@ -850,18 +849,10 @@ MonoBehaviour:
   ObserveHPRoot: {fileID: 7528706831806504024}
   CurArrow: {fileID: 0}
   observeHPYOffset: 145
---- !u!114 &2190559485501102264
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5677865234892204326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc48ac53a11f4f59bfb72fc1217da0fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  BtnFight: {fileID: 7780514503050279798}
+  BtnBack: {fileID: 5274706915110483348}
+  HPGOList: []
+  isLocked: 0
 --- !u!1 &6788160336926445001
 GameObject:
   m_ObjectHideFlags: 0

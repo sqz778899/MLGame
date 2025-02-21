@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DialogueFight : MonoBehaviour
 {
@@ -10,6 +11,13 @@ public class DialogueFight : MonoBehaviour
     public Transform ObserveHPRoot;
     public ArrowNode CurArrow;
     public float observeHPYOffset = 145;
+
+    [Header("按钮")]
+    public Button BtnFight;
+    public Button BtnBack;
+    public List<GameObject> HPGOList = new List<GameObject>();
+    public bool isLocked = false;
+    
     public void InitData(ArrowNode _arraow)
     {
         CurArrow = _arraow;
@@ -18,6 +26,7 @@ public class DialogueFight : MonoBehaviour
         for (int i = 0; i < HPCounts; i++)
         {
             GameObject observeHPIns = Instantiate(observeHPPrefab, ObserveHPRoot.transform);
+            HPGOList.Add(observeHPIns);
             RectTransform observeHPRectTrans = observeHPIns.GetComponent<RectTransform>();
             // 设置位置
             observeHPRectTrans.anchoredPosition = new Vector2(0,0 + observeHPYOffset*i);
@@ -30,8 +39,18 @@ public class DialogueFight : MonoBehaviour
     
     public void EnterFight()
     {
+        if (isLocked ) return;
         MainSceneMono _mainSceneMono = UIManager.Instance.MainSceneGO.GetComponent<MainSceneMono>();
         MainRoleManager.Instance.InitFightData(CurArrow.CurEnemy.ToMiddleData(),LevelID);
         _mainSceneMono.SwitchFightScene();
+        QuitSelf();
+    }
+    
+    public void QuitSelf()
+    {
+        if (isLocked ) return;
+        UIManager.Instance.IsLockedClick = false;
+        CurArrow.IsLocked = false;
+        DestroyImmediate(gameObject);
     }
 }
