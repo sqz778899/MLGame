@@ -10,6 +10,7 @@ public class ArrowNode : MapNodeBase
 
     [Header("横向房间专用")]
     public GameObject ArrowUnlocked;
+    public bool TutorialLocked = false; //新手教程用
     
     MapRoomNode _curRoom;
     MapRoomNode curRoom
@@ -36,6 +37,11 @@ public class ArrowNode : MapNodeBase
     //去下一个房间
     public void GoToOtherNode()
     {
+        if (TutorialLocked)
+        {
+            FloatingText("需要解锁横向房间",new Color(1,1,1,1f));
+            return;
+        }
         if (IsLocked) return;
         MainRoleManager.Instance.CurMapSate.TargetRoomID = TargetRoom.RoomID;
         

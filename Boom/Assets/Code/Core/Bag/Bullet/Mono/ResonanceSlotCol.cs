@@ -6,12 +6,21 @@ using UnityEngine;
 public class ResonanceSlotCol : MonoBehaviour
 {
     public List<int> ResonanceSlots;
-    ParticleSystem _fx;
+
+    private ParticleSystem fx;
+    ParticleSystem _fx
+    {
+        get
+        {
+            if (fx == null)
+                fx = GetComponent<ParticleSystem>();
+            return fx;
+        }
+    }
 
     void Start()
     {
-        _fx = GetComponent<ParticleSystem>();
-        _fx.Stop();
+        CloseEffect();
     }
 
     public void OpenEffect()

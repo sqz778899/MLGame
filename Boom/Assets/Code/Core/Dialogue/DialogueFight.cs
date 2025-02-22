@@ -40,6 +40,7 @@ public class DialogueFight : MonoBehaviour
     public void EnterFight()
     {
         if (isLocked ) return;
+        UIManager.Instance.IsLockedClick = false;
         MainSceneMono _mainSceneMono = UIManager.Instance.MainSceneGO.GetComponent<MainSceneMono>();
         MainRoleManager.Instance.InitFightData(CurArrow.CurEnemy.ToMiddleData(),LevelID);
         _mainSceneMono.SwitchFightScene();

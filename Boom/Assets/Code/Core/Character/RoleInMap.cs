@@ -20,7 +20,8 @@ public class RoleInMap : BaseMove
     
     [Header("移动范围设置")]
     Bounds _roomBounds;
-
+    
+    public bool IsLocked = false; //剧情教程等使用
     internal override void Start()
     {
         base.Start();
@@ -38,7 +39,9 @@ public class RoleInMap : BaseMove
 
     internal override void Move(Vector3 direction)
     {
-        if (UIManager.Instance.IsLockedClick) return;
+        if (UIManager.Instance.IsLockedClick) return; //UI锁
+        if(IsLocked) return;
+        
         Vector3 newPosition = transform.position + direction * Speed * Time.deltaTime;
         // 限制角色在房间范围内
         newPosition.x = Mathf.Clamp(newPosition.x, _roomBounds.min.x, _roomBounds.max.x);

@@ -26,7 +26,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _EdgeSoftness: 0.025
-    - _HoleRadius: 0.06
+    - _HoleRadius: 0.08
     m_Colors:
     - _Color: {r: 0, g: 0, b: 0, a: 0.81960785}
     - _HoleCenter: {r: 0.5, g: 0.5, b: 0, a: 0}

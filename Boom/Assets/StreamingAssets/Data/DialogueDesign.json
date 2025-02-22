@@ -61,6 +61,16 @@
       "Content": "加油上到顶层吧。。。"
     }
   ],
+  "InlayGem": [
+    {
+      "ID": 0,
+      "Sign": "#",
+      "Name": "大聪明",
+      "IsLeft": 1,
+      "NextIdex": -1,
+      "Content": "我可以镶嵌新得到的宝石"
+    }
+  ],
   "Beginner04": [
     {
       "ID": 0,

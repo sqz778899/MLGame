@@ -12,8 +12,9 @@ public class EffectManager : MonoBehaviour
     public GameObject CoinsTarget;
     public GameObject RoomKeysTarget;
     public GameObject BagTarget;
-    
-    public void CreatEffect(EParameter EPara)
+
+    #region 总接口
+    public void CreatEffect(EParameter EPara,bool IsLine = false,Action onFinish = null)
     {
         string insPath = "";
         Vector3 targetpos;
@@ -27,20 +28,53 @@ public class EffectManager : MonoBehaviour
                 insPath = PathConfig.AwardRoomKey;
                 targetpos = RoomKeysTarget.transform.position;
                 break;
+            case EffectType.Shop:
+                insPath = PathConfig.AwardCoin;
+                targetpos = BagTarget.transform.position;
+                break;
             default:
                 insPath = PathConfig.AwardCoin;
                 targetpos = CoinsTarget.transform.position;
                 break;
         }
 
-        PlayAwardEffect(EPara,targetpos, insPath);
-    }
-
-    public void CreatEffect(EParameter EPara,GameObject Ins)
-    {
-        PlayShopEffect(EPara,BagTarget.transform.position, Ins);
+        if (IsLine)
+            PlayEffectIsLine(EPara,targetpos, insPath,onFinish);
+        else
+            PlayAwardEffect(EPara,targetpos, insPath,onFinish);
     }
     
+    public void CreatEffect(EParameter EPara,GameObject Ins,bool IsLine = false,Action onFinish = null)
+    {
+        Vector3 targetpos;
+        switch (EPara.CurEffectType)
+        {
+            case EffectType.CoinsPile:
+                targetpos = CoinsTarget.transform.position;
+                break;
+            case EffectType.RoomKeys:
+              
+                targetpos = RoomKeysTarget.transform.position;
+                break;
+            case EffectType.Shop:
+                targetpos = BagTarget.transform.position;
+                break;
+            default:
+                targetpos = CoinsTarget.transform.position;
+                break;
+        }
+
+        if (IsLine)
+        {
+            PlayEffectIsLine(EPara,targetpos,Ins,onFinish);
+        }
+        else 
+            PlayAwardEffect(EPara,targetpos, Ins,onFinish);
+    }
+    #endregion
+
+    #region 带一些曲线飞向目标
+    //带一些曲线飞向目标
     void PlayAwardEffect(EParameter EPara,Vector3 targetpos,string resPath,Action onFinish = null)
     {
         Sequence seq = DOTween.Sequence();
@@ -57,8 +91,41 @@ public class EffectManager : MonoBehaviour
             onFinish?.Invoke();
         });
     }
+    
+    void PlayAwardEffect(EParameter EPara,Vector3 targetpos,GameObject Ins,Action onFinish = null)
+    {
+        Sequence seq = DOTween.Sequence();
+        float val = Random.Range(EPara.FlyRangeOffset.x,EPara.FlyRangeOffset.y);
+        SetEffectSe(Ins,EPara,targetpos,val,ref seq,onFinish);
+        
+        seq.SetUpdate(true);
+        seq.AppendCallback(() =>
+        {
+            onFinish?.Invoke();
+        });
+    } 
+    #endregion
 
-    void PlayShopEffect(EParameter EPara, Vector3 targetpos, GameObject ins, Action onFinish = null)
+    #region 直接飞向目标
+    void PlayEffectIsLine(EParameter EPara, Vector3 targetpos, string resPath, Action onFinish = null)
+    {
+        Sequence seq = DOTween.Sequence();
+        float val = Random.Range(EPara.FlyRangeOffset.x,EPara.FlyRangeOffset.y);
+        for (int i = 0; i < EPara.InsNum; i++)
+        {
+            GameObject ins = ResManager.instance.CreatInstance(resPath);
+            SetEffectSe(ins, EPara, targetpos, val, ref seq, onFinish);
+        }
+
+        seq.SetUpdate(true);
+        seq.AppendCallback(() =>
+        {
+            onFinish?.Invoke();
+        });
+    }
+    
+    //直接飞向目标
+    void PlayEffectIsLine(EParameter EPara, Vector3 targetpos, GameObject ins, Action onFinish = null)
     {
         Sequence seq = DOTween.Sequence();
         float val = Random.Range(EPara.FlyRangeOffset.x,EPara.FlyRangeOffset.y);
@@ -69,6 +136,7 @@ public class EffectManager : MonoBehaviour
             onFinish?.Invoke();
         });
     }
+    #endregion
     
     void SetEffectSe(GameObject awardIns,EParameter EPara,Vector3 targetpos,float val,ref Sequence seq,Action onFinish = null)
     {

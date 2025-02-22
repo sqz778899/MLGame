@@ -8,17 +8,24 @@ public class TutorialManager : MonoBehaviour
 {
     [Header("基础资产")]
     public Image bgImage;
-    [Header("子弹资产")]
+    [Header("资源类资产")]
     public GameObject BulletFloor1;
+    public GameObject TreasureBoxFloor2;
     [Header("箭头资产")]
     public GameObject ArrowFloor1;
-    
+    public List<GameObject> CrossRoomArrowsFloor2;
+    public List<MapRoomNode> AwardRoomsFloor2;
     [Header("UI资产")]
     public GameObject UIBag;
     public GameObject UIBagBulletTab;
     public GameObject UIBulletSlot1;
     public GameObject UIStart;
     public GameObject UIKeyBoard;
+    public GameObject UIPressEnter;
+    //Step4
+    public GameObject UIFightContinue;
+    public GameObject UIBagGemTab;
+    public GameObject UIGemSlot;
     
     [Header("特效资产")]
     public GameObject PickBullet01Arrow;
@@ -27,49 +34,106 @@ public class TutorialManager : MonoBehaviour
     public GameObject SlotFXArrow;
     public GameObject StartFXArrow;
     public GameObject OBHPFXArrow;
+    //镶嵌宝石
+    public GameObject TreasureBoxArrow;
+    public GameObject ArrowInlayGemToBag;
+    public GameObject ArrowGemTab;
+    public GameObject HandPointInlayGem;
     
-    [Header("对话系统脚本")]
+    [Header("脚本类")]
     public Dialogue CurDialogue;
+    public FightLogic FightLogic;
+    RoleInMap curRole;
+    RoleInMap _curRole
+    {
+        get
+        {
+            if (curRole == null)
+                curRole = MainRoleManager.Instance.MainRoleIns.GetComponent<RoleInMap>();
+            return curRole;
+        }
+    }
     
     //临时监听的变量
     bool _isSetBullet = false;
-    bool _isStartStep2_4 = false;
+    bool _isPressEnter3_3 = false;
+    bool _isOpenBox = false;
+    bool _isAwardRoom5_1 = false;
+    bool _isSetGem = false;
     
     void Start()
     {
         Step1();
+        LockedNeedNodes();
     }
 
     void Update()
     {
-        if(_isStartStep2_4) return;
-        if (MainRoleManager.Instance.CurBullets.Count > 0)
+        #region 解锁宝箱
+        if (!_isOpenBox)
+        {
+            if (TreasureBoxFloor2.GetComponent<TreasureNode>().isOpened)
+            {
+                Step4_1();//打开宝箱之后调用
+                _isOpenBox = true;
+            }
+        }
+
+        if (MainRoleManager.Instance.InLayGems.Count > 0 && !_isSetGem)
+        {
+            _isSetGem = true;
+            Step4_5();
+        }
+        #endregion
+        
+        if (!_isAwardRoom5_1) //如果进入横向奖励房间，则终止
+        {
+            if (AwardRoomsFloor2.Any(each => each.RoomID == MainRoleManager.Instance.CurMapSate.CurRoomID))
+            {
+                Step5();
+                _isAwardRoom5_1 = true;
+            }
+        }
+        if (FightLogic._isAttacked && !_isPressEnter3_3)
+        {
+            _isPressEnter3_3 = true;
+            DestroyImmediate(UIPressEnter);
+        }
+        
+        if (MainRoleManager.Instance.CurBullets.Count > 0 && !_isSetBullet)
         {
             _isSetBullet = true;
             Step2_4();
         }
     }
 
-    #region Step1 引导，捡起黏土子弹
-    void Step1()
+    void LockedNeedNodes()
     {
-        bgImage.enabled = false;
+        CrossRoomArrowsFloor2.ForEach(each => each.GetComponent<ArrowNode>().TutorialLocked = true);
+    }
+
+    #region Step1 引导，捡起黏土子弹
+    void Step1() //新手教程对话
+    {
         ResetBullet(BulletFloor1);
         CurDialogue.OnDialogueEnd += Step1_1;
-        CurDialogue.LoadDialogue("Beginner01");//新手教程对话
+        CurDialogue.LoadDialogue("Beginner01");
+        _curRole.IsLocked = true;
     }
     void Step1_1() //引导，捡起黏土子弹
     {
+        bgImage.enabled = true;
+        BulletFloor1.AddComponent<ShaderHoleController>().radius = 0.06f;
         ArrowFloor1.GetComponent<ArrowNode>().IsLocked = true;
         PickBullet01Arrow.SetActive(true);
         PickBullet01Arrow.GetComponent<ParticleSystem>().Play();
         bgImage.enabled = true;
     }
     
-    //点击黏土子弹触发
-    public void Step1_2()
+    public void Step1_2() //点击黏土子弹触发对话
     {
         UIManager.Instance.IsLockedClick = true;
+        _curRole.IsLocked = false;
         bgImage.enabled = false;
         ResetBullet(BulletFloor1);
         DestroyImmediate(PickBullet01Arrow);
@@ -77,14 +141,10 @@ public class TutorialManager : MonoBehaviour
         CurDialogue.OnDialogueEnd += Step1_3;
     }
     
-    void Step1_3()
+    void Step1_3() //子弹加入
     {
         UIManager.Instance.IsLockedClick = false;
-        MainRoleManager.Instance.AddSpawner(1);
-        BulletJson bulletDesignJson = TrunkManager.Instance.BulletDesignJsons
-            .FirstOrDefault(b => b.ID == 1) ?? new BulletJson();
-        FloatingGetItemText(bulletDesignJson.Name);
-        Destroy(BulletFloor1);
+        BulletFloor1.GetComponent<BulletMapNode>().OnDiaCallBack();
         StartCoroutine(WaitToStep2());
     }
     #endregion
@@ -96,13 +156,13 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         Step2();
     }
-    void Step2()
+    void Step2()  //自言自语，我要装备子弹
     {
         CurDialogue.OnDialogueEnd += Step2_1;
         CurDialogue.LoadDialogue("Beginner03");
     }
 
-    void Step2_1()
+    void Step2_1()  //引导，点击背包按钮
     {
         UIManager.Instance.IsLockedClick = false;
         bgImage.enabled = true;
@@ -111,11 +171,10 @@ public class TutorialManager : MonoBehaviour
         BagFXArrow.SetActive(true);
         BagFXArrow.GetComponent<ParticleSystem>().Play();
         
-        Button btnBag = UIBag.GetComponent<Button>();
-        btnBag.onClick.AddListener(Step2_2);
+        UIBag.GetComponent<Button>().onClick.AddListener(Step2_2);
     }
     
-    void Step2_2()
+    void Step2_2() //引导，切换背包菜单
     {
         //清空之前绑定
         DestroyImmediate(BagFXArrow);
@@ -143,14 +202,13 @@ public class TutorialManager : MonoBehaviour
         
         //现在Mark
         UIBulletSlot1.AddComponent<ShaderHoleController>().radius = 0.08f;
-        //UIBulletSlotRole.AddComponent<ShaderHoleController>().radius = 0.08f;
         SlotFXArrow.SetActive(true);
         SlotFXArrow.GetComponent<ParticleSystem>().Play();
     }
 
-    void Step2_4()
+    void Step2_4() //成功装备子弹
     {
-        _isStartStep2_4 = true;
+        //_isStartStep2_4 = true;
         //清空之前绑定
         DestroyImmediate(SlotFXArrow);
         ShaderHoleController bageSC = UIBulletSlot1.GetComponent<ShaderHoleController>();
@@ -163,7 +221,7 @@ public class TutorialManager : MonoBehaviour
         UIStart.GetComponent<Button>().onClick.AddListener(Step2_5);
     }
 
-    void Step2_5()
+    void Step2_5() //回到房间
     {
         Debug.Log("进入场景！！！");
         //清空之前绑定
@@ -204,7 +262,7 @@ public class TutorialManager : MonoBehaviour
         SC.isLocked = false;
         
         //绑定新的
-        SC.BtnFight.onClick.AddListener(Step3);
+        SC.BtnFight.onClick.AddListener(Step3_2);
     }
 
     void Step3_2() //进入战斗中
@@ -214,11 +272,92 @@ public class TutorialManager : MonoBehaviour
         UIKeyBoard.SetActive(true);
     }
 
-    public void Step3_3()
+    public void Step3_3() //按键教程
     {
         UIManager.Instance.IsLockedClick = false;
         bgImage.enabled = false;
+        //解绑之前
         DestroyImmediate(UIKeyBoard);
+        //
+        UIPressEnter.SetActive(true);
+        UIFightContinue.GetComponent<Button>().onClick.AddListener(Step4);
+    }
+    #endregion
+
+    #region Step4 镶嵌宝石
+    void Step4() //引导开宝箱
+    {
+        //解绑之前
+        UIFightContinue.GetComponent<Button>().onClick.RemoveListener(Step4);
+        //延迟一下执行
+        StartCoroutine(WaitToStep4());
+        UIManager.Instance.IsLockedClick = true;
+    }
+    
+    IEnumerator WaitToStep4()
+    {
+        yield return new WaitForSeconds(0.7f);
+        UIManager.Instance.IsLockedClick = false;
+        _curRole.IsLocked = true;
+        bgImage.enabled = true;
+        //Mark现在
+        MarkGO(TreasureBoxFloor2,TreasureBoxArrow);
+    }
+
+    void Step4_1() //打开了宝箱之后，自言自语我可以装备宝石
+    {
+        bgImage.enabled = false;
+        _curRole.IsLocked = false;
+        //解绑之前
+        DelMark(TreasureBoxFloor2, TreasureBoxArrow);
+        CurDialogue.LoadDialogue("InlayGem");
+        CurDialogue.OnDialogueEnd += Step4_2;
+    }
+
+    void Step4_2() //延迟执行
+    {
+        CurDialogue.OnDialogueEnd -= Step4_2;
+        StartCoroutine(WaitToStep4_2());
+    }
+    
+    IEnumerator WaitToStep4_2()//引导打开背包
+    {
+        yield return new WaitForSeconds(1f);
+        bgImage.enabled = true;
+        MarkGO(UIBag, ArrowInlayGemToBag);//高亮显示背包
+        UIBag.GetComponent<Button>().onClick.AddListener(Step4_3);
+    }
+    
+    void Step4_3() //引导切换宝石Tab
+    {
+        //解绑之前
+        UIBag.GetComponent<Button>().onClick.RemoveListener(Step4_3);
+        DelMark(UIBag, ArrowInlayGemToBag);//取消高亮显示背包
+        
+        MarkGO(UIBagGemTab, ArrowGemTab);//高亮显示背包宝石Tab
+        UIBagGemTab.GetComponent<Button>().onClick.AddListener(Step4_4);
+    }
+
+    void Step4_4() //引导镶嵌宝石
+    {
+        //解绑之前
+        UIBagGemTab.GetComponent<Button>().onClick.RemoveListener(Step4_4);
+        DelMark(UIBagGemTab, ArrowGemTab);//取消高亮背包宝石Tab
+
+        MarkGO(UIGemSlot, HandPointInlayGem); //小手漂移，引导镶嵌宝石动画
+    }
+
+    void Step4_5()//镶嵌宝石完成时候调用
+    {
+        bgImage.enabled = false;
+        DelMark(UIGemSlot, HandPointInlayGem);//取消小手漂移，引导镶嵌宝石动画
+    }
+    #endregion
+
+    #region Step5 解锁横向房间
+    public void Step5()//如果进入横向房间，则解锁Arraw
+    {
+        CrossRoomArrowsFloor2.ForEach(each => each.GetComponent<ArrowNode>().TutorialLocked = false);
     }
     #endregion
     
@@ -228,14 +367,19 @@ public class TutorialManager : MonoBehaviour
         BulletMapNode bm = bullet.GetComponent<BulletMapNode>();
         bm.SpineQuitHighLight();
     }
-    
-    void FloatingGetItemText(string Content)
+
+    void MarkGO(GameObject ins,GameObject fx = null)
     {
-        Transform textNode = MainRoleManager.Instance.MainRoleIns.GetComponent<RoleInMap>().TextNode;
-        GameObject textIns = ResManager.instance.CreatInstance(PathConfig.TxtGetItemPB);
-        FloatingDamageText textSc = textIns.GetComponent<FloatingDamageText>();
-        textIns.transform.SetParent(textNode.transform,false);
-        textSc.AnimateText($"{Content}",new Color(218f/255f,218f/255f,218f/255f,1f));
+        ins.AddComponent<ShaderHoleController>().radius = 0.08f;
+        fx?.SetActive(true);
+        fx?.GetComponent<ParticleSystem>().Play();
+    }
+
+    void DelMark(GameObject ins,GameObject fx = null)
+    {
+        var sc = ins.GetComponent<ShaderHoleController>();
+        if (sc) DestroyImmediate(sc);
+        if (fx) DestroyImmediate(fx);
     }
     #endregion
 }

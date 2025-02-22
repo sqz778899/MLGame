@@ -6,19 +6,20 @@ public class MainSceneMono:MonoBehaviour
     //GUIEditScene
     [Header("BagRoot")]
     public GameObject GUIBagRoot;
-    [Header("GUIEditScene")]
-    public GameObject GUIEditScene;
     //MapScene
     [Header("MapScene")]
-    MapLogic _mapLogic;
-    public GameObject GUIMapScene;
     public GameObject MapScene;
+    public GameObject GUIMap;
     //FightScene
     [Header("FightScene")] 
-    FightLogic _fightLogic;
     public GameObject GUIFightScene;
     public GameObject FightScene;
 
+    
+    BagRoot _bagRootSC;
+    FightLogic _fightLogic;
+    MapLogic _mapLogic;
+    
     void Awake()
     {
         UIManager.Instance.InitMainScene();
@@ -27,6 +28,7 @@ public class MainSceneMono:MonoBehaviour
         //.................Local...........................
         //UIManager.Instance.InitMainScene();
         MainRoleManager.Instance.InitData();
+        _bagRootSC = GUIBagRoot.GetComponent<BagRoot>();
     }
 
     void Start()
@@ -37,20 +39,20 @@ public class MainSceneMono:MonoBehaviour
             _fightLogic = UIManager.Instance.FightLogicGO.GetComponent<FightLogic>();
     }
 
-    public void SwitchEditScene()
+    public void SwitchBag()
     {
         if (UIManager.Instance.IsLockedClick) return;
         
         FightSceneOff();
         MapSceneOff();
-        EditSceneOn();
+        BagOn();
     }
     
     public void SwitchMapScene()
     {
         if (UIManager.Instance.IsLockedClick) return;
         
-        EditSceneOff();
+        BagOff();
         FightSceneOff();
         MapSceneOn();
     }
@@ -59,51 +61,66 @@ public class MainSceneMono:MonoBehaviour
     {
         if (UIManager.Instance.IsLockedClick) return;
         
-        EditSceneOff();
+        BagOff();
         MapSceneOff();
         FightSceneOn();
     }
 
     #region 独立小开关
-    void EditSceneOn()
+    void BagOn()
     {
-        Camera.main.transform.position = new Vector3(0,1,-10);
-        GUIEditScene.SetActive(true);
+        //Camera.main.transform.position = new Vector3(0,1,-10);
+        GUIBagRoot.SetActive(true);
+        _bagRootSC?.InitData();
     }
-    void EditSceneOff()
+    void BagOff()
     {
-        GUIEditScene.SetActive(false);
+        GUIBagRoot.SetActive(false);
     }
     void FightSceneOn()
     {
         GUIFightScene.SetActive(true);
         for (int i = 0; i < FightScene.transform.childCount; i++)
             FightScene.transform.GetChild(i).gameObject.SetActive(true);
-       
-        _fightLogic?.InitData();
-        UIManager.Instance.G_CurBulletIcon?.SetActive(false);
-        UIManager.Instance.G_StandbyIcon?.SetActive(false);
+        try
+        {
+            _fightLogic.InitData();
+            UIManager.Instance.G_CurBulletIcon.SetActive(false);
+            UIManager.Instance.G_StandbyIcon.SetActive(false);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("FightSceneOn  Erro！！！");
+        }
     }
     void FightSceneOff()
     {
         GUIFightScene.SetActive(false);
         for (int i = 0; i < FightScene.transform.childCount; i++)
             FightScene.transform.GetChild(i).gameObject.SetActive(false);
-        _fightLogic?.UnloadData();
-        UIManager.Instance.G_CurBulletIcon?.SetActive(true);
-        UIManager.Instance.G_StandbyIcon?.SetActive(true);
+        
+        try
+        {
+            _fightLogic.UnloadData();
+            UIManager.Instance.G_CurBulletIcon.SetActive(true);
+            UIManager.Instance.G_StandbyIcon.SetActive(true);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("FightSceneOff  Erro！！！");
+        }
     }
     
     void MapSceneOn()
     {
-        GUIMapScene.SetActive(true);
         MapScene.SetActive(true);
+        GUIMap.SetActive(true);
         _mapLogic?.InitMapData();
     }
     
     void MapSceneOff()
     {
-        GUIMapScene.SetActive(false);
+        GUIMap.SetActive(false);
         MapScene.SetActive(false);
     }
     #endregion

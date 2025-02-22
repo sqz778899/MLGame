@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2854409879114146523}
   - component: {fileID: 8502356091104366761}
   - component: {fileID: 346389227664983378}
-  - component: {fileID: 721561191947416554}
   m_Layer: 0
   m_Name: P_BulletMapNode_01
   m_TagString: Bullet
@@ -50,9 +49,9 @@ MonoBehaviour:
   onClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8502356091104366761}
-        m_TargetAssemblyTypeName: BulletMapNode, Assembly-CSharp
-        m_MethodName: JoinYou
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: TutorialManager, Assembly-CSharp
+        m_MethodName: Step1_2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -67,7 +66,7 @@ MonoBehaviour:
   IsLocked: 0
   NodeTextNode: {fileID: 0}
   EPara:
-    CurEffectType: 0
+    CurEffectType: 2
     StartPos: {x: 0, y: 0, z: 0}
     InsNum: 1
     SpawntimeRange: {x: 0.3, y: 0.4}
@@ -108,7 +107,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 9.98082, y: -3.2225885}
+  m_Offset: {x: 0.05045688, y: 0.52112675}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -119,22 +118,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5.787838, y: 6.192971}
+  m_Size: {x: 6.485812, y: 6.3198786}
   m_EdgeRadius: 0
---- !u!114 &721561191947416554
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2090201768069097950}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2579b430c45e074dad6171fe7480c82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 0b51949bbd8115e4ca4857b8ee6ea0d8, type: 2}
-  radius: 0.08
 --- !u!1 &5978591156729170133
 GameObject:
   m_ObjectHideFlags: 0

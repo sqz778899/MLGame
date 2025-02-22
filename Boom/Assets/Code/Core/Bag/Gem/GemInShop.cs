@@ -65,7 +65,7 @@ public class GemInShop : ToolTipsBase,IPointerUpHandler,IPointerDownHandler
         {
             CurShopNode.ShopIndexToGemId.Remove(ShopSlotIndex);
             EPara.StartPos = transform.position;
-            MEffectManager.CreatEffect(EPara,gameObject);
+            MEffectManager.CreatEffect(EPara,gameObject,true);
         }
     }
     

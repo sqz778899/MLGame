@@ -72,16 +72,18 @@ public class DesignTool
     [Title("切换场景")] [PropertyOrder(2)]  public int swith;
     [Button(ButtonSizes.Large),PropertyOrder(2)]
     [ButtonGroup("Switch")]
-    void SwichEdit()
+    void SwichBag()
     {
+        UIManager.Instance.IsLockedClick = false;
         MainSceneMono curSC = GameObject.Find("MainScene").GetComponent<MainSceneMono>();
-        curSC.SwitchEditScene();
+        curSC.SwitchBag();
     }
     
     [Button(ButtonSizes.Large),PropertyOrder(2)]
     [ButtonGroup("Switch")]
     void SwichMap()
     {
+        UIManager.Instance.IsLockedClick = false;
         MainSceneMono curSC = GameObject.Find("MainScene").GetComponent<MainSceneMono>();
         curSC.SwitchMapScene();
     }
@@ -90,6 +92,7 @@ public class DesignTool
     [ButtonGroup("Switch")]
     void SwichFight()
     {
+        UIManager.Instance.IsLockedClick = false;
         MainSceneMono curSC = GameObject.Find("MainScene").GetComponent<MainSceneMono>();
         curSC.SwitchFightScene();
     }
@@ -98,6 +101,7 @@ public class DesignTool
     [ButtonGroup("SwichBag")]
     void SwichBullet()
     {
+        UIManager.Instance.IsLockedClick = false;
         GameObject BagRootGO = GameObject.Find("BagRoot");
         BagRootGO.GetComponent<BagRoot>().SwichBullet();
     }
@@ -106,6 +110,7 @@ public class DesignTool
     [ButtonGroup("SwichBag")]
     void SwichGem()
     {
+        UIManager.Instance.IsLockedClick = false;
         GameObject BagRootGO = GameObject.Find("BagRoot");
         BagRootGO.GetComponent<BagRoot>().SwichGem();
     }
@@ -114,6 +119,7 @@ public class DesignTool
     [ButtonGroup("SwichBag")]
     void SwichItem()
     {
+        UIManager.Instance.IsLockedClick = false;
         GameObject BagRootGO = GameObject.Find("BagRoot");
         BagRootGO.GetComponent<BagRoot>().SwichItem();
     }

@@ -14,6 +14,7 @@ public class FightLogic : MonoBehaviour
     #region 关卡相关
     LevelMono CurLevel;
     void InitLevel() => CurLevel = LevelManager.LoadLevel();
+
     #endregion
 
     [Header("Display")] 
@@ -28,7 +29,7 @@ public class FightLogic : MonoBehaviour
     [Header("角色")] 
     public Enemy CurEnemy;
     public RoleInner CurRole;
-    bool _isAttacked;
+    public bool _isAttacked;
 
     void Start()
     {
@@ -102,6 +103,8 @@ public class FightLogic : MonoBehaviour
     
     void HandleInput()
     {
+        if (UIManager.Instance.IsLockedClick) return;
+        
         if (Input.GetKeyDown(KeyCode.Space) && !_isAttacked)
         {
             _isAttacked = true;
@@ -137,6 +140,7 @@ public class FightLogic : MonoBehaviour
         GUIWin s = WinGUI.GetComponent<GUIWin>();
         s.Win(CurAward);
         isBeginCalculation = false;
+        _isAttacked = false;
         //MainRoleManager.Instance.WinThisLevel();
         //给一个随机Buff
         //RollManager.Instance.OnceRollBuff();

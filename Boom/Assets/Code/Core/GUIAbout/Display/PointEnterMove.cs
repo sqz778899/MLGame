@@ -9,12 +9,7 @@ public class PointEnterMove:MonoBehaviour,IPointerEnterHandler,IPointerExitHandl
     public float AniTime = 0.5f;
     public AnimationCurve Curve;
     public Transform TargetTrans;
-    Vector3 OriginPos;
-
-    void Start()
-    {
-        OriginPos = transform.position;
-    }
+    public Transform StartTrans;
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -23,6 +18,6 @@ public class PointEnterMove:MonoBehaviour,IPointerEnterHandler,IPointerExitHandl
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        transform.DOMove(OriginPos, AniTime).SetEase(Curve);
+        transform.DOMove(StartTrans.position, AniTime).SetEase(Curve);
     }
 }

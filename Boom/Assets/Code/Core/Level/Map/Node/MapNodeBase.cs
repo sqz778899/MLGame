@@ -47,11 +47,15 @@ public class MapNodeBase : SpriteClickHandler
         textSc.AnimateText($"{Content}",new Color(218f/255f,218f/255f,218f/255f,1f));
     }
     
-    internal virtual void FloatingText(string Content)
+    internal virtual void FloatingText(string Content,Color col = default)
     {
         //NodeTextNode
+        if (col == default)
+        {
+            col = new Color(218f / 255f, 218f / 255f, 218f / 255f, 1f);
+        }
         SetFloatingIns(NodeTextNode,out FloatingDamageText textSc);
-        textSc.AnimateText($"{Content}",new Color(218f/255f,218f/255f,218f/255f,1f));
+        textSc.AnimateText($"{Content}",col);
     }
     #endregion
     

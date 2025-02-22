@@ -7,6 +7,11 @@ public static class LevelManager
     public static LevelMono LoadLevel()
     {
         Debug.Log("LoadLevel");
+        //清理之前的Level
+        for (int i = UIManager.Instance.Level.transform.childCount - 1; i >=0; i--)
+        {
+            GameObject.DestroyImmediate(UIManager.Instance.Level.transform.GetChild(i).gameObject);
+        }
         //Load Map
         GameObject levelIns = ResManager.instance.CreatInstance(
             PathConfig.GetLevelPath(MainRoleManager.Instance.CurMapSate.CurLevelID));

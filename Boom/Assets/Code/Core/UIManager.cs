@@ -90,7 +90,7 @@ public class UIManager : ScriptableObject
             MainSceneGO = GameObject.Find("MainScene");
         MainSceneMono curMainSC = MainSceneGO.GetComponent<MainSceneMono>();
         
-        MapScene CurMapSC = curMainSC.GUIMapScene.GetComponent<MapScene>();
+        MapScene CurMapSC = curMainSC.GUIMap.GetComponent<MapScene>();
         MapLogicGO = CurMapSC.MapLogicGO;
         MapRoot = CurMapSC.MapNode;
         ShopRoot = CurMapSC.ShopRoot;

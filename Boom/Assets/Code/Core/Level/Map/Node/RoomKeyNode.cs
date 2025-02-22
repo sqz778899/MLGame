@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+
+using System;
 
 public class RoomKeyNode : MapNodeBase
 {
@@ -10,7 +9,7 @@ public class RoomKeyNode : MapNodeBase
     {
         EPara.InsNum = RoomKeysNum;
         EPara.StartPos = transform.position;
-        MEffectManager.CreatEffect(EPara);
+        MEffectManager.CreatEffect(EPara,false,()=>FloatingGetItemText("获得一个钥匙！"));
         DestroyImmediate(gameObject);
         MainRoleManager.Instance.RoomKeys += RoomKeysNum;
     }

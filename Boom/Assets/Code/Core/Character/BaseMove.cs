@@ -27,6 +27,8 @@ public class BaseMove : MonoBehaviour
 
     internal virtual void Update()
     {
+        if (UIManager.Instance.IsLockedClick) return;
+   
         if (Input.GetKey("d"))
         {
             State = RoleState.MoveForward;

@@ -1,10 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Spine.Unity;
-using Unity.VisualScripting;
 
 public class BulletMapNode : MapNodeBase
 {
@@ -42,12 +38,14 @@ public class BulletMapNode : MapNodeBase
         MMapLogic.CurDialogue.OnDialogueEnd += OnDiaCallBack;
     }
 
-    void OnDiaCallBack()
+    public void OnDiaCallBack()
     {
+        MMapLogic.CurDialogue.OnDialogueEnd -= OnDiaCallBack;
+        
         MainRoleManager.Instance.AddSpawner(BulletID);
         BulletJson bulletDesignJson = TrunkManager.Instance.BulletDesignJsons
             .FirstOrDefault(b => b.ID == BulletID) ?? new BulletJson();
-        FloatingGetItemText(bulletDesignJson.Name);
+        FloatingGetItemText($"获得{bulletDesignJson.Name}");
         Destroy(gameObject);
     }
 
