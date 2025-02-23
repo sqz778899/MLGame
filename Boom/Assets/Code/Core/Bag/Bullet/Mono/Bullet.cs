@@ -8,6 +8,18 @@ using Spine.Unity;
 
 public class Bullet : DragBase
 {
+    [Header("核心策划设计")]
+    BulletJson bulletJson;
+    BulletJson _bulletJson
+    {
+        get
+        {
+            bulletJson ??= TrunkManager.Instance.BulletDesignJsons
+                .FirstOrDefault(each => each.ID == ID) ?? new BulletJson();
+            return bulletJson;
+        }
+    }//原初配表的数据，千万不能修改
+    
     [Header("重要属性")]
     public int _level;
     public int Level
@@ -55,7 +67,7 @@ public class Bullet : DragBase
     public SkeletonDataAsset BulletSpineAsset; // 子弹Spine资产
     public SkeletonDataAsset HitSpfxAsset; // 子弹击中效果子弹Spine资产资产
     //宝石镶嵌
-    List<Gem> InLayGems;
+    public List<Gem> InLayGems;
 
     //辅助功能
     internal Vector3 forward = new Vector3(1, 0, 0);
@@ -193,13 +205,10 @@ public class Bullet : DragBase
         SyncGemAttributes();
     }
     
-    public BulletJson ToJosn()
+    public BulletJson ToJosn()//拷贝一份新的给出去
     {
         BulletJson curBulletJson = new BulletJson();
-        BulletJson designJson = TrunkManager.Instance.BulletDesignJsons
-            .FirstOrDefault(each => each.ID == ID) ?? new BulletJson();
-        
-        curBulletJson.CopyFrom(designJson);
+        curBulletJson.CopyFrom(_bulletJson);
         //同步在游戏内的变量
         curBulletJson.InstanceID = InstanceID;
         curBulletJson.SlotID = SlotID;
@@ -211,27 +220,26 @@ public class Bullet : DragBase
     }
     #endregion
 
-    #region ToolTips
-    internal void DisplayTooltips(Vector3 pos)
+    #region ToolTips SetInfo
+    internal override void SetTooltipInfo()
     {
-        if (TooltipsGO == null)
-        {
-            TooltipsGO = ResManager.instance.CreatInstance(PathConfig.TooltipAsset);
-            CommonTooltip curTip = TooltipsGO.GetComponentInChildren<CommonTooltip>();
-            curTip.SyncInfo(ID,TipTypes.Bullet);
-            TooltipsGO.transform.SetParent(UIManager.Instance.TooltipsRoot.transform);
-            TooltipsGO.transform.localScale = Vector3.one;
-        }
-        TooltipsGO.transform.position = pos;
+        CommonTooltip curTip = TooltipsGO.GetComponentInChildren<CommonTooltip>();
+        
+        curTip.ImgThumbnail.sprite = ResManager.instance.GetAssetCache<Sprite>(
+            PathConfig.GetBulletImageOrSpinePath(ID, BulletInsMode.Thumbnail));
+        curTip.txtTitle.text = Name;
+        curTip.txtDescription.text = GetBulletAttriInfo();
     }
-
-    internal void DestroyTooltips()
+    
+    string GetBulletAttriInfo()
     {
-        for (int i = UIManager.Instance.TooltipsRoot.transform.childCount - 1; i >= 0; i--)
-        {
-            DestroyImmediate(UIManager.Instance.TooltipsRoot
-                .transform.GetChild(i).gameObject);
-        }
+        string str = "";
+        str += $"Lv: {Level}\n";
+        str += FinalDamage != 0 ? $"伤害: {FinalDamage}\n" : string.Empty;
+        str += FinalPiercing != 0 ? $"穿透: {FinalPiercing}\n" : string.Empty;
+        str += FinalResonance != 0 ? $"共振: {FinalResonance}\n" : string.Empty;
+        str += ElementalType.ToString();
+        return str;
     }
     #endregion
 }

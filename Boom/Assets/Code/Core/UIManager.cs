@@ -1,29 +1,10 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class UIManager : ScriptableObject
 {
     //Global Control
     public bool IsLockedClick = false;
-
-    /*public void SetOtherUIPause()
-    {
-        TitleRootMono curSC = TitleRoot.GetComponent<TitleRootMono>();
-        List<Image> btnImgs = curSC.NeedToControl;
-        foreach (var each in btnImgs)
-            each.raycastTarget = false;
-
-        IsLockedClick = true;
-    }
-
-    public void ResetOtherUIPause()
-    {
-        TitleRootMono curSC = TitleRoot.GetComponent<TitleRootMono>();
-        List<Image> btnImgs = curSC.NeedToControl;
-        foreach (var each in btnImgs)
-            each.raycastTarget = true;
-
-        IsLockedClick = false;
-    }*/
 
     //0.StartGame
     //1.CharacterScene
@@ -37,13 +18,12 @@ public class UIManager : ScriptableObject
     public GameObject G_StandbyMat;
     
     public GameObject EffectRoot; //特效根节点
-    public GameObject LevelRoot;//关卡根节点
+    [FormerlySerializedAs("LevelRoot")] public GameObject MapFightRoot;//关卡根节点
     public GameObject Level; //放置关卡的节点
     
     //............GroupTitle.........
     public GameObject TitleRoot;
     public GameObject G_Setting;
-    public GameObject G_Help;
     public GameObject TitleGold;
     public GameObject G_CurBulletIcon; //侧边栏当前子弹图标
     public GameObject G_StandbyIcon; //侧边栏待机图标
@@ -72,15 +52,13 @@ public class UIManager : ScriptableObject
     
     [Header("MiniMap")]
     public GameObject MapLogicGO;
-    public GameObject MapRoot;
     public GameObject ShopRoot;
-    public GameObject REventRoot;
     public GameObject RewardRoot;
+    public GameObject DialogueRoot;
     
     [Header("FightScene")]
     public GameObject FightLogicGO;
     public GameObject G_BulletInScene; //场景内的子弹的父节点
-    public GameObject G_Buff;
     public GameObject RoleIns;
 
     public void InitMainScene()
@@ -90,18 +68,16 @@ public class UIManager : ScriptableObject
             MainSceneGO = GameObject.Find("MainScene");
         MainSceneMono curMainSC = MainSceneGO.GetComponent<MainSceneMono>();
         
-        MapScene CurMapSC = curMainSC.GUIMap.GetComponent<MapScene>();
-        MapLogicGO = CurMapSC.MapLogicGO;
-        MapRoot = CurMapSC.MapNode;
-        ShopRoot = CurMapSC.ShopRoot;
-        REventRoot = CurMapSC.REventRoot;
-        RewardRoot = CurMapSC.RewardRoot;
+        GUIMap curGUIMapSc = curMainSC.GUIMap.GetComponent<GUIMap>();
+        MapLogicGO = curGUIMapSc.MapLogicGO;
+        ShopRoot = curGUIMapSc.ShopRoot;
+        RewardRoot = curGUIMapSc.RewardRoot;
+        DialogueRoot = curGUIMapSc.DialogueRoot;
         
-        FightScene CurFighSceneSC = curMainSC.GUIFightScene.GetComponent<FightScene>();
-        FightLogicGO = CurFighSceneSC.FightLogicGO;
-        G_BulletInScene = CurFighSceneSC.G_BulletInScene;
-        G_Buff = CurFighSceneSC.G_Buff;
-        RoleIns = CurFighSceneSC.CharILIns;
+        GUIFightRoot curFighRootSc = curMainSC.GUIFightScene.GetComponent<GUIFightRoot>();
+        FightLogicGO = curFighRootSc.FightLogicGO;
+        G_BulletInScene = curFighRootSc.G_BulletInScene;
+        RoleIns = curFighRootSc.CharILIns;
     }
     #endregion
 
@@ -130,7 +106,6 @@ public class UIManager : ScriptableObject
         TitleGold = titleRootMono.TitleGold;
         G_CurBulletIcon = titleRootMono.G_CurBulletIcon;
         G_StandbyIcon = titleRootMono.G_StandbyIcon;
-        G_Help = titleRootMono.G_Help;
         G_Setting = titleRootMono.G_Setting;
         if (G_Setting == null)
             G_Setting = GameObject.Find("GroupSetting");
@@ -153,10 +128,10 @@ public class UIManager : ScriptableObject
         if(EffectRoot == null)
             EffectRoot = GameObject.Find("EffectRoot");
 
-        if (LevelRoot == null)
+        if (MapFightRoot == null)
         {
-            LevelRoot = GameObject.Find("LevelRoot");
-            Level = LevelRoot.transform.GetChild(0).gameObject;
+            MapFightRoot = GameObject.Find("MapFightRoot");
+            Level = MapFightRoot.transform.GetChild(0).gameObject;
         }
     }
 
@@ -192,10 +167,18 @@ public class UIManager : ScriptableObject
     {
         get
         {
-            if (s_instance == null)
-                s_instance = ResManager.instance.GetAssetCache<UIManager>(PathConfig.UIManagerOBJ);
-            
+            s_instance??= ResManager.instance.GetAssetCache<UIManager>(PathConfig.UIManagerOBJ);
+            if (s_instance != null) { DontDestroyOnLoad(s_instance); }
             return s_instance;
+        }
+    }
+    
+    void OnEnable()
+    {
+        if (s_instance == null)
+        {
+            s_instance = this;
+            DontDestroyOnLoad(this);
         }
     }
     #endregion

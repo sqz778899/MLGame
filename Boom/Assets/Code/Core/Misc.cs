@@ -2,12 +2,6 @@
 using System.Collections.Generic;
 using TMPro;
 
-public enum TipTypes
-{
-    Bullet = 1,
-    Item = 2,
-}
-
 #region 多语言相关
 public enum MultiLaEN
 {

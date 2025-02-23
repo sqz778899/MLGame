@@ -27,9 +27,9 @@ public class ArrowNode : MapNodeBase
     {
         spriteRenderer.color = HeighLightColor;// 将精灵高亮显示
         if (Input.GetMouseButtonDown(0))
-            transform.localScale = defaultScale * 0.8f;
+            spriteRenderer.transform.localScale = defaultScale * 0.8f;
         if (Input.GetMouseButtonUp(0))
-            transform.localScale = defaultScale;
+            spriteRenderer.transform.localScale = defaultScale;
     }
 
     internal override void OnMouseExit() => spriteRenderer.color = defaultColor;
@@ -44,10 +44,9 @@ public class ArrowNode : MapNodeBase
         }
         if (IsLocked) return;
         MainRoleManager.Instance.CurMapSate.TargetRoomID = TargetRoom.RoomID;
-        
-        GameObject dialogueIns = DialogueManager.CreatDialogueFight();
-        DialogueFight dialogueSC = dialogueIns.GetComponent<DialogueFight>();
-        dialogueSC.InitData(this);
+        GameObject dialogueFightIns = ResManager.instance.CreatInstance(PathConfig.DialogueFightPB);
+        dialogueFightIns.transform.SetParent(UIManager.Instance.DialogueRoot.transform,false);
+        dialogueFightIns.GetComponent<DialogueFight>().InitData(this);;
         IsLocked = true;
         UIManager.Instance.IsLockedClick = true;
     }

@@ -20,7 +20,6 @@ public class SaveFileJson
     public int RoomKeys;
     public List<BulletJson> UserBulletSpawner;
     public List<BulletJson> UserCurBullets;
-    public List<BulletEntry> UserBulletEntries;
     public List<StandbyData> UserStandbyBullet;
     public List<int> UserCurBuff;
     

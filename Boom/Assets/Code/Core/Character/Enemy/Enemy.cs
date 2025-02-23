@@ -67,6 +67,9 @@ public class Enemy : EnemyBase
     //设置盾牌数量和每个盾牌的血量
     public void SetShields()
     {
+        for (int i = ShieldsNode.transform.childCount-1; i >=0; i--)
+            DestroyImmediate(ShieldsNode.transform.GetChild(i).gameObject);
+        
         for (int i = 0; i < ShieldsHPs.Count; i++)
         {
             GameObject ShieldIns = ResManager.instance.CreatInstance(PathConfig.ShieldPB);
@@ -116,8 +119,7 @@ public class Enemy : EnemyBase
         ID = _enemyMidData.ID;
         MaxHP = _enemyMidData.HP;
         ShieldsHPs.Clear();
-        ShieldsHPs.AddRange(_enemyMidData.ShieldsHPs); 
-        InitData();
+        ShieldsHPs.AddRange(_enemyMidData.ShieldsHPs);
     }
     #endregion
     

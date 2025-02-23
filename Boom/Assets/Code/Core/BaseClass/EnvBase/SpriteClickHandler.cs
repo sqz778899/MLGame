@@ -3,10 +3,10 @@ using UnityEngine.Events;
 
 public class SpriteClickHandler : MonoBehaviour
 {
-    internal SpriteRenderer spriteRenderer;
     public UnityEvent onClick = new UnityEvent();
-    
+
     [Header("显示相关")]
+    public SpriteRenderer spriteRenderer;
     [ColorUsage(true, true)] 
     public Color OutlineColor;
     public Color HeighLightColor = Color.white;
@@ -30,10 +30,9 @@ public class SpriteClickHandler : MonoBehaviour
     
     internal virtual void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
         defaultColor = spriteRenderer.color;
         defaultMat = spriteRenderer.material;
-        defaultScale = transform.localScale;
+        defaultScale = spriteRenderer.transform.localScale;
     }
     void Update()
     {

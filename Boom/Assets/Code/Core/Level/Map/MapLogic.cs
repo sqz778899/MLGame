@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class MapLogic : MonoBehaviour
 {
@@ -13,24 +10,28 @@ public class MapLogic : MonoBehaviour
     [Header("对话系统脚本")]
     public Dialogue CurDialogue;
     [Header("地图节点")]
-    public List<GameObject> MapRooms;
     MapRoomNode[] _allMapRooms;
     
-    void Start()
+    void Awake()
     {
         MainRoleManager.Instance.MainRoleIns = Role;
         MainRoleManager.Instance.CurMapLogic = this;
         InitMapData();
     }
+    
+    void Update()
+    {
+        
+        if (MainRoleManager.Instance.CurMapLogic == null)
+        {
+            Debug.LogError($"MainRoleManager.Instance.CurMapLogic 是 null");
+        }
+    }
 
     public void InitMapData()
     {
         //获取地图房间节点
-        MapRooms = new List<GameObject>();
         _allMapRooms = MapNodeRoot.GetComponentsInChildren<MapRoomNode>();
-        foreach (var each in _allMapRooms)
-            MapRooms.Add(each.gameObject);
-        
         //设置角色位置
         SetRolePos();
     }

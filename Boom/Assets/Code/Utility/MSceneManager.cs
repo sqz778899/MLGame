@@ -6,22 +6,9 @@ using UnityEngine.Rendering;
 
 public class MSceneManager: ScriptableObject
 {
-    #region 单例
-    static MSceneManager s_instance;
-    
-    public static MSceneManager Instance
-    {
-        get
-        {
-            if (s_instance == null)
-                s_instance = ResManager.instance.GetAssetCache<MSceneManager>(PathConfig.MSceneManagerOBJ);
-            return s_instance;
-        }
-    }
-    #endregion
-    
+    [SerializeField]
     public int CurrentSceneIndex;
-    const int LoadingScene = 5;
+    const int LoadingScene = 3;
 
     public void LoadScene(int SceneID)
     {
@@ -32,22 +19,15 @@ public class MSceneManager: ScriptableObject
     public void NewGame()
     {
         TrunkManager.Instance.SetSaveFileTemplate();
-        CurrentSceneIndex = 1;
+        CurrentSceneIndex = 2;
         SceneManager.LoadScene(LoadingScene);
     }
-
+    
     public void ContinueGame()
     {
         CurrentSceneIndex = 1;
         SceneManager.LoadScene(LoadingScene);
     }
-
-    #region Help
-    public void Help()
-    {
-        UIManager.Instance.G_Help.GetComponent<HelpMono>().OnOffWindow();
-    }
-    #endregion
 
     #region PlayerSetting
     public void Setting()
@@ -101,4 +81,25 @@ public class MSceneManager: ScriptableObject
             Application.Quit();
 #endif
     }
+    
+    #region 单例
+    static MSceneManager s_instance;
+    public static MSceneManager Instance
+    {
+        get
+        {
+            s_instance ??= ResManager.instance.GetAssetCache<MSceneManager>(PathConfig.MSceneManagerOBJ);
+            if (s_instance != null) { DontDestroyOnLoad(s_instance); }
+            return s_instance;
+        }
+    }
+    void OnEnable()
+    {
+        if (s_instance == null)
+        {
+            s_instance = this;
+            DontDestroyOnLoad(this);
+        }
+    }
+    #endregion
 }

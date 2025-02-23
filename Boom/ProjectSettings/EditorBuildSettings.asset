@@ -9,17 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/0.StartGame.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/1.CharacterScene.unity
-    guid: c47bfe05edf02884ea4a699a21af6545
-  - enabled: 1
-    path: Assets/Scenes/2.Level.unity
-    guid: 0cf7b2a2112b3dd459e3b12aa89a0991
-  - enabled: 1
-    path: Assets/Scenes/3.SelectLevel.unity
-    guid: 70a3012f4e9ae2646ba9feabdd6f7d10
-  - enabled: 1
-    path: Assets/Scenes/4.SelectChar.unity
+    path: Assets/Scenes/1.SelectChar.unity
     guid: a7172708a1dd49f40a9aa5f9ad6f0c53
+  - enabled: 1
+    path: Assets/Scenes/2.CharacterScene.unity
+    guid: c47bfe05edf02884ea4a699a21af6545
   - enabled: 1
     path: Assets/Scenes/9.LoadingScene.unity
     guid: 86095d6e06bdbe243814efa0a3230790

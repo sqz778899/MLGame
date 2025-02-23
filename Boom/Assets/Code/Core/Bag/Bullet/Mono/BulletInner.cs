@@ -3,7 +3,6 @@ using System.Collections;
 using Spine.Unity;
 using System.Collections.Generic;
 using DG.Tweening;
-using Spine.Unity.Editor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -26,6 +25,8 @@ public class BulletInner : Bullet
     internal override void Start()
     {
         base.Start();
+        _piercingCount = 0;
+        _resonance = 0;
         _state = BulletInnerState.Common;
         _ain = transform.GetChild(0).GetComponent<SkeletonAnimation>();
         _materials = new List<Material>(_ain.skeletonDataAsset.atlasAssets[0].Materials);
@@ -68,7 +69,6 @@ public class BulletInner : Bullet
             if (_piercingCount >= FinalPiercing)
                 _state = BulletInnerState.AttackingStop;
 
-            // 如果有敌人，将其血量减少
             HandleEnemyHit(other.GetComponent<EnemyBase>());
             HandleHitEffect();
             HandleBulletDisappear();
@@ -154,7 +154,7 @@ public class BulletInner : Bullet
         GameObject curFX = Instantiate(HitEffect, transform.position, transform.rotation);
         SkeletonAnimation curSpfxSC = curFX.GetComponentInChildren<SkeletonAnimation>();
         curSpfxSC.skeletonDataAsset = HitSpfxAsset;
-        SpineEditorUtilities.ReloadSkeletonDataAssetAndComponent(curSpfxSC);
+        curSpfxSC.Initialize(true);
         float aniTime = 0f;
         AniUtility.PlayAttack(curSpfxSC,ref aniTime,AniScale);
         FXs.Add(curFX);

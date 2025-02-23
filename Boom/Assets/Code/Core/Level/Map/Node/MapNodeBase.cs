@@ -67,9 +67,9 @@ public class MapNodeBase : SpriteClickHandler
         outLineMat.SetColor("_Color",OutlineColor);
         spriteRenderer.material = outLineMat;// 高亮勾边
         if (Input.GetMouseButtonDown(0))
-            transform.localScale = defaultScale * 0.8f;
+            spriteRenderer.transform.localScale = defaultScale * 0.8f;
         if (Input.GetMouseButtonUp(0))
-            transform.localScale = defaultScale;
+            spriteRenderer.transform.localScale = defaultScale;
     }
 
     internal override void OnMouseExit()

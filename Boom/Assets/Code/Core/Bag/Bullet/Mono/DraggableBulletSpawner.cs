@@ -63,11 +63,10 @@ public class DraggableBulletSpawner :Bullet
     public override void OnPointerMove(PointerEventData eventData)
     {
         RectTransform rectTransform = transform.GetComponent<RectTransform>();
-        Vector3 worldPoint;
         if (RectTransformUtility.ScreenPointToWorldPointInRectangle(rectTransform, 
-                eventData.position, eventData.pressEventCamera, out worldPoint))
+                eventData.position, eventData.pressEventCamera, out Vector3 worldPoint))
         {
-            DisplayTooltips(worldPoint);
+            DisplayTooltips(eventData);
         }
     }
 }

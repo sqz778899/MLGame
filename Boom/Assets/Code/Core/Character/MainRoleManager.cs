@@ -6,10 +6,6 @@ using UnityEngine.UI;
 
 public class MainRoleManager :ScriptableObject
 {
-    //...............子弹上膛temp................
-    public List<BulletBuff> CurBulletBuffs;
-    public List<BulletEntry> CurBulletEntries;
-
     [Header("游戏进程相关")] 
     public GameObject MainRoleIns;
     public MapLogic CurMapLogic;
@@ -81,39 +77,6 @@ public class MainRoleManager :ScriptableObject
                 return;
             }
         }
-    }
-    #endregion
-    
-    #region 词条相关
-    public void AddEntry(int EntryID)
-    {
-        List<BulletEntry> DesignEntries = TrunkManager.Instance.BulletEntryDesignJsons;
-        foreach (var each in DesignEntries)
-        {
-            if (each.ID == EntryID && !CurBulletEntries.Contains(each))
-                CurBulletEntries.Add(each);
-        }
-
-        InitBulletEntries();
-    }
-    public void RemoveBulletBuff(int ID)
-    {
-        List<int> NeedDelete = new List<int>();
-        //注意从大到小正确排序
-        for (int i = CurBulletBuffs.Count - 1; i >= 0; i--)
-        {
-            if (CurBulletBuffs[i].ID == ID)
-                NeedDelete.Add(i);
-        }
-
-        foreach (int each in NeedDelete)
-            CurBulletBuffs.RemoveAt(each);
-    }
-    void InitBulletEntries()
-    {
-        foreach (var each in CurBulletEntries)
-            EntryFunc.InvokeEntry(each.ID);
-        UIManager.Instance.G_Help.GetComponent<HelpMono>().InitBulletEntryDes();
     }
     #endregion
     
@@ -281,12 +244,8 @@ public class MainRoleManager :ScriptableObject
     {
         if (CurRollPREveIDs == null)
             CurRollPREveIDs = new List<int>();
-        if (CurBulletEntries == null)
-            CurBulletEntries = new List<BulletEntry>();
         if (CurRollPR == null)
             CurRollPR = new List<RollPR>(OrginalRollPR);
-        if (CurBulletBuffs == null)
-            CurBulletBuffs = new List<BulletBuff>();
         if (CurBulletsPair == null)
             CurBulletsPair = new Dictionary<BulletJson, Bullet>();
         //"游戏进程相关"
@@ -301,7 +260,6 @@ public class MainRoleManager :ScriptableObject
         InstanceCurBullets();
         InitStandbyBulletMats();
         InitCurRollPR();
-        InitBulletEntries();
         RefreshAllItems();
         
         WinOrFailState = WinOrFail.InLevel;
@@ -793,10 +751,17 @@ public class MainRoleManager :ScriptableObject
     {
         get
         {
-            if (s_instance == null)
-                s_instance = ResManager.instance.GetAssetCache<MainRoleManager>(PathConfig.MainRoleManagerOBJ);
-            
+            s_instance??= ResManager.instance.GetAssetCache<MainRoleManager>(PathConfig.MainRoleManagerOBJ);
+            if (s_instance != null) { DontDestroyOnLoad(s_instance); }
             return s_instance;
+        }
+    }
+    void OnEnable()
+    {
+        if (s_instance == null)
+        {
+            s_instance = this;
+            DontDestroyOnLoad(this);
         }
     }
     #endregion

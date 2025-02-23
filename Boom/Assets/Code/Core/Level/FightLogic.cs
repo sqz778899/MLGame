@@ -130,7 +130,7 @@ public class FightLogic : MonoBehaviour
             MainRoleManager.Instance.WinOrFailState = WinOrFail.Fail;
         
         stateActions[MainRoleManager.Instance.WinOrFailState]?.Invoke();
-    }
+    }   
     
     //胜利
     void WinTheLevel()

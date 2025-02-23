@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class TutorialManager : MonoBehaviour
 {
-    [Header("基础资产")]
+    [Header("基础资产")] 
+    public bool IsJampTutorial = false;
     public Image bgImage;
     [Header("资源类资产")]
     public GameObject BulletFloor1;
@@ -63,6 +64,11 @@ public class TutorialManager : MonoBehaviour
     
     void Start()
     {
+        if (IsJampTutorial)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
         Step1();
         LockedNeedNodes();
     }

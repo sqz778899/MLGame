@@ -17,57 +17,6 @@ public class RollManager: ScriptableObject
     }
     #endregion
 
-    #region RollBuff
-    public void OnceRollBuff()
-    {
-        GameObject curRoot = UIManager.Instance.G_Buff;
-        int curLevelID = MainRoleManager.Instance.CurMapSate.CurLevelID;
-        List<LevelBuff> curDesign = TrunkManager.Instance.LevelBuffDesignJsons;
-        LevelBuff curLB = null;
-        foreach (var each in curDesign)
-        {
-            if (each.LevelID == curLevelID)
-            {
-                curLB = each;
-                break;
-            }
-        }
-
-        if (curLB == null) return;
-
-        List<RollPR> curBuffPool = curLB.CurBuffProb;
-        int xOffset = 1167;
-        int start = -1167;
-        for (int i = 0; i < 3; i++)
-        {
-            RollPR curRoll = SingleRoll(curBuffPool);
-            curBuffPool.Remove(curRoll);
-            //DealProb(ref curBuffPool);
-            
-            GameObject curBuffPBIns = Instantiate(ResManager.
-                instance.GetAssetCache<GameObject>(PathConfig.TalentPB));
-            TalentMono curSC = curBuffPBIns.GetComponentInChildren<TalentMono>();
-            curSC.ID = curRoll.ID;
-            curSC.InitBuffData();
-            curBuffPBIns.transform.SetParent(curRoot.transform);
-            curBuffPBIns.transform.localScale = Vector3.one;
-            curBuffPBIns.GetComponent<RectTransform>().anchoredPosition3D =
-                new Vector3(start + xOffset * i, 0, 0);
-        }
-    }
-
-    public void SelOneBuff(GameObject curBuffIns)
-    {
-        //Clean Buff
-        GameObject curRoot = UIManager.Instance.G_Buff;
-        for (int i = curRoot.transform.childCount - 1; i >= 0; i--)
-        {
-            DestroyImmediate(curRoot.transform.GetChild(i).gameObject);
-        }
-        Debug.Log("hhhh: ");
-    }
-    #endregion
-
     #region SomeFunc
     public List<float> NormalizeProb(List<float> Probs)
     {

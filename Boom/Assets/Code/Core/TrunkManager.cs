@@ -10,11 +10,9 @@ public class TrunkManager: ScriptableObject
     #region 策划数据
     List<BulletJson> _bulletDesignJsons;
     List<ItemJson> _itemDesignJsons;
-    List<TalentDataJson> _buffDesignJsons;
     List<LevelBuff> _levelBuffDesignJsons;
     List<RoleBase> _roleDesignJsons;
     List<RollPREvent> _prDesignJsons;
-    List<BulletEntry> _bulletEntryDesignJsons;
     List<GemJson> _gemDesignJsons;
     
     Dictionary<string,List<DiaSingle>> _dialogueDesignJsons;//对话相关
@@ -36,16 +34,6 @@ public class TrunkManager: ScriptableObject
             /*if (_itemDesignJsons == null||_itemDesignJsons.Count ==0)
                 _itemDesignJsons = LoadItemData();*/
             return _itemDesignJsons;
-        }
-    }
-    
-    public List<TalentDataJson> BuffDesignJsons
-    {
-        get
-        {
-            if (_buffDesignJsons == null||_bulletDesignJsons.Count == 0)
-                _buffDesignJsons = LoadBuffData();
-            return _buffDesignJsons;
         }
     }
 
@@ -78,17 +66,6 @@ public class TrunkManager: ScriptableObject
             return _prDesignJsons;
         }
     }
-
-    public List<BulletEntry> BulletEntryDesignJsons
-    {
-        get
-        {
-            if (_bulletEntryDesignJsons == null || _bulletEntryDesignJsons.Count == 0)
-                _bulletEntryDesignJsons = LoadBulletEntryDesignData();
-            return _bulletEntryDesignJsons;
-        }
-    }
-    
     public List<GemJson> GemDesignJsons
     {
         get
@@ -130,14 +107,6 @@ public class TrunkManager: ScriptableObject
         List<ItemJson> ItemDataJsons = JsonConvert.DeserializeObject<List<ItemJson>>(ItemDesignString);
         return ItemDataJsons;
     }
-    
-    public List<TalentDataJson> LoadBuffData()
-    {
-        string BuffDesignString = File.ReadAllText(PathConfig.BuffDesignJson);
-        List<TalentDataJson> BuffDataJsons = JsonConvert.DeserializeObject<List<TalentDataJson>>(BuffDesignString);
-        return BuffDataJsons;
-    }
-
     public List<LevelBuff> LoadLevelBuffData()
     {
         string LBDesignStr = File.ReadAllText(PathConfig.LevelBuffDesignJson);
@@ -157,13 +126,6 @@ public class TrunkManager: ScriptableObject
         string PRDesignStr = File.ReadAllText(PathConfig.PREventDesignJson);
         List<RollPREvent> PRDesignJsons = JsonConvert.DeserializeObject<List<RollPREvent>>(PRDesignStr);
         return PRDesignJsons;
-    }
-    
-    public List<BulletEntry> LoadBulletEntryDesignData()
-    {
-        string BulletEntryDesignStr = File.ReadAllText(PathConfig.BulletEntryDesignJson);
-        List<BulletEntry> BulletEntryJsons = JsonConvert.DeserializeObject<List<BulletEntry>>(BulletEntryDesignStr);
-        return BulletEntryJsons;
     }
     
     public List<GemJson> LoadGemData()
@@ -215,7 +177,6 @@ public class TrunkManager: ScriptableObject
         
         MainRoleManager.Instance.CurBulletSpawners = _saveFile.UserBulletSpawner;
         MainRoleManager.Instance.CurBullets = _saveFile.UserCurBullets;
-        MainRoleManager.Instance.CurBulletEntries = _saveFile.UserBulletEntries;
         MainRoleManager.Instance.CurStandbyBulletMats = _saveFile.UserStandbyBullet;
         MainRoleManager.Instance.CurRollPREveIDs = _saveFile.CurRollPREveIDs;
         #endregion
@@ -245,7 +206,6 @@ public class TrunkManager: ScriptableObject
         _saveFile.RoomKeys = MainRoleManager.Instance.RoomKeys;
         _saveFile.UserBulletSpawner = MainRoleManager.Instance.CurBulletSpawners;
         _saveFile.UserCurBullets = MainRoleManager.Instance.CurBullets;
-        _saveFile.UserBulletEntries = MainRoleManager.Instance.CurBulletEntries;
         List<int> SupremeCharms = new List<int>();
         foreach (var each in MainRoleManager.Instance.SupremeCharms)
             SupremeCharms.Add(each.ID);
@@ -378,7 +338,6 @@ public class TrunkManager: ScriptableObject
         _saveFile.UserGems = new List<GemJson>();
 
         _saveFile.UserCurBullets = new List<BulletJson>();
-        _saveFile.UserBulletEntries = new List<BulletEntry>();
         _saveFile.UserBulletSpawner = UserBulletSpawner;
         _saveFile.Score = 0;
         _saveFile.Coins = 1000;

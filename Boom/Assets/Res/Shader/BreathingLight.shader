@@ -101,13 +101,6 @@ Shader "Boom/BreathingLight"
                 // sample the texture
                 half4 color = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex,i.texcoord + _TextureSampleAdd) * i.color;
                 color.rgb *= (1 + 0.5 * sin(_Time.y * 3));
-                #ifdef UNITY_UI_CLIP_RECT
-                color.a *= UnityGet2DClipping(IN.worldPosition.xy, _ClipRect);
-                #endif
-
-                #ifdef UNITY_UI_ALPHACLIP
-                clip (color.a - 0.001);
-                #endif
                 return color;
             }
             ENDHLSL

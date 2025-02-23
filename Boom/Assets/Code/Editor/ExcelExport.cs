@@ -18,12 +18,10 @@ namespace Code.Editor
         {
             ExportBullet();
             ExportItem();
-            ExportBuffDesign();
             ExportLevelBuffDesign();
             ExportMuliLa();
             ExportRoleDesign();
             ExportPREventDesign();
-            ExportBulletEntry();
             ExportGemDesign();
             ExportDialogue(); //对话相关
             AssetDatabase.Refresh();
@@ -105,37 +103,7 @@ namespace Code.Editor
             else
                 return int.Parse(curStr);
         }
-
-        public void ExportBuffDesign()
-        {
-            DataSet curTables = GetDataSet();
-            List<TalentDataJson> curBuffData = new List<TalentDataJson>();
-
-            DataTable curTable = curTables.Tables[1];
-            for (int i = 1; i < curTable.Rows.Count; i++)
-            {
-                TalentDataJson curData = new TalentDataJson();
-                CommonAttribute comAttri = new CommonAttribute();
-                SpeAttribute speAttri = new SpeAttribute();
-                if (curTable.Rows[i][1].ToString() == "") continue;
-                curData.ID = int.Parse(curTable.Rows[i][0].ToString());
-                curData.name = curTable.Rows[i][1].ToString();
-                curData.rare = int.Parse(curTable.Rows[i][2].ToString());
-                comAttri.damage = int.Parse(curTable.Rows[i][3].ToString());
-                comAttri.elementalType = int.Parse(curTable.Rows[i][4].ToString());
-                comAttri.elementalValue = int.Parse(curTable.Rows[i][5].ToString());
-                comAttri.Penetration = int.Parse(curTable.Rows[i][6].ToString());
-                speAttri.interest = int.Parse(curTable.Rows[i][7].ToString());
-                speAttri.standbyAdd = int.Parse(curTable.Rows[i][8].ToString());
-                curData.comAttributes = comAttri;
-                curData.speAttributes = speAttri;
-                curBuffData.Add(curData);
-            }
-
-            string content01 = JsonConvert.SerializeObject(curBuffData, (Formatting)Formatting.Indented);
-            File.WriteAllText(PathConfig.BuffDesignJson, content01);
-        }
-
+        
         public void ExportLevelBuffDesign()
         {
             DataSet curTables = GetDataSet();
@@ -242,28 +210,6 @@ namespace Code.Editor
 
             string content = JsonConvert.SerializeObject(curPREvents, (Formatting)Formatting.Indented);
             File.WriteAllText(PathConfig.PREventDesignJson, content);
-        }
-
-
-        void ExportBulletEntry()
-        {
-            DataSet curTables = GetDataSet();
-            List<BulletEntry> curBulletEntries = new List<BulletEntry>();
-
-            DataTable curTable = curTables.Tables[5];
-            for (int i = 1; i < curTable.Rows.Count; i++)
-            {
-                BulletEntry curBulletEntry = new BulletEntry();
-                if (curTable.Rows[i][0].ToString() == "") continue;
-
-                curBulletEntry.ID = int.Parse(curTable.Rows[i][0].ToString());
-                curBulletEntry.Name = curTable.Rows[i][1].ToString();
-                curBulletEntry.Description = curTable.Rows[i][3].ToString();
-                curBulletEntries.Add(curBulletEntry);
-            }
-
-            string content = JsonConvert.SerializeObject(curBulletEntries, (Formatting)Formatting.Indented);
-            File.WriteAllText(PathConfig.BulletEntryDesignJson, content);
         }
 
         public void ExportGemDesign()

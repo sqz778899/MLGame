@@ -84,7 +84,8 @@ public class MapRoomNode : MonoBehaviour
     private IEnumerator UnlockRoomAnimation()
     {
         // 设置溶解方向
-        _instanceFogMat.SetInt("_Flip", (DissolveDir.x < 0 || DissolveDir.y < 0) ? 1 : 0);
+        int flip = (DissolveDir.x < 0 || DissolveDir.y < 0) ? 1 : 0;
+        _instanceFogMat.SetInt("_Flip", flip);
         DissolveDir = (DissolveDir.x < 0 || DissolveDir.y < 0) ? -DissolveDir : DissolveDir;
         _instanceFogMat.SetVector("_DissolveDirection", new Vector4(DissolveDir.x, DissolveDir.y, 0,0));
 

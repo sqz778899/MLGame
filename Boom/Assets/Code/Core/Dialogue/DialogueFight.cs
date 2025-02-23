@@ -21,11 +21,11 @@ public class DialogueFight : MonoBehaviour
     public void InitData(ArrowNode _arraow)
     {
         CurArrow = _arraow;
-        GameObject observeHPPrefab = ResManager.instance.CreatInstance(PathConfig.ObserveHPPB);
+        GameObject observeHPAsset = ResManager.instance.GetAssetCache<GameObject>(PathConfig.ObserveHPPB);
         int HPCounts = _arraow.CurEnemy.ShieldsHPs.Count + 1;
         for (int i = 0; i < HPCounts; i++)
         {
-            GameObject observeHPIns = Instantiate(observeHPPrefab, ObserveHPRoot.transform);
+            GameObject observeHPIns = Instantiate(observeHPAsset, ObserveHPRoot.transform);
             HPGOList.Add(observeHPIns);
             RectTransform observeHPRectTrans = observeHPIns.GetComponent<RectTransform>();
             // 设置位置

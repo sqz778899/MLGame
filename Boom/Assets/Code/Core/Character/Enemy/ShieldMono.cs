@@ -19,8 +19,6 @@ public class ShieldMono : EnemyBase
     {
         base.TakeDamage(damage);
         if (CurHP <= 0)
-        {
             Destroy(gameObject);
-        }
     }
 }

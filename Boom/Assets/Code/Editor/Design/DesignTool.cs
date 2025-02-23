@@ -28,45 +28,6 @@ public class DesignTool
         TrunkManager.Instance.LoadSaveFile();
     }
     #endregion
-    
-    #region 词条测试
-    [Title("词条测试")]
-    [PropertyOrder(1)]
-    public int EntryID;
-    [Button(ButtonSizes.Large),PropertyOrder(1)]
-    [ButtonGroup("Entry")]
-    void AddEntry()
-    {
-        List<BulletEntry> DesignEntries = TrunkManager.Instance.BulletEntryDesignJsons;
-        foreach (var each in DesignEntries)
-        {
-            if (each.ID == EntryID && !MainRoleManager.Instance.CurBulletEntries.Contains(each))
-                MainRoleManager.Instance.CurBulletEntries.Add(each);
-        } 
-        
-        UIManager.Instance.G_Help.GetComponent<HelpMono>().InitBulletEntryDes();
-    }
-    
-    [Button(ButtonSizes.Large),PropertyOrder(1)]
-    [ButtonGroup("Entry")]
-    void ClearEntry()
-    {
-        MainRoleManager.Instance.CurBulletEntries.Clear();
-    }
-    
-    [Button(ButtonSizes.Large),PropertyOrder(1)]
-    //[ButtonGroup("Entry")]
-    void ClearStandby()
-    {
-        foreach (var each in MainRoleManager.Instance.CurStandbyBulletMats)
-        {
-            each.ID = 0;
-            each.InstanceID = 0;
-        }
-
-        MainRoleManager.Instance.InitStandbyBulletMats();
-    }
-    #endregion
 
     #region 切换场景
     [Title("切换场景")] [PropertyOrder(2)]  public int swith;

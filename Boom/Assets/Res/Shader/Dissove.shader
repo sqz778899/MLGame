@@ -85,7 +85,7 @@ Shader "Custom/2D_Dissolve"
                 }
                 else
                 {
-                    dissolveWithDirection = _Flip - lerp(1,1,dot(i.uv, _DissolveDirection.xy));
+                    dissolveWithDirection = _Flip - lerp(1,0,dot(i.uv, _DissolveDirection.xy));
                 }
                 dissolve -= dissolveWithDirection;
                 //dissolve = saturate(dissolve);

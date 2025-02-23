@@ -67,6 +67,7 @@ Shader "Custom/CircularHoleShader"
             half4 frag(Varyings i) : SV_Target
             {
                 float2 holeScreen = float2(_HoleScreenPos.x/_ScreenParams.x,_HoleScreenPos.y/_ScreenParams.y);
+                //float2 holeScreen = float2(2876/_ScreenParams.x,695/_ScreenParams.y);
                 // 计算当前像素到洞位置的世界空间距离
                 float distanceFromCenter = distance(i.uv, holeScreen);
 

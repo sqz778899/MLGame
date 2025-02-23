@@ -60,10 +60,3 @@ public enum BulletInnerState
     AttackingStop,
     Dead
 }
-
-public class BulletTooltipInfo
-{
-    public Sprite bulletImage;
-    public string name;
-    public string description;
-}

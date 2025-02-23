@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Spine.Unity;
-using Spine.Unity.Editor;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -58,7 +57,8 @@ public class BulletManager :ScriptableObject
         bulletbase.BulletInsMode = bulletInsMode;
         SkeletonAnimation curAniSC = Bullet.GetComponentInChildren<SkeletonAnimation>();
         if (curAniSC != null)
-            SpineEditorUtilities.ReloadSkeletonDataAssetAndComponent(curAniSC);
+            curAniSC.Initialize(true);
+            //SpineEditorUtilities.ReloadSkeletonDataAssetAndComponent(curAniSC);
         return Bullet;
     }
     
@@ -89,7 +89,8 @@ public class BulletManager :ScriptableObject
         bulletbase.FinalResonance = _finalResonance;
         
         if (curAniSC != null)
-            SpineEditorUtilities.ReloadSkeletonDataAssetAndComponent(curAniSC);
+            curAniSC.Initialize(true);
+            //SpineEditorUtilities.ReloadSkeletonDataAssetAndComponent(curAniSC);
         return Bullet;
     }
     
@@ -102,24 +103,5 @@ public class BulletManager :ScriptableObject
             UIManager.Instance.G_StandbyMat.transform,false);
         return StandbyMatIns;
     }
-    #endregion
-
-    #region 给Tooltip用
-    public BulletTooltipInfo GetBulletInfo(int bulletID)
-    {
-        BulletJson curDsData = TrunkManager.Instance.GetBulletDesignData(bulletID);
-        if (curDsData == null) return null;
-      
-        BulletTooltipInfo tInfo = new BulletTooltipInfo();
-        tInfo.bulletImage = ResManager.instance.GetAssetCache<Sprite>(
-            PathConfig.GetBulletImageOrSpinePath(bulletID, BulletInsMode.Thumbnail));
-        tInfo.name = curDsData.Name;    
-        //tInfo.name = curDsData.Name;
-        string ElementalType = ((ElementalTypes)curDsData.ElementalType).ToString();
-        tInfo.description = string.Format("Lv: {0}\nDamage: {1}\nElement: {2}",
-            curDsData.Level,curDsData.Damage,ElementalType);
-        return tInfo;
-    }
-
     #endregion
 }

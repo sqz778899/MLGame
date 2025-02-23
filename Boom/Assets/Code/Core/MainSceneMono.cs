@@ -66,6 +66,12 @@ public class MainSceneMono:MonoBehaviour
         FightSceneOn();
     }
 
+    public void WinThisLevel()
+    {
+        SwitchMapScene();
+        MainRoleManager.Instance.WinThisLevel();
+    }
+
     #region 独立小开关
     void BagOn()
     {

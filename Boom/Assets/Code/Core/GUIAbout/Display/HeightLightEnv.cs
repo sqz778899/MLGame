@@ -5,8 +5,6 @@ using UnityEngine.EventSystems;
 
 public class HeightLightEnv : SpriteClickHandler
 {
-    [ColorUsage(true, true)] 
-    public Color OutlineColor;
     //需要切换的材质球
     Material _defaultMat;
     Material outLineMat;

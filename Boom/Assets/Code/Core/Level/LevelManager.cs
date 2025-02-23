@@ -17,8 +17,7 @@ public static class LevelManager
             PathConfig.GetLevelPath(MainRoleManager.Instance.CurMapSate.CurLevelID));
         levelIns.transform.SetParent(UIManager.Instance.Level.transform,false);
         LevelMono curlevel = levelIns.GetComponent<LevelMono>();
-        curlevel.SetEnemy(MainRoleManager.Instance.CurEnemyMidData);
-        //Sync Enemy
+        curlevel.SetEnemy(MainRoleManager.Instance.CurEnemyMidData);//初始化敌人属性
         //Set Role
         //设置角色位置
         Vector3 curRolePos = UIManager.Instance.RoleIns.transform.position;
