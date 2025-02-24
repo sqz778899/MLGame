@@ -46,7 +46,7 @@ public class ArrowNode : MapNodeBase
         MainRoleManager.Instance.CurMapSate.TargetRoomID = TargetRoom.RoomID;
         GameObject dialogueFightIns = ResManager.instance.CreatInstance(PathConfig.DialogueFightPB);
         dialogueFightIns.transform.SetParent(UIManager.Instance.DialogueRoot.transform,false);
-        dialogueFightIns.GetComponent<DialogueFight>().InitData(this);;
+        dialogueFightIns.GetComponent<DialogueFight>().InitData(this);
         IsLocked = true;
         UIManager.Instance.IsLockedClick = true;
     }

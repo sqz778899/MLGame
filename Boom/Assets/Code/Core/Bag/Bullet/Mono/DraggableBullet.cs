@@ -41,8 +41,16 @@ public class DraggableBullet : Bullet
         {
             if (result.gameObject.CompareTag("BulletSlotRole"))
             {
+                BulletSlotRole curSlotSC = result.gameObject.GetComponent<BulletSlotRole>();
+                //看看子弹槽是不是锁定状态
+                if (curSlotSC.State == UILockedState.isLocked)
+                {
+                    //寻找母体
+                    ReturnToSpawner();
+                    NonHappen = false;
+                    break;
+                }
                 BulletInsMode = BulletInsMode.EditB;
-                BulletSlot curSlotSC = result.gameObject.GetComponent<BulletSlot>();
                 //MainRoleManager.Instance.AddBulletOnlyData(ID,curSlotSC.SlotID,InstanceID);
                 if (curSlotSC.MainID == -1)
                 {

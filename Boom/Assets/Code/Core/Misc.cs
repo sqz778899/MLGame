@@ -66,6 +66,13 @@ public enum ShopType
     BulletShop = 2
 }
 
+public enum UILockedState
+{
+    isNormal = 0,
+    isLocked = 1,
+    isSelected = 2
+}
+
 [Serializable]
 public class Award
 {

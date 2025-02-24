@@ -142,9 +142,6 @@ public class TrunkManager: ScriptableObject
     //游戏状态
     public bool IsGamePause = false;
 
-    //RandomEvent
-    public List<int> RandomEvents = new List<int>();
-
     #region 存档相关
     public void LoadSaveFile()
     {
@@ -174,6 +171,8 @@ public class TrunkManager: ScriptableObject
             GemJson curGem = _saveFile.UserGems[i];
             BagItemManager<Gem>.InitSaveFileObject(curGem,SlotType.GemBagSlot);
         }
+        //读取子弹槽状态
+        MainRoleManager.Instance.CurBulletSlotLockedState = _saveFile.UserBulletSlotLockedState;
         
         MainRoleManager.Instance.CurBulletSpawners = _saveFile.UserBulletSpawner;
         MainRoleManager.Instance.CurBullets = _saveFile.UserCurBullets;
@@ -264,6 +263,8 @@ public class TrunkManager: ScriptableObject
             });
         }
         _saveFile.UserGems = UserGems;
+        //存子弹槽状态信息
+        _saveFile.UserBulletSlotLockedState = MainRoleManager.Instance.CurBulletSlotLockedState;
         
         _saveFile.UserStandbyBullet = MainRoleManager.Instance.CurStandbyBulletMats;
         _saveFile.SupremeCharms = SupremeCharms;
@@ -302,7 +303,7 @@ public class TrunkManager: ScriptableObject
         Debug.Log("SaveUserConfig");
     }
     #endregion
-
+   
     #region NewGame
     public void SetSaveFileTemplate()
     {
@@ -312,17 +313,17 @@ public class TrunkManager: ScriptableObject
         List<BulletJson> UserBulletSpawner = new List<BulletJson>();
         BulletJson spawner01 = new BulletJson{ID=1};
         spawner01.SyncData();
-        spawner01.SpawnerCount = 5;
+        spawner01.SpawnerCount = 2;
         UserBulletSpawner.Add(spawner01);
         
         BulletJson spawner02 = new BulletJson{ID=2};
         spawner02.SyncData();
-        spawner02.SpawnerCount = 1;
+        spawner02.SpawnerCount = 0;
         UserBulletSpawner.Add(spawner02);
         
         BulletJson spawner03 = new BulletJson{ID=3};
         spawner03.SyncData();
-        spawner03.SpawnerCount = 1;
+        spawner03.SpawnerCount = 0;
         UserBulletSpawner.Add(spawner03);
         
         //..............StandbyData.........................
@@ -332,15 +333,16 @@ public class TrunkManager: ScriptableObject
         
         //...................Items.................................
         _saveFile.UserItems = new List<ItemJson>();
-        //MainRoleManager.Instance.AddItem(1);
-        //MainRoleManager.Instance.AddItem(2);
         //...................Gems..................................
         _saveFile.UserGems = new List<GemJson>();
-
+        //...................子弹槽状态..............................
+        _saveFile.UserBulletSlotLockedState = new Dictionary<int, bool>
+        { {0, true},{1, true},{2,false},{3,false},{4,false} };
+      
         _saveFile.UserCurBullets = new List<BulletJson>();
         _saveFile.UserBulletSpawner = UserBulletSpawner;
         _saveFile.Score = 0;
-        _saveFile.Coins = 1000;
+        _saveFile.Coins = 0;
         _saveFile.RoomKeys = 0;
         _saveFile.SupremeCharms = new List<int>();
         _saveFile.UserStandbyBullet = newGameSD;

@@ -1,6 +1,6 @@
 {
   "Score": 0,
-  "Coins": 1000,
+  "Coins": 0,
   "RoomKeys": 0,
   "UserBulletSpawner": [
     {
@@ -13,7 +13,7 @@
       "FinalPiercing": 0,
       "FinalResonance": 0,
       "IsResonance": false,
-      "SpawnerCount": 5,
+      "SpawnerCount": 2,
       "HitEffectName": "FX_Bullet01_hit",
       "ID": 1,
       "InstanceID": -1,
@@ -32,7 +32,7 @@
       "FinalPiercing": 0,
       "FinalResonance": 0,
       "IsResonance": false,
-      "SpawnerCount": 1,
+      "SpawnerCount": 0,
       "HitEffectName": "FX_Bullet02_hit",
       "ID": 2,
       "InstanceID": -1,
@@ -51,7 +51,7 @@
       "FinalPiercing": 0,
       "FinalResonance": 0,
       "IsResonance": false,
-      "SpawnerCount": 1,
+      "SpawnerCount": 0,
       "HitEffectName": "FX_Bullet03_hit",
       "ID": 3,
       "InstanceID": -1,
@@ -62,7 +62,6 @@
     }
   ],
   "UserCurBullets": [],
-  "UserBulletEntries": [],
   "UserStandbyBullet": [
     {
       "SlotID": 0,
@@ -90,7 +89,13 @@
       "ID": 0
     }
   ],
-  "UserCurBuff": null,
+  "UserBulletSlotLockedState": {
+    "0": true,
+    "1": true,
+    "2": false,
+    "3": false,
+    "4": false
+  },
   "UserItems": [],
   "UserGems": [],
   "SupremeCharms": [],

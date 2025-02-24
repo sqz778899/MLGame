@@ -6,8 +6,9 @@ using UnityEngine.UI;
 
 public class DialogueFight : MonoBehaviour
 {
+    [Header("重要信息")] 
+    public Image Portrait;
     public int LevelID = 1;
-    
     public Transform ObserveHPRoot;
     public ArrowNode CurArrow;
     public float observeHPYOffset = 145;
@@ -21,8 +22,13 @@ public class DialogueFight : MonoBehaviour
     public void InitData(ArrowNode _arraow)
     {
         CurArrow = _arraow;
+        //头像的初始化
+        Enemy curEnemy = CurArrow.CurEnemy;
+        curEnemy.InitData();
+        Portrait.sprite = curEnemy.Portrait;
+        //战斗对话框的界面初始化
         GameObject observeHPAsset = ResManager.instance.GetAssetCache<GameObject>(PathConfig.ObserveHPPB);
-        int HPCounts = _arraow.CurEnemy.ShieldsHPs.Count + 1;
+        int HPCounts = curEnemy.ShieldsHPs.Count + 1;
         for (int i = 0; i < HPCounts; i++)
         {
             GameObject observeHPIns = Instantiate(observeHPAsset, ObserveHPRoot.transform);
@@ -32,7 +38,7 @@ public class DialogueFight : MonoBehaviour
             observeHPRectTrans.anchoredPosition = new Vector2(0,0 + observeHPYOffset*i);
             // 获取并设置文本
             TextMeshProUGUI curObserveHPText = observeHPIns.GetComponentInChildren<TextMeshProUGUI>(true);
-            int currentHP = (i == 0) ? _arraow.CurEnemy.MaxHP : _arraow.CurEnemy.ShieldsHPs[i - 1]; // 根据i来选择显示的血量
+            int currentHP = (i == 0) ? curEnemy.MaxHP : curEnemy.ShieldsHPs[i - 1]; // 根据i来选择显示的血量
             curObserveHPText.text = currentHP.ToString();
         }
     }

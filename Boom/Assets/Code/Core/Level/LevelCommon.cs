@@ -15,18 +15,18 @@ public enum WinOrFail
 [Serializable]
 public class SaveFileJson
 {
-    public int Score;
-    public int Coins;
-    public int RoomKeys;
-    public List<BulletJson> UserBulletSpawner;
-    public List<BulletJson> UserCurBullets;
-    public List<StandbyData> UserStandbyBullet;
-    public List<int> UserCurBuff;
+    public int Score;                //分数
+    public int Coins;                //硬币数量
+    public int RoomKeys;             //钥匙数量
+    public List<BulletJson> UserBulletSpawner;  //子弹孵化器
+    public List<BulletJson> UserCurBullets;     //当前子弹的状态
+    public List<StandbyData> UserStandbyBullet; //子弹材料的状态
+    public Dictionary<int, bool> UserBulletSlotLockedState;  //用户子弹槽的锁定状态
     
-    public List<ItemJson> UserItems;
-    public List<GemJson> UserGems;
-    public List<int> SupremeCharms;
-    public List<MapSate> UserMapSate;
+    public List<ItemJson> UserItems;          //用户道具
+    public List<GemJson> UserGems;            //用户宝石
+    public List<int> SupremeCharms;           //用户饰品
+    public List<MapSate> UserMapSate;         //地图状态
 
     public List<int> CurRollPREveIDs;
 }

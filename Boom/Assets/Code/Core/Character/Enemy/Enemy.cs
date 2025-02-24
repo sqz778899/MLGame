@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.UI;
 using Spine.Unity;
 
 public class Enemy : EnemyBase
@@ -18,6 +18,7 @@ public class Enemy : EnemyBase
    
     [Header("SpineAbout")]
     public SkeletonAnimation Ani;
+    public Sprite Portrait;
     
     [Header("Award")]
     //Award...........
@@ -57,7 +58,8 @@ public class Enemy : EnemyBase
             _fightLogic = UIManager.Instance.FightLogicGO.GetComponent<FightLogic>();
         CurHealthBar.InitHealthBar(this); //初始化血条
         SetShields();//初始化盾牌
-
+        Portrait = ResManager.instance.GetAssetCache<Sprite>(PathConfig.GetEnemyPortrait(ID));
+        //初始化Spine资产
         SkeletonDataAsset curSkeletonDataAsset = ResManager.instance.
             GetAssetCache<SkeletonDataAsset>(PathConfig.GetEnemySkelentonDataPath(ID));
         Ani.skeletonDataAsset = curSkeletonDataAsset;

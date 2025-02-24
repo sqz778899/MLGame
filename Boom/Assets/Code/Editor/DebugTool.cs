@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DebugTool
 {
@@ -18,11 +19,11 @@ public class DebugTool
         //GameObjectUtility.RemoveMonoBehavioursWithMissingScript()
     }
 
-    public MapRoomNode CurMapRoomNode;
-    public MapRoomState State;
     [Button(ButtonSizes.Large)]
     void LogSS()
     {
-        CurMapRoomNode.State = State;
+        string path = "Assets/Res/Character/Image/Enemy/Enemy_Portrait_01.png";
+        Sprite s = AssetDatabase.LoadAssetAtPath<Sprite>(path);
+        Debug.Log(s.name);
     }
 }

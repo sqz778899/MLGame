@@ -76,7 +76,13 @@ public static class PathConfig
    {
       return GetPrepath() + $"Res/Character/SpineData/Enemy{ID.ToString("D2")}/enemy_{ID.ToString("D2")}_SkeletonData.asset";
    }
+
+   public static string GetEnemyPortrait(int ID)
+   {
+      return GetPrepath() + $"Res/Character/Image/Enemy/Enemy_Portrait_{ID.ToString("D2")}.png";
+   }
    public static string ShieldPB = GetPrepath() + "Res/Character/Image/Enemy/P_Shield_01.prefab";
+   
    public static string GetRoleImgPath(int ID)
    {
       return GetPrepath() + "Res/Character/MainRole/T_RoleSel_" + ID.ToString("D2") + ".png";

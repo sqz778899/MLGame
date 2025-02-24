@@ -4,13 +4,11 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewDictionaryConfig", menuName = "Config/DictionaryConfig")]
 public class DialoguePortraitConfig : ScriptableObject
 {
     [SerializeField]
     public List<StringSpritePair> NameToPortrait;
     Dictionary<string, Sprite> dict = new Dictionary<string, Sprite>();
-
     public Dictionary<string, Sprite> GetDictionary() => dict;
     
     void Awake()

@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class MainRoleManager :ScriptableObject
@@ -24,13 +24,31 @@ public class MainRoleManager :ScriptableObject
     public int Coins;
     public int RoomKeys;
     public int ShopCost = 5;
-    public int RollEntryCost = 5;
     public List<StandbyData> CurStandbyBulletMats = new List<StandbyData>();
     
     //...............Item................
     //子弹
     public List<BulletJson> CurBullets = new List<BulletJson>(); //当前上膛的子弹
     Dictionary<BulletJson, Bullet> CurBulletsPair;
+
+    #region 子弹槽的状态
+    public event Action BulletSlotStateChanged;
+    public BulletSlotRole[] CurBulletSlotRoleSCs;
+    private Dictionary<int, bool> _curBulletSlotLockedState = new Dictionary<int, bool>();
+    public Dictionary<int, bool> CurBulletSlotLockedState
+    {
+        get => _curBulletSlotLockedState;
+        set
+        {
+            if (_curBulletSlotLockedState != value)
+            {
+                _curBulletSlotLockedState = value;
+                BulletSlotStateChanged?.Invoke(); // 通知变化
+            }
+        }
+    }
+    #endregion
+    
     public List<BulletJson> CurBulletSpawners;                   //全部的子弹
     //道具
     public List<ItemJson> BagItems = new List<ItemJson>();
@@ -261,7 +279,7 @@ public class MainRoleManager :ScriptableObject
         InitStandbyBulletMats();
         InitCurRollPR();
         RefreshAllItems();
-        
+        CurBulletSlotRoleSCs = UIManager.Instance.BagReadySlotRootGO.GetComponentsInChildren<BulletSlotRole>();
         WinOrFailState = WinOrFail.InLevel;
     }
 
@@ -546,32 +564,25 @@ public class MainRoleManager :ScriptableObject
     
     public void RefreshCurBulletSlots()
     {
-        GameObject roleSlotRoot = UIManager.Instance.BagReadySlotRootGO;
-        GameObject bulletRoot = UIManager.Instance.DragObjRoot;
+        GameObject bulletDragRoot = UIManager.Instance.DragObjRoot;
         //1)重置Slot
-        BulletSlot[] bulletSlots = roleSlotRoot.GetComponentsInChildren<BulletSlot>();
-        foreach (BulletSlot each in bulletSlots)
-        {
+       
+        foreach (BulletSlotRole each in CurBulletSlotRoleSCs)
             each.MainID = -1;
-        }
 
         //2)设置Slot的BulletID
-        for (int i = roleSlotRoot.transform.childCount - 1; i >= 0; i--)
+        foreach (BulletSlotRole eachSlot  in CurBulletSlotRoleSCs)
         {
-            GameObject curSlot = roleSlotRoot.transform.GetChild(i).gameObject;
-            BulletSlot curSlotSC = curSlot.GetComponentInChildren<BulletSlot>();
-            foreach (var each in CurBullets)
+            foreach (var eachBullet in CurBullets)
             {
-                if (each.SlotID == curSlotSC.SlotID)
-                {
-                    curSlotSC.MainID = each.ID;
-                }
+                if (eachBullet.SlotID == eachSlot.SlotID)
+                    eachSlot.MainID = eachBullet.ID;
             }
         }
         //3)设置Bullet的SlotID
-        for (int i = bulletRoot.transform.childCount - 1; i >= 0; i--)
+        for (int i = bulletDragRoot.transform.childCount - 1; i >= 0; i--)
         {
-            GameObject curBullet = bulletRoot.transform.GetChild(i).gameObject;
+            GameObject curBullet = bulletDragRoot.transform.GetChild(i).gameObject;
             DraggableBullet curSC = curBullet.GetComponentInChildren<DraggableBullet>();
             foreach (var each in CurBullets)
             {
@@ -592,10 +603,9 @@ public class MainRoleManager :ScriptableObject
         //..............Clear Old Data..................
         for (int i = SDBulletRoot.transform.childCount - 1; i >= 0; i--)
             DestroyImmediate(SDBulletRoot.transform.GetChild(i).gameObject);
+        
         for (int i = 0; i < SDSlots.Length; i++)
-        {
             SDSlots[i].MainID = -1;
-        }
         //..............Instance New Data..................
         for (int i = 0; i < SDSlots.Length; i++)
         {
