@@ -4,14 +4,18 @@ using UnityEngine.EventSystems;
 public class ToolTipsBase : ItemBase,IPointerMoveHandler,IPointerExitHandler
 {
     [Header("Tooltips&&右击菜单相关")]
-    internal GameObject TooltipsGO;
+    Vector3 ToolTipsOffset;
+    internal bool IsOpenedTooltip = false;
+    internal Tooltips CurTooltipsSC;
     internal GameObject RightClickMenuGO;
     internal bool IsToolTipsDisplay;
     internal RectTransform rectTransform => GetComponent<RectTransform>();
 
     internal virtual void Start()
     {
+        ToolTipsOffset = new Vector3(1.01f, -0.5f, 0);
         IsToolTipsDisplay = true;
+        CurTooltipsSC = UIManager.Instance.TooltipsGO.GetComponentInChildren<Tooltips>();
     }
     
     public virtual void OnPointerExit(PointerEventData eventData)
@@ -38,26 +42,24 @@ public class ToolTipsBase : ItemBase,IPointerMoveHandler,IPointerExitHandler
     internal void DisplayTooltips(PointerEventData eventData)
     {
         // 加载Tooltips
-        if (TooltipsGO == null)
+        if (!IsOpenedTooltip)
         {
-            TooltipsGO = ResManager.instance.CreatInstance(PathConfig.TooltipAsset);
-            TooltipsGO.transform.SetParent(
-                UIManager.Instance.TooltipsRoot.transform,false);
+            UIManager.Instance.TooltipsGO.SetActive(true);
+            IsOpenedTooltip = true;
             SetTooltipInfo();
         }
+        
         // 把Tooltips的位置设置为鼠标位置
-        TooltipsGO.transform.position = GetWPosByMouse(eventData);
+        UIManager.Instance.TooltipsGO.transform.position = GetWPosByMouse(eventData) + ToolTipsOffset;
     }
     
     internal virtual void SetTooltipInfo(){}
     
     internal void DestroyTooltips()
     {
-        for (int i = UIManager.Instance.TooltipsRoot.transform.childCount - 1; i >= 0; i--)
-        {
-            DestroyImmediate(UIManager.Instance.TooltipsRoot
-                .transform.GetChild(i).gameObject);
-        }
+        CurTooltipsSC.ClearInfo();
+        UIManager.Instance.TooltipsGO.SetActive(false);
+        IsOpenedTooltip = false;
     }
     #endregion
     

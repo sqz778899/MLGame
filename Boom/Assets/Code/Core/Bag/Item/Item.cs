@@ -49,11 +49,8 @@ public class Item : DragBase
     #region ToolTips相关
     internal override void SetTooltipInfo()
     {
-        CommonTooltip curTip = TooltipsGO.GetComponentInChildren<CommonTooltip>();
-        string des = GetItemAttriInfo();
-        curTip.txtTitle.text = Name;
-        curTip.txtDescription.text = des;
-        curTip.ImgThumbnail.sprite = ItemSprite.sprite;
+        ToolTipsInfo curToolTipsInfo = new ToolTipsInfo(Name);
+        CurTooltipsSC.SetInfo(curToolTipsInfo);
     }
     
     string GetItemAttriInfo()

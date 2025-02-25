@@ -223,23 +223,29 @@ public class Bullet : DragBase
     #region ToolTips SetInfo
     internal override void SetTooltipInfo()
     {
-        CommonTooltip curTip = TooltipsGO.GetComponentInChildren<CommonTooltip>();
-        
-        curTip.ImgThumbnail.sprite = ResManager.instance.GetAssetCache<Sprite>(
-            PathConfig.GetBulletImageOrSpinePath(ID, BulletInsMode.Thumbnail));
-        curTip.txtTitle.text = Name;
-        curTip.txtDescription.text = GetBulletAttriInfo();
-    }
-    
-    string GetBulletAttriInfo()
-    {
-        string str = "";
-        str += $"Lv: {Level}\n";
-        str += FinalDamage != 0 ? $"伤害: {FinalDamage}\n" : string.Empty;
-        str += FinalPiercing != 0 ? $"穿透: {FinalPiercing}\n" : string.Empty;
-        str += FinalResonance != 0 ? $"共振: {FinalResonance}\n" : string.Empty;
-        str += ElementalType.ToString();
-        return str;
+        ToolTipsInfo curToolTipsInfo = new ToolTipsInfo(Name,Level);
+
+        if (FinalDamage != 0)
+        {
+            ToolTipsAttriSingleInfo curInfo = new ToolTipsAttriSingleInfo(
+                ToolTipsAttriType.Damage, FinalDamage,FinalDamage-Damage);
+            curToolTipsInfo.AttriInfos.Add(curInfo);
+        }
+        if (FinalPiercing != 0)
+        {
+            ToolTipsAttriSingleInfo curInfo = new ToolTipsAttriSingleInfo(
+                ToolTipsAttriType.Piercing, FinalPiercing,FinalPiercing-Piercing);
+            curToolTipsInfo.AttriInfos.Add(curInfo);
+        }
+        if (FinalResonance != 0)
+        {
+            ToolTipsAttriSingleInfo curInfo = new ToolTipsAttriSingleInfo(
+                ToolTipsAttriType.Resonance, FinalResonance,FinalResonance-Resonance);
+            curToolTipsInfo.AttriInfos.Add(curInfo);
+        }
+        //把元素最后加上
+        curToolTipsInfo.AttriInfos.Add(new ToolTipsAttriSingleInfo(ToolTipsAttriType.Element, elementType: ElementalType));
+        CurTooltipsSC.SetInfo(curToolTipsInfo);
     }
     #endregion
 }

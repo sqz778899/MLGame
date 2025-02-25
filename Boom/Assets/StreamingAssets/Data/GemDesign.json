@@ -1,5 +1,6 @@
 [
   {
+    "Level": 1,
     "ImageName": "T_Gem_Damage_01",
     "Attribute": {
       "Damage": 1,
@@ -10,12 +11,13 @@
     "BulletSlotIndex": -1,
     "ID": 1,
     "InstanceID": -1,
-    "Name": "伤害宝石+1",
+    "Name": "伤害宝石",
     "SlotID": -1,
     "SlotType": -1,
     "Price": 5
   },
   {
+    "Level": 2,
     "ImageName": "T_Gem_Damage_02",
     "Attribute": {
       "Damage": 2,
@@ -26,12 +28,13 @@
     "BulletSlotIndex": -1,
     "ID": 2,
     "InstanceID": -1,
-    "Name": "伤害宝石+2",
+    "Name": "伤害宝石",
     "SlotID": -1,
     "SlotType": -1,
     "Price": 20
   },
   {
+    "Level": 3,
     "ImageName": "T_Gem_Damage_03",
     "Attribute": {
       "Damage": 3,
@@ -42,12 +45,13 @@
     "BulletSlotIndex": -1,
     "ID": 3,
     "InstanceID": -1,
-    "Name": "伤害宝石+3",
+    "Name": "伤害宝石",
     "SlotID": -1,
     "SlotType": -1,
     "Price": 100
   },
   {
+    "Level": 1,
     "ImageName": "T_Gem_Piercing_01",
     "Attribute": {
       "Damage": 0,
@@ -58,12 +62,13 @@
     "BulletSlotIndex": -1,
     "ID": 10,
     "InstanceID": -1,
-    "Name": "穿透宝石+1",
+    "Name": "穿透宝石",
     "SlotID": -1,
     "SlotType": -1,
     "Price": 5
   },
   {
+    "Level": 2,
     "ImageName": "T_Gem_Piercing_02",
     "Attribute": {
       "Damage": 0,
@@ -74,12 +79,13 @@
     "BulletSlotIndex": -1,
     "ID": 11,
     "InstanceID": -1,
-    "Name": "穿透宝石+2",
+    "Name": "穿透宝石",
     "SlotID": -1,
     "SlotType": -1,
     "Price": 20
   },
   {
+    "Level": 3,
     "ImageName": "T_Gem_Piercing_03",
     "Attribute": {
       "Damage": 0,
@@ -90,12 +96,13 @@
     "BulletSlotIndex": -1,
     "ID": 12,
     "InstanceID": -1,
-    "Name": "穿透宝石+3",
+    "Name": "穿透宝石",
     "SlotID": -1,
     "SlotType": -1,
     "Price": 100
   },
   {
+    "Level": 1,
     "ImageName": "T_Gem_Resonance_01",
     "Attribute": {
       "Damage": 0,
@@ -106,12 +113,13 @@
     "BulletSlotIndex": -1,
     "ID": 20,
     "InstanceID": -1,
-    "Name": "共振宝石+1",
+    "Name": "共振宝石",
     "SlotID": -1,
     "SlotType": -1,
     "Price": 5
   },
   {
+    "Level": 2,
     "ImageName": "T_Gem_Resonance_02",
     "Attribute": {
       "Damage": 0,
@@ -122,12 +130,13 @@
     "BulletSlotIndex": -1,
     "ID": 21,
     "InstanceID": -1,
-    "Name": "共振宝石+2",
+    "Name": "共振宝石",
     "SlotID": -1,
     "SlotType": -1,
     "Price": 20
   },
   {
+    "Level": 3,
     "ImageName": "T_Gem_Resonance_03",
     "Attribute": {
       "Damage": 0,
@@ -138,7 +147,7 @@
     "BulletSlotIndex": -1,
     "ID": 22,
     "InstanceID": -1,
-    "Name": "共振宝石+3",
+    "Name": "共振宝石",
     "SlotID": -1,
     "SlotType": -1,
     "Price": 100

@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class Gem : DragBase
 {
+    public int Level;
     public GemAttribute Attribute;
     //是否镶嵌
     public bool IsInLay;
@@ -48,21 +49,26 @@ public class Gem : DragBase
     #region ToolTips相关
     internal override void SetTooltipInfo()
     {
-        CommonTooltip curTip = TooltipsGO.GetComponentInChildren<CommonTooltip>();
-        string des = GetItemAttriInfo();
-        curTip.txtTitle.text = Name;
-        curTip.txtDescription.text = des;
-        curTip.ImgThumbnail.sprite = ItemSprite.sprite;
-    }
-
-    string GetItemAttriInfo()
-    {
-        List<string> attributes = new List<string>();
-        if (Attribute.Damage != 0) attributes.Add($"伤害 + {Attribute.Damage}");
-        if (Attribute.Resonance != 0) attributes.Add($"共振 + {Attribute.Resonance}");
-        if (Attribute.Piercing != 0) attributes.Add($"穿透 + {Attribute.Piercing}");
-
-        return string.Join("\n", attributes);
+        ToolTipsInfo curToolTipsInfo = new ToolTipsInfo(Name,Level);
+        if (Attribute.Damage != 0)
+        {
+            ToolTipsAttriSingleInfo curInfo = new ToolTipsAttriSingleInfo(
+                ToolTipsAttriType.Damage, Attribute.Damage);
+            curToolTipsInfo.AttriInfos.Add(curInfo);
+        }
+        if (Attribute.Piercing != 0)
+        {
+            ToolTipsAttriSingleInfo curInfo = new ToolTipsAttriSingleInfo(
+                ToolTipsAttriType.Piercing, Attribute.Piercing);
+            curToolTipsInfo.AttriInfos.Add(curInfo);
+        }
+        if (Attribute.Resonance != 0)
+        {
+            ToolTipsAttriSingleInfo curInfo = new ToolTipsAttriSingleInfo(
+                ToolTipsAttriType.Resonance, Attribute.Resonance);
+            curToolTipsInfo.AttriInfos.Add(curInfo);
+        }
+        CurTooltipsSC.SetInfo(curToolTipsInfo);
     }
     #endregion
     
@@ -72,6 +78,7 @@ public class Gem : DragBase
     {
         InstanceID = gameObject.GetInstanceID();
         GemJson gemDesignData = ToJosn();
+        Level = gemDesignData.Level;
         Name = gemDesignData.Name;
         Attribute = gemDesignData.Attribute;
         if (ItemSprite == null) ItemSprite = GetComponent<Image>();

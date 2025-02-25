@@ -13,7 +13,8 @@ public class UIManager : ScriptableObject
     //4.SelectRole
     //GroupRoleDes
     //............CommonRoot.........
-    public GameObject TooltipsRoot;
+    GameObject TooltipsRoot; //外部不关心
+    public GameObject TooltipsGO;
     public GameObject RightClickMenuRoot;
     public GameObject G_StandbyMat;
     
@@ -112,9 +113,16 @@ public class UIManager : ScriptableObject
         #endregion
         
         //............CommonRoot.........
-        
+
         if (TooltipsRoot == null)
             TooltipsRoot = GameObject.Find("TooltipsRoot");
+        
+        if (TooltipsGO == null)
+        {
+            TooltipsGO = ResManager.instance.CreatInstance(PathConfig.TooltipAsset);
+            TooltipsGO.transform.SetParent(TooltipsRoot.transform,false);
+            TooltipsGO.SetActive(false);
+        }
         
         if (RightClickMenuRoot == null)
             RightClickMenuRoot = GameObject.Find("RightClickMenuRoot");

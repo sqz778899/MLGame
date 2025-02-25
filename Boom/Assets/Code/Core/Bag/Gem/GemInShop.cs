@@ -100,11 +100,9 @@ public class GemInShop : ToolTipsBase,IPointerUpHandler,IPointerDownHandler
     
     internal override void SetTooltipInfo()
     {
-        CommonTooltip curTip = TooltipsGO.GetComponentInChildren<CommonTooltip>();
         string des = GetItemAttriInfo();
-        curTip.txtTitle.text = Name;
-        curTip.txtDescription.text = des;
-        curTip.ImgThumbnail.sprite = ItemSprite.sprite;
+        CurTooltipsSC.txtTitle.text = Name;
+        //curTip.txtDescription.text = des;
     }
     
     string GetItemAttriInfo()

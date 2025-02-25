@@ -62,6 +62,7 @@ public class GemAttribute
 [Serializable]
 public class GemJson : ItemJsonBase
 {
+    public int Level;
     public string ImageName;
     public GemAttribute Attribute;
     public bool IsInLay;
@@ -69,7 +70,7 @@ public class GemJson : ItemJsonBase
     
     public GemJson(int id = -1, int instanceID = -1, 
         string name = "", GemAttribute attribute = null, 
-        string imageName = "", int slotID = -1, int slotType = -1)
+        int _level = 1,string imageName = "", int slotID = -1, int slotType = -1)
     {
         ID = id;
         InstanceID = instanceID;
@@ -77,6 +78,7 @@ public class GemJson : ItemJsonBase
         if (attribute == null)
             attribute = new GemAttribute();
         Attribute = attribute;
+        Level = _level;
         ImageName = imageName;
         SlotID = slotID;
         SlotType = slotType;
@@ -95,6 +97,7 @@ public class GemJson : ItemJsonBase
         Name = other.Name;
         Attribute = new GemAttribute(other.Attribute.Damage,
             other.Attribute.Piercing,other.Attribute.Resonance);  // 假设 GemAttribute 有复制构造函数
+        Level = other.Level;
         ImageName = other.ImageName;
         SlotID = other.SlotID;
         SlotType = other.SlotType;

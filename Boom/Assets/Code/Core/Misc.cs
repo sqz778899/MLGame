@@ -2,6 +2,45 @@
 using System.Collections.Generic;
 using TMPro;
 
+public struct ToolTipsInfo
+{
+    public string Name;
+    public int Level;
+    public List<ToolTipsAttriSingleInfo> AttriInfos;
+
+    public ToolTipsInfo(string name = "", int level = 0,
+        List<ToolTipsAttriSingleInfo> attriInfos = null)
+    {
+        Name = name;
+        Level = level;
+        AttriInfos = attriInfos ?? new List<ToolTipsAttriSingleInfo>();
+    }
+}
+
+public struct ToolTipsAttriSingleInfo
+{
+    public ToolTipsAttriType Type;
+    public int OriginValue;
+    public int AddedValue;
+    public ElementalTypes ElementType;
+    public ToolTipsAttriSingleInfo(ToolTipsAttriType type = default, 
+        int originValue = 0, int addedValue = 0,ElementalTypes elementType = default)
+    {
+        Type = type;
+        OriginValue = originValue;
+        AddedValue = addedValue;
+        ElementType = elementType;
+    }
+}
+
+public enum ToolTipsAttriType
+{
+    Damage = 0,
+    Piercing = 1,
+    Resonance = 2,
+    Element = 10,
+}
+
 #region 多语言相关
 public enum MultiLaEN
 {
