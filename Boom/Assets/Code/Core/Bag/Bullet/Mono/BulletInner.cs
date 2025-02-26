@@ -16,9 +16,9 @@ public class BulletInner : Bullet
     SkeletonAnimation _ain;
     List<Material> _materials;
     public float AniScale = 1f;
-    List<GameObject> FXs;
 
-    [Header("重要属性")] 
+    [Header("重要属性")]
+    public RoleInner CurRoleInner;
     int _piercingCount; //穿透的敌人的数量
     int _resonance;
 
@@ -31,7 +31,6 @@ public class BulletInner : Bullet
         _ain = transform.GetChild(0).GetComponent<SkeletonAnimation>();
         _materials = new List<Material>(_ain.skeletonDataAsset.atlasAssets[0].Materials);
         AniUtility.PlayIdle(_ain,AniScale);
-        FXs = new List<GameObject>();
         foreach (Material material in _materials)
             material.SetFloat("_Transparency", 1);
     }
@@ -48,9 +47,8 @@ public class BulletInner : Bullet
             case BulletInnerState.Attacking:// 让子弹沿着Z轴向前移动
                 transform.Translate(forward * 10f * Time.deltaTime);
                 break;
-            case BulletInnerState.AttackingStop:// 让子弹沿着Z轴向前移动
-                break;
             case BulletInnerState.Dead:
+                CurRoleInner.Bullets.Remove(this);
                 Destroy(gameObject);
                 break;
         }
@@ -67,7 +65,7 @@ public class BulletInner : Bullet
         {
             //穿透敌人的数量
             if (_piercingCount >= FinalPiercing)
-                _state = BulletInnerState.AttackingStop;
+                _state = BulletInnerState.Dead;
 
             HandleEnemyHit(other.GetComponent<EnemyBase>());
             HandleHitEffect();
@@ -152,12 +150,12 @@ public class BulletInner : Bullet
     public IEnumerator PlayHitFX()
     {
         GameObject curFX = Instantiate(HitEffect, transform.position, transform.rotation);
+        curFX.transform.SetParent(UIManager.Instance.G_BulletInScene.transform,false);
         SkeletonAnimation curSpfxSC = curFX.GetComponentInChildren<SkeletonAnimation>();
         curSpfxSC.skeletonDataAsset = HitSpfxAsset;
         curSpfxSC.Initialize(true);
         float aniTime = 0f;
         AniUtility.PlayAttack(curSpfxSC,ref aniTime,AniScale);
-        FXs.Add(curFX);
         yield return new WaitForSeconds(aniTime);
     }
     #endregion
@@ -190,11 +188,4 @@ public class BulletInner : Bullet
         return transform.position.x - UIManager.Instance.RoleIns.transform.position.x;
     }
     #endregion
-    
-    public void DestroySelf()
-    {
-        FXs?.ForEach(Destroy);
-        // 销毁子弹
-        Destroy(gameObject);
-    }
 }

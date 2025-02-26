@@ -24,10 +24,6 @@ public class Shop:GUIBase
     
     const int rowOffet = 756;
     const int columnOffet = -125;
-    void Start()
-    {
-        //GetCurPRBarDisplay();
-    }
 
     void Update()
     {
@@ -68,6 +64,7 @@ public class Shop:GUIBase
                 GameObject curRollIns = ResManager.instance.CreatInstance(PathConfig.RollGemPB);
                 GemInShop curGem = curRollIns.GetComponent<GemInShop>();
                 curGem.ID = each.Value;
+                curGem.CurShopNode = _curShopNode;
                 SetChildIns(curRollIns,each.Key);
             }
         }

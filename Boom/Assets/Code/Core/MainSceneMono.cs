@@ -71,6 +71,17 @@ public class MainSceneMono:MonoBehaviour
         SwitchMapScene();
         MainRoleManager.Instance.WinThisLevel();
     }
+    
+    public void FailThisLevel()
+    {
+        SwitchMapScene();
+        MainRoleManager.Instance.FailThisLevel();
+    }
+    
+    public void EndGame()
+    {
+        MSceneManager.Instance.LoadScene(0);
+    }
 
     #region 独立小开关
     void BagOn()
@@ -86,13 +97,13 @@ public class MainSceneMono:MonoBehaviour
     void FightSceneOn()
     {
         GUIFightScene.SetActive(true);
+        try { _fightLogic.enabled = true; }catch (Exception e) {}
         for (int i = 0; i < FightScene.transform.childCount; i++)
             FightScene.transform.GetChild(i).gameObject.SetActive(true);
         try
         {
             _fightLogic.InitData();
-            UIManager.Instance.G_CurBulletIcon.SetActive(false);
-            UIManager.Instance.G_StandbyIcon.SetActive(false);
+            UIManager.Instance.G_SideBar.SetActive(false);
         }
         catch (Exception e)
         {
@@ -102,14 +113,14 @@ public class MainSceneMono:MonoBehaviour
     void FightSceneOff()
     {
         GUIFightScene.SetActive(false);
+        try { _fightLogic.enabled = false; }catch (Exception e) {}
         for (int i = 0; i < FightScene.transform.childCount; i++)
             FightScene.transform.GetChild(i).gameObject.SetActive(false);
         
         try
         {
             _fightLogic.UnloadData();
-            UIManager.Instance.G_CurBulletIcon.SetActive(true);
-            UIManager.Instance.G_StandbyIcon.SetActive(true);
+            UIManager.Instance.G_SideBar.SetActive(true);
         }
         catch (Exception e)
         {
@@ -122,12 +133,14 @@ public class MainSceneMono:MonoBehaviour
         MapScene.SetActive(true);
         GUIMap.SetActive(true);
         _mapLogic?.InitMapData();
+        try { _mapLogic.enabled = true; }catch (Exception e) {}
     }
     
     void MapSceneOff()
     {
         GUIMap.SetActive(false);
         MapScene.SetActive(false);
+        try { _mapLogic.enabled = false; }catch (Exception e) {}
     }
     #endregion
 }

@@ -6,10 +6,10 @@ using System.Collections;
 public class TextSync : MonoBehaviour
 {
     public float duration = 1f;
-    private TextMeshProUGUI _txt;
-    private int _curValue;
-    private int _targetValue;
-    private bool isAdding = false;
+    TextMeshProUGUI _txt;
+    int _curValue;
+    int _targetValue;
+    bool isAdding = false;
     
     // 自定义的值和更新类型 (Key 或 Coins)
     public enum ValueType
@@ -45,13 +45,13 @@ public class TextSync : MonoBehaviour
         switch (valueType)
         {
             case ValueType.Coins:
-                _targetValue = _targetValue = MainRoleManager.Instance.Coins;
+                _targetValue = MainRoleManager.Instance.Coins;
                 break;
             case ValueType.RoomKeys:
-                _targetValue = _targetValue = MainRoleManager.Instance.RoomKeys;
+                _targetValue = MainRoleManager.Instance.RoomKeys;
                 break;
             case ValueType.Score:
-                _targetValue = _targetValue = MainRoleManager.Instance.Score;
+                _targetValue = MainRoleManager.Instance.Score;
                 break;
         }
 

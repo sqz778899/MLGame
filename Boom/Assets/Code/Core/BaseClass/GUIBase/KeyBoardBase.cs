@@ -13,15 +13,6 @@ public class KeyBoardBase : MonoBehaviour
         GetAllTextInScene();
     }
 
-    void Update()
-    {
-        //按ESC键，可以退出Setting界面
-        if (Input.GetKey(KeyCode.Escape))
-        {
-            UIManager.Instance.G_Setting.GetComponent<SettingMono>().CloseWindow();
-        }
-    }
-
     internal void GetAllTextInScene()
     {
         if (Alltxt == null)

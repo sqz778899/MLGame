@@ -7,6 +7,7 @@ public class LevelMono : MonoBehaviour
 {
     public Enemy CurEnemy;
     public GameObject EnemyRoot;
+    public Collider2D MapCollider;
     
     public void SetEnemy(EnemyMiddleData _midData)
     {

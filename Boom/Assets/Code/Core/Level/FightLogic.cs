@@ -1,29 +1,22 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using DG.Tweening;
-using TMPro;
 using UnityEngine;
 
 public class FightLogic : MonoBehaviour
 {
     Dictionary<WinOrFail, Action> stateActions;
-    [Header("Award")] 
-    public Award CurAward;
     
-    #region 关卡相关
+    [Header("关卡")] 
     LevelMono CurLevel;
     void InitLevel() => CurLevel = LevelManager.LoadLevel();
-
-    #endregion
-
     [Header("Display")] 
     public float waitCalculateTime = 3f;
     public bool isBeginCameraMove;
     GameObject FirstBullet;
-    public bool isBeginCalculation;
     public GameObject WinGUI;
     public GameObject FailGUI;
+    public GameObject GameOverGUI;
     public float Distance;
 
     [Header("角色")] 
@@ -31,28 +24,30 @@ public class FightLogic : MonoBehaviour
     public RoleInner CurRole;
     public bool _isAttacked;
 
+    bool isEnd = false;
+
     void Start()
     {
         TrunkManager.Instance.IsGamePause = false;
-        _isAttacked = false;
         stateActions = new Dictionary<WinOrFail, Action>
         {
             { WinOrFail.InLevel, () => {} }, // 空操作
             { WinOrFail.Win, WinTheLevel },
-            { WinOrFail.Fail, () =>
-                {
-                    FailGUI.SetActive(true);
-                    isBeginCalculation = false;
-                }
-            }
+            { WinOrFail.Fail,FailTheLevel }
         };
     }
     
     void Update()
     {
+        if (isEnd) return;
+        
         //开始结算关卡
-        if (isBeginCalculation)
-            WinOrFailThisLevel();
+        if (CurRole.Bullets.Count == 0 || CurEnemy.EState == EnemyState.dead)
+        {
+            StartCoroutine( WinOrFailThisLevel());
+            isEnd = true;
+        }
+
         //实时计算与敌人的距离
         UpdateDistance();
         //开火
@@ -69,12 +64,13 @@ public class FightLogic : MonoBehaviour
         InitLevel();
         FailGUI.SetActive(false);
         WinGUI.SetActive(false);
+        isEnd = false;
+        _isAttacked = false;
         isBeginCameraMove = false;
-        isBeginCalculation = false;
         Distance = 0f;
         CurEnemy = CurLevel.CurEnemy;
         CurRole = UIManager.Instance.RoleIns.GetComponent<RoleInner>();
-        CurRole.InitData();
+        CurRole.InitData(CurLevel);
         MainRoleManager.Instance.WinOrFailState = WinOrFail.InLevel;
     }
 
@@ -84,8 +80,7 @@ public class FightLogic : MonoBehaviour
         GameObject root = UIManager.Instance.G_BulletInScene;
         for (int i = root.transform.childCount - 1; i >= 0; i--)
         {
-            BulletInner curSC = root.transform.GetChild(i).GetComponent<BulletInner>();
-            curSC.DestroySelf();
+            DestroyImmediate(root.transform.GetChild(i).gameObject);
         }
         //卸载战斗场景
         if (CurLevel != null)
@@ -120,31 +115,37 @@ public class FightLogic : MonoBehaviour
             CurRole.transform.position);
     }
     
-    void WinOrFailThisLevel()
+    //等待结算时间，时间到之后开启结算。。。。。
+    IEnumerator WinOrFailThisLevel()
     {
+        yield return new WaitForSeconds(waitCalculateTime);
+        
         if (CurEnemy.EState == EnemyState.dead)
             MainRoleManager.Instance.WinOrFailState = WinOrFail.Win;
         //如果子弹为0，且敌人未死则失败
-        if (UIManager.Instance.G_BulletInScene.transform.childCount == 0 &&
+        if (CurRole.Bullets.Count == 0 &&
             CurEnemy.EState == EnemyState.live)
             MainRoleManager.Instance.WinOrFailState = WinOrFail.Fail;
         
         stateActions[MainRoleManager.Instance.WinOrFailState]?.Invoke();
-    }   
+    }
     
     //胜利
     void WinTheLevel()
     {
         //播放胜利
         WinGUI.SetActive(true);
-        GUIWin s = WinGUI.GetComponent<GUIWin>();
-        s.Win(CurAward);
-        isBeginCalculation = false;
-        _isAttacked = false;
-        //MainRoleManager.Instance.WinThisLevel();
-        //给一个随机Buff
-        //RollManager.Instance.OnceRollBuff();
-        //选完了给一个随机宝物
+        WinGUI.GetComponent<GUIWin>().Win(CurEnemy.CurAward);
+    }
+    
+    void FailTheLevel()
+    {
+        //播放胜利
+        MainRoleManager.Instance.HP -= 1;
+        if (MainRoleManager.Instance.HP > 0)
+            FailGUI.SetActive(true);
+        else
+            GameOverGUI.SetActive(true);
     }
     #endregion
 }

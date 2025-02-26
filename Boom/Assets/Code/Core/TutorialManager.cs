@@ -323,16 +323,18 @@ public class TutorialManager : MonoBehaviour
     void Step4_2() //延迟执行
     {
         CurDialogue.OnDialogueEnd -= Step4_2;
-        StartCoroutine(WaitToStep4_2());
+        bgImage.enabled = true;
+        MarkGO(UIBag, ArrowInlayGemToBag);//高亮显示背包
+        UIBag.GetComponent<Button>().onClick.AddListener(Step4_3);
     }
     
-    IEnumerator WaitToStep4_2()//引导打开背包
+    /*IEnumerator WaitToStep4_2()//引导打开背包
     {
         yield return new WaitForSeconds(1f);
         bgImage.enabled = true;
         MarkGO(UIBag, ArrowInlayGemToBag);//高亮显示背包
         UIBag.GetComponent<Button>().onClick.AddListener(Step4_3);
-    }
+    }*/
     
     void Step4_3() //引导切换宝石Tab
     {

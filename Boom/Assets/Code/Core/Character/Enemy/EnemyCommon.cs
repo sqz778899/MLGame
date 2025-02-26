@@ -28,14 +28,16 @@ public struct EnemyMiddleData
     public int ID;
     public int HP;
     public List<int> ShieldsHPs;
-
-    public EnemyMiddleData(int _ID = 1,int _hp = 1, List<int> _shields = null)
+    public Award CurAward;
+    
+    public EnemyMiddleData(int _ID = 1,int _hp = 1, List<int> _shields = null,Award _award = default)
     {
         ID = _ID;
         HP = _hp;
         if (_shields == null)
             _shields = new List<int>();
         ShieldsHPs = _shields;
+        CurAward = _award;
     }
 }
 

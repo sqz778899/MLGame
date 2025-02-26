@@ -113,12 +113,20 @@ public enum UILockedState
 }
 
 [Serializable]
-public class Award
+public struct Award
 {
-    public int score;
-    public int gold;
-    public SupremeCharm supremeCharm;
+    public int Score;
+    public int Coin;
+    public List<int> SupremeCharms;
     public List<int> Items;
+
+    public Award(int _score = 0,int _coin = 0,List<int> _supremeCharms = null,List<int> _items = null)
+    {
+        Score = _score;
+        Coin = _coin;
+        SupremeCharms = _supremeCharms ?? new List<int>();
+        Items = _items ?? new List<int>();
+    }
 }
 
 public class ElementState

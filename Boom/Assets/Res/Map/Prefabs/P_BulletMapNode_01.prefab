@@ -49,9 +49,9 @@ MonoBehaviour:
   onClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TutorialManager, Assembly-CSharp
-        m_MethodName: Step1_2
+      - m_Target: {fileID: 8502356091104366761}
+        m_TargetAssemblyTypeName: BulletMapNode, Assembly-CSharp
+        m_MethodName: JoinYou
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -61,6 +61,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  spriteRenderer: {fileID: 0}
   OutlineColor: {r: 0, g: 0, b: 0, a: 0}
   HeighLightColor: {r: 1, g: 1, b: 1, a: 1}
   IsLocked: 0
@@ -74,7 +75,7 @@ MonoBehaviour:
     FlyRangeOffset: {x: -1, y: 1}
     FlyTimeRange: {x: 0.4, y: 0.6}
   BulletID: 1
-  DialogueName: Beginner02
+  DialogueName: Beginner04
 --- !u!61 &346389227664983378
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -149,7 +150,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -3.55, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2854409879114146523}

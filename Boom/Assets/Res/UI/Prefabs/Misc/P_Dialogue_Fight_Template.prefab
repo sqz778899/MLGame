@@ -676,8 +676,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u8FC7\u6765\u5427\uFF01\u6742\u9C7C\uFF01"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f1c451a708465df4fb8c93a002a75950, type: 2}
-  m_sharedMaterial: {fileID: -235926824434492915, guid: f1c451a708465df4fb8c93a002a75950, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 29bbd16ceac763e4a9e86ab3b9e696a3, type: 2}
+  m_sharedMaterial: {fileID: -3753182883971963134, guid: 29bbd16ceac763e4a9e86ab3b9e696a3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -838,6 +838,7 @@ MonoBehaviour:
   ObserveHPRoot: {fileID: 7528706831806504024}
   CurArrow: {fileID: 0}
   observeHPYOffset: 145
+  CotentText: {fileID: 7959386357588333306}
   BtnFight: {fileID: 7780514503050279798}
   BtnBack: {fileID: 5274706915110483348}
   HPGOList: []

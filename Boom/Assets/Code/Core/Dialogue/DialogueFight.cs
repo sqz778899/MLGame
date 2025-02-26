@@ -12,6 +12,7 @@ public class DialogueFight : MonoBehaviour
     public Transform ObserveHPRoot;
     public ArrowNode CurArrow;
     public float observeHPYOffset = 145;
+    public TextMeshProUGUI CotentText;
 
     [Header("按钮")]
     public Button BtnFight;
@@ -46,6 +47,12 @@ public class DialogueFight : MonoBehaviour
     public void EnterFight()
     {
         if (isLocked ) return;
+        //
+        if (MainRoleManager.Instance.CurBullets.Count == 0)
+        {
+            CotentText.text = "把你的子弹装备好再来找我！杂鱼！";
+            return;
+        }
         UIManager.Instance.IsLockedClick = false;
         MainSceneMono _mainSceneMono = UIManager.Instance.MainSceneGO.GetComponent<MainSceneMono>();
         MainRoleManager.Instance.InitFightData(CurArrow.CurEnemy.ToMiddleData(),LevelID);

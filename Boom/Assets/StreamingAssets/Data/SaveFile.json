@@ -1,4 +1,6 @@
 {
+  "MaxHP": 3,
+  "HP": 3,
   "Score": 0,
   "Coins": 0,
   "RoomKeys": 0,
@@ -13,7 +15,7 @@
       "FinalPiercing": 0,
       "FinalResonance": 0,
       "IsResonance": false,
-      "SpawnerCount": 2,
+      "SpawnerCount": 0,
       "HitEffectName": "FX_Bullet01_hit",
       "ID": 1,
       "InstanceID": -1,

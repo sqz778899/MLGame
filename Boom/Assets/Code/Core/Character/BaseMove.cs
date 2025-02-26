@@ -11,20 +11,14 @@ public class BaseMove : MonoBehaviour
     internal Vector3 forward = new Vector3(1, 0, 0);
     internal Camera _mCamera;
     internal FightLogic _fightLogic;
+    public bool IsLocked = false; //剧情教程等使用
 
     internal virtual void Awake()
     {
         // 直接缓存 Camera.main 和 FightLogic 组件
         _mCamera = Camera.main;
     }
-
-    internal virtual void Start()
-    {
-        // 延迟初始化 FightLogic 组件
-        if (_fightLogic == null)
-            _fightLogic = UIManager.Instance.FightLogicGO.GetComponent<FightLogic>();
-    }
-
+    
     internal virtual void Update()
     {
         if (UIManager.Instance.IsLockedClick) return;
@@ -33,8 +27,7 @@ public class BaseMove : MonoBehaviour
         {
             State = RoleState.MoveForward;
         }
-        else if (Input.GetKey("a") &&
-                 _mCamera.WorldToViewportPoint(transform.position).x > 0)
+        else if (Input.GetKey("a") && _mCamera.WorldToViewportPoint(transform.position).x > 0)
         {
             State = RoleState.MoveBack;
         }
@@ -58,12 +51,12 @@ public class BaseMove : MonoBehaviour
         }
     }
 
-    internal virtual void Move(Vector3 direction)
+    internal virtual void Start()
     {
-        transform.Translate(direction * Speed * Time.deltaTime);// 移动角色
-        _mCamera.transform.Translate(direction * Speed * Time.deltaTime);// 移动摄像机
-        
-        AniUtility.TrunAround(Ani,direction.x);//朝向
-        AniUtility.PlayRun(Ani);
+        // 延迟初始化 FightLogic 组件
+        if (_fightLogic == null)
+            _fightLogic = UIManager.Instance.FightLogicGO.GetComponent<FightLogic>();
     }
+
+    internal virtual void Move(Vector3 direction) {}
 }

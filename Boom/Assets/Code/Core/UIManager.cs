@@ -24,8 +24,9 @@ public class UIManager : ScriptableObject
     
     //............GroupTitle.........
     public GameObject TitleRoot;
-    public GameObject G_Setting;
+  
     public GameObject TitleGold;
+    public GameObject G_SideBar;    //侧边栏
     public GameObject G_CurBulletIcon; //侧边栏当前子弹图标
     public GameObject G_StandbyIcon; //侧边栏待机图标
 
@@ -105,11 +106,9 @@ public class UIManager : ScriptableObject
         
         TitleRootMono titleRootMono = TitleRoot.GetComponent<TitleRootMono>();
         TitleGold = titleRootMono.TitleGold;
+        G_SideBar = titleRootMono.G_SideBar;
         G_CurBulletIcon = titleRootMono.G_CurBulletIcon;
         G_StandbyIcon = titleRootMono.G_StandbyIcon;
-        G_Setting = titleRootMono.G_Setting;
-        if (G_Setting == null)
-            G_Setting = GameObject.Find("GroupSetting");
         #endregion
         
         //............CommonRoot.........

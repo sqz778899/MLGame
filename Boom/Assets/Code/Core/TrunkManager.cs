@@ -149,6 +149,8 @@ public class TrunkManager: ScriptableObject
         _saveFile = JsonConvert.DeserializeObject<SaveFileJson>(SaveFileJsonString);
 
         #region Character
+        MainRoleManager.Instance.MaxHP = _saveFile.MaxHP;
+        MainRoleManager.Instance.HP = _saveFile.HP;
         MainRoleManager.Instance.Score = _saveFile.Score;
         MainRoleManager.Instance.Coins = _saveFile.Coins;
         MainRoleManager.Instance.RoomKeys = _saveFile.RoomKeys;
@@ -200,6 +202,8 @@ public class TrunkManager: ScriptableObject
     public void SaveFile()
     {
         #region Character
+        _saveFile.MaxHP = MainRoleManager.Instance.MaxHP;
+        _saveFile.HP = MainRoleManager.Instance.HP;
         _saveFile.Score = MainRoleManager.Instance.Score;
         _saveFile.Coins = MainRoleManager.Instance.Coins;
         _saveFile.RoomKeys = MainRoleManager.Instance.RoomKeys;
@@ -309,11 +313,13 @@ public class TrunkManager: ScriptableObject
     {
         _saveFile = new SaveFileJson();
         #region Character
+        _saveFile.MaxHP = 3;
+        _saveFile.HP = 3;
         //................UserBulletSpawner...........................
         List<BulletJson> UserBulletSpawner = new List<BulletJson>();
         BulletJson spawner01 = new BulletJson{ID=1};
         spawner01.SyncData();
-        spawner01.SpawnerCount = 2;
+        spawner01.SpawnerCount = 0;
         UserBulletSpawner.Add(spawner01);
         
         BulletJson spawner02 = new BulletJson{ID=2};

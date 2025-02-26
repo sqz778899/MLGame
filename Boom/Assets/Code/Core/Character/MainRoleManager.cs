@@ -16,10 +16,20 @@ public class MainRoleManager :ScriptableObject
     {
         CurEnemyMidData = _enemyMidData;
         CurMapSate.CurLevelID = _levelID;
+        CurEnemyMidData.CurAward = _enemyMidData.CurAward;
     }
 
     [Header("重要数据")]
     //...............重要数据................
+    public int MaxHP = 3;
+    public int _hp;
+    public int HP
+    {
+        get => _hp;
+        set { if (_hp != value) { _hp = value; HPChanged?.Invoke(); } } 
+    }
+    public event Action HPChanged;
+    
     public int Score;
     public int Coins;
     public int RoomKeys;
@@ -182,6 +192,11 @@ public class MainRoleManager :ScriptableObject
     {
         CurMapSate.IsFinishedRooms.Add(CurMapSate.CurRoomID);
         CurMapSate.CurRoomID = CurMapSate.TargetRoomID; //切换当前房间
+        CurMapLogic.SetRolePos();
+    }
+    
+    public void FailThisLevel()
+    {
         CurMapLogic.SetRolePos();
     }
     #endregion
@@ -468,8 +483,9 @@ public class MainRoleManager :ScriptableObject
 
         //刷新子弹关系
         ProcessBulletRelations();
+        //刷新侧边栏显示
+        SyncBulletIcon();
     }
-    
     #endregion
 
     #region 场景内GO操作

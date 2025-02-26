@@ -21,7 +21,6 @@ public class RoleInMap : BaseMove
     [Header("移动范围设置")]
     Bounds _roomBounds;
     
-    public bool IsLocked = false; //剧情教程等使用
     internal override void Start()
     {
         base.Start();

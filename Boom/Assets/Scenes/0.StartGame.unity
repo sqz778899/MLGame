@@ -10710,9 +10710,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 36d297b1e3d8b3542947cc9ae503bcf7, type: 2}
-        m_TargetAssemblyTypeName: MSceneManager, Assembly-CSharp
-        m_MethodName: Setting
+      - m_Target: {fileID: 1822047267}
+        m_TargetAssemblyTypeName: GUIBase, Assembly-CSharp
+        m_MethodName: OnOffWindow
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -21286,6 +21286,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8827231347439102516, guid: 924003fc19aff02469fa87c117a3a591, type: 3}
   m_PrefabInstance: {fileID: 8497785156224374269}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1822047267 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 583100517904528726, guid: 924003fc19aff02469fa87c117a3a591, type: 3}
+  m_PrefabInstance: {fileID: 8497785156224374269}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8199ed6fa2be79f40a830393d21b7a71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1844987807
 GameObject:
   m_ObjectHideFlags: 0
@@ -21694,6 +21705,18 @@ PrefabInstance:
     - target: {fileID: 635447062290030859, guid: 924003fc19aff02469fa87c117a3a591, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 973814092365497864, guid: 924003fc19aff02469fa87c117a3a591, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1822047267}
+    - target: {fileID: 973814092365497864, guid: 924003fc19aff02469fa87c117a3a591, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CloseWindow
+      objectReference: {fileID: 0}
+    - target: {fileID: 973814092365497864, guid: 924003fc19aff02469fa87c117a3a591, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GUIBase, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 977396592996370971, guid: 924003fc19aff02469fa87c117a3a591, type: 3}
       propertyPath: m_AnchorMax.y

@@ -12,12 +12,20 @@ public class RoleInner : BaseMove
     public List<BulletInner> Bullets;
     public Connon CurConnon;
     public Transform ConnonNode;
+    [Header("移动范围设置")]
+    Bounds _mapBounds;
+    float _cameraOffsetX;
 
     #region 初始化数据
-    public void InitData()
+    public void InitData(LevelMono CurLevel = null)
     {
+        IsLocked = false;
+        if (CurLevel != null)
+            _mapBounds = CurLevel.MapCollider.bounds;
+        _cameraOffsetX = _mCamera.transform.position.x - transform.position.x;
         if (Bullets != null)
         {
+            Bullets.RemoveAll(bullet => bullet == null);
             if (Bullets.Count > 0)
             {
                 for (int i = 0; i < Bullets.Count; i++)
@@ -41,12 +49,32 @@ public class RoleInner : BaseMove
             float offsetX = startPos.x -i * 1f;
             curSC.FollowDis = Mathf.Abs(offsetX);
             bulletIns.transform.position = new Vector3(offsetX,startPos.y,startPos.z + i);
-            bulletIns.transform.SetParent(transform.parent,false);
+            bulletIns.transform.SetParent(UIManager.Instance.G_BulletInScene.transform,false);
+            curSC.CurRoleInner = this;
             Bullets.Add(curSC);
         }
     }
     #endregion
-    
+
+    #region 角色移动
+    internal override void Move(Vector3 direction)
+    {
+        if (UIManager.Instance.IsLockedClick) return; //UI锁
+        if (IsLocked) return;
+        //地图边缘限制角色移动。。。。。。。。。。。。。。
+        Vector3 newPos = transform.position + direction * Speed * Time.deltaTime;
+        newPos.x = Mathf.Clamp(newPos.x, _mapBounds.min.x, _mapBounds.max.x);
+        transform.position = newPos;
+        
+        //地图边缘限制摄像机移动
+        _mCamera.transform.position = new Vector3(newPos.x + _cameraOffsetX,_mCamera.transform.position.y,_mCamera.transform.position.z);
+        
+        AniUtility.TrunAround(Ani,direction.x);//朝向
+        AniUtility.PlayRun(Ani);
+    }
+    #endregion
+
+    #region 开火相关
     void CreateConnon(ref float AniTime)
     {
         GameObject ConnonIns = ResManager.instance.CreatInstance(PathConfig.ConnonPB);
@@ -62,6 +90,7 @@ public class RoleInner : BaseMove
     public void Fire()
     {
         State = RoleState.Attack;
+        IsLocked = true;
         StartCoroutine(FireIEnu());
         StartCoroutine(PlayAttackFX());
     }
@@ -120,4 +149,5 @@ public class RoleInner : BaseMove
         yield return new WaitForSeconds(2);
         DestroyImmediate(CurConnon.gameObject);
     }
+    #endregion
 }

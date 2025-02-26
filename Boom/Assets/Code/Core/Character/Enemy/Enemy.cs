@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Spine.Unity;
+using UnityEngine.Serialization;
 
 public class Enemy : EnemyBase
 {
@@ -22,7 +23,7 @@ public class Enemy : EnemyBase
     
     [Header("Award")]
     //Award...........
-    public Award award;
+    public Award CurAward;
     
     FightLogic _fightLogic;
 
@@ -94,7 +95,6 @@ public class Enemy : EnemyBase
         {
             StopAllCoroutines();
             EState = EnemyState.dead;
-            StartCoroutine(ChangeCalculation());
         }
         else
             StartCoroutine(ChangeHitState(hitTime)); // 伤害后切换回 idle 状态
@@ -103,7 +103,7 @@ public class Enemy : EnemyBase
     //爆装备了
     public void GetAward()
     {
-        foreach (var each in award.Items)
+        foreach (var each in CurAward.Items)
         {
             //1）添加Item到数据&&GO层
             MainRoleManager.Instance.AddItem(each);
@@ -114,7 +114,7 @@ public class Enemy : EnemyBase
     #endregion
     
     #region 中间数据相关
-    public EnemyMiddleData ToMiddleData() => new (ID,MaxHP, ShieldsHPs);
+    public EnemyMiddleData ToMiddleData() => new (ID,MaxHP, ShieldsHPs,CurAward);
 
     public void LoadMiddleData(EnemyMiddleData _enemyMidData)
     {
@@ -122,6 +122,7 @@ public class Enemy : EnemyBase
         MaxHP = _enemyMidData.HP;
         ShieldsHPs.Clear();
         ShieldsHPs.AddRange(_enemyMidData.ShieldsHPs);
+        CurAward = _enemyMidData.CurAward;
     }
     #endregion
     
@@ -131,24 +132,6 @@ public class Enemy : EnemyBase
     {
         yield return new WaitForSeconds(hitTime);
         EState = EnemyState.live;
-    }
-    
-    //等待结算时间，时间到之后开启结算。。。。。
-    public IEnumerator ChangeCalculation()
-    {
-        yield return new WaitForSeconds(_fightLogic.waitCalculateTime);
-        MainRoleManager.Instance.Score += award.score;
-        _fightLogic.isBeginCalculation = true; //通知进行结算
-    }
-
-    //伤害跳字
-    void HitText(int damage)
-    {
-        GameObject txtHitIns = Instantiate(ResManager.instance
-            .GetAssetCache<GameObject>(PathConfig.TxtHitPB),txtHitNode.transform);
-        txtHitIns.GetComponent<TextMeshPro>().text = "-" + damage;
-        Animation curAni = txtHitIns.GetComponent<Animation>();
-        curAni.Play();
     }
     #endregion
 }

@@ -30,11 +30,6 @@ public class MSceneManager: ScriptableObject
     }
 
     #region PlayerSetting
-    public void Setting()
-    {
-        UIManager.Instance.G_Setting.GetComponent<SettingMono>().OnOffWindow();
-    }
-    
     public void SetScreenResolution(int value)
     {
         TrunkManager.Instance._userConfig.UserScreenResolution = value;

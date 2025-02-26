@@ -15,6 +15,8 @@ public enum WinOrFail
 [Serializable]
 public class SaveFileJson
 {
+    public int MaxHP;
+    public int HP;
     public int Score;                //分数
     public int Coins;                //硬币数量
     public int RoomKeys;             //钥匙数量
