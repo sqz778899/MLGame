@@ -34,12 +34,12 @@ public class Item : DragBase
         ItemBGInElement.gameObject.SetActive(false);
     }
     
-    internal override void VOnDrop()
+    internal override void OnDropEmptySlot()
     {
         //清除旧的Slot信息
         SlotManager.ClearBagSlotByID(SlotID,SlotType.BagSlot);
         //同步新的Slot信息，这一步会改变SlotID,所以放在后面
-        CurSlot.SOnDrop(_dragIns,SlotType.BagSlot);
+        CurSlot.SOnDrop(_dragIns);
         //数据层同步
         MainRoleManager.Instance.MoveItem(this);
         SyncData();

@@ -55,7 +55,6 @@ public class BagRoot : MonoBehaviour
         Dictionary<int, bool> curDict = MainRoleManager.Instance.CurBulletSlotLockedState;
         for (int i = 0; i < 5; i++)
             _btnReadySlotSC[i].State = curDict[i]?UILockedState.isNormal:UILockedState.isLocked;
-        Debug.Log("RefreshBulletSlotLockedState");
     }
     
     //页签切换为Bullet

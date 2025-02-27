@@ -41,6 +41,12 @@ public enum ToolTipsAttriType
     Element = 10,
 }
 
+public enum ToolTipsMenuState
+{
+    Normal = 0,
+    RightClick = 1,
+}
+
 #region 多语言相关
 public enum MultiLaEN
 {

@@ -18,7 +18,8 @@ public class ShopNode: MapNodeBase
     
     public void EnterShop()
     {
-        UIManager.Instance.IsLockedClick = true;
+        if (UIManager.Instance.IsLockedClick) return;
+        
         GameObject ShopIns = ResManager.instance.CreatInstance(PathConfig.ShopAsset);
         ShopIns.transform.SetParent(UIManager.Instance.ShopRoot.transform,false);
         //建立链接

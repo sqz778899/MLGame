@@ -4,17 +4,18 @@ using UnityEngine.EventSystems;
 public class RightClickMenu : MonoBehaviour,IPointerExitHandler
 {
     public GameObject CurIns;
-
+    public ToolTipsBase CurToolTipsBase;
     public void DeleteIns()
     {
-        if (CurIns==null)
-            return;
+        if (CurIns==null) return;
         BagItemManager<ItemBase>.DeleteObject(CurIns);
-        Destroy(gameObject);
+        CurToolTipsBase.CurToolTipsMenuState = ToolTipsMenuState.Normal;
+        gameObject.SetActive(false);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Destroy(gameObject);
+        CurToolTipsBase.CurToolTipsMenuState = ToolTipsMenuState.Normal;
+        gameObject.SetActive(false);
     }
 }

@@ -24,7 +24,7 @@ public class DraggableBulletSpawner :Bullet
     
     public override void OnPointerDown(PointerEventData eventData)
     {
-        DestroyTooltips();
+        HideTooltips();
         if (childBulletIns == null && Count > 0)
         {
             childBulletIns = BulletManager.Instance.InstanceBullet(ID,BulletInsMode.EditA,transform.parent.position);
@@ -39,7 +39,7 @@ public class DraggableBulletSpawner :Bullet
 
     public override void OnPointerUp(PointerEventData eventData)
     {
-        DestroyTooltips();
+        HideTooltips();
         if (Count >= 0 && childBulletIns != null)
         {
             childBulletIns.GetComponentInChildren<DraggableBullet>().DropOneBullet(eventData);
@@ -49,7 +49,7 @@ public class DraggableBulletSpawner :Bullet
 
     public override void OnDrag(PointerEventData eventData)
     {
-        DestroyTooltips();
+        HideTooltips();
         if (Count >= 0 && childBulletIns != null)
         {
             // 在拖动时，我们把子弹位置设置为鼠标位置

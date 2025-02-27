@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GemSlot : SlotBase
 {
+    [SerializeField]
     UILockedState _state;
     public UILockedState State
     {
@@ -22,10 +23,11 @@ public class GemSlot : SlotBase
     [Header("功能参数")]
     public int BulletSlotIndex;
     public Vector3 ChildScale = Vector3.one;
-    public override void SOnDrop(GameObject _childIns,SlotType _slotType)
+    public override void SOnDrop(GameObject _childIns)
     {
-        base.SOnDrop(_childIns,_slotType);
+        base.SOnDrop(_childIns);
         ChildIns.transform.localScale = ChildScale;
+        ChildIns.GetComponent<Gem>().BulletSlotIndex = BulletSlotIndex;
     }
     
     void Awake()

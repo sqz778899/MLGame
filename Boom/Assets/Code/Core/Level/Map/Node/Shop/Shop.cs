@@ -40,6 +40,8 @@ public class Shop:GUIBase
                 break;
         }
 
+        if (Input.GetKeyDown(KeyCode.Escape)) { QuitSelf(); }
+
         if (CurShopNode.IsFirstOpen)
         {
             TextRollCost.text = "0";

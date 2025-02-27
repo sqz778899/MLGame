@@ -4,30 +4,35 @@ using UnityEngine.EventSystems;
 public class ToolTipsBase : ItemBase,IPointerMoveHandler,IPointerExitHandler
 {
     [Header("Tooltips&&右击菜单相关")]
-    Vector3 ToolTipsOffset;
-    internal bool IsOpenedTooltip = false;
+    public float DobuleClickTime = 6f;
+    internal float lastClickTime = 0f;
+    internal Vector3 ToolTipsOffset;
+    Vector3 RightClickMenuOffset;
+    bool IsOpenedTooltip = false; //防止反复调用SetTooltipInfo();
+    public ToolTipsMenuState CurToolTipsMenuState;
     internal Tooltips CurTooltipsSC;
-    internal GameObject RightClickMenuGO;
-    internal bool IsToolTipsDisplay;
+    RightClickMenu CurRightClickMenuSC;
     internal RectTransform rectTransform => GetComponent<RectTransform>();
 
     internal virtual void Start()
     {
+        DobuleClickTime = 0.35f;
+        CurToolTipsMenuState = ToolTipsMenuState.Normal;
         ToolTipsOffset = new Vector3(1.01f, -0.5f, 0);
-        IsToolTipsDisplay = true;
+        RightClickMenuOffset = new Vector3(0.75f, -0.35f, 0);
         CurTooltipsSC = UIManager.Instance.TooltipsGO.GetComponentInChildren<Tooltips>();
+        CurRightClickMenuSC = UIManager.Instance.RightClickGO.GetComponentInChildren<RightClickMenu>();
     }
     
     public virtual void OnPointerExit(PointerEventData eventData)
     {
-        DestroyTooltips();
+        HideTooltips();
     }
 
     public virtual void OnPointerMove(PointerEventData eventData)
     {
-        if (!IsToolTipsDisplay) return;
-        
-        DisplayTooltips(eventData);
+        if (CurToolTipsMenuState == ToolTipsMenuState.Normal)
+            DisplayTooltips(eventData);
     }
 
     //捕捉鼠标位置转化为世界空间位置
@@ -55,7 +60,7 @@ public class ToolTipsBase : ItemBase,IPointerMoveHandler,IPointerExitHandler
     
     internal virtual void SetTooltipInfo(){}
     
-    internal void DestroyTooltips()
+    internal void HideTooltips()
     {
         CurTooltipsSC.ClearInfo();
         UIManager.Instance.TooltipsGO.SetActive(false);
@@ -66,26 +71,11 @@ public class ToolTipsBase : ItemBase,IPointerMoveHandler,IPointerExitHandler
     #region 右击菜单
     internal void DisplayRightClickMenu(PointerEventData eventData)
     {
-        if (RightClickMenuGO == null)
-        {
-            RightClickMenuGO = ResManager.instance.CreatInstance(PathConfig.RightClickMenu);
-            RightClickMenuGO.transform.SetParent(
-                UIManager.Instance.RightClickMenuRoot.transform,false);
-        }
-        if (RightClickMenuGO.TryGetComponent(out RightClickMenu curSc))
-        {
-            curSc.CurIns = eventData.pointerEnter?.transform.parent?.gameObject;
-            RightClickMenuGO.transform.position = GetWPosByMouse(eventData);
-        }
-    }
-    
-    internal void DestroyRightClickMenu()
-    {
-        for (int i = UIManager.Instance.RightClickMenuRoot.transform.childCount - 1; i >= 0; i--)
-        {
-            DestroyImmediate(UIManager.Instance.RightClickMenuRoot
-                .transform.GetChild(i).gameObject);
-        }
+        CurToolTipsMenuState = ToolTipsMenuState.RightClick;
+        UIManager.Instance.RightClickGO.SetActive(true);
+        CurRightClickMenuSC.CurIns = eventData.pointerEnter?.gameObject;
+        CurRightClickMenuSC.CurToolTipsBase = this;
+        UIManager.Instance.RightClickGO.transform.position = GetWPosByMouse(eventData) + RightClickMenuOffset;
     }
     #endregion
 

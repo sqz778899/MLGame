@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 
-public class DragBase : ToolTipsBase, IPointerDownHandler, IPointerUpHandler, IDragHandler
+public class DragBase : ToolTipsBase, IPointerDownHandler, IPointerUpHandler, IDragHandler,IPointerClickHandler
 {
     //其他属性
     [Header("拖拽相关")]
@@ -23,6 +23,14 @@ public class DragBase : ToolTipsBase, IPointerDownHandler, IPointerUpHandler, ID
     }
     
     public override void SyncData() {}//实现一下继承的抽象类
+    
+    //鼠标双击时
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (Time.time - lastClickTime <= DobuleClickTime) { DoubleClick(); }
+        lastClickTime = Time.time;
+    }
+    internal virtual void DoubleClick() {}//双击逻辑，派生类自己覆写去
 
     //鼠标按下时
     public virtual void OnPointerDown(PointerEventData eventData)
@@ -34,14 +42,11 @@ public class DragBase : ToolTipsBase, IPointerDownHandler, IPointerUpHandler, ID
 
         _eventData = eventData;
         if (eventData.button == PointerEventData.InputButton.Left)
-        {
             originalPosition = _dragIns.transform.position;
-        }
+        
         if (eventData.button == PointerEventData.InputButton.Right)
-        {
             RightClick();
-        }
-        DestroyTooltips();
+        HideTooltips();
     }
 
     //鼠标松开时
@@ -51,8 +56,7 @@ public class DragBase : ToolTipsBase, IPointerDownHandler, IPointerUpHandler, ID
         
         if (eventData.button == PointerEventData.InputButton.Right)
             return;
-        DestroyTooltips();
-        IsToolTipsDisplay = true;
+        HideTooltips();
         // 在释放鼠标按钮时，我们检查这个位置下是否有一个Slot
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventData, results);
@@ -67,7 +71,13 @@ public class DragBase : ToolTipsBase, IPointerDownHandler, IPointerUpHandler, ID
                 {
                     SlotManager.ClearBagSlotByID(SlotID,CurSlot.SlotType);//清除旧的Slot信息
                     CurSlot = curSlotSC;//再换Slot信息
-                    VOnDrop();
+                    OnDropEmptySlot();
+                    NonHappen = false;
+                    break;
+                }
+                else
+                {
+                    OnDropFillSlot(curSlotSC);
                     NonHappen = false;
                     break;
                 }
@@ -79,7 +89,8 @@ public class DragBase : ToolTipsBase, IPointerDownHandler, IPointerUpHandler, ID
     }
     
     //拖拽物如果找的Slot,则执行的逻辑
-    internal virtual void VOnDrop(){}
+    internal virtual void OnDropEmptySlot(){}
+    internal virtual void OnDropFillSlot(SlotBase targetSlot){}
     
     internal virtual void NonFindSlot()
     {
@@ -104,10 +115,9 @@ public class DragBase : ToolTipsBase, IPointerDownHandler, IPointerUpHandler, ID
         Vector3 worldPos = GetWPosByMouse(eventData);
         _dragIns.GetComponent<RectTransform>().position = worldPos;
         //拖动不显示Tooltips说明菜单
-        DestroyTooltips();
+        HideTooltips();
         VOnDrag();
     }
     
     internal virtual void VOnDrag(){}
-    
 }

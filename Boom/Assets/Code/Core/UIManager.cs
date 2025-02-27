@@ -15,11 +15,13 @@ public class UIManager : ScriptableObject
     //............CommonRoot.........
     GameObject TooltipsRoot; //外部不关心
     public GameObject TooltipsGO;
-    public GameObject RightClickMenuRoot;
+    GameObject RightClickMenuRoot; //外部不关心
+    public GameObject RightClickGO;
+    
     public GameObject G_StandbyMat;
     
     public GameObject EffectRoot; //特效根节点
-    [FormerlySerializedAs("LevelRoot")] public GameObject MapFightRoot;//关卡根节点
+    public GameObject MapFightRoot;//关卡根节点
     public GameObject Level; //放置关卡的节点
     
     //............GroupTitle.........
@@ -112,19 +114,15 @@ public class UIManager : ScriptableObject
         #endregion
         
         //............CommonRoot.........
+        if(TooltipsRoot == null) TooltipsRoot = GameObject.Find("TooltipsRoot");
+        if(TooltipsGO == null)  TooltipsGO = ResManager.instance.CreatInstance(PathConfig.TooltipAsset);
+        TooltipsGO.transform.SetParent(TooltipsRoot.transform,false);
+        TooltipsGO.SetActive(false);
 
-        if (TooltipsRoot == null)
-            TooltipsRoot = GameObject.Find("TooltipsRoot");
-        
-        if (TooltipsGO == null)
-        {
-            TooltipsGO = ResManager.instance.CreatInstance(PathConfig.TooltipAsset);
-            TooltipsGO.transform.SetParent(TooltipsRoot.transform,false);
-            TooltipsGO.SetActive(false);
-        }
-        
-        if (RightClickMenuRoot == null)
-            RightClickMenuRoot = GameObject.Find("RightClickMenuRoot");
+        if(RightClickMenuRoot == null) RightClickMenuRoot = GameObject.Find("RightClickMenuRoot");
+        if (RightClickGO == null) RightClickGO = ResManager.instance.CreatInstance(PathConfig.RightClickMenu);
+        RightClickGO.transform.SetParent(RightClickMenuRoot.transform,false);
+        RightClickGO.SetActive(false);
         
         if (G_StandbyMat == null)
             G_StandbyMat = GameObject.Find("G_StandbyMat");

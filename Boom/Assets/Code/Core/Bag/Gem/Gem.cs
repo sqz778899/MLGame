@@ -14,34 +14,70 @@ public class Gem : DragBase
     public bool IsInLay;
     public int BulletSlotIndex;
     public Image ItemSprite;
+    
     internal override void Start()
     {
         base.Start();
         SyncData();
     }
     
-    internal override void VOnDrop()
+    //落下空槽逻辑
+    internal override void OnDropEmptySlot()
     {
         switch (CurSlot.SlotType)
         {
             case SlotType.GemBagSlot:
                 IsInLay = false;
                 BulletSlotIndex = -1;
-                CurSlot.SOnDrop(_dragIns,SlotType.GemBagSlot);
+                CurSlot.SOnDrop(_dragIns);
+                ToolTipsOffset = new Vector3(1.01f, -0.5f, 0);
                 break;
             case SlotType.GemInlaySlot:
                 IsInLay = true;
                 GemSlot gemSlot = (GemSlot)CurSlot;
                 BulletSlotIndex = gemSlot.BulletSlotIndex;
-                CurSlot.SOnDrop(_dragIns,SlotType.GemInlaySlot);
+                CurSlot.SOnDrop(_dragIns);
+                ToolTipsOffset = new Vector3(-0.92f, -0.52f, 0);
                 break;
             default:
-                IsInLay = false;
-                BulletSlotIndex = -1;
-                CurSlot.SOnDrop(_dragIns,SlotType.GemBagSlot);
                 break;
         }
         MainRoleManager.Instance.RefreshAllItems();
+    }
+    //落下交换逻辑
+    internal override void OnDropFillSlot(SlotBase targetSlot)
+    {
+        //先把目标槽位的物品拿出来
+        GameObject tagetChildIns = targetSlot.ChildIns;
+        //tagetChildIns.GetComponent<Gem>().SlotType = CurSlot.SlotType;
+        CurSlot.SOnDrop(tagetChildIns);
+        //再把自己放进去
+        targetSlot.SOnDrop(_dragIns);
+        //SlotType = targetSlot.SlotType;
+        MainRoleManager.Instance.RefreshAllItems();
+    }
+    //双击逻辑
+    internal override void DoubleClick()
+    {
+        GemSlot curEmptySlot = null;
+        if (CurSlot.SlotType == SlotType.GemBagSlot)
+            curEmptySlot = MainRoleManager.Instance.GetEmptyGemSlot();//在角色栏找到一个空的GemSlot
+        else if(CurSlot.SlotType == SlotType.GemInlaySlot)
+            curEmptySlot = MainRoleManager.Instance.GetEmptyBagGemSlot();//在角色栏找到一个空的GemSlot
+        
+        if (!curEmptySlot) return;
+        
+        SlotManager.ClearBagSlotByID(SlotID,CurSlot.SlotType);//清除旧的Slot信息
+        CurSlot = curEmptySlot;//再换Slot信息
+        OnDropEmptySlot();
+    }
+    //右击逻辑
+    internal override void RightClick()
+    {
+        if (CurSlot.SlotType == SlotType.GemBagSlot)
+            DisplayRightClickMenu(_eventData);
+        else if (CurSlot.SlotType == SlotType.GemInlaySlot)//如果是镶嵌的宝石.右键直接卸下
+            DoubleClick();
     }
     
     protected override void OnIDChanged() =>  SyncData();

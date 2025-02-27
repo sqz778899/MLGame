@@ -41,6 +41,8 @@ public static class BagItemManager<T> where T:ItemBase
     // 删除物品或宝石
     public static void DeleteObject(GameObject objectIns)
     {
+        SlotBase curSlot = objectIns.GetComponent<ItemBase>().CurSlot;
+        curSlot.MainID = -1;
         GameObject.DestroyImmediate(objectIns);
         MainRoleManager.Instance.RefreshAllItems();
         TrunkManager.Instance.SaveFile();
@@ -58,7 +60,7 @@ public static class BagItemManager<T> where T:ItemBase
         // 找到对应的Slot槽位
         SlotBase curSlot = SlotManager.GetBagSlotByID(curObjectJson.SlotID, slotType);
         if (curSlot == null) return;
-        curSlot.SOnDrop(curObjectIns,slotType);
+        curSlot.SOnDrop(curObjectIns);
 
         // 同步到 MainRoleManager
         curObjectJson.InstanceID = curObjectSC.InstanceID;

@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class MainRoleManager :ScriptableObject
@@ -11,7 +12,6 @@ public class MainRoleManager :ScriptableObject
     public MapLogic CurMapLogic;
     public MapSate CurMapSate;
     public EnemyMiddleData CurEnemyMidData;
-
     public void InitFightData(EnemyMiddleData _enemyMidData,int _levelID)
     {
         CurEnemyMidData = _enemyMidData;
@@ -40,7 +40,6 @@ public class MainRoleManager :ScriptableObject
     //子弹
     public List<BulletJson> CurBullets = new List<BulletJson>(); //当前上膛的子弹
     Dictionary<BulletJson, Bullet> CurBulletsPair;
-
     #region 子弹槽的状态
     public event Action BulletSlotStateChanged;
     public BulletSlotRole[] CurBulletSlotRoleSCs;
@@ -64,8 +63,15 @@ public class MainRoleManager :ScriptableObject
     public List<ItemJson> BagItems = new List<ItemJson>();
     public List<ItemJson> EquipItems = new List<ItemJson>();
     //宝石
-    public List<GemJson> BagGems = new List<GemJson>();
-    public List<GemJson> InLayGems = new List<GemJson>();
+    public List<GemJson> BagGems = new List<GemJson>();//在背包中的宝石
+    public List<GemJson> InLayGems = new List<GemJson>();//在镶嵌槽中的宝石
+    public List<GemSlot> InlayGemSlots = new List<GemSlot>();//宝石槽
+    public GemSlot GetEmptyGemSlot() => InlayGemSlots.FirstOrDefault(gemSlot => 
+        gemSlot.State == UILockedState.isNormal && gemSlot.MainID==-1);//找到一个空的宝石槽
+    public List<GemSlot> BagGemSlots = new List<GemSlot>();//背包中的宝石槽
+    public GemSlot GetEmptyBagGemSlot() => BagGemSlots.FirstOrDefault(gemSlot => 
+        gemSlot.State == UILockedState.isNormal && gemSlot.MainID==-1);//找到一个空的背包位
+    
     public List<SupremeCharm> SupremeCharms = new List<SupremeCharm>();
 
     #region 人物属性
@@ -284,6 +290,13 @@ public class MainRoleManager :ScriptableObject
         //"游戏进程相关"
         if (CurMapSate == null)
             CurMapSate = new MapSate();
+        //初始化宝石槽的数据
+        InlayGemSlots = new List<GemSlot>();
+        InlayGemSlots.AddRange(UIManager.Instance.BagReadySlotRootGO
+            .GetComponentsInChildren<GemSlot>());
+        BagGemSlots = new List<GemSlot>();
+        BagGemSlots.AddRange(UIManager.Instance.BagGemRootGO
+            .GetComponentsInChildren<GemSlot>());
     }
 
     public void InitData()
@@ -372,22 +385,12 @@ public class MainRoleManager :ScriptableObject
         switch (mode)
         {
             case MutMode.Sub:
-                foreach (var each in BagGems)
-                {
-                    if (each.ID == gamJson.ID && each.InstanceID == gamJson.InstanceID)
-                        BagGems.Remove(each);
-                }
-                foreach (var each in InLayGems)
-                {
-                    if (each.ID == gamJson.ID && each.InstanceID == gamJson.InstanceID)
-                        InLayGems.Remove(each);
-                }
+                BagGems.RemoveAll(each => each.ID == gamJson.ID && each.InstanceID == gamJson.InstanceID);
+                InLayGems.RemoveAll(each => each.ID == gamJson.ID && each.InstanceID == gamJson.InstanceID);
                 break;
-            
             case MutMode.Add:
                 BagGems.Add(gamJson);
                 break;
-
         }
     }
     public void RefreshBagData(MutMode mode,ItemJson itemJson)
@@ -395,22 +398,12 @@ public class MainRoleManager :ScriptableObject
         switch (mode)
         {
             case MutMode.Sub:
-                foreach (var each in BagItems)
-                {
-                    if (each.ID == itemJson.ID && each.InstanceID == itemJson.InstanceID)
-                        BagItems.Remove(each);
-                }
-                foreach (var each in EquipItems)
-                {
-                    if (each.ID == itemJson.ID && each.InstanceID == itemJson.InstanceID)
-                        BagItems.Remove(each);
-                }
-
+                BagItems.RemoveAll(each => each.ID == itemJson.ID && each.InstanceID == itemJson.InstanceID);
+                EquipItems.RemoveAll(each => each.ID == itemJson.ID && each.InstanceID == itemJson.InstanceID);
                 break;
             case MutMode.Add:
                 BagItems.Add(itemJson);
                 break;
-
         }
     }
     
@@ -547,7 +540,7 @@ public class MainRoleManager :ScriptableObject
             //...................SetSlot.......................
             GameObject curSlot = roleSlotRoot.transform.GetChild(each.SlotID - 1).gameObject;//找到对应的Slot
             BulletSlot curSlotSC = curSlot.GetComponentInChildren<BulletSlot>();
-            curSlotSC.SOnDrop(BulletIns,SlotType.CurBulletSlot);
+            curSlotSC.SOnDrop(BulletIns);
         }
 
         SyncBulletIcon();

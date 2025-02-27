@@ -30,8 +30,7 @@ public class DraggableBullet : Bullet
         
         if (eventData.button == PointerEventData.InputButton.Right)
             return;
-        DestroyTooltips();
-        IsToolTipsDisplay = true;
+        HideTooltips();
         // 在释放鼠标按钮时，我们检查这个位置下是否有一个子弹槽
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventData, results);
@@ -58,15 +57,15 @@ public class DraggableBullet : Bullet
                     //清除旧的Slot信息
                     SlotManager.ClearBagSlotByID(SlotID,SlotType.CurBulletSlot);
                     //同步新的Slot信息
-                    CurSlot.SOnDrop(Ins,SlotType.CurBulletSlot);
+                    CurSlot.SOnDrop(Ins);
                     MainRoleManager.Instance.RefreshAllItems();
                 }
                 else
                 {
                     //
                     GameObject orIns = curSlotSC.ChildIns;
-                    CurSlot.SOnDrop(orIns,SlotType.CurBulletSlot);
-                    curSlotSC.SOnDrop(Ins,SlotType.CurBulletSlot);
+                    CurSlot.SOnDrop(orIns);
+                    curSlotSC.SOnDrop(Ins);
                     MainRoleManager.Instance.RefreshAllItems();
                 }
                 NonHappen = false;
@@ -95,6 +94,6 @@ public class DraggableBullet : Bullet
     public override void OnPointerUp(PointerEventData eventData)
     {
         DropOneBullet(eventData);
-        DestroyTooltips();
+        HideTooltips();
     }
 }
