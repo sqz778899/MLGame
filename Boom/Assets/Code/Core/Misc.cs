@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 
+#region ToolTips相关
 public struct ToolTipsInfo
 {
     public string Name;
@@ -46,6 +47,28 @@ public enum ToolTipsMenuState
     Normal = 0,
     RightClick = 1,
 }
+#endregion
+
+#region 战斗相关
+public struct BattleOnceHit
+{
+    public int HitIndex;
+    public int ShieldIndex;
+    public int EnmyIndex;
+    public int Damage;
+    public bool IsDestroyed;
+
+    public BattleOnceHit(int _hitIndex = -1,int _shieldIndex = -1,
+        int _enmyIndex = -1,int _damage = 0,bool _isDestroyed = false)
+    {
+        HitIndex = _hitIndex;
+        ShieldIndex = _shieldIndex;
+        EnmyIndex = _enmyIndex;
+        Damage = _damage;
+        IsDestroyed = _isDestroyed;
+    }
+}
+#endregion
 
 #region 多语言相关
 public enum MultiLaEN

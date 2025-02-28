@@ -85,9 +85,9 @@ public class Enemy : EnemyBase
     }
     
     //伤害
-    public override void TakeDamage(int damage)
+    public override void TakeDamage(BulletInner Bullet,int damage)
     {
-        base.TakeDamage(damage);
+        base.TakeDamage(Bullet,damage);
         float hitTime = 0f;
         AniUtility.PlayHit01(Ani, ref hitTime);
 

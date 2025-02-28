@@ -13,7 +13,6 @@ public class FightLogic : MonoBehaviour
     [Header("Display")] 
     public float waitCalculateTime = 3f;
     public bool isBeginCameraMove;
-    GameObject FirstBullet;
     public GameObject WinGUI;
     public GameObject FailGUI;
     public GameObject GameOverGUI;
@@ -90,10 +89,22 @@ public class FightLogic : MonoBehaviour
     #region UpDate中的各种状态
     void HandleCameraFollow()
     {
-        if (!isBeginCameraMove || FirstBullet == null) return;
-    
-        Vector3 cameraPos = Camera.main.transform.position;
-        Camera.main.transform.position = new Vector3(FirstBullet.transform.position.x, cameraPos.y, cameraPos.z);
+        if (!isBeginCameraMove) return;
+        
+        Transform firstBulletTrans = CurRole.Bullets[0].transform;
+        Vector3 bulletViewportPos = Camera.main.WorldToViewportPoint(firstBulletTrans.position);
+        
+        // 当子弹在屏幕外 (屏幕外是 < 0 或 > 1)
+        if (bulletViewportPos.x > 0.7f || bulletViewportPos.x < -0.7f)
+        {
+            Vector3 targetPos = Camera.main.transform.position;
+            targetPos.x = firstBulletTrans.position.x;
+        
+            // 平滑移动摄像机
+            Camera.main.transform.position = Vector3.MoveTowards(
+                Camera.main.transform.position,
+                targetPos, Time.deltaTime * 25f); // 5f是移动速度，可以调节
+        }
     }
     
     void HandleInput()
@@ -104,6 +115,7 @@ public class FightLogic : MonoBehaviour
         {
             _isAttacked = true;
             CurRole.Fire();
+            isBeginCameraMove = true;
         }
     }
     

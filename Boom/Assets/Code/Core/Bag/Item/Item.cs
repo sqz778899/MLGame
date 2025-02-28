@@ -34,7 +34,7 @@ public class Item : DragBase
         ItemBGInElement.gameObject.SetActive(false);
     }
     
-    internal override void OnDropEmptySlot()
+    public override void OnDropEmptySlot()
     {
         //清除旧的Slot信息
         SlotManager.ClearBagSlotByID(SlotID,SlotType.BagSlot);

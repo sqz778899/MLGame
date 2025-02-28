@@ -70,7 +70,7 @@ public class EnemyBase : MonoBehaviour
     public GameObject txtHitNode;
     
     //伤害
-    public virtual void TakeDamage(int damage)
+    public virtual void TakeDamage(BulletInner curBullet,int damage)
     {
         if (EState == EnemyState.dead) return; // 防止重复触发死亡状态
         

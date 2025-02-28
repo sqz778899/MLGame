@@ -15,9 +15,9 @@ public class ShieldMono : EnemyBase
         CurHealthBar.InitHealthBar(this); //初始化血条
     }
     //处理盾牌受到伤害
-    public override void TakeDamage(int damage)
+    public override void TakeDamage(BulletInner bullet,int damage)
     {
-        base.TakeDamage(damage);
+        base.TakeDamage(bullet,damage);
         if (CurHP <= 0)
             Destroy(gameObject);
     }

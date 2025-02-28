@@ -19,13 +19,13 @@ public class CalculateDamageManager : ScriptableObject
     }
     #endregion
 
-    public void CalDamage(Bullet bullet,EnemyBase curEnemy)
+    public void CalDamage(BulletInner bullet,EnemyBase curEnemy)
     {
         int curDamage = bullet.FinalDamage;
         switch (bullet.ElementalType)
         {
             case ElementalTypes.Non:
-                curEnemy.TakeDamage(curDamage);
+                curEnemy.TakeDamage(bullet,curDamage);
                 break;
             case ElementalTypes.Ice:
                 CalIce(bullet, curEnemy);
@@ -39,7 +39,7 @@ public class CalculateDamageManager : ScriptableObject
         }
     }
 
-    void CalIce(Bullet bullet,EnemyBase curEnemy)
+    void CalIce(BulletInner bullet,EnemyBase curEnemy)
     {
         int curDamage = bullet.Damage;
         DamageState curDamageState = curEnemy.DState;
@@ -50,14 +50,14 @@ public class CalculateDamageManager : ScriptableObject
             int curFire = curDamageState.Fire;
             int resultDamage = curFire + curDamage * 2;
             curDamageState.Fire = 0;
-            curEnemy.TakeDamage(resultDamage);
+            curEnemy.TakeDamage(bullet,resultDamage);
             return;
         }
         
         curDamageState.Ice += curDamage;
     }
 
-    void CalFire(Bullet bullet, EnemyBase curEnemy)
+    void CalFire(BulletInner bullet, EnemyBase curEnemy)
     {
         int curDamage = bullet.Damage;
         DamageState curDamageState = curEnemy.DState;
@@ -81,7 +81,7 @@ public class CalculateDamageManager : ScriptableObject
                 (curDamage + curDamageState.Fire) >= 5)
             {
                 int resultDamage = (curDamage + curDamageState.Fire + curDamageState.Electric) * 2;
-                curEnemy.TakeDamage(resultDamage);
+                curEnemy.TakeDamage(bullet,resultDamage);
                 return;
             }
         }
@@ -89,7 +89,7 @@ public class CalculateDamageManager : ScriptableObject
         curDamageState.Fire += curDamage;
     }
 
-    void CalElectric(Bullet bullet, EnemyBase curEnemy)
+    void CalElectric(BulletInner bullet, EnemyBase curEnemy)
     {
         int curDamage = bullet.Damage;
         DamageState curDamageState = curEnemy.DState;
@@ -99,7 +99,7 @@ public class CalculateDamageManager : ScriptableObject
         {
             int resultDamage = curElectric + curDamage;
             curDamageState.Electric += curDamage;
-            curEnemy.TakeDamage(resultDamage);
+            curEnemy.TakeDamage(bullet,resultDamage);
             return;
         }
 
@@ -110,7 +110,7 @@ public class CalculateDamageManager : ScriptableObject
                 (curDamage + curElectric) >= 5)
             {
                 int resultDamage = (curDamage + curElectric + curDamageState.Fire) * 2;
-                curEnemy.TakeDamage(resultDamage);
+                curEnemy.TakeDamage(bullet,resultDamage);
                 return;
             }
         }

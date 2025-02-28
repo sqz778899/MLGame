@@ -89,7 +89,7 @@ public class DragBase : ToolTipsBase, IPointerDownHandler, IPointerUpHandler, ID
     }
     
     //拖拽物如果找的Slot,则执行的逻辑
-    internal virtual void OnDropEmptySlot(){}
+    public virtual void OnDropEmptySlot(){}
     internal virtual void OnDropFillSlot(SlotBase targetSlot){}
     
     internal virtual void NonFindSlot()

@@ -319,12 +319,12 @@ public class TrunkManager: ScriptableObject
         List<BulletJson> UserBulletSpawner = new List<BulletJson>();
         BulletJson spawner01 = new BulletJson{ID=1};
         spawner01.SyncData();
-        spawner01.SpawnerCount = 0;
+        spawner01.SpawnerCount = 1;
         UserBulletSpawner.Add(spawner01);
         
         BulletJson spawner02 = new BulletJson{ID=2};
         spawner02.SyncData();
-        spawner02.SpawnerCount = 0;
+        spawner02.SpawnerCount = 1;
         UserBulletSpawner.Add(spawner02);
         
         BulletJson spawner03 = new BulletJson{ID=3};

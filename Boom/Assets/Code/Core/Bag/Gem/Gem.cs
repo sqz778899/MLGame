@@ -22,7 +22,7 @@ public class Gem : DragBase
     }
     
     //落下空槽逻辑
-    internal override void OnDropEmptySlot()
+    public override void OnDropEmptySlot()
     {
         switch (CurSlot.SlotType)
         {

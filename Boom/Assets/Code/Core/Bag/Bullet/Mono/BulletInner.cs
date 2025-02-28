@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 
 public class BulletInner : Bullet
 {
+    public int BattleOrder = -1;
     public float FollowDis = 3;
     public float RunSpeed = 10.0f;
     
@@ -21,6 +22,7 @@ public class BulletInner : Bullet
     public RoleInner CurRoleInner;
     int _piercingCount; //穿透的敌人的数量
     int _resonance;
+    float _curSpeed;
 
     internal override void Start()
     {
@@ -45,7 +47,7 @@ public class BulletInner : Bullet
             case BulletInnerState.AttackBegin:
                 break;
             case BulletInnerState.Attacking:// 让子弹沿着Z轴向前移动
-                transform.Translate(forward * 10f * Time.deltaTime);
+                AccelerateMove();
                 break;
             case BulletInnerState.Dead:
                 CurRoleInner.Bullets.Remove(this);
@@ -94,6 +96,11 @@ public class BulletInner : Bullet
     #endregion
 
     #region 攻击
+    void AccelerateMove()
+    {
+        _curSpeed = Mathf.Lerp(_curSpeed, 100f, Time.deltaTime * 0.5f);
+        transform.Translate(forward * _curSpeed * Time.deltaTime);
+    }
     public IEnumerator ReadyToAttack(Vector3 targetPos)
     {
         //...............填弹...........

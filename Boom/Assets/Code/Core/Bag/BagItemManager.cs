@@ -32,7 +32,7 @@ public static class BagItemManager<T> where T:ItemBase
         // 绑定到槽位
         objectIns.transform.SetParent(curTargetSlot.transform,false);
         curTargetSlot.MainID = objectID;
-        objectSC.SlotType = slotType;
+        curTargetSlot.ChildIns = objectIns;
         objectSC.SlotID = curTargetSlot.SlotID;
         objectSC.CurSlot = curTargetSlot;
         //objectSC

@@ -46,6 +46,7 @@ public class RoleInner : BaseMove
             GameObject bulletIns = BulletManager.Instance.
                 InstanceBullet(curB, BulletInsMode.Inner);
             BulletInner curSC = bulletIns.GetComponent<BulletInner>();
+            curSC.BattleOrder = i;
             float offsetX = startPos.x -i * 1f;
             curSC.FollowDis = Mathf.Abs(offsetX);
             bulletIns.transform.position = new Vector3(offsetX,startPos.y,startPos.z + i);
