@@ -77,8 +77,6 @@ public class EnemyBase : MonoBehaviour
         EState = EnemyState.hit;
         //伤害跳字
         HitText(damage);
-        CurHP -= damage;
-        if (CurHP < 0) CurHP = 0;
     }
     
     

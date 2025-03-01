@@ -55,17 +55,50 @@ public struct BattleOnceHit
     public int HitIndex;
     public int ShieldIndex;
     public int EnmyIndex;
+    public int EffectiveDamage;
+    public int OverflowDamage;
     public int Damage;
     public bool IsDestroyed;
 
     public BattleOnceHit(int _hitIndex = -1,int _shieldIndex = -1,
-        int _enmyIndex = -1,int _damage = 0,bool _isDestroyed = false)
+        int _enmyIndex = -1,int _effectiveDamage = 0,
+        int _overflowDamage = 0,int _damage = 0,bool _isDestroyed = false)
     {
         HitIndex = _hitIndex;
         ShieldIndex = _shieldIndex;
         EnmyIndex = _enmyIndex;
+        EffectiveDamage = _effectiveDamage;
+        OverflowDamage = _overflowDamage;
         Damage = _damage;
         IsDestroyed = _isDestroyed;
+    }
+}
+
+public class WarReport
+{
+    public int CurWarIndex;
+    public bool IsWin;
+    public Dictionary<int,SingelBattleInfo> WarIndexToBattleInfo;
+
+    public WarReport()
+    {
+        CurWarIndex = 0;
+        IsWin = false;
+        WarIndexToBattleInfo = new Dictionary<int, SingelBattleInfo>();
+    }
+    
+    public SingelBattleInfo GetCurBattleInfo()
+    {
+        return WarIndexToBattleInfo[CurWarIndex];
+    }
+}
+
+public class SingelBattleInfo
+{
+    public Dictionary<int, KeyValuePair<BulletJson, List<BattleOnceHit>>> InfoDict;
+    public SingelBattleInfo()
+    {
+        InfoDict = new Dictionary<int, KeyValuePair<BulletJson, List<BattleOnceHit>>>();
     }
 }
 #endregion

@@ -77,6 +77,7 @@ public class Enemy : EnemyBase
         {
             GameObject ShieldIns = ResManager.instance.CreatInstance(PathConfig.ShieldPB);
             ShieldMono curMono = ShieldIns.GetComponent<ShieldMono>();
+            curMono.ShieldIndex = i;
             curMono.InitShield(ShieldsHPs[i]);
             ShieldIns.transform.SetParent(ShieldsNode.transform,false);
             float curStep = i * curMono.InsStep;
@@ -85,14 +86,25 @@ public class Enemy : EnemyBase
     }
     
     //伤害
-    public override void TakeDamage(BulletInner Bullet,int damage)
+    public override void TakeDamage(BulletInner CurBullet,int damage)
     {
-        base.TakeDamage(Bullet,damage);
+        base.TakeDamage(CurBullet,damage);
+        //战场信息收集
+        int OverflowDamage = 0;
+        if (damage - CurHP > 0)
+            OverflowDamage = damage - CurHP;
+        int EffectiveDamage = damage - OverflowDamage;
+       
+        CurHP -= damage;
+        CurBullet.BattleOnceHits.Add(new BattleOnceHit(CurBullet.BattleOrder,
+            -1,1,EffectiveDamage,OverflowDamage,damage,CurHP<=0));
+        
         float hitTime = 0f;
         AniUtility.PlayHit01(Ani, ref hitTime);
-
+        
         if (CurHP <= 0)
         {
+            CurHP = 0;
             StopAllCoroutines();
             EState = EnemyState.dead;
         }

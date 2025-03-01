@@ -9,6 +9,7 @@ using UnityEngine.UIElements;
 public class BulletInner : Bullet
 {
     public int BattleOrder = -1;
+    public List<BattleOnceHit> BattleOnceHits = new List<BattleOnceHit>();
     public float FollowDis = 3;
     public float RunSpeed = 10.0f;
     
@@ -23,6 +24,7 @@ public class BulletInner : Bullet
     int _piercingCount; //穿透的敌人的数量
     int _resonance;
     float _curSpeed;
+    public float CurSpeed => _curSpeed;
 
     internal override void Start()
     {
@@ -47,7 +49,8 @@ public class BulletInner : Bullet
             case BulletInnerState.AttackBegin:
                 break;
             case BulletInnerState.Attacking:// 让子弹沿着Z轴向前移动
-                AccelerateMove();
+                _curSpeed = 60f;
+                transform.Translate(forward * _curSpeed * Time.deltaTime);
                 break;
             case BulletInnerState.Dead:
                 CurRoleInner.Bullets.Remove(this);
@@ -71,7 +74,26 @@ public class BulletInner : Bullet
 
             HandleEnemyHit(other.GetComponent<EnemyBase>());
             HandleHitEffect();
-            HandleBulletDisappear();
+            if (_state == BulletInnerState.Dead)
+            {
+                //如果是最后一个敌人，子弹消失
+                HandleBulletDisappear();
+                //传递给WarReport消息。
+                WarReport warReport = MainRoleManager.Instance.CurWarReport;
+                int curWarIndex = warReport.CurWarIndex;
+                
+                if (!warReport.WarIndexToBattleInfo.TryGetValue(curWarIndex, out SingelBattleInfo s))
+                {
+                    s = new SingelBattleInfo();
+                    warReport.WarIndexToBattleInfo[curWarIndex] = s;
+                }
+                
+                var dic = new Dictionary<BulletJson, List<BattleOnceHit>>
+                {
+                    [ToJosn()] = BattleOnceHits
+                };
+                s.InfoDict[BattleOrder] = new KeyValuePair<BulletJson, List<BattleOnceHit>>(ToJosn(), BattleOnceHits);
+            }
             _piercingCount++;
         }
     }
@@ -96,11 +118,6 @@ public class BulletInner : Bullet
     #endregion
 
     #region 攻击
-    void AccelerateMove()
-    {
-        _curSpeed = Mathf.Lerp(_curSpeed, 100f, Time.deltaTime * 0.5f);
-        transform.Translate(forward * _curSpeed * Time.deltaTime);
-    }
     public IEnumerator ReadyToAttack(Vector3 targetPos)
     {
         //...............填弹...........

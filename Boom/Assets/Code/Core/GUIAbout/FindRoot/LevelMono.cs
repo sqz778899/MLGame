@@ -16,6 +16,6 @@ public class LevelMono : MonoBehaviour
         CurEnemy = curEnemySC;
         curEnemySC.LoadMiddleData(_midData);
         EnmeyIns.transform.SetParent(EnemyRoot.transform,false);
-        EnmeyIns.transform.position = new Vector3(14,-0.45f,0);
+        //EnmeyIns.transform.position = new Vector3(14,-0.45f,0);
     }
 }

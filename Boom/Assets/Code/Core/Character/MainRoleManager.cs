@@ -73,6 +73,9 @@ public class MainRoleManager :ScriptableObject
         gemSlot.State == UILockedState.isNormal && gemSlot.MainID==-1);//找到一个空的背包位
     
     public List<SupremeCharm> SupremeCharms = new List<SupremeCharm>();
+    
+    [Header("战报")]
+    public WarReport CurWarReport;
 
     #region 人物属性
     [Header("人物属性")] 
@@ -281,6 +284,8 @@ public class MainRoleManager :ScriptableObject
     
     public void InitContainer()
     {
+        if(CurWarReport==null)
+            CurWarReport = new WarReport();
         if (CurRollPREveIDs == null)
             CurRollPREveIDs = new List<int>();
         if (CurRollPR == null)

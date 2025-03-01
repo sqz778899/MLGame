@@ -15,7 +15,7 @@
       "FinalPiercing": 0,
       "FinalResonance": 0,
       "IsResonance": false,
-      "SpawnerCount": 1,
+      "SpawnerCount": 0,
       "HitEffectName": "FX_Bullet01_hit",
       "ID": 1,
       "InstanceID": -1,
@@ -63,7 +63,46 @@
       "Price": 0
     }
   ],
-  "UserCurBullets": [],
+  "UserCurBullets": [
+    {
+      "Level": 1,
+      "ElementalType": 1,
+      "Damage": 1,
+      "Piercing": 0,
+      "Resonance": 0,
+      "FinalDamage": 1,
+      "FinalPiercing": 1,
+      "FinalResonance": 0,
+      "IsResonance": false,
+      "SpawnerCount": 0,
+      "HitEffectName": "FX_Bullet01_hit",
+      "ID": 1,
+      "InstanceID": -78316,
+      "Name": "黏土子弹",
+      "SlotID": 1,
+      "SlotType": 6,
+      "Price": 0
+    },
+    {
+      "Level": 1,
+      "ElementalType": 1,
+      "Damage": 1,
+      "Piercing": 0,
+      "Resonance": 0,
+      "FinalDamage": 1,
+      "FinalPiercing": 0,
+      "FinalResonance": 0,
+      "IsResonance": false,
+      "SpawnerCount": 0,
+      "HitEffectName": "FX_Bullet01_hit",
+      "ID": 1,
+      "InstanceID": -78408,
+      "Name": "黏土子弹",
+      "SlotID": 2,
+      "SlotType": 6,
+      "Price": 0
+    }
+  ],
   "UserStandbyBullet": [
     {
       "SlotID": 0,
@@ -98,8 +137,211 @@
     "3": false,
     "4": false
   },
-  "UserItems": [],
-  "UserGems": [],
+  "UserItems": [
+    {
+      "Rare": 1,
+      "ImageName": "T_Item_Can_01",
+      "Attribute": {
+        "waterElement": 0,
+        "fireElement": 1,
+        "thunderElement": 0,
+        "lightElement": 0,
+        "darkElement": 0,
+        "extraWaterDamage": 0,
+        "extraFireDamage": 20,
+        "extraThunderDamage": 0,
+        "extraLightDamage": 0,
+        "extraDarkDamage": 0,
+        "maxDamage": 30
+      },
+      "ID": 1,
+      "InstanceID": -215524,
+      "Name": "易拉罐",
+      "SlotID": 1,
+      "SlotType": 1,
+      "Price": 0
+    },
+    {
+      "Rare": 1,
+      "ImageName": "T_Item_Can_01",
+      "Attribute": {
+        "waterElement": 0,
+        "fireElement": 1,
+        "thunderElement": 0,
+        "lightElement": 0,
+        "darkElement": 0,
+        "extraWaterDamage": 0,
+        "extraFireDamage": 20,
+        "extraThunderDamage": 0,
+        "extraLightDamage": 0,
+        "extraDarkDamage": 0,
+        "maxDamage": 30
+      },
+      "ID": 1,
+      "InstanceID": -78028,
+      "Name": "易拉罐",
+      "SlotID": 1,
+      "SlotType": 1,
+      "Price": 0
+    },
+    {
+      "Rare": 1,
+      "ImageName": "T_Item_ToiletPlunger_01",
+      "Attribute": {
+        "waterElement": 1,
+        "fireElement": 0,
+        "thunderElement": 0,
+        "lightElement": 0,
+        "darkElement": 0,
+        "extraWaterDamage": 10,
+        "extraFireDamage": 0,
+        "extraThunderDamage": 0,
+        "extraLightDamage": 0,
+        "extraDarkDamage": 0,
+        "maxDamage": 40
+      },
+      "ID": 2,
+      "InstanceID": -215554,
+      "Name": "马桶搋子",
+      "SlotID": 2,
+      "SlotType": 1,
+      "Price": 0
+    },
+    {
+      "Rare": 1,
+      "ImageName": "T_Item_ToiletPlunger_01",
+      "Attribute": {
+        "waterElement": 1,
+        "fireElement": 0,
+        "thunderElement": 0,
+        "lightElement": 0,
+        "darkElement": 0,
+        "extraWaterDamage": 10,
+        "extraFireDamage": 0,
+        "extraThunderDamage": 0,
+        "extraLightDamage": 0,
+        "extraDarkDamage": 0,
+        "maxDamage": 40
+      },
+      "ID": 2,
+      "InstanceID": -78058,
+      "Name": "马桶搋子",
+      "SlotID": 2,
+      "SlotType": 1,
+      "Price": 0
+    },
+    {
+      "Rare": 1,
+      "ImageName": "T_Item_Can_01",
+      "Attribute": {
+        "waterElement": 0,
+        "fireElement": 1,
+        "thunderElement": 0,
+        "lightElement": 0,
+        "darkElement": 0,
+        "extraWaterDamage": 0,
+        "extraFireDamage": 20,
+        "extraThunderDamage": 0,
+        "extraLightDamage": 0,
+        "extraDarkDamage": 0,
+        "maxDamage": 30
+      },
+      "ID": 1,
+      "InstanceID": -366666,
+      "Name": "易拉罐",
+      "SlotID": 3,
+      "SlotType": 1,
+      "Price": 0
+    },
+    {
+      "Rare": 1,
+      "ImageName": "T_Item_Can_01",
+      "Attribute": {
+        "waterElement": 0,
+        "fireElement": 1,
+        "thunderElement": 0,
+        "lightElement": 0,
+        "darkElement": 0,
+        "extraWaterDamage": 0,
+        "extraFireDamage": 20,
+        "extraThunderDamage": 0,
+        "extraLightDamage": 0,
+        "extraDarkDamage": 0,
+        "maxDamage": 30
+      },
+      "ID": 1,
+      "InstanceID": -78088,
+      "Name": "易拉罐",
+      "SlotID": 3,
+      "SlotType": 1,
+      "Price": 0
+    },
+    {
+      "Rare": 1,
+      "ImageName": "T_Item_ToiletPlunger_01",
+      "Attribute": {
+        "waterElement": 1,
+        "fireElement": 0,
+        "thunderElement": 0,
+        "lightElement": 0,
+        "darkElement": 0,
+        "extraWaterDamage": 10,
+        "extraFireDamage": 0,
+        "extraThunderDamage": 0,
+        "extraLightDamage": 0,
+        "extraDarkDamage": 0,
+        "maxDamage": 40
+      },
+      "ID": 2,
+      "InstanceID": -366696,
+      "Name": "马桶搋子",
+      "SlotID": 4,
+      "SlotType": 1,
+      "Price": 0
+    },
+    {
+      "Rare": 1,
+      "ImageName": "T_Item_ToiletPlunger_01",
+      "Attribute": {
+        "waterElement": 1,
+        "fireElement": 0,
+        "thunderElement": 0,
+        "lightElement": 0,
+        "darkElement": 0,
+        "extraWaterDamage": 10,
+        "extraFireDamage": 0,
+        "extraThunderDamage": 0,
+        "extraLightDamage": 0,
+        "extraDarkDamage": 0,
+        "maxDamage": 40
+      },
+      "ID": 2,
+      "InstanceID": -78118,
+      "Name": "马桶搋子",
+      "SlotID": 4,
+      "SlotType": 1,
+      "Price": 0
+    }
+  ],
+  "UserGems": [
+    {
+      "Level": 1,
+      "ImageName": "T_Gem_Piercing_01",
+      "Attribute": {
+        "Damage": 0,
+        "Piercing": 1,
+        "Resonance": 0
+      },
+      "IsInLay": false,
+      "BulletSlotIndex": -1,
+      "ID": 10,
+      "InstanceID": -78910,
+      "Name": "穿透宝石",
+      "SlotID": 3,
+      "SlotType": 5,
+      "Price": 0
+    }
+  ],
   "SupremeCharms": [],
   "UserMapSate": [
     {

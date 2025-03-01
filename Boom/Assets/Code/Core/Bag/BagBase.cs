@@ -250,7 +250,7 @@ public class BulletJson : ItemJsonBase
     
     public string HitEffectName;
 
-    public   BulletJson(int _id = -1, int _instanceID = -1, string _name = "", 
+    public BulletJson(int _id = -1, int _instanceID = -1, string _name = "", 
         int _slotID = -1, int _slotType = -1,int _level = 1,int _elementalType = -1,
         int _damage = 0, int _piercing = 0, int _resonance = 0,int _spawnerCount = 0
         ,string _hitEffectName = "")

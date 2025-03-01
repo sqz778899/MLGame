@@ -23,6 +23,7 @@ public class UIManager : ScriptableObject
     public GameObject EffectRoot; //特效根节点
     public GameObject MapFightRoot;//关卡根节点
     public GameObject Level; //放置关卡的节点
+    public GameObject WarReportGO;//战报根GUI
     
     //............GroupTitle.........
     public GameObject TitleRoot;
@@ -138,6 +139,9 @@ public class UIManager : ScriptableObject
             MapFightRoot = GameObject.Find("MapFightRoot");
             Level = MapFightRoot.transform.GetChild(0).gameObject;
         }
+        
+        if (WarReportGO == null)
+            WarReportGO = GameObject.Find("WarReportRoot").transform.GetChild(0).gameObject;
     }
 
     void InitGUIBag()
