@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GUIWarReport : MonoBehaviour
 {
-    public Enemy CurEnemy;
     public GameObject SingelReportRoot;
     Vector2 SingelYOffset = new Vector2(0, -302);
     

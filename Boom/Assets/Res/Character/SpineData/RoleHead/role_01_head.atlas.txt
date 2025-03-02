@@ -1,0 +1,104 @@
+
+role_01_head.png
+size: 1465,592
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bags
+  rotate: false
+  xy: 881, 2
+  size: 248, 118
+  orig: 248, 118
+  offset: 0, 0
+  index: -1
+chin
+  rotate: false
+  xy: 1299, 446
+  size: 164, 144
+  orig: 164, 144
+  offset: 0, 0
+  index: -1
+era
+  rotate: false
+  xy: 1186, 410
+  size: 105, 180
+  orig: 105, 180
+  offset: 0, 0
+  index: -1
+eye
+  rotate: false
+  xy: 1186, 140
+  size: 135, 143
+  orig: 135, 143
+  offset: 0, 0
+  index: -1
+eye_2
+  rotate: true
+  xy: 1299, 305
+  size: 139, 157
+  orig: 139, 171
+  offset: 0, 14
+  index: -1
+eye_3
+  rotate: false
+  xy: 1131, 9
+  size: 166, 111
+  orig: 166, 111
+  offset: 0, 0
+  index: -1
+eyebrow
+  rotate: true
+  xy: 1299, 26
+  size: 76, 74
+  orig: 76, 74
+  offset: 0, 0
+  index: -1
+hair_1
+  rotate: false
+  xy: 717, 22
+  size: 162, 568
+  orig: 162, 568
+  offset: 0, 0
+  index: -1
+hair_2
+  rotate: true
+  xy: 881, 122
+  size: 468, 303
+  orig: 468, 303
+  offset: 0, 0
+  index: -1
+head
+  rotate: true
+  xy: 2, 6
+  size: 584, 713
+  orig: 584, 713
+  offset: 0, 0
+  index: -1
+iris
+  rotate: true
+  xy: 717, 9
+  size: 11, 29
+  orig: 11, 29
+  offset: 0, 0
+  index: -1
+mouth_1
+  rotate: false
+  xy: 1186, 285
+  size: 104, 123
+  orig: 104, 123
+  offset: 0, 0
+  index: -1
+mouth_2
+  rotate: false
+  xy: 1375, 44
+  size: 62, 58
+  orig: 62, 58
+  offset: 0, 0
+  index: -1
+nose
+  rotate: false
+  xy: 1323, 104
+  size: 126, 199
+  orig: 127, 199
+  offset: 1, 0
+  index: -1

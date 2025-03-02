@@ -102,7 +102,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.026955068, y: 1.3978136}
+  m_Offset: {x: 0.10264045, y: 1.0005289}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -113,7 +113,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.570819, y: 3.0483093}
+  m_Size: {x: 1.495813, y: 2.25374}
   m_EdgeRadius: 0
 --- !u!114 &4105577481829317920
 MonoBehaviour:
@@ -127,6 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6db6d97e977b2f4fb31211b32721169, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ID: 0
   MaxHP: 0
   EState: 0
   txtHitNode: {fileID: 6381881405559485386}
@@ -134,14 +135,11 @@ MonoBehaviour:
   ShieldsHPs: 
   ShieldsNode: {fileID: 203804713691695830}
   Ani: {fileID: 6988306664339217109}
-  award:
-    score: 100
-    gold: 20
-    supremeCharm:
-      ID: 0
-      name: 
-      damage: 0
-      elementalTypes: 0
+  Portrait: {fileID: 0}
+  CurAward:
+    Score: 0
+    Coin: 0
+    SupremeCharms: 
     Items: 
 --- !u!50 &7232633404548124944
 Rigidbody2D:

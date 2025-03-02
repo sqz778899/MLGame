@@ -19,7 +19,6 @@ public class FightLogic : MonoBehaviour
     public GameObject WarReportRootGUI;
     public GameObject WinGUI;
     public GameObject FailGUI;
-    public GameObject GameOverGUI;
     public float Distance;
 
     [Header("角色")] 
@@ -40,8 +39,6 @@ public class FightLogic : MonoBehaviour
             { WinOrFail.Win, WinTheLevel },
             { WinOrFail.Fail,FailTheLevel }
         };
-        _curBulletCount = CurRole.Bullets.Count;
-        _firstBulletTrans = CurRole.Bullets[0].transform;
     }
     
     void Update()
@@ -80,6 +77,10 @@ public class FightLogic : MonoBehaviour
         CurRole.InitData(CurLevel);
         MainRoleManager.Instance.WinOrFailState = WinOrFail.InLevel;
         MainRoleManager.Instance.CurWarReport.CurWarIndex += 1;
+        _curBulletCount = CurRole.Bullets.Count;
+        _firstBulletTrans = CurRole.Bullets[0].transform;
+        isCameraStopping = false;
+        isBeginCatch = false;
     }
 
     public void UnloadData()
@@ -122,7 +123,11 @@ public class FightLogic : MonoBehaviour
                 // 然后播放平滑移动效果
                 cameraSequence.Append(Camera.main.transform.DOMove(endPos, 3f));
                 // 可以选择性地在最后添加回调或其它操作
-                cameraSequence.OnKill(() => isCameraStopping = false);
+                cameraSequence.OnKill(() =>
+                {
+                    isCameraStopping = false;
+                    isBeginCameraMove = false;
+                });
             }
             return;     
         }
@@ -215,10 +220,8 @@ public class FightLogic : MonoBehaviour
         else
         {
             MainRoleManager.Instance.HP -= 1;
-            if (MainRoleManager.Instance.HP > 0)
-                FailGUI.SetActive(true);
-            else
-                GameOverGUI.SetActive(true);
+            FailGUI.SetActive(true);
+            FailGUI.GetComponent<GUIFail>().SetHertAni();
         }
     }
     #endregion

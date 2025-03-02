@@ -23,7 +23,11 @@ public class SingelReportRoot : MonoBehaviour
         BulletJson curBulletJson = curInfo.Key;
         List<BattleOnceHit> curBattleOnceHits = curInfo.Value;
         txtDamage.text = curBulletJson.FinalDamage.ToString();
+        if (curBulletJson.FinalPiercing == 0)
+            txtPiercing.gameObject.SetActive(false);
         txtPiercing.text = curBulletJson.FinalPiercing.ToString();
+        if (curBulletJson.FinalResonance == 0)
+            txtResonance.gameObject.SetActive(false);
         txtResonance.text = curBulletJson.FinalResonance.ToString();
         int effectiveDamage = 0;
         int overflowDamage = 0;
@@ -78,7 +82,12 @@ public class SingelReportRoot : MonoBehaviour
             Debug.Log("敌人有盾");
         }
         
+        if (effectiveDamage == 0)
+            txtEffectiveDamage.gameObject.SetActive(false);
         txtEffectiveDamage.text = effectiveDamage.ToString();
+        
+        if (overflowDamage == 0)
+            txtOverflowDamage.gameObject.SetActive(false);
         txtOverflowDamage.text = overflowDamage.ToString();
     }
 }
