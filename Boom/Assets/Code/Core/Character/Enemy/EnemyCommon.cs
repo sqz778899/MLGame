@@ -65,9 +65,11 @@ public class EnemyBase : MonoBehaviour
     [Header("功能相关")]
     public EnemyState EState;
     public DamageState DState = new DamageState();
-    
-    [Header("Node相关")]
-    public GameObject txtHitNode;
+
+    [Header("Node相关")] 
+    public Color HitColor;
+    public Transform HitTextRoot;  //伤害跳字的GO节点
+    public Transform HitTextTrans;  //伤害跳字的位置节点
     
     //伤害
     public virtual void TakeDamage(BulletInner curBullet,int damage)
@@ -83,10 +85,9 @@ public class EnemyBase : MonoBehaviour
     //伤害跳字
     void HitText(int damage)
     {
-        GameObject txtHitIns = Instantiate(ResManager.instance
-            .GetAssetCache<GameObject>(PathConfig.TxtHitPB),txtHitNode.transform);
-        txtHitIns.GetComponent<TextMeshPro>().text = "-" + damage;
-        Animation curAni = txtHitIns.GetComponent<Animation>();
-        curAni.Play();
+        GameObject txtHitIns = ResManager.instance.CreatInstance(PathConfig.TxtHitPB);
+        txtHitIns.transform.SetParent(HitTextRoot);
+        txtHitIns.transform.position = HitTextTrans.position;
+        txtHitIns.GetComponent<FloatingDamageText>().AnimateText("-" + damage,HitColor);
     }
 }

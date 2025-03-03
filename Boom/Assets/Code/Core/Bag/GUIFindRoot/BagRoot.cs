@@ -1,9 +1,6 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class BagRoot : MonoBehaviour
 {
@@ -18,6 +15,7 @@ public class BagRoot : MonoBehaviour
     public ButtonStateSwitch BtnGemSC;
     
     [Header("背包其它资源")]
+    public GameObject GroupBulletSpawnerSlot;
     public GameObject BagReadySlotGO;  //子弹槽
     BulletSlotRole[] _btnReadySlotSC;
     public GameObject DragObjRootGO;
@@ -56,7 +54,8 @@ public class BagRoot : MonoBehaviour
         for (int i = 0; i < 5; i++)
             _btnReadySlotSC[i].State = curDict[i]?UILockedState.isNormal:UILockedState.isLocked;
     }
-    
+
+    #region 页签切换
     //页签切换为Bullet
     public void SwichBullet()
     {
@@ -97,4 +96,5 @@ public class BagRoot : MonoBehaviour
         BtnItemSC.State = IsUnLockedItem? UILockedState.isNormal : UILockedState.isLocked;
         BtnGemSC.State = UILockedState.isSelected;
     }
+    #endregion
 }

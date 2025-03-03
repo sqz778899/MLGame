@@ -3844,6 +3844,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &5211025687577753345
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1780317543420582872}
+  m_Layer: 0
+  m_Name: HitTextRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1780317543420582872
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5211025687577753345}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3068142009712373496}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5391874203282637081
 GameObject:
   m_ObjectHideFlags: 0
@@ -6456,6 +6487,7 @@ Transform:
   - {fileID: 3640678193423469825}
   - {fileID: 4263190099228995630}
   - {fileID: 7950940845827036866}
+  - {fileID: 1780317543420582872}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3213409650135350164
@@ -6472,6 +6504,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurEnemy: {fileID: 0}
   EnemyRoot: {fileID: 8855117853190022149}
+  HitTextRoot: {fileID: 1780317543420582872}
   MapCollider: {fileID: 1904354366856002149}
 --- !u!1 &8697316925009858640
 GameObject:
@@ -6750,7 +6783,7 @@ Transform:
   m_GameObject: {fileID: 8855117853190022149}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 133.76, y: -1.46, z: 10}
+  m_LocalPosition: {x: 28.7, y: -1.46, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

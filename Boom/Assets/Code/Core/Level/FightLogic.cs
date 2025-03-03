@@ -14,8 +14,11 @@ public class FightLogic : MonoBehaviour
     [Header("Display")] 
     public float waitCalculateTime = 3f;
     public bool isBeginCameraMove;
-    Transform _firstBulletTrans;
+    Transform _firstBulletTrans => 
+        CurRole.Bullets[0] != null && CurRole.Bullets[0].gameObject != null 
+            ? CurRole.Bullets[0].transform : null;
     [Header("窗口")]
+    public GUIFightRoot GUIFightRoot;
     public GameObject WarReportRootGUI;
     public GameObject WinGUI;
     public GameObject FailGUI;
@@ -28,7 +31,7 @@ public class FightLogic : MonoBehaviour
 
     bool isEnd = false;
     float _cameraCurSpeed = 0f; 
-    int _curBulletCount = 0;
+    int _curBulletCount => CurRole.Bullets.Count;
 
     void Start()
     {
@@ -64,6 +67,7 @@ public class FightLogic : MonoBehaviour
     {
         Camera.main.transform.position = new Vector3(2.5f,1,-10);
         Camera.main.orthographicSize = 5;
+        GUIFightRoot.InitData();
         //InitLevel
         InitLevel();
         FailGUI.SetActive(false);
@@ -77,8 +81,6 @@ public class FightLogic : MonoBehaviour
         CurRole.InitData(CurLevel);
         MainRoleManager.Instance.WinOrFailState = WinOrFail.InLevel;
         MainRoleManager.Instance.CurWarReport.CurWarIndex += 1;
-        _curBulletCount = CurRole.Bullets.Count;
-        _firstBulletTrans = CurRole.Bullets[0].transform;
         isCameraStopping = false;
         isBeginCatch = false;
     }

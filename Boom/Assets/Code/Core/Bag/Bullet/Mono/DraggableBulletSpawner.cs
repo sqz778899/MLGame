@@ -10,7 +10,8 @@ public class DraggableBulletSpawner :Bullet
     public int Count;
     public GameObject childBulletIns;
     public TextMeshProUGUI txtCount;
-
+    public BulletJson CurBulletJson;
+    
     internal override void Start()
     {
         base.Start();
@@ -20,6 +21,14 @@ public class DraggableBulletSpawner :Bullet
     void Update()
     {
         txtCount.text = "X" + Count;
+        Count = CurBulletJson.SpawnerCount;
+    }
+
+    public void InitData(BulletJson bulletJson)
+    {
+        CurBulletJson = bulletJson;
+        ID = bulletJson.ID;
+        Count = bulletJson.SpawnerCount;
     }
     
     public override void OnPointerDown(PointerEventData eventData)
@@ -30,8 +39,9 @@ public class DraggableBulletSpawner :Bullet
             childBulletIns = BulletManager.Instance.InstanceBullet(ID,BulletInsMode.EditA,transform.parent.position);
             childBulletIns.transform.SetParent(UIManager.Instance.DragObjRoot.transform);
             childBulletIns.transform.localScale = Vector3.one;
-            Bullet DraBuSC = childBulletIns.GetComponentInChildren<Bullet>();
+            DraggableBullet DraBuSC = childBulletIns.GetComponentInChildren<DraggableBullet>();
             DraBuSC.originalPosition = transform.position;
+            DraBuSC.IsSpawnerCreate = true;
             MainRoleManager.Instance.TmpHongSpawner(ID);
             MainRoleManager.Instance.RefreshAllItems();
         }

@@ -1,22 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class DraggableBullet : Bullet
 {
-    void ReturnToSpawner()
-    {
-        DraggableBulletSpawner[] allSpawner = UIManager.Instance
-            .G_BulletSpawnerSlot.GetComponentsInChildren<DraggableBulletSpawner>();
-        foreach (var each in allSpawner)
-        {
-            if (each.ID == ID)
-            {
-                MainRoleManager.Instance.SubBullet(ID,InstanceID);
-                Destroy(Ins);
-            }
-        }
-    }
+    public bool IsSpawnerCreate = false;
 
     public override void OnPointerDown(PointerEventData eventData)
     {
@@ -27,73 +16,110 @@ public class DraggableBullet : Bullet
     public void DropOneBullet(PointerEventData eventData)
     {
         UIManager.Instance.IsLockedClick = false;
+        if (eventData.button == PointerEventData.InputButton.Right) return;
         
-        if (eventData.button == PointerEventData.InputButton.Right)
-            return;
         HideTooltips();
         // 在释放鼠标按钮时，我们检查这个位置下是否有一个子弹槽
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventData, results);
-
-        bool NonHappen = true; // 发生逻辑，如果未发生，则之后子弹弹回原位
-        foreach (RaycastResult result in results)  
+        bool nonHappen = true; // 发生逻辑，如果未发生，则之后子弹弹回原位
+        
+        foreach (var result in results)
         {
-            if (result.gameObject.CompareTag("BulletSlotRole"))
+            if (HandleBulletSlotRole(result) || HandleBulletSlot(result) || HandleBulletInnerSlot(result))
             {
-                BulletSlotRole curSlotSC = result.gameObject.GetComponent<BulletSlotRole>();
-                //看看子弹槽是不是锁定状态
-                if (curSlotSC.State == UILockedState.isLocked)
-                {
-                    //寻找母体
-                    ReturnToSpawner();
-                    NonHappen = false;
-                    break;
-                }
-                BulletInsMode = BulletInsMode.EditB;
-                //MainRoleManager.Instance.AddBulletOnlyData(ID,curSlotSC.SlotID,InstanceID);
-                if (curSlotSC.MainID == -1)
-                {
-                    CurSlot = curSlotSC;
-                    //清除旧的Slot信息
-                    SlotManager.ClearBagSlotByID(SlotID,SlotType.CurBulletSlot);
-                    //同步新的Slot信息
-                    CurSlot.SOnDrop(Ins);
-                    MainRoleManager.Instance.RefreshAllItems();
-                }
-                else
-                {
-                    //
-                    GameObject orIns = curSlotSC.ChildIns;
-                    CurSlot.SOnDrop(orIns);
-                    curSlotSC.SOnDrop(Ins);
-                    MainRoleManager.Instance.RefreshAllItems();
-                }
-                NonHappen = false;
-            }
-
-            if (result.gameObject.CompareTag("BulletSlot"))
-            {
-                //寻找母体
-                ReturnToSpawner();
-                NonHappen = false;
+                nonHappen = false;
                 break;
             }
         }
-
         // 如果这个位置下没有子弹槽，我们就将子弹位置恢复到原来的位置
-        if (NonHappen)
+        if (nonHappen)
         {
-            BulletInsMode = BulletInsMode.EditB;
-            Ins.transform.position = originalPosition;
-            _dragIns.transform.SetParent(originalParent,true);
+            if (IsSpawnerCreate) ReturnToSpawner();
+            else ResetPosition();
         }
-        
         MainRoleManager.Instance.RefreshAllItems();
     }
-
+    
     public override void OnPointerUp(PointerEventData eventData)
     {
         DropOneBullet(eventData);
         HideTooltips();
     }
+
+    #region 私有方法
+    bool HandleBulletSlotRole(RaycastResult result)
+    {
+        if (!result.gameObject.CompareTag("BulletSlotRole")) return false;
+        var curSlotSC = result.gameObject.GetComponent<BulletSlotRole>();
+        if (curSlotSC.State == UILockedState.isLocked)
+        {
+            ReturnToSpawner();
+            return true;
+        }
+
+        BulletInsMode = BulletInsMode.EditB;
+        if (curSlotSC.MainID == -1)
+        {
+            CurSlot = curSlotSC;
+            SlotManager.ClearBagSlotByID(SlotID, SlotType.CurBulletSlot);
+            CurSlot.SOnDrop(Ins);
+        }
+        else
+        {
+            var orIns = curSlotSC.ChildIns;
+            CurSlot.SOnDrop(orIns);
+            curSlotSC.SOnDrop(Ins);
+        }
+        MainRoleManager.Instance.RefreshAllItems();
+        return true;
+    }
+    
+    bool HandleBulletSlot(RaycastResult result)
+    {
+        if (!result.gameObject.CompareTag("BulletSlot")) return false;
+        ReturnToSpawner();
+        return true;
+    }
+
+    bool HandleBulletInnerSlot(RaycastResult result)
+    {
+        if (result.gameObject.CompareTag("BulletInnerSlot"))
+        {
+            //1) 查一下CurBullets,看看这个槽位下有无子弹,如果有，回退子弹
+            BulletInnerSlot curSlotSC = result.gameObject.GetComponent<BulletInnerSlot>();
+            GameObject oldBullet = MainRoleManager.Instance.GetReadyBulletBySlotID(curSlotSC.SlotID);
+            if (oldBullet != null)
+                MainRoleManager.Instance.SubBullet(curSlotSC.SlotID);
+            //2)添加当前子弹进入战场
+            MainRoleManager.Instance.RefreshCurBullets(MutMode.Add, ID,TargetSlotID: curSlotSC.SlotID);
+            MainRoleManager.Instance.InstanceCurBullets();
+            UIManager.Instance.RoleIns.GetComponent<RoleInner>().InitData();
+            //3)
+            Destroy(Ins);
+            return true;
+        }
+        return false;
+    }
+    
+    void ReturnToSpawner()
+    {
+        DraggableBulletSpawner[] allSpawner = UIManager.Instance
+            .G_BulletSpawnerSlot.GetComponentsInChildren<DraggableBulletSpawner>();
+        
+        foreach (var spawner in allSpawner.Where(spawner => spawner.ID == ID))
+        {
+            MainRoleManager.Instance.SubBullet(ID, InstanceID);
+            Destroy(Ins);
+            return;
+        }
+    }
+    
+    void ResetPosition()
+    {
+        BulletInsMode = BulletInsMode.EditB;
+        Ins.transform.position = originalPosition;
+        _dragIns.transform.SetParent(originalParent, true);
+    }
+    #endregion
 }

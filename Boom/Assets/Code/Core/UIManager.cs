@@ -46,11 +46,13 @@ public class UIManager : ScriptableObject
     [Header("Bag")]
     //Bag Bullet
     public GameObject G_BulletSpawnerSlot;  //子弹孵化器的Group
+    public GameObject G_BulletSpawnerSlot_Mini;  //子弹孵化器的Group
     //Bag Item
     public GameObject BagItemRootGO;           //道具根节点
     public GameObject EquipItemRootGO;       //元素均衡槽根节点
     //Bag Gem
     public GameObject BagGemRootGO;            //宝石根节点
+    public GameObject BagGemRootGO_Mini;            //宝石根节点
     //Bag Common
     public GameObject DragObjRoot;            //拖动物品时候的悬浮父节点
     public GameObject BagReadySlotRootGO;     //子弹在人物右侧的Group
@@ -157,8 +159,8 @@ public class UIManager : ScriptableObject
         DragObjRoot = bagRootSC.DragObjRootGO;
         
         #region 初始化背包子弹编辑界面的GUI逻辑
-        BagBulletRoot bagBulletRootSC = bagRootSC.BagBulletRootGO.GetComponent<BagBulletRoot>();
-        G_BulletSpawnerSlot = bagBulletRootSC.G_BulletSpawnerSlot;
+        G_BulletSpawnerSlot = bagRootSC.GroupBulletSpawnerSlot;
+        G_BulletSpawnerSlot_Mini = curMainSC.GUIBagRoot_Mini.GetComponent<BagRootMini>().GroupBulletSpawnerSlot;
         #endregion
 
         #region 初始化BagItem界面
@@ -168,6 +170,7 @@ public class UIManager : ScriptableObject
         #endregion
 
         BagGemRootGO = bagRootSC.BagGemRootGO;
+        BagGemRootGO_Mini = curMainSC.GUIBagRoot_Mini.GetComponent<BagRootMini>().BagGemRootGO;
     }
     
     #region 单例

@@ -70,7 +70,7 @@ public static class PathConfig
    public static string ObserveHPPB = GetPrepath() + "Res/Character/Image/Enemy/P_ObserveHP_01.prefab";
    
    //...........................角色.................................
-   public static string EnemyPB = GetPrepath() + "Res/Character/SpineData/Enemy01/P_Enemy_01.prefab";
+   public static string EnemyPB = GetPrepath() + "Res/Character/SpineData/P_Enemy_Template.prefab";
 
    public static string GetEnemySkelentonDataPath(int ID)
    {

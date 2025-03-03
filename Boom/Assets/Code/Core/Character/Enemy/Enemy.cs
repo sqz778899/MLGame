@@ -79,6 +79,8 @@ public class Enemy : EnemyBase
             ShieldMono curMono = ShieldIns.GetComponent<ShieldMono>();
             curMono.ShieldIndex = i;
             curMono.InitShield(ShieldsHPs[i]);
+            curMono.HitColor = HitColor;
+            curMono.HitTextRoot = HitTextRoot;
             ShieldIns.transform.SetParent(ShieldsNode.transform,false);
             float curStep = i * curMono.InsStep;
             ShieldIns.transform.localPosition = new Vector3(curStep,0,0);

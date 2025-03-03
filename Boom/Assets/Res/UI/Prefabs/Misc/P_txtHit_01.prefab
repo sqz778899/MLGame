@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7636619880151445399}
   - component: {fileID: 8957541134501403405}
   - component: {fileID: 6551574905545421367}
-  - component: {fileID: 3786144671893068971}
+  - component: {fileID: -1285592168087078567}
   m_Layer: 0
   m_Name: P_txtHit_01
   m_TagString: Untagged
@@ -172,19 +172,17 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 8957541134501403405}
   m_maskType: 0
---- !u!111 &3786144671893068971
-Animation:
+--- !u!114 &-1285592168087078567
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8142654205520534213}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 08634a82dc5a86e49ab309d3c423bf7d, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 08634a82dc5a86e49ab309d3c423bf7d, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96f49041aceb6774a8c7a65295640356, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveUpDistance: 4
+  duration: 6

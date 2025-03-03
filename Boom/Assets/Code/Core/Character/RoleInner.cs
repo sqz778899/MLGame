@@ -39,7 +39,7 @@ public class RoleInner : BaseMove
     //在开始战斗的时候，根据角色槽位的子弹，创建五个跟着他跑的傻逼嘻嘻的小子弹
     void CreateBulletInner()
     {
-        Vector3 startPos = new Vector3(-1f, -0.64f, 1f);
+        Vector3 startPos = new Vector3(transform.position.x - 1, -0.64f, 1f);
         for (int i = 0; i < MainRoleManager.Instance.CurBullets.Count; i++)
         {
             BulletJson curB = MainRoleManager.Instance.CurBullets[i];
@@ -47,7 +47,7 @@ public class RoleInner : BaseMove
                 InstanceBullet(curB, BulletInsMode.Inner);
             BulletInner curSC = bulletIns.GetComponent<BulletInner>();
             curSC.BattleOrder = i;
-            float offsetX = startPos.x -i * 1f;
+            float offsetX = startPos.x - (curB.SlotID - 1) * 1f;
             curSC.FollowDis = Mathf.Abs(offsetX);
             bulletIns.transform.position = new Vector3(offsetX,startPos.y,startPos.z + i);
             bulletIns.transform.SetParent(UIManager.Instance.G_BulletInScene.transform,false);
@@ -68,7 +68,8 @@ public class RoleInner : BaseMove
         transform.position = newPos;
         
         //地图边缘限制摄像机移动
-        _mCamera.transform.position = new Vector3(newPos.x + _cameraOffsetX,_mCamera.transform.position.y,_mCamera.transform.position.z);
+        _mCamera.transform.position = new Vector3(newPos.x + _cameraOffsetX,_mCamera.transform.position.y
+            ,_mCamera.transform.position.z);
         
         AniUtility.TrunAround(Ani,direction.x);//朝向
         AniUtility.PlayRun(Ani);
@@ -122,7 +123,7 @@ public class RoleInner : BaseMove
         StartCoroutine(FireWithDelay(FireDelay));
     }
 
-    public IEnumerator FireWithDelay(float delay)
+    public IEnumerator   FireWithDelay(float delay)
     {
         Debug.Log("fire");
         //填弹药动画

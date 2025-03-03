@@ -6,6 +6,7 @@ public class MainSceneMono:MonoBehaviour
     //GUIEditScene
     [Header("BagRoot")]
     public GameObject GUIBagRoot;
+    public GameObject GUIBagRoot_Mini;
     //MapScene
     [Header("MapScene")]
     public GameObject MapScene;

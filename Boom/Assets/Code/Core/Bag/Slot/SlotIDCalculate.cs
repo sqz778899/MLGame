@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class SlotIDCalculate : MonoBehaviour
 {
-    public SlotType SlotType;
-    
     public void InitSlotID()
     {
         BulletSlot[] bulletSlots = gameObject.GetComponentsInChildren<BulletSlot>();
@@ -16,7 +14,6 @@ public class SlotIDCalculate : MonoBehaviour
             SlotBase curBase = bagSlots[i];
             curBase.SlotID = i + 1;
             curBase.MainID = -1;
-            curBase.SlotType = SlotType;
         }
         
         GemSlot[] gemSlots = gameObject.GetComponentsInChildren<GemSlot>();

@@ -130,7 +130,9 @@ MonoBehaviour:
   ID: 0
   MaxHP: 0
   EState: 0
-  txtHitNode: {fileID: 6381881405559485386}
+  HitColor: {r: 0.6603774, g: 0, b: 0, a: 1}
+  HitTextRoot: {fileID: 0}
+  HitTextTrans: {fileID: 4114839840542551525}
   CurHealthBar: {fileID: 248491858651689384}
   ShieldsHPs: 
   ShieldsNode: {fileID: 203804713691695830}

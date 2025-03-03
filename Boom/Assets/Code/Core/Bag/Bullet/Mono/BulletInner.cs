@@ -46,6 +46,8 @@ public class BulletInner : Bullet
             case BulletInnerState.Common:
                 Run();//在界面跟着主角跑
                 break;
+            case BulletInnerState.Edit:
+                break;
             case BulletInnerState.AttackBegin:
                 break;
             case BulletInnerState.Attacking:// 让子弹沿着Z轴向前移动
@@ -53,7 +55,7 @@ public class BulletInner : Bullet
                 transform.Translate(forward * _curSpeed * Time.deltaTime);
                 break;
             case BulletInnerState.Dead:
-                CurRoleInner.Bullets.Remove(this);
+                //CurRoleInner.Bullets.Remove(this);
                 Destroy(gameObject);
                 break;
         }
@@ -164,7 +166,7 @@ public class BulletInner : Bullet
     public void Attack()
     {
         gameObject.SetActive(true);
-        StopAllCoroutines();
+        //StopAllCoroutines();
         _state = BulletInnerState.Attacking;
         foreach (Material material in _materials)
             material.SetFloat("_Transparency", 1);

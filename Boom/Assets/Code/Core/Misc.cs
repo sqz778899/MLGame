@@ -232,5 +232,6 @@ public enum SlotType
     ElementSlot = 3,
     GemBagSlot = 4,
     GemInlaySlot = 5,
-    CurBulletSlot = 6
+    CurBulletSlot = 6,
+    BulletInnerSlot = 7
 }

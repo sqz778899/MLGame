@@ -108,6 +108,7 @@ public class DesignTool
         if (MainRoleManager.Instance.CurBullets.Count >= 5)
             MainRoleManager.Instance.CurBullets.RemoveAt(0);
         MainRoleManager.Instance.RefreshCurBullets(MutMode.Add, bulletID);
+        MainRoleManager.Instance.InstanceCurBullets();
         UIManager.Instance.RoleIns.GetComponent<RoleInner>().InitData();
     }
     [Button("添加黏土子弹Lv1",ButtonSizes.Large)]

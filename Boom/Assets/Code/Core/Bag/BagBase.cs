@@ -297,12 +297,15 @@ public class BulletJson : ItemJsonBase
     {
         BulletJson designJson = TrunkManager.Instance.BulletDesignJsons
             .FirstOrDefault(each => each.ID == ID) ?? new BulletJson();
-        
-        // 通过反射遍历所有字段并同步值
-        foreach (var field in typeof(BulletJson).GetFields())
-        {
-            field.SetValue(this, field.GetValue(designJson));
-        }
+
+        ID = designJson.ID;
+        InstanceID = designJson.InstanceID;
+        Name = designJson.Name;
+        Level = designJson.Level;
+        ElementalType = designJson.ElementalType;
+        Damage = designJson.Damage;
+        Piercing = designJson.Piercing;
+        Resonance = designJson.Resonance;
     }
 }
 #endregion

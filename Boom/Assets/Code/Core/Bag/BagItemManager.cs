@@ -79,6 +79,15 @@ public static class BagItemManager<T> where T:ItemBase
                 MainRoleManager.Instance.EquipItems.Add(curObjectJson as ItemJson);
                 break;
         }
+        
+        //同步到BagMini
+        GameObject curObjectIns_Mini = null;
+        T curObject_Mini = null;
+        InitObjectIns(curObjectJson.ID, ref curObjectIns_Mini, ref curObject_Mini, slotType);
+        
+        SlotBase curSlot_Mini = SlotManager.GetMiniBagSlotByID(curObjectJson.SlotID, slotType);
+        if (curSlot_Mini == null) return;
+        curSlot_Mini.SOnDrop(curObjectIns_Mini);
     }
     #endregion
     
