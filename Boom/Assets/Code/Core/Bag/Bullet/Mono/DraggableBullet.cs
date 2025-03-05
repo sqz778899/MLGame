@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DraggableBullet : Bullet
+public class DraggableBullet : BulletNew
 {
     public bool IsSpawnerCreate = false;
 
@@ -63,13 +63,13 @@ public class DraggableBullet : Bullet
         {
             CurSlot = curSlotSC;
             SlotManager.ClearBagSlotByID(SlotID, SlotType.CurBulletSlot);
-            CurSlot.SOnDrop(Ins);
+            CurSlot.SOnDrop(gameObject);
         }
         else
         {
             var orIns = curSlotSC.ChildIns;
             CurSlot.SOnDrop(orIns);
-            curSlotSC.SOnDrop(Ins);
+            curSlotSC.SOnDrop(gameObject);
         }
         MainRoleManager.Instance.RefreshAllItems();
         return true;
@@ -92,11 +92,11 @@ public class DraggableBullet : Bullet
             if (oldBullet != null)
                 MainRoleManager.Instance.SubBullet(curSlotSC.SlotID);
             //2)添加当前子弹进入战场
-            MainRoleManager.Instance.RefreshCurBullets(MutMode.Add, ID,TargetSlotID: curSlotSC.SlotID);
+            MainRoleManager.Instance.RefreshCurBullets(MutMode.Add, _data.ID,TargetSlotID: curSlotSC.SlotID);
             MainRoleManager.Instance.InstanceCurBullets();
             UIManager.Instance.RoleIns.GetComponent<RoleInner>().InitData();
             //3)
-            Destroy(Ins);
+            Destroy(gameObject);
             return true;
         }
         return false;
@@ -109,8 +109,8 @@ public class DraggableBullet : Bullet
         
         foreach (var spawner in allSpawner.Where(spawner => spawner.ID == ID))
         {
-            MainRoleManager.Instance.SubBullet(ID, InstanceID);
-            Destroy(Ins);
+            MainRoleManager.Instance.SubBullet(_data.ID, InstanceID);
+            Destroy(gameObject);
             return;
         }
     }
@@ -118,7 +118,7 @@ public class DraggableBullet : Bullet
     void ResetPosition()
     {
         BulletInsMode = BulletInsMode.EditB;
-        Ins.transform.position = originalPosition;
+        gameObject.transform.position = originalPosition;
         _dragIns.transform.SetParent(originalParent, true);
     }
     #endregion

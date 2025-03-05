@@ -38,7 +38,7 @@ public class MainRoleManager :ScriptableObject
     
     //...............Item................
     //子弹
-    public List<BulletJson> CurBullets = new List<BulletJson>(); //当前上膛的子弹
+    public List<BulletData> CurBullets = new List<BulletData>(); //当前上膛的子弹
     Dictionary<BulletJson, Bullet> CurBulletsPair;
     #region 子弹槽的状态
     public event Action BulletSlotStateChanged;
@@ -58,7 +58,7 @@ public class MainRoleManager :ScriptableObject
     }
     #endregion
     
-    public List<BulletJson> CurBulletSpawners;                   //全部的子弹
+    public List<BulletData> CurBulletSpawners = new List<BulletData>();                   //全部的子弹
     //道具
     public List<ItemJson> BagItems = new List<ItemJson>();
     public List<ItemJson> EquipItems = new List<ItemJson>();
@@ -71,8 +71,6 @@ public class MainRoleManager :ScriptableObject
     public List<GemSlot> BagGemSlots = new List<GemSlot>();//背包中的宝石槽
     public GemSlot GetEmptyBagGemSlot() => BagGemSlots.FirstOrDefault(gemSlot => 
         gemSlot.State == UILockedState.isNormal && gemSlot.MainID==-1);//找到一个空的背包位
-    
-    public List<SupremeCharm> SupremeCharms = new List<SupremeCharm>();
     
     [Header("战报")]
     public WarReport CurWarReport;
@@ -169,8 +167,8 @@ public class MainRoleManager :ScriptableObject
         int resonanceCount = 0;
         for (int i = 1; i < CurBullets.Count; i++)
         {
-            BulletJson preBullet = CurBullets[i - 1];
-            BulletJson nextBullet = CurBullets[i];
+            BulletData preBullet = CurBullets[i - 1];
+            BulletData nextBullet = CurBullets[i];
             if (preBullet.FinalResonance == 0 || nextBullet.FinalResonance == 0)//不符合共振条件
             {
                 resonanceCount = 0;
@@ -183,14 +181,14 @@ public class MainRoleManager :ScriptableObject
             if (nextRemainder == preRemainder)//符合共振条件
             {
                 resonanceCount++;
-                preBullet.IsResonance = true;
-                nextBullet.IsResonance = true;
-                CurBulletsPair[preBullet].IsResonance = true;
+                //preBullet.IsResonance = true;
+                //nextBullet.IsResonance = true;
+                //CurBulletsPair[preBullet].IsResonance = true;
                 //开始添加共振伤害
-                Bullet nextBulletSC = CurBulletsPair[nextBullet];
+                /*Bullet nextBulletSC = CurBulletsPair[nextBullet];
                 nextBulletSC.IsResonance = true;
                 nextBulletSC.FinalDamage += nextBulletSC.FinalResonance * resonanceCount;
-                nextBullet.FinalDamage += nextBullet.FinalResonance * resonanceCount;
+                nextBullet.FinalDamage += nextBullet.FinalResonance * resonanceCount;*/
                 //构建共振簇
                 if (ResonanceClusterDict.ContainsKey(clusterCount))
                     ResonanceClusterDict[clusterCount].Add(nextBullet.SlotID);
@@ -282,7 +280,7 @@ public class MainRoleManager :ScriptableObject
         switch (mode)
         {
             case MutMode.Sub:
-                BulletJson bulletToRemove = CurBullets
+                BulletData bulletToRemove = CurBullets
                     .FirstOrDefault(b => b.ID == BulletID && b.InstanceID == InstanceID);
                 if (bulletToRemove != null)
                     CurBullets.Remove(bulletToRemove);
@@ -296,8 +294,8 @@ public class MainRoleManager :ScriptableObject
                         .FirstOrDefault(i => !CurBullets.Any(b => b.SlotID == i));
                 }
                 
-                BulletJson curData = new BulletJson(BulletID,_slotID: TargetSlotID);
-                curData.SyncData();
+                BulletData curData = new BulletData(BulletID);
+                curData.SlotID = TargetSlotID;
                 CurBullets.Add(curData);
                 break;
         }
@@ -379,7 +377,7 @@ public class MainRoleManager :ScriptableObject
             GetComponentsInChildren<Gem>(true).Select(gem => gem.ToJosn()));
         
         //宝石镶嵌属性一并同步
-        CurBullets = new List<BulletJson>();
+        CurBullets = new List<BulletData>();
         Bullet[] CurBulletSC = UIManager.Instance.BagReadySlotRootGO
             .GetComponentsInChildren<Bullet>(true);
 
@@ -398,12 +396,12 @@ public class MainRoleManager :ScriptableObject
         }
 
         CurBulletsPair.Clear();
-        foreach (var each in CurBulletSC)
+        /*foreach (var each in CurBulletSC)
         {
-            BulletJson curJson = each.ToJosn();
+            BulletData curJson = each.ToJosn();
             CurBullets.Add(curJson);
             CurBulletsPair[curJson] = each;
-        }
+        }*/
         #endregion
 
         #region 属性添加
@@ -450,15 +448,14 @@ public class MainRoleManager :ScriptableObject
     }
     void InstanceSpawnersSingel(BulletSlot[] slots)
     {
-        foreach (BulletJson each in CurBulletSpawners)
+        foreach (BulletData each in CurBulletSpawners)
         {
             int curSpawnerFindID = each.ID % 10;
             var slot = slots.FirstOrDefault(s => s.SlotID == curSpawnerFindID);
             if (slot != null)
             {
                 slot.MainID = each.ID;
-                GameObject newSpawnerIns = BulletManager.Instance.InstanceBullet(each.ID, BulletInsMode.Spawner);
-                newSpawnerIns.GetComponentInChildren<DraggableBulletSpawner>().InitData(each);
+                GameObject newSpawnerIns = BulletFactory.CreateBullet(each, BulletInsMode.Spawner).gameObject;
                 newSpawnerIns.transform.SetParent(slot.gameObject.transform, false);
             }
         }
@@ -475,7 +472,7 @@ public class MainRoleManager :ScriptableObject
             DestroyImmediate(allOldBullets[i].gameObject);
         
         //..............Instance New Data..................
-        foreach (BulletJson each in CurBullets)
+        foreach (BulletData each in CurBullets)
         {
             GameObject BulletIns = BulletManager.Instance.InstanceBullet(each.ID,BulletInsMode.EditB);
             each.InstanceID = BulletIns.GetComponentInChildren<Bullet>().InstanceID; //读取存档，要把InstanceID同步
@@ -493,7 +490,7 @@ public class MainRoleManager :ScriptableObject
         for (int i = 0; i < 5; i++)
         {
             int curSlotID = i + 1;
-            BulletJson curBulletReady = null;
+            BulletData curBulletReady = null;
             foreach (var each in CurBullets)
             {
                 if (each.SlotID == curSlotID)

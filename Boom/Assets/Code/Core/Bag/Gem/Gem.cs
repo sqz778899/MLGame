@@ -80,7 +80,7 @@ public class Gem : DragBase
             DoubleClick();
     }
     
-    protected override void OnIDChanged() =>  SyncData();
+    protected  void OnIDChanged() =>  SyncData();
 
     #region ToolTips相关
     internal override void SetTooltipInfo()

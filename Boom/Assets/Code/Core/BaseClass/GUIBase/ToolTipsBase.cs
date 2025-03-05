@@ -79,5 +79,8 @@ public class ToolTipsBase : ItemBase,IPointerMoveHandler,IPointerExitHandler
     }
     #endregion
 
-    public override void SyncData(){}
+    public override void SyncData()
+    {
+        
+    }
 }

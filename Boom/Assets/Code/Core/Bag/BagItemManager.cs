@@ -45,7 +45,6 @@ public static class BagItemManager<T> where T:ItemBase
         curSlot.MainID = -1;
         GameObject.DestroyImmediate(objectIns);
         MainRoleManager.Instance.RefreshAllItems();
-        TrunkManager.Instance.SaveFile();
     }
     
     // 读档并实例化物品或宝石

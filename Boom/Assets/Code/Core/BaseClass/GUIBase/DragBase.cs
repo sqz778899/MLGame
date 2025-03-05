@@ -22,7 +22,6 @@ public class DragBase : ToolTipsBase, IPointerDownHandler, IPointerUpHandler, ID
         dragObjParent = UIManager.Instance.DragObjRoot.transform;
     }
     
-    public override void SyncData() {}//实现一下继承的抽象类
     
     //鼠标双击时
     public void OnPointerClick(PointerEventData eventData)
@@ -36,13 +35,13 @@ public class DragBase : ToolTipsBase, IPointerDownHandler, IPointerUpHandler, ID
     public virtual void OnPointerDown(PointerEventData eventData)
     {
         UIManager.Instance.IsLockedClick = true;
-        //改变父层级
-        originalParent = _dragIns.transform.parent;
-        _dragIns.transform.SetParent(dragObjParent);
-
         _eventData = eventData;
         if (eventData.button == PointerEventData.InputButton.Left)
+        {
+            originalParent = _dragIns.transform.parent;//记录原始父层级
+            _dragIns.transform.SetParent(dragObjParent);//改变父层级
             originalPosition = _dragIns.transform.position;
+        }
         
         if (eventData.button == PointerEventData.InputButton.Right)
             RightClick();
@@ -56,6 +55,7 @@ public class DragBase : ToolTipsBase, IPointerDownHandler, IPointerUpHandler, ID
         
         if (eventData.button == PointerEventData.InputButton.Right)
             return;
+        
         HideTooltips();
         // 在释放鼠标按钮时，我们检查这个位置下是否有一个Slot
         List<RaycastResult> results = new List<RaycastResult>();

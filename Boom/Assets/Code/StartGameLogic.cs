@@ -8,6 +8,6 @@ public class StartGameLogic : KeyBoardBase
     {
         base.Start();
         UIManager.Instance.InitStartGame();
-        TrunkManager.Instance.LoadSaveFile();
+        SaveManager.LoadSaveFile();
     }
 }

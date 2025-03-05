@@ -854,23 +854,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _id: 0
+  CurSlot: {fileID: 0}
   Name: 
   InstanceID: 0
   SlotID: 0
   SlotType: 0
-  _level: 0
-  Damage: 0
-  Piercing: 0
-  Resonance: 0
-  ElementalType: 0
-  Ins: {fileID: 8573389509980627070}
-  Edit_a: {fileID: 6357494558779006968}
-  Edit_b: {fileID: 9150009719306848518}
-  _bulletInsMode: 0
-  HitEffect: {fileID: 0}
-  BulletSpineAsset: {fileID: 0}
-  HitSpfxAsset: {fileID: 0}
-  InLayGems: []
+  DobuleClickTime: 6
+  CurToolTipsMenuState: 0
+  EditA: {fileID: 6357494558779006968}
+  EditB: {fileID: 9150009719306848518}
+  IconEditA: {fileID: 2992298705235526589}
+  IconEditB: {fileID: 2879946628548675555}
+  EditA_GroupStar: {fileID: 5531656790639264171}
+  EditB_GroupStar: {fileID: 2089091102569232032}
+  BulletInsMode: 0
+  IsSpawnerCreate: 0
 --- !u!1 &9150009719306848518
 GameObject:
   m_ObjectHideFlags: 0

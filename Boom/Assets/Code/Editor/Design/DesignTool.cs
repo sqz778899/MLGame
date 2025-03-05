@@ -18,14 +18,20 @@ public class DesignTool
     [ButtonGroup("存档")]
     void SaveFile()
     {
-        TrunkManager.Instance.SaveFile();
+        SaveManager.SaveFile();
     }
     
     [Button("读档",ButtonSizes.Large),PropertyOrder(0)]
     [ButtonGroup("存档")]
     void LoadFile()
     {
-        TrunkManager.Instance.LoadSaveFile();
+        SaveManager.LoadSaveFile();
+    }
+
+    [Button("强制刷新配表数据",ButtonSizes.Large),PropertyOrder(0)]
+    void sss()
+    {
+        TrunkManager.Instance.ForceRefresh();
     }
     #endregion
 

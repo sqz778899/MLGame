@@ -29,7 +29,7 @@ public class Bullet : DragBase
         {
             if (_level != value)
             {
-                _level = value;
+                _level = value; 
                 OnIDChanged();
             }
         }
@@ -107,7 +107,7 @@ public class Bullet : DragBase
         }
     }
     
-    void SetStart(int Level)
+    void SetStart(int Level) 
     {
         if (GroupStar == null)return;
         switch (Level)
@@ -181,7 +181,7 @@ public class Bullet : DragBase
             FinalResonance += gem.Attribute.Resonance;
         }
     }
-    public override void SyncData()
+    public void SyncData()
     {
         InstanceID = gameObject.GetInstanceID();
         BulletJson bulletJson = TrunkManager.Instance.BulletDesignJsons

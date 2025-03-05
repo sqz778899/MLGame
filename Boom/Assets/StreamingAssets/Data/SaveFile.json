@@ -6,61 +6,22 @@
   "RoomKeys": 0,
   "UserBulletSpawner": [
     {
-      "Level": 1,
-      "ElementalType": 1,
-      "Damage": 1,
-      "Piercing": 0,
-      "Resonance": 0,
-      "FinalDamage": 0,
-      "FinalPiercing": 0,
-      "FinalResonance": 0,
-      "IsResonance": false,
       "SpawnerCount": 1,
-      "HitEffectName": "",
       "ID": 1,
-      "InstanceID": -1,
-      "Name": "黏土子弹",
-      "SlotID": -1,
-      "SlotType": -1,
-      "Price": 0
+      "SlotID": 0,
+      "SlotType": 0
     },
     {
-      "Level": 1,
-      "ElementalType": 2,
-      "Damage": 1,
-      "Piercing": 0,
-      "Resonance": 0,
-      "FinalDamage": 0,
-      "FinalPiercing": 0,
-      "FinalResonance": 0,
-      "IsResonance": false,
       "SpawnerCount": 1,
-      "HitEffectName": "",
       "ID": 2,
-      "InstanceID": -1,
-      "Name": "Ice01",
-      "SlotID": -1,
-      "SlotType": -1,
-      "Price": 0
+      "SlotID": 0,
+      "SlotType": 0
     },
     {
-      "Level": 1,
-      "ElementalType": 3,
-      "Damage": 1,
-      "Piercing": 0,
-      "Resonance": 0,
-      "FinalDamage": 0,
-      "FinalPiercing": 0,
-      "FinalResonance": 0,
-      "IsResonance": false,
       "SpawnerCount": 0,
-      "HitEffectName": "",
       "ID": 3,
-      "InstanceID": -1,
-      "Name": "Fire01",
-      "SlotID": -1,
-      "SlotType": -1,
-      "Price": 0
+      "SlotID": 0,
+      "SlotType": 0
     }
   ],
   "UserCurBullets": [],
@@ -100,7 +61,6 @@
   },
   "UserItems": [],
   "UserGems": [],
-  "SupremeCharms": [],
   "UserMapSate": [
     {
       "CurLevelID": 1,
@@ -110,6 +70,5 @@
       "IsFinishedLevels": [],
       "IsFinishedRooms": []
     }
-  ],
-  "CurRollPREveIDs": []
+  ]
 }

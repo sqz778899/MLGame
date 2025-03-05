@@ -42,9 +42,10 @@ public class RoleInner : BaseMove
         Vector3 startPos = new Vector3(transform.position.x - 1, -0.64f, 1f);
         for (int i = 0; i < MainRoleManager.Instance.CurBullets.Count; i++)
         {
-            BulletJson curB = MainRoleManager.Instance.CurBullets[i];
-            GameObject bulletIns = BulletManager.Instance.
-                InstanceBullet(curB, BulletInsMode.Inner);
+            BulletData curB = MainRoleManager.Instance.CurBullets[i];
+            GameObject bulletIns = null;
+            /*GameObject bulletIns = BulletManager.Instance.
+                InstanceBullet(curB, BulletInsMode.Inner);*/
             BulletInner curSC = bulletIns.GetComponent<BulletInner>();
             curSC.BattleOrder = i;
             float offsetX = startPos.x - (curB.SlotID - 1) * 1f;

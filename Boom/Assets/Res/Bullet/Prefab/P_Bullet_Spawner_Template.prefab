@@ -180,11 +180,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4867039856259110931}
+  m_Father: {fileID: 3550475874872731627}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 149.9, y: 97.2}
+  m_AnchoredPosition: {x: 149.9, y: 94.10002}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7521300756026002241
@@ -314,6 +314,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4867039856259110931}
+  - {fileID: 2034359263348376232}
   - {fileID: 426107729241396049}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -342,44 +343,10 @@ MonoBehaviour:
   SlotType: 0
   DobuleClickTime: 6
   CurToolTipsMenuState: 0
-  _level: 0
-  Damage: 0
-  Piercing: 0
-  Resonance: 0
-  FinalDamage: 0
-  FinalPiercing: 0
-  FinalResonance: 0
-  ElementalType: 0
-  IsResonance: 0
-  Ins: {fileID: 0}
-  Edit_a: {fileID: 0}
-  Edit_b: {fileID: 0}
-  _bulletInsMode: 0
-  HitEffect: {fileID: 0}
-  BulletSpineAsset: {fileID: 0}
-  HitSpfxAsset: {fileID: 0}
-  InLayGems: []
-  Count: 0
+  IconSpawner: {fileID: 7684855849994658922}
+  GroupStar: {fileID: 3847564016434351185}
   childBulletIns: {fileID: 0}
   txtCount: {fileID: 7225459898815611356}
-  CurBulletJson:
-    ID: 0
-    InstanceID: 0
-    Name: 
-    SlotID: 0
-    SlotType: 0
-    Price: 0
-    Level: 0
-    ElementalType: 0
-    Damage: 0
-    Piercing: 0
-    Resonance: 0
-    FinalDamage: 0
-    FinalPiercing: 0
-    FinalResonance: 0
-    IsResonance: 0
-    SpawnerCount: 0
-    HitEffectName: 
 --- !u!1 &3847564016434351185
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,8 +491,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2034359263348376232}
+  m_Children: []
   m_Father: {fileID: 3550475874872731627}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}

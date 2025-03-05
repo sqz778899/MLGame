@@ -4,45 +4,64 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Linq;
+using UnityEngine.UI;
 
-public class DraggableBulletSpawner :Bullet
+public class DraggableBulletSpawner :DragBase
 {
-    public int Count;
+    BulletData _data; //绝对核心数据
+    
+    [Header("表现资产")]
+    public Image IconSpawner;
+    public GameObject GroupStar;
+    
     public GameObject childBulletIns;
     public TextMeshProUGUI txtCount;
-    public BulletJson CurBulletJson;
     
     internal override void Start()
     {
         base.Start();
         childBulletIns = null;
     }
-
-    void Update()
+    
+    public void BindData(BulletData data)
     {
-        txtCount.text = "X" + Count;
-        Count = CurBulletJson.SpawnerCount;
+        if (_data != null)
+            _data.OnDataChanged -= OnDataChangedSpawner; // 先退订旧Data的事件
+        
+        _data = data;
+        if (_data != null)
+        {
+            _data.OnDataChanged += OnDataChangedSpawner;
+            OnDataChangedSpawner(); // 立即刷新一遍
+        }
     }
-
-    public void InitData(BulletJson bulletJson)
+    
+    void OnDataChangedSpawner()
     {
-        CurBulletJson = bulletJson;
-        ID = bulletJson.ID;
-        Count = bulletJson.SpawnerCount;
-    }
+        // 显示数量同步
+        txtCount.text = "X" + _data.SpawnerCount;
+        // 显示星级
+        for (int i = 0; i < GroupStar.transform.childCount; i++)
+            GroupStar.transform.GetChild(i).
+                gameObject.SetActive(i < _data.Level);
+        // 显示Icon
+        IconSpawner.sprite = ResManager.instance.GetAssetCache<Sprite>(
+            PathConfig.GetBulletImageOrSpinePath(_data.ID, BulletInsMode.Spawner));
+    } 
+    
     
     public override void OnPointerDown(PointerEventData eventData)
     {
         HideTooltips();
-        if (childBulletIns == null && Count > 0)
+        if (childBulletIns == null && _data.SpawnerCount > 0)
         {
-            childBulletIns = BulletManager.Instance.InstanceBullet(ID,BulletInsMode.EditA,transform.parent.position);
+            childBulletIns = BulletFactory.CreateBullet(_data,BulletInsMode.EditA).gameObject;
             childBulletIns.transform.SetParent(UIManager.Instance.DragObjRoot.transform);
             childBulletIns.transform.localScale = Vector3.one;
             DraggableBullet DraBuSC = childBulletIns.GetComponentInChildren<DraggableBullet>();
             DraBuSC.originalPosition = transform.position;
             DraBuSC.IsSpawnerCreate = true;
-            MainRoleManager.Instance.TmpHongSpawner(ID);
+            MainRoleManager.Instance.TmpHongSpawner(_data.ID);
             MainRoleManager.Instance.RefreshAllItems();
         }
     }
@@ -50,7 +69,7 @@ public class DraggableBulletSpawner :Bullet
     public override void OnPointerUp(PointerEventData eventData)
     {
         HideTooltips();
-        if (Count >= 0 && childBulletIns != null)
+        if (_data.SpawnerCount >= 0 && childBulletIns != null)
         {
             childBulletIns.GetComponentInChildren<DraggableBullet>().DropOneBullet(eventData);
             childBulletIns = null;
@@ -60,7 +79,7 @@ public class DraggableBulletSpawner :Bullet
     public override void OnDrag(PointerEventData eventData)
     {
         HideTooltips();
-        if (Count >= 0 && childBulletIns != null)
+        if (_data.SpawnerCount >= 0 && childBulletIns != null)
         {
             // 在拖动时，我们把子弹位置设置为鼠标位置
             RectTransform rectTransform = childBulletIns.transform.GetComponent<RectTransform>();

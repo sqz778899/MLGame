@@ -25,7 +25,7 @@ public class MainSceneMono:MonoBehaviour
     {
         UIManager.Instance.InitMainScene();
         //.................Global...........................
-        TrunkManager.Instance.LoadSaveFile();
+        SaveManager.LoadSaveFile();
         //.................Local...........................
         //UIManager.Instance.InitMainScene();
         MainRoleManager.Instance.InitData();

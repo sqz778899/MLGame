@@ -49,7 +49,7 @@ public class MSceneManager: ScriptableObject
                 Screen.SetResolution(1366,768,true);
                 break;
         }
-        TrunkManager.Instance.SaveUserConfig();
+        SaveManager.SaveUserConfig();
     }
 
     public void SetScreenMode(FullScreenMode CurScreenMode)
@@ -64,7 +64,7 @@ public class MSceneManager: ScriptableObject
     {
         TrunkManager.Instance._userConfig.UserScreenMode = value;
         Screen.fullScreenMode = (FullScreenMode)value;
-        TrunkManager.Instance.SaveUserConfig();
+        SaveManager.SaveUserConfig();
     }
     #endregion
     

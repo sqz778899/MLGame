@@ -43,12 +43,14 @@ public class BulletManager :ScriptableObject
     public GameObject InstanceBullet(int ID,BulletInsMode bulletInsMode
         ,Vector3 pos = new Vector3())
     {
-        GetIns(bulletInsMode, out GameObject Bullet,pos);
+        GameObject Bullet = ResManager.instance.CreatInstance(PathConfig.GetBulletTemplate(bulletInsMode));
+       
         if (bulletInsMode == BulletInsMode.Spawner)
         {
             DraggableBulletSpawner bulletSpawner = Bullet.GetComponentInChildren<DraggableBulletSpawner>();
             bulletSpawner.ID = ID;
         }
+        
         Bullet bulletbase = Bullet.GetComponentInChildren<Bullet>();
         //curAniSC?.Initialize(true);
         bulletbase.Ins = Bullet;
