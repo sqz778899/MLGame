@@ -5,86 +5,76 @@ using UnityEngine;
 public static class BagItemManager<T> where T:ItemBase
 {
     #region 重要功能
-    //添加物品
-    public static void AddObjectGO(int objectID,ref T objectSC,Transform parentTransform,SlotType slotType)
+    public static GameObject CreateTempObjectGO<TData>(TData curObjectData)where TData : ItemDataBase
     {
         //实例化宝石
         GameObject objectIns = null;
-        InitObjectIns(objectID, ref objectIns,ref objectSC,slotType);
-        //放进背包
-        SlotBase[] allSlot = parentTransform.GetComponentsInChildren<SlotBase>();
-        SlotBase curTargetSlot = null;
-        foreach (var each in allSlot)
-        {
-            if (each.MainID == -1)
-            {
-                curTargetSlot = each;
-                break;
-            }
-        }
-
-        if (curTargetSlot == null)
-        {
-            Debug.LogError("未找到 Bag Slot!!!!!!!!!");
-            return;
-        }
-        
-        // 绑定到槽位
-        objectIns.transform.SetParent(curTargetSlot.transform,false);
-        curTargetSlot.MainID = objectID;
-        curTargetSlot.ChildIns = objectIns;
-        objectSC.SlotID = curTargetSlot.SlotID;
-        objectSC.CurSlot = curTargetSlot;
-        //objectSC
+        T objectSC = null;
+        InitObjectInsTemp(curObjectData, ref objectIns,ref objectSC);
+        return objectIns;
+    }
+    
+    //添加物品到背包
+    public static void AddObjectGO<TData>(TData curObjectData)where TData : ItemDataBase
+    {
+        //实例化宝石
+        GameObject objectIns = null;
+        T objectSC = null;
+        InitObjectIns(curObjectData, ref objectIns,ref objectSC);
     }
     
     // 删除物品或宝石
     public static void DeleteObject(GameObject objectIns)
     {
-        SlotBase curSlot = objectIns.GetComponent<ItemBase>().CurSlot;
-        curSlot.MainID = -1;
-        GameObject.DestroyImmediate(objectIns);
-        MainRoleManager.Instance.RefreshAllItems();
+        ItemBase curSC = objectIns.GetComponent<ItemBase>();
+        if (curSC is Gem curGem)
+        {
+            MainRoleManager.Instance.SubGem(curGem._data);
+            SlotManager.ClearSlot(curGem._data.CurSlot);
+            GameObject.DestroyImmediate(objectIns);
+        }
+        
+        if (curSC is Item curItem)
+        {
+            MainRoleManager.Instance.SubItem(curItem._data);
+            SlotManager.ClearSlot(curItem._data.CurSlot);
+            GameObject.DestroyImmediate(objectIns);
+        }
     }
     
     // 读档并实例化物品或宝石
-    public static void InitSaveFileObject<TJson>(
-        TJson curObjectJson,SlotType slotType)
-        where TJson : ItemJsonBase
+    public static void InitSaveFileObject<TData>(
+        TData curObjectData,SlotType slotType)
+        where TData : ItemDataBase
     {
         GameObject curObjectIns = null;
         T curObjectSC = null;
-        InitObjectIns(curObjectJson.ID, ref curObjectIns, ref curObjectSC, slotType);
-        
-        // 找到对应的Slot槽位
-        SlotBase curSlot = SlotManager.GetBagSlotByID(curObjectJson.SlotID, slotType);
-        if (curSlot == null) return;
-        curSlot.SOnDrop(curObjectIns);
+        InitObjectIns(curObjectData, ref curObjectIns, ref curObjectSC);
+        curObjectData.CurSlot.SOnDrop(curObjectIns);
 
         // 同步到 MainRoleManager
-        curObjectJson.InstanceID = curObjectSC.InstanceID;
         switch (slotType)
         {
             case SlotType.BagSlot:
-                MainRoleManager.Instance.BagItems.Add(curObjectJson as ItemJson);
+                MainRoleManager.Instance.BagItems.Add(curObjectData as ItemData);
                 break;
             case SlotType.GemBagSlot:
-                MainRoleManager.Instance.BagGems.Add(curObjectJson as GemJson);
+                MainRoleManager.Instance.BagGems.Add(curObjectData as GemData);
                 break;
             case SlotType.GemInlaySlot:
-                MainRoleManager.Instance.InLayGems.Add(curObjectJson as GemJson);
+                MainRoleManager.Instance.InLayGems.Add(curObjectData as GemData);
                 break;
             case SlotType.ElementSlot:
-                MainRoleManager.Instance.EquipItems.Add(curObjectJson as ItemJson);
+                MainRoleManager.Instance.EquipItems.Add(curObjectData as ItemData);
                 break;
         }
         
         //同步到BagMini
         GameObject curObjectIns_Mini = null;
         T curObject_Mini = null;
-        InitObjectIns(curObjectJson.ID, ref curObjectIns_Mini, ref curObject_Mini, slotType);
+        InitObjectIns(curObjectData, ref curObjectIns_Mini, ref curObject_Mini);
         
-        SlotBase curSlot_Mini = SlotManager.GetMiniBagSlotByID(curObjectJson.SlotID, slotType);
+        SlotBase curSlot_Mini = SlotManager.GetMiniBagSlotByID(curObjectData.CurSlot.SlotID, slotType);
         if (curSlot_Mini == null) return;
         curSlot_Mini.SOnDrop(curObjectIns_Mini);
     }
@@ -92,18 +82,32 @@ public static class BagItemManager<T> where T:ItemBase
     
     #region 私有方法
     // 私有方法：实例化对象
-    static void InitObjectIns(int objectID, ref GameObject objectIns, ref T objectSC, SlotType slotType)
+    static void InitObjectIns<TData>(TData curObjectData, ref GameObject objectIns,
+        ref T objectSC) where TData : ItemDataBase
     {
-        string assetPath = slotType == SlotType.GemBagSlot || slotType == SlotType.GemInlaySlot
+        SlotType curSlotType = curObjectData.CurSlot.SlotType;
+        string assetPath = curSlotType == SlotType.GemBagSlot || curSlotType == SlotType.GemInlaySlot
             ? PathConfig.GemTemplate
             : PathConfig.ItemPB;
 
         objectIns = ResManager.instance.CreatInstance(assetPath);
         objectIns.transform.SetParent(UIManager.Instance.BagItemRootGO.transform, false);
         objectSC = objectIns.GetComponent<T>();
-        objectSC.ID = objectID;
-        objectSC.InstanceID = objectIns.GetInstanceID();
-        objectSC.SyncData();
+        objectSC.BindData(curObjectData);
+        curObjectData.CurSlot.SOnDrop(objectIns);
+    }
+    
+    static void InitObjectInsTemp<TData>(TData curObjectData, ref GameObject objectIns,
+        ref T objectSC) where TData : ItemDataBase
+    {
+        SlotType curSlotType = curObjectData.CurSlot.SlotType;
+        string assetPath = curSlotType == SlotType.GemBagSlot || curSlotType == SlotType.GemInlaySlot
+            ? PathConfig.GemTemplate
+            : PathConfig.ItemPB;
+
+        objectIns = ResManager.instance.CreatInstance(assetPath);
+        objectSC = objectIns.GetComponent<T>();
+        objectSC.BindData(curObjectData);
     }
     #endregion
 }

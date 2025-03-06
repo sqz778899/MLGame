@@ -17,16 +17,13 @@ public class RightClickMenu : MonoBehaviour,IPointerExitHandler
     {
         if (CurIns==null) return;
         ItemBase curBaseSC = CurIns.GetComponent<ItemBase>();
-        if (curBaseSC is Gem)
+        if (curBaseSC is Gem curGem)
         {
-            Gem curGem = curBaseSC as Gem;
-            GemSlot curEmptySlot = null;
-            curEmptySlot = MainRoleManager.Instance.GetEmptyGemSlot();//在角色栏找到一个空的GemSlot
+            SlotBase curEmptySlot = SlotManager.GetEmptySlot(SlotType.GemInlaySlot);
             if (!curEmptySlot) return;
             
-            SlotManager.ClearBagSlotByID(curGem.SlotID,curGem.CurSlot.SlotType);//清除旧的Slot信息
-            curGem.CurSlot = curEmptySlot;//再换Slot信息
-            curGem.OnDropEmptySlot();
+            SlotManager.ClearSlot(curGem._data.CurSlot);//清除旧的Slot信息
+            curEmptySlot.SOnDrop(CurIns);
         }
         CurToolTipsBase.CurToolTipsMenuState = ToolTipsMenuState.Normal;
         gameObject.SetActive(false);

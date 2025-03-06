@@ -8,14 +8,15 @@ using UnityEngine.UI;
 
 public class DraggableBulletSpawner :DragBase
 {
-    BulletData _data; //绝对核心数据
-    
+    // 1) 数据引用
+    public BulletData _data;
+    // 2) UI 资产
     [Header("表现资产")]
     public Image IconSpawner;
     public GameObject GroupStar;
-    
-    public GameObject childBulletIns;
     public TextMeshProUGUI txtCount;
+    // 3) 拖拽中生成的子弹
+    public GameObject childBulletIns;
     
     internal override void Start()
     {
@@ -56,13 +57,12 @@ public class DraggableBulletSpawner :DragBase
         if (childBulletIns == null && _data.SpawnerCount > 0)
         {
             childBulletIns = BulletFactory.CreateBullet(_data,BulletInsMode.EditA).gameObject;
-            childBulletIns.transform.SetParent(UIManager.Instance.DragObjRoot.transform);
-            childBulletIns.transform.localScale = Vector3.one;
+            childBulletIns.transform.SetParent(UIManager.Instance.DragObjRoot.transform,false);
+           
             DraggableBullet DraBuSC = childBulletIns.GetComponentInChildren<DraggableBullet>();
             DraBuSC.originalPosition = transform.position;
             DraBuSC.IsSpawnerCreate = true;
-            MainRoleManager.Instance.TmpHongSpawner(_data.ID);
-            MainRoleManager.Instance.RefreshAllItems();
+            _data.SpawnerCount--;
         }
     }
 
@@ -97,5 +97,11 @@ public class DraggableBulletSpawner :DragBase
         {
             DisplayTooltips(eventData);
         }
+    }
+    
+    void OnDestroy()
+    {
+        if (_data != null)
+            _data.OnDataChanged -= OnDataChangedSpawner;
     }
 }

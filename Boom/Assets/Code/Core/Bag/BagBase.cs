@@ -1,13 +1,32 @@
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using System;
-using System.Linq;
 using UnityEngine;
 
-//基础抽象类
-public abstract class ItemBase : MonoBehaviour
+#region 接口
+public interface IBulletModifier
 {
-    [SerializeField] int _id;
+    void Modify(BulletData data);
+}
+
+public interface IBindData
+{
+    void BindData(ItemDataBase data);
+}
+#endregion
+
+#region 基础抽象类
+//基础抽象类
+public abstract class ItemBase : MonoBehaviour,IBindData
+{
+    public virtual void BindData(ItemDataBase data){}
+}
+
+[Serializable]
+public abstract class ItemDataBase:ISaveable
+{
+    //静态数据层 配表数据
+    [SerializeField] 
+    int _id;
     public virtual int ID
     {
         get => _id;
@@ -20,95 +39,200 @@ public abstract class ItemBase : MonoBehaviour
             }
         }
     }
+
+    public int Level;
     protected virtual void OnIDChanged() { }
-    public SlotBase CurSlot; //当前拖拽物所在的Slot
     public string Name;
-    public int InstanceID;
-    public int SlotID;
-    public SlotType SlotType;
-
-    public abstract void SyncData();
-}
-
-// 统一 Json 数据基类
-public abstract class ItemJsonBase
-{
-    public int ID;
-    public int InstanceID;
-    public string Name;
-    public int SlotID;
-    public int SlotType;
     public int Price;
+    
+    //动态数据层 运行时数据
+    public int InstanceID;
+    public SlotBase CurSlot;
+    
+    public virtual ItemBaseSaveData ToSaveData() { throw new NotImplementedException(); }
 }
-
+#endregion
 
 #region 宝石类
-//和GO解绑的纯数据
-[Serializable]
-public class GemAttribute
+public class GemData : ItemDataBase
 {
+    public event Action OnDataChanged;
+    //静态数据层 配表数据
     public int Damage;
     public int Piercing;
     public int Resonance;
     
-    public GemAttribute(int damage = 0, int piercing = 0, int resonance = 0)
+    public GemData(int _id,SlotBase _slot)
     {
-        Damage = damage;
-        Piercing = piercing;
-        Resonance = resonance;
+        GemJson json = TrunkManager.Instance.GetGemJson(_id);
+        CurSlot = _slot;
+        InitData(json);
+    }
+
+    public void InitData(GemJson json)
+    {
+        ID = json.ID;
+        Name = json.Name;
+        Price = json.Price;
+        Level = json.Level;
+        
+        Damage = json.Damage;
+        Piercing = json.Piercing;
+        Resonance = json.Resonance;
+        OnDataChanged?.Invoke();
+    }
+    protected override void OnIDChanged()
+    {
+        GemJson json = TrunkManager.Instance.GetGemJson(ID);
+        InitData(json);
     }
 }
+#endregion
 
-[Serializable]
-public class GemJson : ItemJsonBase
+#region 子弹类
+//动态数据层 运行时数据（数值计算、宝石镶嵌、元素关系）
+public class BulletData:ItemDataBase
 {
+    public event Action OnDataChanged;
+    //静态数据层 配表数据
     public int Level;
-    public string ImageName;
-    public GemAttribute Attribute;
-    public bool IsInLay;
-    public int BulletSlotIndex;
+    public int Damage;
+    public int Piercing;
+    public int Resonance;
+    public ElementalTypes ElementalType;
     
-    public GemJson(int id = -1, int instanceID = -1, 
-        string name = "", GemAttribute attribute = null, 
-        int _level = 1,string imageName = "", int slotID = -1, int slotType = -1)
+    //动态数据层 运行时数据
+    public int FinalDamage;
+    public int FinalPiercing;
+    public int FinalResonance;
+    public List<IBulletModifier> Modifiers = new();
+    
+    //子弹孵化器专用
+    public int _spawnerCount;
+    public int SpawnerCount
     {
-        ID = id;
-        InstanceID = instanceID;
-        Name = name;
-        if (attribute == null)
-            attribute = new GemAttribute();
-        Attribute = attribute;
-        Level = _level;
-        ImageName = imageName;
-        SlotID = slotID;
-        SlotType = slotType;
-        //是否镶嵌
-        IsInLay = false;
-        BulletSlotIndex = -1;
-        Price = 0;
+        get => _spawnerCount;
+        set
+        {
+            _spawnerCount = value;
+            OnDataChanged?.Invoke();
+        }
     }
     
-    public void CopyFrom(GemJson other)
+    public BulletData(int _id,SlotBase _slot)
     {
-        if (other == null) return;
+        BulletJson json = TrunkManager.Instance.GetBulletJson(_id);
+        CurSlot = _slot;
+        InitData(json);
+    }
 
-        ID = other.ID;
-        InstanceID = other.InstanceID;
-        Name = other.Name;
-        Attribute = new GemAttribute(other.Attribute.Damage,
-            other.Attribute.Piercing,other.Attribute.Resonance);  // 假设 GemAttribute 有复制构造函数
-        Level = other.Level;
-        ImageName = other.ImageName;
-        SlotID = other.SlotID;
-        SlotType = other.SlotType;
-        IsInLay = other.IsInLay;
-        BulletSlotIndex = other.BulletSlotIndex;
-        Price = other.Price;
+    #region 拓展插槽处理
+    public void AddModifier(IBulletModifier modifier)
+    {
+        Modifiers.Add(modifier);
+        SyncFinalAttributes();
+        OnDataChanged?.Invoke();
+    }
+    
+    public void ClearModifiers()
+    {
+        Modifiers.Clear();
+        SyncFinalAttributes();
+        OnDataChanged?.Invoke();
+    }
+    #endregion
+
+    #region 数据同步
+    protected override void OnIDChanged()
+    {
+        BulletJson json = TrunkManager.Instance.GetBulletJson(ID);
+        InitData(json);
+    }
+    
+    void InitData(BulletJson json)
+    {
+        ID = json.ID;
+        Level = json.Level;
+        Name = json.Name;
+        Price = json.Price;
+        
+        Damage = json.Damage;
+        Piercing = json.Piercing;
+        Resonance = json.Resonance;
+        
+        ElementalType = (ElementalTypes)json.ElementalType;
+        SyncFinalAttributes();
+        OnDataChanged?.Invoke();
+    }
+    
+    public void SyncFinalAttributes()
+    {
+        FinalDamage = Damage;
+        FinalPiercing = Piercing;
+        FinalResonance = Resonance;
+
+        foreach (var modifier in Modifiers)
+        {
+            modifier.Modify(this);
+        }
+    }
+    #endregion
+    
+    public override ItemBaseSaveData ToSaveData() => new BulletBaseSaveData(this);
+}
+
+
+//宝石修饰器
+public class BulletModifierGem : IBulletModifier
+{
+    public GemData gem;
+
+    public BulletModifierGem(GemData gem)
+    {
+        this.gem = gem;
+    }
+
+    public void Modify(BulletData data)
+    {
+        data.FinalDamage += gem.Damage;
+        data.FinalPiercing += gem.Piercing;
+        data.FinalResonance += gem.Resonance;
     }
 }
 #endregion
 
 #region 道具类
+public class ItemData : ItemDataBase
+{
+    public event Action OnDataChanged;
+    //静态数据层 配表数据
+    public int Rare;
+    public int Damage;
+    public int Piercing;
+    public int Resonance;
+    
+    public ItemData(int _id,SlotBase _slot)
+    {
+        ItemJson json = TrunkManager.Instance.GetItemJson(_id);
+        CurSlot = _slot;
+        InitData(json);
+    }
+
+    public void InitData(ItemJson json)
+    {
+        ID = json.ID;
+        Name = json.Name;
+        Price = json.Price;
+        Rare = json.Rare;
+        OnDataChanged?.Invoke();
+    }
+    protected override void OnIDChanged()
+    {
+        ItemJson json = TrunkManager.Instance.GetItemJson(ID);
+        InitData(json);
+    }
+}
+
 [Serializable]
 public class ItemAttribute
 {
@@ -162,150 +286,6 @@ public class ItemAttribute
         extraDarkDamage += other.Attribute.extraDarkDamage;
 
         maxDamage += other.Attribute.maxDamage;
-    }
-}
-
-[Serializable]
-public class ItemJson:ItemJsonBase
-{
-    public int Rare;
-    public string ImageName;
-    public ItemAttribute Attribute;
-    
-    public ItemJson(int _id = -1, int _instanceID = -1,
-        int _rare = -1, string _name = "", 
-        string _imageName = "", ItemAttribute _attribute = null,
-        int _SlotID = 0, int _SlotType = 0)
-    {
-        ID = _id;
-        InstanceID = _instanceID;
-        Rare = _rare;
-        Name = _name;
-        ImageName = _imageName;
-        if (_attribute == null)
-        {
-            _attribute = new ItemAttribute();
-        }
-        Attribute = _attribute;
-        SlotID = _SlotID;
-        SlotType = _SlotType;
-        Price = 0;
-    }
-    
-    public void CopyFrom(ItemJson other)
-    {
-        if (other == null) return;
-
-        // 复制基础字段
-        this.ID = other.ID;
-        this.InstanceID = other.InstanceID;
-        this.Rare = other.Rare;
-        this.Name = other.Name;
-        this.ImageName = other.ImageName;
-        this.SlotID = other.SlotID;
-        this.SlotType = other.SlotType;
-
-        // 复制 Attribute
-        // 如果 Attribute 不是 null，那么我们直接聚合它，假如你是想合并多个 ItemJson 的属性，调用 Aggregate。
-        // 否则，直接赋值。
-        if (other.Attribute != null)
-        {
-            this.Attribute = new ItemAttribute(
-                other.Attribute.waterElement,
-                other.Attribute.fireElement,
-                other.Attribute.thunderElement,
-                other.Attribute.lightElement,
-                other.Attribute.darkElement,
-                other.Attribute.extraWaterDamage,
-                other.Attribute.extraFireDamage,
-                other.Attribute.extraThunderDamage,
-                other.Attribute.extraLightDamage,
-                other.Attribute.extraDarkDamage,
-                other.Attribute.maxDamage
-            );
-        }
-    }
-}
-#endregion
-
-#region 子弹类
-[Serializable]
-public class BulletJson : ItemJsonBase
-{
-    public int Level;
-    public int ElementalType;
-    
-    //基础属性
-    public int Damage;
-    public int Piercing;
-    public int Resonance;
-    //额外属性
-    public int FinalDamage;
-    public int FinalPiercing;
-    public int FinalResonance;
-
-    public bool IsResonance = false;
-    //如果是Spawner，则有Count
-    public int SpawnerCount;
-    
-    public string HitEffectName;
-
-    public BulletJson(int _id = -1, int _instanceID = -1, string _name = "", 
-        int _slotID = -1, int _slotType = -1,int _level = 1,int _elementalType = -1,
-        int _damage = 0, int _piercing = 0, int _resonance = 0,int _spawnerCount = 0
-        ,string _hitEffectName = "")
-    {
-        ID = _id;
-        InstanceID = _instanceID;
-        Name = _name;
-        SlotID = _slotID;
-        SlotType = _slotType;
-        Level = _level;
-        ElementalType = _elementalType;
-        Damage = _damage;
-        Piercing = _piercing;
-        Resonance = _resonance;
-        SpawnerCount = _spawnerCount;
-        HitEffectName = _hitEffectName;
-        Price = 0;
-    }
-
-    public void CopyFrom(BulletJson other)
-    {
-        if (other == null) return;
-
-        // 复制基础字段
-        this.ID = other.ID;
-        this.InstanceID = other.InstanceID;
-        this.Name = other.Name;
-        this.SlotID = other.SlotID;
-        this.SlotType = other.SlotType;
-        this.Level = other.Level;
-        this.ElementalType = other.ElementalType;
-        this.Damage = other.Damage;
-        this.Piercing = other.Piercing;
-        this.Resonance = other.Resonance;
-        this.FinalDamage = other.FinalDamage;
-        this.FinalPiercing = other.FinalPiercing;
-        this.FinalResonance = other.FinalResonance;
-        this.IsResonance = other.IsResonance;
-        this.SpawnerCount = other.SpawnerCount;
-        this.HitEffectName = other.HitEffectName;
-    }
-
-    public void SyncData()
-    {
-        BulletJson designJson = TrunkManager.Instance.BulletDesignJsons
-            .FirstOrDefault(each => each.ID == ID) ?? new BulletJson();
-
-        ID = designJson.ID;
-        InstanceID = designJson.InstanceID;
-        Name = designJson.Name;
-        Level = designJson.Level;
-        ElementalType = designJson.ElementalType;
-        Damage = designJson.Damage;
-        Piercing = designJson.Piercing;
-        Resonance = designJson.Resonance;
     }
 }
 #endregion

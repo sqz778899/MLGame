@@ -134,12 +134,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53e70b8144690aa4d8d186252eea44bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: 1
+  _id: 0
+  CurSlot: {fileID: 0}
+  Name: 
   InstanceID: 0
+  SlotID: 0
+  SlotType: 0
+  DobuleClickTime: 6
+  CurToolTipsMenuState: 0
   Attribute:
     Damage: 0
     Piercing: 0
     Resonance: 0
-  SlotID: 0
-  CurGemInSlotType: 0
-  preID: 0
+  IsInLay: 0
+  BulletSlotIndex: 0
+  ItemSprite: {fileID: 2139649737402363962}

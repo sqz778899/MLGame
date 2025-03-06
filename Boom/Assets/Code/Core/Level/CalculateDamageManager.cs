@@ -21,8 +21,8 @@ public class CalculateDamageManager : ScriptableObject
 
     public void CalDamage(BulletInner bullet,EnemyBase curEnemy)
     {
-        int curDamage = bullet.FinalDamage;
-        switch (bullet.ElementalType)
+        int curDamage = bullet._data.FinalDamage;
+        switch (bullet._data.ElementalType)
         {
             case ElementalTypes.Non:
                 curEnemy.TakeDamage(bullet,curDamage);
@@ -41,7 +41,7 @@ public class CalculateDamageManager : ScriptableObject
 
     void CalIce(BulletInner bullet,EnemyBase curEnemy)
     {
-        int curDamage = bullet.Damage;
+        int curDamage = bullet._data.Damage;
         DamageState curDamageState = curEnemy.DState;
         
         //冰遇见火，会极度爆炸，造成大量伤害并且属性积蓄归零
@@ -59,7 +59,7 @@ public class CalculateDamageManager : ScriptableObject
 
     void CalFire(BulletInner bullet, EnemyBase curEnemy)
     {
-        int curDamage = bullet.Damage;
+        int curDamage = bullet._data.Damage;
         DamageState curDamageState = curEnemy.DState;
         
         //火遇见冰，会冷却 todo Debuff
@@ -91,7 +91,7 @@ public class CalculateDamageManager : ScriptableObject
 
     void CalElectric(BulletInner bullet, EnemyBase curEnemy)
     {
-        int curDamage = bullet.Damage;
+        int curDamage = bullet._data.Damage;
         DamageState curDamageState = curEnemy.DState;
         int curElectric = curDamageState.Electric;
         

@@ -18,17 +18,17 @@ public class SingelReportRoot : MonoBehaviour
     Vector2 _shieldStartPos = new Vector2(560, 512); 
     Vector2 _shieldOffset = new Vector2(-100, 0); 
     
-    public void SyncReport(KeyValuePair<BulletJson,List<BattleOnceHit>> curInfo)
+    public void SyncReport(KeyValuePair<BulletData,List<BattleOnceHit>> curInfo)
     {
-        BulletJson curBulletJson = curInfo.Key;
+        BulletData curBulletData = curInfo.Key;
         List<BattleOnceHit> curBattleOnceHits = curInfo.Value;
-        txtDamage.text = curBulletJson.FinalDamage.ToString();
-        if (curBulletJson.FinalPiercing == 0)
+        txtDamage.text = curBulletData.FinalDamage.ToString();
+        if (curBulletData.FinalPiercing == 0)
             txtPiercing.gameObject.SetActive(false);
-        txtPiercing.text = curBulletJson.FinalPiercing.ToString();
-        if (curBulletJson.FinalResonance == 0)
+        txtPiercing.text = curBulletData.FinalPiercing.ToString();
+        if (curBulletData.FinalResonance == 0)
             txtResonance.gameObject.SetActive(false);
-        txtResonance.text = curBulletJson.FinalResonance.ToString();
+        txtResonance.text = curBulletData.FinalResonance.ToString();
         int effectiveDamage = 0;
         int overflowDamage = 0;
 

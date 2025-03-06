@@ -225,17 +225,14 @@ namespace Code.Editor
                 curData.ID = int.Parse(curTable.Rows[i][0].ToString());
                 curData.Name = curTable.Rows[i][1].ToString();
                 curData.Level = int.Parse(curTable.Rows[i][2].ToString());
-                curData.Attribute.Damage =
-                    string.IsNullOrEmpty(curTable.Rows[i][3].ToString())
-                        ? 0
+                curData.Damage =
+                    string.IsNullOrEmpty(curTable.Rows[i][3].ToString()) ? 0
                         : int.Parse(curTable.Rows[i][3].ToString());
-                curData.Attribute.Piercing =
-                    string.IsNullOrEmpty(curTable.Rows[i][4].ToString())
-                        ? 0
+                curData.Piercing =
+                    string.IsNullOrEmpty(curTable.Rows[i][4].ToString()) ? 0
                         : int.Parse(curTable.Rows[i][4].ToString());
-                curData.Attribute.Resonance =
-                    string.IsNullOrEmpty(curTable.Rows[i][5].ToString())
-                        ? 0
+                curData.Resonance =
+                    string.IsNullOrEmpty(curTable.Rows[i][5].ToString()) ? 0
                         : int.Parse(curTable.Rows[i][5].ToString());
                 curData.Price = string.IsNullOrEmpty(curTable.Rows[i][6].ToString()) ? 0
                         : int.Parse(curTable.Rows[i][6].ToString());

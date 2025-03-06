@@ -78,9 +78,4 @@ public class ToolTipsBase : ItemBase,IPointerMoveHandler,IPointerExitHandler
         UIManager.Instance.RightClickGO.transform.position = GetWPosByMouse(eventData) + RightClickMenuOffset;
     }
     #endregion
-
-    public override void SyncData()
-    {
-        
-    }
 }

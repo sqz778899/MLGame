@@ -8,6 +8,22 @@ using UnityEngine.EventSystems;
 
 public class GemInShop : ToolTipsBase,IPointerUpHandler,IPointerDownHandler
 {
+    public GemData _data;
+    
+    public override void BindData(ItemDataBase data)
+    {
+        if (_data != null)
+            _data.OnDataChanged -= OnDataChangeGem; // 先退订旧Data的事件
+        
+        _data = data as GemData;
+        if (_data != null)
+        {
+            _data.OnDataChanged += OnDataChangeGem;
+            OnDataChangeGem(); // 立即刷新一遍
+        }
+    }
+    
+    
     EffectManager _effectManager;
     internal EffectManager MEffectManager
     {
@@ -26,7 +42,6 @@ public class GemInShop : ToolTipsBase,IPointerUpHandler,IPointerDownHandler
     public int ShopSlotIndex;
     
     [Header("基础属性")]
-    public GemAttribute Attribute;
     public Image ItemSprite;
 
     [Header("显示相关")]
@@ -50,7 +65,7 @@ public class GemInShop : ToolTipsBase,IPointerUpHandler,IPointerDownHandler
     internal virtual void Start()
     {
         base.Start();
-        SyncData();
+        OnDataChangeGem();
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -83,48 +98,33 @@ public class GemInShop : ToolTipsBase,IPointerUpHandler,IPointerDownHandler
     }
 
     #region 数据同步相关
-    protected override void OnIDChanged() =>  SyncData();
     
-    public override void SyncData()
+    public void OnDataChangeGem()
     {
-        InstanceID = gameObject.GetInstanceID();
-        GemJson gemDesignData = ToJosn();
-        Name = gemDesignData.Name;
-        Attribute = gemDesignData.Attribute;
-        Price = gemDesignData.Price;
-        PriceText.text = Price.ToString();
-        if (ItemSprite == null) ItemSprite = GetComponent<Image>();
+        _data.InstanceID = gameObject.GetInstanceID();
+        GemJson gemDesignData = TrunkManager.Instance.GetGemJson(_data.ID);
         ItemSprite.sprite = ResManager.instance.GetAssetCache<Sprite>(
             PathConfig.GetGemPath(gemDesignData.ImageName));
+        
+        Price = gemDesignData.Price;
+        PriceText.text = Price.ToString();
     }
     
     internal override void SetTooltipInfo()
     {
         string des = GetItemAttriInfo();
-        CurTooltipsSC.txtTitle.text = Name;
+        CurTooltipsSC.txtTitle.text = _data.Name;
         //curTip.txtDescription.text = des;
     }
     
     string GetItemAttriInfo()
     {
         List<string> attributes = new List<string>();
-        if (Attribute.Damage != 0) attributes.Add($"伤害 + {Attribute.Damage}");
-        if (Attribute.Resonance != 0) attributes.Add($"共振 + {Attribute.Resonance}");
-        if (Attribute.Piercing != 0) attributes.Add($"穿透 + {Attribute.Piercing}");
+        if (_data.Damage != 0) attributes.Add($"伤害 + {_data.Damage}");
+        if (_data.Resonance != 0) attributes.Add($"共振 + {_data.Resonance}");
+        if (_data.Piercing != 0) attributes.Add($"穿透 + {_data.Piercing}");
 
         return string.Join("\n", attributes);
-    }
-    
-    public GemJson ToJosn()
-    {
-        GemJson gemJson = new GemJson();
-        GemJson gemDesignJson = TrunkManager.Instance.GemDesignJsons
-            .FirstOrDefault(each => each.ID == ID) ?? new GemJson();
-
-        gemJson.CopyFrom(gemDesignJson);
-        //同步在游戏内的变量
-        gemJson.InstanceID = InstanceID;
-        return gemJson;
     }
     #endregion
 }

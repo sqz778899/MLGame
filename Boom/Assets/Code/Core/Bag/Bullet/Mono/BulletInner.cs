@@ -4,37 +4,72 @@ using Spine.Unity;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class BulletInner : Bullet
+public class BulletInner:ItemBase
 {
-    public int BattleOrder = -1;
-    public List<BattleOnceHit> BattleOnceHits = new List<BattleOnceHit>();
-    public float FollowDis = 3;
-    public float RunSpeed = 10.0f;
+    public BulletData _data; //绝对核心数据
     
-    public BulletInnerState _state;
+    [Header("表现资产")]
+    public Renderer CurRenderer;
+    public SkeletonAnimation Skeleton;
+    public GameObject HitEffect; // 击中效果预制体
+    public SkeletonDataAsset HitSpfxAsset; // 子弹击中效果子弹Spine资产资产
     
-    SkeletonAnimation _ain;
+    internal Vector3 forward = new Vector3(1, 0, 0);
     List<Material> _materials;
-    public float AniScale = 1f;
-
+    
     [Header("重要属性")]
-    public RoleInner CurRoleInner;
+    public BulletInnerState _state;
+    public List<BattleOnceHit> BattleOnceHits = new List<BattleOnceHit>();
+    public float RunSpeed = 10.0f;
+    public float FollowDis = 3;
+    public float AniScale = 1f;
+    
     int _piercingCount; //穿透的敌人的数量
     int _resonance;
-    float _curSpeed;
-    public float CurSpeed => _curSpeed;
-
-    internal override void Start()
+    public float CurSpeed;
+    
+    
+    public void BindData(BulletData data)
     {
-        base.Start();
+        if (_data != null)
+            _data.OnDataChanged -= OnDataChangedInner; // 先退订旧Data的事件
+        
+        _data = data;
+        if (_data != null)
+        {
+            _data.OnDataChanged += OnDataChangedInner;
+            OnDataChangedInner(); // 立即刷新一遍
+        }
+    }
+    
+    void OnDataChangedInner()
+    {
+        Skeleton.skeletonDataAsset = ResManager.instance.GetAssetCache<SkeletonDataAsset>
+            (PathConfig.GetBulletImageOrSpinePath(_data.ID,BulletInsMode.Inner));
+        Skeleton.Initialize(true);
+        HitEffect = ResManager.instance.GetAssetCache<GameObject>(
+            PathConfig.BulletSpfxTemplate);
+        HitSpfxAsset = ResManager.instance.GetAssetCache<SkeletonDataAsset>
+            (PathConfig.GetBulletSpfxPath(_data.ID));
+    }
+    
+
+    void Start()
+    {
         _piercingCount = 0;
         _resonance = 0;
         _state = BulletInnerState.Common;
-        _ain = transform.GetChild(0).GetComponent<SkeletonAnimation>();
-        _materials = new List<Material>(_ain.skeletonDataAsset.atlasAssets[0].Materials);
-        AniUtility.PlayIdle(_ain,AniScale);
+        /*_materials = new List<Material>();
+        foreach (var each in _ain.skeletonDataAsset.atlasAssets[0].Materials)
+        {
+            Material newMat = new Material(each);
+            _materials.Add(newMat);
+        }
+        _ain.skeletonDataAsset.atlasAssets[0].Materials = _materials;*/
+        _materials = new List<Material>(Skeleton.skeletonDataAsset.atlasAssets[0].Materials);
+        
+        AniUtility.PlayIdle(Skeleton,AniScale);
         foreach (Material material in _materials)
             material.SetFloat("_Transparency", 1);
     }
@@ -51,8 +86,8 @@ public class BulletInner : Bullet
             case BulletInnerState.AttackBegin:
                 break;
             case BulletInnerState.Attacking:// 让子弹沿着Z轴向前移动
-                _curSpeed = 60f;
-                transform.Translate(forward * _curSpeed * Time.deltaTime);
+                CurSpeed = 60f;
+                transform.Translate(forward * CurSpeed * Time.deltaTime);
                 break;
             case BulletInnerState.Dead:
                 //CurRoleInner.Bullets.Remove(this);
@@ -71,7 +106,7 @@ public class BulletInner : Bullet
         if (Array.Exists(whiteListTags, tag => other.CompareTag(tag)))
         {
             //穿透敌人的数量
-            if (_piercingCount >= FinalPiercing)
+            if (_piercingCount >= _data.FinalPiercing)
                 _state = BulletInnerState.Dead;
 
             HandleEnemyHit(other.GetComponent<EnemyBase>());
@@ -90,11 +125,11 @@ public class BulletInner : Bullet
                     warReport.WarIndexToBattleInfo[curWarIndex] = s;
                 }
                 
-                var dic = new Dictionary<BulletJson, List<BattleOnceHit>>
+                var dic = new Dictionary<BulletData, List<BattleOnceHit>>
                 {
-                    [ToJosn()] = BattleOnceHits
+                    [_data] = BattleOnceHits
                 };
-                s.InfoDict[BattleOrder] = new KeyValuePair<BulletJson, List<BattleOnceHit>>(ToJosn(), BattleOnceHits);
+                s.InfoDict[_data.CurSlot.SlotID] = new KeyValuePair<BulletData, List<BattleOnceHit>>(_data, BattleOnceHits);
             }
             _piercingCount++;
         }
@@ -112,7 +147,8 @@ public class BulletInner : Bullet
         if (HitEffect != null)
             StartCoroutine(PlayHitFX());
     }
-    
+
+
     void HandleBulletDisappear()
     {
         gameObject.transform.GetChild(0).gameObject.SetActive(false);
@@ -126,7 +162,7 @@ public class BulletInner : Bullet
         _state = BulletInnerState.AttackBegin;
         float aniTime = 0f;
         Vector3 curScale = transform.localScale;
-        AniUtility.PlayAttack(_ain,ref aniTime,AniScale);
+        AniUtility.PlayAttack(Skeleton,ref aniTime,AniScale);
         transform.DOMove(targetPos, aniTime);
         transform.DOScale(curScale * 0.5f , aniTime);
         StartCoroutine(FadeOut(aniTime));
@@ -170,7 +206,7 @@ public class BulletInner : Bullet
         _state = BulletInnerState.Attacking;
         foreach (Material material in _materials)
             material.SetFloat("_Transparency", 1);
-        AniUtility.PlayAttacking(_ain,AniScale);
+        AniUtility.PlayAttacking(Skeleton,AniScale);
     }
 
     public IEnumerator PlayHitFX()
@@ -194,19 +230,19 @@ public class BulletInner : Bullet
         
         //..............面向...................
         if (dis < 0)
-            AniUtility.TrunAround(_ain, 1); // 面朝左
+            AniUtility.TrunAround(Skeleton, 1); // 面朝左
         else
-            AniUtility.TrunAround(_ain, -1); // 面朝右
+            AniUtility.TrunAround(Skeleton, -1); // 面朝右
         
         //..............移动方向...................
         if (shouldMove)
         {
-            AniUtility.PlayRun(_ain, AniScale);
+            AniUtility.PlayRun(Skeleton, AniScale);
             float moveDistance = RunSpeed * Time.deltaTime;
             transform.Translate(forward * (dis < 0 ? moveDistance : -moveDistance));
         }
         else
-            AniUtility.PlayIdle(_ain, AniScale);
+            AniUtility.PlayIdle(Skeleton, AniScale);
     }
     
     float CurDistance()

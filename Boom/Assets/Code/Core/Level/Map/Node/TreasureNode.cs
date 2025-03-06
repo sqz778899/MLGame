@@ -15,17 +15,18 @@ public class TreasureNode:MapNodeBase
         //抽宝石
         isOpened = true;
         spriteRenderer.sprite = TreasureOpened;
-        GemJson gemDesignJson = TrunkManager.Instance.GemDesignJsons
-            .FirstOrDefault(each => each.ID == GemID) ?? new GemJson();
         
-        GameObject GemIns = ResManager.instance.CreatInstance(PathConfig.GemTemplate);
-        GemIns.GetComponent<Gem>().ID = gemDesignJson.ID;
+        //创建一个临时的宝石，只用来表现，用完即销毁
+        GemData rollGemData = new GemData(GemID, null);
+        string gemName = rollGemData.Name;
+        GameObject GemIns = BagItemManager<Gem>.CreateTempObjectGO(rollGemData);
+        
         GemIns.transform.SetParent(transform,false);
         Vector3 startPos = new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z);
         GemIns.transform.position = startPos;
         GemIns.transform.localScale = Vector3.one*0.7f;
         EPara.StartPos = startPos;
-        MEffectManager.CreatEffect(EPara,GemIns,false,()=>FloatingGetItemText($"获得{gemDesignJson.Name}！"));
+        MEffectManager.CreatEffect(EPara,GemIns,false,()=>FloatingGetItemText($"获得{gemName}！"));
        
         MainRoleManager.Instance.AddGem(GemID);
     }

@@ -13,11 +13,17 @@ public class SlotBase : MonoBehaviour
         ChildIns.transform.position = transform.position;
         ChildIns.transform.SetParent(transform,true);
         ChildIns.transform.localScale = Vector3.one;
-        DragBase dragBaseSC = _childIns.GetComponentInChildren<DragBase>();
-        //同步新的Slot信息
-        MainID = dragBaseSC.ID;
-        dragBaseSC.CurSlot = this;
-        dragBaseSC.SlotID = SlotID;
-        dragBaseSC.SlotType = SlotType;
+        ItemBase curSC = _childIns.GetComponentInChildren<ItemBase>();
+        if (curSC is Bullet _bulletNew)
+        {
+            _bulletNew._data.CurSlot = this;
+            MainID = _bulletNew._data.ID;
+        }
+        if (curSC is Gem _gemNew)
+        {
+            _gemNew._data.CurSlot = this;
+            MainID = _gemNew._data.ID;
+        }
+        
     }
 }

@@ -58,15 +58,15 @@ public class TrunkManager: ScriptableObject
         _saveFile.HP = 3;
         //................UserBulletSpawner...........................
         List<BulletData> UserBulletSpawner = new List<BulletData>();
-        BulletData spawner01 = new BulletData(1);
+        BulletData spawner01 = new BulletData(1,SlotManager.GetSlot(1, SlotType.SpawnnerSlot));
         spawner01.SpawnerCount = 1;
         UserBulletSpawner.Add(spawner01);
         
-        BulletData spawner02 = new BulletData(2);
+        BulletData spawner02 = new BulletData(2,SlotManager.GetSlot(2, SlotType.SpawnnerSlot));
         spawner02.SpawnerCount = 1;
         UserBulletSpawner.Add(spawner02);
         
-        BulletData spawner03 = new BulletData(3);
+        BulletData spawner03 = new BulletData(3,SlotManager.GetSlot(3, SlotType.SpawnnerSlot));
         spawner03.SpawnerCount = 0;
         UserBulletSpawner.Add(spawner03);
         
@@ -76,16 +76,16 @@ public class TrunkManager: ScriptableObject
             newGameSD.Add(new StandbyData(i,0));
         
         //...................Items.................................
-        _saveFile.UserItems = new List<ItemJson>();
+        _saveFile.UserItems = new List<ItemSaveData>();
         //...................Gems..................................
-        _saveFile.UserGems = new List<GemJson>();
+        _saveFile.UserGems = new List<GemBaseSaveData>();
         //...................子弹槽状态..............................
         _saveFile.UserBulletSlotLockedState = new Dictionary<int, bool>
         { {0, true},{1, true},{2,false},{3,false},{4,false} };
       
-        _saveFile.UserCurBullets = new List<BulletSaveData>();
+        _saveFile.UserCurBullets = new List<BulletBaseSaveData>();
         _saveFile.UserBulletSpawner.AddRange(
-            UserBulletSpawner.Select(each => each.ToSaveData() as BulletSaveData));
+            UserBulletSpawner.Select(each => each.ToSaveData() as BulletBaseSaveData));
         _saveFile.Score = 0;
         _saveFile.Coins = 0;
         _saveFile.RoomKeys = 0;
@@ -105,22 +105,7 @@ public class TrunkManager: ScriptableObject
         File.WriteAllText(PathConfig.SaveFileJson, content01);
     }
     #endregion
-
-    #region MyRegion
-    public BulletJson GetBulletDesignData(int BulletID)
-    {
-        BulletJson curData = null;
-        foreach (BulletJson each in BulletDesignJsons)
-        {
-            if (each.ID == BulletID)
-            {
-                curData = each;
-                break;
-            }
-        }
-        return curData;
-    }
-    #endregion
+    
     
     #region 单例
     static TrunkManager s_instance;
@@ -130,8 +115,17 @@ public class TrunkManager: ScriptableObject
         {
             if (s_instance == null)
                 s_instance = ResManager.instance.GetAssetCache<TrunkManager>(PathConfig.TrunkManagerOBJ);
-            
+            if (s_instance != null) { DontDestroyOnLoad(s_instance); }
             return s_instance;
+        }
+    }
+    
+    void OnEnable()
+    {
+        if (s_instance == null)
+        {
+            s_instance = this;
+            DontDestroyOnLoad(this);
         }
     }
     #endregion

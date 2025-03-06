@@ -6,49 +6,17 @@ using UnityEngine;
 public static class SlotManager
 {
     //根据SlotId 和 SlotType 还原Slot的MainID和InstanceID
-    public static void ClearBagSlotByID(int SlotID,SlotType slotType)
+    public static void ClearSlotByID(int SlotID,SlotType slotType)
     {
-        SlotBase curSlot = GetBagSlotByID(SlotID,slotType);
+        SlotBase curSlot = GetSlot(SlotID,slotType);
         if (curSlot == null) return;
         curSlot.MainID = -1;
     }
     
-    //根据SlotId 和 SlotType 拿到背包的Slot
-    public static SlotBase GetBagSlotByID(int SlotID,SlotType slotType = SlotType.BagSlot)
+    public static void ClearSlot(SlotBase curSlot)
     {
-        SlotBase curTargetSlot = null;
-        SlotBase[] allSlot;
-      
-        switch (slotType)
-        {
-            case SlotType.GemBagSlot:
-                allSlot = UIManager.Instance.BagGemRootGO.GetComponentsInChildren<SlotBase>();
-                break;
-            case SlotType.GemInlaySlot:
-                allSlot = UIManager.Instance.BagReadySlotRootGO.GetComponentsInChildren<GemSlot>();
-                break;
-            case SlotType.CurBulletSlot:
-                allSlot = UIManager.Instance.BagReadySlotRootGO.GetComponentsInChildren<BulletSlotRole>();
-                break;
-            case SlotType.ElementSlot:
-                allSlot = UIManager.Instance.EquipItemRootGO.GetComponentsInChildren<SlotBase>();
-                break;
-            case SlotType.BagSlot:
-                allSlot = UIManager.Instance.BagItemRootGO.GetComponentsInChildren<SlotBase>();
-                break;
-            default:
-                allSlot = UIManager.Instance.BagItemRootGO.GetComponentsInChildren<SlotBase>();
-                break;
-        }
-        foreach (var each in allSlot)
-        {
-            if (each.SlotID == SlotID)
-            {
-                curTargetSlot = each;
-                break;
-            }
-        }
-        return curTargetSlot;
+        if (curSlot == null) return;
+        curSlot.MainID = -1;
     }
     
     public static SlotBase GetMiniBagSlotByID(int SlotID,SlotType slotType = SlotType.BagSlot)
@@ -78,9 +46,23 @@ public static class SlotManager
     
     public static SlotBase GetEmptySlot(SlotType slotType)
     {
-        SlotBase curTargetSlot = null;
+        SlotBase[] allSlot = GetCurSlotArray(slotType);
+        SlotBase curTargetSlot = allSlot.FirstOrDefault(each => each.MainID == -1);
+        return curTargetSlot;
+    }
+
+    //根据SlotID 和SlotType精准定位到具体的Slot
+    public static SlotBase GetSlot(int SlotID, SlotType slotType)
+    {
+        SlotBase[] allSlot = GetCurSlotArray(slotType);
+        SlotBase curTargetSlot = allSlot.FirstOrDefault(each => each.SlotID == SlotID);
+        return curTargetSlot;
+    }
+
+    #region 不需要关心的私有方法
+    static SlotBase[] GetCurSlotArray(SlotType slotType)
+    {
         SlotBase[] allSlot;
-      
         switch (slotType)
         {
             case SlotType.GemBagSlot:
@@ -98,19 +80,15 @@ public static class SlotManager
             case SlotType.BagSlot:
                 allSlot = UIManager.Instance.BagItemRootGO.GetComponentsInChildren<SlotBase>();
                 break;
+            case SlotType.SpawnnerSlot:
+                allSlot = UIManager.Instance.G_BulletSpawnerSlot.GetComponentsInChildren<SlotBase>();
+                break;
             default:
                 allSlot = UIManager.Instance.BagItemRootGO.GetComponentsInChildren<SlotBase>();
                 break;
         }
-        foreach (var each in allSlot)
-        {
-            if (each.MainID == -1)
-            {
-                curTargetSlot = each;
-                break;
-            }
-        }
-        return curTargetSlot;
+
+        return allSlot;
     }
-    
+    #endregion
 }

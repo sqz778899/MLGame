@@ -27,7 +27,6 @@ public class GemSlot : SlotBase
     {
         base.SOnDrop(_childIns);
         ChildIns.transform.localScale = ChildScale;
-        ChildIns.GetComponent<Gem>().BulletSlotIndex = BulletSlotIndex;
     }
     
     void Awake()

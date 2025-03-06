@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DraggableBullet : BulletNew
+public class DraggableBullet : Bullet
 {
     public bool IsSpawnerCreate = false;
 
@@ -38,7 +38,6 @@ public class DraggableBullet : BulletNew
             if (IsSpawnerCreate) ReturnToSpawner();
             else ResetPosition();
         }
-        MainRoleManager.Instance.RefreshAllItems();
     }
     
     public override void OnPointerUp(PointerEventData eventData)
@@ -51,27 +50,34 @@ public class DraggableBullet : BulletNew
     bool HandleBulletSlotRole(RaycastResult result)
     {
         if (!result.gameObject.CompareTag("BulletSlotRole")) return false;
-        var curSlotSC = result.gameObject.GetComponent<BulletSlotRole>();
-        if (curSlotSC.State == UILockedState.isLocked)
+        var targetSlotSC = result.gameObject.GetComponent<BulletSlotRole>();
+        if (targetSlotSC.State == UILockedState.isLocked)
         {
             ReturnToSpawner();
             return true;
         }
 
+        //落入装备槽位，如果是Spawner诞生的，创建新的Data绑定
+        if (IsSpawnerCreate)
+        {
+            BindData(new BulletData(_data.ID,_data.CurSlot));
+            IsSpawnerCreate = false;
+        }
+     
         BulletInsMode = BulletInsMode.EditB;
-        if (curSlotSC.MainID == -1)
+        if (targetSlotSC.MainID == -1)
         {
-            CurSlot = curSlotSC;
-            SlotManager.ClearBagSlotByID(SlotID, SlotType.CurBulletSlot);
-            CurSlot.SOnDrop(gameObject);
+            SlotManager.ClearSlot(_data.CurSlot);
+            targetSlotSC.SOnDrop(gameObject);
         }
-        else
+        else//交换
         {
-            var orIns = curSlotSC.ChildIns;
-            CurSlot.SOnDrop(orIns);
-            curSlotSC.SOnDrop(gameObject);
+            GameObject orIns = targetSlotSC.ChildIns;
+            _data.CurSlot.SOnDrop(orIns);
+            targetSlotSC.SOnDrop(gameObject);
         }
-        MainRoleManager.Instance.RefreshAllItems();
+        //这个时候槽位ID才确定下来
+        MainRoleManager.Instance.AddCurBullet(_data);
         return true;
     }
     
@@ -88,12 +94,10 @@ public class DraggableBullet : BulletNew
         {
             //1) 查一下CurBullets,看看这个槽位下有无子弹,如果有，回退子弹
             BulletInnerSlot curSlotSC = result.gameObject.GetComponent<BulletInnerSlot>();
-            GameObject oldBullet = MainRoleManager.Instance.GetReadyBulletBySlotID(curSlotSC.SlotID);
-            if (oldBullet != null)
-                MainRoleManager.Instance.SubBullet(curSlotSC.SlotID);
             //2)添加当前子弹进入战场
-            MainRoleManager.Instance.RefreshCurBullets(MutMode.Add, _data.ID,TargetSlotID: curSlotSC.SlotID);
-            MainRoleManager.Instance.InstanceCurBullets();
+            SlotBase orSlotSC = SlotManager.GetSlot(curSlotSC.SlotID, SlotType.CurBulletSlot);
+            MainRoleManager.Instance.ReturnCurBulletBySlotID(orSlotSC);//回退老子弹
+            MainRoleManager.Instance.AddCurBullet(new BulletData(_data.ID,orSlotSC));//添加新子弹
             UIManager.Instance.RoleIns.GetComponent<RoleInner>().InitData();
             //3)
             Destroy(gameObject);
@@ -104,14 +108,16 @@ public class DraggableBullet : BulletNew
     
     void ReturnToSpawner()
     {
-        DraggableBulletSpawner[] allSpawner = UIManager.Instance
-            .G_BulletSpawnerSlot.GetComponentsInChildren<DraggableBulletSpawner>();
-        
-        foreach (var spawner in allSpawner.Where(spawner => spawner.ID == ID))
+        foreach (var eachBulletData in MainRoleManager.Instance.CurBulletSpawners)
         {
-            MainRoleManager.Instance.SubBullet(_data.ID, InstanceID);
-            Destroy(gameObject);
-            return;
+            if (eachBulletData.ID == _data.ID)
+            {
+                eachBulletData.SpawnerCount++;
+                MainRoleManager.Instance.SubCurBullet(_data);
+                Destroy(gameObject);
+                SlotManager.ClearSlot(_data.CurSlot);
+                break;
+            }
         }
     }
     
@@ -119,7 +125,7 @@ public class DraggableBullet : BulletNew
     {
         BulletInsMode = BulletInsMode.EditB;
         gameObject.transform.position = originalPosition;
-        _dragIns.transform.SetParent(originalParent, true);
+        gameObject.transform.SetParent(originalParent, true);
     }
     #endregion
 }

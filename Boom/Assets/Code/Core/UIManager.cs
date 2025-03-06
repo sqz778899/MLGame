@@ -49,10 +49,10 @@ public class UIManager : ScriptableObject
     public GameObject G_BulletSpawnerSlot_Mini;  //子弹孵化器的Group
     //Bag Item
     public GameObject BagItemRootGO;           //道具根节点
-    public GameObject EquipItemRootGO;       //元素均衡槽根节点
+    public GameObject EquipItemRootGO;         //元素均衡槽根节点
     //Bag Gem
     public GameObject BagGemRootGO;            //宝石根节点
-    public GameObject BagGemRootGO_Mini;            //宝石根节点
+    public GameObject BagGemRootGO_Mini;       //宝石根节点
     //Bag Common
     public GameObject DragObjRoot;            //拖动物品时候的悬浮父节点
     public GameObject BagReadySlotRootGO;     //子弹在人物右侧的Group

@@ -168,32 +168,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5c2057c8aebf174cbe3041368d0b664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: 0
-  CurSlot: {fileID: 0}
-  Name: 
-  InstanceID: 0
-  SlotID: 0
-  SlotType: 0
-  _level: 0
-  Damage: 0
-  Piercing: 0
-  Resonance: 0
-  FinalDamage: 0
-  FinalPiercing: 0
-  FinalResonance: 0
-  ElementalType: 0
-  IsResonance: 0
-  Ins: {fileID: 0}
-  Edit_a: {fileID: 0}
-  Edit_b: {fileID: 0}
-  _bulletInsMode: 0
-  HitEffect: {fileID: 0}
-  BulletSpineAsset: {fileID: 0}
+  CurRenderer: {fileID: 2501256042464223712}
+  Skeleton: {fileID: 3922445145063372190}
+  HitEffect: {fileID: 3868051808788307342, guid: d6dd6b9ca7e787c469b8297e3953dff9, type: 3}
   HitSpfxAsset: {fileID: 0}
-  FollowDis: 3
-  RunSpeed: 10
+  BattleOrder: -1
   _state: 0
+  RunSpeed: 10
+  FollowDis: 3
   AniScale: 1
+  CurSpeed: 0
 --- !u!70 &1371652625376912822
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

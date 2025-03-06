@@ -46,7 +46,7 @@ public static class ShopUtility
         MainRoleManager.Instance.Coins -= SelGem.Price;
         
         //...........Buy This One................
-        MainRoleManager.Instance.AddGem(SelGem.ID);
+        MainRoleManager.Instance.AddGem(SelGem._data.ID);
         return true;
     }
 

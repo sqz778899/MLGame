@@ -43,16 +43,12 @@ public class RoleInner : BaseMove
         for (int i = 0; i < MainRoleManager.Instance.CurBullets.Count; i++)
         {
             BulletData curB = MainRoleManager.Instance.CurBullets[i];
-            GameObject bulletIns = null;
-            /*GameObject bulletIns = BulletManager.Instance.
-                InstanceBullet(curB, BulletInsMode.Inner);*/
+            GameObject bulletIns = BulletFactory.CreateBullet(curB, BulletInsMode.Inner).gameObject;
             BulletInner curSC = bulletIns.GetComponent<BulletInner>();
-            curSC.BattleOrder = i;
-            float offsetX = startPos.x - (curB.SlotID - 1) * 1f;
+            float offsetX = startPos.x - (curB.CurSlot.SlotID - 1) * 1f;
             curSC.FollowDis = Mathf.Abs(offsetX);
             bulletIns.transform.position = new Vector3(offsetX,startPos.y,startPos.z + i);
             bulletIns.transform.SetParent(UIManager.Instance.G_BulletInScene.transform,false);
-            curSC.CurRoleInner = this;
             Bullets.Add(curSC);
         }
     }

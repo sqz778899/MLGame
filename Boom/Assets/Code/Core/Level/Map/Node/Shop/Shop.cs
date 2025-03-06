@@ -65,7 +65,7 @@ public class Shop:GUIBase
             {
                 GameObject curRollIns = ResManager.instance.CreatInstance(PathConfig.RollGemPB);
                 GemInShop curGem = curRollIns.GetComponent<GemInShop>();
-                curGem.ID = each.Value;
+                curGem._data.ID = each.Value;
                 curGem.CurShopNode = _curShopNode;
                 SetChildIns(curRollIns,each.Key);
             }
@@ -144,10 +144,10 @@ public class Shop:GUIBase
             RollPR curProb = RollManager.Instance.SingleRoll(RollProbs);//抽一发
             GameObject curRollIns = ResManager.instance.CreatInstance(PathConfig.RollGemPB);
             GemInShop curGem = curRollIns.GetComponent<GemInShop>();
-            curGem.ID = curProb.ID;
+            curGem._data.ID = curProb.ID;
             curGem.CurShopNode = CurShopNode;
             curGem.ShopSlotIndex = i;
-            CurShopNode.ShopIndexToGemId.Add(i,curGem.ID);
+            CurShopNode.ShopIndexToGemId.Add(i,curGem._data.ID);
             SetChildIns(curRollIns, i);
         }
     }

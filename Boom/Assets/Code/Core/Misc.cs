@@ -95,10 +95,10 @@ public class WarReport
 
 public class SingelBattleInfo
 {
-    public Dictionary<int, KeyValuePair<BulletJson, List<BattleOnceHit>>> InfoDict;
+    public Dictionary<int, KeyValuePair<BulletData, List<BattleOnceHit>>> InfoDict;
     public SingelBattleInfo()
     {
-        InfoDict = new Dictionary<int, KeyValuePair<BulletJson, List<BattleOnceHit>>>();
+        InfoDict = new Dictionary<int, KeyValuePair<BulletData, List<BattleOnceHit>>>();
     }
 }
 #endregion
@@ -227,6 +227,7 @@ public class SupremeCharm
 //Slot的类型
 public enum SlotType
 {
+    SpawnnerSlot = 0,
     BagSlot = 1,
     BulletSlot = 2,
     ElementSlot = 3,

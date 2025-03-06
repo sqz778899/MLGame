@@ -8,7 +8,6 @@ public class DragBase : ToolTipsBase, IPointerDownHandler, IPointerUpHandler, ID
 {
     //其他属性
     [Header("拖拽相关")]
-    internal GameObject _dragIns; //当前拖拽物
     internal Vector3 originalPosition; //拖拽物原始位置
     internal Transform originalParent;//拖拽中的物品原始父层级
     internal Transform dragObjParent; //拖拽中的物品所在的父层级
@@ -18,7 +17,6 @@ public class DragBase : ToolTipsBase, IPointerDownHandler, IPointerUpHandler, ID
     internal override void Start()
     {
         base.Start();
-        _dragIns = gameObject;
         dragObjParent = UIManager.Instance.DragObjRoot.transform;
     }
     
@@ -38,9 +36,9 @@ public class DragBase : ToolTipsBase, IPointerDownHandler, IPointerUpHandler, ID
         _eventData = eventData;
         if (eventData.button == PointerEventData.InputButton.Left)
         {
-            originalParent = _dragIns.transform.parent;//记录原始父层级
-            _dragIns.transform.SetParent(dragObjParent);//改变父层级
-            originalPosition = _dragIns.transform.position;
+            originalParent = gameObject.transform.parent;//记录原始父层级
+            gameObject.transform.SetParent(dragObjParent);//改变父层级
+            originalPosition = gameObject.transform.position;
         }
         
         if (eventData.button == PointerEventData.InputButton.Right)
@@ -69,9 +67,7 @@ public class DragBase : ToolTipsBase, IPointerDownHandler, IPointerUpHandler, ID
                 
                 if (curSlotSC.MainID == -1)
                 {
-                    SlotManager.ClearBagSlotByID(SlotID,CurSlot.SlotType);//清除旧的Slot信息
-                    CurSlot = curSlotSC;//再换Slot信息
-                    OnDropEmptySlot();
+                    OnDropEmptySlot(curSlotSC);
                     NonHappen = false;
                     break;
                 }
@@ -89,15 +85,15 @@ public class DragBase : ToolTipsBase, IPointerDownHandler, IPointerUpHandler, ID
     }
     
     //拖拽物如果找的Slot,则执行的逻辑
-    public virtual void OnDropEmptySlot(){}
+    public virtual void OnDropEmptySlot(SlotBase targetSlot){}
+    
     internal virtual void OnDropFillSlot(SlotBase targetSlot){}
     
     internal virtual void NonFindSlot()
     {
         // 如果没有找到槽位，那么物品回到原始位置
-        _dragIns.transform.position = originalPosition;
-        CurSlot.MainID = ID;
-        _dragIns.transform.SetParent(originalParent,true);//还原父层级
+        gameObject.transform.position = originalPosition;
+        gameObject.transform.SetParent(originalParent,true);//还原父层级
     }
 
     //右击
@@ -113,7 +109,7 @@ public class DragBase : ToolTipsBase, IPointerDownHandler, IPointerUpHandler, ID
         _eventData = eventData;
         // 在拖动时，我们把子弹位置设置为鼠标位置
         Vector3 worldPos = GetWPosByMouse(eventData);
-        _dragIns.GetComponent<RectTransform>().position = worldPos;
+        gameObject.GetComponent<RectTransform>().position = worldPos;
         //拖动不显示Tooltips说明菜单
         HideTooltips();
         VOnDrag();
