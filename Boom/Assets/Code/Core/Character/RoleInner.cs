@@ -39,7 +39,7 @@ public class RoleInner : BaseMove
     //在开始战斗的时候，根据角色槽位的子弹，创建五个跟着他跑的傻逼嘻嘻的小子弹
     void CreateBulletInner()
     {
-        Vector3 startPos = new Vector3(transform.position.x - 1, -0.64f, 1f);
+        Vector3 startPos = new Vector3(transform.position.x - 1, -0.64f, -0.15f);
         for (int i = 0; i < MainRoleManager.Instance.CurBullets.Count; i++)
         {
             BulletData curB = MainRoleManager.Instance.CurBullets[i];

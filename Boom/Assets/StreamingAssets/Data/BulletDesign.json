@@ -8,8 +8,6 @@
     "HitEffectName": "FX_Bullet01_hit",
     "ID": 1,
     "Name": "黏土子弹",
-    "SlotID": 0,
-    "SlotType": 0,
     "Price": 0
   },
   {
@@ -21,8 +19,6 @@
     "HitEffectName": "FX_Bullet01_hit",
     "ID": 101,
     "Name": "硬质子弹",
-    "SlotID": 0,
-    "SlotType": 0,
     "Price": 0
   },
   {
@@ -34,8 +30,6 @@
     "HitEffectName": "FX_Bullet01_hit",
     "ID": 201,
     "Name": "黑曜石子弹",
-    "SlotID": 0,
-    "SlotType": 0,
     "Price": 0
   },
   {
@@ -47,8 +41,6 @@
     "HitEffectName": "FX_Bullet02_hit",
     "ID": 2,
     "Name": "Ice01",
-    "SlotID": 0,
-    "SlotType": 0,
     "Price": 0
   },
   {
@@ -60,8 +52,6 @@
     "HitEffectName": "FX_Bullet02_hit",
     "ID": 102,
     "Name": "Ice02",
-    "SlotID": 0,
-    "SlotType": 0,
     "Price": 0
   },
   {
@@ -73,8 +63,6 @@
     "HitEffectName": "FX_Bullet02_hit",
     "ID": 202,
     "Name": "Ice03",
-    "SlotID": 0,
-    "SlotType": 0,
     "Price": 0
   },
   {
@@ -86,8 +74,6 @@
     "HitEffectName": "FX_Bullet03_hit",
     "ID": 3,
     "Name": "Fire01",
-    "SlotID": 0,
-    "SlotType": 0,
     "Price": 0
   },
   {
@@ -99,8 +85,6 @@
     "HitEffectName": "FX_Bullet03_hit",
     "ID": 103,
     "Name": "Fire02",
-    "SlotID": 0,
-    "SlotType": 0,
     "Price": 0
   },
   {
@@ -112,8 +96,6 @@
     "HitEffectName": "FX_Bullet03_hit",
     "ID": 203,
     "Name": "Fire03",
-    "SlotID": 0,
-    "SlotType": 0,
     "Price": 0
   }
 ]

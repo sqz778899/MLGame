@@ -15,7 +15,6 @@ public class MainSceneMono:MonoBehaviour
     [Header("FightScene")] 
     public GameObject GUIFightScene;
     public GameObject FightScene;
-
     
     BagRoot _bagRootSC;
     FightLogic _fightLogic;

@@ -24,6 +24,5 @@ public class SlotBase : MonoBehaviour
             _gemNew._data.CurSlot = this;
             MainID = _gemNew._data.ID;
         }
-        
     }
 }

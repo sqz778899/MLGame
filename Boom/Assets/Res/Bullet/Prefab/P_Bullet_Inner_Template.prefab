@@ -149,7 +149,7 @@ Transform:
   m_GameObject: {fileID: 3868051808788307342}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.7, z: 100}
+  m_LocalPosition: {x: 0, y: -0.7, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -172,7 +172,6 @@ MonoBehaviour:
   Skeleton: {fileID: 3922445145063372190}
   HitEffect: {fileID: 3868051808788307342, guid: d6dd6b9ca7e787c469b8297e3953dff9, type: 3}
   HitSpfxAsset: {fileID: 0}
-  BattleOrder: -1
   _state: 0
   RunSpeed: 10
   FollowDis: 3

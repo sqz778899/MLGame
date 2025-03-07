@@ -6,16 +6,17 @@ using UnityEngine;
 public static class SlotManager
 {
     //根据SlotId 和 SlotType 还原Slot的MainID和InstanceID
-    public static void ClearSlotByID(int SlotID,SlotType slotType)
-    {
-        SlotBase curSlot = GetSlot(SlotID,slotType);
-        if (curSlot == null) return;
-        curSlot.MainID = -1;
-    }
-    
     public static void ClearSlot(SlotBase curSlot)
     {
         if (curSlot == null) return;
+        if (curSlot is GemSlot _gemSlot)
+        {
+            _gemSlot.CurGemData = null;
+        }
+        if (curSlot is BulletSlotRole _roleSlot)
+        {
+            _roleSlot.CurBulletData = null;
+        }
         curSlot.MainID = -1;
     }
     

@@ -69,15 +69,17 @@ public class DraggableBullet : Bullet
         {
             SlotManager.ClearSlot(_data.CurSlot);
             targetSlotSC.SOnDrop(gameObject);
+            //这个时候槽位ID才确定下来
+            MainRoleManager.Instance.AddCurBullet(_data);
         }
         else//交换
         {
             GameObject orIns = targetSlotSC.ChildIns;
-            _data.CurSlot.SOnDrop(orIns);
+            SlotBase oldSlot = _data.CurSlot;
             targetSlotSC.SOnDrop(gameObject);
+            oldSlot.SOnDrop(orIns);
+            MainRoleManager.Instance.SortCurBullet();
         }
-        //这个时候槽位ID才确定下来
-        MainRoleManager.Instance.AddCurBullet(_data);
         return true;
     }
     
@@ -92,14 +94,15 @@ public class DraggableBullet : Bullet
     {
         if (result.gameObject.CompareTag("BulletInnerSlot"))
         {
-            //1) 查一下CurBullets,看看这个槽位下有无子弹,如果有，回退子弹
             BulletInnerSlot curSlotSC = result.gameObject.GetComponent<BulletInnerSlot>();
-            //2)添加当前子弹进入战场
-            SlotBase orSlotSC = SlotManager.GetSlot(curSlotSC.SlotID, SlotType.CurBulletSlot);
-            MainRoleManager.Instance.ReturnCurBulletBySlotID(orSlotSC);//回退老子弹
-            MainRoleManager.Instance.AddCurBullet(new BulletData(_data.ID,orSlotSC));//添加新子弹
+            //1) 查一下CurBullets,看看这个槽位下有无子弹,如果有，回退子弹
+            MainRoleManager.Instance.ReturnCurBulletBySlotID(
+                curSlotSC.CurBulletSlotRole.CurBulletData);//回退老子弹
+            //2)添加新子弹，到数据层
+            curSlotSC.CurBulletSlotRole.SOnDrop(_data);
+            MainRoleManager.Instance.AddCurBullet(_data);//添加新子弹
+            //3)刷新GO
             UIManager.Instance.RoleIns.GetComponent<RoleInner>().InitData();
-            //3)
             Destroy(gameObject);
             return true;
         }

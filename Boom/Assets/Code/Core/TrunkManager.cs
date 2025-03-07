@@ -106,7 +106,6 @@ public class TrunkManager: ScriptableObject
     }
     #endregion
     
-    
     #region 单例
     static TrunkManager s_instance;
     public static TrunkManager Instance

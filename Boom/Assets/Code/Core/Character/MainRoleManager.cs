@@ -64,12 +64,6 @@ public class MainRoleManager :ScriptableObject
     //宝石
     public List<GemData> BagGems = new List<GemData>();//在背包中的宝石
     public List<GemData> InLayGems = new List<GemData>();//在镶嵌槽中的宝石
-    public List<GemSlot> InlayGemSlots = new List<GemSlot>();//宝石槽
-    public GemSlot GetEmptyGemSlot() => InlayGemSlots.FirstOrDefault(gemSlot => 
-        gemSlot.State == UILockedState.isNormal && gemSlot.MainID==-1);//找到一个空的宝石槽
-    public List<GemSlot> BagGemSlots = new List<GemSlot>();//背包中的宝石槽
-    public GemSlot GetEmptyBagGemSlot() => BagGemSlots.FirstOrDefault(gemSlot => 
-        gemSlot.State == UILockedState.isNormal && gemSlot.MainID==-1);//找到一个空的背包位
     
     [Header("战报")]
     public WarReport CurWarReport;
@@ -215,13 +209,6 @@ public class MainRoleManager :ScriptableObject
         //"游戏进程相关"
         if (CurMapSate == null)
             CurMapSate = new MapSate();
-        //初始化宝石槽的数据
-        InlayGemSlots = new List<GemSlot>();
-        InlayGemSlots.AddRange(UIManager.Instance.BagReadySlotRootGO
-            .GetComponentsInChildren<GemSlot>());
-        BagGemSlots = new List<GemSlot>();
-        BagGemSlots.AddRange(UIManager.Instance.BagGemRootGO
-            .GetComponentsInChildren<GemSlot>());
     }
 
     public void InitData()
@@ -230,13 +217,11 @@ public class MainRoleManager :ScriptableObject
         InitSpawners();
         InitCurBullets();
         InitStandbyBulletMats();
-        RefreshAllItems();
         CurBulletSlotRoleSCs = UIManager.Instance.BagReadySlotRootGO.GetComponentsInChildren<BulletSlotRole>();
         WinOrFailState = WinOrFail.InLevel;
     }
 
     #region 纯数据层操作
-    
     //更新当前备用子弹数据
     public void RefreshStandbyBulletMats(MutMode mode, int BulletID,int InstanceID)
     {
@@ -264,94 +249,6 @@ public class MainRoleManager :ScriptableObject
                 }
                 break;
         }
-    }
-    
-    //更新当前背包内物品数据
-    public void RefreshBagData(MutMode mode,ItemJson itemJson)
-    {
-        /*switch (mode)
-        {
-            case MutMode.Sub:
-                BagItems.RemoveAll(each => each.ID == itemJson.ID && each.InstanceID == itemJson.InstanceID);
-                EquipItems.RemoveAll(each => each.ID == itemJson.ID && each.InstanceID == itemJson.InstanceID);
-                break;
-            case MutMode.Add:
-                BagItems.Add(itemJson);
-                break;
-        }*/
-    }
-    
-    //更新当前全部
-    public void RefreshAllItems()
-    {
-        #region 更新数据
-        /*EquipItems = new List<ItemJson>();
-        EquipItems.AddRange(UIManager.Instance.EquipItemRootGO
-            .GetComponentsInChildren<Item>(true)
-            .Select(item => item.ToJosn()));
-
-        BagItems = new List<ItemJson>();
-        BagItems.AddRange(UIManager.Instance.BagItemRootGO
-            .GetComponentsInChildren<Item>(true)
-            .Select(item => item.ToJosn()));*/
-
-        /*BagGems = new List<GemJson>();
-        BagGems.AddRange(UIManager.Instance.BagGemRootGO.
-            GetComponentsInChildren<Gem>(true).Select(gem => gem.ToJosn()));*/
-        
-        //宝石镶嵌属性一并同步
-        CurBullets = new List<BulletData>();
-        /*Bullet[] CurBulletSC = UIManager.Instance.BagReadySlotRootGO
-            .GetComponentsInChildren<Bullet>(true);*/
-
-        /*InLayGems = new List<GemJson>();
-        Gem[] InLayGemSC = UIManager.Instance.BagReadySlotRootGO
-            .GetComponentsInChildren<Gem>(true);
-        InLayGems.AddRange(InLayGemSC.Select(gem => gem.ToJosn()));*/
-        /*foreach (var each in CurBulletSC)
-        {
-            each.ClearGem();
-            foreach (var eachGem in InLayGemSC)
-            {
-                if (each.SlotID == eachGem.BulletSlotIndex)
-                    each.AddGem(eachGem);
-            }
-        }*/
-
-        //CurBulletsPair.Clear();
-        /*foreach (var each in CurBulletSC)
-        {
-            BulletData curJson = each.ToJosn();
-            CurBullets.Add(curJson);
-            CurBulletsPair[curJson] = each;
-        }*/
-        #endregion
-
-        #region 属性添加
-        _attrInfo = new ItemAttribute();
-        //把元素均衡界面的属性，同步到角色身上
-        /*foreach (var each in EquipItems)
-            _attrInfo.Aggregate(each);*/
-        
-        WaterElement = _attrInfo.waterElement;
-        FireElement = _attrInfo.fireElement;
-        ThunderElement = _attrInfo.thunderElement;
-        LightElement = _attrInfo.lightElement;
-        DarkElement = _attrInfo.darkElement;
-
-        WaterDamage = _attrInfo.extraWaterDamage;
-        FireDamage = _attrInfo.extraFireDamage;
-        ThunderDamage = _attrInfo.extraThunderDamage;
-        LightDamage = _attrInfo.extraLightDamage;
-        DarkDamage = _attrInfo.extraDarkDamage;
-
-        MaxDamage = _attrInfo.maxDamage;
-        #endregion
-
-        //刷新子弹关系
-        ProcessBulletRelations();
-        //刷新侧边栏显示
-        SyncBulletIcon();
     }
     #endregion
 
@@ -387,41 +284,18 @@ public class MainRoleManager :ScriptableObject
     //初始化当前子弹的GO
     public void InitCurBullets()
     {
+        //...............Clear Old Data....................
+        Bullet[] oldBullets = UIManager.Instance.BagReadySlotRootGO.GetComponentsInChildren<Bullet>();
+        for (int i = oldBullets.Length - 1; i >= 0; i--)
+            DestroyImmediate(oldBullets[i].gameObject);
+        SlotManager.GetEmptySlot(SlotType.CurBulletSlot);
         //..............Instance New Data..................
         foreach (BulletData each in CurBullets)
         {
             GameObject BulletIns = BulletFactory.CreateBullet(each, BulletInsMode.EditB).gameObject;
-            //...................SetSlot.......................
-            SlotBase baseSC = SlotManager.GetEmptySlot(SlotType.CurBulletSlot);
-            if (baseSC == null)return;
-            baseSC.SOnDrop(BulletIns);
+            each.CurSlot.SOnDrop(BulletIns);
         }
         SyncBulletIcon();
-    }
-
-    public void SyncBulletIcon()
-    {
-        GameObject bulletIconRoot = UIManager.Instance.G_CurBulletIcon;
-        for (int i = 0; i < 5; i++)
-        {
-            int curSlotID = i + 1;
-            BulletData curBulletReady = null;
-            foreach (var each in CurBullets)
-            {
-                if (each.CurSlot.SlotID == curSlotID)
-                    curBulletReady = each;
-            }
-            GameObject curIconSlot = bulletIconRoot.transform.GetChild(curSlotID).gameObject;//找到对应的IconSlot
-            Image curImg = curIconSlot.transform.GetChild(0).GetComponent<Image>();
-            if (curBulletReady == null)
-                curImg.color = Color.clear;
-            else
-            {
-                curImg.color = Color.white;
-                curImg.sprite = ResManager.instance.GetAssetCache<
-                    Sprite>(PathConfig.GetBulletImageOrSpinePath(curBulletReady.ID, BulletInsMode.Icon));
-            }
-        }
     }
 
     public void InitStandbyBulletMats()
@@ -524,25 +398,57 @@ public class MainRoleManager :ScriptableObject
     {
         if (CurBullets.Count >= 5) return;
         CurBullets.Add(bulletData);
+        SortCurBullet();
+        SyncBulletIcon();
+    }
+
+    public void SortCurBullet()
+    {
         CurBullets.Sort((bullet1, bullet2) => bullet1.CurSlot.SlotID.CompareTo(bullet2.CurSlot.SlotID));
+        SyncBulletIcon();
     }
 
     public void SubCurBullet(BulletData bulletData)
     {
         CurBullets.Remove(bulletData);
+        SyncBulletIcon();
     }
     
     //根据槽位清除当前子弹信息
-    public void ReturnCurBulletBySlotID(SlotBase slot)
+    public void ReturnCurBulletBySlotID(BulletData _data)
     {
-        BulletData curBullet = CurBullets.
-            FirstOrDefault(e => e.CurSlot == slot);
-        if (curBullet == null) return;
-        SubCurBullet(curBullet);
-        AddSpawner(curBullet.ID);
+        if (_data == null) return;
+        SubCurBullet(_data);
+        AddSpawner(_data.ID);
     }
     #endregion
-    
+
+    #region 不关心的私有方法
+    void SyncBulletIcon()
+    {
+        GameObject bulletIconRoot = UIManager.Instance.G_CurBulletIcon;
+        for (int i = 0; i < 5; i++)
+        {
+            int curSlotID = i + 1;
+            BulletData curBulletReady = null;
+            foreach (var each in CurBullets)
+            {
+                if (each.CurSlot.SlotID == curSlotID)
+                    curBulletReady = each;
+            }
+            GameObject curIconSlot = bulletIconRoot.transform.GetChild(curSlotID).gameObject;//找到对应的IconSlot
+            Image curImg = curIconSlot.transform.GetChild(0).GetComponent<Image>();
+            if (curBulletReady == null)
+                curImg.color = Color.clear;
+            else
+            {
+                curImg.color = Color.white;
+                curImg.sprite = ResManager.instance.GetAssetCache<
+                    Sprite>(PathConfig.GetBulletImageOrSpinePath(curBulletReady.ID, BulletInsMode.Icon));
+            }
+        }
+    }
+    #endregion
     
     #region 单例
     static MainRoleManager s_instance;

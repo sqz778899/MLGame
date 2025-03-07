@@ -61,12 +61,14 @@ public class GemData : ItemDataBase
     public int Damage;
     public int Piercing;
     public int Resonance;
+    public BulletModifierGem Modifier;
     
     public GemData(int _id,SlotBase _slot)
     {
         GemJson json = TrunkManager.Instance.GetGemJson(_id);
         CurSlot = _slot;
         InitData(json);
+        Modifier = new BulletModifierGem(this);
     }
 
     public void InitData(GemJson json)
@@ -191,7 +193,6 @@ public class BulletModifierGem : IBulletModifier
     {
         this.gem = gem;
     }
-
     public void Modify(BulletData data)
     {
         data.FinalDamage += gem.Damage;

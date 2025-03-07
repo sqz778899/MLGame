@@ -52,7 +52,6 @@ public class Item : DragBase
         //数据层同步
         //MainRoleManager.Instance.MoveItem(this);
         //OnDataChangeGem();
-        MainRoleManager.Instance.RefreshAllItems();
     }
     
     #region ToolTips相关

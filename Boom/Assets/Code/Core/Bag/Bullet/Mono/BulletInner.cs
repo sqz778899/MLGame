@@ -28,46 +28,19 @@ public class BulletInner:ItemBase
     int _piercingCount; //穿透的敌人的数量
     int _resonance;
     public float CurSpeed;
-    
-    
-    public void BindData(BulletData data)
-    {
-        if (_data != null)
-            _data.OnDataChanged -= OnDataChangedInner; // 先退订旧Data的事件
-        
-        _data = data;
-        if (_data != null)
-        {
-            _data.OnDataChanged += OnDataChangedInner;
-            OnDataChangedInner(); // 立即刷新一遍
-        }
-    }
-    
-    void OnDataChangedInner()
-    {
-        Skeleton.skeletonDataAsset = ResManager.instance.GetAssetCache<SkeletonDataAsset>
-            (PathConfig.GetBulletImageOrSpinePath(_data.ID,BulletInsMode.Inner));
-        Skeleton.Initialize(true);
-        HitEffect = ResManager.instance.GetAssetCache<GameObject>(
-            PathConfig.BulletSpfxTemplate);
-        HitSpfxAsset = ResManager.instance.GetAssetCache<SkeletonDataAsset>
-            (PathConfig.GetBulletSpfxPath(_data.ID));
-    }
-    
 
     void Start()
     {
         _piercingCount = 0;
         _resonance = 0;
         _state = BulletInnerState.Common;
-        /*_materials = new List<Material>();
-        foreach (var each in _ain.skeletonDataAsset.atlasAssets[0].Materials)
+        _materials = new List<Material>();
+        foreach (var each in CurRenderer.materials)
         {
             Material newMat = new Material(each);
             _materials.Add(newMat);
         }
-        _ain.skeletonDataAsset.atlasAssets[0].Materials = _materials;*/
-        _materials = new List<Material>(Skeleton.skeletonDataAsset.atlasAssets[0].Materials);
+        CurRenderer.materials = _materials.ToArray();
         
         AniUtility.PlayIdle(Skeleton,AniScale);
         foreach (Material material in _materials)
@@ -90,7 +63,6 @@ public class BulletInner:ItemBase
                 transform.Translate(forward * CurSpeed * Time.deltaTime);
                 break;
             case BulletInnerState.Dead:
-                //CurRoleInner.Bullets.Remove(this);
                 Destroy(gameObject);
                 break;
         }
@@ -158,6 +130,7 @@ public class BulletInner:ItemBase
     #region 攻击
     public IEnumerator ReadyToAttack(Vector3 targetPos)
     {
+        CurRenderer.materials = _materials.ToArray();
         //...............填弹...........
         _state = BulletInnerState.AttackBegin;
         float aniTime = 0f;
@@ -250,4 +223,33 @@ public class BulletInner:ItemBase
         return transform.position.x - UIManager.Instance.RoleIns.transform.position.x;
     }
     #endregion
+    
+    public void BindData(BulletData data)
+    {
+        if (_data != null)
+            _data.OnDataChanged -= OnDataChangedInner; // 先退订旧Data的事件
+        
+        _data = data;
+        if (_data != null)
+        {
+            _data.OnDataChanged += OnDataChangedInner;
+            OnDataChangedInner(); // 立即刷新一遍
+        }
+    }
+
+    void OnDataChangedInner()
+    {
+        Skeleton.skeletonDataAsset = ResManager.instance.GetAssetCache<SkeletonDataAsset>
+            (PathConfig.GetBulletImageOrSpinePath(_data.ID,BulletInsMode.Inner));
+        Skeleton.Initialize(true);
+        HitEffect = ResManager.instance.GetAssetCache<GameObject>(
+            PathConfig.BulletSpfxTemplate);
+        HitSpfxAsset = ResManager.instance.GetAssetCache<SkeletonDataAsset>
+            (PathConfig.GetBulletSpfxPath(_data.ID));
+    }
+    
+    void OnDestroy()
+    {
+        _data.OnDataChanged -= OnDataChangedInner;
+    }
 }

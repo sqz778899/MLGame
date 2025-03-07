@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class GemSlot : SlotBase
 {
+    public Action OnGemDataChange;
     [SerializeField]
     UILockedState _state;
     public UILockedState State
@@ -18,15 +18,39 @@ public class GemSlot : SlotBase
         }
         get { return _state; }
     }
+
+    [Header("持有子弹&&宝石的重要数据")]
+    GemData _curGemData;
+    public GemData CurGemData
+    {
+        get => _curGemData;
+        set
+        {
+            if (_curGemData != value)
+            {
+                _curGemData = value;
+                OnGemDataChange?.Invoke();
+            }
+        }
+    }
+    
     [Header("锁定的美术资源")] 
     public GameObject Locked;
     [Header("功能参数")]
-    public int BulletSlotIndex;
     public Vector3 ChildScale = Vector3.one;
+
+  
     public override void SOnDrop(GameObject _childIns)
     {
         base.SOnDrop(_childIns);
         ChildIns.transform.localScale = ChildScale;
+        
+        ItemBase curSC = _childIns.GetComponentInChildren<ItemBase>();
+        Gem _gemNew = curSC as Gem;
+        _gemNew._data.CurSlot = this;
+        MainID = _gemNew._data.ID;
+
+        CurGemData = _gemNew._data;
     }
     
     void Awake()

@@ -178,7 +178,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &502489
 MonoBehaviour:
@@ -1091,6 +1090,7 @@ MonoBehaviour:
   MainID: -1
   SlotType: 7
   ChildIns: {fileID: 0}
+  CurBulletSlotRole: {fileID: 2087331870}
 --- !u!114 &32201573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1319,7 +1319,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &32963299
 MonoBehaviour:
@@ -1670,7 +1669,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &46123682
 MonoBehaviour:
@@ -1766,7 +1764,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &46238647
 MonoBehaviour:
@@ -2103,7 +2100,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &63619335
 MonoBehaviour:
@@ -2199,7 +2195,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &68945537
 MonoBehaviour:
@@ -2454,7 +2449,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &74973975
 MonoBehaviour:
@@ -2642,7 +2636,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &83923185
 MonoBehaviour:
@@ -3154,7 +3147,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &104650188
 MonoBehaviour:
@@ -3392,7 +3384,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &108183263
 MonoBehaviour:
@@ -3488,7 +3479,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &109070978
 MonoBehaviour:
@@ -3854,7 +3844,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &129789800
 MonoBehaviour:
@@ -3950,7 +3939,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &132995320
 MonoBehaviour:
@@ -4046,7 +4034,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &133283105
 MonoBehaviour:
@@ -4327,12 +4314,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bca688204ea3084d8e73e9ab59dc89e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: 1
-  CurSlot: {fileID: 0}
-  Name: "\u6613\u62C9\u7F50"
-  InstanceID: -215524
-  SlotID: 1
-  SlotType: 1
   DobuleClickTime: 6
   CurToolTipsMenuState: 0
   Rare: 1
@@ -4726,7 +4707,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &147320058
 MonoBehaviour:
@@ -4914,7 +4894,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &152932003
 MonoBehaviour:
@@ -5048,7 +5027,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!1 &158381347
 GameObject:
@@ -5106,7 +5084,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &158381350
 MonoBehaviour:
@@ -5636,7 +5613,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &172350882
 MonoBehaviour:
@@ -5824,7 +5800,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &179760462
 MonoBehaviour:
@@ -6022,7 +5997,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &184769019
 MonoBehaviour:
@@ -11819,7 +11793,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &202779887
 MonoBehaviour:
@@ -12266,7 +12239,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 502575722}
-  BulletSlotIndex: 3
   ChildScale: {x: 0.7, y: 0.7, z: 0.7}
 --- !u!114 &236246511
 MonoBehaviour:
@@ -12437,7 +12409,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &244055760
 MonoBehaviour:
@@ -12533,7 +12504,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &245885365
 MonoBehaviour:
@@ -17573,7 +17543,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!1 &252038170
 GameObject:
@@ -17631,7 +17600,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &252038173
 MonoBehaviour:
@@ -18095,7 +18063,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &255921064
 MonoBehaviour:
@@ -23462,7 +23429,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!1 &280226207
 GameObject:
@@ -23520,7 +23486,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &280226210
 MonoBehaviour:
@@ -24061,7 +24026,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &298075621
 MonoBehaviour:
@@ -24157,7 +24121,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &299088559
 MonoBehaviour:
@@ -24549,7 +24512,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &319999766
 MonoBehaviour:
@@ -24818,7 +24780,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!1 &338035010
 GameObject:
@@ -25010,7 +24971,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &342133319
 MonoBehaviour:
@@ -25142,7 +25102,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 1984234282}
-  BulletSlotIndex: 4
   ChildScale: {x: 0.7, y: 0.7, z: 0.7}
 --- !u!114 &344841809
 MonoBehaviour:
@@ -25238,7 +25197,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &345675410
 MonoBehaviour:
@@ -30947,7 +30905,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &371078625
 MonoBehaviour:
@@ -31100,7 +31057,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 592684258}
-  BulletSlotIndex: 4
   ChildScale: {x: 0.7, y: 0.7, z: 0.7}
 --- !u!114 &376483616
 MonoBehaviour:
@@ -31196,7 +31152,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &380024112
 MonoBehaviour:
@@ -31640,7 +31595,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &405798725
 MonoBehaviour:
@@ -31828,7 +31782,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &420370863
 MonoBehaviour:
@@ -31924,7 +31877,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &421133880
 MonoBehaviour:
@@ -32020,7 +31972,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &425932328
 MonoBehaviour:
@@ -32208,7 +32159,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &434530029
 MonoBehaviour:
@@ -32273,7 +32223,7 @@ Transform:
   m_GameObject: {fileID: 440946030}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 100}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -33019,6 +32969,7 @@ MonoBehaviour:
   MainID: -1
   SlotType: 7
   ChildIns: {fileID: 0}
+  CurBulletSlotRole: {fileID: 1804508752}
 --- !u!114 &468291691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38391,7 +38342,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &477839208
 MonoBehaviour:
@@ -38485,6 +38435,7 @@ MonoBehaviour:
   MainID: -1
   SlotType: 7
   ChildIns: {fileID: 0}
+  CurBulletSlotRole: {fileID: 1501758412}
 --- !u!114 &478478379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38822,7 +38773,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 1131853181}
-  BulletSlotIndex: 3
   ChildScale: {x: 0.7, y: 0.7, z: 0.7}
 --- !u!114 &495945994
 MonoBehaviour:
@@ -38918,7 +38868,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &501860397
 MonoBehaviour:
@@ -39687,7 +39636,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &544922782
 MonoBehaviour:
@@ -39847,7 +39795,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &550872661
 MonoBehaviour:
@@ -39943,7 +39890,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &551055720
 MonoBehaviour:
@@ -40039,7 +39985,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &551330510
 MonoBehaviour:
@@ -40362,7 +40307,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &561928956
 MonoBehaviour:
@@ -40720,7 +40664,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &581642190
 MonoBehaviour:
@@ -41146,7 +41089,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &597744233
 MonoBehaviour:
@@ -41334,7 +41276,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &603627357
 MonoBehaviour:
@@ -41564,7 +41505,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &618008236
 MonoBehaviour:
@@ -41731,7 +41671,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &623712752
 MonoBehaviour:
@@ -41827,7 +41766,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &627034604
 MonoBehaviour:
@@ -42159,7 +42097,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &633018130
 MonoBehaviour:
@@ -42302,6 +42239,7 @@ MonoBehaviour:
   MainID: -1
   SlotType: 7
   ChildIns: {fileID: 0}
+  CurBulletSlotRole: {fileID: 162620750}
 --- !u!114 &637077192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42698,7 +42636,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 1037035521}
-  BulletSlotIndex: 1
   ChildScale: {x: 0.7, y: 0.7, z: 0.7}
 --- !u!114 &650601539
 MonoBehaviour:
@@ -42794,7 +42731,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &651207751
 MonoBehaviour:
@@ -42928,7 +42864,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!1 &663740116
 GameObject:
@@ -42986,7 +42921,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &663740119
 MonoBehaviour:
@@ -43082,7 +43016,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &668624857
 MonoBehaviour:
@@ -43297,7 +43230,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!1 &682186955
 GameObject:
@@ -43430,7 +43362,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &682591202
 MonoBehaviour:
@@ -43526,7 +43457,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &683503973
 MonoBehaviour:
@@ -43660,7 +43590,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!1 &688555300
 GameObject:
@@ -43927,7 +43856,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &700224651
 MonoBehaviour:
@@ -44023,7 +43951,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &702009642
 MonoBehaviour:
@@ -44119,7 +44046,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &704626170
 MonoBehaviour:
@@ -44215,7 +44141,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &711056060
 MonoBehaviour:
@@ -44311,7 +44236,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &712651157
 MonoBehaviour:
@@ -44673,7 +44597,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &718136024
 MonoBehaviour:
@@ -44805,7 +44728,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &720885667
 MonoBehaviour:
@@ -44979,7 +44901,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &725595288
 MonoBehaviour:
@@ -45167,7 +45088,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &733150374
 MonoBehaviour:
@@ -45456,7 +45376,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &746301487
 MonoBehaviour:
@@ -45726,7 +45645,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &755688269
 MonoBehaviour:
@@ -45902,7 +45820,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &760863644
 MonoBehaviour:
@@ -46066,7 +45983,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 1562821617}
-  BulletSlotIndex: 1
   ChildScale: {x: 0.7, y: 0.7, z: 0.7}
 --- !u!114 &767051112
 MonoBehaviour:
@@ -46425,7 +46341,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 1443287533}
-  BulletSlotIndex: 2
   ChildScale: {x: 0.7, y: 0.7, z: 0.7}
 --- !u!114 &775762708
 MonoBehaviour:
@@ -46863,7 +46778,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &787098376
 MonoBehaviour:
@@ -47195,7 +47109,7 @@ Transform:
   m_GameObject: {fileID: 793761039}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 100}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -47569,7 +47483,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &806653894
 MonoBehaviour:
@@ -47660,12 +47573,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bca688204ea3084d8e73e9ab59dc89e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: 2
-  CurSlot: {fileID: 1760051300}
-  Name: "\u9A6C\u6876\u640B\u5B50"
-  InstanceID: -366696
-  SlotID: 4
-  SlotType: 1
   DobuleClickTime: 6
   CurToolTipsMenuState: 0
   Rare: 1
@@ -47888,7 +47795,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &819193006
 MonoBehaviour:
@@ -53686,7 +53592,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &845780537
 MonoBehaviour:
@@ -53857,7 +53762,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &855174727
 MonoBehaviour:
@@ -54045,7 +53949,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &859379501
 MonoBehaviour:
@@ -54164,7 +54067,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &862135597
 MonoBehaviour:
@@ -54438,7 +54340,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &869971480
 MonoBehaviour:
@@ -54626,7 +54527,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &871726872
 MonoBehaviour:
@@ -56042,7 +55942,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &924669696
 MonoBehaviour:
@@ -56138,7 +56037,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &926335952
 MonoBehaviour:
@@ -56610,7 +56508,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &945781318
 MonoBehaviour:
@@ -56840,7 +56737,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &946314001
 MonoBehaviour:
@@ -56936,7 +56832,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &946712449
 MonoBehaviour:
@@ -57581,7 +57476,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &972055076
 MonoBehaviour:
@@ -57769,7 +57663,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &983891418
 MonoBehaviour:
@@ -59047,7 +58940,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1025580623
 MonoBehaviour:
@@ -59143,7 +59035,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1025662323
 MonoBehaviour:
@@ -59368,7 +59259,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1036460857
 MonoBehaviour:
@@ -64445,7 +64335,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1037181660
 MonoBehaviour:
@@ -64551,7 +64440,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1043060593
 MonoBehaviour:
@@ -64758,7 +64646,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1054664396
 MonoBehaviour:
@@ -64947,7 +64834,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1061248556
 MonoBehaviour:
@@ -65105,7 +64991,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1064068668
 MonoBehaviour:
@@ -65427,7 +65312,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1072469407
 MonoBehaviour:
@@ -65642,7 +65526,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1076673152
 MonoBehaviour:
@@ -65778,7 +65661,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1084912638
 MonoBehaviour:
@@ -65874,7 +65756,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1089980051
 MonoBehaviour:
@@ -65970,7 +65851,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1091419470
 MonoBehaviour:
@@ -66246,7 +66126,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1093312100
 MonoBehaviour:
@@ -66342,7 +66221,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1093658505
 MonoBehaviour:
@@ -66708,6 +66586,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1161009651}
+        m_TargetAssemblyTypeName: BagRoot, Assembly-CSharp
+        m_MethodName: RefreshInsByData
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1116531064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67035,7 +66925,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1127621133
 MonoBehaviour:
@@ -67342,7 +67231,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1132223879
 MonoBehaviour:
@@ -67438,7 +67326,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1134462855
 MonoBehaviour:
@@ -67534,7 +67421,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1140118714
 MonoBehaviour:
@@ -67850,7 +67736,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1159800410
 MonoBehaviour:
@@ -67946,7 +67831,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1160089601
 MonoBehaviour:
@@ -68347,7 +68231,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1171348578
 MonoBehaviour:
@@ -68443,7 +68326,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1174933360
 MonoBehaviour:
@@ -68539,7 +68421,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1176267110
 MonoBehaviour:
@@ -68666,7 +68547,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1177676138
 MonoBehaviour:
@@ -68763,7 +68643,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 5
   ChildScale: {x: 0.7, y: 0.7, z: 0.7}
 --- !u!114 &1177766417
 MonoBehaviour:
@@ -68859,7 +68738,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1179347136
 MonoBehaviour:
@@ -69047,7 +68925,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1184120786
 MonoBehaviour:
@@ -69427,7 +69304,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1198153550
 MonoBehaviour:
@@ -69563,7 +69439,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 1602366262}
-  BulletSlotIndex: 4
   ChildScale: {x: 0.7, y: 0.7, z: 0.7}
 --- !u!114 &1211270638
 MonoBehaviour:
@@ -69659,7 +69534,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1213159041
 MonoBehaviour:
@@ -69830,7 +69704,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1220743881
 MonoBehaviour:
@@ -69926,7 +69799,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1221647191
 MonoBehaviour:
@@ -70574,7 +70446,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1246740101
 MonoBehaviour:
@@ -70714,7 +70585,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1264932250
 MonoBehaviour:
@@ -71227,7 +71097,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1270004463
 MonoBehaviour:
@@ -71726,7 +71595,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1281440714
 MonoBehaviour:
@@ -71823,7 +71691,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 1216489472}
-  BulletSlotIndex: 2
   ChildScale: {x: 0.7, y: 0.7, z: 0.7}
 --- !u!114 &1282670326
 MonoBehaviour:
@@ -71919,7 +71786,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1283177450
 MonoBehaviour:
@@ -72015,7 +71881,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1284968811
 MonoBehaviour:
@@ -72111,7 +71976,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1285731491
 MonoBehaviour:
@@ -72994,12 +72858,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bca688204ea3084d8e73e9ab59dc89e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: 2
-  CurSlot: {fileID: 0}
-  Name: "\u9A6C\u6876\u640B\u5B50"
-  InstanceID: -215554
-  SlotID: 2
-  SlotType: 1
   DobuleClickTime: 6
   CurToolTipsMenuState: 0
   Rare: 1
@@ -73079,7 +72937,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1305802003
 MonoBehaviour:
@@ -73414,7 +73271,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1317996611
 MonoBehaviour:
@@ -73891,7 +73747,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1330093409
 MonoBehaviour:
@@ -75165,7 +75020,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!1 &1366111027
 GameObject:
@@ -75357,7 +75211,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1366683097
 MonoBehaviour:
@@ -75453,7 +75306,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1379595437
 MonoBehaviour:
@@ -75802,7 +75654,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1384131852
 MonoBehaviour:
@@ -76087,7 +75938,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1385973969
 MonoBehaviour:
@@ -76613,7 +76463,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1410159406
 MonoBehaviour:
@@ -76741,7 +76590,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1422352163
 MonoBehaviour:
@@ -77000,7 +76848,7 @@ Transform:
   m_GameObject: {fileID: 1442016717}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 100}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -77139,7 +76987,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1445252223
 MonoBehaviour:
@@ -77235,7 +77082,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1448191133
 MonoBehaviour:
@@ -77534,7 +77380,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 5
   ChildScale: {x: 0.7, y: 0.7, z: 0.7}
 --- !u!114 &1472218394
 MonoBehaviour:
@@ -77966,7 +77811,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1480985093
 MonoBehaviour:
@@ -78062,7 +77906,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1488709501
 MonoBehaviour:
@@ -78610,7 +78453,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1508374270
 MonoBehaviour:
@@ -79357,7 +79199,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1531586002
 MonoBehaviour:
@@ -79453,7 +79294,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1535520639
 MonoBehaviour:
@@ -79699,7 +79539,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1540694608
 MonoBehaviour:
@@ -79795,7 +79634,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1541327559
 MonoBehaviour:
@@ -79891,7 +79729,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1545115559
 MonoBehaviour:
@@ -80079,7 +79916,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1548374047
 MonoBehaviour:
@@ -80667,7 +80503,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1570883430
 MonoBehaviour:
@@ -80763,7 +80598,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1570953907
 MonoBehaviour:
@@ -80950,7 +80784,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1586310161
 MonoBehaviour:
@@ -81298,7 +81131,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1592338772
 MonoBehaviour:
@@ -87080,7 +86912,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1611310880
 MonoBehaviour:
@@ -87545,7 +87376,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1635256151
 MonoBehaviour:
@@ -87696,7 +87526,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1643081263
 MonoBehaviour:
@@ -87792,7 +87621,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1644728165
 MonoBehaviour:
@@ -87932,7 +87760,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1653562734
 MonoBehaviour:
@@ -89194,7 +89021,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1686597983
 MonoBehaviour:
@@ -90192,7 +90018,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1727286647
 MonoBehaviour:
@@ -90288,7 +90113,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1728265348
 MonoBehaviour:
@@ -90754,7 +90578,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1741029936
 MonoBehaviour:
@@ -90850,7 +90673,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1744477912
 MonoBehaviour:
@@ -91639,7 +91461,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1765900665
 MonoBehaviour:
@@ -91827,7 +91648,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1770246302
 MonoBehaviour:
@@ -92063,7 +91883,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1779310606
 MonoBehaviour:
@@ -92159,7 +91978,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1780028066
 MonoBehaviour:
@@ -92854,7 +92672,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1794881602
 MonoBehaviour:
@@ -92987,7 +92804,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1796189227
 MonoBehaviour:
@@ -93285,7 +93101,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1815295625
 MonoBehaviour:
@@ -93456,7 +93271,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1824819673
 MonoBehaviour:
@@ -98614,7 +98428,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1835890375
 MonoBehaviour:
@@ -98801,7 +98614,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1840192885
 MonoBehaviour:
@@ -98897,7 +98709,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1840322392
 MonoBehaviour:
@@ -99204,7 +99015,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1845856877
 MonoBehaviour:
@@ -99389,7 +99199,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1849713426
 MonoBehaviour:
@@ -99606,7 +99415,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1856507403
 MonoBehaviour:
@@ -99832,7 +99640,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1859793985
 MonoBehaviour:
@@ -99928,7 +99735,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1860772357
 MonoBehaviour:
@@ -100024,7 +99830,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1862071879
 MonoBehaviour:
@@ -100576,7 +100381,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1883775258
 MonoBehaviour:
@@ -100764,7 +100568,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1899809529
 MonoBehaviour:
@@ -101250,6 +101053,7 @@ MonoBehaviour:
   MainID: -1
   SlotType: 7
   ChildIns: {fileID: 0}
+  CurBulletSlotRole: {fileID: 1813928443}
 --- !u!114 &1906827862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101380,7 +101184,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1914408381
 MonoBehaviour:
@@ -101476,7 +101279,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1919771371
 MonoBehaviour:
@@ -101572,7 +101374,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1920587254
 MonoBehaviour:
@@ -101760,7 +101561,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1921734920
 MonoBehaviour:
@@ -101948,7 +101748,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1939165456
 MonoBehaviour:
@@ -102044,7 +101843,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1941402278
 MonoBehaviour:
@@ -102448,7 +102246,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 1398923641}
-  BulletSlotIndex: 3
   ChildScale: {x: 0.7, y: 0.7, z: 0.7}
 --- !u!114 &1947272657
 MonoBehaviour:
@@ -102661,12 +102458,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bca688204ea3084d8e73e9ab59dc89e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: 1
-  CurSlot: {fileID: 1747963365}
-  Name: "\u6613\u62C9\u7F50"
-  InstanceID: -366666
-  SlotID: 3
-  SlotType: 1
   DobuleClickTime: 6
   CurToolTipsMenuState: 0
   Rare: 1
@@ -102783,7 +102574,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1968975991
 MonoBehaviour:
@@ -102957,7 +102747,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1971818662
 MonoBehaviour:
@@ -103053,7 +102842,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1971852363
 MonoBehaviour:
@@ -103187,7 +102975,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!1 &1972508197
 GameObject:
@@ -103938,7 +103725,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1987874458
 MonoBehaviour:
@@ -104072,7 +103858,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1989577302
 MonoBehaviour:
@@ -104168,7 +103953,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1992144441
 MonoBehaviour:
@@ -104264,7 +104048,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1992412767
 MonoBehaviour:
@@ -104503,7 +104286,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1997599682
 MonoBehaviour:
@@ -104599,7 +104381,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1997976163
 MonoBehaviour:
@@ -104695,7 +104476,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &1998539552
 MonoBehaviour:
@@ -104921,7 +104701,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &2002797484
 MonoBehaviour:
@@ -105316,7 +105095,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &2018499840
 MonoBehaviour:
@@ -106010,7 +105788,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &2034556041
 MonoBehaviour:
@@ -106141,7 +105918,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &2038229317
 MonoBehaviour:
@@ -106237,7 +106013,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &2042129802
 MonoBehaviour:
@@ -106333,7 +106108,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &2042294322
 MonoBehaviour:
@@ -106430,7 +106204,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 1983891877}
-  BulletSlotIndex: 2
   ChildScale: {x: 0.7, y: 0.7, z: 0.7}
 --- !u!114 &2042527463
 MonoBehaviour:
@@ -106601,7 +106374,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &2056429781
 MonoBehaviour:
@@ -106698,7 +106470,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 71117150}
-  BulletSlotIndex: 1
   ChildScale: {x: 0.7, y: 0.7, z: 0.7}
 --- !u!114 &2058030672
 MonoBehaviour:
@@ -106794,7 +106565,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &2060131573
 MonoBehaviour:
@@ -106975,7 +106745,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 5
   ChildScale: {x: 0.7, y: 0.7, z: 0.7}
 --- !u!114 &2061435924
 MonoBehaviour:
@@ -107071,7 +106840,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &2065162691
 MonoBehaviour:
@@ -107301,7 +107069,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &2077456430
 MonoBehaviour:
@@ -107608,7 +107375,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &2097142507
 MonoBehaviour:
@@ -108135,7 +107901,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &2113438800
 MonoBehaviour:
@@ -108306,7 +108071,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &2127291708
 MonoBehaviour:
@@ -108572,7 +108336,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &2135932708
 MonoBehaviour:
@@ -108668,7 +108431,6 @@ MonoBehaviour:
   ChildIns: {fileID: 0}
   _state: 0
   Locked: {fileID: 0}
-  BulletSlotIndex: 0
   ChildScale: {x: 1, y: 1, z: 1}
 --- !u!114 &2139863225
 MonoBehaviour:
@@ -122066,7 +121828,7 @@ Transform:
   m_GameObject: {fileID: 2437188808215822002}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 90}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

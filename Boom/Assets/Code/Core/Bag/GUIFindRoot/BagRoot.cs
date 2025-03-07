@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -22,7 +23,7 @@ public class BagRoot : MonoBehaviour
     [Header("特效资源")]
     public GameObject SlotFx;
     ResonanceSlotCol[] _slotFxs;
-
+    
     #region 初始化数据
     private void Awake()
     {
@@ -44,10 +45,9 @@ public class BagRoot : MonoBehaviour
     {
         _slotFxs ??= SlotFx.GetComponentsInChildren<ResonanceSlotCol>();
         _slotFxs.ToList().ForEach(perFX => perFX.CloseEffect());
-        MainRoleManager.Instance.RefreshAllItems();
     }
     #endregion
-
+    
     public void RefreshBulletSlotLockedState()
     {
         Dictionary<int, bool> curDict = MainRoleManager.Instance.CurBulletSlotLockedState;
@@ -97,4 +97,11 @@ public class BagRoot : MonoBehaviour
         BtnGemSC.State = UILockedState.isSelected;
     }
     #endregion
+
+    //根据数据，刷新下背包内的所有物件
+    public void RefreshInsByData()
+    {
+        MainRoleManager.Instance.InitSpawners(); //初始化Spawner里的GO
+        MainRoleManager.Instance.InitCurBullets(); //初始化Spawner里的GO
+    }
 }
