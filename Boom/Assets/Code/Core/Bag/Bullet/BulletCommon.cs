@@ -10,6 +10,7 @@ public enum MutMode
 
 public enum BulletInsMode
 {
+    EditInner = 0,
     Inner = 1,
     EditA = 2,
     EditB = 3,

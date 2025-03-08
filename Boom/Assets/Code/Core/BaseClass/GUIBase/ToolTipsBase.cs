@@ -60,9 +60,9 @@ public class ToolTipsBase : ItemBase,IPointerMoveHandler,IPointerExitHandler
     
     internal virtual void SetTooltipInfo(){}
     
-    internal void HideTooltips()
+    public void HideTooltips()
     {
-        CurTooltipsSC.ClearInfo();
+        CurTooltipsSC?.ClearInfo();
         UIManager.Instance.TooltipsGO.SetActive(false);
         IsOpenedTooltip = false;
     }

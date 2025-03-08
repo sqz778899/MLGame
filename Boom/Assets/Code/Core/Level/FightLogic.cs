@@ -18,7 +18,7 @@ public class FightLogic : MonoBehaviour
         CurRole.Bullets[0] != null && CurRole.Bullets[0].gameObject != null 
             ? CurRole.Bullets[0].transform : null;
     [Header("窗口")]
-    public GUIFightRoot GUIFightRoot;
+    public BagRootMini BagRootMiniSC;
     public GameObject WarReportRootGUI;
     public GameObject WinGUI;
     public GameObject FailGUI;
@@ -67,9 +67,9 @@ public class FightLogic : MonoBehaviour
     {
         Camera.main.transform.position = new Vector3(2.5f,1,-10);
         Camera.main.orthographicSize = 5;
-        GUIFightRoot.InitData();
         //InitLevel
         InitLevel();
+        BagRootMiniSC.InitData();
         FailGUI.SetActive(false);
         WinGUI.SetActive(false);
         isEnd = false;
@@ -81,6 +81,7 @@ public class FightLogic : MonoBehaviour
         CurRole.InitData(CurLevel);
         MainRoleManager.Instance.WinOrFailState = WinOrFail.InLevel;
         MainRoleManager.Instance.CurWarReport.CurWarIndex += 1;
+        MainRoleManager.Instance.MainRoleIns = CurRole.gameObject;
         isCameraStopping = false;
         isBeginCatch = false;
     }

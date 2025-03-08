@@ -141,6 +141,9 @@ public static class PathConfig
       string orginName = "";
       switch (bulletInsMode)
       {
+         case BulletInsMode.EditInner:
+            orginName = "P_BulletInner_Edit_Template.prefab";
+            break;
          case BulletInsMode.Inner:
             orginName = "P_Bullet_Inner_Template.prefab";
             break;

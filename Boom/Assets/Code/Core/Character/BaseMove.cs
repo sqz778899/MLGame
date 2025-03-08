@@ -1,11 +1,33 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Spine.Unity;
 
 public class BaseMove : MonoBehaviour
 {
     [Header("SpineAbout")]
     public SkeletonAnimation Ani;
-    public RoleState State;
+    
+    BagRootMini _bagRootMini;
+    public Action OnEditEndInner;
+    RoleState _state;
+    public RoleState State
+    {
+        get => _state;
+        set
+        {
+            if (_state != value)
+            {
+                _state = value;
+                if (_state == RoleState.Attack || 
+                    _state == RoleState.MoveForward ||
+                    _state == RoleState.MoveBack)
+                {
+                    OnEditEndInner?.Invoke();
+                }
+            }
+        }
+    }
+    
     public float Speed = 10.0f;
 
     internal Vector3 forward = new Vector3(1, 0, 0);
@@ -15,7 +37,6 @@ public class BaseMove : MonoBehaviour
 
     internal virtual void Awake()
     {
-        // 直接缓存 Camera.main 和 FightLogic 组件
         _mCamera = Camera.main;
     }
     
@@ -56,7 +77,16 @@ public class BaseMove : MonoBehaviour
         // 延迟初始化 FightLogic 组件
         if (_fightLogic == null)
             _fightLogic = UIManager.Instance.FightLogicGO.GetComponent<FightLogic>();
+        _bagRootMini = UIManager.Instance.MainSceneGO.GetComponent<MainSceneMono>()
+            .GUIBagRoot_Mini.GetComponent<BagRootMini>();
+        
+        OnEditEndInner += _bagRootMini.EditEnd;
     }
 
     internal virtual void Move(Vector3 direction) {}
+
+    private void OnDestroy()
+    {
+        OnEditEndInner -= _bagRootMini.EditEnd;
+    }
 }

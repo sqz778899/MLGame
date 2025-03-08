@@ -46,6 +46,7 @@ public enum ToolTipsMenuState
 {
     Normal = 0,
     RightClick = 1,
+    Locked = 2
 }
 #endregion
 

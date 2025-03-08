@@ -36,6 +36,18 @@ public class RoleInner : BaseMove
         CreateBulletInner();
     }
     
+    public void SetBulletPos()
+    {
+        foreach (var curBullet in Bullets)
+        {
+            curBullet.transform.position = new Vector3(
+                transform.position.x - curBullet._data.CurSlot.SlotID,
+                -0.64f,
+                -0.15f
+            );
+        }
+    }
+    
     //在开始战斗的时候，根据角色槽位的子弹，创建五个跟着他跑的傻逼嘻嘻的小子弹
     void CreateBulletInner()
     {
@@ -46,7 +58,7 @@ public class RoleInner : BaseMove
             GameObject bulletIns = BulletFactory.CreateBullet(curB, BulletInsMode.Inner).gameObject;
             BulletInner curSC = bulletIns.GetComponent<BulletInner>();
             float offsetX = startPos.x - (curB.CurSlot.SlotID - 1) * 1f;
-            curSC.FollowDis = Mathf.Abs(offsetX);
+            curSC.FollowDis = Mathf.Abs(curB.CurSlot.SlotID  * 1f);
             bulletIns.transform.position = new Vector3(offsetX,startPos.y,startPos.z + i);
             bulletIns.transform.SetParent(UIManager.Instance.G_BulletInScene.transform,false);
             Bullets.Add(curSC);

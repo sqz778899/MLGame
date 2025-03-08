@@ -10,16 +10,7 @@ public class DragBase : ToolTipsBase, IPointerDownHandler, IPointerUpHandler, ID
     [Header("拖拽相关")]
     internal Vector3 originalPosition; //拖拽物原始位置
     internal Transform originalParent;//拖拽中的物品原始父层级
-    internal Transform dragObjParent; //拖拽中的物品所在的父层级
-    
     internal PointerEventData _eventData;
-    
-    internal override void Start()
-    {
-        base.Start();
-        dragObjParent = UIManager.Instance.DragObjRoot.transform;
-    }
-    
     
     //鼠标双击时
     public void OnPointerClick(PointerEventData eventData)
@@ -37,7 +28,7 @@ public class DragBase : ToolTipsBase, IPointerDownHandler, IPointerUpHandler, ID
         if (eventData.button == PointerEventData.InputButton.Left)
         {
             originalParent = gameObject.transform.parent;//记录原始父层级
-            gameObject.transform.SetParent(dragObjParent);//改变父层级
+            gameObject.transform.SetParent(UIManager.Instance.DragObjRoot.transform);//改变父层级
             originalPosition = gameObject.transform.position;
         }
         
@@ -111,7 +102,7 @@ public class DragBase : ToolTipsBase, IPointerDownHandler, IPointerUpHandler, ID
         Vector3 worldPos = GetWPosByMouse(eventData);
         gameObject.GetComponent<RectTransform>().position = worldPos;
         //拖动不显示Tooltips说明菜单
-        HideTooltips();
+        HideTooltips(); 
         VOnDrag();
     }
     

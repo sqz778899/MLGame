@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BagRootMini : MonoBehaviour
 {
@@ -17,14 +19,93 @@ public class BagRootMini : MonoBehaviour
 
     [Header("背包其它资源")] 
     public GameObject GroupBulletSpawnerSlot;
+    public List<Image> AllSlotImages;
     public GameObject DragObjRootGO;
-
+    
+    [Header("摄像机移动表现相关")]
+    public Vector3 OriginCameraPos;
+    public float orthographicSize;
+    
+    public Vector3 TargetCameraOffset;
+    public float TargetOrthographicSize;
+    bool IsCameraNear = false;
     void Start()
     {
         SwichBullet();
+        TargetCameraOffset = new Vector3(-2.5f,-0.65f,0);
+        TargetOrthographicSize = 3.35f;
+    }
+    
+    public void InitData()
+    {
+        OriginCameraPos = Camera.main.transform.position;
+        orthographicSize = Camera.main.orthographicSize;
+    }
+    
+    //响应开始在战斗场景内拖拽的事件
+    public void BulletDragged()
+    {
+        if(!IsCameraNear)
+        SetCameraEdit();//拉近摄像机
+    }
+    
+    //响应开始在战斗场景内推远摄像机的事件
+    public void EditEnd()
+    {
+        if(IsCameraNear)
+            SetCameraBattle();//推远摄像机
+    }
+    
+    //拉近摄像机
+    public void SetCameraEdit()
+    {
+        float duration = 0.5f;
+        IsCameraNear = true;
+        InitData();
+        Sequence seq = DOTween.Sequence();
+        Vector3 targetCameraPos = OriginCameraPos + TargetCameraOffset;
+        seq.Append(Camera.main.transform.DOMove(targetCameraPos, duration).SetEase(Ease.InOutQuad));
+        seq.Join(DOTween.To(() => Camera.main.orthographicSize, 
+            x => Camera.main.orthographicSize = x, 
+            TargetOrthographicSize, duration).SetEase(Ease.InOutQuad));
+        GameObject RoleGO = MainRoleManager.Instance.MainRoleIns;
+        seq.Join(RoleGO.transform.DOMove(new Vector3(targetCameraPos.x,
+            RoleGO.transform.position.y,RoleGO.transform.position.z), duration).SetEase(Ease.InOutQuad));
+        
+        foreach (var img in AllSlotImages)
+        {
+            Color c = img.color;
+            c.a = 0; //初始透明
+            img.color = c;
+            img.DOFade(0.2f, duration); //渐显到Alpha=1
+        }
+        
+        seq.onComplete = () =>
+        {
+            RoleGO.GetComponent<RoleInner>().SetBulletPos();
+        };
+    }
+    
+    //推远摄像机
+    public void SetCameraBattle()
+    {
+        IsCameraNear = false;
+        Sequence seq = DOTween.Sequence();
+        seq.Append(Camera.main.transform.DOMove(OriginCameraPos, 0.0f).SetEase(Ease.InOutQuad));
+        seq.Join(DOTween.To(() => Camera.main.orthographicSize, 
+            x => Camera.main.orthographicSize = x, 
+            orthographicSize, 0.0f).SetEase(Ease.InOutQuad));
+        
+        foreach (var img in AllSlotImages)
+        {
+            Color c = img.color;
+            c.a = 0; //初始透明
+            img.color = c;
+            img.DOFade(0f, 0); //渐显到Alpha=1
+        }
     }
 
-
+    #region Switch Tab
     //页签切换为Bullet
     public void SwichBullet()
     {
@@ -62,4 +143,5 @@ public class BagRootMini : MonoBehaviour
         BtnItemSC.State = IsUnLockedItem? UILockedState.isNormal : UILockedState.isLocked;
         BtnGemSC.State = UILockedState.isSelected;
     }
+    #endregion
 }
