@@ -19,7 +19,7 @@ public class GemSlot : SlotBase
         get { return _state; }
     }
 
-    [Header("持有子弹&&宝石的重要数据")]
+    [Header("持有宝石&&InnerSlot的重要数据")]
     GemData _curGemData;
     public GemData CurGemData
     {
@@ -33,6 +33,7 @@ public class GemSlot : SlotBase
             }
         }
     }
+    public GemSlotInner CurGemSlotInner;
     
     [Header("锁定的美术资源")] 
     public GameObject Locked;
@@ -51,6 +52,13 @@ public class GemSlot : SlotBase
         MainID = _gemNew._data.ID;
 
         CurGemData = _gemNew._data;
+        //在GemSlotInner部分创建一个影分身
+        GameObject _newChildeIns = BagItemManager<GemInner>.CreateTempObjectGO(_gemNew._data,true);
+        if (CurGemSlotInner != null)
+        {
+            SlotManager.ClearSlot(CurGemSlotInner);
+            CurGemSlotInner.SOnDrop(_newChildeIns);
+        }
     }
     
     void Awake()

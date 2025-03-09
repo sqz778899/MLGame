@@ -13,5 +13,11 @@ public class BulletGroupEditor: Editor
             Debug.Log("InitSlotID");
             myScript.InitSlotID();
         }
+        
+        if(GUILayout.Button("SyncSlot"))
+        {
+            Debug.Log("SyncSlot");
+            myScript.SyncSlotGem();
+        }
     }
 }

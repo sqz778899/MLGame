@@ -96,6 +96,7 @@ public static class PathConfig
    
    //...........................Gem.............................................
    public static string GemTemplate = GetPrepath() + "Res/UI/Gem/Prefabs/P_Gem_Template_01.prefab";
+   public static string GemInnerTemplate = GetPrepath() + "Res/UI/Gem/Prefabs/P_GemInner_Template.prefab";
    
    //..........................ScoreMat.........................................
    public static string ScoreMatImage = GetPrepath() + "Res/Bullet/Textures/T_ScoreMat_01.png";
@@ -149,6 +150,9 @@ public static class PathConfig
             break;
          case BulletInsMode.Spawner:
             orginName = "P_Bullet_Spawner_Template.prefab";
+            break;
+         case BulletInsMode.SpawnerInner:
+            orginName = "P_Bullet_SpawnerInner_Template.prefab";
             break;
          case BulletInsMode.EditA:
             orginName = "P_Bullet_Edit_Template.prefab";

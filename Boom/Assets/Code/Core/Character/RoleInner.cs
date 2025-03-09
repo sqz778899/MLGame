@@ -23,16 +23,6 @@ public class RoleInner : BaseMove
         if (CurLevel != null)
             _mapBounds = CurLevel.MapCollider.bounds;
         _cameraOffsetX = _mCamera.transform.position.x - transform.position.x;
-        if (Bullets != null)
-        {
-            Bullets.RemoveAll(bullet => bullet == null);
-            if (Bullets.Count > 0)
-            {
-                for (int i = 0; i < Bullets.Count; i++)
-                    DestroyImmediate(Bullets[i].gameObject);
-            }
-        }
-        Bullets = new List<BulletInner>();
         CreateBulletInner();
     }
     
@@ -49,8 +39,20 @@ public class RoleInner : BaseMove
     }
     
     //在开始战斗的时候，根据角色槽位的子弹，创建五个跟着他跑的傻逼嘻嘻的小子弹
-    void CreateBulletInner()
+    public void CreateBulletInner()
     {
+        //清空子弹
+        if (Bullets != null)
+        {
+            Bullets.RemoveAll(bullet => bullet == null);
+            if (Bullets.Count > 0)
+            {
+                for (int i = 0; i < Bullets.Count; i++)
+                    DestroyImmediate(Bullets[i].gameObject);
+            }
+        }
+        Bullets = new List<BulletInner>();
+        //创建子弹
         Vector3 startPos = new Vector3(transform.position.x - 1, -0.64f, -0.15f);
         for (int i = 0; i < MainRoleManager.Instance.CurBullets.Count; i++)
         {

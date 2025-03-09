@@ -20,4 +20,27 @@ public class SlotIDCalculate : MonoBehaviour
         for (int i = 0; i < gemSlots.Length; i++)
             gemSlots[i].SlotID = i + 1;
     }
+    
+    [Header("同步影分身Slot地址工具")]
+    public GameObject SourceRoot;
+    public GameObject TargetRoot;
+    public void SyncSlotGem()
+    {
+        if (SourceRoot == null || TargetRoot == null) return;
+        
+        GemSlot[] sourceSlots = SourceRoot.GetComponentsInChildren<GemSlot>();
+        GemSlotInner[] targetSlots = TargetRoot.GetComponentsInChildren<GemSlotInner>();
+
+        foreach (var eachS in sourceSlots)
+        {
+            foreach (var eachT in targetSlots)
+            {
+                if (eachS.SlotID == eachT.SlotID)//双持，互相持有
+                {
+                    eachT.CurGemSlot = eachS;
+                    eachS.CurGemSlotInner = eachT;
+                }
+            }
+        }
+    }
 }

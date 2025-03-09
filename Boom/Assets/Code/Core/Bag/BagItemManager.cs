@@ -5,12 +5,12 @@ using UnityEngine;
 public static class BagItemManager<T> where T:ItemBase
 {
     #region 重要功能
-    public static GameObject CreateTempObjectGO<TData>(TData curObjectData)where TData : ItemDataBase
+    public static GameObject CreateTempObjectGO<TData>(TData curObjectData,bool isInner = false)where TData : ItemDataBase
     {
         //实例化宝石
         GameObject objectIns = null;
         T objectSC = null;
-        InitObjectInsTemp(curObjectData, ref objectIns,ref objectSC);
+        InitObjectInsTemp(curObjectData, ref objectIns,ref objectSC,isInner);
         return objectIns;
     }
     
@@ -50,7 +50,6 @@ public static class BagItemManager<T> where T:ItemBase
         GameObject curObjectIns = null;
         T curObjectSC = null;
         InitObjectIns(curObjectData, ref curObjectIns, ref curObjectSC);
-        curObjectData.CurSlot.SOnDrop(curObjectIns);
 
         // 同步到 MainRoleManager
         switch (slotType)
@@ -68,15 +67,6 @@ public static class BagItemManager<T> where T:ItemBase
                 MainRoleManager.Instance.EquipItems.Add(curObjectData as ItemData);
                 break;
         }
-        
-        //同步到BagMini
-        GameObject curObjectIns_Mini = null;
-        T curObject_Mini = null;
-        InitObjectIns(curObjectData, ref curObjectIns_Mini, ref curObject_Mini);
-        
-        SlotBase curSlot_Mini = SlotManager.GetMiniBagSlotByID(curObjectData.CurSlot.SlotID, slotType);
-        if (curSlot_Mini == null) return;
-        curSlot_Mini.SOnDrop(curObjectIns_Mini);
     }
     #endregion
     
@@ -90,6 +80,9 @@ public static class BagItemManager<T> where T:ItemBase
             ? PathConfig.GemTemplate
             : PathConfig.ItemPB;
 
+        if (curObjectData.CurSlot is GemSlotInner)
+            assetPath = PathConfig.GemInnerTemplate;
+        
         objectIns = ResManager.instance.CreatInstance(assetPath);
         objectIns.transform.SetParent(UIManager.Instance.BagItemRootGO.transform, false);
         objectSC = objectIns.GetComponent<T>();
@@ -98,13 +91,18 @@ public static class BagItemManager<T> where T:ItemBase
     }
     
     static void InitObjectInsTemp<TData>(TData curObjectData, ref GameObject objectIns,
-        ref T objectSC) where TData : ItemDataBase
+        ref T objectSC,bool isInner = false) where TData : ItemDataBase
     {
         SlotType curSlotType = curObjectData.CurSlot.SlotType;
         string assetPath = curSlotType == SlotType.GemBagSlot || curSlotType == SlotType.GemInlaySlot
             ? PathConfig.GemTemplate
             : PathConfig.ItemPB;
-
+        
+        if (isInner)
+            assetPath = curSlotType == SlotType.GemBagSlot || curSlotType == SlotType.GemInlaySlot
+                ? PathConfig.GemInnerTemplate
+                : PathConfig.ItemPB;
+        
         objectIns = ResManager.instance.CreatInstance(assetPath);
         objectSC = objectIns.GetComponent<T>();
         objectSC.BindData(curObjectData);

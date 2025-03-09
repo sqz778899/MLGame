@@ -52,7 +52,6 @@ public class UIManager : ScriptableObject
     public GameObject EquipItemRootGO;         //元素均衡槽根节点
     //Bag Gem
     public GameObject BagGemRootGO;            //宝石根节点
-    public GameObject BagGemRootGO_Mini;       //宝石根节点
     //Bag Common
     public GameObject DragObjRoot;            //拖动物品时候的悬浮父节点
     public GameObject BagReadySlotRootGO;     //子弹在人物右侧的Group
@@ -85,17 +84,6 @@ public class UIManager : ScriptableObject
         FightLogicGO = curFighRootSc.FightLogicGO;
         G_BulletInScene = curFighRootSc.G_BulletInScene;
         RoleIns = curFighRootSc.CharILIns;
-    }
-    #endregion
-
-    #region SelectRole
-    public GameObject GroupRoleDes;
-    public GameObject SelRoleLogic;
-    public void InitSelectRole()
-    {
-        InitComon();
-        GroupRoleDes = GameObject.Find("GroupRoleDes");
-        SelRoleLogic = GameObject.Find("SelRoleLogic");
     }
     #endregion
     
@@ -170,7 +158,6 @@ public class UIManager : ScriptableObject
         #endregion
 
         BagGemRootGO = bagRootSC.BagGemRootGO;
-        BagGemRootGO_Mini = curMainSC.GUIBagRoot_Mini.GetComponent<BagRootMini>().BagGemRootGO;
     }
     
     #region 单例

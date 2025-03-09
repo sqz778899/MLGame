@@ -19,7 +19,7 @@ public class BagRootMini : MonoBehaviour
 
     [Header("背包其它资源")] 
     public GameObject GroupBulletSpawnerSlot;
-    public List<Image> AllSlotImages;
+    public CanvasGroup MiniSlotCanvasGroup;
     public GameObject DragObjRootGO;
     
     [Header("摄像机移动表现相关")]
@@ -72,18 +72,10 @@ public class BagRootMini : MonoBehaviour
         seq.Join(RoleGO.transform.DOMove(new Vector3(targetCameraPos.x,
             RoleGO.transform.position.y,RoleGO.transform.position.z), duration).SetEase(Ease.InOutQuad));
         
-        foreach (var img in AllSlotImages)
-        {
-            Color c = img.color;
-            c.a = 0; //初始透明
-            img.color = c;
-            img.DOFade(0.2f, duration); //渐显到Alpha=1
-        }
+        MiniSlotCanvasGroup.alpha = 0; // 从透明状态开始
+        seq.Join(MiniSlotCanvasGroup.DOFade(1, duration).SetEase(Ease.Linear));
         
-        seq.onComplete = () =>
-        {
-            RoleGO.GetComponent<RoleInner>().SetBulletPos();
-        };
+        seq.onComplete = () => { RoleGO.GetComponent<RoleInner>().SetBulletPos(); };
     }
     
     //推远摄像机
@@ -96,13 +88,7 @@ public class BagRootMini : MonoBehaviour
             x => Camera.main.orthographicSize = x, 
             orthographicSize, 0.0f).SetEase(Ease.InOutQuad));
         
-        foreach (var img in AllSlotImages)
-        {
-            Color c = img.color;
-            c.a = 0; //初始透明
-            img.color = c;
-            img.DOFade(0f, 0); //渐显到Alpha=1
-        }
+        seq.Join(MiniSlotCanvasGroup.DOFade(0, 0).SetEase(Ease.Linear));
     }
 
     #region Switch Tab

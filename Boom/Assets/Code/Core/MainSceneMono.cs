@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class MainSceneMono:MonoBehaviour
 {
@@ -7,6 +8,9 @@ public class MainSceneMono:MonoBehaviour
     [Header("BagRoot")]
     public GameObject GUIBagRoot;
     public GameObject GUIBagRoot_Mini;
+    
+    public BagRoot BagRootSC;
+    public BagRootMini BagRootMiniSC;
     //MapScene
     [Header("MapScene")]
     public GameObject MapScene;
@@ -15,11 +19,10 @@ public class MainSceneMono:MonoBehaviour
     [Header("FightScene")] 
     public GameObject GUIFightScene;
     public GameObject FightScene;
-    
-    BagRoot _bagRootSC;
     FightLogic _fightLogic;
     MapLogic _mapLogic;
     
+    //总Init接口
     void Awake()
     {
         UIManager.Instance.InitMainScene();
@@ -28,7 +31,7 @@ public class MainSceneMono:MonoBehaviour
         //.................Local...........................
         //UIManager.Instance.InitMainScene();
         MainRoleManager.Instance.InitData();
-        _bagRootSC = GUIBagRoot.GetComponent<BagRoot>();
+        BagRootSC.InitData();
     }
 
     void Start()
@@ -88,7 +91,7 @@ public class MainSceneMono:MonoBehaviour
     {
         //Camera.main.transform.position = new Vector3(0,1,-10);
         GUIBagRoot.SetActive(true);
-        _bagRootSC?.InitData();
+        BagRootSC?.InitData();
     }
     void BagOff()
     {

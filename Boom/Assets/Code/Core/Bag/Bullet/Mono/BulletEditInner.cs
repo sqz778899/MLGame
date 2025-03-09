@@ -46,6 +46,30 @@ public class BulletEditInner:ItemBase
                 nonHappen = false;
                 break;
             }
+
+            if (result.gameObject.CompareTag("BulletInnerSlot"))
+            {
+                BulletInnerSlot targetSlotSC = result.gameObject.GetComponent<BulletInnerSlot>();
+                if(targetSlotSC.CurBulletSlotRole.CurBulletData == _data) break;//如果是同一个子弹，不做任何操作
+                if (targetSlotSC.CurBulletSlotRole.CurBulletData != null) //走交换逻辑
+                {
+                    GameObject targerChildIns = targetSlotSC.CurBulletSlotRole.ChildIns;
+                    SlotManager.ClearSlot(_data.CurSlot);
+                    _data.CurSlot.SOnDrop(targerChildIns);
+                    targetSlotSC.CurBulletSlotRole.SOnDrop(_data);
+                }
+                else
+                {
+                    SlotManager.ClearSlot(_data.CurSlot);
+                    targetSlotSC.CurBulletSlotRole.SOnDrop(_data);//走空插逻辑
+                }
+             
+                //3)刷新GO
+                UIManager.Instance.RoleIns.GetComponent<RoleInner>().CreateBulletInner();
+                Destroy(gameObject);
+                nonHappen = false;
+                break;
+            }
         }
         return nonHappen;
     }

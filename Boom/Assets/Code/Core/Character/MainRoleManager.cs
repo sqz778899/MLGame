@@ -264,9 +264,9 @@ public class MainRoleManager :ScriptableObject
         BulletSlot[] slots = UIManager.Instance.G_BulletSpawnerSlot.GetComponentsInChildren<BulletSlot>();
         BulletSlot[] slotMinis = UIManager.Instance.G_BulletSpawnerSlot_Mini.GetComponentsInChildren<BulletSlot>();
         InitSpawnersSingel(slots);
-        InitSpawnersSingel(slotMinis);
+        InitSpawnersSingel(slotMinis,true);
     }
-    void InitSpawnersSingel(BulletSlot[] slots)
+    void InitSpawnersSingel(BulletSlot[] slots, bool isMini = false)
     {
         foreach (BulletData each in CurBulletSpawners)
         {
@@ -275,7 +275,11 @@ public class MainRoleManager :ScriptableObject
             if (slot != null)
             {
                 slot.MainID = each.ID;
-                GameObject newSpawnerIns = BulletFactory.CreateBullet(each, BulletInsMode.Spawner).gameObject;
+                GameObject newSpawnerIns = null;
+                if (isMini)
+                    newSpawnerIns = BulletFactory.CreateBullet(each, BulletInsMode.SpawnerInner).gameObject;
+                else
+                    newSpawnerIns = BulletFactory.CreateBullet(each, BulletInsMode.Spawner).gameObject;
                 newSpawnerIns.transform.SetParent(slot.gameObject.transform, false);
             }
         }

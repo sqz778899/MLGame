@@ -30,16 +30,18 @@ public class BulletSlotRole: SlotBase
             {
                 _curBulletData = value;
                 OnBulletDataChange();
+                OnIsHaveBullet?.Invoke();//战斗内是否显示气泡
             }
         }
     }
+    public Action OnIsHaveBullet;
     
     [Header("锁定的美术资源")] 
     public GameObject Locked;
     [Header("Gems")]
     public List<GemSlot> GemSlots;
     
-    void Awake()
+    public void InitData()
     {
         ChangeState();
         foreach (var each in GemSlots)
@@ -80,9 +82,8 @@ public class BulletSlotRole: SlotBase
 
     public void SOnDrop(BulletData bulletData)
     {
-        bulletData.CurSlot = this;
-        MainID = bulletData.ID;
-        CurBulletData = bulletData;
+        GameObject bulletIns = BulletFactory.CreateBullet(bulletData, BulletInsMode.EditB).gameObject;
+        SOnDrop(bulletIns);
     }
 
     public override void SOnDrop(GameObject _childIns)

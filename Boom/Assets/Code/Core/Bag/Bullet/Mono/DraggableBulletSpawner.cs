@@ -10,7 +10,6 @@ public class DraggableBulletSpawner :DragBase
 {
     // 1) 数据引用
     public BulletData _data;
-    BagRootMini _bagRootMini;
     // 2) UI 资产
     [Header("表现资产")]
     public Image IconSpawner;
@@ -18,16 +17,11 @@ public class DraggableBulletSpawner :DragBase
     public TextMeshProUGUI txtCount;
     // 3) 拖拽中生成的子弹
     public GameObject childBulletIns;
-    public Action OnBulletDragged;
     
     internal override void Start()
     {
         base.Start();
         childBulletIns = null;
-        _bagRootMini = UIManager.Instance.MainSceneGO.GetComponent<MainSceneMono>()
-            .GUIBagRoot_Mini.GetComponent<BagRootMini>();
-        
-        OnBulletDragged += _bagRootMini.BulletDragged;
     }
     
     public void BindData(BulletData data)
@@ -43,7 +37,7 @@ public class DraggableBulletSpawner :DragBase
         }
     }
     
-    void OnDataChangedSpawner()
+    internal void OnDataChangedSpawner()
     {
         // 显示数量同步
         txtCount.text = "X" + _data.SpawnerCount;
@@ -55,7 +49,6 @@ public class DraggableBulletSpawner :DragBase
         IconSpawner.sprite = ResManager.instance.GetAssetCache<Sprite>(
             PathConfig.GetBulletImageOrSpinePath(_data.ID, BulletInsMode.Spawner));
     } 
-    
     
     public override void OnPointerDown(PointerEventData eventData)
     {
@@ -70,7 +63,6 @@ public class DraggableBulletSpawner :DragBase
             DraBuSC.IsSpawnerCreate = true;
             _data.SpawnerCount--;
         }
-        OnBulletDragged?.Invoke();
     }
 
     public override void OnPointerUp(PointerEventData eventData)
@@ -110,7 +102,5 @@ public class DraggableBulletSpawner :DragBase
     {
         if (_data != null)
             _data.OnDataChanged -= OnDataChangedSpawner;
-        if (_bagRootMini != null)
-            OnBulletDragged -= _bagRootMini.BulletDragged;
     }
 }

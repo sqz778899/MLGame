@@ -18,7 +18,8 @@ public enum BulletInsMode
     Standby = 6,
     Thumbnail = 7,
     Icon = 8,
-    Mat = 9
+    Mat = 9,
+    SpawnerInner = 10,
 }
 
 public enum RollBulletMatType

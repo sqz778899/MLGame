@@ -6,43 +6,17 @@ using UnityEngine;
 public static class SlotManager
 {
     //根据SlotId 和 SlotType 还原Slot的MainID和InstanceID
-    public static void ClearSlot(SlotBase curSlot)
+    public static void ClearSlot(SlotBase curSlot,bool isClearChildIns = false)
     {
         if (curSlot == null) return;
+        if (isClearChildIns && curSlot.ChildIns != null)
+            GameObject.DestroyImmediate(curSlot.ChildIns);
+        
         if (curSlot is GemSlot _gemSlot)
-        {
             _gemSlot.CurGemData = null;
-        }
         if (curSlot is BulletSlotRole _roleSlot)
-        {
             _roleSlot.CurBulletData = null;
-        }
         curSlot.MainID = -1;
-    }
-    
-    public static SlotBase GetMiniBagSlotByID(int SlotID,SlotType slotType = SlotType.BagSlot)
-    {
-        SlotBase curTargetSlot = null;
-        SlotBase[] allSlot;
-      
-        switch (slotType)
-        {
-            case SlotType.GemBagSlot:
-                allSlot = UIManager.Instance.BagGemRootGO_Mini.GetComponentsInChildren<SlotBase>();
-                break;
-            default:
-                allSlot = UIManager.Instance.BagItemRootGO.GetComponentsInChildren<SlotBase>();
-                break;
-        }
-        foreach (var each in allSlot)
-        {
-            if (each.SlotID == SlotID)
-            {
-                curTargetSlot = each;
-                break;
-            }
-        }
-        return curTargetSlot;
     }
     
     public static SlotBase GetEmptySlot(SlotType slotType)

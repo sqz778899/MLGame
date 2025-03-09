@@ -1,27 +1,57 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class Gem : DragBase
 {
     public GemData _data;
-    
-    public override void BindData(ItemDataBase data)
-    {
-        if (_data != null)
-            _data.OnDataChanged -= OnDataChangeGem; // 先退订旧Data的事件
-        
-        _data = data as GemData;
-        if (_data != null)
-        {
-            _data.OnDataChanged += OnDataChangeGem;
-            OnDataChangeGem(); // 立即刷新一遍
-        }
-    }
-    
     [Header("资产")]
     public Image ItemSprite;
-
+    
     #region UI交互逻辑
+    //鼠标抬起
+    public override void OnPointerUp(PointerEventData eventData)
+    {
+        UIManager.Instance.IsLockedClick = false;
+        if (eventData.button == PointerEventData.InputButton.Right)
+            return;
+        HideTooltips();
+        
+        // 在释放鼠标按钮时，我们检查这个位置下是否有一个Slot
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, results);
+        bool NonHappen = true; // 发生Slot drop down 逻辑
+        
+        foreach (RaycastResult result in results)
+        {
+            if (result.gameObject.TryGetComponent(out SlotBase curSlotSC))
+            {
+                //1）前置判断，如果Slot是GemSlot类型，才能继续
+                GemSlot curGemSlot = curSlotSC as GemSlot;
+                if (curGemSlot == null) continue;
+                if (curGemSlot.CurGemData == _data) break;//如果是同一个宝石，不做任何操作
+                
+                //2）空槽逻辑
+                if (curGemSlot.MainID == -1)
+                {
+                    OnDropEmptySlot(curGemSlot);
+                    NonHappen = false;
+                }
+                else//3）满槽逻辑
+                {
+                    OnDropFillSlot(curGemSlot);
+                    NonHappen = false;
+                    break;
+                }
+            }
+        }
+        
+        if (NonHappen)
+            NonFindSlot();
+    }
+    
     //落下空槽逻辑
     public override void OnDropEmptySlot(SlotBase targetSlot)
     {
@@ -107,8 +137,22 @@ public class Gem : DragBase
     {
         _data.InstanceID = gameObject.GetInstanceID();
         GemJson gemDesignData = TrunkManager.Instance.GetGemJson(_data.ID);
+        gameObject.name = gemDesignData.Name + _data.InstanceID;
         ItemSprite.sprite = ResManager.instance.GetAssetCache<Sprite>(
             PathConfig.GetGemPath(gemDesignData.ImageName));
+    }
+    
+    public override void BindData(ItemDataBase data)
+    {
+        if (_data != null)
+            _data.OnDataChanged -= OnDataChangeGem; // 先退订旧Data的事件
+        
+        _data = data as GemData;
+        if (_data != null)
+        {
+            _data.OnDataChanged += OnDataChangeGem;
+            OnDataChangeGem(); // 立即刷新一遍
+        }
     }
     #endregion
 }

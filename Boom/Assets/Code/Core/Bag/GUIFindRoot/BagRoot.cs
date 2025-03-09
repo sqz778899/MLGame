@@ -25,12 +25,17 @@ public class BagRoot : MonoBehaviour
     ResonanceSlotCol[] _slotFxs;
     
     #region 初始化数据
-    private void Awake()
+    //游戏最开始时候需要初始化的数据
+    public void InitData()
     {
+        //共振特效资产初始化
         _slotFxs = SlotFx.GetComponentsInChildren<ResonanceSlotCol>();
+        _slotFxs.ToList().ForEach(perFX => perFX.CloseEffect());
+        //子弹槽初始化
         _btnReadySlotSC = BagReadySlotGO.GetComponentsInChildren<BulletSlotRole>();
+        _btnReadySlotSC.ToList().ForEach(perSlot => perSlot.InitData());
     }
-
+    
     void Start()
     {
         SwichGem();
@@ -39,12 +44,6 @@ public class BagRoot : MonoBehaviour
         //注册事件。背包Slot解锁的话，这边会函数响应更新状态
         MainRoleManager.Instance.BulletSlotStateChanged += RefreshBulletSlotLockedState;
         RefreshBulletSlotLockedState();//最开始先更新一次状态
-    }
-
-    public void InitData()
-    {
-        _slotFxs ??= SlotFx.GetComponentsInChildren<ResonanceSlotCol>();
-        _slotFxs.ToList().ForEach(perFX => perFX.CloseEffect());
     }
     #endregion
     
