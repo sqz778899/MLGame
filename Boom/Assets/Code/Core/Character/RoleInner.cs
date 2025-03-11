@@ -23,6 +23,7 @@ public class RoleInner : BaseMove
         if (CurLevel != null)
             _mapBounds = CurLevel.MapCollider.bounds;
         _cameraOffsetX = _mCamera.transform.position.x - transform.position.x;
+        //_cameraOffsetX = 2.5f;
         CreateBulletInner();
     }
     
@@ -48,7 +49,7 @@ public class RoleInner : BaseMove
             if (Bullets.Count > 0)
             {
                 for (int i = 0; i < Bullets.Count; i++)
-                    DestroyImmediate(Bullets[i].gameObject);
+                    Destroy(Bullets[i].gameObject);
             }
         }
         Bullets = new List<BulletInner>();
@@ -59,6 +60,7 @@ public class RoleInner : BaseMove
             BulletData curB = MainRoleManager.Instance.CurBullets[i];
             GameObject bulletIns = BulletFactory.CreateBullet(curB, BulletInsMode.Inner).gameObject;
             BulletInner curSC = bulletIns.GetComponent<BulletInner>();
+            curSC.CurRole = this;
             float offsetX = startPos.x - (curB.CurSlot.SlotID - 1) * 1f;
             curSC.FollowDis = Mathf.Abs(curB.CurSlot.SlotID  * 1f);
             bulletIns.transform.position = new Vector3(offsetX,startPos.y,startPos.z + i);
@@ -77,13 +79,12 @@ public class RoleInner : BaseMove
         Vector3 newPos = transform.position + direction * Speed * Time.deltaTime;
         newPos.x = Mathf.Clamp(newPos.x, _mapBounds.min.x, _mapBounds.max.x);
         transform.position = newPos;
-        
         //地图边缘限制摄像机移动
         _mCamera.transform.position = new Vector3(newPos.x + _cameraOffsetX,_mCamera.transform.position.y
             ,_mCamera.transform.position.z);
         
         AniUtility.TrunAround(Ani,direction.x);//朝向
-        AniUtility.PlayRun(Ani);
+        AniUtility.PlayRun(Ani);    
     }
     #endregion
 
@@ -134,9 +135,8 @@ public class RoleInner : BaseMove
         StartCoroutine(FireWithDelay(FireDelay));
     }
 
-    public IEnumerator   FireWithDelay(float delay)
+    public IEnumerator FireWithDelay(float delay)
     {
-        Debug.Log("fire");
         //填弹药动画
         float connonReloadTime = 0f;
         CurConnon.Reload(ref connonReloadTime);
@@ -150,7 +150,6 @@ public class RoleInner : BaseMove
             StartCoroutine(curBullet.ReadyToAttack(CurConnon.FillNode.transform.position));
             yield return new WaitForSeconds(delay);  // 在发射下一个子弹之前，等待delay秒
         }
-        
         //播放大炮攻击动画
         for (int i = 0; i < Bullets.Count; i++)
         {
@@ -160,7 +159,7 @@ public class RoleInner : BaseMove
             yield return new WaitForSeconds(connonAttackTime);  // 在发射下一个子弹之前，等待delay秒
         }
         yield return new WaitForSeconds(2);
-        DestroyImmediate(CurConnon.gameObject);
+        Destroy(CurConnon.gameObject);
     }
     #endregion
 }

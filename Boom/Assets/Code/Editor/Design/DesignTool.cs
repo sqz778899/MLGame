@@ -104,7 +104,7 @@ public class DesignTool
     [ButtonGroup("调试总功能")]
     void SetEnemyHp()
     {
-        Enemy curEnemy = UIManager.Instance.FightLogicGO.GetComponent<FightLogic>().CurEnemy;
+        Enemy curEnemy = UIManager.Instance.BattleLogicGO.GetComponent<BattleLogic>().CurEnemy;
         curEnemy.MaxHP = 9999;
         curEnemy.CurHP = 9999;
     }

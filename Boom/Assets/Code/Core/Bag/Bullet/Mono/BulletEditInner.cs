@@ -42,7 +42,7 @@ public class BulletEditInner:ItemBase
             {
                 ReturnToSpawner();
                 //3)刷新GO
-                UIManager.Instance.RoleIns.GetComponent<RoleInner>().InitData();
+                UIManager.Instance.RoleIns.GetComponent<RoleInner>().CreateBulletInner();
                 nonHappen = false;
                 break;
             }

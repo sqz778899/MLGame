@@ -63,7 +63,7 @@ public class UIManager : ScriptableObject
     public GameObject DialogueRoot;
     
     [Header("FightScene")]
-    public GameObject FightLogicGO;
+    public GameObject BattleLogicGO;
     public GameObject G_BulletInScene; //场景内的子弹的父节点
     public GameObject RoleIns;
 
@@ -81,7 +81,7 @@ public class UIManager : ScriptableObject
         DialogueRoot = curGUIMapSc.DialogueRoot;
         
         GUIFightRoot curFighRootSc = curMainSC.GUIFightScene.GetComponent<GUIFightRoot>();
-        FightLogicGO = curFighRootSc.FightLogicGO;
+        BattleLogicGO = curFighRootSc.FightLogicGO;
         G_BulletInScene = curFighRootSc.G_BulletInScene;
         RoleIns = curFighRootSc.CharILIns;
     }

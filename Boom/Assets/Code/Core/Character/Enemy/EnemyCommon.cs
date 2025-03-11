@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -54,14 +55,10 @@ public class EnemyBase : MonoBehaviour
     public int CurHP
     {
         get => curHP;
-        set
-        {
-            curHP = Mathf.Clamp(value, 0, MaxHP);  // 防止当前血量大于最大血量或者小于0
-        }
+        set { curHP = Mathf.Clamp(value, 0, MaxHP);}// 防止当前血量大于最大血量或者小于0
     }
-
     public int MaxHP;
-    
+    public Action OnTakeDamage;
     [Header("功能相关")]
     public EnemyState EState;
     public DamageState DState = new DamageState();
@@ -89,5 +86,10 @@ public class EnemyBase : MonoBehaviour
         txtHitIns.transform.SetParent(HitTextRoot);
         txtHitIns.transform.position = HitTextTrans.position;
         txtHitIns.GetComponent<FloatingDamageText>().AnimateText("-" + damage,HitColor);
+    }
+    
+    internal virtual void OnDestroy()
+    {
+        OnTakeDamage = null; // 清空事件的所有绑定
     }
 }

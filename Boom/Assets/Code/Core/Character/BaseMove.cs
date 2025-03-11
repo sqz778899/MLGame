@@ -32,7 +32,7 @@ public class BaseMove : MonoBehaviour
 
     internal Vector3 forward = new Vector3(1, 0, 0);
     internal Camera _mCamera;
-    internal FightLogic _fightLogic;
+    internal BattleLogic BattleLogic;
     public bool IsLocked = false; //剧情教程等使用
 
     internal virtual void Awake()
@@ -75,8 +75,8 @@ public class BaseMove : MonoBehaviour
     internal virtual void Start()
     {
         // 延迟初始化 FightLogic 组件
-        if (_fightLogic == null)
-            _fightLogic = UIManager.Instance.FightLogicGO.GetComponent<FightLogic>();
+        if (BattleLogic == null)
+            BattleLogic = UIManager.Instance.BattleLogicGO.GetComponent<BattleLogic>();
         _bagRootMini = UIManager.Instance.MainSceneGO.GetComponent<MainSceneMono>()
             .GUIBagRoot_Mini.GetComponent<BagRootMini>();
         

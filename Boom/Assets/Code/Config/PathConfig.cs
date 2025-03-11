@@ -19,6 +19,11 @@ public static class PathConfig
 #endif
       return Application.streamingAssetsPath + "/";
    }
+   //..........................全局大关卡...............................
+   public static string LevelAssetDir = GetPrepath() + "Res/Levels/";
+   
+   //..........................全局大地图...............................
+   public static string MapPB(int ID) => GetPrepath() + $"Res/Map/P_Map_{ID.ToString("D2")}.prefab";
    
    //......................Data..............................................
    public static string MultiLaDesignJson = GetDataPrepath() + "Data/MultiLa.json";
@@ -47,10 +52,8 @@ public static class PathConfig
    public static string DialogueNamePortraitOBJ =  GetPrepath() + "Res/Manager/DialogueNamePortraitConfig.asset";
    ///.........................资源类.................................
    public static string TooltipAsset = GetPrepath() + "Res/UI/Prefabs/P_Tooltip_01.prefab";
-   public static string TexttipAsset = GetPrepath() + "Res/UI/Prefabs/Misc/P_Tooltip_Text_02.prefab";
    public static string TxtHitPB = GetPrepath() + "Res/UI/Prefabs/Misc/P_txtHit_01.prefab";
    public static string TxtGetItemPB = GetPrepath() + "Res/UI/Prefabs/Misc/P_TextGetItem_01.prefab";
-   public static string TxtFloatingUIPB = GetPrepath() + "Res/UI/Prefabs/Misc/P_TxtFloatingUI_01.prefab";
    //商店
    public static string RollScorePB = GetPrepath() + "Res/Bullet/Prefab/P_RollScore_Template.prefab";
    public static string RollGemPB = GetPrepath() + "Res/UI/Gem/Prefabs/P_GemInShop_Template.prefab";
@@ -71,22 +74,11 @@ public static class PathConfig
    
    //...........................角色.................................
    public static string EnemyPB = GetPrepath() + "Res/Character/SpineData/P_Enemy_Template.prefab";
-
-   public static string GetEnemySkelentonDataPath(int ID)
-   {
-      return GetPrepath() + $"Res/Character/SpineData/Enemy{ID.ToString("D2")}/enemy_{ID.ToString("D2")}_SkeletonData.asset";
-   }
-
-   public static string GetEnemyPortrait(int ID)
-   {
-      return GetPrepath() + $"Res/Character/Image/Enemy/Enemy_Portrait_{ID.ToString("D2")}.png";
-   }
+   public static string GetEnemySkelentonDataPath(int ID) =>
+      GetPrepath() + $"Res/Character/SpineData/Enemy{ID.ToString("D2")}/enemy_{ID.ToString("D2")}_SkeletonData.asset";
+   public static string GetEnemyPortrait(int ID) => 
+      GetPrepath() + $"Res/Character/Image/Enemy/Enemy_Portrait_{ID.ToString("D2")}.png";
    public static string ShieldPB = GetPrepath() + "Res/Character/Image/Enemy/P_Shield_01.prefab";
-   
-   public static string GetRoleImgPath(int ID)
-   {
-      return GetPrepath() + "Res/Character/MainRole/T_RoleSel_" + ID.ToString("D2") + ".png";
-   }
    
    //..........................子弹.............................................
    public static string BulletImageDir = GetPrepath() + "Res/Bullet/Textures/";
@@ -102,13 +94,9 @@ public static class PathConfig
    public static string ScoreMatImage = GetPrepath() + "Res/Bullet/Textures/T_ScoreMat_01.png";
    
    //..........................Buff.............................................
-   public static string TalentImageDir = GetPrepath() + "Res/UI/Buff/Talent/Textures/";
-   public static string TalentPB = GetPrepath() + "Res/UI/Buff/Talent/P_Buff_Template.prefab";
+
    //..........................Connon...........................................
    public static string ConnonPB = GetPrepath() + "Res/Character/SpineData/Connon01/P_Connon_01.prefab";
-   
-   //..........................全局大关卡...............................
-   public static string LevelAssetDir = GetPrepath() + "Res/Levels/";
    
    //..........................通用材质球..............................
    public static string MatOutLine = GetPrepath() + "Res/Shader/CommonMaterial/OutLine.mat";
@@ -227,14 +215,6 @@ public static class PathConfig
       string curDir = BulletSpineDir;
       string finnal = $"{curDir}{smallDir}spfx_hit_{ID.ToString("D3")}_SkeletonData.asset";
       return finnal;
-   }
-
-   public static string GetBufftImagePath(int ID,string name)
-   {
-      string orginName = "T_Buff_" + name +"_" +  ID.ToString("D2") + ".png";
-      string curImagePath = TalentImageDir + orginName;
-      
-      return curImagePath;
    }
    #endregion
 }

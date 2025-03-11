@@ -28,13 +28,12 @@ public class Connon : MonoBehaviour
         AllBullets = new List<BulletInner>();
     }
     
-    private void SpEventFire(TrackEntry trackEntry, Event e)
+    void SpEventFire(TrackEntry trackEntry, Event e)
     {
         // 处理事件，根据事件名称执行不同的逻辑
         switch (e.Data.Name)
         {
             case "fire":
-                Debug.Log($"fire  Unhandled event: {e.Data.Name}");
                 if (isFiring)
                 {
                     //发射子弹

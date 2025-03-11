@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class TutorialManager : MonoBehaviour
@@ -43,7 +44,7 @@ public class TutorialManager : MonoBehaviour
     
     [Header("脚本类")]
     public Dialogue CurDialogue;
-    public FightLogic FightLogic;
+    [FormerlySerializedAs("FightLogic")] public BattleLogic battleLogic;
     RoleInMap curRole;
     RoleInMap _curRole
     {
@@ -100,7 +101,7 @@ public class TutorialManager : MonoBehaviour
                 _isAwardRoom5_1 = true;
             }
         }
-        if (FightLogic._isAttacked && !_isPressEnter3_3)
+        if (battleLogic.IsAttacking && !_isPressEnter3_3)
         {
             _isPressEnter3_3 = true;
             DestroyImmediate(UIPressEnter);

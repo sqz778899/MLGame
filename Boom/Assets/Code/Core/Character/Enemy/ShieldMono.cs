@@ -26,6 +26,7 @@ public class ShieldMono : EnemyBase
         int EffectiveDamage = damage - OverflowDamage;
        
         CurHP -= damage;
+        OnTakeDamage?.Invoke();
         CurBullet.BattleOnceHits.Add(new BattleOnceHit(CurBullet._data.CurSlot.SlotID,
             ShieldIndex,-1,EffectiveDamage,OverflowDamage,damage,CurHP<=0));
         

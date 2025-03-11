@@ -63,11 +63,15 @@ public class SingelReportRoot : MonoBehaviour
             {
                 if (each.ShieldIndex == -1)
                 {
-                    IconEnemy.GetComponentInChildren<TextMeshProUGUI>().text = $"-{each.EffectiveDamage}";
+                    TextMeshProUGUI enemyHPText = IconEnemy.GetComponentInChildren<TextMeshProUGUI>(true);
+                    enemyHPText.gameObject.SetActive(true);
+                    enemyHPText.text = $"-{each.EffectiveDamage}";
                     if (!each.IsDestroyed)
                         IconEnemy.transform.GetChild(0).gameObject.SetActive(false);
+                    effectiveDamage += each.EffectiveDamage;
+                    overflowDamage += each.OverflowDamage;
                     continue;
-                }
+                } 
                 
                 GameObject curIconShield = iconShieldDict[each.ShieldIndex];
                 GameObject textGO = curIconShield.transform.GetChild(2).gameObject;

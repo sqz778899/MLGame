@@ -13,6 +13,7 @@ public class Enemy : EnemyBase
 
     [Header("盾牌")]
     public List<int> ShieldsHPs = new List<int>();
+    public List<ShieldMono> Shields;
 
     [Header("Node相关")]
     public GameObject ShieldsNode;
@@ -25,7 +26,8 @@ public class Enemy : EnemyBase
     //Award...........
     public Award CurAward;
     
-    FightLogic _fightLogic;
+    public Action OnLoadData;
+    BattleLogic _battleLogic;
 
     void Start()
     {
@@ -55,8 +57,8 @@ public class Enemy : EnemyBase
     {
         CurHP = MaxHP;
         EState = EnemyState.live;
-        if (_fightLogic==null)
-            _fightLogic = UIManager.Instance.FightLogicGO.GetComponent<FightLogic>();
+        if (_battleLogic==null)
+            _battleLogic = UIManager.Instance.BattleLogicGO.GetComponent<BattleLogic>();
         CurHealthBar.InitHealthBar(this); //初始化血条
         SetShields();//初始化盾牌
         Portrait = ResManager.instance.GetAssetCache<Sprite>(PathConfig.GetEnemyPortrait(ID));
@@ -65,13 +67,15 @@ public class Enemy : EnemyBase
             GetAssetCache<SkeletonDataAsset>(PathConfig.GetEnemySkelentonDataPath(ID));
         Ani.skeletonDataAsset = curSkeletonDataAsset;
         Ani.Initialize(true);
+        OnLoadData?.Invoke();//绑定MiniMap中的UI显示敌人状态
     }
 
     //设置盾牌数量和每个盾牌的血量
     public void SetShields()
     {
+        Shields = new List<ShieldMono>();
         for (int i = ShieldsNode.transform.childCount-1; i >=0; i--)
-            DestroyImmediate(ShieldsNode.transform.GetChild(i).gameObject);
+            Destroy(ShieldsNode.transform.GetChild(i).gameObject);
         
         for (int i = 0; i < ShieldsHPs.Count; i++)
         {
@@ -84,6 +88,7 @@ public class Enemy : EnemyBase
             ShieldIns.transform.SetParent(ShieldsNode.transform,false);
             float curStep = i * curMono.InsStep;
             ShieldIns.transform.localPosition = new Vector3(curStep,0,0);
+            Shields.Add(curMono);
         }
     }
     
@@ -98,6 +103,7 @@ public class Enemy : EnemyBase
         int EffectiveDamage = damage - OverflowDamage;
        
         CurHP -= damage;
+        OnTakeDamage?.Invoke();//MiniMap中的UI显示敌人状态
         CurBullet.BattleOnceHits.Add(new BattleOnceHit(CurBullet._data.CurSlot.SlotID,
             -1,1,EffectiveDamage,OverflowDamage,damage,CurHP<=0));
         
@@ -137,6 +143,12 @@ public class Enemy : EnemyBase
         ShieldsHPs.Clear();
         ShieldsHPs.AddRange(_enemyMidData.ShieldsHPs);
         CurAward = _enemyMidData.CurAward;
+    }
+
+    internal override void OnDestroy()
+    {
+        base.OnDestroy();
+        OnLoadData = null;
     }
     #endregion
     

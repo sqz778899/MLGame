@@ -8,6 +8,7 @@ using UnityEngine;
 public class BulletInner:ItemBase
 {
     public BulletData _data; //绝对核心数据
+    public RoleInner CurRole; //当前持有的角色
     
     [Header("表现资产")]
     public Renderer CurRenderer;
@@ -87,7 +88,7 @@ public class BulletInner:ItemBase
             {
                 //如果是最后一个敌人，子弹消失
                 HandleBulletDisappear();
-                //传递给WarReport消息。
+                //战报收集！！传递给WarReport消息。
                 WarReport warReport = MainRoleManager.Instance.CurWarReport;
                 int curWarIndex = warReport.CurWarIndex;
                 
@@ -123,7 +124,7 @@ public class BulletInner:ItemBase
 
     void HandleBulletDisappear()
     {
-        gameObject.transform.GetChild(0).gameObject.SetActive(false);
+        Destroy(gameObject);
     }
     #endregion
 
@@ -163,7 +164,6 @@ public class BulletInner:ItemBase
                     continue;
                 material.SetFloat("_Transparency", alpha);
             }
-
             yield return null;
         }
         gameObject.SetActive(false);
@@ -223,7 +223,8 @@ public class BulletInner:ItemBase
         return transform.position.x - UIManager.Instance.RoleIns.transform.position.x;
     }
     #endregion
-    
+
+    #region 数据绑定相关
     public void BindData(BulletData data)
     {
         if (_data != null)
@@ -252,4 +253,5 @@ public class BulletInner:ItemBase
     {
         _data.OnDataChanged -= OnDataChangedInner;
     }
+    #endregion
 }

@@ -19,7 +19,7 @@ public class MainSceneMono:MonoBehaviour
     [Header("FightScene")] 
     public GameObject GUIFightScene;
     public GameObject FightScene;
-    FightLogic _fightLogic;
+    BattleLogic _battleLogic;
     MapLogic _mapLogic;
     
     //总Init接口
@@ -38,8 +38,8 @@ public class MainSceneMono:MonoBehaviour
     {
         if (_mapLogic==null)
             _mapLogic = UIManager.Instance.MapLogicGO.GetComponent<MapLogic>();
-        if (_fightLogic==null)
-            _fightLogic = UIManager.Instance.FightLogicGO.GetComponent<FightLogic>();
+        if (_battleLogic==null)
+            _battleLogic = UIManager.Instance.BattleLogicGO.GetComponent<BattleLogic>();
     }
 
     public void SwitchBag()
@@ -100,12 +100,12 @@ public class MainSceneMono:MonoBehaviour
     void FightSceneOn()
     {
         GUIFightScene.SetActive(true);
-        try { _fightLogic.enabled = true; }catch (Exception e) {}
+        try { _battleLogic.enabled = true; }catch (Exception e) {}
         for (int i = 0; i < FightScene.transform.childCount; i++)
             FightScene.transform.GetChild(i).gameObject.SetActive(true);
         try
         {
-            _fightLogic.InitData();
+            _battleLogic.InitData();
             UIManager.Instance.G_SideBar.SetActive(false);
         }
         catch (Exception e)
@@ -116,13 +116,13 @@ public class MainSceneMono:MonoBehaviour
     void FightSceneOff()
     {
         GUIFightScene.SetActive(false);
-        try { _fightLogic.enabled = false; }catch (Exception e) {}
+        try { _battleLogic.enabled = false; }catch (Exception e) {}
         for (int i = 0; i < FightScene.transform.childCount; i++)
             FightScene.transform.GetChild(i).gameObject.SetActive(false);
         
         try
         {
-            _fightLogic.UnloadData();
+            _battleLogic.UnloadData();
             UIManager.Instance.G_SideBar.SetActive(true);
         }
         catch (Exception e)

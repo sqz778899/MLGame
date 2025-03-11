@@ -46,6 +46,29 @@ public static class AniUtility
         curAni.timeScale = timeScale;
     }
     
+    public static void PlayCommon(SkeletonGraphic curAni,float timeScale,string AniType,bool isloop,bool isReset=false,int trackIndex=0)
+    {
+        #region 容错
+        //动画不存在的话直接Return
+        if (curAni.Skeleton == null) return;
+        if (curAni.Skeleton.Data.FindAnimation(AniType) == null) return;
+        #endregion
+        
+        if (curAni.startingAnimation != AniType || curAni.startingLoop != isloop)
+        {
+            curAni.startingLoop = isloop;
+            curAni.AnimationState.SetAnimation(trackIndex, AniType,isloop);
+        }
+
+        if (isReset)
+        {
+            curAni.AnimationState.SetAnimation(trackIndex, AniType,isloop);
+        }
+        
+        curAni.startingAnimation = AniType;
+        curAni.timeScale = timeScale;
+    }
+    
     public static void PlayResetAni(SkeletonAnimation curAni,float timeScale,string AniType)
     {
         curAni.AnimationState.SetAnimation(0, AniType,curAni.loop);
@@ -71,6 +94,11 @@ public static class AniUtility
     }
     
     public static void PlayDead01(SkeletonAnimation curAni,float timeScale=1f)
+    {
+        PlayCommon(curAni, timeScale, Dead01,false);
+    }
+    
+    public static void PlayDead01(SkeletonGraphic curAni,float timeScale=1f)
     {
         PlayCommon(curAni, timeScale, Dead01,false);
     }

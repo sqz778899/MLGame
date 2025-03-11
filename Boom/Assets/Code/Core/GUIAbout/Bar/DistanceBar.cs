@@ -10,21 +10,21 @@ public class DistanceBar : MonoBehaviour
     public float MaxDistance;
     public float CurDistance;
 
-    FightLogic _fightLogic;
+    BattleLogic _battleLogic;
     float t;
     public virtual void Start()
     {
         MaxDistance = 100f;
-        if (_fightLogic == null)
-            _fightLogic = UIManager.Instance.FightLogicGO.GetComponent<FightLogic>();
+        if (_battleLogic == null)
+            _battleLogic = UIManager.Instance.BattleLogicGO.GetComponent<BattleLogic>();
         
-        CurDistance = _fightLogic.Distance;
+        CurDistance = _battleLogic.Distance;
         Text.text = string.Format("{0} : {1}", GetRange(CurDistance), CurDistance);
     }
 
     public virtual void Update()
     {
-        CurDistance = _fightLogic.Distance;
+        CurDistance = _battleLogic.Distance;
         t = CurDistance / MaxDistance;
         NarmalBar.fillAmount = t;
         Text.text = string.Format("{0} : {1}", GetRange(CurDistance), CurDistance);

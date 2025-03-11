@@ -1,0 +1,134 @@
+﻿using DG.Tweening;
+using UnityEngine;
+
+#region 接口
+public interface IFightState
+{
+    // 进入状态时调用
+    void Enter();
+    // 每帧更新状态时调用
+    void Update();
+    // 离开状态时调用
+    void Exit();
+}
+#endregion
+
+#region 战斗中状态机
+public class InLevelState : IFightState
+{
+    BattleLogic _battleLogic;
+    Enemy _curEnemy;
+    RoleInner _curRole;
+
+    public InLevelState(BattleLogic battleLogic)
+    {
+        _battleLogic = battleLogic;
+        _curEnemy = _battleLogic.CurEnemy;
+        _curRole = _battleLogic.CurRole;
+    }
+    
+    public void Enter()
+    {
+        Debug.Log("进入战斗中状态");
+    }
+    
+    public void Update()
+    {
+        // 检查战斗是否结束：子弹用完或敌人死亡
+        if (_battleLogic.IsBattleOver())
+        {
+            _battleLogic.IsBattleEnded = true;
+            // 根据敌人状态切换到胜利或失败状态
+            if (_battleLogic.CurrentEnemyIsDead())
+                _battleLogic.ChangeState(new WinState(_battleLogic));
+            else
+                _battleLogic.ChangeState(new FailState(_battleLogic));
+        }
+        
+        UpdateDistance();//实时计算与敌人的距离
+        HandleInput();//开火
+    }
+    
+    //开火
+    void HandleInput()
+    {
+        if (UIManager.Instance.IsLockedClick) return;
+        
+        if (Input.GetKeyDown(KeyCode.Space) && !_battleLogic.IsAttacking)
+        {
+            _battleLogic.IsAttacking = true;
+            _battleLogic.IsAfterAttack = true;
+            _curRole.Fire();
+            _battleLogic.IsBeginCameraMove = true;
+        }
+    }
+    
+    //实时计算与敌人的距离
+    void UpdateDistance()
+    {
+        if(_curEnemy == null) return;
+        
+        _battleLogic.Distance = Vector2.Distance(_curEnemy.transform.position,
+            _curRole.transform.position);
+    }
+    
+    public void Exit()
+    {
+        Debug.Log("退出战斗中状态");
+    }
+}
+#endregion
+
+#region 胜利状态机
+public class WinState : IFightState
+{
+    BattleLogic _battleLogic;
+    public WinState(BattleLogic battleLogic)
+    {
+        _battleLogic = battleLogic;
+    }
+    
+    public void Enter()
+    {
+        Debug.Log("进入胜利状态");
+        DOVirtual.DelayedCall(3f, () => { _battleLogic.ShowWinUI(); });
+    }
+    
+    public void Update()
+    {
+        // 可在这里添加胜利后需要持续处理的逻辑
+    }
+    
+    public void Exit()
+    {
+        Debug.Log("退出胜利状态");
+    }
+}
+#endregion
+
+#region 失败状态机
+public class FailState : IFightState
+{
+    BattleLogic _battleLogic;
+    public FailState(BattleLogic battleLogic)
+    {
+        _battleLogic = battleLogic;
+    }
+    
+    public void Enter()
+    {
+        Debug.Log("进入失败状态");
+        DOVirtual.DelayedCall(3f, () => { _battleLogic.ShowFailUI(); });
+    }
+    
+    public void Update()
+    {
+        // 可在这里添加失败后需要持续处理的逻辑
+    }
+    
+    public void Exit()
+    {
+        Debug.Log("退出失败状态");
+    }
+}
+#endregion
