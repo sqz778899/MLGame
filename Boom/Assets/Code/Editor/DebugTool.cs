@@ -7,14 +7,15 @@ using UnityEngine.UI;
 public class DebugTool
 {
     public GameObject Root;
+    public Material _defaultMaterial;
 
     [Button(ButtonSizes.Large)]
     void DealMissingScript()
     {
-        Transform[] allTrans = Root.GetComponentsInChildren<Transform>(true);
+        SpriteRenderer[] allTrans = Root.GetComponentsInChildren<SpriteRenderer>(true);
         foreach (var each in allTrans)
         {
-            GameObjectUtility.RemoveMonoBehavioursWithMissingScript(each.gameObject);
+            each.material = _defaultMaterial;
         }
         //GameObjectUtility.RemoveMonoBehavioursWithMissingScript()
     }
