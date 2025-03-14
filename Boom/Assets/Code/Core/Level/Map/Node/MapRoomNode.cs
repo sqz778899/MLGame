@@ -49,7 +49,7 @@ public class MapRoomNode : MonoBehaviour
     ArrowNode[] _arrows;     //全部的箭头
     MapNodeBase[] _resources; //全部的资源
 
-    void Awake()
+    public void InitData()
     {
         _arrows = GetComponentsInChildren<ArrowNode>();
         _resources = _resRoot.GetComponentsInChildren<MapNodeBase>();
@@ -58,7 +58,7 @@ public class MapRoomNode : MonoBehaviour
             _instanceFogMat = new Material(RoomFog.material);
             RoomFog.material = _instanceFogMat;
         }
-        State = MapRoomState.IsLocked;
+        //State = MapRoomState.IsLocked;
     } 
 
     //更新资产状态

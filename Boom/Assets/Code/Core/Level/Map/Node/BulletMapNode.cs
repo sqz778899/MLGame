@@ -34,13 +34,13 @@ public class BulletMapNode : MapNodeBase
     public void JoinYou()
     {
         SpineQuitHighLight();
-        MMapLogic.CurDialogue.LoadDialogue(DialogueName);
-        MMapLogic.CurDialogue.OnDialogueEnd += OnDiaCallBack;
+        MMapManager.CurDialogue.LoadDialogue(DialogueName);
+        MMapManager.CurDialogue.OnDialogueEnd += OnDiaCallBack;
     }
 
     public void OnDiaCallBack()
     {
-        MMapLogic.CurDialogue.OnDialogueEnd -= OnDiaCallBack;
+        MMapManager.CurDialogue.OnDialogueEnd -= OnDiaCallBack;
         
         MainRoleManager.Instance.AddSpawner(BulletID);
         BulletJson bulletDesignJson = TrunkManager.Instance.BulletDesignJsons

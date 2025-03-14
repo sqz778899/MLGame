@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MapControllerMainEnv : MonoBehaviour
+public class MapMouseControlMainEnv : MonoBehaviour
 {
    [Header("Zoom Settings")]
     public float minZoom = 2f;

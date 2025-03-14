@@ -23,9 +23,4 @@ public class OutsideLogic : MonoBehaviour
             _builds.ForEach(menu => menu.CloseBuild());
         }
     }
-
-    public void GoToTask()
-    {
-        MSceneManager.Instance.LoadScene(2);
-    }
 }

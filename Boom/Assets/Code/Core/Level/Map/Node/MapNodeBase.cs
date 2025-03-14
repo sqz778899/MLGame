@@ -10,14 +10,14 @@ public class MapNodeBase : SpriteClickHandler
     [Header("飞行特效参数")] 
     public EParameter EPara;
     
-    MapLogic _mapLogic;
-    internal MapLogic MMapLogic
+    MapManager _mapManager;
+    internal MapManager MMapManager
     {
         get
         {
-            if (_mapLogic == null)
-                _mapLogic = UIManager.Instance.MapLogicGO.GetComponent<MapLogic>();
-            return _mapLogic;
+            if (_mapManager == null)
+                _mapManager = UIManager.Instance.MapManagerGO.GetComponent<MapManager>();
+            return _mapManager;
         }   
     }
     

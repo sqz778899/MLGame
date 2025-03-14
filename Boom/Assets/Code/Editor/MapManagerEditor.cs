@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(MapLogic))]
+[CustomEditor(typeof(MapManager))]
 [CanEditMultipleObjects]
-public class MapLogicEditor : Editor
+public class MapManagerEditor : Editor
 {
     public override void OnInspectorGUI()
     {
@@ -14,8 +14,8 @@ public class MapLogicEditor : Editor
         
         if (GUILayout.Button("GenerateNodeIDs"))
         {
-            var mtarget = target as MapLogic;
-            mtarget.InitMapData();
+            var mtarget = target as MapManager;
+            //mtarget.InitMapData();
             mtarget.SetAllIDs();
         }
     }

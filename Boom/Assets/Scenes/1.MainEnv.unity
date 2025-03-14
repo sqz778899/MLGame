@@ -573,8 +573,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.2866, y: -0.13675004, z: 0}
-    m_Extent: {x: 0.566, y: 1.33255, z: 0}
+    m_Center: {x: 0.2872, y: -0.13665003, z: 0}
+    m_Extent: {x: 0.56949997, y: 1.34395, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 1.26
@@ -10188,7 +10188,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 809303062}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1410404430}
+        m_TargetAssemblyTypeName: QuestManager, Assembly-CSharp
+        m_MethodName: SelectQuest
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &809303062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14530,14 +14542,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2038537326}
-        m_TargetAssemblyTypeName: OutsideLogic, Assembly-CSharp
-        m_MethodName: GoToTask
-        m_Mode: 1
+      - m_Target: {fileID: 1410404430}
+        m_TargetAssemblyTypeName: QuestManager, Assembly-CSharp
+        m_MethodName: SelectQuest
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -14740,7 +14752,7 @@ GameObject:
   - component: {fileID: 1410404431}
   - component: {fileID: 1410404430}
   m_Layer: 0
-  m_Name: Quest
+  m_Name: QuestManager(singleton)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14760,11 +14772,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questDatabase: {fileID: 11400000, guid: b3afe3c0848720b4abc1239df04ae770, type: 2}
   currentQuest:
-    ID: 
+    ID: 0
     Name: 
+    Level: 0
     Description: 
-    SceneName: 
     State: 0
+    DifficultyLevel: 0
+  IsTestMode: 0
+  TestMapID: 0
 --- !u!4 &1410404431
 Transform:
   m_ObjectHideFlags: 0
@@ -17497,8 +17512,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 1.4284999, y: 0.1361, z: 0}
-    m_Extent: {x: 1.7052, y: 1.7554, z: 0}
+    m_Center: {x: 1.4340501, y: 0.13305002, z: 0}
+    m_Extent: {x: 1.71175, y: 1.7595501, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 1.26

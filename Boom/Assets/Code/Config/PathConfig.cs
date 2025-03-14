@@ -35,6 +35,7 @@ public static class PathConfig
    public static string PREventDesignJson = GetDataPrepath() + "Data/PREventDesign.json";
    public static string ItemDesignJson = GetDataPrepath() + "Data/ItemDesign.json";
    public static string GemDesignJson = GetDataPrepath() + "Data/GemDesign.json";
+   public static string QuestDesignJson = GetDataPrepath() + "Data/QuestDesign.json";
    
    public static string DialogueDesignJson = GetDataPrepath() + "Data/DialogueDesign.json";
 

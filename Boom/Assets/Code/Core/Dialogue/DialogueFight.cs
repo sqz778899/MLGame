@@ -59,7 +59,7 @@ public class DialogueFight : MonoBehaviour
         _mainSceneMono.SwitchFightScene();
         QuitSelf();
     }
-    
+
     public void QuitSelf()
     {
         if (isLocked ) return;

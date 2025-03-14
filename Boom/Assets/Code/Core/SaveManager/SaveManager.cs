@@ -43,6 +43,30 @@ public static class SaveManager
         
         MainRoleManager.Instance.CurStandbyBulletMats = saveFile.UserStandbyBullet;
         #endregion
+
+        #region Quest
+        List<QuestSaveData> UserQuests = saveFile.UserQuests;
+        List<Quest> curQuests = QuestManager.Instance.questDatabase.quests;
+        foreach (var eachSave in UserQuests)
+        {
+            bool isExist = false;
+            foreach (var eachQ in curQuests)
+            {
+                if (eachQ.ID == eachSave.ID)
+                {
+                    isExist = true;
+                    eachQ.LoadQuest(eachSave);
+                    break;
+                }
+            }
+            if (!isExist)
+            {
+                Quest newQuest = new Quest(eachSave.ID);
+                newQuest.LoadQuest(eachSave);
+                curQuests.Add(newQuest);
+            }
+        }
+        #endregion
         
         #region Map
         List<MapSate> UserMapSate = saveFile.UserMapSate;
@@ -96,6 +120,15 @@ public static class SaveManager
         saveFile.UserBulletSlotLockedState = MainRoleManager.Instance.CurBulletSlotLockedState;
         
         saveFile.UserStandbyBullet = MainRoleManager.Instance.CurStandbyBulletMats;
+        #endregion
+        
+        #region Quest
+        List<QuestSaveData> UserQuests = new List<QuestSaveData>();
+        QuestManager.Instance.questDatabase.quests.ForEach(each =>
+        {
+            UserQuests.Add(new QuestSaveData(each));
+        });
+        saveFile.UserQuests = UserQuests;
         #endregion
         
         #region Map

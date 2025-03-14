@@ -20,7 +20,7 @@ public class MainSceneMono:MonoBehaviour
     public GameObject GUIFightScene;
     public GameObject FightScene;
     BattleLogic _battleLogic;
-    MapLogic _mapLogic;
+    MapManager _mapManager;
     
     //总Init接口
     void Awake()
@@ -36,8 +36,8 @@ public class MainSceneMono:MonoBehaviour
 
     void Start()
     {
-        if (_mapLogic==null)
-            _mapLogic = UIManager.Instance.MapLogicGO.GetComponent<MapLogic>();
+        if (_mapManager==null)
+            _mapManager = UIManager.Instance.MapManagerGO.GetComponent<MapManager>();
         if (_battleLogic==null)
             _battleLogic = UIManager.Instance.BattleLogicGO.GetComponent<BattleLogic>();
     }
@@ -135,15 +135,15 @@ public class MainSceneMono:MonoBehaviour
     {
         MapScene.SetActive(true);
         GUIMap.SetActive(true);
-        _mapLogic?.InitMapData();
-        try { _mapLogic.enabled = true; }catch (Exception e) {}
+        //_mapManager?.InitMapData();
+        try { _mapManager.enabled = true; }catch (Exception e) {}
     }
     
     void MapSceneOff()
     {
         GUIMap.SetActive(false);
         MapScene.SetActive(false);
-        try { _mapLogic.enabled = false; }catch (Exception e) {}
+        try { _mapManager.enabled = false; }catch (Exception e) {}
     }
     #endregion
 }

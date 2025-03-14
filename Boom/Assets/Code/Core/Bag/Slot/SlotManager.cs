@@ -50,16 +50,16 @@ public static class SlotManager
                 allSlot = UIManager.Instance.BagReadySlotRootGO.GetComponentsInChildren<BulletSlotRole>();
                 break;
             case SlotType.ElementSlot:
-                allSlot = UIManager.Instance.EquipItemRootGO.GetComponentsInChildren<SlotBase>();
+                allSlot = UIManager.Instance.EquipItemRoot.GetComponentsInChildren<SlotBase>();
                 break;
             case SlotType.BagSlot:
-                allSlot = UIManager.Instance.BagItemRootGO.GetComponentsInChildren<SlotBase>();
+                allSlot = UIManager.Instance.BagItemRoot.GetComponentsInChildren<SlotBase>();
                 break;
             case SlotType.SpawnnerSlot:
-                allSlot = UIManager.Instance.G_BulletSpawnerSlot.GetComponentsInChildren<SlotBase>();
+                allSlot = UIManager.Instance.SpawnerSlotRoot.GetComponentsInChildren<SlotBase>();
                 break;
             default:
-                allSlot = UIManager.Instance.BagItemRootGO.GetComponentsInChildren<SlotBase>();
+                allSlot = UIManager.Instance.BagItemRoot.GetComponentsInChildren<SlotBase>();
                 break;
         }
 

@@ -21,6 +21,7 @@ Shader "Custom/2D_Dissolve"
             "RenderType"="Transparent"
             "PreviewType"="Plane"
             "CanUseSpriteAtlas"="True"
+            "RenderPipeline"="UniversalPipeline"
         }
 
         Cull Off
@@ -30,7 +31,7 @@ Shader "Custom/2D_Dissolve"
         
         Pass
         {
-            Tags { "LightMode"="UniversalForward" }
+            Tags { "LightMode"="Universal2D" }
 
             HLSLPROGRAM
             #pragma vertex vert
@@ -75,6 +76,7 @@ Shader "Custom/2D_Dissolve"
 
             half4 frag(Varyings i) : SV_Target
             {
+                //return half4(0,0,0,1);
                 half4 col2 = SAMPLE_TEXTURE2D(_DissolveTexture,sampler_DissolveTexture,i.uv);
                 float dissolve = col2.a;
 

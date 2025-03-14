@@ -3,14 +3,14 @@ using UnityEditor;
 using UnityEngine;
 using DG.Tweening;
 
-[CustomEditor(typeof(MapController))]
+[CustomEditor(typeof(MapMouseControl))]
 public class MapRootEdit: Editor
 {
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector(); // 把默认的inspector的内容画出来
 
-        MapController myScript = (MapController)target;
+        MapMouseControl myScript = (MapMouseControl)target;
         if (GUILayout.Button("Set Room ID"))
         {
             MapRoomNode[] rooms = myScript.gameObject.

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapController : MonoBehaviour
+public class MapMouseControl : MonoBehaviour
 {
     public float Sensitive;
     public Vector2 MinMaxZ;

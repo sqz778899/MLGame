@@ -24,14 +24,7 @@
       "SlotType": 0
     }
   ],
-  "UserCurBullets": [
-    {
-      "SpawnerCount": 0,
-      "ID": 1,
-      "SlotID": 1,
-      "SlotType": 6
-    }
-  ],
+  "UserCurBullets": [],
   "UserStandbyBullet": [
     {
       "SlotID": 0,
@@ -66,55 +59,8 @@
     "3": false,
     "4": false
   },
-  "UserItems": [
-    {
-      "ID": 1,
-      "SlotID": 1,
-      "SlotType": 1
-    },
-    {
-      "ID": 2,
-      "SlotID": 2,
-      "SlotType": 1
-    },
-    {
-      "ID": 1,
-      "SlotID": 3,
-      "SlotType": 1
-    },
-    {
-      "ID": 2,
-      "SlotID": 4,
-      "SlotType": 1
-    }
-  ],
-  "UserGems": [
-    {
-      "ID": 1,
-      "SlotID": 1,
-      "SlotType": 4
-    },
-    {
-      "ID": 1,
-      "SlotID": 2,
-      "SlotType": 4
-    },
-    {
-      "ID": 1,
-      "SlotID": 3,
-      "SlotType": 4
-    },
-    {
-      "ID": 10,
-      "SlotID": 2,
-      "SlotType": 5
-    },
-    {
-      "ID": 10,
-      "SlotID": 3,
-      "SlotType": 5
-    }
-  ],
+  "UserItems": [],
+  "UserGems": [],
   "UserMapSate": [
     {
       "CurLevelID": 1,
@@ -123,6 +69,18 @@
       "IsFinishedMaps": [],
       "IsFinishedLevels": [],
       "IsFinishedRooms": []
+    }
+  ],
+  "UserQuests": [
+    {
+      "ID": 1,
+      "State": 1,
+      "DifficultyLevel": 0
+    },
+    {
+      "ID": 2,
+      "State": 1,
+      "DifficultyLevel": 0
     }
   ]
 }

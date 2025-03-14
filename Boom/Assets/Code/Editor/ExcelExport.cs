@@ -24,6 +24,7 @@ namespace Code.Editor
             ExportPREventDesign();
             ExportGemDesign();
             ExportDialogue(); //对话相关
+            ExportQuestDesign();//任务相关
             AssetDatabase.Refresh();
         }
 
@@ -243,6 +244,66 @@ namespace Code.Editor
             string content01 = JsonConvert.SerializeObject(curGemDesign,
                 (Formatting)Formatting.Indented);
             File.WriteAllText(PathConfig.GemDesignJson, content01);
+        }
+
+        public void ExportQuestDesign()
+        {
+            DataSet curTables = GetDataSet();
+            List<QuestJson> curQuestDesign = new List<QuestJson>();
+            DataTable curTable = curTables.Tables["任务设计"];
+            
+            for (int i = 1; i < curTable.Rows.Count; i++)
+            {
+                QuestJson curData = new QuestJson();
+                if (curTable.Rows[i][1].ToString() == "") continue;
+                curData.ID = int.Parse(curTable.Rows[i][0].ToString());
+                curData.Name = curTable.Rows[i][1].ToString();
+                curData.Level = int.Parse(curTable.Rows[i][2].ToString());
+                curData.Description = curTable.Rows[i][3].ToString();
+                curQuestDesign.Add(curData);
+            }
+
+            string content01 = JsonConvert.SerializeObject(curQuestDesign,
+                (Formatting)Formatting.Indented);
+            File.WriteAllText(PathConfig.QuestDesignJson, content01);
+
+            QuestDatabaseOBJ obj = AssetDatabase.LoadAssetAtPath<QuestDatabaseOBJ>("Assets/Res/Manager/QuestDatabase.asset");
+            //同步到数据库
+            //已有的更新
+            foreach (var each in obj.quests)
+            {
+                foreach (var eachJson in curQuestDesign)
+                {
+                    if (each.ID == eachJson.ID)
+                    {
+                        each.Name = eachJson.Name;
+                        each.Level = eachJson.Level;
+                        each.Description = eachJson.Description;
+                    }
+                }
+            }
+            //新增的添加
+            foreach (var eachJson in curQuestDesign)
+            {
+                bool isExist = false;
+                foreach (var each in obj.quests)
+                {
+                    if (each.ID == eachJson.ID)
+                    {
+                        isExist = true;
+                        break;
+                    }
+                }
+
+                if (!isExist)
+                {
+                    Quest newQuest = new Quest(eachJson.ID);
+                    obj.quests.Add(newQuest);
+                }
+            }
+            
+            EditorUtility.SetDirty(obj);
+            AssetDatabase.SaveAssets();
         }
         #endregion
 

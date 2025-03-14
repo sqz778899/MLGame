@@ -24,6 +24,7 @@ public class SaveFileJson
     public List<ItemSaveData> UserItems;          //用户道具
     public List<GemBaseSaveData> UserGems;        //用户宝石
     public List<MapSate> UserMapSate;         //地图状态
+    public List<QuestSaveData> UserQuests;          //用户任务
 
     public SaveFileJson()
     {
@@ -39,6 +40,7 @@ public class SaveFileJson
         UserItems = new List<ItemSaveData>();
         UserGems = new List<GemBaseSaveData>();
         UserMapSate = new List<MapSate>();
+        UserQuests = new List<QuestSaveData>();
     }
 }
 
@@ -139,6 +141,23 @@ public class ItemJson:ItemJsonBase
         Price = 0;
     }
 }
+
+[Serializable]
+public class QuestJson
+{
+    public int ID;                   // 唯一ID
+    public string Name;              // 任务名称
+    public int Level;                // 任务等级
+    public string Description;       // 任务描述
+
+    public QuestJson()
+    {
+        ID = -1;
+        Name = "";
+        Level = -1;
+        Description = "";
+    }
+}
 #endregion
 
 #region 游戏内存档数据结构
@@ -169,6 +188,14 @@ public class BulletBaseSaveData:ItemBaseSaveData
         SlotType = data.CurSlot.SlotType;
         SpawnerCount = data.SpawnerCount;
     }
+    public BulletBaseSaveData(int _id = -1, int _slotID = -1, 
+        SlotType _slotType = SlotType.CurBulletSlot, int _spawnerCount = 0)
+    {
+        ID = _id;
+        SlotID = _slotID;
+        SlotType = _slotType;
+        SpawnerCount = _spawnerCount;
+    }
     public BulletBaseSaveData() {}// 让无参构造也保留，以免 JsonUtility/序列化报错
 }
 
@@ -194,5 +221,20 @@ public class ItemSaveData:ItemBaseSaveData
         SlotType = data.CurSlot.SlotType;
     }
     public ItemSaveData() {}// 让无参构造也保留，以免 JsonUtility/序列化报错
+}
+
+[Serializable]
+public class QuestSaveData
+{
+    public int ID;                   // 唯一ID
+    public QuestState State;         // 任务状态
+    public int DifficultyLevel;      // 难度等级（用于调整怪物或地图状态）
+    public QuestSaveData(Quest quest)
+    {
+        ID = quest.ID;
+        State = quest.State;
+        DifficultyLevel = quest.DifficultyLevel;
+    }
+    public QuestSaveData() {}// 让无参构造也保留，以免 JsonUtility/序列化报错
 }
 #endregion

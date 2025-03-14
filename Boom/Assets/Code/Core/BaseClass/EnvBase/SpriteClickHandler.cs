@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -36,7 +37,27 @@ public class SpriteClickHandler : MonoBehaviour
     
     internal virtual void OnMouseUp()
     {
-        if (EventSystem.current.IsPointerOverGameObject())  return;
+        // 检测是否有UI遮挡
+        if (EventSystem.current.IsPointerOverGameObject()) return; // 如果鼠标在 UI 上，则直接返回 false
+        /*{
+            // 获取所有被点击的UI对象
+            PointerEventData eventData = new PointerEventData(EventSystem.current);
+            eventData.position = Input.mousePosition;
+
+            List<RaycastResult> results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(eventData, results);
+
+            // 打印所有遮挡的UI对象名字
+            if (results.Count > 0)
+            {
+                Debug.Log("遮挡的UI对象数量: " + results.Count);
+                foreach (var result in results)
+                {
+                    Debug.Log("遮挡的UI对象: " + result.gameObject.name);
+                }
+            }
+            return; // 如果有UI遮挡，直接返回
+        }*/
         if (IsLocked || UIManager.Instance.IsLockedClick) return;
         onClick.Invoke();
     }

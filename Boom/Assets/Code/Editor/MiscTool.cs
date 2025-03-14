@@ -17,6 +17,7 @@ namespace Code.Editor
             tree.Selection.SupportsMultiSelect = false;
             tree.Add("ExcelExport", new ExcelExport());
             tree.Add("DesignTool", new DesignTool());
+            tree.Add("主界面策划工具", new MainEnvTool());
             tree.Add("FXTranslate", new FXTranslateEditor());
             tree.Add("Debug", new DebugTool());
             return tree;

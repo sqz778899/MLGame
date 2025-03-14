@@ -3,54 +3,60 @@ using UnityEngine.SceneManagement;
 
 public class QuestManager : MonoBehaviour
 {
-    public static QuestManager Instance { get; private set; }
-
     public QuestDatabaseOBJ questDatabase;
     public Quest currentQuest;
+    
+    [Header("测试模式")]
+    public bool IsTestMode;
+    public int TestMapID;
 
+    // 选择任务并加载对应地图Prefab
+    public void SelectQuest(int questID)
+    {
+        Quest quest = questDatabase.GetQuestByID(questID);
+        if (quest == null)
+        {
+            Debug.LogError($"未找到任务: {questID}");
+            return;
+        }
+
+        currentQuest = quest;
+
+        // 加载固定的游戏场景
+        MSceneManager.Instance.LoadScene(2);
+    }
+
+    //异步加载场景完成后调用
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // 场景加载完成后通知MapManager加载对应Prefab
+        var mapManager = FindObjectOfType<MapManager>();
+        if (mapManager != null && currentQuest != null)
+        {
+            if (IsTestMode)
+                mapManager.InitializeMap(new Quest(TestMapID));
+            else
+                mapManager.InitializeMap(currentQuest);
+        }
+    }
+
+    #region 单例的加载卸载
+    public static QuestManager Instance { get; private set; }
+    void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+    
     void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
             Destroy(gameObject);
     }
-
-    // 选择任务并加载对应场景
-    public void SelectQuest(string questID)
-    {
-        Quest quest = questDatabase.GetQuestByID(questID);
-        if (quest == null)
-        {
-            Debug.LogError($"未找到ID为{questID}的任务！");
-            return;
-        }
-
-        currentQuest = quest;
-        LoadQuestScene(quest.SceneName);
-    }
-
-    // 加载任务场景
-    void LoadQuestScene(string sceneName)
-    {
-        if (string.IsNullOrEmpty(sceneName))
-        {
-            Debug.LogError("场景名为空！");
-            return;
-        }
-        SceneManager.LoadScene(sceneName);
-    }
-
-    // 更新任务状态
-    public void UpdateQuestState(QuestState newState)
-    {
-        if (currentQuest != null)
-        {
-            currentQuest.State = newState;
-            Debug.Log($"任务状态更新：{currentQuest.Name} → {newState}");
-        }
-    }
+    #endregion
 }

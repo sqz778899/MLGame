@@ -6,7 +6,7 @@ public class QuestDatabaseOBJ : ScriptableObject
 {
     public List<Quest> quests = new List<Quest>();
 
-    public Quest GetQuestByID(string id)
+    public Quest GetQuestByID(int id)
     {
         return quests.Find(q => q.ID == id);
     }

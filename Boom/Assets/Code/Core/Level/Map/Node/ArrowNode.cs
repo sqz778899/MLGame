@@ -55,7 +55,7 @@ public class ArrowNode : MapNodeBase
     {
         if (IsLocked) return;
         MainRoleManager.Instance.CurMapSate.CurRoomID = TargetRoom.RoomID;
-        MMapLogic.SetRolePos();
+        MMapManager.SetRolePos();
     }
     
     public void GoToLockedRoomWithKey()
@@ -71,7 +71,7 @@ public class ArrowNode : MapNodeBase
         
         ArrowUnlocked.SetActive(true);
         MainRoleManager.Instance.CurMapSate.CurRoomID = TargetRoom.RoomID;
-        MMapLogic.SetRolePos();
+        MMapManager.SetRolePos();
         gameObject.SetActive(false);
     }
 }
