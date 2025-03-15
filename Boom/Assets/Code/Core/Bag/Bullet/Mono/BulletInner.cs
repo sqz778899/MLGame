@@ -185,7 +185,7 @@ public class BulletInner:ItemBase
     public IEnumerator PlayHitFX()
     {
         GameObject curFX = Instantiate(HitEffect, transform.position, transform.rotation);
-        curFX.transform.SetParent(UIManager.Instance.G_BulletInScene.transform,false);
+        curFX.transform.SetParent(UIManager.Instance.Logic.MapManagerSC.MapBuleltRoot.transform,false);
         SkeletonAnimation curSpfxSC = curFX.GetComponentInChildren<SkeletonAnimation>();
         curSpfxSC.skeletonDataAsset = HitSpfxAsset;
         curSpfxSC.Initialize(true);
@@ -220,7 +220,7 @@ public class BulletInner:ItemBase
     
     float CurDistance()
     {
-        return transform.position.x - UIManager.Instance.RoleIns.transform.position.x;
+        return transform.position.x - UIManager.Instance.Logic.MapManagerSC.RoleInFight.transform.position.x;
     }
     #endregion
 

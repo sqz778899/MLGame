@@ -20,8 +20,8 @@ public class ToolTipsBase : ItemBase,IPointerMoveHandler,IPointerExitHandler
         CurToolTipsMenuState = ToolTipsMenuState.Normal;
         ToolTipsOffset = new Vector3(1.01f, -0.5f, 0);
         RightClickMenuOffset = new Vector3(0.75f, -0.35f, 0);
-        CurTooltipsSC = UIManager.Instance.TooltipsGO.GetComponentInChildren<Tooltips>();
-        CurRightClickMenuSC = UIManager.Instance.RightClickGO.GetComponentInChildren<RightClickMenu>();
+        CurTooltipsSC = UIManager.Instance.CommonUI.TooltipsGO.GetComponentInChildren<Tooltips>();
+        CurRightClickMenuSC = UIManager.Instance.CommonUI.RightClickGO.GetComponentInChildren<RightClickMenu>();
     }
     
     public virtual void OnPointerExit(PointerEventData eventData)
@@ -49,13 +49,13 @@ public class ToolTipsBase : ItemBase,IPointerMoveHandler,IPointerExitHandler
         // 加载Tooltips
         if (!IsOpenedTooltip)
         {
-            UIManager.Instance.TooltipsGO.SetActive(true);
+            UIManager.Instance.CommonUI.TooltipsGO.SetActive(true);
             IsOpenedTooltip = true;
             SetTooltipInfo();
         }
         
         // 把Tooltips的位置设置为鼠标位置
-        UIManager.Instance.TooltipsGO.transform.position = GetWPosByMouse(eventData) + ToolTipsOffset;
+        UIManager.Instance.CommonUI.TooltipsGO.transform.position = GetWPosByMouse(eventData) + ToolTipsOffset;
     }
     
     internal virtual void SetTooltipInfo(){}
@@ -63,7 +63,7 @@ public class ToolTipsBase : ItemBase,IPointerMoveHandler,IPointerExitHandler
     public void HideTooltips()
     {
         CurTooltipsSC?.ClearInfo();
-        UIManager.Instance.TooltipsGO.SetActive(false);
+        UIManager.Instance.CommonUI.TooltipsGO.SetActive(false);
         IsOpenedTooltip = false;
     }
     #endregion
@@ -72,10 +72,10 @@ public class ToolTipsBase : ItemBase,IPointerMoveHandler,IPointerExitHandler
     internal void DisplayRightClickMenu(PointerEventData eventData)
     {
         CurToolTipsMenuState = ToolTipsMenuState.RightClick;
-        UIManager.Instance.RightClickGO.SetActive(true);
+        UIManager.Instance.CommonUI.RightClickGO.SetActive(true);
         CurRightClickMenuSC.CurIns = eventData.pointerEnter?.gameObject;
         CurRightClickMenuSC.CurToolTipsBase = this;
-        UIManager.Instance.RightClickGO.transform.position = GetWPosByMouse(eventData) + RightClickMenuOffset;
+        UIManager.Instance.CommonUI.RightClickGO.transform.position = GetWPosByMouse(eventData) + RightClickMenuOffset;
     }
     #endregion
 }

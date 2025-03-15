@@ -8,7 +8,11 @@ public class StartGameLogic : KeyBoardBase
     internal void Start()
     {
         base.Start();
+        TrunkManager.Instance.ForceRefresh();
         UIManager.Instance.InitStartGame();
+        SaveManager.LoadSaveFile();
+        MainRoleManager.Instance.InitData();
+        EternalCavans.Instance.InStartGame();
     }
     
     public void NewGame()
@@ -21,6 +25,11 @@ public class StartGameLogic : KeyBoardBase
     {
         MSceneManager.Instance.LoadScene(1);
         SceneManager.sceneLoaded += OnContinueGame;
+    }
+    
+    public void Setting()
+    {
+        EternalCavans.Instance.OpenSettingLv2();
     }
 
     void OnContinueGame(Scene scene, LoadSceneMode mode)

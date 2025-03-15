@@ -16,7 +16,7 @@ public class DistanceBar : MonoBehaviour
     {
         MaxDistance = 100f;
         if (_battleLogic == null)
-            _battleLogic = UIManager.Instance.BattleLogicGO.GetComponent<BattleLogic>();
+            _battleLogic = UIManager.Instance.Logic.BattleLogicSC;
         
         CurDistance = _battleLogic.Distance;
         Text.text = string.Format("{0} : {1}", GetRange(CurDistance), CurDistance);

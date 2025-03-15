@@ -11,11 +11,16 @@ public class MapMouseControl : MonoBehaviour
     Vector2 preMousePos;
     Vector2 lastMousePos;
     public float dragThreshold = 1f; // 最小偏移量阈值，避免微小的移动触发抖动
+    
+    bool isLocked = false;
+    public void LockMap() => isLocked = true;
+    public void UnLockMap() => isLocked = false;
+    
     void Update()
     {
         if (UIManager.Instance.IsLockedClick)
             return;
-        
+        if (isLocked) return;
         // 滚轮缩放地图逻辑
         HandleZoom();
         //拖拽地图逻辑

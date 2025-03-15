@@ -46,7 +46,7 @@ public class BulletManager :ScriptableObject
         StandbyBulletMat curSC = StandbyMatIns.GetComponent<StandbyBulletMat>();
         curSC.InitData(bulletID);
         StandbyMatIns.transform.SetParent(
-            UIManager.Instance.StandbyRoot.transform,false);
+            UIManager.Instance.CommonUI.StandbyRoot.transform,false);
         return StandbyMatIns;
     }
     #endregion

@@ -11,6 +11,9 @@ public class BuildBase : SpriteClickHandler
     [Header("冲突锁定的建筑")] 
     public List<SpriteClickHandler> NeedLockedBuilds;
     
+    public void LockBuild() => IsLocked = true;
+    public void UnLockBuild() => IsLocked = false;
+    
     internal override void Start()
     {
         base.Start();

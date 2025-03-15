@@ -28,7 +28,7 @@ public class DragBase : ToolTipsBase, IPointerDownHandler, IPointerUpHandler, ID
         if (eventData.button == PointerEventData.InputButton.Left)
         {
             originalParent = gameObject.transform.parent;//记录原始父层级
-            gameObject.transform.SetParent(UIManager.Instance.DragObjRoot.transform);//改变父层级
+            gameObject.transform.SetParent(UIManager.Instance.CommonUI.DragObjRoot.transform);//改变父层级
             originalPosition = gameObject.transform.position;
         }
         

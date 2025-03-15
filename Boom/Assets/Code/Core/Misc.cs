@@ -237,3 +237,10 @@ public enum SlotType
     CurBulletSlot = 6,
     BulletInnerSlot = 7
 }
+
+public enum SceneState
+{
+    StartGame = 0,
+    MainEnv = 1,
+    MapScene = 2,
+}

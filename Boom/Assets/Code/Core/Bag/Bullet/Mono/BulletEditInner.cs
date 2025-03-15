@@ -42,7 +42,7 @@ public class BulletEditInner:ItemBase
             {
                 ReturnToSpawner();
                 //3)刷新GO
-                UIManager.Instance.RoleIns.GetComponent<RoleInner>().CreateBulletInner();
+                UIManager.Instance.Logic.MapManagerSC.RoleInFight.CreateBulletInner();
                 nonHappen = false;
                 break;
             }
@@ -65,7 +65,7 @@ public class BulletEditInner:ItemBase
                 }
              
                 //3)刷新GO
-                UIManager.Instance.RoleIns.GetComponent<RoleInner>().CreateBulletInner();
+                UIManager.Instance.Logic.MapManagerSC.RoleInFight.CreateBulletInner();
                 Destroy(gameObject);
                 nonHappen = false;
                 break;

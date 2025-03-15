@@ -84,7 +84,7 @@ public static class BagItemManager<T> where T:ItemBase
             assetPath = PathConfig.GemInnerTemplate;
         
         objectIns = ResManager.instance.CreatInstance(assetPath);
-        objectIns.transform.SetParent(UIManager.Instance.BagItemRoot.transform, false);
+        objectIns.transform.SetParent(UIManager.Instance.BagUI.ItemRoot.transform, false);
         objectSC = objectIns.GetComponent<T>();
         objectSC.BindData(curObjectData);
         curObjectData.CurSlot.SOnDrop(objectIns);

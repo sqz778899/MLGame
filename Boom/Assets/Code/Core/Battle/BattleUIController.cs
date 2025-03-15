@@ -1,44 +1,44 @@
-﻿using UnityEngine;
+﻿using System;
+using Unity.VisualScripting;
+using UnityEngine;
 
 public class BattleUIController
 {
-    BattleLogic _battleLogic;
+    BattleLogic _battleLogic => UIManager.Instance.Logic.BattleLogicSC;
     //窗口
-    GameObject WarReportRootGUI;
-    GameObject WinGUI;
-    GameObject FailGUI;
-    BagRootMini BagRootMiniSC;
-    EnemyMiniMap EnemyMiniMapSC;
+    GameObject WarReportRootGUI => UIManager.Instance.MapUI.WarReportGO.transform.GetChild(0).gameObject;
+    GameObject WinGUI => UIManager.Instance.MapUI.WinGUI;
+    GameObject FailGUI => UIManager.Instance.MapUI.FailGUI;
+    BagRootMini BagRootMiniSC => UIManager.Instance.BagUI.BagRootMiniGO.GetComponent<BagRootMini>();
+    EnemyMiniMap EnemyMiniMapSC => UIManager.Instance.MapUI.EnemyMiniMapGO.GetComponent<EnemyMiniMap>();
     
-    public BattleUIController(BattleLogic battleLogic)
+    public BattleUIController()
     {
-        _battleLogic = battleLogic;
-        WarReportRootGUI = _battleLogic.WarReportRootGUI;
-        WinGUI = _battleLogic.WinGUI;
-        FailGUI = _battleLogic.FailGUI;
         //初始化小地图背包界面
-        BagRootMiniSC = _battleLogic.BagRootMiniSC;
         BagRootMiniSC.InitData();
         //初始化小地图敌人信息界面
-        EnemyMiniMapSC = _battleLogic.EnemyMiniMapSC;
         EnemyMiniMapSC.InitData(_battleLogic.CurEnemy);
         FailGUI.SetActive(false);
         WinGUI.SetActive(false);
         MainRoleManager.Instance.CurWarReport.CurWarIndex += 1;//战报系统，战斗次数+1
+        EternalCavans.Instance.OnFightContinue += WarReportContinue;
     }
-    
+    public void OnDestroy()
+    {
+        EternalCavans.Instance.OnFightContinue -= WarReportContinue;
+    }
     public void ShowWinUI()
     {
         MainRoleManager.Instance.CurWarReport.IsWin = true;
         WarReportRootGUI.SetActive(true);
-        UIManager.Instance.WarReportGO.GetComponent<GUIWarReport>().SyncReport();
+        WarReportRootGUI.GetComponent<GUIWarReport>().SyncReport();
     }
     
     public void ShowFailUI()
     {
         MainRoleManager.Instance.CurWarReport.IsWin = false;
         WarReportRootGUI.SetActive(true);
-        UIManager.Instance.WarReportGO.GetComponent<GUIWarReport>().SyncReport();
+        WarReportRootGUI.GetComponent<GUIWarReport>().SyncReport();
     }
     
     public void WarReportContinue()

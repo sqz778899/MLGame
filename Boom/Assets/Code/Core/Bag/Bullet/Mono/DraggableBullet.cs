@@ -103,7 +103,7 @@ public class DraggableBullet : Bullet
             curSlotSC.CurBulletSlotRole.SOnDrop(_data);
             MainRoleManager.Instance.AddCurBullet(_data);//添加新子弹
             //3)刷新GO
-            UIManager.Instance.RoleIns.GetComponent<RoleInner>().CreateBulletInner();
+            UIManager.Instance.Logic.MapManagerSC.RoleInFight.CreateBulletInner();
             Destroy(gameObject);
             return true;
         }

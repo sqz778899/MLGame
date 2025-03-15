@@ -41,25 +41,25 @@ public static class SlotManager
         switch (slotType)
         {
             case SlotType.GemBagSlot:
-                allSlot = UIManager.Instance.BagGemRootGO.GetComponentsInChildren<SlotBase>();
+                allSlot = UIManager.Instance.BagUI.GemRoot.GetComponentsInChildren<SlotBase>();
                 break;
             case SlotType.GemInlaySlot:
-                allSlot = UIManager.Instance.BagReadySlotRootGO.GetComponentsInChildren<GemSlot>();
+                allSlot = UIManager.Instance.BagUI.BagReadySlotRootGO.GetComponentsInChildren<GemSlot>();
                 break;
             case SlotType.CurBulletSlot:
-                allSlot = UIManager.Instance.BagReadySlotRootGO.GetComponentsInChildren<BulletSlotRole>();
+                allSlot = UIManager.Instance.BagUI.BagReadySlotRootGO.GetComponentsInChildren<BulletSlotRole>();
                 break;
             case SlotType.ElementSlot:
-                allSlot = UIManager.Instance.EquipItemRoot.GetComponentsInChildren<SlotBase>();
+                allSlot = UIManager.Instance.BagUI.EquipItemRoot.GetComponentsInChildren<SlotBase>();
                 break;
             case SlotType.BagSlot:
-                allSlot = UIManager.Instance.BagItemRoot.GetComponentsInChildren<SlotBase>();
+                allSlot = UIManager.Instance.BagUI.ItemRoot.GetComponentsInChildren<SlotBase>();
                 break;
             case SlotType.SpawnnerSlot:
-                allSlot = UIManager.Instance.SpawnerSlotRoot.GetComponentsInChildren<SlotBase>();
+                allSlot = UIManager.Instance.BagUI.SpawnerSlotRoot.GetComponentsInChildren<SlotBase>();
                 break;
             default:
-                allSlot = UIManager.Instance.BagItemRoot.GetComponentsInChildren<SlotBase>();
+                allSlot = UIManager.Instance.BagUI.ItemRoot.GetComponentsInChildren<SlotBase>();
                 break;
         }
 

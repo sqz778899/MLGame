@@ -54,7 +54,7 @@ public static class ShopUtility
     public static Vector3 GetTargetSlotPos()
     {
         SlotStandbyMat[] SDSlots = UIManager.Instance.
-            G_StandbyIcon.GetComponentsInChildren<SlotStandbyMat>();
+            CommonUI.G_StandbyIcon.GetComponentsInChildren<SlotStandbyMat>();
 
         foreach (var each in SDSlots)
         {

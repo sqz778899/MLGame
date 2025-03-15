@@ -18,13 +18,6 @@ public class BattleLogic : MonoBehaviour
     public bool IsAfterAttack;           //是否被已经攻击过了
     public bool IsBeginCameraMove;    //是否开始摄像机移动,外部唯一关心参数
     BattleCameraController _battleCameraController;
-   
-    [Header("GUI窗口相关")]
-    public BagRootMini BagRootMiniSC;
-    public EnemyMiniMap EnemyMiniMapSC;
-    public GameObject WarReportRootGUI;
-    public GameObject WinGUI;
-    public GameObject FailGUI;
     BattleUIController _battleUIController;
 
     void Start()
@@ -49,7 +42,7 @@ public class BattleLogic : MonoBehaviour
         LevelManager.InitLevel(this);
         //加载摄像机控制器
         _battleCameraController = new BattleCameraController(this);//加载摄像机控制器
-        _battleUIController = new BattleUIController(this);
+        _battleUIController = new BattleUIController();
         CurRole.InitData(CurLevel);//初始化角色数据
         //初始化状态机
         ChangeState(new InLevelState(this));
@@ -97,17 +90,21 @@ public class BattleLogic : MonoBehaviour
     //UI调用模块
     public void ShowWinUI() => _battleUIController.ShowWinUI();
     public void ShowFailUI() => _battleUIController.ShowFailUI();
-    public void WarReportContinue() => _battleUIController.WarReportContinue();
     
     //卸载战斗场景
     public void UnloadData()
     {
         //清除场景内遗留子弹
-        GameObject root = UIManager.Instance.G_BulletInScene;
+        GameObject root = UIManager.Instance.Logic.MapManagerSC.MapBuleltRoot;
         for (int i = root.transform.childCount - 1; i >= 0; i--)
             Destroy(root.transform.GetChild(i).gameObject);
         //卸载战斗场景
         if (CurLevel != null)
             Destroy(CurLevel);
+    }
+    
+    void OnDestroy()
+    {
+        _battleUIController?.OnDestroy();
     }
 }

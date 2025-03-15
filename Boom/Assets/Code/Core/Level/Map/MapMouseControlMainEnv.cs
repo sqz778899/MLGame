@@ -13,19 +13,23 @@ public class MapMouseControlMainEnv : MonoBehaviour
     [Header("Boundary Collider")]
     public BoxCollider2D boundaryCollider;
 
-    private Camera cam;
-    private Vector3 dragOrigin;
-
-    private float mapMinX, mapMaxX, mapMinY, mapMaxY;
-
+    Camera cam;
+    Vector3 dragOrigin;
+    float mapMinX, mapMaxX, mapMinY, mapMaxY;
+    bool isLocked = false;
+    public void LockMap() => isLocked = true;
+    public void UnLockMap() => isLocked = false;
+    
     void Start()
     {
+        isLocked = false;
         cam = Camera.main;
         CalculateBoundaryLimits();
     }
 
     void Update()
     {
+        if (isLocked) return;
         HandleZoom();
         HandleDrag();
     }

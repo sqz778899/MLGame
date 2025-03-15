@@ -14,7 +14,7 @@ public class DraggableBulletSpawnerInner:DraggableBulletSpawner
     internal override void Start()
     {
         base.Start();
-        _bagRootMini = UIManager.Instance.MainSceneGO.GetComponent<MainSceneMono>().BagRootMiniSC;
+        _bagRootMini = UIManager.Instance.BagUI.BagRootMiniGO.GetComponent<BagRootMini>();
         OnBulletDragged += _bagRootMini.BulletDragged;
     }
     

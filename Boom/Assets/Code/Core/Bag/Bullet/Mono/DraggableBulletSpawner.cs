@@ -24,19 +24,6 @@ public class DraggableBulletSpawner :DragBase
         childBulletIns = null;
     }
     
-    public void BindData(BulletData data)
-    {
-        if (_data != null)
-            _data.OnDataChanged -= OnDataChangedSpawner; // 先退订旧Data的事件
-        
-        _data = data;
-        if (_data != null)
-        {
-            _data.OnDataChanged += OnDataChangedSpawner;
-            OnDataChangedSpawner(); // 立即刷新一遍
-        }
-    }
-    
     internal void OnDataChangedSpawner()
     {
         // 显示数量同步
@@ -56,7 +43,7 @@ public class DraggableBulletSpawner :DragBase
         if (childBulletIns == null && _data.SpawnerCount > 0)
         {
             childBulletIns = BulletFactory.CreateBullet(new BulletData(_data.ID,null),BulletInsMode.EditA).gameObject;
-            childBulletIns.transform.SetParent(UIManager.Instance.DragObjRoot.transform,false);
+            childBulletIns.transform.SetParent(UIManager.Instance.CommonUI.DragObjRoot.transform,false);
            
             DraggableBullet DraBuSC = childBulletIns.GetComponentInChildren<DraggableBullet>();
             DraBuSC.originalPosition = transform.position;
@@ -88,6 +75,7 @@ public class DraggableBulletSpawner :DragBase
                 rectTransform.position = worldPoint;
         }
     }
+    
     public override void OnPointerMove(PointerEventData eventData)
     {
         RectTransform rectTransform = transform.GetComponent<RectTransform>();
@@ -98,9 +86,52 @@ public class DraggableBulletSpawner :DragBase
         }
     }
     
+    #region ToolTips相关
+    internal override void SetTooltipInfo()
+    {
+        ToolTipsInfo curToolTipsInfo = new ToolTipsInfo(_data.Name,_data.Level);
+
+        if (_data.FinalDamage != 0)
+        {
+            ToolTipsAttriSingleInfo curInfo = new ToolTipsAttriSingleInfo(
+                ToolTipsAttriType.Damage, _data.FinalDamage,_data.FinalDamage-_data.Damage);
+            curToolTipsInfo.AttriInfos.Add(curInfo);
+        }
+        if (_data.FinalPiercing != 0)
+        {
+            ToolTipsAttriSingleInfo curInfo = new ToolTipsAttriSingleInfo(
+                ToolTipsAttriType.Piercing, _data.FinalPiercing,_data.FinalPiercing-_data.Piercing);
+            curToolTipsInfo.AttriInfos.Add(curInfo);
+        }
+        if (_data.FinalResonance != 0)
+        {
+            ToolTipsAttriSingleInfo curInfo = new ToolTipsAttriSingleInfo(
+                ToolTipsAttriType.Resonance, _data.FinalResonance,_data.FinalResonance-_data.Resonance);
+            curToolTipsInfo.AttriInfos.Add(curInfo);
+        }
+        //把元素最后加上
+        curToolTipsInfo.AttriInfos.Add(new ToolTipsAttriSingleInfo(ToolTipsAttriType.Element, elementType: _data.ElementalType));
+        CurTooltipsSC.SetInfo(curToolTipsInfo);
+    }
+    #endregion
+
+    #region 数据绑定相关
+    public void BindData(BulletData data)
+    {
+        if (_data != null)
+            _data.OnDataChanged -= OnDataChangedSpawner; // 先退订旧Data的事件
+        
+        _data = data;
+        if (_data != null)
+        {
+            _data.OnDataChanged += OnDataChangedSpawner;
+            OnDataChangedSpawner(); // 立即刷新一遍
+        }
+    }
     void OnDestroy()
     {
         if (_data != null)
             _data.OnDataChanged -= OnDataChangedSpawner;
     }
+    #endregion
 }

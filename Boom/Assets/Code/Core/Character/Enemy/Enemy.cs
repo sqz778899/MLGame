@@ -58,7 +58,7 @@ public class Enemy : EnemyBase
         CurHP = MaxHP;
         EState = EnemyState.live;
         if (_battleLogic==null)
-            _battleLogic = UIManager.Instance.BattleLogicGO.GetComponent<BattleLogic>();
+            _battleLogic = UIManager.Instance.Logic.BattleLogicSC;
         CurHealthBar.InitHealthBar(this); //初始化血条
         SetShields();//初始化盾牌
         Portrait = ResManager.instance.GetAssetCache<Sprite>(PathConfig.GetEnemyPortrait(ID));

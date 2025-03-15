@@ -21,12 +21,14 @@ public class BulletMapNode : MapNodeBase
     
     internal override void OnMouseEnter()
     {
+        if (IsLocked) return;
         if (UIManager.Instance.IsLockedClick) return;
         SpineHighLight();
     }
 
     internal override void OnMouseExit()
     {
+        if (IsLocked) return;
         if (UIManager.Instance.IsLockedClick) return;
         SpineQuitHighLight();
     }
@@ -34,13 +36,13 @@ public class BulletMapNode : MapNodeBase
     public void JoinYou()
     {
         SpineQuitHighLight();
-        MMapManager.CurDialogue.LoadDialogue(DialogueName);
-        MMapManager.CurDialogue.OnDialogueEnd += OnDiaCallBack;
+        UIManager.Instance.Logic.MapManagerSC.CurDialogue.LoadDialogue(DialogueName);
+        UIManager.Instance.Logic.MapManagerSC.CurDialogue.OnDialogueEnd += OnDiaCallBack;
     }
 
     public void OnDiaCallBack()
     {
-        MMapManager.CurDialogue.OnDialogueEnd -= OnDiaCallBack;
+        UIManager.Instance.Logic.MapManagerSC.CurDialogue.OnDialogueEnd -= OnDiaCallBack;
         
         MainRoleManager.Instance.AddSpawner(BulletID);
         BulletJson bulletDesignJson = TrunkManager.Instance.BulletDesignJsons

@@ -28,13 +28,12 @@ public class BulletInnerSelect:MonoBehaviour
     {
         _data = GetComponent<BulletInner>()._data;//同步数据
         DragBase = BulletFactory.CreateBullet(_data, BulletInsMode.EditInner) as BulletEditInner;
-        DragBase.gameObject.transform.SetParent(UIManager.Instance.DragObjRoot.transform,false);
+        DragBase.gameObject.transform.SetParent(UIManager.Instance.CommonUI.DragObjRoot.transform,false);
         DragBase._data = _data;
         DragBase.InitData();
         DragBase.gameObject.SetActive(false);
         
-        _bagRootMini = UIManager.Instance.MainSceneGO.GetComponent<MainSceneMono>()
-            .GUIBagRoot_Mini.GetComponent<BagRootMini>();
+        _bagRootMini = UIManager.Instance.BagUI.BagRootMiniGO.GetComponent<BagRootMini>();
         
         OnBulletDragged += _bagRootMini.BulletDragged;
     }
@@ -87,7 +86,7 @@ public class BulletInnerSelect:MonoBehaviour
         // 将鼠标位置转为 UI 世界坐标
         Vector3 screenPoint = Input.mousePosition;
         RectTransformUtility.ScreenPointToWorldPointInRectangle(
-            UIManager.Instance.DragObjRoot.GetComponent<RectTransform>(),
+            UIManager.Instance.CommonUI.DragObjRoot.GetComponent<RectTransform>(),
             screenPoint,
             Camera.main,
             out Vector3 uiWorldPoint

@@ -119,11 +119,6 @@ public class MainRoleManager :ScriptableObject
         CurMapSate.CurRoomID = CurMapSate.TargetRoomID; //切换当前房间
         CurMapManager.SetRolePos();
     }
-    
-    public void FailThisLevel()
-    {
-        CurMapManager.SetRolePos();
-    }
     #endregion
 
     //子弹关系
@@ -131,7 +126,7 @@ public class MainRoleManager :ScriptableObject
     {
         if (CurBullets.Count < 2) return;
 
-        ResonanceSlotCol[] ResonanceSlotCols = UIManager.Instance.BagReadySlotRootGO.
+        ResonanceSlotCol[] ResonanceSlotCols = UIManager.Instance.BagUI.BagReadySlotRootGO.
             GetComponentsInChildren<ResonanceSlotCol>();
         //处理共振
         Dictionary<int,List<int>> ResonanceClusterDict = new Dictionary<int, List<int>>();
@@ -217,7 +212,7 @@ public class MainRoleManager :ScriptableObject
         InitSpawners();
         InitCurBullets();
         InitStandbyBulletMats();
-        CurBulletSlotRoleSCs = UIManager.Instance.BagReadySlotRootGO.GetComponentsInChildren<BulletSlotRole>();
+        CurBulletSlotRoleSCs = UIManager.Instance.BagUI.BagReadySlotRootGO.GetComponentsInChildren<BulletSlotRole>();
         WinOrFailState = WinOrFail.InLevel;
     }
 
@@ -257,12 +252,12 @@ public class MainRoleManager :ScriptableObject
     {
         //..............Clear Old Data..................
         DraggableBulletSpawner[] oldSpawner = UIManager.Instance
-            .SpawnerSlotRoot.GetComponentsInChildren<DraggableBulletSpawner>();
+            .BagUI.SpawnerSlotRoot.GetComponentsInChildren<DraggableBulletSpawner>();
         for (int i = oldSpawner.Length - 1; i >= 0; i--)
             DestroyImmediate(oldSpawner[i].gameObject);
         //..............Instance New Data..................
-        BulletSlot[] slots = UIManager.Instance.SpawnerSlotRoot.GetComponentsInChildren<BulletSlot>();
-        BulletSlot[] slotMinis = UIManager.Instance.SpawnerSlotRootMini.GetComponentsInChildren<BulletSlot>();
+        BulletSlot[] slots = UIManager.Instance.BagUI.SpawnerSlotRoot.GetComponentsInChildren<BulletSlot>();
+        BulletSlot[] slotMinis = UIManager.Instance.BagUI.SpawnerSlotRootMini.GetComponentsInChildren<BulletSlot>();
         InitSpawnersSingel(slots);
         InitSpawnersSingel(slotMinis,true);
     }
@@ -289,7 +284,7 @@ public class MainRoleManager :ScriptableObject
     public void InitCurBullets()
     {
         //...............Clear Old Data....................
-        Bullet[] oldBullets = UIManager.Instance.BagReadySlotRootGO.GetComponentsInChildren<Bullet>();
+        Bullet[] oldBullets = UIManager.Instance.BagUI.BagReadySlotRootGO.GetComponentsInChildren<Bullet>();
         for (int i = oldBullets.Length - 1; i >= 0; i--)
             DestroyImmediate(oldBullets[i].gameObject);
         SlotManager.GetEmptySlot(SlotType.CurBulletSlot);
@@ -304,9 +299,9 @@ public class MainRoleManager :ScriptableObject
 
     public void InitStandbyBulletMats()
     {
-        GameObject SDBulletRoot = UIManager.Instance.StandbyRoot;
+        GameObject SDBulletRoot = UIManager.Instance.CommonUI.StandbyRoot;
         SlotStandbyMat[] SDSlots = UIManager.Instance.
-            G_StandbyIcon.GetComponentsInChildren<SlotStandbyMat>();
+            CommonUI.G_StandbyIcon.GetComponentsInChildren<SlotStandbyMat>();
         //..............Clear Old Data..................
         for (int i = SDBulletRoot.transform.childCount - 1; i >= 0; i--)
             DestroyImmediate(SDBulletRoot.transform.GetChild(i).gameObject);
@@ -340,7 +335,7 @@ public class MainRoleManager :ScriptableObject
             return false;
         
         SlotStandbyMat[] SDSlots = UIManager.Instance.
-            G_StandbyIcon.GetComponentsInChildren<SlotStandbyMat>();
+            CommonUI.G_StandbyIcon.GetComponentsInChildren<SlotStandbyMat>();
         SlotStandbyMat curSlot = SDSlots[curSD.SlotID];
         GameObject StandbyMatIns = BulletManager.Instance.InstanceStandbyMat(BulletID);
         curSlot.AddIns(StandbyMatIns);
@@ -352,7 +347,7 @@ public class MainRoleManager :ScriptableObject
     public void SubStandebyBullet(int BulletID,int InstanceID = -1)
     {
         RefreshStandbyBulletMats(MutMode.Sub, BulletID,InstanceID);
-        GameObject curSD = UIManager.Instance.StandbyRoot;
+        GameObject curSD = UIManager.Instance.CommonUI.StandbyRoot;
 
         for (int i = curSD.transform.childCount-1 ; i >= 0; i--)
         {
@@ -430,7 +425,7 @@ public class MainRoleManager :ScriptableObject
     #region 不关心的私有方法
     void SyncBulletIcon()
     {
-        GameObject bulletIconRoot = UIManager.Instance.G_CurBulletIcon;
+        GameObject bulletIconRoot = UIManager.Instance.CommonUI.G_CurBulletIcon;
         for (int i = 0; i < 5; i++)
         {
             int curSlotID = i + 1;

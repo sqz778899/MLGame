@@ -30,7 +30,7 @@ public class GemInShop : ToolTipsBase,IPointerUpHandler,IPointerDownHandler
         get
         {
             if (_effectManager==null)
-                _effectManager = UIManager.Instance.EffectRoot.GetComponent<EffectManager>();
+                _effectManager = UIManager.Instance.CommonUI.EffectRoot.GetComponent<EffectManager>();
             return _effectManager;
         }
     }

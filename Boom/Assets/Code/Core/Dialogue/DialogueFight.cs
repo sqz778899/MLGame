@@ -54,9 +54,9 @@ public class DialogueFight : MonoBehaviour
             return;
         }
         UIManager.Instance.IsLockedClick = false;
-        MainSceneMono _mainSceneMono = UIManager.Instance.MainSceneGO.GetComponent<MainSceneMono>();
+        MapManager _mapManager = UIManager.Instance.Logic.MapManagerSC;
         MainRoleManager.Instance.InitFightData(CurArrow.CurEnemy.ToMiddleData(),LevelID);
-        _mainSceneMono.SwitchFightScene();
+        _mapManager.SwitchFightScene();
         QuitSelf();
     }
 

@@ -9,25 +9,14 @@ public class MapNodeBase : SpriteClickHandler
     public Transform NodeTextNode;
     [Header("飞行特效参数")] 
     public EParameter EPara;
-    
-    MapManager _mapManager;
-    internal MapManager MMapManager
-    {
-        get
-        {
-            if (_mapManager == null)
-                _mapManager = UIManager.Instance.MapManagerGO.GetComponent<MapManager>();
-            return _mapManager;
-        }   
-    }
-    
+
     EffectManager _effectManager;
     internal EffectManager MEffectManager
     {
         get
         {
             if (_effectManager==null)
-                _effectManager = UIManager.Instance.EffectRoot.GetComponent<EffectManager>();
+                _effectManager = UIManager.Instance.CommonUI.EffectRoot.GetComponent<EffectManager>();
             return _effectManager;
         }
     }

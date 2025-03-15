@@ -14,12 +14,15 @@ public class DebugTool
     [Button(ButtonSizes.Large)]
     void DealMissingScript()
     {
+        /*
         SpriteRenderer[] allTrans = Root.GetComponentsInChildren<SpriteRenderer>(true);
         foreach (var each in allTrans)
         {
             each.material = _defaultMaterial;
         }
-        //GameObjectUtility.RemoveMonoBehavioursWithMissingScript()
+        */
+
+        GameObjectUtility.RemoveMonoBehavioursWithMissingScript(Root);
     }
 
     

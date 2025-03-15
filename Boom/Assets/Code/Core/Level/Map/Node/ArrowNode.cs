@@ -45,7 +45,7 @@ public class ArrowNode : MapNodeBase
         if (IsLocked) return;
         MainRoleManager.Instance.CurMapSate.TargetRoomID = TargetRoom.RoomID;
         GameObject dialogueFightIns = ResManager.instance.CreatInstance(PathConfig.DialogueFightPB);
-        dialogueFightIns.transform.SetParent(UIManager.Instance.DialogueRoot.transform,false);
+        dialogueFightIns.transform.SetParent(UIManager.Instance.CommonUI.DialogueRoot.transform,false);
         dialogueFightIns.GetComponent<DialogueFight>().InitData(this);
         IsLocked = true;
         UIManager.Instance.IsLockedClick = true;
@@ -55,7 +55,7 @@ public class ArrowNode : MapNodeBase
     {
         if (IsLocked) return;
         MainRoleManager.Instance.CurMapSate.CurRoomID = TargetRoom.RoomID;
-        MMapManager.SetRolePos();
+        UIManager.Instance.Logic.MapManagerSC.SetRolePos();
     }
     
     public void GoToLockedRoomWithKey()
@@ -71,7 +71,7 @@ public class ArrowNode : MapNodeBase
         
         ArrowUnlocked.SetActive(true);
         MainRoleManager.Instance.CurMapSate.CurRoomID = TargetRoom.RoomID;
-        MMapManager.SetRolePos();
+        UIManager.Instance.Logic.MapManagerSC.SetRolePos();
         gameObject.SetActive(false);
     }
 }

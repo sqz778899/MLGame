@@ -21,7 +21,7 @@ public class ShopNode: MapNodeBase
         if (UIManager.Instance.IsLockedClick) return;
         
         GameObject ShopIns = ResManager.instance.CreatInstance(PathConfig.ShopAsset);
-        ShopIns.transform.SetParent(UIManager.Instance.ShopRoot.transform,false);
+        ShopIns.transform.SetParent(UIManager.Instance.MapUI.ShopRoot.transform,false);
         //建立链接
         Shop curShopSC = ShopIns.GetComponent<Shop>();
         curShopSC.InitData(this);

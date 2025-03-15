@@ -42,8 +42,8 @@ public class DesignTool
     void SwichBag()
     {
         UIManager.Instance.IsLockedClick = false;
-        MainSceneMono curSC = GameObject.Find("MainScene").GetComponent<MainSceneMono>();
-        curSC.SwitchBag();
+        MapManager curSC = GameObject.Find("MapManager").GetComponent<MapManager>();
+        //curSC.SwitchBag();
     }
     
     [Button(ButtonSizes.Large),PropertyOrder(2)]
@@ -51,7 +51,7 @@ public class DesignTool
     void SwichMap()
     {
         UIManager.Instance.IsLockedClick = false;
-        MainSceneMono curSC = GameObject.Find("MainScene").GetComponent<MainSceneMono>();
+        MapManager curSC = GameObject.Find("MapManager").GetComponent<MapManager>();
         curSC.SwitchMapScene();
     }
     
@@ -60,7 +60,7 @@ public class DesignTool
     void SwichFight()
     {
         UIManager.Instance.IsLockedClick = false;
-        MainSceneMono curSC = GameObject.Find("MainScene").GetComponent<MainSceneMono>();
+        MapManager curSC = GameObject.Find("MapManager").GetComponent<MapManager>();
         curSC.SwitchFightScene();
     }
     
@@ -97,14 +97,14 @@ public class DesignTool
     [Button("重置子弹",ButtonSizes.Large)]
     void SetBullet()
     {
-        UIManager.Instance.RoleIns.GetComponent<RoleInner>().InitData();
+        UIManager.Instance.Logic.MapManagerSC.RoleInFight.InitData();
     }
     
     [Button("敌人血量无限",ButtonSizes.Large)]
     [ButtonGroup("调试总功能")]
     void SetEnemyHp()
     {
-        Enemy curEnemy = UIManager.Instance.BattleLogicGO.GetComponent<BattleLogic>().CurEnemy;
+        Enemy curEnemy = UIManager.Instance.Logic.BattleLogicSC.CurEnemy;
         curEnemy.MaxHP = 9999;
         curEnemy.CurHP = 9999;
     }
@@ -115,7 +115,7 @@ public class DesignTool
             MainRoleManager.Instance.CurBullets.RemoveAt(0);
         MainRoleManager.Instance.AddCurBullet(new BulletData(bulletID,SlotManager.GetEmptySlot(SlotType.CurBulletSlot)));
         MainRoleManager.Instance.InitCurBullets();
-        UIManager.Instance.RoleIns.GetComponent<RoleInner>().InitData();
+        UIManager.Instance.Logic.MapManagerSC.RoleInFight.InitData();
     }
     [Button("添加黏土子弹Lv1",ButtonSizes.Large)]
     [ButtonGroup("添加黏土子弹")]

@@ -18,8 +18,8 @@ public class BagRoot : MonoBehaviour
     [Header("背包其它资源")]
     public GameObject GroupBulletSpawnerSlot;
     public GameObject BagReadySlotGO;  //子弹槽
+    public GameObject EquipItemRoot;  //装备栏
     BulletSlotRole[] _btnReadySlotSC;
-    public GameObject DragObjRootGO;
     [Header("特效资源")]
     public GameObject SlotFx;
     ResonanceSlotCol[] _slotFxs;
@@ -32,7 +32,7 @@ public class BagRoot : MonoBehaviour
         _slotFxs = SlotFx.GetComponentsInChildren<ResonanceSlotCol>();
         _slotFxs.ToList().ForEach(perFX => perFX.CloseEffect());
         //子弹槽初始化
-        _btnReadySlotSC = BagReadySlotGO.GetComponentsInChildren<BulletSlotRole>();
+        _btnReadySlotSC = BagReadySlotGO.GetComponentsInChildren<BulletSlotRole>(true);
         _btnReadySlotSC.ToList().ForEach(perSlot => perSlot.InitData());
     }
     

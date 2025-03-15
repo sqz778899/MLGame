@@ -64,7 +64,7 @@ public class RoleInner : BaseMove
             float offsetX = startPos.x - (curB.CurSlot.SlotID - 1) * 1f;
             curSC.FollowDis = Mathf.Abs(curB.CurSlot.SlotID  * 1f);
             bulletIns.transform.position = new Vector3(offsetX,startPos.y,startPos.z + i);
-            bulletIns.transform.SetParent(UIManager.Instance.G_BulletInScene.transform,false);
+            bulletIns.transform.SetParent(UIManager.Instance.Logic.MapManagerSC.MapBuleltRoot.transform,false);
             Bullets.Add(curSC);
         }
     }

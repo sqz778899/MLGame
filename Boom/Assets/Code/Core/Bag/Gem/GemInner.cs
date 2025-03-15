@@ -17,7 +17,7 @@ public class GemInner:DragBase
     internal override void Start()
     {
         base.Start();
-        _bagRootMini = UIManager.Instance.MainSceneGO.GetComponent<MainSceneMono>().BagRootMiniSC;
+        _bagRootMini = UIManager.Instance.BagUI.BagRootMiniGO.GetComponent<BagRootMini>();
         OnGemDragged += _bagRootMini.BulletDragged;
     }
     
@@ -30,7 +30,7 @@ public class GemInner:DragBase
         if (eventData.button == PointerEventData.InputButton.Left)
         {
             originalParent = gameObject.transform.parent;//记录原始父层级
-            gameObject.transform.SetParent(UIManager.Instance.DragObjRoot.transform);//改变父层级
+            gameObject.transform.SetParent(UIManager.Instance.CommonUI.DragObjRoot.transform);//改变父层级
             originalPosition = gameObject.transform.position;
         }
         

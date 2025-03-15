@@ -59,7 +59,23 @@ public class MapRoomNode : MonoBehaviour
             RoomFog.material = _instanceFogMat;
         }
         //State = MapRoomState.IsLocked;
-    } 
+    }
+
+    #region 开启背包时锁定所有物体
+    public void LockRes()
+    {
+        if (State == MapRoomState.IsLocked) return;
+        _resources.ToList().ForEach(r => r.IsLocked = true);
+        _arrows.ToList().ForEach(r => r.IsLocked = true);
+    }
+    
+    public void UnLockRes()
+    {
+        if (State == MapRoomState.IsLocked) return;
+        _resources.ToList().ForEach(r => r.IsLocked = false);
+        _arrows.ToList().ForEach(r => r.IsLocked = false);
+    }
+    #endregion
 
     //更新资产状态
     void UpdateResState()
