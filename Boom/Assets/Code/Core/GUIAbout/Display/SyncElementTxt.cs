@@ -14,8 +14,8 @@ public class SyncElementTxt : MonoBehaviour
 
     void Update()
     {
-        Water.text =$"水：{MainRoleManager.Instance.WaterElement}";
+        /*Water.text =$"水：{MainRoleManager.Instance.WaterElement}";
         Fire.text = $"火：{MainRoleManager.Instance.FireElement}";
-        Thunder.text = $"雷：{MainRoleManager.Instance.ThunderElement}";
+        Thunder.text = $"雷：{MainRoleManager.Instance.ThunderElement}";*/
     }
 }

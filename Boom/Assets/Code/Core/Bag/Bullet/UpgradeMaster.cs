@@ -12,7 +12,7 @@ public static class UpgradeMaster
     {
         //先记录一下之前的子弹状态
         PreBulletSpawners = new List<int>();
-        foreach (var each in MainRoleManager.Instance.CurBulletSpawners)
+        foreach (var each in InventoryManager.Instance._BulletInvData.BagBulletSpawners)
         {
             PreBulletSpawners.Add(each.ID);
         }
@@ -33,7 +33,7 @@ public static class UpgradeMaster
         int bulletID = -1;
         for (int i = 0; i < PreBulletSpawners.Count; i++)
         {
-            if (MainRoleManager.Instance.CurBulletSpawners[i].ID != PreBulletSpawners[i])
+            if (InventoryManager.Instance._BulletInvData.BagBulletSpawners[i].ID != PreBulletSpawners[i])
             {
                 bulletID = PreBulletSpawners[i];
                 break;
@@ -47,7 +47,7 @@ public static class UpgradeMaster
     {
         bool _isUpgrade = false;
         //.................检查一下是否有子弹需要升级...............
-        Dictionary<int, int> IDCount = new Dictionary<int, int>();
+        /*Dictionary<int, int> IDCount = new Dictionary<int, int>();
         List<StandbyData> curSBMs = MainRoleManager.Instance.CurStandbyBulletMats;
         for (int i = 0; i < curSBMs.Count; i++)
         {
@@ -71,7 +71,7 @@ public static class UpgradeMaster
                     {
                         _isUpgrade = true;
                         //Upgrade
-                        MainRoleManager.Instance.SubStandebyBullet(each.Key);//DelAll
+                        //MainRoleManager.Instance.SubStandebyBullet(each.Key);//DelAll
                         foreach (var eachBullet in MainRoleManager.Instance.CurBullets)
                         {
                             if (eachBullet.ID == eachSpawner.ID)
@@ -83,11 +83,11 @@ public static class UpgradeMaster
             }
             if (each.Value == 3)
             {
-                MainRoleManager.Instance.SubStandebyBullet(each.Key);//DelAll
-                MainRoleManager.Instance.AddStandbyBulletMat(each.Key+100);
+                //MainRoleManager.Instance.SubStandebyBullet(each.Key);//DelAll
+                //MainRoleManager.Instance.AddStandbyBulletMat(each.Key+100);
                 _isUpgrade = IsUpgrade();
             }
-        }
+        }*/
         
         Debug.Log("Upgrade !!!!");
         return _isUpgrade;

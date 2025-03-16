@@ -24,9 +24,9 @@ public class EnemyMiniMap : MonoBehaviour
         CurEnemy.OnLoadData += BindData;
         CurEnemy.OnTakeDamage += ChangeEnemyUI;
         
-        EnemyMiddleData midData = MainRoleManager.Instance.CurEnemyMidData;
+        //EnemyMiddleData midData = BattleManager.Instance.EnemyMidData;
         SkeletonGraphic.skeletonDataAsset = ResManager.instance.
-            GetAssetCache<SkeletonDataAsset>(PathConfig.GetEnemySkelentonDataPath(midData.ID));
+            GetAssetCache<SkeletonDataAsset>(PathConfig.GetEnemySkelentonDataPath(_curEnemy.ID));
         SkeletonGraphic.Initialize(true);
     }
 

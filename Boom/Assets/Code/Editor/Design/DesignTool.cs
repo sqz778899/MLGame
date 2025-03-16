@@ -97,25 +97,25 @@ public class DesignTool
     [Button("重置子弹",ButtonSizes.Large)]
     void SetBullet()
     {
-        UIManager.Instance.Logic.MapManagerSC.RoleInFight.InitData();
+        PlayerManager.Instance.RoleInFightGO.GetComponent<RoleInner>().InitData();
     }
     
     [Button("敌人血量无限",ButtonSizes.Large)]
     [ButtonGroup("调试总功能")]
     void SetEnemyHp()
     {
-        Enemy curEnemy = UIManager.Instance.Logic.BattleLogicSC.CurEnemy;
+        Enemy curEnemy = BattleManager.Instance.battleData.CurEnemy;
         curEnemy.MaxHP = 9999;
         curEnemy.CurHP = 9999;
     }
 
     void TempAddBullet(int bulletID)
     {
-        if (MainRoleManager.Instance.CurBullets.Count >= 5)
-            MainRoleManager.Instance.CurBullets.RemoveAt(0);
-        MainRoleManager.Instance.AddCurBullet(new BulletData(bulletID,SlotManager.GetEmptySlot(SlotType.CurBulletSlot)));
-        MainRoleManager.Instance.InitCurBullets();
-        UIManager.Instance.Logic.MapManagerSC.RoleInFight.InitData();
+        if (InventoryManager.Instance._BulletInvData.EquipBullets.Count >= 5)
+            InventoryManager.Instance._BulletInvData.EquipBullets.RemoveAt(0);
+        InventoryManager.Instance._BulletInvData.EquipBullet(new BulletData(bulletID,SlotManager.GetEmptySlot(SlotType.CurBulletSlot)));
+        UIManager.Instance.BagUI.InitEquipBullets();
+        PlayerManager.Instance.RoleInFightGO.GetComponent<RoleInner>().InitData();
     }
     [Button("添加黏土子弹Lv1",ButtonSizes.Large)]
     [ButtonGroup("添加黏土子弹")]
@@ -214,7 +214,7 @@ public class DesignTool
     [Button("获得道具",ButtonSizes.Large),PropertyOrder(111)]
     void AddItem()
     {
-        MainRoleManager.Instance.AddItem(ItemID);
+        InventoryManager.Instance.AddItemToBag(ItemID);
     }
     [Title("宝石测试")]
     [PropertyOrder(101)]
@@ -222,6 +222,6 @@ public class DesignTool
     [Button("获得宝石",ButtonSizes.Large),PropertyOrder(111)]
     void AddGem()
     {
-        MainRoleManager.Instance.AddGem(GemID);
+        InventoryManager.Instance.AddGemToBag(GemID);
     }
 }

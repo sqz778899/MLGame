@@ -1,0 +1,72 @@
+﻿using UnityEngine;
+
+public class BattleManager: MonoBehaviour
+{
+    public MapManager _MapManager;
+    
+    public BattleData battleData;
+    public BattleLogic battleLogic;
+    public BattleUIController battleUI;
+
+    #region 事件的注册和注销
+    void Start()
+    {
+        EternalCavans.Instance.OnWinToNextRoom += WinToNextRoom;
+        EternalCavans.Instance.OnFightContinue += WarReportContinue;
+    }
+    void OnDestroy()
+    {
+        EternalCavans.Instance.OnWinToNextRoom -= WinToNextRoom;
+        EternalCavans.Instance.OnFightContinue -= WarReportContinue;
+    }
+    #endregion
+
+    //进入战斗唯一入口
+    public void EnterFight(EnemyMiddleData _enemyMidData,int _levelID)
+    {
+        //1)进入战斗场景
+        _MapManager.SwitchFightScene();
+        //2)初始化战斗数据
+        battleData.InitFightData(_enemyMidData, _levelID);
+        battleLogic.InitFightData();
+        battleUI.InitFightData();
+    }
+
+    #region 战后UI以及行为
+    //赢得战斗
+    public void WinToNextRoom()
+    { 
+        _MapManager.SwitchMapScene();
+        battleData.CurMapSate.FinishAndToNextRoom();//切换当前房间
+        _MapManager.SetRolePos();
+    }
+    
+    //胜利结算战报界面
+    public void ShowWarReport(bool isWin)
+    {
+        battleData.CurWarReport.IsWin = isWin;
+        battleUI.ShowWarReport();
+    }
+    
+    public void WarReportContinue()
+    {
+        battleUI.WarReportContinue();
+    }
+    #endregion
+    
+    #region 单例的加载卸载
+    public static BattleManager Instance { get; private set; }
+    
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+            Destroy(gameObject);
+        battleData = ResManager.instance.GetAssetCache<BattleData>(PathConfig.BattleDataPath);
+    }
+    #endregion
+}

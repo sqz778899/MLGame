@@ -11,6 +11,6 @@ public class CoinsPileNode: MapNodeBase
         EPara.StartPos = transform.position;
         MEffectManager.CreatEffect(EPara);
         DestroyImmediate(gameObject);
-        MainRoleManager.Instance.Coins += CoinsNum;
+        PlayerManager.Instance._PlayerData.ModifyCoins(CoinsNum);
     }
 }

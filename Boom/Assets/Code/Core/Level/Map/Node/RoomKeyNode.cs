@@ -11,6 +11,6 @@ public class RoomKeyNode : MapNodeBase
         EPara.StartPos = transform.position;
         MEffectManager.CreatEffect(EPara,false,()=>FloatingGetItemText("获得一个钥匙！"));
         DestroyImmediate(gameObject);
-        MainRoleManager.Instance.RoomKeys += RoomKeysNum;
+        PlayerManager.Instance._PlayerData.ModifyRoomKeys(RoomKeysNum);
     }
 }

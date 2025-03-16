@@ -551,6 +551,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 278418333218321760, guid: 79aacfe33e84d8e48bcf8db27e3a8858, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 12742576}
     - target: {fileID: 808570739096868345, guid: 79aacfe33e84d8e48bcf8db27e3a8858, type: 3}
       propertyPath: m_Name
       value: CanvasQ01
@@ -734,13 +738,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a30f8c34e83082469f3a533d1d31c6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurLevel: {fileID: 0}
-  CurEnemy: {fileID: 0}
-  CurRole: {fileID: 0}
-  Distance: 0
-  IsBattleEnded: 0
-  IsAttacking: 0
-  IsAfterAttack: 0
   IsBeginCameraMove: 0
 --- !u!4 &948206932
 Transform:
@@ -955,6 +952,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1774164770
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1774164772}
+  - component: {fileID: 1774164771}
+  m_Layer: 0
+  m_Name: GM
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1774164771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774164770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dc7158957454266a45da8dd48677eed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1774164772
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1774164770}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.12826908, y: 0.5586002, z: 4.5147033}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1775846162
 GameObject:
   m_ObjectHideFlags: 0
@@ -1019,8 +1060,6 @@ MonoBehaviour:
   MapFightRoot: {fileID: 1355511863}
   MapBuleltRoot: {fileID: 440946030}
   MapMouseControl: {fileID: 1775846163}
-  Role: {fileID: 2464911972961609301}
-  RoleInFight: {fileID: 5633047558067748206}
   CurDialogue: {fileID: 0}
   IsTest: 1
 --- !u!1 &41606714806885670
@@ -3207,11 +3246,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5369461324828125590}
   m_CullTransparentMesh: 1
---- !u!1 &2464911972961609301 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8528588361646193252, guid: 9fbc89abd7184d040a6124dc18579766, type: 3}
-  m_PrefabInstance: {fileID: 6790190822023150470}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2526500711147123181
 Transform:
   m_ObjectHideFlags: 0
@@ -5575,17 +5609,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56970ad8e4a2b6f4d89a52408669a8a8, type: 3}
---- !u!114 &5633047558067748206 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7396044978268161219, guid: 56970ad8e4a2b6f4d89a52408669a8a8, type: 3}
-  m_PrefabInstance: {fileID: 5633047558067748205}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 560146146c07df540a118aa151f6fb59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5768709663656409098
 GameObject:
   m_ObjectHideFlags: 0
@@ -8355,4 +8378,5 @@ SceneRoots:
   - {fileID: 948206932}
   - {fileID: 1775846164}
   - {fileID: 446014250}
+  - {fileID: 1774164772}
   - {fileID: 503727756}

@@ -19,11 +19,11 @@ public class PRDisplayBar : MonoBehaviour
 
     public void InitDataByID()
     {
-        foreach (RollPR each in MainRoleManager.Instance.CurRollPR)
+        /*foreach (RollPR each in MainRoleManager.Instance.CurRollPR)
         {
             if (each.ID == ID)
                 CurRollPr = each;
-        }
+        }*/
         
         string curImagePath = "";
         if (ID != 0)

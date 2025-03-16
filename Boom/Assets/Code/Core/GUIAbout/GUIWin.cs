@@ -11,7 +11,7 @@ public class GUIWin : MonoBehaviour
     
     public void Win(Award CurAward)
     {
-        MainRoleManager.Instance.Score += CurAward.Score;
+        PlayerManager.Instance._PlayerData.ModifyScore(CurAward.Score);
         textScore.text = $"+ {CurAward.Score}";
         for (int i = 0; i < CurAward.Items.Count; i++)
         {

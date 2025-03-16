@@ -13,7 +13,7 @@ public class GUIWarReport : MonoBehaviour
         //Bullet 这个类
         //Enemy  这个类
         //List<BattleOnceHit> 战场表现收集
-        SingelBattleInfo curInfo = MainRoleManager.Instance.CurWarReport.GetCurBattleInfo();
+        SingelBattleInfo curInfo = BattleManager.Instance.battleData.CurWarReport.GetCurBattleInfo();
         int count = 0;
         foreach (var eachInfo in curInfo.InfoDict)
         {

@@ -85,7 +85,8 @@ public class EternalCavans : MonoBehaviour
         CurSceneState = SceneState.MapScene;
     }
     #endregion
-    
+
+    #region 开关背包
     public void OpendBag()
     {
         UIManager.Instance.BagUI.ShowBag();
@@ -106,26 +107,14 @@ public class EternalCavans : MonoBehaviour
         Camera.main.orthographicSize = _preCameraOrthographicSize;
         OnCloseBag?.Invoke();
     }
-    
-    public void Continue()
-    {
-        OnFightContinue?.Invoke();
-    }
+    #endregion
 
-    public void WinToNextRoom()
-    {
-        OnWinToNextRoom?.Invoke();
-    }
-    
-    public void SwitchMapScene()
-    {
-        OnSwitchMapScene?.Invoke();
-    }
-
-    public void GameOver()
-    {
-        MSceneManager.Instance.LoadScene(1);
-    }
+    #region 战斗结束的界面响应
+    public void Continue() => OnFightContinue?.Invoke();
+    public void WinToNextRoom() => OnWinToNextRoom?.Invoke();
+    public void SwitchMapScene() => OnSwitchMapScene?.Invoke();
+    public void GameOver() => MSceneManager.Instance.LoadScene(1);
+    #endregion
     
     public void OpenSettingLv2()
     {
@@ -135,12 +124,6 @@ public class EternalCavans : MonoBehaviour
     
     #region 单例的加载卸载
     public static EternalCavans Instance { get; private set; }
-    
-    void OnDestroy()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoadedCavans;
-    }
-    
     void Awake()
     {
         if (Instance == null)
@@ -153,9 +136,7 @@ public class EternalCavans : MonoBehaviour
             Destroy(gameObject);
     }
 
-    void OnSceneLoadedCavans(Scene scene, LoadSceneMode mode)
-    {
-        MCanvas.worldCamera = Camera.main;
-    }
+    void OnDestroy() => SceneManager.sceneLoaded -= OnSceneLoadedCavans;
+    void OnSceneLoadedCavans(Scene scene, LoadSceneMode mode) =>MCanvas.worldCamera = Camera.main;
     #endregion
 }

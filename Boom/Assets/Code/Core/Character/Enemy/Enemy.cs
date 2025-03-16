@@ -58,7 +58,7 @@ public class Enemy : EnemyBase
         CurHP = MaxHP;
         EState = EnemyState.live;
         if (_battleLogic==null)
-            _battleLogic = UIManager.Instance.Logic.BattleLogicSC;
+            _battleLogic = BattleManager.Instance.battleLogic;
         CurHealthBar.InitHealthBar(this); //初始化血条
         SetShields();//初始化盾牌
         Portrait = ResManager.instance.GetAssetCache<Sprite>(PathConfig.GetEnemyPortrait(ID));
@@ -123,13 +123,6 @@ public class Enemy : EnemyBase
     //爆装备了
     public void GetAward()
     {
-        foreach (var each in CurAward.Items)
-        {
-            //1）添加Item到数据&&GO层
-            MainRoleManager.Instance.AddItem(each);
-            //2) 展示Item
-            //ItemManager.InstanceItemByID();
-        }
     }
     #endregion
     

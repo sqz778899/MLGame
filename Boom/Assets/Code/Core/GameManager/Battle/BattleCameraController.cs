@@ -21,7 +21,7 @@ public class BattleCameraController
     public BattleCameraController(BattleLogic battleLogic)
     {
         _battleLogic = battleLogic;
-        CurRole = battleLogic.CurRole;
+        CurRole = BattleManager.Instance.battleData.CurRole;
         _mainCamera.transform.position = new Vector3(2.5f,1,-10);
         _mainCamera.orthographicSize = 5;
         _battleLogic.IsBeginCameraMove = false;

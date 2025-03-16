@@ -51,7 +51,7 @@ public class TutorialManager : MonoBehaviour
         get
         {
             if (curRole == null)
-                curRole = MainRoleManager.Instance.MainRoleIns.GetComponent<RoleInMap>();
+                curRole = PlayerManager.Instance.RoleInMapGO.GetComponent<RoleInMap>();
             return curRole;
         }
     }
@@ -86,7 +86,7 @@ public class TutorialManager : MonoBehaviour
             }
         }
 
-        if (MainRoleManager.Instance.InLayGems.Count > 0 && !_isSetGem)
+        if (InventoryManager.Instance._InventoryData.EquipGems.Count > 0 && !_isSetGem)
         {
             _isSetGem = true;
             Step4_5();
@@ -95,19 +95,19 @@ public class TutorialManager : MonoBehaviour
         
         if (!_isAwardRoom5_1) //如果进入横向奖励房间，则终止
         {
-            if (AwardRoomsFloor2.Any(each => each.RoomID == MainRoleManager.Instance.CurMapSate.CurRoomID))
+            if (AwardRoomsFloor2.Any(each => each.RoomID == BattleManager.Instance.battleData.CurMapSate.CurRoomID))
             {
                 Step5();
                 _isAwardRoom5_1 = true;
             }
         }
-        if (battleLogic.IsAttacking && !_isPressEnter3_3)
+        if (BattleManager.Instance.battleData.IsAttacking && !_isPressEnter3_3)
         {
             _isPressEnter3_3 = true;
             DestroyImmediate(UIPressEnter);
         }
         
-        if (MainRoleManager.Instance.CurBullets.Count > 0 && !_isSetBullet)
+        if (InventoryManager.Instance._BulletInvData.EquipBullets.Count > 0 && !_isSetBullet)
         {
             _isSetBullet = true;
             Step2_4();

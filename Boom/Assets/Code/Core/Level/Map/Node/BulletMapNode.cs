@@ -44,7 +44,7 @@ public class BulletMapNode : MapNodeBase
     {
         UIManager.Instance.Logic.MapManagerSC.CurDialogue.OnDialogueEnd -= OnDiaCallBack;
         
-        MainRoleManager.Instance.AddSpawner(BulletID);
+        InventoryManager.Instance._BulletInvData.AddSpawner(BulletID);
         BulletJson bulletDesignJson = TrunkManager.Instance.BulletDesignJsons
             .FirstOrDefault(b => b.ID == BulletID) ?? new BulletJson();
         FloatingGetItemText($"获得{bulletDesignJson.Name}");

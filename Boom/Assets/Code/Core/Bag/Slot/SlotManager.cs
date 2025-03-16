@@ -44,10 +44,10 @@ public static class SlotManager
                 allSlot = UIManager.Instance.BagUI.GemRoot.GetComponentsInChildren<SlotBase>();
                 break;
             case SlotType.GemInlaySlot:
-                allSlot = UIManager.Instance.BagUI.BagReadySlotRootGO.GetComponentsInChildren<GemSlot>();
+                allSlot = UIManager.Instance.BagUI.EquipBulletSlotRoot.GetComponentsInChildren<GemSlot>();
                 break;
             case SlotType.CurBulletSlot:
-                allSlot = UIManager.Instance.BagUI.BagReadySlotRootGO.GetComponentsInChildren<BulletSlotRole>();
+                allSlot = UIManager.Instance.BagUI.EquipBulletSlotRoot.GetComponentsInChildren<BulletSlotRole>();
                 break;
             case SlotType.ElementSlot:
                 allSlot = UIManager.Instance.BagUI.EquipItemRoot.GetComponentsInChildren<SlotBase>();

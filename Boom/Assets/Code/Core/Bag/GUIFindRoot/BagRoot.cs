@@ -42,14 +42,14 @@ public class BagRoot : MonoBehaviour
         if (!IsUnLockedItem)
             BtnItemSC.State = UILockedState.isLocked;
         //注册事件。背包Slot解锁的话，这边会函数响应更新状态
-        MainRoleManager.Instance.BulletSlotStateChanged += RefreshBulletSlotLockedState;
+        PlayerManager.Instance._PlayerData.BulletSlotStateChanged += RefreshBulletSlotLockedState;
         RefreshBulletSlotLockedState();//最开始先更新一次状态
     }
     #endregion
     
     public void RefreshBulletSlotLockedState()
     {
-        Dictionary<int, bool> curDict = MainRoleManager.Instance.CurBulletSlotLockedState;
+        Dictionary<int, bool> curDict = PlayerManager.Instance._PlayerData.CurBulletSlotLockedState;
         for (int i = 0; i < 5; i++)
             _btnReadySlotSC[i].State = curDict[i]?UILockedState.isNormal:UILockedState.isLocked;
     }
@@ -97,10 +97,8 @@ public class BagRoot : MonoBehaviour
     }
     #endregion
 
-    //根据数据，刷新下背包内的所有物件
-    public void RefreshInsByData()
+    void OnDestroy()
     {
-        MainRoleManager.Instance.InitSpawners(); //初始化Spawner里的GO
-        MainRoleManager.Instance.InitCurBullets(); //初始化Spawner里的GO
+        PlayerManager.Instance._PlayerData.BulletSlotStateChanged -= RefreshBulletSlotLockedState;
     }
 }

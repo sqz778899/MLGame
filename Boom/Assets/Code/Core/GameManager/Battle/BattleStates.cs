@@ -17,14 +17,16 @@ public interface IFightState
 public class InLevelState : IFightState
 {
     BattleLogic _battleLogic;
+    BattleData _battleData;
     Enemy _curEnemy;
     RoleInner _curRole;
 
-    public InLevelState(BattleLogic battleLogic)
+    public InLevelState()
     {
-        _battleLogic = battleLogic;
-        _curEnemy = _battleLogic.CurEnemy;
-        _curRole = _battleLogic.CurRole;
+        _battleLogic = BattleManager.Instance.battleLogic;
+        _battleData = BattleManager.Instance.battleData;
+        _curEnemy = _battleData.CurEnemy;
+        _curRole = _battleData.CurRole;
     }
     
     public void Enter()
@@ -37,12 +39,12 @@ public class InLevelState : IFightState
         // 检查战斗是否结束：子弹用完或敌人死亡
         if (_battleLogic.IsBattleOver())
         {
-            _battleLogic.IsBattleEnded = true;
+            _battleData.IsBattleEnded = true;
             // 根据敌人状态切换到胜利或失败状态
             if (_battleLogic.CurrentEnemyIsDead())
-                _battleLogic.ChangeState(new WinState(_battleLogic));
+                _battleLogic.ChangeState(new WinState());
             else
-                _battleLogic.ChangeState(new FailState(_battleLogic));
+                _battleLogic.ChangeState(new FailState());
         }
         
         UpdateDistance();//实时计算与敌人的距离
@@ -54,10 +56,10 @@ public class InLevelState : IFightState
     {
         if (UIManager.Instance.IsLockedClick) return;
         
-        if (Input.GetKeyDown(KeyCode.Space) && !_battleLogic.IsAttacking)
+        if (Input.GetKeyDown(KeyCode.Space) && !_battleData.IsAttacking)
         {
-            _battleLogic.IsAttacking = true;
-            _battleLogic.IsAfterAttack = true;
+            _battleData.IsAttacking = true;
+            _battleData.IsAfterAttack = true;
             _curRole.Fire();
             _battleLogic.IsBeginCameraMove = true;
         }
@@ -68,7 +70,7 @@ public class InLevelState : IFightState
     {
         if(_curEnemy == null) return;
         
-        _battleLogic.Distance = Vector2.Distance(_curEnemy.transform.position,
+        _battleData.Distance = Vector2.Distance(_curEnemy.transform.position,
             _curRole.transform.position);
     }
     
@@ -82,16 +84,13 @@ public class InLevelState : IFightState
 #region 胜利状态机
 public class WinState : IFightState
 {
-    BattleLogic _battleLogic;
-    public WinState(BattleLogic battleLogic)
-    {
-        _battleLogic = battleLogic;
-    }
+    public WinState() {}
     
     public void Enter()
     {
         Debug.Log("进入胜利状态");
-        DOVirtual.DelayedCall(3f, () => { _battleLogic.ShowWinUI(); });
+        DOVirtual.DelayedCall(3f, () =>
+            { BattleManager.Instance.ShowWarReport(true); });
     }
     
     public void Update()
@@ -109,16 +108,14 @@ public class WinState : IFightState
 #region 失败状态机
 public class FailState : IFightState
 {
-    BattleLogic _battleLogic;
-    public FailState(BattleLogic battleLogic)
-    {
-        _battleLogic = battleLogic;
-    }
+    public FailState() {}
     
     public void Enter()
     {
         Debug.Log("进入失败状态");
-        DOVirtual.DelayedCall(3f, () => { _battleLogic.ShowFailUI(); });
+        PlayerManager.Instance._PlayerData.ModifyHP(-1);
+        DOVirtual.DelayedCall(3f, () => 
+            { BattleManager.Instance.ShowWarReport(false); });
     }
     
     public void Update()

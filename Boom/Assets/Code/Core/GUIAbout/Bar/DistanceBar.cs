@@ -16,15 +16,15 @@ public class DistanceBar : MonoBehaviour
     {
         MaxDistance = 100f;
         if (_battleLogic == null)
-            _battleLogic = UIManager.Instance.Logic.BattleLogicSC;
+            _battleLogic = BattleManager.Instance.battleLogic;
         
-        CurDistance = _battleLogic.Distance;
+        CurDistance = BattleManager.Instance.battleData.Distance;
         Text.text = string.Format("{0} : {1}", GetRange(CurDistance), CurDistance);
     }
 
     public virtual void Update()
     {
-        CurDistance = _battleLogic.Distance;
+        CurDistance = BattleManager.Instance.battleData.Distance;
         t = CurDistance / MaxDistance;
         NarmalBar.fillAmount = t;
         Text.text = string.Format("{0} : {1}", GetRange(CurDistance), CurDistance);

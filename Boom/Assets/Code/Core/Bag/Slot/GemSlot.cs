@@ -53,7 +53,7 @@ public class GemSlot : SlotBase
 
         CurGemData = _gemNew._data;
         //在GemSlotInner部分创建一个影分身
-        GameObject _newChildeIns = BagItemManager<GemInner>.CreateTempObjectGO(_gemNew._data,true);
+        GameObject _newChildeIns = BagItemTools<GemInner>.CreateTempObjectGO(_gemNew._data,true);
         if (CurGemSlotInner != null)
         {
             SlotManager.ClearSlot(CurGemSlotInner);

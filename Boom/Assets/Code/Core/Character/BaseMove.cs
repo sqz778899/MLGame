@@ -76,7 +76,7 @@ public class BaseMove : MonoBehaviour
     {
         // 延迟初始化 FightLogic 组件
         if (BattleLogic == null)
-            BattleLogic = UIManager.Instance.Logic.BattleLogicSC;
+            BattleLogic = BattleManager.Instance.battleLogic;
         _bagRootMini = UIManager.Instance.BagUI.BagRootMiniGO.GetComponent<BagRootMini>();
         
         OnEditEndInner += _bagRootMini.EditEnd;

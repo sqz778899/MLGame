@@ -14,10 +14,7 @@ public class MapManager : MonoBehaviour
     public GameObject MapFightRoot;  // 地图战斗相关加载的节点
     public GameObject MapBuleltRoot;  // 场景内的子弹的父节点
     public MapMouseControl MapMouseControl;  // 地图鼠标控制脚本
-  
-    [Header("角色")]
-    public GameObject Role;//地图内角色
-    public RoleInner RoleInFight;//战斗内角色
+    
    
     GameObject currentMap;
     MapController _mapController;
@@ -25,11 +22,15 @@ public class MapManager : MonoBehaviour
     
     [Header("对话系统脚本")]
     public Dialogue CurDialogue;
+
+    [Header("一些脚本")] 
+    BattleData _battleData;
+    BattleLogic _battleLogicSC;
     
-    GameObject _GUIUIFightMapRootGO => UIManager.Instance.MapUI.GUIFightMapRootGO;
-    GameObject _GUIMapRootGO => UIManager.Instance.MapUI.GUIMapRootGO;
-    BattleLogic _battleLogicSC => UIManager.Instance.Logic.BattleLogicSC;
-    GameObject _sideBar => UIManager.Instance.CommonUI.G_SideBar;
+    [Header("一些UI")] 
+    GameObject _GUIUIFightMapRootGO;
+    GameObject _GUIMapRootGO;
+    GameObject _sideBar;
     
     Vector3 _preCameraPos;
 
@@ -43,15 +44,14 @@ public class MapManager : MonoBehaviour
             TrunkManager.Instance.ForceRefresh();
             UIManager.Instance.InitStartGame();
             SaveManager.LoadSaveFile();
-            MainRoleManager.Instance.InitData();
+            UIManager.Instance.BagUI.InitAllBagGO();
         }
         //todo ......................
         UIManager.Instance.InitLogic();
-        MainRoleManager.Instance.CurMapManager = this;
+        BattleManager.Instance._MapManager = this;
         EternalCavans.Instance.InMapScene();
         EternalCavans.Instance.OnOpenBag += LockAllThings;
         EternalCavans.Instance.OnCloseBag += UnLockAllThings;
-        EternalCavans.Instance.OnWinToNextRoom += WinToNextGame;
         EternalCavans.Instance.OnSwitchMapScene += SwitchMapScene;
     }
     
@@ -77,12 +77,12 @@ public class MapManager : MonoBehaviour
     // 加载地图
     void LoadMap(int questID)
     {
-        ClearCurrentMap();
+        //先清理下老的地图
+        MapResRoot.transform.Cast<Transform>().ToList().ForEach(child => Destroy(child.gameObject));
         currentMap = ResManager.instance.CreatInstance(PathConfig.MapPB(questID));
         currentMap.transform.SetParent(MapResRoot.transform,false);
         _mapController = currentMap.GetComponent<MapController>();
-        Role = _mapController.Role;
-        MainRoleManager.Instance.MainRoleIns = Role;
+        PlayerManager.Instance.RoleInMapGO = _mapController.Role;
         
         //获取地图房间节点
         _allMapRooms = currentMap.GetComponentsInChildren<MapRoomNode>();
@@ -137,11 +137,7 @@ public class MapManager : MonoBehaviour
         
         for (int i = 0; i < MapFightRoot.transform.childCount; i++)
             MapFightRoot.transform.GetChild(i).gameObject.SetActive(true);
-        try
-        {
-            _battleLogicSC.InitData();
-            _sideBar.SetActive(false);
-        }
+        try { _sideBar.SetActive(false); }
         catch (Exception e) { Debug.LogError("FightSceneOn  Erro！！！"); }
     }
     
@@ -154,7 +150,7 @@ public class MapManager : MonoBehaviour
             MapFightRoot.transform.GetChild(i).gameObject.SetActive(false);
         try
         {
-            _battleLogicSC.UnloadData();
+            UnloadLevelData();
             _sideBar.SetActive(true);
         }catch (Exception e) { Debug.LogError("FightSceneOff  Erro！！！"); }
     }
@@ -180,41 +176,44 @@ public class MapManager : MonoBehaviour
     #endregion
 
     #region 不太关心的各种方法
-    // 清除当前地图
-    void ClearCurrentMap()
-    {
-        int childCount = MapResRoot.transform.childCount;
-        for (int i = childCount -1; i >= 0; i--)
-            Destroy(MapResRoot.transform.GetChild(i).gameObject);
-    }
+    public void SetAllRoomIDs() => _allMapRooms.Select((room, index) => room.RoomID = index + 1).ToList();
     
-    public void SetAllIDs()
-    {
-        for (int i = 0; i < _allMapRooms.Length; i++)
-            _allMapRooms[i].RoomID = i + 1;
-    }
-
-    public void WinToNextGame()
-    { 
-        SwitchMapScene();
-        MainRoleManager.Instance.WinThisLevel();
-        SetRolePos();
-    }
-
     public void SetRolePos()
     {
+        InitData();
         //找到当前房间的节点
         MapRoomNode curRoom = _allMapRooms.FirstOrDefault(
-            each => each.RoomID == MainRoleManager.Instance.CurMapSate.CurRoomID);
+            each => each.RoomID == _battleData.CurMapSate.CurRoomID);
         curRoom.State = MapRoomState.Unlocked;
         
         //设置角色&&摄像机位置
-        Role.GetComponent<RoleInMap>().CurRoom = curRoom;
-        //Role.GetComponent<RoleInMap>().InitRoomBounds();
-        Role.transform.position = curRoom.RoleStartPos.position;
+        GameObject roleInMap = PlayerManager.Instance.RoleInMapGO;
+        roleInMap.GetComponent<RoleInMap>().CurRoom = curRoom;
+        roleInMap.transform.position = curRoom.RoleStartPos.position;
         Vector3 newCameraPos = new Vector3(curRoom.CameraStartPos.position.x,
             curRoom.CameraStartPos.position.y, Camera.main.transform.position.z);
         Camera.main.transform.DOMove(newCameraPos, 0.5f);
+    }
+    
+    public void UnloadLevelData()
+    {
+        InitData();
+        //清除场景内遗留子弹
+        for (int i = MapBuleltRoot.transform.childCount - 1; i >= 0; i--)
+            Destroy(MapBuleltRoot.transform.GetChild(i).gameObject);
+        //卸载战斗场景
+        if (_battleData.CurLevel != null)
+            Destroy(_battleData.CurLevel.gameObject);
+    }
+
+    void InitData()
+    {
+        _battleData ??= BattleManager.Instance.battleData;
+        _battleLogicSC ??= BattleManager.Instance.battleLogic;
+
+        _GUIUIFightMapRootGO ??= UIManager.Instance.MapUI.GUIFightMapRootGO;
+        _GUIMapRootGO ??= UIManager.Instance.MapUI.GUIMapRootGO;
+        _sideBar ??= UIManager.Instance.CommonUI.G_SideBar;
     }
 
     void OnDestroy()
@@ -222,7 +221,6 @@ public class MapManager : MonoBehaviour
         EternalCavans.Instance.OnOpenBag -= LockAllThings;
         EternalCavans.Instance.OnCloseBag -= UnLockAllThings;
         EternalCavans.Instance.OnSwitchMapScene -= SwitchMapScene;
-        EternalCavans.Instance.OnWinToNextRoom -= WinToNextGame;
     }
     #endregion
 }

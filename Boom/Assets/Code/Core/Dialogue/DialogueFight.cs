@@ -16,7 +16,6 @@ public class DialogueFight : MonoBehaviour
 
     [Header("按钮")]
     public Button BtnFight;
-    public Button BtnBack;
     public List<GameObject> HPGOList = new List<GameObject>();
     public bool isLocked = false;
     
@@ -48,15 +47,13 @@ public class DialogueFight : MonoBehaviour
     {
         if (isLocked ) return;
         //
-        if (MainRoleManager.Instance.CurBullets.Count == 0)
+        if (InventoryManager.Instance._BulletInvData.EquipBullets.Count == 0)
         {
             CotentText.text = "把你的子弹装备好再来找我！杂鱼！";
             return;
         }
         UIManager.Instance.IsLockedClick = false;
-        MapManager _mapManager = UIManager.Instance.Logic.MapManagerSC;
-        MainRoleManager.Instance.InitFightData(CurArrow.CurEnemy.ToMiddleData(),LevelID);
-        _mapManager.SwitchFightScene();
+        BattleManager.Instance.EnterFight(CurArrow.CurEnemy.ToMiddleData(),LevelID);
         QuitSelf();
     }
 

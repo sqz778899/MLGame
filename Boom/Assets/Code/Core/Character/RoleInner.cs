@@ -55,9 +55,10 @@ public class RoleInner : BaseMove
         Bullets = new List<BulletInner>();
         //创建子弹
         Vector3 startPos = new Vector3(transform.position.x - 1, -0.64f, -0.15f);
-        for (int i = 0; i < MainRoleManager.Instance.CurBullets.Count; i++)
+        List<BulletData> CurBullets = InventoryManager.Instance._BulletInvData.EquipBullets;
+        for (int i = 0; i < CurBullets.Count; i++)
         {
-            BulletData curB = MainRoleManager.Instance.CurBullets[i];
+            BulletData curB = CurBullets[i];
             GameObject bulletIns = BulletFactory.CreateBullet(curB, BulletInsMode.Inner).gameObject;
             BulletInner curSC = bulletIns.GetComponent<BulletInner>();
             curSC.CurRole = this;

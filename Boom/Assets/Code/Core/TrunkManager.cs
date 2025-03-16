@@ -91,7 +91,7 @@ public class TrunkManager: ScriptableObject
         _saveFile.Score = 0;
         _saveFile.Coins = 0;
         _saveFile.RoomKeys = 0;
-        _saveFile.UserStandbyBullet = newGameSD;
+        //_saveFile.UserStandbyBullet = newGameSD;
         #endregion
         
         #region Quest

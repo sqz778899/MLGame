@@ -43,7 +43,7 @@ public class ArrowNode : MapNodeBase
             return;
         }
         if (IsLocked) return;
-        MainRoleManager.Instance.CurMapSate.TargetRoomID = TargetRoom.RoomID;
+        BattleManager.Instance.battleData.CurMapSate.TargetRoomID = TargetRoom.RoomID;
         GameObject dialogueFightIns = ResManager.instance.CreatInstance(PathConfig.DialogueFightPB);
         dialogueFightIns.transform.SetParent(UIManager.Instance.CommonUI.DialogueRoot.transform,false);
         dialogueFightIns.GetComponent<DialogueFight>().InitData(this);
@@ -54,23 +54,23 @@ public class ArrowNode : MapNodeBase
     public void GoToLockedRoom()
     {
         if (IsLocked) return;
-        MainRoleManager.Instance.CurMapSate.CurRoomID = TargetRoom.RoomID;
+        BattleManager.Instance.battleData.CurMapSate.CurRoomID = TargetRoom.RoomID;
         UIManager.Instance.Logic.MapManagerSC.SetRolePos();
     }
     
     public void GoToLockedRoomWithKey()
     {
         if (IsLocked) return;
-        if (MainRoleManager.Instance.RoomKeys == 0)
+        if (PlayerManager.Instance._PlayerData.RoomKeys == 0)
         {
             FloatingText("锁上了");
             FloatingGetItemText("我需要一把钥匙");
             return;
         }
-        MainRoleManager.Instance.RoomKeys -= 1;
+        PlayerManager.Instance._PlayerData.ModifyRoomKeys(-1);
         
         ArrowUnlocked.SetActive(true);
-        MainRoleManager.Instance.CurMapSate.CurRoomID = TargetRoom.RoomID;
+        BattleManager.Instance.battleData.CurMapSate.CurRoomID = TargetRoom.RoomID;
         UIManager.Instance.Logic.MapManagerSC.SetRolePos();
         gameObject.SetActive(false);
     }

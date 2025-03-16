@@ -16,7 +16,7 @@ public class MapManagerEditor : Editor
         {
             var mtarget = target as MapManager;
             //mtarget.InitMapData();
-            mtarget.SetAllIDs();
+            mtarget.SetAllRoomIDs();
         }
     }
 }

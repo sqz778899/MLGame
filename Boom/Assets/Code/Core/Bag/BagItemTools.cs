@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class BagItemManager<T> where T:ItemBase
+public static class BagItemTools<T> where T:ItemBase
 {
     #region 重要功能
     public static GameObject CreateTempObjectGO<TData>(TData curObjectData,bool isInner = false)where TData : ItemDataBase
@@ -29,14 +29,14 @@ public static class BagItemManager<T> where T:ItemBase
         ItemBase curSC = objectIns.GetComponent<ItemBase>();
         if (curSC is Gem curGem)
         {
-            MainRoleManager.Instance.SubGem(curGem._data);
+            InventoryManager.Instance._InventoryData.RemoveGem(curGem._data);
             SlotManager.ClearSlot(curGem._data.CurSlot);
             GameObject.DestroyImmediate(objectIns);
         }
         
         if (curSC is Item curItem)
         {
-            MainRoleManager.Instance.SubItem(curItem._data);
+            InventoryManager.Instance._InventoryData.RemoveItem(curItem._data);
             SlotManager.ClearSlot(curItem._data.CurSlot);
             GameObject.DestroyImmediate(objectIns);
         }
@@ -51,20 +51,20 @@ public static class BagItemManager<T> where T:ItemBase
         T curObjectSC = null;
         InitObjectIns(curObjectData, ref curObjectIns, ref curObjectSC);
 
-        // 同步到 MainRoleManager
+        // 同步到 数据层
         switch (slotType)
         {
             case SlotType.BagSlot:
-                MainRoleManager.Instance.BagItems.Add(curObjectData as ItemData);
+                InventoryManager.Instance._InventoryData.AddItemToBag(curObjectData as ItemData);
                 break;
             case SlotType.GemBagSlot:
-                MainRoleManager.Instance.BagGems.Add(curObjectData as GemData);
+                InventoryManager.Instance._InventoryData.AddGemToBag(curObjectData as GemData);
                 break;
             case SlotType.GemInlaySlot:
-                MainRoleManager.Instance.InLayGems.Add(curObjectData as GemData);
+                InventoryManager.Instance._InventoryData.AddGemToEquip(curObjectData as GemData);
                 break;
             case SlotType.ElementSlot:
-                MainRoleManager.Instance.EquipItems.Add(curObjectData as ItemData);
+                InventoryManager.Instance._InventoryData.AddItemToEquip(curObjectData as ItemData);
                 break;
         }
     }

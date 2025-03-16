@@ -18,7 +18,7 @@ public class SaveFileJson
     public int RoomKeys;             //钥匙数量
     public List<BulletBaseSaveData> UserBulletSpawner;  //子弹孵化器
     public List<BulletBaseSaveData> UserCurBullets;     //当前子弹的状态
-    public List<StandbyData> UserStandbyBullet; //子弹材料的状态
+    //public List<StandbyData> UserStandbyBullet; //子弹材料的状态
     public Dictionary<int, bool> UserBulletSlotLockedState;  //用户子弹槽的锁定状态
     
     public List<ItemSaveData> UserItems;          //用户道具
@@ -35,7 +35,7 @@ public class SaveFileJson
         RoomKeys = 0;
         UserBulletSpawner = new List<BulletBaseSaveData>();
         UserCurBullets = new List<BulletBaseSaveData>();
-        UserStandbyBullet = new List<StandbyData>();
+        //UserStandbyBullet = new List<StandbyData>();
         UserBulletSlotLockedState = new Dictionary<int, bool>();
         UserItems = new List<ItemSaveData>();
         UserGems = new List<GemBaseSaveData>();

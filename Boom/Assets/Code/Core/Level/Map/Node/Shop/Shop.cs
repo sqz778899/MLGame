@@ -16,8 +16,9 @@ public class Shop:GUIBase
     public GameObject ShopSlotRoot;
     public GameObject BarRoot;
     public SkeletonGraphic Ani;
-    
-    [Header("基本属性")]
+
+    [Header("基本属性")] 
+    public int ShopCost = 5;
     public ShopNode CurShopNode;
     public ShopType CurShopType;
     public List<RollPR> RollProbs;
@@ -48,7 +49,7 @@ public class Shop:GUIBase
         }
         else
         {
-            TextRollCost.text = MainRoleManager.Instance.ShopCost.ToString();
+            TextRollCost.text = ShopCost.ToString();
         }
     }
 
@@ -100,10 +101,9 @@ public class Shop:GUIBase
         //Cal gold
         if (!CurShopNode.IsFirstOpen) //商店第一次打开免费
         {
-            int curCost = MainRoleManager.Instance.ShopCost;
-            int curGold = MainRoleManager.Instance.Coins;
-            if (curGold < curCost) return false;
-            MainRoleManager.Instance.Coins -= curCost;
+            int curGold = PlayerManager.Instance._PlayerData.Coins;
+            if (curGold < ShopCost) return false;
+            PlayerManager.Instance._PlayerData.ModifyCoins(-ShopCost);
         }
         else
             CurShopNode.IsFirstOpen = false;
@@ -154,7 +154,7 @@ public class Shop:GUIBase
     
     public void OnceRollBullet()
     {
-        //处理概率
+        /*//处理概率
         RollProbs = RollManager.
             Instance.DealProb(MainRoleManager.Instance.CurRollPR);
         if(!ReadyToRoll()) return;
@@ -175,14 +175,14 @@ public class Shop:GUIBase
                 curRollIns = BulletManager.Instance.InstanceRollBulletMat(curProb.ID,BulletInsMode.Mat);
 
             SetChildIns(curRollIns, i);
-        }
+        }*/
     }
     #endregion
 
     #region Bar
     //1086 -151
     //1086 -276
-    void GetCurPRBarDisplay()
+    /*void GetCurPRBarDisplay()
     {
         List<RollPR> CurRollPR = MainRoleManager.Instance.CurRollPR;
         int column = 0;
@@ -204,7 +204,7 @@ public class Shop:GUIBase
             curBarSC.InitDataByID();
             column++;
         }
-    }
+    }*/
     
 
     #endregion

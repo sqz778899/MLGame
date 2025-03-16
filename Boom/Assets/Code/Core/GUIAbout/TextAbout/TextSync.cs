@@ -27,13 +27,13 @@ public class TextSync : MonoBehaviour
         switch (valueType)
         {
             case ValueType.Coins:
-                _curValue = _targetValue = MainRoleManager.Instance.Coins;
+                _curValue = _targetValue = PlayerManager.Instance._PlayerData.Coins;
                 break;
             case ValueType.RoomKeys:
-                _curValue = _targetValue = MainRoleManager.Instance.RoomKeys;
+                _curValue = _targetValue = PlayerManager.Instance._PlayerData.RoomKeys;
                 break;
             case ValueType.Score:
-                _curValue = _targetValue = MainRoleManager.Instance.Score;
+                _curValue = _targetValue =  PlayerManager.Instance._PlayerData.Score;
                 break;
         }
         _txt.text = _curValue.ToString();
@@ -45,13 +45,13 @@ public class TextSync : MonoBehaviour
         switch (valueType)
         {
             case ValueType.Coins:
-                _targetValue = MainRoleManager.Instance.Coins;
+                _targetValue = PlayerManager.Instance._PlayerData.Coins;
                 break;
             case ValueType.RoomKeys:
-                _targetValue = MainRoleManager.Instance.RoomKeys;
+                _targetValue = PlayerManager.Instance._PlayerData.RoomKeys;
                 break;
             case ValueType.Score:
-                _targetValue = MainRoleManager.Instance.Score;
+                _targetValue = PlayerManager.Instance._PlayerData.Score;
                 break;
         }
 

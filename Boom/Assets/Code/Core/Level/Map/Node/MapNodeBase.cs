@@ -31,7 +31,7 @@ public class MapNodeBase : SpriteClickHandler
     
     internal virtual void FloatingGetItemText(string Content)
     {
-        Transform textNode = MainRoleManager.Instance.MainRoleIns.GetComponent<RoleInMap>().TextNode;
+        Transform textNode = PlayerManager.Instance.RoleInMapGO.GetComponent<RoleInMap>().TextNode;
         SetFloatingIns(textNode,out FloatingDamageText textSc);
         textSc.AnimateText($"{Content}",new Color(218f/255f,218f/255f,218f/255f,1f));
     }

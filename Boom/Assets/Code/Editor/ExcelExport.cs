@@ -18,11 +18,8 @@ namespace Code.Editor
         {
             ExportBullet();
             ExportItem();
-            ExportLevelBuffDesign();
-            ExportMuliLa();
-            ExportRoleDesign();
-            ExportPREventDesign();
             ExportGemDesign();
+            ExportMuliLa();
             ExportDialogue(); //对话相关
             ExportQuestDesign();//任务相关
             AssetDatabase.Refresh();
@@ -33,7 +30,7 @@ namespace Code.Editor
         {
             DataSet curTables = GetDataSet();
             List<BulletJson> curBulletDesign = new List<BulletJson>();
-            DataTable curTable = curTables.Tables[0];
+            DataTable curTable = curTables.Tables["BulletDesign"];
 
             for (int i = 1; i < curTable.Rows.Count; i++)
             {
@@ -57,8 +54,7 @@ namespace Code.Editor
         public void ExportItem()
         {
             DataSet curTables = GetDataSet();
-            DataTable curTable = curTables.Tables.Cast<DataTable>()
-                .FirstOrDefault(t => t.TableName == "ItemDesign");
+            DataTable curTable = curTables.Tables["ItemDesign"];
 
             if (curTable == null)
             {
@@ -95,122 +91,6 @@ namespace Code.Editor
 
             string content01 = JsonConvert.SerializeObject(curItemDesign, (Formatting)Formatting.Indented);
             File.WriteAllText(PathConfig.ItemDesignJson, content01);
-        }
-
-        int GetCellInt(string curStr)
-        {
-            if (curStr == "")
-                return 0;
-            else
-                return int.Parse(curStr);
-        }
-        
-        public void ExportLevelBuffDesign()
-        {
-            DataSet curTables = GetDataSet();
-            List<LevelBuff> curLBuffData = new List<LevelBuff>();
-
-            DataTable curTable = curTables.Tables[2];
-            for (int i = 1; i < curTable.Rows.Count; i++)
-            {
-                LevelBuff curLB = new LevelBuff();
-                List<RollPR> curRProb = new List<RollPR>();
-                if (curTable.Rows[i][1].ToString() == "") continue;
-                curLB.LevelID = int.Parse(curTable.Rows[i][0].ToString());
-
-                string sBuffIDs = curTable.Rows[i][1].ToString();
-                string sBuffProbs = curTable.Rows[i][2].ToString();
-                string[] sBuffIDTemp = sBuffIDs.Split(";");
-                string[] sBuffProbTemp = sBuffProbs.Split(";");
-                if (sBuffIDTemp.Length != sBuffProbTemp.Length)
-                {
-                    Debug.LogError("导表失败");
-                    return;
-                }
-
-                List<float> orProb = new List<float>();
-                for (int j = 0; j < sBuffIDTemp.Length; j++)
-                    orProb.Add(float.Parse(sBuffProbTemp[j]));
-
-                List<float> normalizeProb = RollManager.Instance.NormalizeProb(orProb);
-                for (int j = 0; j < sBuffIDTemp.Length; j++)
-                {
-                    RollPR curRP = new RollPR();
-                    curRP.ID = int.Parse(sBuffIDTemp[j]);
-                    curRP.Probability = normalizeProb[j];
-                    curRProb.Add(curRP);
-                }
-
-                curLB.CurBuffProb = curRProb;
-                curLBuffData.Add(curLB);
-            }
-
-            string content01 = JsonConvert.SerializeObject(curLBuffData, (Formatting)Formatting.Indented);
-            File.WriteAllText(PathConfig.LevelBuffDesignJson, content01);
-        }
-
-        public void ExportRoleDesign()
-        {
-            DataSet curTables = GetDataSet();
-            List<RoleBase> curRoleData = new List<RoleBase>();
-
-            DataTable curTable = curTables.Tables[3];
-            for (int i = 1; i < curTable.Rows.Count; i++)
-            {
-                RoleBase curRole = new RoleBase();
-                RoleAttri curRoleAttri = new RoleAttri();
-                curRole.Attri = curRoleAttri;
-                if (curTable.Rows[i][0].ToString() == "") continue;
-
-                curRole.ID = int.Parse(curTable.Rows[i][0].ToString());
-                //...................RoleAttri........................
-                curRoleAttri.StandbyAdd = int.Parse(curTable.Rows[i][1].ToString());
-                //....................................................
-                curRole.BloodGroup = curTable.Rows[i][2].ToString();
-                curRole.ZodiacSign = curTable.Rows[i][3].ToString();
-                curRole.MBTI = curTable.Rows[i][4].ToString();
-                curRole.Description = curTable.Rows[i][5].ToString();
-                curRoleData.Add(curRole);
-            }
-
-            string content = JsonConvert.SerializeObject(curRoleData, (Formatting)Formatting.Indented);
-            File.WriteAllText(PathConfig.RoleDesignJson, content);
-        }
-
-        public void ExportPREventDesign()
-        {
-            DataSet curTables = GetDataSet();
-            List<RollPREvent> curPREvents = new List<RollPREvent>();
-
-            DataTable curTable = curTables.Tables[4];
-            for (int i = 1; i < curTable.Rows.Count; i++)
-            {
-                RollPREvent curRollPREvent = new RollPREvent();
-                if (curTable.Rows[i][0].ToString() == "") continue;
-
-                curRollPREvent.ID = int.Parse(curTable.Rows[i][0].ToString());
-                //...................Add........................
-                Dictionary<int, float> AddPRDict = new Dictionary<int, float>();
-                List<float> curAddPR = ExcellUtility.GetListFloat(curTable.Rows[i][1].ToString());
-                List<int> curAddPRBullet = ExcellUtility.GetListInt(curTable.Rows[i][2].ToString());
-                for (int j = 0; j < curAddPR.Count; j++)
-                    AddPRDict[curAddPRBullet[j]] = curAddPR[j];
-                curRollPREvent.AddPRDict = AddPRDict;
-                //...................Sub........................
-                Dictionary<int, float> SubPRDict = new Dictionary<int, float>();
-                List<float> curSubPR = ExcellUtility.GetListFloat(curTable.Rows[i][3].ToString());
-                List<int> curSubPRBullet = ExcellUtility.GetListInt(curTable.Rows[i][4].ToString());
-                for (int j = 0; j < curSubPR.Count; j++)
-                    SubPRDict[curSubPRBullet[j]] = curSubPR[j];
-                curRollPREvent.SubPRDict = SubPRDict;
-                //...................Title........................
-                curRollPREvent.Title = curTable.Rows[i][5].ToString();
-                curRollPREvent.EDescription = curTable.Rows[i][6].ToString();
-                curPREvents.Add(curRollPREvent);
-            }
-
-            string content = JsonConvert.SerializeObject(curPREvents, (Formatting)Formatting.Indented);
-            File.WriteAllText(PathConfig.PREventDesignJson, content);
         }
 
         public void ExportGemDesign()
@@ -376,6 +256,7 @@ namespace Code.Editor
         }
         #endregion
 
+        #region 不关心的私有方法
         DataSet GetDataSet(string excelFileName = "CommonDesign.xlsx")
         {
             FileStream fileStream = File.Open(GetDesignExcelPath(excelFileName), FileMode.Open, FileAccess.Read);
@@ -384,11 +265,20 @@ namespace Code.Editor
             return result;
         }
         
+        int GetCellInt(string curStr)
+        {
+            if (curStr == "")
+                return 0;
+            else
+                return int.Parse(curStr);
+        }
+        
         string GetDesignExcelPath(string excelName)
         {
             string diskDir = Application.streamingAssetsPath.Replace(
                 "Assets/StreamingAssets", "Excel/") + excelName;
             return diskDir;
         }
+        #endregion
     }
 }

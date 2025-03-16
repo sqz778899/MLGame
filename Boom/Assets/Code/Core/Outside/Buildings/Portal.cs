@@ -1,8 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEngine;
 
 public class Portal : BuildBase
 {
+    public void SelQuest(int questID)
+    {
+        QuestManager.Instance.SelectQuest(questID);
+    }
 }

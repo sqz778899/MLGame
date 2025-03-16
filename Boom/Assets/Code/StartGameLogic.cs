@@ -8,11 +8,11 @@ public class StartGameLogic : KeyBoardBase
     internal void Start()
     {
         base.Start();
-        TrunkManager.Instance.ForceRefresh();
-        UIManager.Instance.InitStartGame();
-        SaveManager.LoadSaveFile();
-        MainRoleManager.Instance.InitData();
-        EternalCavans.Instance.InStartGame();
+        TrunkManager.Instance.ForceRefresh();//强制刷新策划数据
+        UIManager.Instance.InitStartGame(); //初始化UIManager
+        SaveManager.LoadSaveFile();          //读取存档数据
+        UIManager.Instance.BagUI.InitAllBagGO(); //初始化背包内GO
+        EternalCavans.Instance.InStartGame(); //初始化UI显隐状态
     }
     
     public void NewGame()

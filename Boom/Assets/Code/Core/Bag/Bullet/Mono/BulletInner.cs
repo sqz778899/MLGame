@@ -89,7 +89,7 @@ public class BulletInner:ItemBase
                 //如果是最后一个敌人，子弹消失
                 HandleBulletDisappear();
                 //战报收集！！传递给WarReport消息。
-                WarReport warReport = MainRoleManager.Instance.CurWarReport;
+                WarReport warReport = BattleManager.Instance.battleData.CurWarReport;
                 int curWarIndex = warReport.CurWarIndex;
                 
                 if (!warReport.WarIndexToBattleInfo.TryGetValue(curWarIndex, out SingelBattleInfo s))
@@ -220,7 +220,7 @@ public class BulletInner:ItemBase
     
     float CurDistance()
     {
-        return transform.position.x - UIManager.Instance.Logic.MapManagerSC.RoleInFight.transform.position.x;
+        return transform.position.x - PlayerManager.Instance.RoleInFightGO.transform.position.x;
     }
     #endregion
 

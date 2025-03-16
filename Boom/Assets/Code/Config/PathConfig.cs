@@ -103,6 +103,12 @@ public static class PathConfig
    public static string MatOutLine = GetPrepath() + "Res/Shader/CommonMaterial/OutLine.mat";
    public static string MatUIOutLine = GetPrepath() + "Res/Shader/CommonMaterial/UIOutLine.mat";
    
+   //..............................OBJ Data..............................................
+   public static string PlayerDataPath = GetPrepath() + "Res/DataOBJ/PlayerData.asset";
+   public static string InventoryDataPath = GetPrepath() + "Res/DataOBJ/InventoryData.asset";
+   public static string BulletInvDataPath = GetPrepath() + "Res/DataOBJ/BulletInvData.asset";
+   public static string BattleDataPath = GetPrepath() + "Res/DataOBJ/BattleData.asset";
+   
    #region Function
    //获得关卡的路径
    public static string GetLevelPath(int levelID)

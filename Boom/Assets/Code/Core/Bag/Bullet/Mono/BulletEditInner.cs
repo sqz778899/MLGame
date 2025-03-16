@@ -42,7 +42,7 @@ public class BulletEditInner:ItemBase
             {
                 ReturnToSpawner();
                 //3)刷新GO
-                UIManager.Instance.Logic.MapManagerSC.RoleInFight.CreateBulletInner();
+                PlayerManager.Instance.RoleInFightGO.GetComponent<RoleInner>().CreateBulletInner();
                 nonHappen = false;
                 break;
             }
@@ -65,7 +65,7 @@ public class BulletEditInner:ItemBase
                 }
              
                 //3)刷新GO
-                UIManager.Instance.Logic.MapManagerSC.RoleInFight.CreateBulletInner();
+                PlayerManager.Instance.RoleInFightGO.GetComponent<RoleInner>().CreateBulletInner();
                 Destroy(gameObject);
                 nonHappen = false;
                 break;
@@ -76,12 +76,12 @@ public class BulletEditInner:ItemBase
     
     void ReturnToSpawner()
     {
-        foreach (var eachBulletData in MainRoleManager.Instance.CurBulletSpawners)
+        foreach (var eachBulletData in InventoryManager.Instance._BulletInvData.BagBulletSpawners)
         {
             if (eachBulletData.ID == _data.ID)
             {
                 eachBulletData.SpawnerCount++;
-                MainRoleManager.Instance.SubCurBullet(_data);
+                InventoryManager.Instance._BulletInvData.RemoveEquipBullet(_data);
                 Destroy(gameObject);
                 SlotManager.ClearSlot(_data.CurSlot);
                 break;

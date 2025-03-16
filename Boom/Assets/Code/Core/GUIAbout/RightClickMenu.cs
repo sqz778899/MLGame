@@ -8,7 +8,7 @@ public class RightClickMenu : MonoBehaviour,IPointerExitHandler
     public void DeleteIns()
     {
         if (CurIns==null) return;
-        BagItemManager<ItemBase>.DeleteObject(CurIns);
+        BagItemTools<ItemBase>.DeleteObject(CurIns);
         CurToolTipsBase.CurToolTipsMenuState = ToolTipsMenuState.Normal;
         gameObject.SetActive(false);
     }

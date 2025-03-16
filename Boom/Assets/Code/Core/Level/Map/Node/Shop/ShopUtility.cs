@@ -7,20 +7,21 @@ public static class ShopUtility
     {
         RollBase curSCBase = SelGO.GetComponent<RollBase>();
         //............Cost Money.................
-        int curCost = MainRoleManager.Instance.ShopCost;
-        if (MainRoleManager.Instance.Coins < curCost)
+        int curCost = 5;
+        if (PlayerManager.Instance._PlayerData.Coins < curCost)
         {
             Debug.Log("No Money");
             return;
         }
-        MainRoleManager.Instance.Coins -= curCost;
+        PlayerManager.Instance._PlayerData.ModifyCoins(-curCost);
         
         //............Deal Data.................
         switch (curSCBase.CurType)
         {
             case RollBulletMatType.Mat:
                 RollBulletMat curSCM = curSCBase as RollBulletMat;
-                bool isAdd = MainRoleManager.Instance.AddStandbyBulletMat(curSCM.ID);
+                bool isAdd = false;
+                //bool isAdd = MainRoleManager.Instance.AddStandbyBulletMat(curSCM.ID);
                 if (!isAdd)
                 {
                     Debug.Log("没有位置了");
@@ -30,7 +31,7 @@ public static class ShopUtility
                 break;
             case RollBulletMatType.Score:
                 RollScore curSCS = curSCBase as RollScore;
-                MainRoleManager.Instance.Score +=  curSCS.Score;
+                PlayerManager.Instance._PlayerData.Score +=  curSCS.Score;
                 break;
         }
     }
@@ -38,15 +39,15 @@ public static class ShopUtility
     public static bool SelOne(GemInShop SelGem)
     {
         //............Cost Money.................
-        if (MainRoleManager.Instance.Coins < SelGem.Price)
+        if (PlayerManager.Instance._PlayerData.Coins < SelGem.Price)
         {
             Debug.Log("No Money");
             return false;
         }
-        MainRoleManager.Instance.Coins -= SelGem.Price;
+        PlayerManager.Instance._PlayerData.ModifyCoins(-SelGem.Price);
         
         //...........Buy This One................
-        MainRoleManager.Instance.AddGem(SelGem._data.ID);
+        InventoryManager.Instance.AddGemToBag(SelGem._data.ID);
         return true;
     }
 

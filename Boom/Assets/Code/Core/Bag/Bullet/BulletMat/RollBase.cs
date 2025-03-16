@@ -15,7 +15,7 @@ public class RollBase:MonoBehaviour,IPointerEnterHandler,IPointerExitHandler,IPo
     internal virtual void Update()
     {
         if (_rollCost != null)   
-            _rollCost.text = MainRoleManager.Instance.ShopCost.ToString();
+            _rollCost.text = 5.ToString();
     }
     public virtual void OnPointerEnter(PointerEventData eventData)
     {

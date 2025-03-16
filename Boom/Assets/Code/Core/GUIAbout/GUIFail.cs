@@ -20,12 +20,12 @@ public class GUIFail : MonoBehaviour
         Herts = new List<GameObject>();
         Herts.AddRange(HertRoot.transform.Cast<Transform>().Select(child => child.gameObject));
         
-        if (MainRoleManager.Instance.HP == 0)//如果血量为0,不显示继续了。播完动画直接显示gameover
+        if (PlayerManager.Instance._PlayerData.HP == 0)//如果血量为0,不显示继续了。播完动画直接显示gameover
             ContinueButton.SetActive(false);
         
         //Should HP
-        int shouldHP = MainRoleManager.Instance.HP + 1;
-        int maxHP = MainRoleManager.Instance.MaxHP;
+        int shouldHP = PlayerManager.Instance._PlayerData.HP + 1;
+        int maxHP = PlayerManager.Instance._PlayerData.MaxHP;
         
         for (int i = maxHP - 1; i >= 0; i--)
         {
@@ -36,7 +36,7 @@ public class GUIFail : MonoBehaviour
         int needSubIndex = shouldHP - 1;
         CuteDisappear(Herts[needSubIndex].GetComponent<Image>());
         
-        if(MainRoleManager.Instance.HP == 0)
+        if(PlayerManager.Instance._PlayerData.HP == 0)
             StartCoroutine(ShowGameOver());
     }
     

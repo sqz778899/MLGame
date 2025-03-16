@@ -31,6 +31,12 @@ public class MapSate
         IsFinishedLevels = new List<int>();
         IsFinishedRooms = new List<int>();
     }
+
+    public void FinishAndToNextRoom()
+    {
+        IsFinishedRooms.Add(CurRoomID);
+        CurRoomID = TargetRoomID;
+    }
 }
 
 public enum MapNodeType

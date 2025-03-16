@@ -573,8 +573,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.2804, y: -0.13389999, z: 0}
-    m_Extent: {x: 0.5732, y: 1.3402, z: 0}
+    m_Center: {x: 0.2816, y: -0.1372, z: 0}
+    m_Extent: {x: 0.5588, y: 1.3336, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 1.26
@@ -2994,6 +2994,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 522533941}
   m_CullTransparentMesh: 1
+--- !u!1 &530808257
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 530808259}
+  - component: {fileID: 530808258}
+  m_Layer: 0
+  m_Name: GM
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &530808258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530808257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dc7158957454266a45da8dd48677eed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &530808259
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530808257}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.12826908, y: 0.5586002, z: 4.5147033}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &538214753
 GameObject:
   m_ObjectHideFlags: 0
@@ -9764,9 +9808,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1410404430}
-        m_TargetAssemblyTypeName: QuestManager, Assembly-CSharp
-        m_MethodName: SelectQuest
+      - m_Target: {fileID: 907998832}
+        m_TargetAssemblyTypeName: Portal, Assembly-CSharp
+        m_MethodName: SelQuest
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10507,7 +10551,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -13456,9 +13500,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1410404430}
-        m_TargetAssemblyTypeName: QuestManager, Assembly-CSharp
-        m_MethodName: SelectQuest
+      - m_Target: {fileID: 907998832}
+        m_TargetAssemblyTypeName: Portal, Assembly-CSharp
+        m_MethodName: SelQuest
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16011,8 +16055,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 1.4228001, y: 0.13495004, z: 0}
-    m_Extent: {x: 1.7086, y: 1.75255, z: 0}
+    m_Center: {x: 1.4269, y: 0.13450003, z: 0}
+    m_Extent: {x: 1.7087001, y: 1.7665, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 1.26
@@ -22162,4 +22206,5 @@ SceneRoots:
   - {fileID: 2038537327}
   - {fileID: 1568792279}
   - {fileID: 1410404431}
+  - {fileID: 530808259}
   - {fileID: 8448053916852797065}

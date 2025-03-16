@@ -36,7 +36,7 @@ public class DraggableBullet : Bullet
         // 如果这个位置下没有子弹槽，我们就将子弹位置恢复到原来的位置
         if (nonHappen)
         {
-            if (IsSpawnerCreate) ReturnToSpawner();
+            if (IsSpawnerCreate) InventoryManager.Instance.ReturnToSpawner(gameObject);
             else ResetPosition();
         }
     }
@@ -54,7 +54,7 @@ public class DraggableBullet : Bullet
         var targetSlotSC = result.gameObject.GetComponent<BulletSlotRole>();
         if (targetSlotSC.State == UILockedState.isLocked)
         {
-            ReturnToSpawner();
+            InventoryManager.Instance.ReturnToSpawner(gameObject);
             return true;
         }
 
@@ -71,7 +71,7 @@ public class DraggableBullet : Bullet
             SlotManager.ClearSlot(_data.CurSlot);
             targetSlotSC.SOnDrop(gameObject);
             //这个时候槽位ID才确定下来
-            MainRoleManager.Instance.AddCurBullet(_data);
+            InventoryManager.Instance._BulletInvData.EquipBullet(_data);
         }
         else//交换
         {
@@ -79,7 +79,7 @@ public class DraggableBullet : Bullet
             SlotBase oldSlot = _data.CurSlot;
             targetSlotSC.SOnDrop(gameObject);
             oldSlot.SOnDrop(orIns);
-            MainRoleManager.Instance.SortCurBullet();
+            InventoryManager.Instance._BulletInvData.SortEquipBullet();
         }
         return true;
     }
@@ -87,7 +87,7 @@ public class DraggableBullet : Bullet
     bool HandleBulletSlot(RaycastResult result)
     {
         if (!result.gameObject.CompareTag("BulletSlot")) return false;
-        ReturnToSpawner();
+        InventoryManager.Instance.ReturnToSpawner(gameObject);
         return true;
     }
 
@@ -97,32 +97,17 @@ public class DraggableBullet : Bullet
         {
             BulletInnerSlot curSlotSC = result.gameObject.GetComponent<BulletInnerSlot>();
             //1) 查一下CurBullets,看看这个槽位下有无子弹,如果有，回退子弹
-            MainRoleManager.Instance.ReturnCurBulletBySlotID(
+            InventoryManager.Instance._BulletInvData.UnEquipBullet(
                 curSlotSC.CurBulletSlotRole.CurBulletData);//回退老子弹
             //2)添加新子弹，到数据层
             curSlotSC.CurBulletSlotRole.SOnDrop(_data);
-            MainRoleManager.Instance.AddCurBullet(_data);//添加新子弹
+            InventoryManager.Instance._BulletInvData.EquipBullet(_data);//添加新子弹
             //3)刷新GO
-            UIManager.Instance.Logic.MapManagerSC.RoleInFight.CreateBulletInner();
+            PlayerManager.Instance.RoleInFightGO.GetComponent<RoleInner>().CreateBulletInner();
             Destroy(gameObject);
             return true;
         }
         return false;
-    }
-    
-    void ReturnToSpawner()
-    {
-        foreach (var eachBulletData in MainRoleManager.Instance.CurBulletSpawners)
-        {
-            if (eachBulletData.ID == _data.ID)
-            {
-                eachBulletData.SpawnerCount++;
-                MainRoleManager.Instance.SubCurBullet(_data);
-                Destroy(gameObject);
-                SlotManager.ClearSlot(_data.CurSlot);
-                break;
-            }
-        }
     }
     
     void ResetPosition()

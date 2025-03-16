@@ -9,7 +9,7 @@ public class HPSync : MonoBehaviour
     List<GameObject> Herts;
     void Start()
     {
-        MainRoleManager.Instance.HPChanged += HPChanged;
+        PlayerManager.Instance._PlayerData.OnHPChanged += HPChanged;
         Herts = new List<GameObject>();
         Herts.AddRange(transform.Cast<Transform>().Select(child => child.gameObject));
         HPChanged();
@@ -17,12 +17,17 @@ public class HPSync : MonoBehaviour
 
     void HPChanged()
     {
-        int maxHP = MainRoleManager.Instance.MaxHP;
-        int curHP = MainRoleManager.Instance.HP;
+        int maxHP = PlayerManager.Instance._PlayerData.MaxHP;
+        int curHP = PlayerManager.Instance._PlayerData.HP;
         for (int i = maxHP - 1; i >= 0; i--)
         {
             if (i == curHP - 1) break;
             Herts[i].SetActive(false);
         }
+    }
+
+    void OnDestroy()
+    {
+        PlayerManager.Instance._PlayerData.OnHPChanged -= HPChanged;
     }
 }
