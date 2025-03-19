@@ -111,7 +111,7 @@ Transform:
   m_GameObject: {fileID: 1243153004754106142}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.229, y: -0.9299998, z: -0.05000305}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.01}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -147,7 +147,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   spriteRenderer: {fileID: 3257555168735931559}
-  OutlineColor: {r: 0, g: 0, b: 0, a: 0}
   HeighLightColor: {r: 1, g: 1, b: 1, a: 1}
   IsLocked: 0
   NodeTextNode: {fileID: 3258285015816014560}
@@ -268,7 +267,7 @@ Transform:
   m_GameObject: {fileID: 3789393754373899311}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 6.229, y: -0.9299998, z: -0.05000305}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.01}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -303,7 +302,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   spriteRenderer: {fileID: 3284173225916762814}
-  OutlineColor: {r: 0, g: 0, b: 0, a: 0}
   HeighLightColor: {r: 1, g: 1, b: 1, a: 1}
   IsLocked: 0
   NodeTextNode: {fileID: 0}

@@ -22,10 +22,6 @@ public class Shop:GUIBase
     public ShopNode CurShopNode;
     public ShopType CurShopType;
     public List<RollPR> RollProbs;
-    
-    const int rowOffet = 756;
-    const int columnOffet = -125;
-
     void Update()
     {
         switch (CurShopType)
@@ -44,41 +40,18 @@ public class Shop:GUIBase
         if (Input.GetKeyDown(KeyCode.Escape)) { QuitSelf(); }
 
         if (CurShopNode.IsFirstOpen)
-        {
             TextRollCost.text = "0";
-        }
         else
-        {
             TextRollCost.text = ShopCost.ToString();
-        }
     }
 
     public void InitData(ShopNode _curShopNode)
     {
         CurShopNode = _curShopNode;
         CurShopType = _curShopNode.CurShopType;
+        ShopCost = _curShopNode.ShopCost;
         RollProbs = RollManager.Instance.DealProb(_curShopNode.RollPRs);
-
-        if (_curShopNode.ShopIndexToGemId.Count != 0)
-        {
-            AniUtility.UIPlayIdle2(Ani);
-            foreach (var each in _curShopNode.ShopIndexToGemId)
-            {
-                GameObject curRollIns = ResManager.instance.CreatInstance(PathConfig.RollGemPB);
-                GemInShop curGem = curRollIns.GetComponent<GemInShop>();
-                curGem._data.ID = each.Value;
-                curGem.CurShopNode = _curShopNode;
-                SetChildIns(curRollIns,each.Key);
-            }
-        }
     }
-
-    #region Design
-    //.........temp
-    //90概率 Score
-    //10概率 Bullet
-    Vector2Int ScoreRange = new Vector2Int(3, 9);
-    #endregion
 
     #region Roll
     public void OnceRefreshShop()
@@ -91,7 +64,6 @@ public class Shop:GUIBase
                 OnceRollGem();
                 break;
             case ShopType.BulletShop:
-                OnceRollBullet();
                 break;
         }
     }
@@ -137,45 +109,16 @@ public class Shop:GUIBase
     {
         yield return new WaitForSeconds(aniTime);
         
-        CurShopNode.ShopIndexToGemId.Clear();
         //New Ins
         for (int i = 0; i < 5; i++)
         {
             RollPR curProb = RollManager.Instance.SingleRoll(RollProbs);//抽一发
-            GameObject curRollIns = ResManager.instance.CreatInstance(PathConfig.RollGemPB);
-            GemInShop curGem = curRollIns.GetComponent<GemInShop>();
-            curGem._data.ID = curProb.ID;
+            GemData tempData = new GemData(curProb.ID, null);
+            GameObject curShopGem = BagItemTools<GemInShop>.CreateTempObjectGO(tempData,CreateItemType.ShopGem);
+            GemInShop curGem = curShopGem.GetComponent<GemInShop>();
             curGem.CurShopNode = CurShopNode;
-            curGem.ShopSlotIndex = i;
-            CurShopNode.ShopIndexToGemId.Add(i,curGem._data.ID);
-            SetChildIns(curRollIns, i);
+            SetChildIns(curShopGem, i);
         }
-    }
-    
-    public void OnceRollBullet()
-    {
-        /*//处理概率
-        RollProbs = RollManager.
-            Instance.DealProb(MainRoleManager.Instance.CurRollPR);
-        if(!ReadyToRoll()) return;
-        //New Ins
-        for (int i = 0; i < 5; i++)
-        {
-            RollPR curProb = RollManager.Instance.SingleRoll(RollProbs);
-            //GetIns
-            GameObject curRollIns = null;
-            if (curProb.ID == 0)
-            {
-                curRollIns = ResManager.instance.CreatInstance(PathConfig.RollScorePB);
-                RollScore curSC = curRollIns.GetComponent<RollScore>();
-                int curScore = Random.Range(ScoreRange.x, ScoreRange.y+1);
-                curSC.Score = curScore;
-            }
-            else
-                curRollIns = BulletManager.Instance.InstanceRollBulletMat(curProb.ID,BulletInsMode.Mat);
-
-            SetChildIns(curRollIns, i);
-        }*/
     }
     #endregion
 
@@ -209,9 +152,5 @@ public class Shop:GUIBase
 
     #endregion
     
-    public override void QuitSelf()
-    {
-        base.QuitSelf();
-        UIManager.Instance.IsLockedClick = false;
-    }
+    public override void QuitSelf() => gameObject.SetActive(false);
 }

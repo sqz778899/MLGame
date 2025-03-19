@@ -6,24 +6,24 @@ public class ShopNode: MapNodeBase
     [Header("重要属性")]
     public ShopType CurShopType;
     public List<RollPR> RollPRs = new List<RollPR>();
-    public Dictionary<int, int> ShopIndexToGemId =
-        new Dictionary<int, int>();//为了关闭商店再打开，商店物品依然还原，构建了一个存商店物品的地方
-    public bool IsFirstOpen;
+    public int ShopCost;
     
+    public bool IsFirstOpen;
+    public GameObject ShopIns;
     internal override void Start()
     {
         base.Start();
         IsFirstOpen = true;
+        ShopIns = ResManager.instance.CreatInstance(PathConfig.ShopAsset);
+        ShopIns.transform.SetParent(UIManager.Instance.MapUI.ShopRoot.transform,false);
+        ShopIns.GetComponent<Shop>().InitData(this);//建立链接
+        ShopIns.SetActive(false);
     }
     
     public void EnterShop()
     {
         if (UIManager.Instance.IsLockedClick) return;
         
-        GameObject ShopIns = ResManager.instance.CreatInstance(PathConfig.ShopAsset);
-        ShopIns.transform.SetParent(UIManager.Instance.MapUI.ShopRoot.transform,false);
-        //建立链接
-        Shop curShopSC = ShopIns.GetComponent<Shop>();
-        curShopSC.InitData(this);
+        ShopIns.SetActive(true);
     }
 }

@@ -51,6 +51,7 @@ public class ArrowNode : MapNodeBase
         UIManager.Instance.IsLockedClick = true;
     }
     
+    //开完锁之后，普通的来回穿梭
     public void GoToLockedRoom()
     {
         if (IsLocked) return;
@@ -58,6 +59,7 @@ public class ArrowNode : MapNodeBase
         UIManager.Instance.Logic.MapManagerSC.SetRolePos();
     }
     
+    //消耗钥匙去下一个房间
     public void GoToLockedRoomWithKey()
     {
         if (IsLocked) return;
@@ -73,5 +75,11 @@ public class ArrowNode : MapNodeBase
         BattleManager.Instance.battleData.CurMapSate.CurRoomID = TargetRoom.RoomID;
         UIManager.Instance.Logic.MapManagerSC.SetRolePos();
         gameObject.SetActive(false);
+    }
+    
+    //游戏胜利返回城镇
+    public void ReturnTown()
+    {
+        MSceneManager.Instance.LoadScene(1);
     }
 }

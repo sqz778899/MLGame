@@ -270,19 +270,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 939e8ca1c6e272c4c9f0c6bf2f7f6acf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: 1
-  CurSlot: {fileID: 0}
-  Name: 
-  InstanceID: 0
-  SlotID: 0
-  SlotType: 0
+  DobuleClickTime: 6
+  CurToolTipsMenuState: 0
   Price: 0
   PriceText: {fileID: 104149203160529776}
-  Attribute:
-    Damage: 0
-    Piercing: 0
-    Resonance: 0
-  ItemSprite: {fileID: 0}
+  CurShopNode: {fileID: 0}
+  ShopSlotIndex: 0
+  ItemSprite: {fileID: 1081066080780118012}
   OutlineColor: {r: 0.55743295, g: 3.0853553, b: 3.109891, a: 1}
   EPara:
     CurEffectType: 2

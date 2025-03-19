@@ -28,6 +28,7 @@ public class EnemyMiniMap : MonoBehaviour
         SkeletonGraphic.skeletonDataAsset = ResManager.instance.
             GetAssetCache<SkeletonDataAsset>(PathConfig.GetEnemySkelentonDataPath(_curEnemy.ID));
         SkeletonGraphic.Initialize(true);
+        AniUtility.PlayIdle(SkeletonGraphic);//最开始播放待机动画
     }
 
     public void BindData()

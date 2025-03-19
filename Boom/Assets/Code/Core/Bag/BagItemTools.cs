@@ -5,12 +5,28 @@ using UnityEngine;
 public static class BagItemTools<T> where T:ItemBase
 {
     #region 重要功能
-    public static GameObject CreateTempObjectGO<TData>(TData curObjectData,bool isInner = false)where TData : ItemDataBase
+    public static GameObject CreateTempObjectGO<TData>(TData curObjectData,CreateItemType insType)where TData : ItemDataBase
     {
         //实例化宝石
         GameObject objectIns = null;
         T objectSC = null;
-        InitObjectInsTemp(curObjectData, ref objectIns,ref objectSC,isInner);
+        string assetpath = "";
+        switch (insType)
+        {
+            case CreateItemType.ShopGem:
+                assetpath = PathConfig.RollGemPB;
+                break;
+            case CreateItemType.TempGem://临时既创建销毁的，比如开宝箱的表现用
+                assetpath = PathConfig.GemTemplate;
+                break;
+            case CreateItemType.MiniBagGem:
+                assetpath = PathConfig.GemInnerTemplate;
+                break;
+        }
+        
+        objectIns = ResManager.instance.CreatInstance(assetpath);
+        objectSC = objectIns.GetComponent<T>();
+        objectSC.BindData(curObjectData);
         return objectIns;
     }
     
@@ -88,24 +104,6 @@ public static class BagItemTools<T> where T:ItemBase
         objectSC = objectIns.GetComponent<T>();
         objectSC.BindData(curObjectData);
         curObjectData.CurSlot.SOnDrop(objectIns);
-    }
-    
-    static void InitObjectInsTemp<TData>(TData curObjectData, ref GameObject objectIns,
-        ref T objectSC,bool isInner = false) where TData : ItemDataBase
-    {
-        SlotType curSlotType = curObjectData.CurSlot.SlotType;
-        string assetPath = curSlotType == SlotType.GemBagSlot || curSlotType == SlotType.GemInlaySlot
-            ? PathConfig.GemTemplate
-            : PathConfig.ItemPB;
-        
-        if (isInner)
-            assetPath = curSlotType == SlotType.GemBagSlot || curSlotType == SlotType.GemInlaySlot
-                ? PathConfig.GemInnerTemplate
-                : PathConfig.ItemPB;
-        
-        objectIns = ResManager.instance.CreatInstance(assetPath);
-        objectSC = objectIns.GetComponent<T>();
-        objectSC.BindData(curObjectData);
     }
     #endregion
 }

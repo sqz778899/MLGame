@@ -8,6 +8,7 @@ public class BulletMapNode : MapNodeBase
     public string DialogueName;
     SkeletonAnimation _ain;
     Renderer _renderer;
+    Dialogue _dialogue;
     
     void Awake()
     {
@@ -17,7 +18,10 @@ public class BulletMapNode : MapNodeBase
         SpineQuitHighLight();
     }
 
-    internal override void Start() {}
+    internal override void Start()
+    {
+        _dialogue = UIManager.Instance.CommonUI.DialogueRoot.GetComponentInChildren<Dialogue>(true);
+    }
     
     internal override void OnMouseEnter()
     {
@@ -36,13 +40,13 @@ public class BulletMapNode : MapNodeBase
     public void JoinYou()
     {
         SpineQuitHighLight();
-        UIManager.Instance.Logic.MapManagerSC.CurDialogue.LoadDialogue(DialogueName);
-        UIManager.Instance.Logic.MapManagerSC.CurDialogue.OnDialogueEnd += OnDiaCallBack;
+        _dialogue.LoadDialogue(DialogueName);
+        _dialogue.OnDialogueEnd += OnDiaCallBack;
     }
 
     public void OnDiaCallBack()
     {
-        UIManager.Instance.Logic.MapManagerSC.CurDialogue.OnDialogueEnd -= OnDiaCallBack;
+        _dialogue.OnDialogueEnd -= OnDiaCallBack;
         
         InventoryManager.Instance._BulletInvData.AddSpawner(BulletID);
         BulletJson bulletDesignJson = TrunkManager.Instance.BulletDesignJsons

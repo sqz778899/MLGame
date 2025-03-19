@@ -33,9 +33,7 @@ public class RoleInner : BaseMove
         {
             curBullet.transform.position = new Vector3(
                 transform.position.x - curBullet._data.CurSlot.SlotID,
-                -0.64f,
-                -0.15f
-            );
+                -0.64f, -0.15f);
         }
     }
     

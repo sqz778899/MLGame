@@ -24,6 +24,6 @@ public class GUIBase : MonoBehaviour
 
     public virtual void QuitSelf()
     {
-        DestroyImmediate(gameObject);
+        Destroy(gameObject);
     }
 }

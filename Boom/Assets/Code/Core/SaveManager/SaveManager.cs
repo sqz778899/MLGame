@@ -30,7 +30,6 @@ public static class SaveManager
         for (int i = 0; i < saveFile.UserGems.Count; i++)
         {
             GemData curGem = LoadGemData(saveFile.UserGems[i]);
-            //GemSaveData curGem = saveFile.UserGems[i];
             BagItemTools<Gem>.InitSaveFileObject(curGem,SlotType.GemBagSlot);
         }
         //读取子弹槽状态

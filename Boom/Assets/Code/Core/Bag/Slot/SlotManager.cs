@@ -10,13 +10,24 @@ public static class SlotManager
     {
         if (curSlot == null) return;
         if (isClearChildIns && curSlot.ChildIns != null)
-            GameObject.DestroyImmediate(curSlot.ChildIns);
+            GameObject.Destroy(curSlot.ChildIns);
         
         if (curSlot is GemSlot _gemSlot)
             _gemSlot.CurGemData = null;
         if (curSlot is BulletSlotRole _roleSlot)
             _roleSlot.CurBulletData = null;
         curSlot.MainID = -1;
+    }
+
+    public static void ClearGemSlot(SlotBase slot)
+    {
+        if (slot == null) return;
+        if (slot is GemSlot gemSlot)
+        {
+            GemSlotInner innerSlot = gemSlot.CurGemSlotInner;
+           // ClearSlot(gemSlot, true);
+            ClearSlot(innerSlot, true);
+        }
     }
     
     public static SlotBase GetEmptySlot(SlotType slotType)

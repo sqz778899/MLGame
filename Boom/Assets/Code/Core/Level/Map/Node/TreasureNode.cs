@@ -19,7 +19,7 @@ public class TreasureNode:MapNodeBase
         //创建一个临时的宝石，只用来表现，用完即销毁
         GemData rollGemData = new GemData(GemID, null);
         string gemName = rollGemData.Name;
-        GameObject GemIns = BagItemTools<Gem>.CreateTempObjectGO(rollGemData);
+        GameObject GemIns = BagItemTools<Gem>.CreateTempObjectGO(rollGemData,CreateItemType.TempGem);
         
         GemIns.transform.SetParent(transform,false);
         Vector3 startPos = new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z);

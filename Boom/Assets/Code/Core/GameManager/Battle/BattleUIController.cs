@@ -46,6 +46,13 @@ public class BattleUIController
             failGUI.GetComponent<GUIFail>().SetHertAni();
         }
     }
+
+    public void InitWinFailGUI()
+    {
+        warReportRootGUI.SetActive(false);
+        winGUI.SetActive(false);
+        failGUI.SetActive(false);
+    }
     
     #region 不关心的私有方法
     void InitData()

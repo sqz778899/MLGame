@@ -9,9 +9,17 @@ public class DesignTool
     #region 存档测试
     [Title("存档测试")]
     [Button("默认存档",ButtonSizes.Large),PropertyOrder(0)]
+    [ButtonGroup("默认存档")]
     void ResetAll()
     {
         TrunkManager.Instance.SetSaveFileTemplate();
+    }
+    
+    [Button("测试存档",ButtonSizes.Large),PropertyOrder(0)]
+    [ButtonGroup("默认存档")]
+    void ResetAllWithGem()
+    {
+        TrunkManager.Instance.SetSaveFileTest();
     }
     
     [Button("存档",ButtonSizes.Large),PropertyOrder(0)]

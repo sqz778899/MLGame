@@ -11,36 +11,32 @@ public class BattleManager: MonoBehaviour
     #region 事件的注册和注销
     void Start()
     {
-        EternalCavans.Instance.OnWinToNextRoom += WinToNextRoom;
         EternalCavans.Instance.OnFightContinue += WarReportContinue;
+        EternalCavans.Instance.OnWinToNextRoom += WinToNextRoom;
+        EternalCavans.Instance.OnFailToThisRoom += FailToThisRoom;
     }
     void OnDestroy()
     {
-        EternalCavans.Instance.OnWinToNextRoom -= WinToNextRoom;
         EternalCavans.Instance.OnFightContinue -= WarReportContinue;
+        EternalCavans.Instance.OnWinToNextRoom -= WinToNextRoom;
+        EternalCavans.Instance.OnFailToThisRoom -= FailToThisRoom;
     }
     #endregion
 
     //进入战斗唯一入口
     public void EnterFight(EnemyMiddleData _enemyMidData,int _levelID)
     {
+        InitData();
         //1)进入战斗场景
         _MapManager.SwitchFightScene();
         //2)初始化战斗数据
+        battleLogic._battleCameraController = new BattleCameraController();//加载摄像机控制器
         battleData.InitFightData(_enemyMidData, _levelID);
         battleLogic.InitFightData();
         battleUI.InitFightData();
     }
 
     #region 战后UI以及行为
-    //赢得战斗
-    public void WinToNextRoom()
-    { 
-        _MapManager.SwitchMapScene();
-        battleData.CurMapSate.FinishAndToNextRoom();//切换当前房间
-        _MapManager.SetRolePos();
-    }
-    
     //胜利结算战报界面
     public void ShowWarReport(bool isWin)
     {
@@ -51,6 +47,23 @@ public class BattleManager: MonoBehaviour
     public void WarReportContinue()
     {
         battleUI.WarReportContinue();
+    }
+    
+    //赢得战斗
+    public void WinToNextRoom()
+    {
+        battleUI.InitWinFailGUI();
+        _MapManager.SwitchMapScene();
+        battleData.CurMapSate.FinishAndToNextRoom();//切换当前房间
+        _MapManager.SetRolePos();
+    }
+
+    //战斗失败
+    public void FailToThisRoom()
+    {
+        battleUI.InitWinFailGUI();
+        _MapManager.SwitchMapScene();
+        _MapManager.SetRolePos();
     }
     #endregion
     
@@ -69,4 +82,10 @@ public class BattleManager: MonoBehaviour
         battleData = ResManager.instance.GetAssetCache<BattleData>(PathConfig.BattleDataPath);
     }
     #endregion
+    
+    void InitData()
+    {
+        battleLogic ??= GameObject.Find("BattleLogic").GetComponent<BattleLogic>();
+        battleUI ??= new BattleUIController();
+    }
 }

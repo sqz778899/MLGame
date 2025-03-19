@@ -18,10 +18,10 @@ public class BattleCameraController
     float _cameraCurSpeed = 0f;
     
     
-    public BattleCameraController(BattleLogic battleLogic)
+    public BattleCameraController()
     {
-        _battleLogic = battleLogic;
-        CurRole = BattleManager.Instance.battleData.CurRole;
+        _battleLogic = BattleManager.Instance.battleLogic;
+        CurRole = PlayerManager.Instance.RoleInFightGO.GetComponent<RoleInner>();
         _mainCamera.transform.position = new Vector3(2.5f,1,-10);
         _mainCamera.orthographicSize = 5;
         _battleLogic.IsBeginCameraMove = false;

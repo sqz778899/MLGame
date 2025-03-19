@@ -5,7 +5,6 @@ using System.Linq;
 using DG.Tweening;
 using Sirenix.Utilities;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class MapManager : MonoBehaviour
 {
@@ -15,14 +14,10 @@ public class MapManager : MonoBehaviour
     public GameObject MapBuleltRoot;  // 场景内的子弹的父节点
     public MapMouseControl MapMouseControl;  // 地图鼠标控制脚本
     
-   
     GameObject currentMap;
     MapController _mapController;
     MapRoomNode[] _allMapRooms;
     
-    [Header("对话系统脚本")]
-    public Dialogue CurDialogue;
-
     [Header("一些脚本")] 
     BattleData _battleData;
     BattleLogic _battleLogicSC;
@@ -49,10 +44,10 @@ public class MapManager : MonoBehaviour
         //todo ......................
         UIManager.Instance.InitLogic();
         BattleManager.Instance._MapManager = this;
+        PlayerManager.Instance.RoleInFightGO = MapFightRoot.GetComponentInChildren<RoleInner>(true).gameObject;
         EternalCavans.Instance.InMapScene();
         EternalCavans.Instance.OnOpenBag += LockAllThings;
         EternalCavans.Instance.OnCloseBag += UnLockAllThings;
-        EternalCavans.Instance.OnSwitchMapScene += SwitchMapScene;
     }
     
     void LockAllThings()
@@ -133,6 +128,7 @@ public class MapManager : MonoBehaviour
     {
         _GUIUIFightMapRootGO.SetActive(true);
         UIManager.Instance.BagUI.ShowMiniBag();
+        BattleManager.Instance.battleLogic.enabled = true;
         try { _battleLogicSC.enabled = true; }catch (Exception e) {}
         
         for (int i = 0; i < MapFightRoot.transform.childCount; i++)
@@ -145,6 +141,7 @@ public class MapManager : MonoBehaviour
     {
         _GUIUIFightMapRootGO.SetActive(false);
         UIManager.Instance.BagUI.HideMiniBag();
+        BattleManager.Instance.battleLogic.enabled = false;
         try { _battleLogicSC.enabled = false; }catch (Exception e) {}
         for (int i = 0; i < MapFightRoot.transform.childCount; i++)
             MapFightRoot.transform.GetChild(i).gameObject.SetActive(false);
@@ -220,7 +217,6 @@ public class MapManager : MonoBehaviour
     {
         EternalCavans.Instance.OnOpenBag -= LockAllThings;
         EternalCavans.Instance.OnCloseBag -= UnLockAllThings;
-        EternalCavans.Instance.OnSwitchMapScene -= SwitchMapScene;
     }
     #endregion
 }

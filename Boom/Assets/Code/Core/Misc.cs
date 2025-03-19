@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 
-#region ToolTips相关
+#region ToolTips相
 public struct ToolTipsInfo
 {
     public string Name;
@@ -167,6 +167,14 @@ public enum ShopType
     GemShop = 1,
     BulletShop = 2
 }
+
+public enum CreateItemType
+{
+    ShopGem = 0,
+    MiniBagGem = 1,
+    TempGem = 2,
+}
+
 
 public enum UILockedState
 {

@@ -63,6 +63,71 @@ public class TrunkManager: ScriptableObject
         //................UserBulletSpawner...........................
         List<BulletBaseSaveData> UserBulletSpawner = new List<BulletBaseSaveData>();
         BulletBaseSaveData spawner01 = new BulletBaseSaveData(1,1,SlotType.SpawnnerSlot,1);
+        spawner01.SpawnerCount = 0;
+        UserBulletSpawner.Add(spawner01);
+        
+        BulletBaseSaveData spawner02 = new BulletBaseSaveData(2,2,SlotType.SpawnnerSlot,1);
+        spawner02.SpawnerCount = 0;
+        UserBulletSpawner.Add(spawner02);
+        
+        BulletBaseSaveData spawner03 = new BulletBaseSaveData(3,3,SlotType.SpawnnerSlot,0);
+        spawner03.SpawnerCount = 0;
+        UserBulletSpawner.Add(spawner03);
+        
+        //..............StandbyData.........................
+        List<StandbyData> newGameSD = new List<StandbyData>();
+        for (int i = 0; i < 5; i++)
+            newGameSD.Add(new StandbyData(i,0));
+        
+        //...................Items.................................
+        _saveFile.UserItems = new List<ItemSaveData>();
+        //...................Gems..................................
+        _saveFile.UserGems = new List<GemBaseSaveData>();
+        //...................子弹槽状态..............................
+        _saveFile.UserBulletSlotLockedState = new Dictionary<int, bool>
+        { {0, true},{1, true},{2,false},{3,false},{4,false} };
+      
+        _saveFile.UserCurBullets = new List<BulletBaseSaveData>();
+        _saveFile.UserBulletSpawner = UserBulletSpawner;
+        _saveFile.Score = 0;
+        _saveFile.Coins = 0;
+        _saveFile.RoomKeys = 0;
+        //_saveFile.UserStandbyBullet = newGameSD;
+        #endregion
+        
+        #region Quest
+        int questDesignCount = 2;
+        List<QuestSaveData> UserQuests = new List<QuestSaveData>();
+        for (int i = 0; i < questDesignCount; i++)
+        {
+            QuestSaveData newQuest = new QuestSaveData(new Quest(i+1));
+            UserQuests.Add(newQuest);
+        }
+        _saveFile.UserQuests = UserQuests;
+        #endregion
+        
+        #region Map
+        List<MapSate> curMapSate = new List<MapSate>();
+        MapSate curMap = new MapSate();
+        curMap.CurLevelID = 1;
+        curMap.IsFinishedRooms = new List<int>();
+        curMapSate.Add(curMap);
+        _saveFile.UserMapSate = curMapSate;
+        #endregion
+
+        string content01 = JsonConvert.SerializeObject(_saveFile,(Formatting) Formatting.Indented);
+        File.WriteAllText(PathConfig.SaveFileJson, content01);
+    }
+    
+    public void SetSaveFileTest()
+    {
+        _saveFile = new SaveFileJson();
+        #region Character
+        _saveFile.MaxHP = 3;
+        _saveFile.HP = 3;
+        //................UserBulletSpawner...........................
+        List<BulletBaseSaveData> UserBulletSpawner = new List<BulletBaseSaveData>();
+        BulletBaseSaveData spawner01 = new BulletBaseSaveData(1,1,SlotType.SpawnnerSlot,1);
         UserBulletSpawner.Add(spawner01);
         
         BulletBaseSaveData spawner02 = new BulletBaseSaveData(2,2,SlotType.SpawnnerSlot,1);

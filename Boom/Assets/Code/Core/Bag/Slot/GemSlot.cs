@@ -48,12 +48,14 @@ public class GemSlot : SlotBase
         
         ItemBase curSC = _childIns.GetComponentInChildren<ItemBase>();
         Gem _gemNew = curSC as Gem;
+        //先清理之前的Slot的影子信息
+        SlotManager.ClearGemSlot(_gemNew._data.CurSlot);
         _gemNew._data.CurSlot = this;
         MainID = _gemNew._data.ID;
 
         CurGemData = _gemNew._data;
         //在GemSlotInner部分创建一个影分身
-        GameObject _newChildeIns = BagItemTools<GemInner>.CreateTempObjectGO(_gemNew._data,true);
+        GameObject _newChildeIns = BagItemTools<GemInner>.CreateTempObjectGO(_gemNew._data,CreateItemType.MiniBagGem);
         if (CurGemSlotInner != null)
         {
             SlotManager.ClearSlot(CurGemSlotInner);

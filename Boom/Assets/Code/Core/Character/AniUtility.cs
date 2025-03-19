@@ -83,25 +83,17 @@ public static class AniUtility
         curAni.timeScale = timeScale;
     }
     
-    public static void PlayIdle(SkeletonAnimation curAni,float timeScale=1f)
-    {
+    public static void PlayIdle(SkeletonAnimation curAni,float timeScale=1f) => 
         PlayCommon(curAni, timeScale, Idle,true);
-    }
-    
-    public static void PlayIdle01(SkeletonAnimation curAni,float timeScale=1f)
-    {
+    public static void PlayIdle(SkeletonGraphic curAni,float timeScale=1f) =>
+        PlayCommon(curAni, timeScale, Idle,true);
+    public static void PlayIdle01(SkeletonAnimation curAni,float timeScale=1f) =>
         PlayCommon(curAni, timeScale, Idle01,true);
-    }
     
-    public static void PlayDead01(SkeletonAnimation curAni,float timeScale=1f)
-    {
+    public static void PlayDead01(SkeletonAnimation curAni,float timeScale=1f) =>
         PlayCommon(curAni, timeScale, Dead01,false);
-    }
-    
-    public static void PlayDead01(SkeletonGraphic curAni,float timeScale=1f)
-    {
+    public static void PlayDead01(SkeletonGraphic curAni,float timeScale=1f) =>
         PlayCommon(curAni, timeScale, Dead01,false);
-    }
 
     public static void PlayAttack(SkeletonAnimation curAni,ref float anitime,float timeScale=1f,bool isReset=false)
     {

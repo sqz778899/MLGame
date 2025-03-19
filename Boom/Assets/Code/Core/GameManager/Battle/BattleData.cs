@@ -22,17 +22,17 @@ public class BattleData: ScriptableObject
     {
         CurMapSate.CurLevelID = _levelID;
         CurLevel = LevelManager.LoadLevel(_levelID);
-        CurEnemy = CurLevel.CurEnemy;
         CurRole = PlayerManager.Instance.RoleInFightGO.GetComponent<RoleInner>();
         CurRole.InitData(CurLevel);//初始化角色数据
         CurLevel.SetEnemy(_enemyMidData);//初始化敌人属性
+        CurEnemy = CurLevel.CurEnemy;
         //初始化各类数据
         IsBattleEnded = false;
         IsAttacking = false;
         IsAfterAttack = false;
         Distance = 0f;
         //初始化战报
-        CurWarReport ??= new();
+        CurWarReport = new();
         CurWarReport.CurWarIndex += 1;
     }
 }

@@ -4,7 +4,7 @@ public static class LevelManager
 {
     public static LevelMono LoadLevel(int levelID)
     {
-        GameObject levelRoot = GameObject.Find("MapFightRoot").transform.GetChild(0).gameObject;
+        GameObject levelRoot = BattleManager.Instance._MapManager.MapFightRoot.transform.GetChild(0).gameObject;
         //清理之前的Level
         for (int i = levelRoot.transform.childCount - 1; i >=0; i--)
             GameObject.Destroy(levelRoot.transform.GetChild(i).gameObject);

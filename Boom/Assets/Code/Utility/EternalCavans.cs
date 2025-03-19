@@ -53,8 +53,8 @@ public class EternalCavans : MonoBehaviour
     public Action OnOpenBag;
     public Action OnCloseBag;
     public Action OnFightContinue; //战报后面那个继续的按钮
-    public Action OnWinToNextRoom;
-    public Action OnSwitchMapScene; //失败返回地图
+    public Action OnWinToNextRoom; //成功返回塔楼
+    public Action OnFailToThisRoom; //失败返回塔楼
     
     #region 初始化各个场景中的UI显示状态
     public void InStartGame()
@@ -112,7 +112,7 @@ public class EternalCavans : MonoBehaviour
     #region 战斗结束的界面响应
     public void Continue() => OnFightContinue?.Invoke();
     public void WinToNextRoom() => OnWinToNextRoom?.Invoke();
-    public void SwitchMapScene() => OnSwitchMapScene?.Invoke();
+    public void FailToThisRoom() => OnFailToThisRoom?.Invoke();
     public void GameOver() => MSceneManager.Instance.LoadScene(1);
     #endregion
     

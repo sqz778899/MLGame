@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +8,6 @@ using UnityEngine.EventSystems;
 public class GemInShop : ToolTipsBase,IPointerUpHandler,IPointerDownHandler
 {
     public GemData _data;
-    
     public override void BindData(ItemDataBase data)
     {
         if (_data != null)
@@ -22,7 +20,6 @@ public class GemInShop : ToolTipsBase,IPointerUpHandler,IPointerDownHandler
             OnDataChangeGem(); // 立即刷新一遍
         }
     }
-    
     
     EffectManager _effectManager;
     internal EffectManager MEffectManager
@@ -39,7 +36,6 @@ public class GemInShop : ToolTipsBase,IPointerUpHandler,IPointerDownHandler
     public int Price;
     public TextMeshProUGUI PriceText;
     public ShopNode CurShopNode;
-    public int ShopSlotIndex;
     
     [Header("基础属性")]
     public Image ItemSprite;
@@ -78,7 +74,6 @@ public class GemInShop : ToolTipsBase,IPointerUpHandler,IPointerDownHandler
         rectTransform.localScale = Vector3.one;
         if (ShopUtility.SelOne(this))
         {
-            CurShopNode.ShopIndexToGemId.Remove(ShopSlotIndex);
             EPara.StartPos = transform.position;
             MEffectManager.CreatEffect(EPara,gameObject,true);
         }
@@ -98,7 +93,6 @@ public class GemInShop : ToolTipsBase,IPointerUpHandler,IPointerDownHandler
     }
 
     #region 数据同步相关
-    
     public void OnDataChangeGem()
     {
         _data.InstanceID = gameObject.GetInstanceID();
@@ -109,22 +103,31 @@ public class GemInShop : ToolTipsBase,IPointerUpHandler,IPointerDownHandler
         Price = gemDesignData.Price;
         PriceText.text = Price.ToString();
     }
+    #endregion
     
+    #region ToolTips相关
     internal override void SetTooltipInfo()
     {
-        string des = GetItemAttriInfo();
-        CurTooltipsSC.txtTitle.text = _data.Name;
-        //curTip.txtDescription.text = des;
-    }
-    
-    string GetItemAttriInfo()
-    {
-        List<string> attributes = new List<string>();
-        if (_data.Damage != 0) attributes.Add($"伤害 + {_data.Damage}");
-        if (_data.Resonance != 0) attributes.Add($"共振 + {_data.Resonance}");
-        if (_data.Piercing != 0) attributes.Add($"穿透 + {_data.Piercing}");
-
-        return string.Join("\n", attributes);
+        ToolTipsInfo curToolTipsInfo = new ToolTipsInfo(_data.Name,_data.Level);
+        if (_data.Damage != 0)
+        {
+            ToolTipsAttriSingleInfo curInfo = new ToolTipsAttriSingleInfo(
+                ToolTipsAttriType.Damage,_data.Damage);
+            curToolTipsInfo.AttriInfos.Add(curInfo);
+        }
+        if (_data.Piercing != 0)
+        {
+            ToolTipsAttriSingleInfo curInfo = new ToolTipsAttriSingleInfo(
+                ToolTipsAttriType.Piercing, _data.Piercing);
+            curToolTipsInfo.AttriInfos.Add(curInfo);
+        }
+        if (_data.Resonance != 0)
+        {
+            ToolTipsAttriSingleInfo curInfo = new ToolTipsAttriSingleInfo(
+                ToolTipsAttriType.Resonance, _data.Resonance);
+            curToolTipsInfo.AttriInfos.Add(curInfo);
+        }
+        CurTooltipsSC.SetInfo(curToolTipsInfo);
     }
     #endregion
 }

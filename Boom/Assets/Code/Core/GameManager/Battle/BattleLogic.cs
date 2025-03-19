@@ -9,7 +9,7 @@ public class BattleLogic : MonoBehaviour
     
     [Header("Camera")] 
     public bool IsBeginCameraMove;    //是否开始摄像机移动,外部唯一关心参数
-    BattleCameraController _battleCameraController;
+    public BattleCameraController _battleCameraController;
     BattleData _battleData;
     
     void Start()
@@ -31,8 +31,8 @@ public class BattleLogic : MonoBehaviour
 
     public void InitFightData()
     {
-        _battleCameraController = new BattleCameraController(this);//加载摄像机控制器
         //初始化状态机
+        currentState = null;
         ChangeState(new InLevelState());
     }
    
