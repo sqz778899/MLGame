@@ -7,12 +7,21 @@ using UnityEngine;
 public class DesignTool
 {
     #region 存档测试
-    [Title("存档测试")]
+
+    [Title("存档测试")] [PropertyOrder(-1)]
+    public int 存档测试;
     [Button("默认存档",ButtonSizes.Large),PropertyOrder(0)]
     [ButtonGroup("默认存档")]
     void ResetAll()
     {
         TrunkManager.Instance.SetSaveFileTemplate();
+    }
+    
+    [Button("默认存档万解",ButtonSizes.Large),PropertyOrder(0)]
+    [ButtonGroup("默认存档")]
+    void ResetAllFiveSlots()
+    {
+        TrunkManager.Instance.SetSaveFileFiveSlotsTemplate();
     }
     
     [Button("测试存档",ButtonSizes.Large),PropertyOrder(0)]

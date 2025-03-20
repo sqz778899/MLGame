@@ -29,25 +29,19 @@ public class BulletSlotRole: SlotBase
             if (_curBulletData != value)
             {
                 _curBulletData = value;
-                OnBulletDataChange();
                 OnIsHaveBullet?.Invoke();//战斗内是否显示气泡
             }
         }
     }
-    public Action OnIsHaveBullet;
     
     [Header("锁定的美术资源")] 
     public GameObject Locked;
     [Header("Gems")]
     public List<GemSlot> GemSlots;
+    public event Action OnIsHaveBullet;//战斗内是否显示气泡
     
-    public void InitData()
-    {
-        ChangeState();
-        foreach (var each in GemSlots)
-            each.OnGemDataChange += RefreshModifiers;
-    }
-    
+    public void InitData() =>ChangeState();
+ 
     void ChangeState()
     {
         switch (State)
@@ -62,23 +56,7 @@ public class BulletSlotRole: SlotBase
                 break;
         }
     }
-
-    void RefreshModifiers()
-    {
-        if (CurBulletData == null) return;
-        CurBulletData.ClearModifiers();
-        foreach (var each in GemSlots)
-        {
-            if(each.CurGemData == null)
-                continue;
-            CurBulletData.AddModifier(new BulletModifierGem(each.CurGemData));
-        }
-    }
-
-    void OnBulletDataChange()
-    {
-        RefreshModifiers();
-    }
+    
 
     public void SOnDrop(BulletData bulletData)
     {
@@ -97,4 +75,5 @@ public class BulletSlotRole: SlotBase
         //持有这个BulletData
         CurBulletData = _bulletNew._data;
     }
+    
 }

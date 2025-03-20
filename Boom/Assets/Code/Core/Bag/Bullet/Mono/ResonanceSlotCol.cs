@@ -18,13 +18,16 @@ public class ResonanceSlotCol : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        CloseEffect();
-    }
+    void Start() =>  CloseEffect();
 
     public void OpenEffect()
     {
+        StartCoroutine(LoadAndPlayEffect());
+        _fx.Play();
+    }
+
+    IEnumerator LoadAndPlayEffect() {
+        yield return new WaitForFixedUpdate();
         _fx.Play();
     }
     

@@ -29,12 +29,8 @@ public class BulletInnerSlot : SlotBase
     void OnOffBubble()
     {
         if (CurBulletSlotRole.CurBulletData == null)
-        {
             BubbleGO.SetActive(false);
-        }
         else
-        {
             BubbleGO.SetActive(true);
-        }
     }
 }

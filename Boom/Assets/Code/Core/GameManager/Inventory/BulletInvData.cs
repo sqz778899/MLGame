@@ -1,18 +1,36 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.Utilities;
 using UnityEngine;
 
-[CreateAssetMenu(menuName="Inventory/BulletInventory")]
 public class BulletInvData : ScriptableObject
 {
     public List<BulletData> BagBulletSpawners = new();//全部的子弹
     public List<BulletData> EquipBullets = new();// 有顺序要求的装备子弹
-    public List<BulletSlotRole> EquipSlots = new(); //子弹槽
+    public List<BulletSlotRole> EquipBulletSlots; //子弹槽
     
-    // 子弹变动事件
-    public event Action OnBulletsChanged;
+    public event Action OnBulletsChanged;//子弹数据变化
     
+    //宝石操作和子弹槽操作都会响应这个函数
+    public void RefreshModifiers()
+    {
+        foreach (var eSlot in EquipBulletSlots)
+        {
+            if (eSlot.CurBulletData == null)
+                continue;
+            eSlot.CurBulletData.ClearModifiers();
+            foreach (var eGemSlot in eSlot.GemSlots)
+            {
+                if(eGemSlot.CurGemData == null)
+                    continue;
+                eSlot.CurBulletData.AddModifier(new BulletModifierGem(eGemSlot.CurGemData));
+            }
+        }
+        
+        InventoryManager.Instance._BulletInvData.ProcessBulletRelations();
+    }
+
     #region 子弹操作
     public void AddSpawner(int bulletID)
     {
@@ -26,6 +44,7 @@ public class BulletInvData : ScriptableObject
         RemoveEquipBullet(_data);
         AddSpawner(_data.ID);
         OnBulletsChanged?.Invoke();
+        RefreshModifiers();
     }
 
     public void EquipBullet(BulletData bulletData)
@@ -33,7 +52,8 @@ public class BulletInvData : ScriptableObject
         if (EquipBullets.Count >= 5) return;
         if (!EquipBullets.Contains(bulletData))
             EquipBullets.Add(bulletData);
-        SortEquipBullet();
+        SortEquipBullet();//子弹内部数据进行排序
+        RefreshModifiers();
     }
     
     public void SortEquipBullet()
@@ -45,7 +65,7 @@ public class BulletInvData : ScriptableObject
 
     public void RemoveEquipBullet(BulletData _data)
     {
-        EquipBullets.Remove(_data);
+        EquipBullets.Remove(_data);  
         OnBulletsChanged?.Invoke();
     }
     #endregion
@@ -55,8 +75,10 @@ public class BulletInvData : ScriptableObject
     {
         if (EquipBullets.Count < 2) return;
 
-        ResonanceSlotCol[] ResonanceSlotCols = UIManager.Instance.BagUI.EquipBulletSlotRoot.
-            GetComponentsInChildren<ResonanceSlotCol>();
+        SortEquipBullet();
+        ResonanceSlotCol[] ResonanceSlotCols=UIManager.Instance.BagUI.EquipBulletSlotRoot.
+                GetComponentsInChildren<ResonanceSlotCol>(true);
+      
         //处理共振
         Dictionary<int,List<int>> ResonanceClusterDict = new Dictionary<int, List<int>>();
         int clusterCount = 1;
@@ -77,14 +99,11 @@ public class BulletInvData : ScriptableObject
             if (nextRemainder == preRemainder)//符合共振条件
             {
                 resonanceCount++;
-                //preBullet.IsResonance = true;
-                //nextBullet.IsResonance = true;
-                //CurBulletsPair[preBullet].IsResonance = true;
-                //开始添加共振伤害
-                /*Bullet nextBulletSC = CurBulletsPair[nextBullet];
-                nextBulletSC.IsResonance = true;
-                nextBulletSC.FinalDamage += nextBulletSC.FinalResonance * resonanceCount;
-                nextBullet.FinalDamage += nextBullet.FinalResonance * resonanceCount;*/
+                preBullet.IsResonance = true;
+                nextBullet.IsResonance = true;
+                nextBullet.ResonanceDamage = 0;
+                nextBullet.ResonanceDamage += nextBullet.FinalResonance * resonanceCount;
+                nextBullet.SyncFinalAttributes();
                 //构建共振簇
                 if (ResonanceClusterDict.ContainsKey(clusterCount))
                     ResonanceClusterDict[clusterCount].Add(nextBullet.CurSlot.SlotID);
@@ -92,21 +111,14 @@ public class BulletInvData : ScriptableObject
                     ResonanceClusterDict[clusterCount] = new List<int>{preBullet.CurSlot.SlotID,nextBullet.CurSlot.SlotID};
             }
             else
-            {
                 resonanceCount = 0;
-            }
 
             if (resonanceCount == 0)//说明共振被中断了，要重新开始
-            {
                 clusterCount++;
-            }
         }
         
         //处理共振簇
-        foreach (var slotCol in ResonanceSlotCols)
-        {
-            slotCol.CloseEffect();
-        }
+        ResonanceSlotCols.ForEach(s => s.CloseEffect());
 
         foreach (var each in ResonanceClusterDict)
         {
@@ -122,4 +134,11 @@ public class BulletInvData : ScriptableObject
         }
     }
     #endregion
+    
+    public void InitData()
+    {
+        GameObject equipBulletSlotRoot = EternalCavans.Instance.BagRoot.GetComponent<BagRoot>().BagReadySlotGO;
+        EquipBulletSlots = equipBulletSlotRoot.GetComponentsInChildren<BulletSlotRole>(true).ToList();
+    }
+
 }

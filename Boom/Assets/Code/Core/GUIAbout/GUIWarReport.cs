@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -7,6 +8,7 @@ public class GUIWarReport : MonoBehaviour
 {
     public GameObject ReportRoot;
     public GameObject SingelReportTemplate;
+    public TextMeshProUGUI txtTotalDamage;
     Vector2 SingelYOffset = new Vector2(0, -302);
     
     //B
@@ -17,6 +19,7 @@ public class GUIWarReport : MonoBehaviour
         //Bullet 这个类
         //Enemy  这个类
         //List<BattleOnceHit> 战场表现收集
+        int totalDamage = 0;
         SingelBattleInfo curInfo = BattleManager.Instance.battleData.CurWarReport.GetCurBattleInfo();
         int count = 0;
         foreach (var eachInfo in curInfo.InfoDict)
@@ -24,8 +27,10 @@ public class GUIWarReport : MonoBehaviour
             GameObject curSingelReport = Instantiate(SingelReportTemplate, ReportRoot.transform);
             curSingelReport.SetActive(true);
             curSingelReport.GetComponent<RectTransform>().anchoredPosition = SingelYOffset * count;
-            curSingelReport.GetComponent<SingelReportRoot>().SyncReport(eachInfo.Value);
+            curSingelReport.GetComponent<SingelReportRoot>().SyncReport(eachInfo.Value,out int totalTemp);
+            totalDamage += totalTemp;
             count++;
         }
+        txtTotalDamage.text = totalDamage.ToString();
     }
 }

@@ -18,7 +18,7 @@ public class SingelReportRoot : MonoBehaviour
     Vector2 _shieldStartPos = new Vector2(560, 512); 
     Vector2 _shieldOffset = new Vector2(-100, 0); 
     
-    public void SyncReport(KeyValuePair<BulletData,List<BattleOnceHit>> curInfo)
+    public void SyncReport(KeyValuePair<BulletData,List<BattleOnceHit>> curInfo ,out int totalDamage)
     {
         BulletData curBulletData = curInfo.Key;
         List<BattleOnceHit> curBattleOnceHits = curInfo.Value;
@@ -31,6 +31,7 @@ public class SingelReportRoot : MonoBehaviour
         txtResonance.text = curBulletData.FinalResonance.ToString();
         int effectiveDamage = 0;
         int overflowDamage = 0;
+        totalDamage = 0;
 
         if (curBattleOnceHits.Count == 0) return;
         
@@ -46,6 +47,7 @@ public class SingelReportRoot : MonoBehaviour
             
             effectiveDamage += firstHit.EffectiveDamage;
             overflowDamage += firstHit.OverflowDamage;
+            totalDamage = effectiveDamage + overflowDamage;
         }
         else
         {
@@ -70,6 +72,7 @@ public class SingelReportRoot : MonoBehaviour
                         IconEnemy.transform.GetChild(0).gameObject.SetActive(false);
                     effectiveDamage += each.EffectiveDamage;
                     overflowDamage += each.OverflowDamage;
+                    totalDamage += effectiveDamage + overflowDamage;
                     continue;
                 } 
                 
@@ -82,6 +85,7 @@ public class SingelReportRoot : MonoBehaviour
                 
                 effectiveDamage += each.EffectiveDamage;
                 overflowDamage += each.OverflowDamage;
+                totalDamage += effectiveDamage + overflowDamage;
             }
             Debug.Log("敌人有盾");
         }

@@ -47,14 +47,17 @@ public class EternalCavans : MonoBehaviour
     public GUIBase SettingUILv2;
     public GameObject btnBag;
     
+    [Header(("对话系统"))]
+    public Dialogue DialogueSC;
+    
     public SceneState CurSceneState { get; private set; }
     BagRoot _bagRootSC => BagRoot.GetComponent<BagRoot>();
     float _preCameraOrthographicSize;
-    public Action OnOpenBag;
-    public Action OnCloseBag;
-    public Action OnFightContinue; //战报后面那个继续的按钮
-    public Action OnWinToNextRoom; //成功返回塔楼
-    public Action OnFailToThisRoom; //失败返回塔楼
+    public event Action OnOpenBag;
+    public event Action OnCloseBag;
+    public event Action OnFightContinue; //战报后面那个继续的按钮
+    public event Action OnWinToNextRoom; //成功返回塔楼
+    public event Action OnFailToThisRoom; //失败返回塔楼
     
     #region 初始化各个场景中的UI显示状态
     public void InStartGame()

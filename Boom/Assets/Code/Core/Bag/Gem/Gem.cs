@@ -57,19 +57,7 @@ public class Gem : DragBase
     {
         GemSlot slot = targetSlot as GemSlot;
         SlotManager.ClearSlot(_data.CurSlot);
-        switch (slot.SlotType)
-        {
-            case SlotType.GemBagSlot:
-                slot.SOnDrop(gameObject);
-                ToolTipsOffset = new Vector3(1.01f, -0.5f, 0);
-                break;
-            case SlotType.GemInlaySlot:
-                slot.SOnDrop(gameObject);
-                ToolTipsOffset = new Vector3(-0.92f, -0.52f, 0);
-                break;
-            default:
-                break;
-        }
+        slot.SOnDrop(gameObject);
     }
     
     //落下交换逻辑

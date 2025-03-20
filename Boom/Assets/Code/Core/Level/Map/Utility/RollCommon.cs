@@ -8,15 +8,17 @@ public class HaveID
 }
 
 [Serializable]
-public struct RollPR
+public class RollPR
 {
     public int ID;
-    public float Probability;
+    public float Probability; //基础概率（真实概率，如10%写为10f）
+    [NonSerialized] public int FailCount; //当前连续失败次数（不序列化）
 
-    public RollPR(int ID = -1, float Probability = -1)
+    public RollPR(int id, float prob)
     {
-        this.ID = ID;
-        this.Probability = Probability;
+        ID = id;
+        Probability = prob;
+        FailCount = 1;
     }
 }
 

@@ -18,7 +18,6 @@ public class ToolTipsBase : ItemBase,IPointerMoveHandler,IPointerExitHandler
     {
         DobuleClickTime = 0.35f;
         CurToolTipsMenuState = ToolTipsMenuState.Normal;
-        ToolTipsOffset = new Vector3(1.01f, -0.5f, 0);
         RightClickMenuOffset = new Vector3(0.75f, -0.35f, 0);
         CurTooltipsSC = UIManager.Instance.CommonUI.TooltipsGO.GetComponentInChildren<Tooltips>();
         CurRightClickMenuSC = UIManager.Instance.CommonUI.RightClickGO.GetComponentInChildren<RightClickMenu>();
@@ -46,6 +45,9 @@ public class ToolTipsBase : ItemBase,IPointerMoveHandler,IPointerExitHandler
     #region Tooltips说明窗口
     internal void DisplayTooltips(PointerEventData eventData)
     {
+        if (ToolTipsOffset == Vector3.zero)
+            ToolTipsOffset = new Vector3(1.01f, -0.5f, 0);
+        
         // 加载Tooltips
         if (!IsOpenedTooltip)
         {

@@ -57,33 +57,42 @@ public class RollManager: ScriptableObject
         return TargetProbs;
     }
     
+    //伪随机抽取
     public RollPR SingleRoll(List<RollPR> rollProbs)
     {
-        float c = Random.Range(0f, 100f);
-        RollPR curProb = new RollPR();
-        for (int j = 0; j < rollProbs.Count; j++)
-        {
-            float min = 0;
-            float max = 0;
-            if (j == 0)
-            {
-                min = 0;
-                max = rollProbs[j].Probability;
-            }
-            else
-            {
-                min = rollProbs[j-1].Probability;
-                max = rollProbs[j].Probability;
-            }
+        // 先计算总概率（用于归一化）
+        float totalAdjustedProb = 0f;
+        foreach (var rp in rollProbs)
+            totalAdjustedProb += Mathf.Min(100f, rp.Probability * rp.FailCount);
 
-            if (c >= min && c <= max)
+        // roll一个数，决定抽到哪个
+        float c = Random.Range(0f, totalAdjustedProb);
+        float accum = 0f;
+
+        RollPR selectedProb = null;
+
+        foreach (var rp in rollProbs)
+        {
+            float adjustedProb = Mathf.Min(100f, rp.Probability * rp.FailCount);
+            accum += adjustedProb;
+
+            if (c <= accum)
             {
-                curProb = rollProbs[j];
+                selectedProb = rp;
                 break;
             }
         }
 
-        return curProb;
+        //更新失败次数
+        foreach (var rp in rollProbs)
+        {
+            if (rp == selectedProb)
+                rp.FailCount = 1; // 抽到后重置
+            else
+                rp.FailCount += 1; // 没抽到则增加失败计数
+        }
+
+        return selectedProb;
     }
     #endregion
 }

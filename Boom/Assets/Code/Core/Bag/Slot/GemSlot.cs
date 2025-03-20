@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class GemSlot : SlotBase
 {
-    public Action OnGemDataChange;
     [SerializeField]
     UILockedState _state;
     public UILockedState State
@@ -29,7 +28,7 @@ public class GemSlot : SlotBase
             if (_curGemData != value)
             {
                 _curGemData = value;
-                OnGemDataChange?.Invoke();
+                InventoryManager.Instance._BulletInvData.RefreshModifiers();
             }
         }
     }
@@ -39,8 +38,9 @@ public class GemSlot : SlotBase
     public GameObject Locked;
     [Header("功能参数")]
     public Vector3 ChildScale = Vector3.one;
+    
+    void Awake() => ChangeState();
 
-  
     public override void SOnDrop(GameObject _childIns)
     {
         base.SOnDrop(_childIns);
@@ -48,6 +48,12 @@ public class GemSlot : SlotBase
         
         ItemBase curSC = _childIns.GetComponentInChildren<ItemBase>();
         Gem _gemNew = curSC as Gem;
+        //设置一下ToolTips根据不同Slot的偏移
+        if (SlotType == SlotType.GemBagSlot)
+            _gemNew.ToolTipsOffset = new Vector3(1.01f, -0.5f, 0);
+        if (SlotType == SlotType.GemInlaySlot)
+            _gemNew.ToolTipsOffset = new Vector3(-0.92f, -0.52f, 0);
+        
         //先清理之前的Slot的影子信息
         SlotManager.ClearGemSlot(_gemNew._data.CurSlot);
         _gemNew._data.CurSlot = this;
@@ -55,17 +61,13 @@ public class GemSlot : SlotBase
 
         CurGemData = _gemNew._data;
         //在GemSlotInner部分创建一个影分身
-        GameObject _newChildeIns = BagItemTools<GemInner>.CreateTempObjectGO(_gemNew._data,CreateItemType.MiniBagGem);
+        GameObject _newChildeIns = BagItemTools<GemInner>.
+            CreateTempObjectGO(_gemNew._data,CreateItemType.MiniBagGem);
         if (CurGemSlotInner != null)
         {
             SlotManager.ClearSlot(CurGemSlotInner);
             CurGemSlotInner.SOnDrop(_newChildeIns);
         }
-    }
-    
-    void Awake()
-    {
-        ChangeState();
     }
     
     void ChangeState()

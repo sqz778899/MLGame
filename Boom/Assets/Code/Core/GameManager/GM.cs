@@ -7,6 +7,8 @@ public class GM: MonoBehaviour
     public InventoryManager InventoryMgr { get; private set; }
     
     public BattleManager BattleMgr{ get; private set; }
+    
+    public StorylineManager StorylineMgr{ get; private set; }
 
     #region 单例的加载卸载
     public static GM Root { get; private set; }
@@ -24,6 +26,7 @@ public class GM: MonoBehaviour
         PlayerMgr = Root.gameObject.AddComponent<PlayerManager>();
         InventoryMgr = Root.gameObject.AddComponent<InventoryManager>();
         BattleMgr = Root.gameObject.AddComponent<BattleManager>();
+        StorylineMgr = Root.gameObject.AddComponent<StorylineManager>();
     }
     #endregion  
 }

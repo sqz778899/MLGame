@@ -102,6 +102,7 @@ public class InventoryManager : MonoBehaviour
         
         _InventoryData =  ResManager.instance.GetAssetCache<InventoryData>(PathConfig.InventoryDataPath);
         _BulletInvData =  ResManager.instance.GetAssetCache<BulletInvData>(PathConfig.BulletInvDataPath);
+        _BulletInvData.InitData();
     }
     #endregion 
 }

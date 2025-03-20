@@ -245,11 +245,16 @@ namespace Code.Editor
         
         void ExportDialogue()
         {
-            DataSet curTables = GetDataSet("BeginnerTutorial.xlsx");
             
             Dictionary<string,List<DiaSingle>> curDiaDesignDict = new Dictionary<string, List<DiaSingle>>();
-            for (int i = 0; i < curTables.Tables.Count; i++)
-                SetPerDialoguesData(ref curDiaDesignDict,curTables.Tables[i]);
+            
+            DataSet curTableTutorial = GetDataSet("BeginnerTutorial.xlsx");
+            for (int i = 0; i < curTableTutorial.Tables.Count; i++)
+                SetPerDialoguesData(ref curDiaDesignDict,curTableTutorial.Tables[i]);
+            
+            DataSet curTableStoryline = GetDataSet("Storyline.xlsx");
+            for (int i = 0; i < curTableStoryline.Tables.Count; i++)
+                SetPerDialoguesData(ref curDiaDesignDict,curTableStoryline.Tables[i]);
 
             string content01 = JsonConvert.SerializeObject(curDiaDesignDict, (Formatting)Formatting.Indented);
             File.WriteAllText(PathConfig.DialogueDesignJson, content01);

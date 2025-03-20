@@ -36,12 +36,14 @@ public class GUIBagManager
         GemRoot = BagRootSC.BagGemRootGO;
     }
 
+    #region 初始化背包内的子弹资产
     public void InitAllBagGO()
     {
         InitEquipBullets();
         InitSpawners();
     }
     
+    //初始化当前装备的子弹
     public void InitEquipBullets()
     {
         //...............Clear Old Data....................
@@ -57,7 +59,8 @@ public class GUIBagManager
         }
     }
     
-    public void InitSpawners()
+    //初始化子弹孵化器
+    void InitSpawners()
     {
         //..............Clear Old Data..................
         DraggableBulletSpawner[] oldSpawner = SpawnerSlotRoot.GetComponentsInChildren<DraggableBulletSpawner>();
@@ -88,6 +91,7 @@ public class GUIBagManager
             }
         }
     }
+    #endregion
 
     #region 显示/隐藏背包相关
     public void ShowBag()

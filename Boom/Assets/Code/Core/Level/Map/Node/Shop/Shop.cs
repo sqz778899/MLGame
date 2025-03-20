@@ -83,15 +83,8 @@ public class Shop:GUIBase
         //Clean Ins
         int preRollIns = RollInsRoot.transform.childCount;
         for (int i = preRollIns - 1; i >= 0; i--)
-            DestroyImmediate(RollInsRoot.transform.GetChild(i).gameObject);
+            Destroy(RollInsRoot.transform.GetChild(i).gameObject);
         return true;
-    }
-
-    void SetChildIns(GameObject _child, int _index)
-    {
-        Transform curPivot = ShopSlotRoot.transform.GetChild(_index);
-        _child.transform.SetParent(RollInsRoot.transform,false);
-        _child.transform.position = curPivot.position;
     }
     
     void OnceRollGem()
@@ -109,15 +102,18 @@ public class Shop:GUIBase
     {
         yield return new WaitForSeconds(aniTime);
         
-        //New Ins
         for (int i = 0; i < 5; i++)
         {
-            RollPR curProb = RollManager.Instance.SingleRoll(RollProbs);//抽一发
+            //抽一发
+            RollPR curProb = RollManager.Instance.SingleRoll(RollProbs);
+            //实例化商店宝石
             GemData tempData = new GemData(curProb.ID, null);
             GameObject curShopGem = BagItemTools<GemInShop>.CreateTempObjectGO(tempData,CreateItemType.ShopGem);
             GemInShop curGem = curShopGem.GetComponent<GemInShop>();
             curGem.CurShopNode = CurShopNode;
-            SetChildIns(curShopGem, i);
+            Transform curPivot = ShopSlotRoot.transform.GetChild(i);
+            curShopGem.transform.SetParent(RollInsRoot.transform,false);
+            curShopGem.transform.position = curPivot.position;
         }
     }
     #endregion

@@ -12,3 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4baeed416511bd47ad81bb6674dcc52, type: 3}
   m_Name: BulletInvData
   m_EditorClassIdentifier: 
+  EquipSlots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

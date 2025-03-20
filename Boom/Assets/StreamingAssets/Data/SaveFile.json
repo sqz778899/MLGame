@@ -6,7 +6,7 @@
   "RoomKeys": 0,
   "UserBulletSpawner": [
     {
-      "SpawnerCount": 0,
+      "SpawnerCount": 3,
       "ID": 1,
       "SlotID": 1,
       "SlotType": 0
@@ -24,16 +24,40 @@
       "SlotType": 0
     }
   ],
-  "UserCurBullets": [],
+  "UserCurBullets": [
+    {
+      "SpawnerCount": 0,
+      "ID": 1,
+      "SlotID": 1,
+      "SlotType": 6
+    },
+    {
+      "SpawnerCount": 0,
+      "ID": 1,
+      "SlotID": 2,
+      "SlotType": 6
+    }
+  ],
   "UserBulletSlotLockedState": {
     "0": true,
     "1": true,
-    "2": false,
-    "3": false,
-    "4": false
+    "2": true,
+    "3": true,
+    "4": true
   },
   "UserItems": [],
-  "UserGems": [],
+  "UserGems": [
+    {
+      "ID": 20,
+      "SlotID": 5,
+      "SlotType": 5
+    },
+    {
+      "ID": 20,
+      "SlotID": 2,
+      "SlotType": 5
+    }
+  ],
   "UserMapSate": [
     {
       "CurLevelID": 1,

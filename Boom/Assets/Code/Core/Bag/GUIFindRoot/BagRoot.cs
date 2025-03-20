@@ -20,20 +20,15 @@ public class BagRoot : MonoBehaviour
     public GameObject BagReadySlotGO;  //子弹槽
     public GameObject EquipItemRoot;  //装备栏
     BulletSlotRole[] _btnReadySlotSC;
-    [Header("特效资源")]
-    public GameObject SlotFx;
-    ResonanceSlotCol[] _slotFxs;
     
     #region 初始化数据
     //游戏最开始时候需要初始化的数据
     public void InitData()
     {
-        //共振特效资产初始化
-        _slotFxs = SlotFx.GetComponentsInChildren<ResonanceSlotCol>();
-        _slotFxs.ToList().ForEach(perFX => perFX.CloseEffect());
         //子弹槽初始化
         _btnReadySlotSC = BagReadySlotGO.GetComponentsInChildren<BulletSlotRole>(true);
         _btnReadySlotSC.ToList().ForEach(perSlot => perSlot.InitData());
+        InventoryManager.Instance._BulletInvData.RefreshModifiers();
     }
     
     void Start()
@@ -47,6 +42,7 @@ public class BagRoot : MonoBehaviour
     }
     #endregion
     
+    //子弹槽锁定状态
     public void RefreshBulletSlotLockedState()
     {
         Dictionary<int, bool> curDict = PlayerManager.Instance._PlayerData.CurBulletSlotLockedState;

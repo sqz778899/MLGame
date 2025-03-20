@@ -104,9 +104,11 @@ public class BulletData:ItemDataBase
     public ElementalTypes ElementalType;
     
     //动态数据层 运行时数据
+    public int ResonanceDamage;
     public int FinalDamage;
     public int FinalPiercing;
     public int FinalResonance;
+    public bool IsResonance; //是否开启共振
     public List<IBulletModifier> Modifiers = new();
     
     //子弹孵化器专用
@@ -172,11 +174,9 @@ public class BulletData:ItemDataBase
         FinalDamage = Damage;
         FinalPiercing = Piercing;
         FinalResonance = Resonance;
-
-        foreach (var modifier in Modifiers)
-        {
-            modifier.Modify(this);
-        }
+        Modifiers.ForEach(mo => mo.Modify(this));
+        
+        FinalDamage += ResonanceDamage;
     }
     #endregion
     

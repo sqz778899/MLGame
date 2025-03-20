@@ -36,7 +36,20 @@ public class Dialogue : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonUp(0) && _curState == DiaState.Start)
+        /*if (Input.GetMouseButtonUp(0) && _curState == DiaState.Start)
+        {
+            if (nextDialogueID == -1)//对话结束
+            {
+                CloseDialogue();
+                return;
+            }
+            UpdateNextDialogue(nextDialogueID);
+        }*/
+    }
+
+    public void NextDialogue()
+    {
+        if (_curState == DiaState.Start)
         {
             if (nextDialogueID == -1)//对话结束
             {
