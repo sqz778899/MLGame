@@ -58,29 +58,3 @@ public abstract class StorylineStepBase
         this.controller = controller;
     }
 }
-
-public class StepEnterRoom : StorylineStepBase
-{
-    int targetRoomID;
-    public StepEnterRoom(StorylineController controller, int roomID) : base(controller)
-    {
-        targetRoomID = roomID;
-    }
-
-    public override void Enter() => EventManager.OnRoomEntered += OnRoomEntered;
-
-    void OnRoomEntered(int roomID)
-    {
-        if (roomID == targetRoomID)
-        {
-            controller.StepCompleted();
-        }
-    }
-
-    public override void Exit()
-    {
-        EventManager.OnRoomEntered -= OnRoomEntered;
-    }
-
-    public override bool CheckComplete() => false;
-}

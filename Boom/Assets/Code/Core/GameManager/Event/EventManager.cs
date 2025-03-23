@@ -6,10 +6,10 @@ using UnityEngine;
 
 public static class EventManager
 {
-    public static Action<int> OnBulletPicked;
-    public static Action<int> OnBulletEquipped;
-    public static Action OnFightStart;
-    public static Action<int> OnGemInlayed;
+    public static Action OnBulletPicked;
+    public static Action OnBulletEquipped;
+    public static Action OnFirstBattleEnd;
+    public static Action OnGemEquipped;
     public static Action<int> OnRoomEntered;
 
     #region 主线剧情

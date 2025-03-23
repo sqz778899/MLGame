@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
 public class Dialogue : MonoBehaviour
@@ -36,15 +35,8 @@ public class Dialogue : MonoBehaviour
 
     void Update()
     {
-        /*if (Input.GetMouseButtonUp(0) && _curState == DiaState.Start)
-        {
-            if (nextDialogueID == -1)//对话结束
-            {
-                CloseDialogue();
-                return;
-            }
-            UpdateNextDialogue(nextDialogueID);
-        }*/
+        if (Input.GetKeyDown(KeyCode.Space))
+            NextDialogue();
     }
 
     public void NextDialogue()
@@ -69,9 +61,7 @@ public class Dialogue : MonoBehaviour
         NameLeft.text = NameRight.text = "";
         PLeft.sprite = PRight.sprite = null;
         _curDialogueDict?.Clear();
-        // 调用对话结束时的回调函数
         OnDialogueEnd?.Invoke();
-        OnDialogueEnd = null; // 取消订阅
     }
 
     //加载当前对话块信息

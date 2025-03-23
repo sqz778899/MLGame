@@ -9,24 +9,31 @@ public class SpriteClickHandler : MonoBehaviour
 
     [Header("显示相关")]
     public SpriteRenderer spriteRenderer;
+    public Renderer _renderer;
     public Color HeighLightColor = Color.white;
     internal Color defaultColor;
     internal Vector3 defaultScale;
     
     [Header("功能相关")]
     public bool IsLocked = false;
+    public bool IsSpeTutorial = false;//新手教程要用的flag，优先级高于一切
     
     internal virtual void Start()
     {
-        defaultColor = spriteRenderer.color;
-        defaultScale = spriteRenderer.transform.localScale;
+        if (spriteRenderer != null)
+        {
+            defaultColor = spriteRenderer.color;
+            defaultScale = spriteRenderer.transform.localScale;
+        }
+        else
+            _renderer = transform.GetChild(0).GetComponent<Renderer>();
     }
 
     #region 虚函数们
     internal virtual void OnMouseEnter()
     {
         if (EventSystem.current.IsPointerOverGameObject()) return; // 如果鼠标在 UI 上，则直接返回 false
-        if (IsLocked || UIManager.Instance.IsLockedClick) return;
+        if ((IsLocked || UIManager.Instance.IsLockedClick) && !IsSpeTutorial) return;
         HighLight();
     }
     
@@ -58,20 +65,29 @@ public class SpriteClickHandler : MonoBehaviour
             }
             return; // 如果有UI遮挡，直接返回
         }*/
-        if (IsLocked || UIManager.Instance.IsLockedClick) return;
+        if ((IsLocked || UIManager.Instance.IsLockedClick) && !IsSpeTutorial) return;
         onClick.Invoke();
     }
     #endregion
 
+    #region 高亮显示相关
     public void HighLight()
     {
         uint layerToAdd = 1u << 1;
-        spriteRenderer.renderingLayerMask |= layerToAdd;
+        if (spriteRenderer == null)
+            _renderer.renderingLayerMask |= layerToAdd;
+        else
+            spriteRenderer.renderingLayerMask |= layerToAdd;
+     
     }
     
     public void QuitHighLight()
     {
         uint layerToRemove = 1u << 1;
-        spriteRenderer.renderingLayerMask &= ~layerToRemove;
+        if (spriteRenderer == null)
+            _renderer.renderingLayerMask &= ~layerToRemove;
+        else
+            spriteRenderer.renderingLayerMask &= ~layerToRemove;
     }
+    #endregion
 }

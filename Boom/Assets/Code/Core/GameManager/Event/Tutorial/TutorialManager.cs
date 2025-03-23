@@ -374,7 +374,7 @@ public class TutorialManager : MonoBehaviour
     void ResetBullet(GameObject bullet)
     {
         BulletMapNode bm = bullet.GetComponent<BulletMapNode>();
-        bm.SpineQuitHighLight();
+        bm.QuitHighLight();
     }
 
     void MarkGO(GameObject ins,GameObject fx = null)

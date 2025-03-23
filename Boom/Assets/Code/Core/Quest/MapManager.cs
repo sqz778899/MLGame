@@ -76,6 +76,7 @@ public class MapManager : MonoBehaviour
         currentMap.transform.SetParent(MapResRoot.transform,false);
         _mapController = currentMap.GetComponent<MapController>();
         PlayerManager.Instance.RoleInMapGO = _mapController.Role;
+        PlayerManager.Instance.RoleInMapSC = _mapController.Role.GetComponent<RoleInMap>();
         
         //获取地图房间节点
         _allMapRooms = currentMap.GetComponentsInChildren<MapRoomNode>();
@@ -168,6 +169,11 @@ public class MapManager : MonoBehaviour
         else
             Debug.LogWarning("地图Prefab缺少MapController组件");
     }
+    #endregion
+
+    #region 外部调用的各种关于地图信息的接口
+    public MapRoomNode GetMapRoomNode(int roomID) => _allMapRooms.FirstOrDefault(r => r.RoomID == roomID);
+
     #endregion
 
     #region 不太关心的各种方法

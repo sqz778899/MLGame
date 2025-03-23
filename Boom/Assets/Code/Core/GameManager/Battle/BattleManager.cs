@@ -8,6 +8,8 @@ public class BattleManager: MonoBehaviour
     public BattleLogic battleLogic;
     public BattleUIController battleUI;
 
+    public bool IsInBattle = false;
+
     #region 事件的注册和注销
     void Start()
     {
@@ -27,6 +29,7 @@ public class BattleManager: MonoBehaviour
     public void EnterFight(EnemyMiddleData _enemyMidData,int _levelID)
     {
         InitData();
+        IsInBattle = true;
         //1)进入战斗场景
         _MapManager.SwitchFightScene();
         //2)初始化战斗数据
@@ -52,6 +55,7 @@ public class BattleManager: MonoBehaviour
     //赢得战斗
     public void WinToNextRoom()
     {
+        IsInBattle = false;
         battleUI.InitWinFailGUI();
         _MapManager.SwitchMapScene();
         battleData.CurMapSate.FinishAndToNextRoom();//切换当前房间
@@ -61,6 +65,7 @@ public class BattleManager: MonoBehaviour
     //战斗失败
     public void FailToThisRoom()
     {
+        IsInBattle = false;
         battleUI.InitWinFailGUI();
         _MapManager.SwitchMapScene();
         _MapManager.SetRolePos();

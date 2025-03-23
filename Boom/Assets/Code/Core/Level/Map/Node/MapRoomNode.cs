@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class MapRoomNode : MonoBehaviour
 {
@@ -46,8 +47,9 @@ public class MapRoomNode : MonoBehaviour
     }
     
     //Room节点下全部资产信息
-    ArrowNode[] _arrows;     //全部的箭头
-    MapNodeBase[] _resources; //全部的资源
+    public ArrowNode[] _arrows;     //全部的箭头
+    public MapNodeBase[] _resources; //全部的资源
+    public bool IsFogUnLocked; //播放完解锁动画了，已经全部解锁了
 
     public void InitData()
     {
@@ -58,7 +60,7 @@ public class MapRoomNode : MonoBehaviour
             _instanceFogMat = new Material(RoomFog.material);
             RoomFog.material = _instanceFogMat;
         }
-        //State = MapRoomState.IsLocked;
+        IsFogUnLocked = false;
     }
 
     #region 开启背包时锁定所有物体
@@ -96,7 +98,8 @@ public class MapRoomNode : MonoBehaviour
             }
         }
     }
-    
+
+    #region 迷雾解锁溶解相关
     private IEnumerator UnlockRoomAnimation()
     {
         // 设置溶解方向
@@ -125,5 +128,7 @@ public class MapRoomNode : MonoBehaviour
         
         _resources.ToList().ForEach(r => r.IsLocked = false);
         _arrows.ToList().ForEach(r => r.IsLocked = false);
+        IsFogUnLocked = true;
     }
+    #endregion
 }

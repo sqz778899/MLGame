@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class EternalCavans : MonoBehaviour
 {
@@ -49,6 +50,15 @@ public class EternalCavans : MonoBehaviour
     
     [Header(("对话系统"))]
     public Dialogue DialogueSC;
+
+    [Header("新手引导使用的资产")] 
+    public Transform btnBag_Apos;
+    public GameObject btnSWBullet;
+    public Transform btnSWBullet_Apos;
+    public GameObject btnSWGem;
+    public Transform btnSWGem_Apos;
+    public GameObject btnStart;
+    public Transform btnStart_Apos;
     
     public SceneState CurSceneState { get; private set; }
     BagRoot _bagRootSC => BagRoot.GetComponent<BagRoot>();
@@ -92,6 +102,7 @@ public class EternalCavans : MonoBehaviour
     #region 开关背包
     public void OpendBag()
     {
+        if(UIManager.Instance.IsLockedClick) return;
         UIManager.Instance.BagUI.ShowBag();
         _bagRootSC.RefreshBulletSlotLockedState();
         btnBag.SetActive(false);
@@ -103,6 +114,7 @@ public class EternalCavans : MonoBehaviour
     
     public void CloseBag()
     {
+        if(UIManager.Instance.IsLockedClick) return;
         UIManager.Instance.BagUI.HideBag();
         if(CurSceneState == SceneState.MainEnv)
             TitleRoot.SetActive(false);

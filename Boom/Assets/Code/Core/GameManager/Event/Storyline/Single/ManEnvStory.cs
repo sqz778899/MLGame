@@ -7,10 +7,12 @@ public class ManEnvStory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(sss());
     }
 
-    public void sss()
+    IEnumerator sss()
     {
-        EventManager.OnChapterOne?.Invoke(); 
+        yield return new WaitForFixedUpdate();
+        EventManager.OnChapterOne?.Invoke();
     }
 }

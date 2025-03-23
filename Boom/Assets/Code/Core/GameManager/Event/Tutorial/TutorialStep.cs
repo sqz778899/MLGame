@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using Sirenix.Utilities;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 //管理步骤状态机
 public class TutorialController
@@ -42,43 +44,5 @@ public abstract class TutorialStepBase
     public TutorialStepBase(TutorialController controller)
     {
         this.controller = controller;
-    }
-}
-
-//具体引导步骤继承基类
-public class StepPickBullet : TutorialStepBase
-{
-    GameObject bullet;
-    GameObject arrow;
-
-    public StepPickBullet(TutorialController controller, GameObject bullet, GameObject arrow)
-        : base(controller)
-    {
-        this.bullet = bullet;
-        this.arrow = arrow;
-    }
-
-    public override void Enter()
-    {
-        UIManager.Instance.IsLockedClick = true;
-        bullet.AddComponent<ShaderHoleController>().radius = 0.06f;
-        arrow.SetActive(true);
-
-        EventManager.OnBulletPicked += OnBulletPicked;
-    }
-
-    void OnBulletPicked(int bulletID)
-    {
-        Exit();
-        controller.NextStep();
-    }
-
-    public override void Exit()
-    {
-        UIManager.Instance.IsLockedClick = false;
-        Object.Destroy(bullet.GetComponent<ShaderHoleController>());
-        arrow.SetActive(false);
-
-        EventManager.OnBulletPicked -= OnBulletPicked;
     }
 }

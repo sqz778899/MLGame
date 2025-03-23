@@ -15,8 +15,15 @@ public class FloatingIcon : MonoBehaviour
         StartFloating();
     }
 
+    public void ResetPos(Vector3 pos)
+    {
+        startPos = pos;
+        StartFloating();
+    }
+
     void StartFloating()
     {
+        transform.DOKill();
         transform.DOLocalMoveY(startPos.y + floatDistance, duration)
             .SetEase(easeType)
             .SetLoops(-1, LoopType.Yoyo);

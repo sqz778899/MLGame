@@ -7,6 +7,7 @@ public class PlayerManager : MonoBehaviour
 {
     public GameObject RoleInFightGO;
     public GameObject RoleInMapGO;
+    public RoleInMap RoleInMapSC;
     public PlayerData _PlayerData;
     
     #region 单例的加载卸载

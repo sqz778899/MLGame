@@ -9,6 +9,7 @@ public class GM: MonoBehaviour
     public BattleManager BattleMgr{ get; private set; }
     
     public StorylineManager StorylineMgr{ get; private set; }
+    
 
     #region 单例的加载卸载
     public static GM Root { get; private set; }
@@ -21,7 +22,10 @@ public class GM: MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         else
+        {
             Destroy(gameObject);
+            return; // ← 立即返回，防止执行后续代码
+        }
         
         PlayerMgr = Root.gameObject.AddComponent<PlayerManager>();
         InventoryMgr = Root.gameObject.AddComponent<InventoryManager>();

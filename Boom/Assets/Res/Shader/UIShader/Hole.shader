@@ -2,9 +2,10 @@ Shader "Custom/CircularHoleShader"
 {
     Properties
     {
+        _MainTex ("Base Texture", 2D) = "white" { }
         _Color ("Base Color", Color) = (1, 0, 0, 1)
         _HoleCenter ("Hole Center", Vector) = (0.5, 0.5, 0, 0)
-        _HoleRadius ("Hole Radius", Float) = 0.2
+        //_HoleRadius ("Hole Radius", Float) = 0.2
         _EdgeSoftness ("Edge Softness", Float) = 0.05
     }
 
@@ -17,6 +18,7 @@ Shader "Custom/CircularHoleShader"
             "RenderType"="Transparent"
             "PreviewType"="Plane"
             "CanUseSpriteAtlas"="True"
+            "RenderPipeline"="UniversalPipeline"
         }
 
         Cull Off
@@ -25,7 +27,7 @@ Shader "Custom/CircularHoleShader"
         Blend SrcAlpha OneMinusSrcAlpha
         Pass
         {
-            Tags { "LightMode"="UniversalForward" }
+            Tags { "LightMode"="Universal2D" }
 
             HLSLPROGRAM
             #pragma vertex vert
@@ -66,11 +68,13 @@ Shader "Custom/CircularHoleShader"
 
             half4 frag(Varyings i) : SV_Target
             {
+                //return half4(0,1,1,1);
                 float2 holeScreen = float2(_HoleScreenPos.x/_ScreenParams.x,_HoleScreenPos.y/_ScreenParams.y);
                 //float2 holeScreen = float2(2876/_ScreenParams.x,695/_ScreenParams.y);
                 // 计算当前像素到洞位置的世界空间距离
                 float distanceFromCenter = distance(i.uv, holeScreen);
 
+                //_HoleRadius = 0.1;
                 float alpha = smoothstep(_HoleRadius - _EdgeSoftness, _HoleRadius + _EdgeSoftness, distanceFromCenter);
                 //float alpha = lerp(0,_HoleRadius + _EdgeSoftness,distanceFromCenter);
                 // 如果当前像素的距离小于给定的半径，则设置透明
