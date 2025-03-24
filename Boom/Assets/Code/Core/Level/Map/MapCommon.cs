@@ -12,23 +12,17 @@ public enum   MapRoomState
 [Serializable]
 public class MapSate
 {
-    //public int CurMapID;
     public int CurLevelID;
     public int CurRoomID;
     public int TargetRoomID;
     //
-    public List<int> IsFinishedMaps;//已经完成的Map
-    public List<int> IsFinishedLevels;//已经完成的Map
     public List<int> IsFinishedRooms;//已经完成的RoomID
 
     public MapSate()
     {
-        //CurMapID = 1;
         CurLevelID = 1;
         CurRoomID = 1;
         TargetRoomID = 1;
-        IsFinishedMaps = new List<int>();
-        IsFinishedLevels = new List<int>();
         IsFinishedRooms = new List<int>();
     }
 

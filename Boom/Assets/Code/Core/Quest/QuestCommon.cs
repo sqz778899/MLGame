@@ -9,7 +9,9 @@ public enum QuestState
     NotStarted = 1,
     InProgress = 2,
     Completed = 3,
+    Failed = 4
 }
+
 
 [Serializable]
 public class Quest
@@ -20,7 +22,7 @@ public class Quest
     [TextArea] 
     public string Description;       // 任务描述
     public QuestState State;         // 任务状态
-    
+    public bool IsCompleted;         // 是否完成过
     public int DifficultyLevel;         // 难度等级（用于调整怪物或地图状态）
 
     //初始化策划配置，不变的状态
@@ -44,6 +46,7 @@ public class Quest
             InitQuest();
             State = data.State;
             DifficultyLevel = data.DifficultyLevel;
+            IsCompleted = data.IsCompleted;
         }
     }
     

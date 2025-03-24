@@ -18,6 +18,23 @@ public class L1Step1PickBullet : TutorialStepBase
 
     public override void Enter()
     {
+        //1)注册事件，结束流程后调用
+        EventManager.OnBulletPicked += OnBulletPicked;
+        GlobalTicker.Instance.OnUpdate += Update;
+    }
+    
+    void Update()
+    {
+        if (PlayerManager.Instance._QuestData.MainStoryProgress == 0)
+        {
+            GlobalTicker.Instance.OnUpdate -= Update;
+            BeginTutorial();
+        }
+    }
+    
+    void BeginTutorial()
+    {
+        GlobalTicker.Instance.OnUpdate -= Update;
         //1)设置引导板状态
         tutorialBG.enabled = false;
         fxArrow.Clear();
@@ -26,8 +43,6 @@ public class L1Step1PickBullet : TutorialStepBase
         Dialogue curDia = EternalCavans.Instance.DialogueSC;
         curDia.LoadDialogue("魔法基础大聪明");
         curDia.OnDialogueEnd += PickBullet;
-        //3)注册事件，结束流程后调用
-        EventManager.OnBulletPicked += OnBulletPicked;
     }
 
     void PickBullet()
@@ -360,6 +375,7 @@ public class L1Step4EquipGem : TutorialStepBase
     {
         fxArrow.Clear();
         fxArrow.Stop();
+        _btnSWGem.GetComponent<Button>().onClick.RemoveListener(EquipGem);
         //1)设置槽位高亮
         HandPointMove tsc = fXHand.gameObject.GetComponent<HandPointMove>();
         //2)小手平移特效
@@ -404,7 +420,6 @@ public class L1Step4EquipGem : TutorialStepBase
         tutorialBG.enabled = false;
         fxArrow.Clear();
         fxArrow.Stop();
-        
         EventManager.OnGemEquipped?.Invoke();
     }
 

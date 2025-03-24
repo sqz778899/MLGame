@@ -20,17 +20,15 @@ public class GM: MonoBehaviour
         {
             Root = this;
             DontDestroyOnLoad(gameObject);
+            PlayerMgr = Root.gameObject.AddComponent<PlayerManager>();
+            InventoryMgr = Root.gameObject.AddComponent<InventoryManager>();
+            BattleMgr = Root.gameObject.AddComponent<BattleManager>();
+            StorylineMgr = Root.gameObject.AddComponent<StorylineManager>();
         }
         else
         {
             Destroy(gameObject);
-            return; // ← 立即返回，防止执行后续代码
         }
-        
-        PlayerMgr = Root.gameObject.AddComponent<PlayerManager>();
-        InventoryMgr = Root.gameObject.AddComponent<InventoryManager>();
-        BattleMgr = Root.gameObject.AddComponent<BattleManager>();
-        StorylineMgr = Root.gameObject.AddComponent<StorylineManager>();
     }
     #endregion  
 }

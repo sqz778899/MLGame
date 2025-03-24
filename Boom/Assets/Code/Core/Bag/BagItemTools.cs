@@ -45,7 +45,7 @@ public static class BagItemTools<T> where T:ItemBase
         ItemBase curSC = objectIns.GetComponent<ItemBase>();
         if (curSC is Gem curGem)
         {
-            InventoryManager.Instance._InventoryData.RemoveGem(curGem._data);
+            InventoryManager.Instance._InventoryData.RemoveGemToBag(curGem._data);
             SlotManager.ClearSlot(curGem._data.CurSlot);
             GameObject.DestroyImmediate(objectIns);
         }
@@ -66,23 +66,6 @@ public static class BagItemTools<T> where T:ItemBase
         GameObject curObjectIns = null;
         T curObjectSC = null;
         InitObjectIns(curObjectData, ref curObjectIns, ref curObjectSC);
-
-        // 同步到 数据层
-        switch (slotType)
-        {
-            case SlotType.BagSlot:
-                InventoryManager.Instance._InventoryData.AddItemToBag(curObjectData as ItemData);
-                break;
-            case SlotType.GemBagSlot:
-                InventoryManager.Instance._InventoryData.AddGemToBag(curObjectData as GemData);
-                break;
-            case SlotType.GemInlaySlot:
-                InventoryManager.Instance._InventoryData.AddGemToEquip(curObjectData as GemData);
-                break;
-            case SlotType.ElementSlot:
-                InventoryManager.Instance._InventoryData.AddItemToEquip(curObjectData as ItemData);
-                break;
-        }
     }
     #endregion
     

@@ -9,7 +9,7 @@ public class StorylineManager:MonoBehaviour
     void Start()
     {
         StorylineController mainQuest = new StorylineController();
-        mainQuest.AddStep(new ChapterOne(mainQuest));
+        //mainQuest.AddStep(new ChapterOne(mainQuest));
         /*mainQuest.AddStep(new StepDialogue(mainQuest, "MainQuest01"));
         mainQuest.AddStep(new StepCombat(mainQuest, enemyID: 201));
         mainQuest.AddStep(new StepCollectItem(mainQuest, itemID: 301));*/

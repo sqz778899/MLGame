@@ -105,6 +105,7 @@ public static class PathConfig
    
    //..............................OBJ Data..............................................
    public static string PlayerDataPath = GetPrepath() + "Res/DataOBJ/PlayerData.asset";
+   public static string QuestDataPath = GetPrepath() + "Res/DataOBJ/QuestData.asset";
    public static string InventoryDataPath = GetPrepath() + "Res/DataOBJ/InventoryData.asset";
    public static string BulletInvDataPath = GetPrepath() + "Res/DataOBJ/BulletInvData.asset";
    public static string BattleDataPath = GetPrepath() + "Res/DataOBJ/BattleData.asset";

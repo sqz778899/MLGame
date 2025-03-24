@@ -47,17 +47,34 @@ public class BagRootMini : MonoBehaviour
     {
         if(!IsCameraNear)
         SetCameraEdit();//拉近摄像机
+        SetBulletInnerTextUp();//把子弹的伤害数字抬起来
     }
     
     //响应开始在战斗场景内推远摄像机的事件
     public void EditEnd()
     {
-        if(IsCameraNear)
+        if (IsCameraNear)
+        {
             SetCameraBattle();//推远摄像机
+            SetBulletInnerTextReturn();//把伤害数字位置还原
+        }
     }
+
     
+    //把伤害数字抬起来
+    void SetBulletInnerTextUp()
+    {
+        RoleInner role = PlayerManager.Instance.RoleInFightGO.GetComponent<RoleInner>();
+        role.Bullets.ForEach(b=>b.UpText());
+    }
+    //把伤害数字位置还原
+    void SetBulletInnerTextReturn()
+    {
+        RoleInner role = PlayerManager.Instance.RoleInFightGO.GetComponent<RoleInner>();
+        role.Bullets.ForEach(b=>b.ReturnText());
+    }
     //拉近摄像机
-    public void SetCameraEdit()
+    void SetCameraEdit()
     {
         float duration = 0.5f;
         IsCameraNear = true;
@@ -79,7 +96,7 @@ public class BagRootMini : MonoBehaviour
     }
     
     //推远摄像机
-    public void SetCameraBattle()
+    void SetCameraBattle()
     {
         IsCameraNear = false;
         Sequence seq = DOTween.Sequence();

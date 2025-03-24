@@ -80,6 +80,6 @@ public class ArrowNode : MapNodeBase
     //游戏胜利返回城镇
     public void ReturnTown()
     {
-        MSceneManager.Instance.LoadScene(1);
+        QuestManager.Instance.CompleteQuest();
     }
 }

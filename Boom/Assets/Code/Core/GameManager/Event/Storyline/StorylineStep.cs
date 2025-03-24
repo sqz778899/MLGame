@@ -31,7 +31,7 @@ public class StorylineController
         NextStep();
     }
 
-    void NextStep()
+    public void NextStep()
     {
         if (stepsQueue.Count > 0)
         {

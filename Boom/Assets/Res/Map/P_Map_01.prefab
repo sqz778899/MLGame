@@ -376,6 +376,7 @@ MonoBehaviour:
   DissolveDir: {x: 0, y: 1}
   _arrows: []
   _resources: []
+  IsFogUnLocked: 0
 --- !u!61 &3231036333781919027
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1801,6 +1802,7 @@ MonoBehaviour:
   DissolveDir: {x: 0, y: 1}
   _arrows: []
   _resources: []
+  IsFogUnLocked: 0
 --- !u!61 &1356816674443596480
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1958,6 +1960,7 @@ MonoBehaviour:
   DissolveDir: {x: 0, y: 1}
   _arrows: []
   _resources: []
+  IsFogUnLocked: 0
 --- !u!61 &3387941743155879949
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2908,6 +2911,7 @@ MonoBehaviour:
   DissolveDir: {x: 1, y: 0}
   _arrows: []
   _resources: []
+  IsFogUnLocked: 0
 --- !u!61 &8131630392519174585
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4051,6 +4055,7 @@ MonoBehaviour:
   DissolveDir: {x: -1, y: 0}
   _arrows: []
   _resources: []
+  IsFogUnLocked: 0
 --- !u!61 &3843007051104591685
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4908,6 +4913,7 @@ MonoBehaviour:
   DissolveDir: {x: 1, y: 0}
   _arrows: []
   _resources: []
+  IsFogUnLocked: 0
 --- !u!61 &6352163165738189504
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5017,8 +5023,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   spriteRenderer: {fileID: 6135459440444530798}
+  _renderer: {fileID: 0}
   HeighLightColor: {r: 0.63207537, g: 0.9399065, b: 1, a: 1}
   IsLocked: 0
+  IsSpeTutorial: 0
   NodeTextNode: {fileID: 9158951561548902006}
   EPara:
     CurEffectType: 0
@@ -6339,6 +6347,7 @@ MonoBehaviour:
   DissolveDir: {x: -1, y: 0}
   _arrows: []
   _resources: []
+  IsFogUnLocked: 0
 --- !u!61 &3134938386025345627
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6590,6 +6599,7 @@ MonoBehaviour:
   DissolveDir: {x: 0, y: 1}
   _arrows: []
   _resources: []
+  IsFogUnLocked: 0
 --- !u!61 &8592907729817091801
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7046,7 +7056,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6888136326317888262, guid: a18b688c63c6b2c45bb3b249a4fe336e, type: 3}
       propertyPath: CoinsNum
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8193,6 +8203,14 @@ PrefabInstance:
     - target: {fileID: 7456018186503698756, guid: d9d20a734d0e2724baab70f6d9a64b48, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8081991846097052204, guid: d9d20a734d0e2724baab70f6d9a64b48, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 8081991846097052204, guid: d9d20a734d0e2724baab70f6d9a64b48, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

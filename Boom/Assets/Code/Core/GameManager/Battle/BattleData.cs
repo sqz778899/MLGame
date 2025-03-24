@@ -35,4 +35,13 @@ public class BattleData: ScriptableObject
         CurWarReport = new();
         CurWarReport.CurWarIndex += 1;
     }
+    
+    public void ClearData()
+    {
+        CurEnemy = null;
+        CurRole = null;
+        CurWarReport = new WarReport();
+        CurMapSate = new MapSate();
+        CurLevel = null;
+    }
 }

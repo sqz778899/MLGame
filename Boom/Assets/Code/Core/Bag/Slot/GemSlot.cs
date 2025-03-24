@@ -55,11 +55,21 @@ public class GemSlot : SlotBase
             _gemNew.ToolTipsOffset = new Vector3(-0.92f, -0.52f, 0);
         
         //先清理之前的Slot的影子信息
+        if (_gemNew._data.CurSlot.SlotType == SlotType.GemBagSlot)
+            InventoryManager.Instance._InventoryData.RemoveGemToBag(_gemNew._data);
+        else
+            InventoryManager.Instance._InventoryData.UnEquipGem(_gemNew._data);
         SlotManager.ClearGemSlot(_gemNew._data.CurSlot);
         _gemNew._data.CurSlot = this;
         MainID = _gemNew._data.ID;
-
+        
+        //同步到数据层
         CurGemData = _gemNew._data;
+        if (SlotType == SlotType.GemBagSlot)
+            InventoryManager.Instance._InventoryData.AddGemToBag(CurGemData);
+        else
+            InventoryManager.Instance._InventoryData.EquipGem(CurGemData);
+        
         //在GemSlotInner部分创建一个影分身
         GameObject _newChildeIns = BagItemTools<GemInner>.
             CreateTempObjectGO(_gemNew._data,CreateItemType.MiniBagGem);

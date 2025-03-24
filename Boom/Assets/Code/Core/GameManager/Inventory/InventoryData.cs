@@ -14,21 +14,19 @@ public class InventoryData: ScriptableObject
     public List<ItemData> EquipItems = new();
     public List<GemData> EquipGems = new();
 
-    #region 宝石操作
-    public void AddGemToBag(GemData gem) => BagGems.Add(gem);
-    public void AddGemToEquip(GemData gem) => EquipGems.Add(gem);
-    public void RemoveGem(GemData gem) => BagGems.Remove(gem);
-    public void EquipGem(GemData gem)
+    public void ClearData()
     {
-        if (BagGems.Remove(gem))
-            EquipGems.Add(gem);
+        BagItems.Clear();
+        BagGems.Clear();
+        EquipItems.Clear();
+        EquipGems.Clear();
     }
 
-    public void UnEquipGem(GemData gem)
-    {
-        if (EquipGems.Remove(gem))
-            BagGems.Add(gem);
-    }
+    #region 宝石操作
+    public void AddGemToBag(GemData gem) => BagGems.Add(gem);
+    public void RemoveGemToBag(GemData gem) => BagGems.Remove(gem);
+    public void EquipGem(GemData gem) => EquipGems.Add(gem);
+    public void UnEquipGem(GemData gem) => EquipGems.Remove(gem);
     #endregion
     
     #region 道具操作

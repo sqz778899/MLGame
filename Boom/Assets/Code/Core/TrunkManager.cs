@@ -104,6 +104,7 @@ public class TrunkManager: ScriptableObject
             UserQuests.Add(newQuest);
         }
         _saveFile.UserQuests = UserQuests;
+        _saveFile.UserMainStoryProgress = 0;
         #endregion
         
         #region Map
@@ -169,6 +170,7 @@ public class TrunkManager: ScriptableObject
             UserQuests.Add(newQuest);
         }
         _saveFile.UserQuests = UserQuests;
+        _saveFile.UserMainStoryProgress = 0;
         #endregion
         
         #region Map
@@ -233,6 +235,7 @@ public class TrunkManager: ScriptableObject
             UserQuests.Add(newQuest);
         }
         _saveFile.UserQuests = UserQuests;
+        _saveFile.UserMainStoryProgress = 0;
         #endregion
         
         #region Map

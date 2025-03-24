@@ -128,7 +128,7 @@ public class EternalCavans : MonoBehaviour
     public void Continue() => OnFightContinue?.Invoke();
     public void WinToNextRoom() => OnWinToNextRoom?.Invoke();
     public void FailToThisRoom() => OnFailToThisRoom?.Invoke();
-    public void GameOver() => MSceneManager.Instance.LoadScene(1);
+    public void GameOver() => QuestManager.Instance.FailQuest();
     #endregion
     
     public void OpenSettingLv2()

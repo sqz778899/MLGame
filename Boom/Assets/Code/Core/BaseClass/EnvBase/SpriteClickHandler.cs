@@ -45,8 +45,8 @@ public class SpriteClickHandler : MonoBehaviour
     internal virtual void OnMouseUp()
     {
         // 检测是否有UI遮挡
-        if (EventSystem.current.IsPointerOverGameObject()) return; // 如果鼠标在 UI 上，则直接返回 false
-        /*{
+        if (EventSystem.current.IsPointerOverGameObject()) //return; // 如果鼠标在 UI 上，则直接返回 false
+        {
             // 获取所有被点击的UI对象
             PointerEventData eventData = new PointerEventData(EventSystem.current);
             eventData.position = Input.mousePosition;
@@ -64,7 +64,7 @@ public class SpriteClickHandler : MonoBehaviour
                 }
             }
             return; // 如果有UI遮挡，直接返回
-        }*/
+        }
         if ((IsLocked || UIManager.Instance.IsLockedClick) && !IsSpeTutorial) return;
         onClick.Invoke();
     }

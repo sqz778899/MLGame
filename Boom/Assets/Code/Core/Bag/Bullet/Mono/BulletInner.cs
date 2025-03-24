@@ -3,14 +3,17 @@ using System.Collections;
 using Spine.Unity;
 using System.Collections.Generic;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 
 public class BulletInner:ItemBase
 {
     public BulletData _data; //绝对核心数据
     public RoleInner CurRole; //当前持有的角色
-    
-    [Header("表现资产")]
+
+    [Header("表现资产")] 
+    public TextMeshPro txtDamage;
+    Vector3 textDamagePos;
     public Renderer CurRenderer;
     public SkeletonAnimation Skeleton;
     public GameObject HitEffect; // 击中效果预制体
@@ -46,6 +49,7 @@ public class BulletInner:ItemBase
         AniUtility.PlayIdle(Skeleton,AniScale);
         foreach (Material material in _materials)
             material.SetFloat("_Transparency", 1);
+        textDamagePos = txtDamage.transform.position;
     }
 
     void Update()
@@ -68,6 +72,15 @@ public class BulletInner:ItemBase
                 break;
         }
     }
+
+    public void UpText()
+    {
+        Vector3 tmpPos = textDamagePos;
+        tmpPos.y += 0.4f;
+        txtDamage.transform.position = tmpPos;
+    }
+    
+    public void ReturnText() => txtDamage.transform.position= textDamagePos;
 
     #region 击中敌人相关
     void OnTriggerEnter2D(Collider2D other)
@@ -140,7 +153,8 @@ public class BulletInner:ItemBase
         transform.DOMove(targetPos, aniTime);
         transform.DOScale(curScale * 0.5f , aniTime);
         StartCoroutine(FadeOut(aniTime));
-        
+        //......关闭伤害提示UI
+        txtDamage.gameObject.SetActive(false);
         float elapsed = 0f;
         while (elapsed < 10f && _state == BulletInnerState.AttackBegin)
         {
@@ -247,6 +261,7 @@ public class BulletInner:ItemBase
             PathConfig.BulletSpfxTemplate);
         HitSpfxAsset = ResManager.instance.GetAssetCache<SkeletonDataAsset>
             (PathConfig.GetBulletSpfxPath(_data.ID));
+        txtDamage.text = _data.FinalDamage.ToString();
     }
     
     void OnDestroy()

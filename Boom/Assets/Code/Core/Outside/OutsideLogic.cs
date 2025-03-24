@@ -20,6 +20,7 @@ public class OutsideLogic : MonoBehaviour
         TrunkManager.Instance.ForceRefresh();
         UIManager.Instance.InitStartGame();
         SaveManager.LoadSaveFile();
+        UIManager.Instance.BagUI.InitAllBagGO(); //初始化背包内GO
         //todo ......................
         EternalCavans.Instance.InMainEnv();
         EternalCavans.Instance.OnOpenBag += LockedAllThings;

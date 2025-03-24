@@ -252,7 +252,7 @@ namespace Code.Editor
             for (int i = 0; i < curTableTutorial.Tables.Count; i++)
                 SetPerDialoguesData(ref curDiaDesignDict,curTableTutorial.Tables[i]);
             
-            DataSet curTableStoryline = GetDataSet("Storyline.xlsx");
+            DataSet curTableStoryline = GetDataSet("StorylineDia.xlsx");
             for (int i = 0; i < curTableStoryline.Tables.Count; i++)
                 SetPerDialoguesData(ref curDiaDesignDict,curTableStoryline.Tables[i]);
 

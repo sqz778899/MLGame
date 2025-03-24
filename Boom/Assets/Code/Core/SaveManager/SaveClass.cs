@@ -24,7 +24,8 @@ public class SaveFileJson
     public List<ItemSaveData> UserItems;          //用户道具
     public List<GemBaseSaveData> UserGems;        //用户宝石
     public List<MapSate> UserMapSate;         //地图状态
-    public List<QuestSaveData> UserQuests;          //用户任务
+    public List<QuestSaveData> UserQuests;          //用户任务完成情况
+    public int UserMainStoryProgress; //主线剧情进度
 
     public SaveFileJson()
     {
@@ -227,12 +228,14 @@ public class ItemSaveData:ItemBaseSaveData
 public class QuestSaveData
 {
     public int ID;                   // 唯一ID
-    public QuestState State;         // 任务状态
+    public bool IsCompleted;         // 是否完成过
+    public QuestState State;         // 任务此时状态（可以重复刷所以与上述不冲突）
     public int DifficultyLevel;      // 难度等级（用于调整怪物或地图状态）
     public QuestSaveData(Quest quest)
     {
         ID = quest.ID;
         State = quest.State;
+        IsCompleted = quest.IsCompleted;
         DifficultyLevel = quest.DifficultyLevel;
     }
     public QuestSaveData() {}// 让无参构造也保留，以免 JsonUtility/序列化报错

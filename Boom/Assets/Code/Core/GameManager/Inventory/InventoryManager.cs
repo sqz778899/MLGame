@@ -18,8 +18,7 @@ public class InventoryManager : MonoBehaviour
     public void AddGemToBag(int gemID)
     {
         GemData newGemData = new GemData(gemID, SlotManager.GetEmptySlot(SlotType.GemBagSlot));
-        _InventoryData.AddGemToBag(newGemData);
-        BagItemTools<Gem>.AddObjectGO(newGemData);
+        BagItemTools<Gem>.AddObjectGO(newGemData);//在OnDrop中添加到数据层
     }
     
     //把当前子弹，归还给子弹槽
@@ -38,54 +37,6 @@ public class InventoryManager : MonoBehaviour
             }
         }
     }
-
-    #region 装备相关
-    public bool TryEquipItem(ItemData item)
-    {
-        if (_InventoryData.BagItems.Contains(item))
-        {
-            _InventoryData.EquipItem(item);
-            // 通知UI更新
-            //UIManager.Instance.BagUI.Refresh();
-            return true;
-        }
-        return false;
-    }
-
-    public bool TryUnEquipItem(ItemData item)
-    {
-        if (_InventoryData.EquipItems.Contains(item))
-        {
-            _InventoryData.UnEquipItem(item);
-            //UIManager.Instance.BagUI.Refresh();
-            return true;
-        }
-        return false;
-    }
-    
-    public bool TryEquipGem(GemData gem)
-    {
-        if (_InventoryData.BagGems.Contains(gem))
-        {
-            _InventoryData.EquipGem(gem);
-            // 通知UI更新
-            //UIManager.Instance.BagUI.Refresh();
-            return true;
-        }
-        return false;
-    }
-
-    public bool TryUnEquipGem(GemData gem)
-    {
-        if (_InventoryData.EquipGems.Contains(gem))
-        {
-            _InventoryData.UnEquipGem(gem);
-            //UIManager.Instance.BagUI.Refresh();
-            return true;
-        }
-        return false;
-    }
-    #endregion
     
     #region 单例的加载卸载
     public static InventoryManager Instance { get; private set; }

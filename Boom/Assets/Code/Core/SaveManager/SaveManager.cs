@@ -20,6 +20,7 @@ public static class SaveManager
         PlayerManager.Instance._PlayerData.Coins = saveFile.Coins;
         PlayerManager.Instance._PlayerData.RoomKeys = saveFile.RoomKeys;
         
+        InventoryManager.Instance._InventoryData.ClearData();
         //读取Item
         for (int i = 0; i < saveFile.UserItems.Count; i++)
         {
@@ -38,16 +39,17 @@ public static class SaveManager
         List<BulletData> curSpawners = InventoryManager.Instance._BulletInvData.BagBulletSpawners;
         curSpawners.Clear();
         curSpawners.AddRange(saveFile.UserBulletSpawner.Select(LoadBulletData));
-        List<BulletData> CurBullets = InventoryManager.Instance._BulletInvData.EquipBullets;
-        CurBullets.Clear();
-        CurBullets.AddRange(saveFile.UserCurBullets.Select(LoadBulletData));
+        List<BulletData> curBullets = InventoryManager.Instance._BulletInvData.EquipBullets;
+        curBullets.Clear();
+        curBullets.AddRange(saveFile.UserCurBullets.Select(LoadBulletData));
         
         //MainRoleManager.Instance.CurStandbyBulletMats = saveFile.UserStandbyBullet;
         #endregion
 
         #region Quest
         List<QuestSaveData> UserQuests = saveFile.UserQuests;
-        List<Quest> curQuests = QuestManager.Instance.questDatabase.quests;
+        List<Quest> designQuests = QuestManager.Instance.questDatabase.quests;
+        List<Quest> curQuests = PlayerManager.Instance._QuestData.Quests;
         foreach (var eachSave in UserQuests)
         {
             bool isExist = false;
@@ -67,6 +69,30 @@ public static class SaveManager
                 curQuests.Add(newQuest);
             }
         }
+        //把策划配置的新的任务更新进去。已有的更新，没有的添加
+        foreach (var eachDesignQuest in designQuests)
+        {
+            var existingQuest = curQuests.FirstOrDefault(q => q.ID == eachDesignQuest.ID);
+            if (existingQuest != null)
+            {
+                // Update existing quest
+                existingQuest.Name = eachDesignQuest.Name;
+                existingQuest.Level = eachDesignQuest.Level;
+                existingQuest.Description = eachDesignQuest.Description;
+            }
+            else
+            {
+                // Add new quest
+                Quest newQuest = new Quest(eachDesignQuest.ID)
+                {
+                    Name = eachDesignQuest.Name,
+                    Level = eachDesignQuest.Level,
+                    Description = eachDesignQuest.Description
+                };
+                curQuests.Add(newQuest);
+            }
+        }
+        PlayerManager.Instance._QuestData.MainStoryProgress = saveFile.UserMainStoryProgress;
         #endregion
         
         #region Map
@@ -114,24 +140,25 @@ public static class SaveManager
         //存储Gem信息
         saveFile.UserGems.Clear();
         List<GemBaseSaveData> UserGems = new List<GemBaseSaveData>();
-        foreach (var each in InventoryManager.Instance._InventoryData.BagGems.Concat(
-                     InventoryManager.Instance._InventoryData.EquipGems))
+        foreach (var each in InventoryManager.Instance._InventoryData.BagGems)
             UserGems.Add(new GemBaseSaveData(each));
+        foreach (var each in InventoryManager.Instance._InventoryData.EquipGems)
+            UserGems.Add(new GemBaseSaveData(each));
+        
         saveFile.UserGems = UserGems;
         
         //存子弹槽状态信息
         saveFile.UserBulletSlotLockedState = PlayerManager.Instance._PlayerData.CurBulletSlotLockedState;
-        
-        //saveFile.UserStandbyBullet = MainRoleManager.Instance.CurStandbyBulletMats;
         #endregion
         
         #region Quest
         List<QuestSaveData> UserQuests = new List<QuestSaveData>();
-        QuestManager.Instance.questDatabase.quests.ForEach(each =>
+        PlayerManager.Instance._QuestData.Quests.ForEach(each =>
         {
             UserQuests.Add(new QuestSaveData(each));
         });
         saveFile.UserQuests = UserQuests;
+        saveFile.UserMainStoryProgress = PlayerManager.Instance._QuestData.MainStoryProgress;
         #endregion
         
         #region Map

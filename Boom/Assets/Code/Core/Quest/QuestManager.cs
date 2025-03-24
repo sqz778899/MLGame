@@ -22,6 +22,8 @@ public class QuestManager : MonoBehaviour
 
         currentQuest = quest;
 
+        //同步数据给PlayerManager
+        PlayerManager.Instance._QuestData.UpdateQuestState(questID, QuestState.InProgress);
         // 加载固定的游戏场景
         MSceneManager.Instance.LoadScene(2);
     }
@@ -38,6 +40,32 @@ public class QuestManager : MonoBehaviour
             else
                 mapManager.InitializeMap(currentQuest);
         }
+    }
+
+    public void CompleteQuest()
+    {
+        //1)更新任务数据
+        PlayerManager.Instance._QuestData.UpdateQuestState(
+            currentQuest.ID, QuestState.Completed);
+        //2）清理战斗数据
+        BattleManager.Instance.battleData.ClearData();
+        
+        SaveManager.SaveFile();
+        //3）加载固定的游戏场景，返回城镇
+        MSceneManager.Instance.LoadScene(1);
+        
+    }
+    
+    public void FailQuest()
+    {
+        //1)更新任务数据
+        PlayerManager.Instance._QuestData.UpdateQuestState(
+            currentQuest.ID, QuestState.Failed);
+        //2）清理战斗数据
+        BattleManager.Instance.battleData.ClearData();
+        SaveManager.SaveFile();
+        //3）加载固定的游戏场景，返回城镇
+        MSceneManager.Instance.LoadScene(1);
     }
 
     #region 单例的加载卸载

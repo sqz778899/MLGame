@@ -7,7 +7,20 @@ public class ChapterOne: StorylineStepBase
 {
     public ChapterOne(StorylineController controller) : base(controller) {}
 
-    public override void Enter()=> EventManager.OnChapterOne += HelloWorld;
+    public override void Enter()
+    {
+        EventManager.OnChapterOne += OnChapterOneCompleted;
+        GlobalTicker.Instance.OnUpdate += Update;
+    }
+    
+    void Update()
+    {
+        if (PlayerManager.Instance._QuestData.MainStoryProgress == 0)
+        {
+            GlobalTicker.Instance.OnUpdate -= Update;
+            HelloWorld();
+        }
+    }
 
     void HelloWorld()
     {
@@ -18,10 +31,17 @@ public class ChapterOne: StorylineStepBase
 
     void BeginQuest()
     {
+        EternalCavans.Instance.DialogueSC.OnDialogueEnd -= BeginQuest;
         QuestManager.Instance.SelectQuest(1);
     }
+     
+    void OnChapterOneCompleted()
+    {
+        Exit();
+        controller.NextStep();
+    }
     
-    public override void Exit() => EventManager.OnChapterOne -= HelloWorld;
+    public override void Exit() => EventManager.OnChapterOne -= OnChapterOneCompleted;
 
     public override bool CheckComplete() => false;
 }
