@@ -12,6 +12,11 @@ public class PlayerManager : MonoBehaviour
     public PlayerData _PlayerData;
     public QuestData _QuestData;
     
+    public void ClearPlayerData()
+    {
+        _PlayerData.ClearData();
+    }
+    
     #region 单例的加载卸载
     public static PlayerManager Instance { get; private set; }
     

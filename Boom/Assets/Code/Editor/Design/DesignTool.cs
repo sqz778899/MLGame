@@ -131,7 +131,6 @@ public class DesignTool
         if (InventoryManager.Instance._BulletInvData.EquipBullets.Count >= 5)
             InventoryManager.Instance._BulletInvData.EquipBullets.RemoveAt(0);
         InventoryManager.Instance._BulletInvData.EquipBullet(new BulletData(bulletID,SlotManager.GetEmptySlot(SlotType.CurBulletSlot)));
-        UIManager.Instance.BagUI.InitEquipBullets();
         PlayerManager.Instance.RoleInFightGO.GetComponent<RoleInner>().InitData();
     }
     [Button("添加黏土子弹Lv1",ButtonSizes.Large)]

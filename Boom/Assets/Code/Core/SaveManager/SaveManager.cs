@@ -25,14 +25,21 @@ public static class SaveManager
         for (int i = 0; i < saveFile.UserItems.Count; i++)
         {
             ItemData curItem = LoadItemData(saveFile.UserItems[i]);
-            BagItemTools<Item>.InitSaveFileObject(curItem,SlotType.BagSlot);
+            if (curItem.CurSlot.SlotType == SlotType.BagItemSlot)
+                InventoryManager.Instance._InventoryData.AddItemToBag(curItem);
+            if (curItem.CurSlot.SlotType == SlotType.BagEquipSlot)
+                InventoryManager.Instance._InventoryData.AddItemToEquip(curItem);
         }
         //读取Gem
         for (int i = 0; i < saveFile.UserGems.Count; i++)
         {
             GemData curGem = LoadGemData(saveFile.UserGems[i]);
-            BagItemTools<Gem>.InitSaveFileObject(curGem,SlotType.GemBagSlot);
+            if (curGem.CurSlot.SlotType == SlotType.GemBagSlot)
+                InventoryManager.Instance._InventoryData.AddGemToBag(curGem);
+            if (curGem.CurSlot.SlotType == SlotType.GemInlaySlot)
+                InventoryManager.Instance._InventoryData.EquipGem(curGem);
         }
+        
         //读取子弹槽状态
         PlayerManager.Instance._PlayerData.CurBulletSlotLockedState = saveFile.UserBulletSlotLockedState;
 
@@ -43,7 +50,7 @@ public static class SaveManager
         curBullets.Clear();
         curBullets.AddRange(saveFile.UserCurBullets.Select(LoadBulletData));
         
-        //MainRoleManager.Instance.CurStandbyBulletMats = saveFile.UserStandbyBullet;
+        InventoryManager.Instance.InitAllBagGO();//初始化背包数据
         #endregion
 
         #region Quest
@@ -93,20 +100,6 @@ public static class SaveManager
             }
         }
         PlayerManager.Instance._QuestData.MainStoryProgress = saveFile.UserMainStoryProgress;
-        #endregion
-        
-        #region Map
-        List<MapSate> UserMapSate = saveFile.UserMapSate;
-        MapSate curMapSate = null;
-        foreach (var eachMapSate in UserMapSate)
-        {
-            if (eachMapSate.CurLevelID == 1)
-            {
-                curMapSate = eachMapSate;
-                break;
-            }
-        }
-        BattleManager.Instance.battleData.CurMapSate = curMapSate;
         #endregion
         
         LoadUserConfig();
@@ -159,14 +152,6 @@ public static class SaveManager
         });
         saveFile.UserQuests = UserQuests;
         saveFile.UserMainStoryProgress = PlayerManager.Instance._QuestData.MainStoryProgress;
-        #endregion
-        
-        #region Map
-        List<MapSate> UserMapSate = new List<MapSate>();
-        MapSate curMapState = new MapSate();
-        curMapState = BattleManager.Instance.battleData.CurMapSate;
-        UserMapSate.Add(curMapState);
-        saveFile.UserMapSate = UserMapSate;
         #endregion
         
         string content01 = JsonConvert.SerializeObject(saveFile,(Formatting) Formatting.Indented);

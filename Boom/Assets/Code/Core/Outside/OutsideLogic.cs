@@ -20,12 +20,14 @@ public class OutsideLogic : MonoBehaviour
         TrunkManager.Instance.ForceRefresh();
         UIManager.Instance.InitStartGame();
         SaveManager.LoadSaveFile();
-        UIManager.Instance.BagUI.InitAllBagGO(); //初始化背包内GO
         //todo ......................
         EternalCavans.Instance.InMainEnv();
         EternalCavans.Instance.OnOpenBag += LockedAllThings;
         EternalCavans.Instance.OnCloseBag += UnLockedAllThings;
     }
+    
+    public void LockedMap() => MapControl.LockMap();
+    public void UnLockedMap() => MapControl.UnLockMap();
     
     void LockedAllThings()
     {
@@ -44,6 +46,7 @@ public class OutsideLogic : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             _builds.ForEach(menu => menu.CloseBuild());
+            UnLockedMap();
         }
     }
 

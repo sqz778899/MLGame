@@ -9,7 +9,7 @@ public class BattleData: ScriptableObject
     [Header("战报")]
     public WarReport CurWarReport;
     [Header("关卡")]
-    public MapSate CurMapSate;
+    //public MapSate CurMapSate;
     public LevelMono CurLevel;
     
     [Header("Display")] 
@@ -20,7 +20,7 @@ public class BattleData: ScriptableObject
     
     public void InitFightData(EnemyMiddleData _enemyMidData,int _levelID)
     {
-        CurMapSate.CurLevelID = _levelID;
+        //CurMapSate.CurLevelID = _levelID;
         CurLevel = LevelManager.LoadLevel(_levelID);
         CurRole = PlayerManager.Instance.RoleInFightGO.GetComponent<RoleInner>();
         CurRole.InitData(CurLevel);//初始化角色数据
@@ -41,7 +41,6 @@ public class BattleData: ScriptableObject
         CurEnemy = null;
         CurRole = null;
         CurWarReport = new WarReport();
-        CurMapSate = new MapSate();
         CurLevel = null;
     }
 }

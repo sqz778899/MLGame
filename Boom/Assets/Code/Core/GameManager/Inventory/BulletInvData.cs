@@ -12,6 +12,14 @@ public class BulletInvData : ScriptableObject
     
     public event Action OnBulletsChanged;//子弹数据变化
     
+    public void ClearData()
+    {
+        foreach (var each in BagBulletSpawners)
+            each.SpawnerCount = 0;
+        EquipBullets.Clear();
+        OnBulletsChanged?.Invoke();
+    }
+    
     //宝石操作和子弹槽操作都会响应这个函数
     public void RefreshModifiers()
     {
@@ -140,5 +148,4 @@ public class BulletInvData : ScriptableObject
         GameObject equipBulletSlotRoot = EternalCavans.Instance.BagRoot.GetComponent<BagRoot>().BagReadySlotGO;
         EquipBulletSlots = equipBulletSlotRoot.GetComponentsInChildren<BulletSlotRole>(true).ToList();
     }
-
 }

@@ -24,6 +24,12 @@ public class BuildBase : SpriteClickHandler
     {
         _outsideLogic._builds.ForEach(menu => { if (menu != this) menu.CloseBuild(); });
         Menu.SetActive(!Menu.activeSelf);
+        //锁定地图
+        if(Menu.activeSelf)
+            _outsideLogic.LockedMap();
+        else
+            _outsideLogic.UnLockedMap();
+        
         if (IsQuitHighLight)
             QuitHighLight();
         //因为UI摆放问题，这里需要手动设置一下
@@ -37,5 +43,6 @@ public class BuildBase : SpriteClickHandler
     {
         Menu.SetActive(false);
         NeedLockedBuilds.ForEach(needLockedBuild => needLockedBuild.IsLocked = false);
+        _outsideLogic.UnLockedMap();
     }
 }

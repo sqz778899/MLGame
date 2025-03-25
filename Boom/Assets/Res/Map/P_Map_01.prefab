@@ -1573,7 +1573,7 @@ MonoBehaviour:
   Ani: {fileID: 85023579005996359}
   Portrait: {fileID: 0}
   CurAward:
-    Score: 0
+    BaseScore: 0
     Coin: 0
     SupremeCharms: 
     Items: 
@@ -7130,6 +7130,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8492373345024864060, guid: 7e50c7fd7967db74ab7b234307124519, type: 3}
       propertyPath: CurAward.Score
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8492373345024864060, guid: 7e50c7fd7967db74ab7b234307124519, type: 3}
+      propertyPath: CurAward.BaseScore
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8492373345024864060, guid: 7e50c7fd7967db74ab7b234307124519, type: 3}

@@ -45,6 +45,17 @@ public static class SlotManager
         return curTargetSlot;
     }
 
+    public static SlotBase[] GetAllSlotBase()
+    {
+        SlotBase[] allItemSlot = UIManager.Instance.BagUI.ItemRoot.GetComponentsInChildren<SlotBase>();
+        SlotBase[] allEuipItemSlot = UIManager.Instance.BagUI.EquipItemRoot.GetComponentsInChildren<SlotBase>();
+        SlotBase[] allGemSlot = UIManager.Instance.BagUI.GemRoot.GetComponentsInChildren<SlotBase>();
+        SlotBase[] allGemInlaySlot = UIManager.Instance.BagUI.EquipBulletSlotRoot.GetComponentsInChildren<SlotBase>();
+        SlotBase[] allCurBulletSlot = UIManager.Instance.BagUI.EquipBulletSlotRoot.GetComponentsInChildren<SlotBase>();
+        SlotBase[] allSlot = allItemSlot.Concat(allEuipItemSlot).Concat(allGemSlot).Concat(allGemInlaySlot).Concat(allCurBulletSlot).ToArray();
+        return allSlot;
+    }
+
     #region 不需要关心的私有方法
     static SlotBase[] GetCurSlotArray(SlotType slotType)
     {
@@ -63,10 +74,10 @@ public static class SlotManager
             case SlotType.CurBulletSlot:
                 allSlot = UIManager.Instance.BagUI.EquipBulletSlotRoot.GetComponentsInChildren<BulletSlotRole>();
                 break;
-            case SlotType.ElementSlot:
+            case SlotType.BagEquipSlot:
                 allSlot = UIManager.Instance.BagUI.EquipItemRoot.GetComponentsInChildren<SlotBase>();
                 break;
-            case SlotType.BagSlot:
+            case SlotType.BagItemSlot:
                 allSlot = UIManager.Instance.BagUI.ItemRoot.GetComponentsInChildren<SlotBase>();
                 break;
             case SlotType.SpawnnerSlot:

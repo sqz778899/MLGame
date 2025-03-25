@@ -39,6 +39,7 @@ public class EternalCavans : MonoBehaviour
 
     [Header("UI根据各个场景切换表现")] 
     public GameObject Bag;
+    public GameObject MagicDust;
     public GameObject TitleRoot;
     public GameObject MapFrame;
     public GameObject BtnSetting;
@@ -73,6 +74,7 @@ public class EternalCavans : MonoBehaviour
     public void InStartGame()
     {
         Bag.SetActive(false);
+        MagicDust.SetActive(false);
         TitleRoot.SetActive(false);
         BtnSetting.SetActive(false);
         MapFrame.SetActive(false);
@@ -82,6 +84,7 @@ public class EternalCavans : MonoBehaviour
     public void InMainEnv()
     {
         Bag.SetActive(true);
+        MagicDust.SetActive(true);
         BagRoot.SetActive(false);
         BagRootMini.SetActive(false);
         GUIFightMapRootGO.SetActive(false);
@@ -95,7 +98,22 @@ public class EternalCavans : MonoBehaviour
     {
         TitleRoot.SetActive(true);
         MapFrame.SetActive(true);
+        Bag.SetActive(true);
+        MagicDust.SetActive(false);
         CurSceneState = SceneState.MapScene;
+    }
+    
+    public void InLoadingScene()
+    {
+        Bag.SetActive(false);
+        MagicDust.SetActive(false);
+        BagRoot.SetActive(false);
+        BagRootMini.SetActive(false);
+        GUIFightMapRootGO.SetActive(false);
+        TitleRoot.SetActive(false);
+        MapFrame.SetActive(false);
+        BtnSetting.SetActive(true);
+        CurSceneState = SceneState.LoadingScene;
     }
     #endregion
 

@@ -106,15 +106,6 @@ public class TrunkManager: ScriptableObject
         _saveFile.UserQuests = UserQuests;
         _saveFile.UserMainStoryProgress = 0;
         #endregion
-        
-        #region Map
-        List<MapSate> curMapSate = new List<MapSate>();
-        MapSate curMap = new MapSate();
-        curMap.CurLevelID = 1;
-        curMap.IsFinishedRooms = new List<int>();
-        curMapSate.Add(curMap);
-        _saveFile.UserMapSate = curMapSate;
-        #endregion
 
         string content01 = JsonConvert.SerializeObject(_saveFile,(Formatting) Formatting.Indented);
         File.WriteAllText(PathConfig.SaveFileJson, content01);
@@ -172,15 +163,6 @@ public class TrunkManager: ScriptableObject
         _saveFile.UserQuests = UserQuests;
         _saveFile.UserMainStoryProgress = 0;
         #endregion
-        
-        #region Map
-        List<MapSate> curMapSate = new List<MapSate>();
-        MapSate curMap = new MapSate();
-        curMap.CurLevelID = 1;
-        curMap.IsFinishedRooms = new List<int>();
-        curMapSate.Add(curMap);
-        _saveFile.UserMapSate = curMapSate;
-        #endregion
 
         string content01 = JsonConvert.SerializeObject(_saveFile,(Formatting) Formatting.Indented);
         File.WriteAllText(PathConfig.SaveFileJson, content01);
@@ -236,15 +218,6 @@ public class TrunkManager: ScriptableObject
         }
         _saveFile.UserQuests = UserQuests;
         _saveFile.UserMainStoryProgress = 0;
-        #endregion
-        
-        #region Map
-        List<MapSate> curMapSate = new List<MapSate>();
-        MapSate curMap = new MapSate();
-        curMap.CurLevelID = 1;
-        curMap.IsFinishedRooms = new List<int>();
-        curMapSate.Add(curMap);
-        _saveFile.UserMapSate = curMapSate;
         #endregion
 
         string content01 = JsonConvert.SerializeObject(_saveFile,(Formatting) Formatting.Indented);

@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class MapManager : MonoBehaviour
 {
+    public MapSate CurMapSate;
     [Header("地图节点")]
     public Transform MapResRoot;  // 用于挂载地图Prefab的节点
     public GameObject MapFightRoot;  // 地图战斗相关加载的节点
@@ -37,7 +38,6 @@ public class MapManager : MonoBehaviour
             TrunkManager.Instance.ForceRefresh();
             UIManager.Instance.InitStartGame();
             SaveManager.LoadSaveFile();
-            UIManager.Instance.BagUI.InitAllBagGO();
         }
         //todo ......................
         UIManager.Instance.InitLogic();
@@ -80,6 +80,8 @@ public class MapManager : MonoBehaviour
         
         //获取地图房间节点
         _allMapRooms = currentMap.GetComponentsInChildren<MapRoomNode>();
+        CurMapSate = new MapSate();
+        CurMapSate.AllRoomCount = _allMapRooms.Length;
         _allMapRooms.ForEach(e=>e.InitData());
         //设置角色位置
         SetRolePos();
@@ -184,7 +186,7 @@ public class MapManager : MonoBehaviour
         InitData();
         //找到当前房间的节点
         MapRoomNode curRoom = _allMapRooms.FirstOrDefault(
-            each => each.RoomID == _battleData.CurMapSate.CurRoomID);
+            each => each.RoomID == CurMapSate.CurRoomID);
         curRoom.State = MapRoomState.Unlocked;
         
         //设置角色&&摄像机位置

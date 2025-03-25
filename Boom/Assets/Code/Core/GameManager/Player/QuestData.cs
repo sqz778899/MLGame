@@ -18,9 +18,19 @@ public class QuestData : ScriptableObject
             quest.State = newState;
             if (newState == QuestState.Completed)
             {
+                // 1)如果任务完成，主线剧情进度+1
                 if (!quest.IsCompleted)
                     MainStoryProgress++;
+                // 2)任务完成后，标记为已完成
                 quest.IsCompleted = true;
+                // 3)任务完成后，记录历史最高分数
+                int curScore = PlayerManager.Instance._PlayerData.Score;
+                quest.TotalScore = Mathf.Max(curScore, quest.TotalScore);
+                // 4)任务完成后，记录完成次数
+                quest.TotalLoopCount += 1;
+                // 5)任务完成后，记录房间探索进度
+                int explorePercent = BattleManager.Instance._MapManager.CurMapSate.ExplorePercent;
+                quest.ExplorationPercent = Mathf.Max(explorePercent, quest.ExplorationPercent);
             }
         }
     }

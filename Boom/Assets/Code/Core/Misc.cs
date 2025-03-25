@@ -1,6 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine.Serialization;
+
+
+[Serializable]
+public struct Award
+{
+    public int BaseScore;
+    public int Coin;
+    public List<int> SupremeCharms;
+    public List<int> Items;
+
+    public Award(int baseScore = 0,int _coin = 0,List<int> _supremeCharms = null,List<int> _items = null)
+    {
+        BaseScore = baseScore;
+        Coin = _coin;
+        SupremeCharms = _supremeCharms ?? new List<int>();
+        Items = _items ?? new List<int>();
+    }
+}
 
 #region ToolTips相
 public struct ToolTipsInfo
@@ -79,6 +98,9 @@ public class WarReport
 {
     public int CurWarIndex;
     public bool IsWin;
+    public int TotalDamage;
+    public int EffectiveDamage;
+    public int OverFlowDamage;
     public Dictionary<int,SingelBattleInfo> WarIndexToBattleInfo;
 
     public WarReport()
@@ -183,23 +205,6 @@ public enum UILockedState
     isSelected = 2
 }
 
-[Serializable]
-public struct Award
-{
-    public int Score;
-    public int Coin;
-    public List<int> SupremeCharms;
-    public List<int> Items;
-
-    public Award(int _score = 0,int _coin = 0,List<int> _supremeCharms = null,List<int> _items = null)
-    {
-        Score = _score;
-        Coin = _coin;
-        SupremeCharms = _supremeCharms ?? new List<int>();
-        Items = _items ?? new List<int>();
-    }
-}
-
 public class ElementState
 {
     //元素均衡
@@ -237,9 +242,9 @@ public class SupremeCharm
 public enum SlotType
 {
     SpawnnerSlot = 0,
-    BagSlot = 1,
+    BagItemSlot = 1,
     BulletSlot = 2,
-    ElementSlot = 3,
+    BagEquipSlot = 3,
     GemBagSlot = 4,
     GemInlaySlot = 5,
     CurBulletSlot = 6,
@@ -251,4 +256,5 @@ public enum SceneState
     StartGame = 0,
     MainEnv = 1,
     MapScene = 2,
+    LoadingScene = 3
 }

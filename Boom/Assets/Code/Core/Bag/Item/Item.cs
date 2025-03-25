@@ -104,11 +104,11 @@ public class Item : DragBase
         //同步背景形状
         switch (_data.CurSlot.SlotType)
         {
-            case SlotType.BagSlot:
+            case SlotType.BagItemSlot:
                 ItemBGInBag.gameObject.SetActive(true);
                 ItemBGInElement.gameObject.SetActive(false);
                 break;
-            case SlotType.ElementSlot:
+            case SlotType.BagEquipSlot:
                 ItemBGInElement.gameObject.SetActive(true);
                 ItemBGInBag.gameObject.SetActive(false);
                 break;

@@ -71,11 +71,11 @@ public class EnemyBase : MonoBehaviour
     //伤害
     public virtual void TakeDamage(BulletInner curBullet,int damage)
     {
+        //伤害跳字
+        HitText(damage);
         if (EState == EnemyState.dead) return; // 防止重复触发死亡状态
         
         EState = EnemyState.hit;
-        //伤害跳字
-        HitText(damage);
     }
     
     

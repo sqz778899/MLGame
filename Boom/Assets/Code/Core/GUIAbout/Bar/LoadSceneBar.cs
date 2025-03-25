@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -8,7 +9,12 @@ public class LoadSceneBar : MonoBehaviour
 {
     public Image m_bar;
     public TextMeshProUGUI m_txt_Loading;
-    
+
+    void Awake()
+    {
+        EternalCavans.Instance.InLoadingScene();
+    }
+
     void Start()
     {
         StartCoroutine(LoadScene());

@@ -1,8 +1,8 @@
 {
   "MaxHP": 3,
   "HP": 3,
-  "Score": 100,
-  "Coins": 4,
+  "Score": 0,
+  "Coins": 0,
   "RoomKeys": 0,
   "UserBulletSpawner": [
     {
@@ -24,14 +24,7 @@
       "SlotType": 0
     }
   ],
-  "UserCurBullets": [
-    {
-      "SpawnerCount": 0,
-      "ID": 1,
-      "SlotID": 1,
-      "SlotType": 6
-    }
-  ],
+  "UserCurBullets": [],
   "UserBulletSlotLockedState": {
     "0": true,
     "1": true,
@@ -40,91 +33,26 @@
     "4": false
   },
   "UserItems": [],
-  "UserGems": [
-    {
-      "ID": 1,
-      "SlotID": 1,
-      "SlotType": 4
-    },
-    {
-      "ID": 20,
-      "SlotID": 2,
-      "SlotType": 4
-    },
-    {
-      "ID": 20,
-      "SlotID": 3,
-      "SlotType": 4
-    },
-    {
-      "ID": 1,
-      "SlotID": 3,
-      "SlotType": 5
-    }
-  ],
-  "UserMapSate": [
-    {
-      "CurLevelID": 1,
-      "CurRoomID": 1,
-      "TargetRoomID": 1,
-      "IsFinishedRooms": []
-    }
-  ],
+  "UserGems": [],
   "UserQuests": [
     {
       "ID": 1,
-      "IsCompleted": true,
-      "State": 3,
-      "DifficultyLevel": 0
+      "IsCompleted": false,
+      "State": 1,
+      "DifficultyLevel": 0,
+      "TotalScore": 0,
+      "TotalLoopCount": 0,
+      "ExplorationPercent": 0
     },
     {
       "ID": 2,
-      "IsCompleted": true,
-      "State": 3,
-      "DifficultyLevel": 0
-    },
-    {
-      "ID": 3,
-      "IsCompleted": true,
-      "State": 3,
-      "DifficultyLevel": 0
-    },
-    {
-      "ID": 50,
       "IsCompleted": false,
       "State": 1,
-      "DifficultyLevel": 0
-    },
-    {
-      "ID": 51,
-      "IsCompleted": false,
-      "State": 1,
-      "DifficultyLevel": 0
-    },
-    {
-      "ID": 52,
-      "IsCompleted": false,
-      "State": 1,
-      "DifficultyLevel": 0
-    },
-    {
-      "ID": 100,
-      "IsCompleted": false,
-      "State": 1,
-      "DifficultyLevel": 0
-    },
-    {
-      "ID": 150,
-      "IsCompleted": false,
-      "State": 1,
-      "DifficultyLevel": 0
-    },
-    {
-      "ID": 200,
-      "IsCompleted": false,
-      "State": 1,
-      "DifficultyLevel": 0
+      "DifficultyLevel": 0,
+      "TotalScore": 0,
+      "TotalLoopCount": 0,
+      "ExplorationPercent": 0
     }
   ],
-  "UserMainStoryProgress": 3
+  "UserMainStoryProgress": 0
 }

@@ -97,5 +97,9 @@ public class SingelReportRoot : MonoBehaviour
         if (overflowDamage == 0)
             txtOverflowDamage.gameObject.SetActive(false);
         txtOverflowDamage.text = overflowDamage.ToString();
+        
+        BattleManager.Instance.battleData.CurWarReport.TotalDamage = totalDamage;
+        BattleManager.Instance.battleData.CurWarReport.EffectiveDamage = effectiveDamage;
+        BattleManager.Instance.battleData.CurWarReport.OverFlowDamage = overflowDamage;
     }
 }

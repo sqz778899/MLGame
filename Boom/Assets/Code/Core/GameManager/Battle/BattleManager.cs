@@ -58,7 +58,7 @@ public class BattleManager: MonoBehaviour
         IsInBattle = false;
         battleUI.InitWinFailGUI();
         _MapManager.SwitchMapScene();
-        battleData.CurMapSate.FinishAndToNextRoom();//切换当前房间
+        _MapManager.CurMapSate.FinishAndToNextRoom();//切换当前房间
         _MapManager.SetRolePos();
     }
 

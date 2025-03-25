@@ -35,64 +35,7 @@ public class GUIBagManager
         EquipItemRoot = BagRootSC.EquipItemRoot;
         GemRoot = BagRootSC.BagGemRootGO;
     }
-
-    #region 初始化背包内的子弹资产
-    public void InitAllBagGO()
-    {
-        InitEquipBullets();
-        InitSpawners();
-    }
     
-    //初始化当前装备的子弹
-    public void InitEquipBullets()
-    {
-        //...............Clear Old Data....................
-        Bullet[] oldBullets = EquipBulletSlotRoot.GetComponentsInChildren<Bullet>();
-        for (int i = oldBullets.Length - 1; i >= 0; i--)
-            GameObject.Destroy(oldBullets[i].gameObject);
-        SlotManager.GetEmptySlot(SlotType.CurBulletSlot);
-        //..............Instance New Data..................
-        foreach (BulletData each in InventoryManager.Instance._BulletInvData.EquipBullets)
-        {
-            GameObject BulletIns = BulletFactory.CreateBullet(each, BulletInsMode.EditB).gameObject;
-            each.CurSlot.SOnDrop(BulletIns);
-        }
-    }
-    
-    //初始化子弹孵化器
-    void InitSpawners()
-    {
-        //..............Clear Old Data..................
-        DraggableBulletSpawner[] oldSpawner = SpawnerSlotRoot.GetComponentsInChildren<DraggableBulletSpawner>();
-        for (int i = oldSpawner.Length - 1; i >= 0; i--)
-            GameObject.Destroy(oldSpawner[i].gameObject);
-        //..............Instance New Data..................
-        BulletSlot[] slots = SpawnerSlotRoot.GetComponentsInChildren<BulletSlot>();
-        BulletSlot[] slotMinis = SpawnerSlotRootMini.GetComponentsInChildren<BulletSlot>();
-        InitSpawnersSingel(slots);
-        InitSpawnersSingel(slotMinis,true);
-    }
-    
-    void InitSpawnersSingel(BulletSlot[] slots, bool isMini = false)
-    {
-        foreach (BulletData each in InventoryManager.Instance._BulletInvData.BagBulletSpawners)
-        {
-            int curSpawnerFindID = each.ID % 10;
-            var slot = slots.FirstOrDefault(s => s.SlotID == curSpawnerFindID);
-            if (slot != null)
-            {
-                slot.MainID = each.ID;
-                GameObject newSpawnerIns = null;
-                if (isMini)
-                    newSpawnerIns = BulletFactory.CreateBullet(each, BulletInsMode.SpawnerInner).gameObject;
-                else
-                    newSpawnerIns = BulletFactory.CreateBullet(each, BulletInsMode.Spawner).gameObject;
-                newSpawnerIns.transform.SetParent(slot.gameObject.transform, false);
-            }
-        }
-    }
-    #endregion
-
     #region 显示/隐藏背包相关
     public void ShowBag()
     {

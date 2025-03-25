@@ -131,6 +131,7 @@ MonoBehaviour:
   txtQuestName: {fileID: 9157961301553778868}
   RankStarRoot: {fileID: 3293937995970926886}
   Medal: {fileID: 7952798530561803090}
+  QuestMenuGO: {fileID: 0}
 --- !u!1 &2203219131890847535
 GameObject:
   m_ObjectHideFlags: 0

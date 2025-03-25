@@ -26,6 +26,10 @@ public class PlayerData: ScriptableObject
         }
     }
     #endregion
+    
+    //Buff类
+    public int PerfectDamageBonus = 100;
+    public int OverflowDamageBonus = 2;
 
     public event Action OnHPChanged;
 
@@ -35,21 +39,19 @@ public class PlayerData: ScriptableObject
         OnHPChanged?.Invoke();
     }
     
-    public void ModifyCoins(int amount)
-    {
-        Coins += amount;
-    }
+    public void ModifyCoins(int amount) =>Coins += amount;
+    public void ModifyRoomKeys(int amount) => RoomKeys += amount;
+    public void ModifyScore(int amount) => Score += amount;
     
-    public void ModifyRoomKeys(int amount)
+    public void ClearData()
     {
-        RoomKeys += amount;
+        MaxHP = 3;
+        HP = 3;
+        Coins = 0;
+        RoomKeys = 0;
+        Score = 0;
+        //Buff类不清理
     }
-    
-    public void ModifyScore(int amount)
-    {
-        Score += amount;
-    }
-    
     
     #region 人物属性
     [Header("人物属性")] 

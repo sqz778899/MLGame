@@ -13,7 +13,6 @@ public class BulletInner:ItemBase
 
     [Header("表现资产")] 
     public TextMeshPro txtDamage;
-    Vector3 textDamagePos;
     public Renderer CurRenderer;
     public SkeletonAnimation Skeleton;
     public GameObject HitEffect; // 击中效果预制体
@@ -49,7 +48,6 @@ public class BulletInner:ItemBase
         AniUtility.PlayIdle(Skeleton,AniScale);
         foreach (Material material in _materials)
             material.SetFloat("_Transparency", 1);
-        textDamagePos = txtDamage.transform.position;
     }
 
     void Update()
@@ -75,12 +73,12 @@ public class BulletInner:ItemBase
 
     public void UpText()
     {
-        Vector3 tmpPos = textDamagePos;
+        Vector3 tmpPos = new Vector3(0,1.2f,0) + transform.position;
         tmpPos.y += 0.4f;
         txtDamage.transform.position = tmpPos;
     }
     
-    public void ReturnText() => txtDamage.transform.position= textDamagePos;
+    public void ReturnText() => txtDamage.transform.position = transform.position + new Vector3(0,1.2f,0);
 
     #region 击中敌人相关
     void OnTriggerEnter2D(Collider2D other)

@@ -49,6 +49,8 @@ public class QuestManager : MonoBehaviour
             currentQuest.ID, QuestState.Completed);
         //2）清理战斗数据
         BattleManager.Instance.battleData.ClearData();
+        PlayerManager.Instance.ClearPlayerData();
+        InventoryManager.Instance.ClearInventoryData();
         
         SaveManager.SaveFile();
         //3）加载固定的游戏场景，返回城镇

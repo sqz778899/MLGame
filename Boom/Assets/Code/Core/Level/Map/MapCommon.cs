@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
+using UnityEngine;
 using UnityEngine.Serialization;
 
 public enum   MapRoomState
@@ -12,39 +13,39 @@ public enum   MapRoomState
 [Serializable]
 public class MapSate
 {
-    public int CurLevelID;
     public int CurRoomID;
     public int TargetRoomID;
+    //
+    public int AllRoomCount;
+    public int ExplorePercent;
     //
     public List<int> IsFinishedRooms;//已经完成的RoomID
 
     public MapSate()
     {
-        CurLevelID = 1;
+        ExplorePercent = 0;
         CurRoomID = 1;
         TargetRoomID = 1;
         IsFinishedRooms = new List<int>();
+        IsFinishedRooms.Add(1);
+    }
+    
+    public void SetCurRoomID(int id)
+    {
+        CurRoomID = id;
+        if (!IsFinishedRooms.Contains(CurRoomID))
+            IsFinishedRooms.Add(CurRoomID);
+        Debug.Log($"IsFinishedRooms:{IsFinishedRooms.Count}  AllRoomCount:{AllRoomCount}");
     }
 
     public void FinishAndToNextRoom()
     {
-        IsFinishedRooms.Add(CurRoomID);
         CurRoomID = TargetRoomID;
+        if (!IsFinishedRooms.Contains(CurRoomID))
+            IsFinishedRooms.Add(CurRoomID);
+        //计算探索进度
+        float s = IsFinishedRooms.Count;
+        Debug.Log($"IsFinishedRooms:{IsFinishedRooms.Count}  AllRoomCount:{AllRoomCount}");
+        ExplorePercent = (int)(s / AllRoomCount * 100);
     }
-}
-
-public enum MapNodeType
-{
-    Main = 1,
-    Shop = 2,
-    Event = 3,
-    TreasureBox = 4,
-    GoldPile = 5
-}
-
-
-public enum MapEventType
-{
-    Non = 0,
-    PREvent = 1
 }

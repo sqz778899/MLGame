@@ -38,7 +38,7 @@ public class RoleInner : BaseMove
     }
     
     //在开始战斗的时候，根据角色槽位的子弹，创建五个跟着他跑的傻逼嘻嘻的小子弹
-    public void CreateBulletInner()
+    public void CreateBulletInner(bool IsUpText = false)
     {
         //清空子弹
         if (Bullets != null)
@@ -64,6 +64,8 @@ public class RoleInner : BaseMove
             curSC.FollowDis = Mathf.Abs(curB.CurSlot.SlotID  * 1f);
             bulletIns.transform.position = new Vector3(offsetX,startPos.y,startPos.z + i);
             bulletIns.transform.SetParent(UIManager.Instance.Logic.MapManagerSC.MapBuleltRoot.transform,false);
+            if(IsUpText)
+                curSC.UpText();
             Bullets.Add(curSC);
         }
     }

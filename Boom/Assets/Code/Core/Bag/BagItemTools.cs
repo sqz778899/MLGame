@@ -69,6 +69,17 @@ public static class BagItemTools<T> where T:ItemBase
     }
     #endregion
     
+    public static void ClearAllObject()
+    {
+        SlotBase[] allSlot = SlotManager.GetAllSlotBase();
+        foreach (SlotBase each in allSlot)
+        {
+            if (each.ChildIns == null) continue;
+            GameObject.Destroy(each.ChildIns);
+            SlotManager.ClearSlot(each, true);
+        }
+    }
+    
     #region 私有方法
     // 私有方法：实例化对象
     static void InitObjectIns<TData>(TData curObjectData, ref GameObject objectIns,
