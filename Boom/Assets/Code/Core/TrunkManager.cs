@@ -92,6 +92,7 @@ public class TrunkManager: ScriptableObject
         _saveFile.Score = 0;
         _saveFile.Coins = 0;
         _saveFile.RoomKeys = 0;
+        _saveFile.MagicDust = 0;
         //_saveFile.UserStandbyBullet = newGameSD;
         #endregion
         
@@ -149,6 +150,7 @@ public class TrunkManager: ScriptableObject
         _saveFile.Score = 0;
         _saveFile.Coins = 0;
         _saveFile.RoomKeys = 0;
+        _saveFile.MagicDust = 9999;
         //_saveFile.UserStandbyBullet = newGameSD;
         #endregion
         
@@ -205,6 +207,7 @@ public class TrunkManager: ScriptableObject
         _saveFile.Score = 0;
         _saveFile.Coins = 0;
         _saveFile.RoomKeys = 0;
+        _saveFile.MagicDust = 9999;
         //_saveFile.UserStandbyBullet = newGameSD;
         #endregion
         

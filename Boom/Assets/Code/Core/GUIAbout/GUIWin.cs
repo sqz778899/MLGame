@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GUIWin : MonoBehaviour
 {
+    Vector3[] originalPositions; // 存储初始位置
     [Header("UI Text 引用")]
     public CanvasGroup baseScoreGroup;
     public CanvasGroup overflowScoreGroup;
@@ -16,6 +18,7 @@ public class GUIWin : MonoBehaviour
     public TextMeshProUGUI overflowScoreText;
     public TextMeshProUGUI perfectScoreText;
     public TextMeshProUGUI totalScoreText;
+    public Button btnContinue;
     
     [Header("动画设置")]
     public float fadeDuration = 0.5f;    // 淡入动画时间
@@ -39,12 +42,30 @@ public class GUIWin : MonoBehaviour
     }
 
     #region UI动效相关
+    void Awake() {
+        // 记录初始位置
+        originalPositions = new Vector3[] {
+            baseScoreGroup.transform.localPosition,
+            overflowScoreGroup.transform.localPosition,
+            perfectScoreGroup.transform.localPosition,
+            totalScoreGroup.transform.localPosition
+        };
+    }
+    
     void ResetUI()
     {
         baseScoreGroup.alpha = 0;
         overflowScoreGroup.alpha = 0;
         perfectScoreGroup.alpha = 0;
         totalScoreGroup.alpha = 0;
+        
+        // 恢复初始位置
+        baseScoreGroup.transform.localPosition = originalPositions[0];
+        overflowScoreGroup.transform.localPosition = originalPositions[1];
+        perfectScoreGroup.transform.localPosition = originalPositions[2];
+        totalScoreGroup.transform.localPosition = originalPositions[3];
+        
+        btnContinue.gameObject.SetActive(false);
     }
     
     void ShowScores(int baseScore, int overflowScore, int perfectScore)
@@ -85,8 +106,9 @@ public class GUIWin : MonoBehaviour
         seq.Join(totalScoreGroup.transform.DOLocalMoveY(-30, fadeDuration).From(true));
         // 总分登场后回调（比如播放特效）
         seq.AppendCallback(() => {
-            Debug.Log("总分展示完毕！");
-            //PlayTotalScoreEffect();
+            btnContinue.gameObject.SetActive(true);
+            btnContinue.transform.localScale = Vector3.zero;
+            btnContinue.transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack);
             Shake();
         });
     }

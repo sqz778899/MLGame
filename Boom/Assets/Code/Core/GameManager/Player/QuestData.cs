@@ -31,6 +31,8 @@ public class QuestData : ScriptableObject
                 // 5)任务完成后，记录房间探索进度
                 int explorePercent = BattleManager.Instance._MapManager.CurMapSate.ExplorePercent;
                 quest.ExplorationPercent = Mathf.Max(explorePercent, quest.ExplorationPercent);
+                // 6)任务完成后，结算魔尘奖励
+                PlayerManager.Instance._PlayerData.LevelRewards();
             }
         }
     }

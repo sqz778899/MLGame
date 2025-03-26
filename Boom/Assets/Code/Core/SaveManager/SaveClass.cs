@@ -11,11 +11,15 @@ public interface ISaveable
 [Serializable]
 public class SaveFileJson
 {
+    //单局会清理的数据
     public int MaxHP;
     public int HP;
     public int Score;                //分数
     public int Coins;                //硬币数量
     public int RoomKeys;             //钥匙数量
+    //局外数据
+    public int MagicDust;//魔尘
+    
     public List<BulletBaseSaveData> UserBulletSpawner;  //子弹孵化器
     public List<BulletBaseSaveData> UserCurBullets;     //当前子弹的状态
     //public List<StandbyData> UserStandbyBullet; //子弹材料的状态
@@ -34,6 +38,7 @@ public class SaveFileJson
         Score = 0;
         Coins = 0;
         RoomKeys = 0;
+        MagicDust = 0;
         UserBulletSpawner = new List<BulletBaseSaveData>();
         UserCurBullets = new List<BulletBaseSaveData>();
         UserBulletSlotLockedState = new Dictionary<int, bool>();

@@ -183,6 +183,13 @@ public enum ScreenRes
 //gold
 //insignias
 
+public enum TalentType
+{
+    Normal = 0,
+    Resource = 1,
+    Gem = 2,
+    Bullet = 3,
+}
 public enum ShopType
 {
     All = 0,

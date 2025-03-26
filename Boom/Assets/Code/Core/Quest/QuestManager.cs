@@ -55,7 +55,6 @@ public class QuestManager : MonoBehaviour
         SaveManager.SaveFile();
         //3）加载固定的游戏场景，返回城镇
         MSceneManager.Instance.LoadScene(1);
-        
     }
     
     public void FailQuest()

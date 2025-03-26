@@ -19,6 +19,7 @@ public static class SaveManager
         PlayerManager.Instance._PlayerData.Score = saveFile.Score;
         PlayerManager.Instance._PlayerData.Coins = saveFile.Coins;
         PlayerManager.Instance._PlayerData.RoomKeys = saveFile.RoomKeys;
+        PlayerManager.Instance._PlayerData.MagicDust = saveFile.MagicDust;
         
         InventoryManager.Instance._InventoryData.ClearData();
         //读取Item
@@ -114,6 +115,7 @@ public static class SaveManager
         saveFile.Score = PlayerManager.Instance._PlayerData.Score;
         saveFile.Coins = PlayerManager.Instance._PlayerData.Coins;
         saveFile.RoomKeys = PlayerManager.Instance._PlayerData.RoomKeys;
+        saveFile.MagicDust = PlayerManager.Instance._PlayerData.MagicDust;
         
         saveFile.UserBulletSpawner.Clear();
         saveFile.UserBulletSpawner.AddRange(InventoryManager.Instance._BulletInvData.

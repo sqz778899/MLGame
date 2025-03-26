@@ -35,6 +35,7 @@ public class EternalCavans : MonoBehaviour
     public GameObject WarReportGO;
     public GameObject WinGUI;
     public GameObject FailGUI;
+    public GameObject ConquerTheLevel;
     public GameObject EnemyMiniMapGO;
 
     [Header("UI根据各个场景切换表现")] 
@@ -147,6 +148,19 @@ public class EternalCavans : MonoBehaviour
     public void WinToNextRoom() => OnWinToNextRoom?.Invoke();
     public void FailToThisRoom() => OnFailToThisRoom?.Invoke();
     public void GameOver() => QuestManager.Instance.FailQuest();
+    
+    public void ShowConquerTheLevelGUI()
+    {
+        ConquerTheLevelGUI curGUISC = ConquerTheLevel.GetComponent<ConquerTheLevelGUI>();
+        curGUISC.gameObject.SetActive(true);
+        curGUISC.ConquerTheLevel();
+    }
+    public void ReturnTown()
+    {
+        QuestManager.Instance.CompleteQuest();
+        ConquerTheLevel.SetActive(false);
+    }
+
     #endregion
     
     public void OpenSettingLv2()

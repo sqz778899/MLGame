@@ -4,6 +4,7 @@
   "Score": 0,
   "Coins": 0,
   "RoomKeys": 0,
+  "MagicDust": 602,
   "UserBulletSpawner": [
     {
       "SpawnerCount": 0,
@@ -37,12 +38,12 @@
   "UserQuests": [
     {
       "ID": 1,
-      "IsCompleted": false,
-      "State": 1,
+      "IsCompleted": true,
+      "State": 3,
       "DifficultyLevel": 0,
-      "TotalScore": 0,
-      "TotalLoopCount": 0,
-      "ExplorationPercent": 0
+      "TotalScore": 1560,
+      "TotalLoopCount": 3,
+      "ExplorationPercent": 100
     },
     {
       "ID": 2,
@@ -52,7 +53,70 @@
       "TotalScore": 0,
       "TotalLoopCount": 0,
       "ExplorationPercent": 0
+    },
+    {
+      "ID": 3,
+      "IsCompleted": false,
+      "State": 1,
+      "DifficultyLevel": 0,
+      "TotalScore": 0,
+      "TotalLoopCount": 0,
+      "ExplorationPercent": 0
+    },
+    {
+      "ID": 50,
+      "IsCompleted": false,
+      "State": 1,
+      "DifficultyLevel": 0,
+      "TotalScore": 0,
+      "TotalLoopCount": 0,
+      "ExplorationPercent": 0
+    },
+    {
+      "ID": 51,
+      "IsCompleted": false,
+      "State": 1,
+      "DifficultyLevel": 0,
+      "TotalScore": 0,
+      "TotalLoopCount": 0,
+      "ExplorationPercent": 0
+    },
+    {
+      "ID": 52,
+      "IsCompleted": false,
+      "State": 1,
+      "DifficultyLevel": 0,
+      "TotalScore": 0,
+      "TotalLoopCount": 0,
+      "ExplorationPercent": 0
+    },
+    {
+      "ID": 100,
+      "IsCompleted": false,
+      "State": 1,
+      "DifficultyLevel": 0,
+      "TotalScore": 0,
+      "TotalLoopCount": 0,
+      "ExplorationPercent": 0
+    },
+    {
+      "ID": 150,
+      "IsCompleted": false,
+      "State": 1,
+      "DifficultyLevel": 0,
+      "TotalScore": 0,
+      "TotalLoopCount": 0,
+      "ExplorationPercent": 0
+    },
+    {
+      "ID": 200,
+      "IsCompleted": false,
+      "State": 1,
+      "DifficultyLevel": 0,
+      "TotalScore": 0,
+      "TotalLoopCount": 0,
+      "ExplorationPercent": 0
     }
   ],
-  "UserMainStoryProgress": 0
+  "UserMainStoryProgress": 1
 }

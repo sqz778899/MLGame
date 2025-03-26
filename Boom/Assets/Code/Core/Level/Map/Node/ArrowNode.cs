@@ -80,6 +80,6 @@ public class ArrowNode : MapNodeBase
     //游戏胜利返回城镇
     public void ReturnTown()
     {
-        QuestManager.Instance.CompleteQuest();
+        EternalCavans.Instance.ShowConquerTheLevelGUI();
     }
 }
