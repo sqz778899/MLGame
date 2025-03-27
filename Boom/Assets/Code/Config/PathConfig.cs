@@ -30,23 +30,18 @@ public static class PathConfig
    public static string SaveFileJson = GetDataPrepath() + "Data/SaveFile.json";
    public static string UserConfigJson = GetDataPrepath() + "Data/UserConfig.json";
    public static string BulletDesignJson = GetDataPrepath() + "Data/BulletDesign.json";
-   public static string LevelBuffDesignJson = GetDataPrepath() + "Data/LevelBuffDesign.json";
-   public static string RoleDesignJson = GetDataPrepath() + "Data/RoleDesign.json";
-   public static string PREventDesignJson = GetDataPrepath() + "Data/PREventDesign.json";
    public static string ItemDesignJson = GetDataPrepath() + "Data/ItemDesign.json";
    public static string GemDesignJson = GetDataPrepath() + "Data/GemDesign.json";
    public static string QuestDesignJson = GetDataPrepath() + "Data/QuestDesign.json";
    
    public static string DialogueDesignJson = GetDataPrepath() + "Data/DialogueDesign.json";
+   public static string TalentDesignJson = GetDataPrepath() + "Data/TalentDesign.json";
 
    //.........................ScriptObject...........................
    public static string TrunkManagerOBJ = GetPrepath() + "Res/TrunkManager.asset";
-   public static string GLGameDataManagerOBJ = GetPrepath() + "Res/GlobalGameDataManager.asset";
    public static string UIManagerOBJ = GetPrepath() + "Res/Manager/UIManager.asset";
    public static string RollManagerOBJ = GetPrepath() + "Res/Manager/RollManager.asset";
    public static string MSceneManagerOBJ = GetPrepath() + "Res/Manager/MSceneManager.asset";
-   public static string MainRoleManagerOBJ = GetPrepath() + "Res/Character/MainRole/MainRoleManager.asset";
-   public static string BulletManagerOBJ = GetPrepath() + "Res/Bullet/BulletManager.asset";
    public static string CalculateDamageManagerOBJ = GetPrepath() + "Res/Manager/CalculateDamageManager.asset";
    public static string MultiLaOBJ =  GetPrepath() + "Res/Manager/MultiLa.asset";
    
@@ -56,7 +51,6 @@ public static class PathConfig
    public static string TxtHitPB = GetPrepath() + "Res/UI/Prefabs/Misc/P_txtHit_01.prefab";
    public static string TxtGetItemPB = GetPrepath() + "Res/UI/Prefabs/Misc/P_TextGetItem_01.prefab";
    //商店
-   public static string RollScorePB = GetPrepath() + "Res/Bullet/Prefab/P_RollScore_Template.prefab";
    public static string RollGemPB = GetPrepath() + "Res/UI/Gem/Prefabs/P_GemInShop_Template.prefab";
    public static string ItemImageDir = GetPrepath() + "Res/UI/Item/Textures/";
    public static string GemImageDir = GetPrepath() + "Res/UI/Gem/Textures/";
@@ -64,10 +58,8 @@ public static class PathConfig
 
    ///.........................GUI.................................
    public static string ShopAsset = GetPrepath() + "Res/UI/Prefabs/Popup/P_Shop.prefab";
-   public static string  PRDisplayBarPB = GetPrepath() + "Res/UI/Prefabs/Misc/PRBar_Template.prefab";
    public static string  BulletUPPB = GetPrepath() + "Res/UI/Prefabs/Popup/P_BulletUP_01.prefab";
    public static string RightClickMenu = GetPrepath() + "Res/UI/Prefabs/RightClickMenu.prefab";
-   public static string AwardTextPB = GetPrepath() + "Res/UI/Prefabs/Misc/P_Award_01.prefab";
    public static string AwardCoin = GetPrepath() + "Res/UI/Prefabs/Misc/P_Award_Coin_01.prefab";
    public static string AwardRoomKey = GetPrepath() + "Res/UI/Prefabs/Misc/P_Award_RoomKey_01.prefab";
    public static string DialogueFightPB = GetPrepath() + "Res/UI/Prefabs/Misc/P_Dialogue_Fight_Template.prefab";

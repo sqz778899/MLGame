@@ -227,7 +227,7 @@ public class DesignTool
     [Title("道具测试")]
     [PropertyOrder(100)]
     public int ItemID;
-    [Button("获得道具",ButtonSizes.Large),PropertyOrder(111)]
+    [Button("获得道具",ButtonSizes.Large),PropertyOrder(100)]
     void AddItem()
     {
         InventoryManager.Instance.AddItemToBag(ItemID);
@@ -235,7 +235,7 @@ public class DesignTool
     [Title("宝石测试")]
     [PropertyOrder(101)]
     public int GemID;
-    [Button("获得宝石",ButtonSizes.Large),PropertyOrder(111)]
+    [Button("获得宝石",ButtonSizes.Large),PropertyOrder(101)]
     void AddGem()
     {
         InventoryManager.Instance.AddGemToBag(GemID);

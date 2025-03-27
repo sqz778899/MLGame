@@ -13,6 +13,7 @@ public class TrunkManager: ScriptableObject
     List<GemJson> _gemDesignJsons;
     Dictionary<string,List<DiaSingle>> _dialogueDesignJsons;//对话相关
     List<QuestJson> _questDesignJsons;
+    List<TalentJson> _talentDesignJsons;
     
     public List<BulletJson> BulletDesignJsons => _bulletDesignJsons ??= LoadBulletData();
     public List<BulletJson> LoadBulletData() => 
@@ -38,12 +39,19 @@ public class TrunkManager: ScriptableObject
         JsonConvert.DeserializeObject<List<QuestJson>>(File.ReadAllText(PathConfig.QuestDesignJson));
     public QuestJson GetQuestJson(int ID)=>QuestDesignJsons.FirstOrDefault(each => each.ID == ID) ?? new QuestJson();
     
+    public List<TalentJson> TalentDesignJsons => _talentDesignJsons ??= LoadTalentData();
+    public List<TalentJson> LoadTalentData()=>
+        JsonConvert.DeserializeObject<List<TalentJson>>(File.ReadAllText(PathConfig.TalentDesignJson));
+    public TalentJson GetTalentJson(int ID)=>TalentDesignJsons.FirstOrDefault(each => each.ID == ID) ?? new TalentJson();
+    
     public void ForceRefresh()
     {
         _bulletDesignJsons = LoadBulletData();
         _itemDesignJsons = LoadItemData();
         _gemDesignJsons = LoadGemData();
         _dialogueDesignJsons = LoadDialogueDesignData();
+        _questDesignJsons = LoadQuestData();
+        _talentDesignJsons = LoadTalentData();
     }
     #endregion
     
@@ -94,6 +102,13 @@ public class TrunkManager: ScriptableObject
         _saveFile.RoomKeys = 0;
         _saveFile.MagicDust = 0;
         //_saveFile.UserStandbyBullet = newGameSD;
+        
+        _saveFile.UserTalents = new List<TalentData>();
+        foreach (var each in TalentDesignJsons)
+        {
+            TalentData newTalent = new TalentData(each.ID);
+            _saveFile.UserTalents.Add(newTalent);
+        }
         #endregion
         
         #region Quest
@@ -152,6 +167,12 @@ public class TrunkManager: ScriptableObject
         _saveFile.RoomKeys = 0;
         _saveFile.MagicDust = 9999;
         //_saveFile.UserStandbyBullet = newGameSD;
+        _saveFile.UserTalents = new List<TalentData>();
+        foreach (var each in TalentDesignJsons)
+        {
+            TalentData newTalent = new TalentData(each.ID);
+            _saveFile.UserTalents.Add(newTalent);
+        }
         #endregion
         
         #region Quest
@@ -209,6 +230,12 @@ public class TrunkManager: ScriptableObject
         _saveFile.RoomKeys = 0;
         _saveFile.MagicDust = 9999;
         //_saveFile.UserStandbyBullet = newGameSD;
+        _saveFile.UserTalents = new List<TalentData>();
+        foreach (var each in TalentDesignJsons)
+        {
+            TalentData newTalent = new TalentData(each.ID);
+            _saveFile.UserTalents.Add(newTalent);
+        }
         #endregion
         
         #region Quest

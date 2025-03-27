@@ -332,7 +332,7 @@ namespace UnityEngine.UI.Extensions
 			var v3 = end + offset;
 			var v4 = end - offset;
             //Return the VDO with the correct uvs
-            switch (type)
+            /*switch (type)
             {
                 case SegmentType.Start:
                     return SetVbo(new[] { v1, v2, v3, v4 }, startUvs);
@@ -342,7 +342,8 @@ namespace UnityEngine.UI.Extensions
                     return SetVbo(new[] { v1, v2, v3, v4 }, fullUvs);
                 default:
                     return SetVbo(new[] { v1, v2, v3, v4 }, middleUvs);
-            }
+            }*/
+            return SetVbo(new[] { v1, v2, v3, v4 }, fullUvs);
 		}
 
         protected override void GeneratedUVs()

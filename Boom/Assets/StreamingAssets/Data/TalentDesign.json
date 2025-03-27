@@ -1,0 +1,129 @@
+[
+  {
+    "ID": 1,
+    "Name": "槽位+1",
+    "Level": 2,
+    "DependTalents": [
+      0
+    ],
+    "UnlockTalents": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "Price": 500
+  },
+  {
+    "ID": 2,
+    "Name": "携带伤害+1",
+    "Level": 1,
+    "DependTalents": [
+      1
+    ],
+    "UnlockTalents": [
+      8,
+      9
+    ],
+    "Price": 500
+  },
+  {
+    "ID": 3,
+    "Name": "携带穿透+1",
+    "Level": 1,
+    "DependTalents": [
+      1
+    ],
+    "UnlockTalents": [
+      9
+    ],
+    "Price": 500
+  },
+  {
+    "ID": 4,
+    "Name": "携带共振+1",
+    "Level": 1,
+    "DependTalents": [
+      1
+    ],
+    "UnlockTalents": [
+      10
+    ],
+    "Price": 500
+  },
+  {
+    "ID": 5,
+    "Name": "携带黏土+1",
+    "Level": 1,
+    "DependTalents": [
+      1
+    ],
+    "UnlockTalents": [
+      0
+    ],
+    "Price": 500
+  },
+  {
+    "ID": 6,
+    "Name": "携带钥匙+1",
+    "Level": 1,
+    "DependTalents": [
+      1
+    ],
+    "UnlockTalents": [
+      0
+    ],
+    "Price": 500
+  },
+  {
+    "ID": 7,
+    "Name": "硬币数量+1",
+    "Level": 1,
+    "DependTalents": [
+      1
+    ],
+    "UnlockTalents": [
+      0
+    ],
+    "Price": 500
+  },
+  {
+    "ID": 8,
+    "Name": "2级共振+1",
+    "Level": 1,
+    "DependTalents": [
+      2
+    ],
+    "UnlockTalents": [
+      0
+    ],
+    "Price": 1500
+  },
+  {
+    "ID": 9,
+    "Name": "2级伤害+1",
+    "Level": 1,
+    "DependTalents": [
+      3,
+      2
+    ],
+    "UnlockTalents": [
+      0
+    ],
+    "Price": 1500
+  },
+  {
+    "ID": 10,
+    "Name": "2级穿透+1",
+    "Level": 1,
+    "DependTalents": [
+      4
+    ],
+    "UnlockTalents": [
+      0
+    ],
+    "Price": 1500
+  }
+]

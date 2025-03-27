@@ -22,6 +22,7 @@ namespace Code.Editor
             ExportMuliLa();
             ExportDialogue(); //对话相关
             ExportQuestDesign();//任务相关
+            ExportTalent();//天赋相关
             AssetDatabase.Refresh();
         }
 
@@ -185,6 +186,32 @@ namespace Code.Editor
             EditorUtility.SetDirty(obj);
             AssetDatabase.SaveAssets();
         }
+
+        public void ExportTalent()
+        {
+            DataSet curTables = GetDataSet();
+            List<TalentJson> curTalentDesign = new List<TalentJson>();
+            DataTable curTable = curTables.Tables["天赋设计"];
+
+            for (int i = 1; i < curTable.Rows.Count; i++)
+            {
+                TalentJson curData = new TalentJson();
+                if (curTable.Rows[i][1].ToString() == "") continue;
+                curData.ID = int.Parse(curTable.Rows[i][0].ToString());
+                curData.Name = curTable.Rows[i][1].ToString();
+                curData.Level = int.Parse(curTable.Rows[i][2].ToString());
+                curData.DependTalents = GetCellIntList(curTable.Rows[i][3].ToString());
+                curData.UnlockTalents = GetCellIntList(curTable.Rows[i][4].ToString());
+                curData.Price =
+                    string.IsNullOrEmpty(curTable.Rows[i][5].ToString()) ? 0
+                        : int.Parse(curTable.Rows[i][5].ToString());
+                curTalentDesign.Add(curData);
+            }
+            
+            string content01 = JsonConvert.SerializeObject(curTalentDesign,
+                (Formatting)Formatting.Indented);
+            File.WriteAllText(PathConfig.TalentDesignJson, content01);
+        }
         #endregion
 
         #region 多语言
@@ -268,6 +295,14 @@ namespace Code.Editor
             IExcelDataReader excelDataReader = ExcelReaderFactory.CreateOpenXmlReader(fileStream);
             DataSet result = excelDataReader.AsDataSet();
             return result;
+        }
+        
+        List<int> GetCellIntList(string curStr)
+        {
+            if (curStr == "")
+                return new List<int>();
+            else
+                return curStr.Split(';').Select(int.Parse).ToList();
         }
         
         int GetCellInt(string curStr)

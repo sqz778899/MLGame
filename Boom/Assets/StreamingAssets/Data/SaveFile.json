@@ -4,7 +4,7 @@
   "Score": 0,
   "Coins": 0,
   "RoomKeys": 0,
-  "MagicDust": 602,
+  "MagicDust": 0,
   "UserBulletSpawner": [
     {
       "SpawnerCount": 0,
@@ -38,12 +38,12 @@
   "UserQuests": [
     {
       "ID": 1,
-      "IsCompleted": true,
-      "State": 3,
+      "IsCompleted": false,
+      "State": 1,
       "DifficultyLevel": 0,
-      "TotalScore": 1560,
-      "TotalLoopCount": 3,
-      "ExplorationPercent": 100
+      "TotalScore": 0,
+      "TotalLoopCount": 0,
+      "ExplorationPercent": 0
     },
     {
       "ID": 2,
@@ -53,70 +53,156 @@
       "TotalScore": 0,
       "TotalLoopCount": 0,
       "ExplorationPercent": 0
+    }
+  ],
+  "UserMainStoryProgress": 0,
+  "UserTalents": [
+    {
+      "ID": 1,
+      "Name": "槽位+1",
+      "Level": 2,
+      "DependTalents": [
+        0
+      ],
+      "UnlockTalents": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "Price": 500,
+      "IsLocked": false,
+      "IsLearned": false
+    },
+    {
+      "ID": 2,
+      "Name": "携带伤害+1",
+      "Level": 1,
+      "DependTalents": [
+        1
+      ],
+      "UnlockTalents": [
+        8,
+        9
+      ],
+      "Price": 500,
+      "IsLocked": true,
+      "IsLearned": false
     },
     {
       "ID": 3,
-      "IsCompleted": false,
-      "State": 1,
-      "DifficultyLevel": 0,
-      "TotalScore": 0,
-      "TotalLoopCount": 0,
-      "ExplorationPercent": 0
+      "Name": "携带穿透+1",
+      "Level": 1,
+      "DependTalents": [
+        1
+      ],
+      "UnlockTalents": [
+        9
+      ],
+      "Price": 500,
+      "IsLocked": true,
+      "IsLearned": false
     },
     {
-      "ID": 50,
-      "IsCompleted": false,
-      "State": 1,
-      "DifficultyLevel": 0,
-      "TotalScore": 0,
-      "TotalLoopCount": 0,
-      "ExplorationPercent": 0
+      "ID": 4,
+      "Name": "携带共振+1",
+      "Level": 1,
+      "DependTalents": [
+        1
+      ],
+      "UnlockTalents": [
+        10
+      ],
+      "Price": 500,
+      "IsLocked": true,
+      "IsLearned": false
     },
     {
-      "ID": 51,
-      "IsCompleted": false,
-      "State": 1,
-      "DifficultyLevel": 0,
-      "TotalScore": 0,
-      "TotalLoopCount": 0,
-      "ExplorationPercent": 0
+      "ID": 5,
+      "Name": "携带黏土+1",
+      "Level": 1,
+      "DependTalents": [
+        1
+      ],
+      "UnlockTalents": [
+        0
+      ],
+      "Price": 500,
+      "IsLocked": true,
+      "IsLearned": false
     },
     {
-      "ID": 52,
-      "IsCompleted": false,
-      "State": 1,
-      "DifficultyLevel": 0,
-      "TotalScore": 0,
-      "TotalLoopCount": 0,
-      "ExplorationPercent": 0
+      "ID": 6,
+      "Name": "携带钥匙+1",
+      "Level": 1,
+      "DependTalents": [
+        1
+      ],
+      "UnlockTalents": [
+        0
+      ],
+      "Price": 500,
+      "IsLocked": true,
+      "IsLearned": false
     },
     {
-      "ID": 100,
-      "IsCompleted": false,
-      "State": 1,
-      "DifficultyLevel": 0,
-      "TotalScore": 0,
-      "TotalLoopCount": 0,
-      "ExplorationPercent": 0
+      "ID": 7,
+      "Name": "硬币数量+1",
+      "Level": 1,
+      "DependTalents": [
+        1
+      ],
+      "UnlockTalents": [
+        0
+      ],
+      "Price": 500,
+      "IsLocked": true,
+      "IsLearned": false
     },
     {
-      "ID": 150,
-      "IsCompleted": false,
-      "State": 1,
-      "DifficultyLevel": 0,
-      "TotalScore": 0,
-      "TotalLoopCount": 0,
-      "ExplorationPercent": 0
+      "ID": 8,
+      "Name": "2级共振+1",
+      "Level": 1,
+      "DependTalents": [
+        2
+      ],
+      "UnlockTalents": [
+        0
+      ],
+      "Price": 1500,
+      "IsLocked": true,
+      "IsLearned": false
     },
     {
-      "ID": 200,
-      "IsCompleted": false,
-      "State": 1,
-      "DifficultyLevel": 0,
-      "TotalScore": 0,
-      "TotalLoopCount": 0,
-      "ExplorationPercent": 0
+      "ID": 9,
+      "Name": "2级伤害+1",
+      "Level": 1,
+      "DependTalents": [
+        3,
+        2
+      ],
+      "UnlockTalents": [
+        0
+      ],
+      "Price": 1500,
+      "IsLocked": true,
+      "IsLearned": false
+    },
+    {
+      "ID": 10,
+      "Name": "2级穿透+1",
+      "Level": 1,
+      "DependTalents": [
+        4
+      ],
+      "UnlockTalents": [
+        0
+      ],
+      "Price": 1500,
+      "IsLocked": true,
+      "IsLearned": false
     }
-  ],
-  "UserMainStoryProgress": 1
+  ]
 }

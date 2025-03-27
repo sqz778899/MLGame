@@ -52,6 +52,9 @@ public static class SaveManager
         curBullets.AddRange(saveFile.UserCurBullets.Select(LoadBulletData));
         
         InventoryManager.Instance.InitAllBagGO();//初始化背包数据
+        
+        //读取天赋信息
+        PlayerManager.Instance._PlayerData.Talents = saveFile.UserTalents;
         #endregion
 
         #region Quest
@@ -109,6 +112,7 @@ public static class SaveManager
     public static void SaveFile()
     {
         SaveFileJson saveFile = TrunkManager.Instance._saveFile;
+        
         #region Character
         saveFile.MaxHP = PlayerManager.Instance._PlayerData.MaxHP;
         saveFile.HP = PlayerManager.Instance._PlayerData.HP;
@@ -144,6 +148,9 @@ public static class SaveManager
         
         //存子弹槽状态信息
         saveFile.UserBulletSlotLockedState = PlayerManager.Instance._PlayerData.CurBulletSlotLockedState;
+        
+        //存天赋信息状态
+        saveFile.UserTalents = PlayerManager.Instance._PlayerData.Talents;
         #endregion
         
         #region Quest

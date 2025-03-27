@@ -30,6 +30,7 @@ public class SaveFileJson
     //public List<MapSate> UserMapSate;         //地图状态
     public List<QuestSaveData> UserQuests;          //用户任务完成情况
     public int UserMainStoryProgress; //主线剧情进度
+    public List<TalentData> UserTalents; //用户天赋
 
     public SaveFileJson()
     {
@@ -160,6 +161,26 @@ public class QuestJson
         Name = "";
         Level = -1;
         Description = "";
+    }
+}
+
+[Serializable]
+public class TalentJson
+{
+    public int ID;                   // 唯一ID
+    public string Name;              // 天赋名称
+    public int Level;                // 天赋等级
+    public List<int> DependTalents;  // 依赖的天赋ID
+    public List<int> UnlockTalents;  // 解锁的天赋ID
+    public int Price;               // 价格
+    public TalentJson()
+    {
+        ID = -1;
+        Name = "";
+        Level = -1;
+        DependTalents = new List<int>();
+        UnlockTalents = new List<int>();
+        Price = -1;
     }
 }
 #endregion

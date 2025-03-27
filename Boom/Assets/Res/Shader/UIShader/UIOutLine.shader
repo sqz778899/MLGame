@@ -56,7 +56,7 @@ Shader "Unlit/UIOutLine"
             #pragma fragment frag
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/UnityInstancing.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
-
+            //#include "UnityUI.cginc"
             struct appdata
             {
                 float4 vertex   : POSITION;
@@ -99,6 +99,12 @@ Shader "Unlit/UIOutLine"
                 return o;
             }
 
+            inline float UnityGet2DClipping (in float2 position, in float4 clipRect)
+            {
+                float2 inside = step(clipRect.xy, position.xy) * step(position.xy, clipRect.zw);
+                return inside.x * inside.y;
+            }
+
             float4 frag (v2f i) : SV_Target
             {
                 // sample the texture
@@ -116,7 +122,7 @@ Shader "Unlit/UIOutLine"
                 
                 color.rgb = lerp(_OutLineColor.rgb,color.rgb,w);
                 #ifdef UNITY_UI_CLIP_RECT
-                color.a *= UnityGet2DClipping(i.worldPosition.x   y, _ClipRect);
+                color.a *= UnityGet2DClipping(i.worldPosition.xy, _ClipRect);
                 #endif
 
                 #ifdef UNITY_UI_ALPHACLIP

@@ -69,6 +69,7 @@ namespace UnityEngine.UI.Extensions
                     continue;
                 }
                 worldSpaces[i] = transforms[i].TransformPoint(thisPivot);
+                //worldSpaces[i] = transforms[i].position; // ✅ 直接用世界坐标中心
             }
 
             // Then, convert to canvas space

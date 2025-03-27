@@ -36,6 +36,9 @@ public class PlayerData: ScriptableObject
     public int OverflowDamageBonus = 2;   // 溢出伤害加成
     public float ScoreToDustRate = 0.1f;  // 分数转魔尘比例
     public float CoinToDustRate = 2f;     // 金币转魔尘比例
+    
+    //talent
+    public List<TalentData> Talents;  // 天赋数据
 
     #region 各类事件
     public event Action OnHPChanged;
@@ -85,6 +88,7 @@ public class PlayerData: ScriptableObject
             OnMagicDustSub?.Invoke();
     }
 
+    //任务完成后，结算魔尘奖励
     public void LevelRewards()
     {
         int scoreDustAmount = ScoreCalculator.ScoreToDust(Score);
@@ -92,6 +96,8 @@ public class PlayerData: ScriptableObject
         int totalDustAmount = scoreDustAmount + coinDustAmount;
         ModifyMagicDust(totalDustAmount);
     }
+    
+    public TalentData GetTalent(int talentID) => Talents.Find(t => t.ID == talentID);
     #endregion
 
     public void ClearData()
