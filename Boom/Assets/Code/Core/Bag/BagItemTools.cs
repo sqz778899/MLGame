@@ -47,14 +47,14 @@ public static class BagItemTools<T> where T:ItemBase
         {
             InventoryManager.Instance._InventoryData.RemoveGemToBag(curGem._data);
             SlotManager.ClearSlot(curGem._data.CurSlot);
-            GameObject.DestroyImmediate(objectIns);
+            GameObject.Destroy(objectIns);
         }
         
         if (curSC is Item curItem)
         {
             InventoryManager.Instance._InventoryData.RemoveItem(curItem._data);
             SlotManager.ClearSlot(curItem._data.CurSlot);
-            GameObject.DestroyImmediate(objectIns);
+            GameObject.Destroy(objectIns);
         }
     }
     

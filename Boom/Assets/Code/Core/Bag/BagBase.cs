@@ -83,6 +83,26 @@ public class GemData : ItemDataBase
         Resonance = json.Resonance;
         OnDataChanged?.Invoke();
     }
+    
+    public void AddTalentGemBonus()
+    {
+        //同步一下天赋树加成
+        List<TalentGemBonus> TalentGemBonuses = PlayerManager.Instance._PlayerData.TalentGemBonuses;
+        foreach (var bonus in TalentGemBonuses)
+        {
+            if (bonus.GemID == ID)
+            {
+                if (ID < 10)
+                    Damage += bonus.BonusValue;
+                else if (ID < 20)
+                    Piercing += bonus.BonusValue;
+                else if (ID < 30)
+                    Resonance += bonus.BonusValue;
+            }
+        }
+        OnDataChanged?.Invoke();
+    }
+    
     protected override void OnIDChanged()
     {
         GemJson json = TrunkManager.Instance.GetGemJson(ID);

@@ -14,6 +14,7 @@ public class InventoryManager : MonoBehaviour
         _InventoryData.ClearData();
         _BulletInvData.ClearData();
         InitAllBagGO();
+        //读取天赋数据，看看有无初始携带类天赋
     }
     
     public void InitAllBagGO()

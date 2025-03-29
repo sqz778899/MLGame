@@ -14,7 +14,10 @@
       6,
       7
     ],
-    "Price": 500
+    "Price": 500,
+    "TalentType": 0,
+    "EffectID": 2,
+    "EffectValue": -1
   },
   {
     "ID": 2,
@@ -25,9 +28,13 @@
     ],
     "UnlockTalents": [
       8,
-      9
+      9,
+      25
     ],
-    "Price": 500
+    "Price": 500,
+    "TalentType": 1,
+    "EffectID": 1,
+    "EffectValue": 1
   },
   {
     "ID": 3,
@@ -39,7 +46,10 @@
     "UnlockTalents": [
       9
     ],
-    "Price": 500
+    "Price": 500,
+    "TalentType": 1,
+    "EffectID": 10,
+    "EffectValue": 1
   },
   {
     "ID": 4,
@@ -51,7 +61,10 @@
     "UnlockTalents": [
       10
     ],
-    "Price": 500
+    "Price": 500,
+    "TalentType": 1,
+    "EffectID": 20,
+    "EffectValue": 1
   },
   {
     "ID": 5,
@@ -61,9 +74,12 @@
       1
     ],
     "UnlockTalents": [
-      0
+      26
     ],
-    "Price": 500
+    "Price": 500,
+    "TalentType": 2,
+    "EffectID": 1,
+    "EffectValue": 1
   },
   {
     "ID": 6,
@@ -73,9 +89,14 @@
       1
     ],
     "UnlockTalents": [
-      0
+      26,
+      27,
+      28
     ],
-    "Price": 500
+    "Price": 500,
+    "TalentType": 3,
+    "EffectID": -1,
+    "EffectValue": 1
   },
   {
     "ID": 7,
@@ -85,9 +106,12 @@
       1
     ],
     "UnlockTalents": [
-      0
+      25
     ],
-    "Price": 500
+    "Price": 500,
+    "TalentType": 5,
+    "EffectID": -1,
+    "EffectValue": 1
   },
   {
     "ID": 8,
@@ -97,9 +121,12 @@
       2
     ],
     "UnlockTalents": [
-      0
+      13
     ],
-    "Price": 1500
+    "Price": 1500,
+    "TalentType": 4,
+    "EffectID": 21,
+    "EffectValue": 1
   },
   {
     "ID": 9,
@@ -110,9 +137,13 @@
       2
     ],
     "UnlockTalents": [
-      0
+      13,
+      14
     ],
-    "Price": 1500
+    "Price": 1500,
+    "TalentType": 4,
+    "EffectID": 2,
+    "EffectValue": 1
   },
   {
     "ID": 10,
@@ -122,8 +153,299 @@
       4
     ],
     "UnlockTalents": [
+      11,
+      12,
+      14
+    ],
+    "Price": 1500,
+    "TalentType": 4,
+    "EffectID": 11,
+    "EffectValue": 1
+  },
+  {
+    "ID": 11,
+    "Name": "3级伤害+1",
+    "Level": 1,
+    "DependTalents": [
+      10
+    ],
+    "UnlockTalents": [
+      17
+    ],
+    "Price": 2500,
+    "TalentType": 4,
+    "EffectID": 3,
+    "EffectValue": 1
+  },
+  {
+    "ID": 12,
+    "Name": "3级穿透+1",
+    "Level": 1,
+    "DependTalents": [
+      10
+    ],
+    "UnlockTalents": [
+      20,
+      17
+    ],
+    "Price": 2500,
+    "TalentType": 4,
+    "EffectID": 12,
+    "EffectValue": 1
+  },
+  {
+    "ID": 13,
+    "Name": "3级共振+1",
+    "Level": 1,
+    "DependTalents": [
+      9,
+      8
+    ],
+    "UnlockTalents": [
+      15
+    ],
+    "Price": 2500,
+    "TalentType": 4,
+    "EffectID": 22,
+    "EffectValue": 1
+  },
+  {
+    "ID": 14,
+    "Name": "槽位+1",
+    "Level": 2,
+    "DependTalents": [
+      9,
+      10
+    ],
+    "UnlockTalents": [
+      16,
+      21
+    ],
+    "Price": 2500,
+    "TalentType": 0,
+    "EffectID": 3,
+    "EffectValue": -1
+  },
+  {
+    "ID": 15,
+    "Name": "1级伤害+1",
+    "Level": 1,
+    "DependTalents": [
+      13
+    ],
+    "UnlockTalents": [
+      18
+    ],
+    "Price": 3500,
+    "TalentType": 4,
+    "EffectID": 1,
+    "EffectValue": 1
+  },
+  {
+    "ID": 16,
+    "Name": "1级穿透+1",
+    "Level": 1,
+    "DependTalents": [
+      14
+    ],
+    "UnlockTalents": [
+      18
+    ],
+    "Price": 3500,
+    "TalentType": 4,
+    "EffectID": 10,
+    "EffectValue": 1
+  },
+  {
+    "ID": 17,
+    "Name": "1级共振+1",
+    "Level": 1,
+    "DependTalents": [
+      11,
+      12
+    ],
+    "UnlockTalents": [
+      19,
+      20
+    ],
+    "Price": 3500,
+    "TalentType": 4,
+    "EffectID": 20,
+    "EffectValue": 1
+  },
+  {
+    "ID": 18,
+    "Name": "3级伤害+1",
+    "Level": 1,
+    "DependTalents": [
+      10
+    ],
+    "UnlockTalents": [
+      22,
+      23
+    ],
+    "Price": 4500,
+    "TalentType": 4,
+    "EffectID": 3,
+    "EffectValue": 1
+  },
+  {
+    "ID": 19,
+    "Name": "3级穿透+1",
+    "Level": 1,
+    "DependTalents": [
+      10
+    ],
+    "UnlockTalents": [
+      23
+    ],
+    "Price": 4500,
+    "TalentType": 4,
+    "EffectID": 12,
+    "EffectValue": 1
+  },
+  {
+    "ID": 20,
+    "Name": "3级共振+1",
+    "Level": 1,
+    "DependTalents": [
+      9,
+      8
+    ],
+    "UnlockTalents": [
+      24
+    ],
+    "Price": 4500,
+    "TalentType": 4,
+    "EffectID": 22,
+    "EffectValue": 1
+  },
+  {
+    "ID": 21,
+    "Name": "携带等级+1",
+    "Level": 2,
+    "DependTalents": [
+      9,
+      10
+    ],
+    "UnlockTalents": [
+      18,
+      19
+    ],
+    "Price": 5500,
+    "TalentType": 8,
+    "EffectID": -1,
+    "EffectValue": 1
+  },
+  {
+    "ID": 22,
+    "Name": "传奇宝石“倍化”",
+    "Level": 3,
+    "DependTalents": [
+      18
+    ],
+    "UnlockTalents": [
       0
     ],
-    "Price": 1500
+    "Price": 8000,
+    "TalentType": 7,
+    "EffectID": -1,
+    "EffectValue": -1
+  },
+  {
+    "ID": 23,
+    "Name": "传奇宝石“无限”",
+    "Level": 3,
+    "DependTalents": [
+      18,
+      19
+    ],
+    "UnlockTalents": [
+      0
+    ],
+    "Price": 8000,
+    "TalentType": 7,
+    "EffectID": -1,
+    "EffectValue": -1
+  },
+  {
+    "ID": 24,
+    "Name": "传奇宝石“分裂”",
+    "Level": 3,
+    "DependTalents": [
+      19,
+      20
+    ],
+    "UnlockTalents": [
+      0
+    ],
+    "Price": 8000,
+    "TalentType": 7,
+    "EffectID": -1,
+    "EffectValue": -1
+  },
+  {
+    "ID": 25,
+    "Name": "积分转化+1",
+    "Level": 1,
+    "DependTalents": [
+      2,
+      7
+    ],
+    "UnlockTalents": [
+      0
+    ],
+    "Price": 500,
+    "TalentType": 5,
+    "EffectID": -1,
+    "EffectValue": 10
+  },
+  {
+    "ID": 26,
+    "Name": "黏土升级-1",
+    "Level": 1,
+    "DependTalents": [
+      5,
+      6
+    ],
+    "UnlockTalents": [
+      28
+    ],
+    "Price": 500,
+    "TalentType": 6,
+    "EffectID": 1,
+    "EffectValue": 1
+  },
+  {
+    "ID": 27,
+    "Name": "金币转化+1",
+    "Level": 1,
+    "DependTalents": [
+      6
+    ],
+    "UnlockTalents": [
+      28
+    ],
+    "Price": 500,
+    "TalentType": 5,
+    "EffectID": -1,
+    "EffectValue": 1
+  },
+  {
+    "ID": 28,
+    "Name": "槽位+1",
+    "Level": 2,
+    "DependTalents": [
+      6,
+      27,
+      26
+    ],
+    "UnlockTalents": [
+      0
+    ],
+    "Price": 2500,
+    "TalentType": 0,
+    "EffectID": 4,
+    "EffectValue": -1
   }
 ]

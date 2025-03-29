@@ -85,7 +85,8 @@
       ],
       "UnlockTalents": [
         8,
-        9
+        9,
+        25
       ],
       "Price": 500,
       "IsLocked": true,
@@ -127,7 +128,7 @@
         1
       ],
       "UnlockTalents": [
-        0
+        26
       ],
       "Price": 500,
       "IsLocked": true,
@@ -141,7 +142,9 @@
         1
       ],
       "UnlockTalents": [
-        0
+        26,
+        27,
+        28
       ],
       "Price": 500,
       "IsLocked": true,
@@ -155,7 +158,7 @@
         1
       ],
       "UnlockTalents": [
-        0
+        25
       ],
       "Price": 500,
       "IsLocked": true,
@@ -169,7 +172,7 @@
         2
       ],
       "UnlockTalents": [
-        0
+        13
       ],
       "Price": 1500,
       "IsLocked": true,
@@ -184,7 +187,8 @@
         2
       ],
       "UnlockTalents": [
-        0
+        13,
+        14
       ],
       "Price": 1500,
       "IsLocked": true,
@@ -198,9 +202,279 @@
         4
       ],
       "UnlockTalents": [
-        0
+        11,
+        12,
+        14
       ],
       "Price": 1500,
+      "IsLocked": true,
+      "IsLearned": false
+    },
+    {
+      "ID": 11,
+      "Name": "3级伤害+1",
+      "Level": 1,
+      "DependTalents": [
+        10
+      ],
+      "UnlockTalents": [
+        17
+      ],
+      "Price": 2500,
+      "IsLocked": true,
+      "IsLearned": false
+    },
+    {
+      "ID": 12,
+      "Name": "3级穿透+1",
+      "Level": 1,
+      "DependTalents": [
+        10
+      ],
+      "UnlockTalents": [
+        20,
+        17
+      ],
+      "Price": 2500,
+      "IsLocked": true,
+      "IsLearned": false
+    },
+    {
+      "ID": 13,
+      "Name": "3级共振+1",
+      "Level": 1,
+      "DependTalents": [
+        9,
+        8
+      ],
+      "UnlockTalents": [
+        15
+      ],
+      "Price": 2500,
+      "IsLocked": true,
+      "IsLearned": false
+    },
+    {
+      "ID": 14,
+      "Name": "槽位+1",
+      "Level": 2,
+      "DependTalents": [
+        9,
+        10
+      ],
+      "UnlockTalents": [
+        16,
+        21
+      ],
+      "Price": 2500,
+      "IsLocked": true,
+      "IsLearned": false
+    },
+    {
+      "ID": 15,
+      "Name": "1级伤害+1",
+      "Level": 1,
+      "DependTalents": [
+        13
+      ],
+      "UnlockTalents": [
+        18
+      ],
+      "Price": 3500,
+      "IsLocked": true,
+      "IsLearned": false
+    },
+    {
+      "ID": 16,
+      "Name": "1级穿透+1",
+      "Level": 1,
+      "DependTalents": [
+        14
+      ],
+      "UnlockTalents": [
+        18
+      ],
+      "Price": 3500,
+      "IsLocked": true,
+      "IsLearned": false
+    },
+    {
+      "ID": 17,
+      "Name": "1级共振+1",
+      "Level": 1,
+      "DependTalents": [
+        11,
+        12
+      ],
+      "UnlockTalents": [
+        19,
+        20
+      ],
+      "Price": 3500,
+      "IsLocked": true,
+      "IsLearned": false
+    },
+    {
+      "ID": 18,
+      "Name": "3级伤害+1",
+      "Level": 1,
+      "DependTalents": [
+        10
+      ],
+      "UnlockTalents": [
+        22,
+        23
+      ],
+      "Price": 4500,
+      "IsLocked": true,
+      "IsLearned": false
+    },
+    {
+      "ID": 19,
+      "Name": "3级穿透+1",
+      "Level": 1,
+      "DependTalents": [
+        10
+      ],
+      "UnlockTalents": [
+        23
+      ],
+      "Price": 4500,
+      "IsLocked": true,
+      "IsLearned": false
+    },
+    {
+      "ID": 20,
+      "Name": "3级共振+1",
+      "Level": 1,
+      "DependTalents": [
+        9,
+        8
+      ],
+      "UnlockTalents": [
+        24
+      ],
+      "Price": 4500,
+      "IsLocked": true,
+      "IsLearned": false
+    },
+    {
+      "ID": 21,
+      "Name": "携带等级+1",
+      "Level": 2,
+      "DependTalents": [
+        9,
+        10
+      ],
+      "UnlockTalents": [
+        18,
+        19
+      ],
+      "Price": 5500,
+      "IsLocked": true,
+      "IsLearned": false
+    },
+    {
+      "ID": 22,
+      "Name": "传奇宝石“倍化”",
+      "Level": 3,
+      "DependTalents": [
+        18
+      ],
+      "UnlockTalents": [
+        0
+      ],
+      "Price": 8000,
+      "IsLocked": true,
+      "IsLearned": false
+    },
+    {
+      "ID": 23,
+      "Name": "传奇宝石“无限”",
+      "Level": 3,
+      "DependTalents": [
+        18,
+        19
+      ],
+      "UnlockTalents": [
+        0
+      ],
+      "Price": 8000,
+      "IsLocked": true,
+      "IsLearned": false
+    },
+    {
+      "ID": 24,
+      "Name": "传奇宝石“分裂”",
+      "Level": 3,
+      "DependTalents": [
+        19,
+        20
+      ],
+      "UnlockTalents": [
+        0
+      ],
+      "Price": 8000,
+      "IsLocked": true,
+      "IsLearned": false
+    },
+    {
+      "ID": 25,
+      "Name": "积分转化+1",
+      "Level": 1,
+      "DependTalents": [
+        2,
+        7
+      ],
+      "UnlockTalents": [
+        0
+      ],
+      "Price": 500,
+      "IsLocked": true,
+      "IsLearned": false
+    },
+    {
+      "ID": 26,
+      "Name": "黏土升级-1",
+      "Level": 1,
+      "DependTalents": [
+        5,
+        6
+      ],
+      "UnlockTalents": [
+        28
+      ],
+      "Price": 500,
+      "IsLocked": true,
+      "IsLearned": false
+    },
+    {
+      "ID": 27,
+      "Name": "金币转化+1",
+      "Level": 1,
+      "DependTalents": [
+        6
+      ],
+      "UnlockTalents": [
+        28
+      ],
+      "Price": 500,
+      "IsLocked": true,
+      "IsLearned": false
+    },
+    {
+      "ID": 28,
+      "Name": "槽位+1",
+      "Level": 2,
+      "DependTalents": [
+        6,
+        27,
+        26
+      ],
+      "UnlockTalents": [
+        0
+      ],
+      "Price": 2500,
       "IsLocked": true,
       "IsLearned": false
     }

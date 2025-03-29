@@ -133,14 +133,25 @@ public class Gem : DragBase
     public override void BindData(ItemDataBase data)
     {
         if (_data != null)
+        {
             _data.OnDataChanged -= OnDataChangeGem; // 先退订旧Data的事件
+            PlayerManager.Instance.OnTalentLearned -= _data.AddTalentGemBonus;
+        }
         
         _data = data as GemData;
         if (_data != null)
         {
             _data.OnDataChanged += OnDataChangeGem;
+            PlayerManager.Instance.OnTalentLearned += _data.AddTalentGemBonus;
             OnDataChangeGem(); // 立即刷新一遍
         }
     }
+
+    void OnDestroy()
+    {
+        _data.OnDataChanged -= OnDataChangeGem;
+        PlayerManager.Instance.OnTalentLearned -= _data.AddTalentGemBonus;
+    }
+
     #endregion
 }

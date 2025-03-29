@@ -223,21 +223,4 @@ public class DesignTool
             .ForEach(each => each.RoomFog.gameObject.SetActive(true)); // 执行操作
     }
     #endregion
-
-    [Title("道具测试")]
-    [PropertyOrder(100)]
-    public int ItemID;
-    [Button("获得道具",ButtonSizes.Large),PropertyOrder(100)]
-    void AddItem()
-    {
-        InventoryManager.Instance.AddItemToBag(ItemID);
-    }
-    [Title("宝石测试")]
-    [PropertyOrder(101)]
-    public int GemID;
-    [Button("获得宝石",ButtonSizes.Large),PropertyOrder(101)]
-    void AddGem()
-    {
-        InventoryManager.Instance.AddGemToBag(GemID);
-    }
 }

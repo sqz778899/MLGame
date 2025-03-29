@@ -21,7 +21,6 @@ public class InventoryData: ScriptableObject
         EquipItems.Clear();
         EquipGems.Clear();
     }
-    
 
     #region 宝石操作
     public void AddGemToBag(GemData gem) => BagGems.Add(gem);

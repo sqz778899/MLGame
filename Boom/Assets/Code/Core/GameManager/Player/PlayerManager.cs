@@ -12,9 +12,23 @@ public class PlayerManager : MonoBehaviour
     public PlayerData _PlayerData;
     public QuestData _QuestData;
     
+    public event Action OnTalentLearned;
     public void ClearPlayerData()
     {
         _PlayerData.ClearData();
+    }
+
+    /// 读取天赋数据
+    public void LoadTalent()
+    {
+        ClearPlayerData();
+        InventoryManager.Instance.ClearInventoryData();
+        foreach (var each in _PlayerData.Talents)
+        {
+            if (!each.IsLearned) continue;
+            TalentFunctions.LearnTalent(each.ID);
+        }
+        OnTalentLearned?.Invoke();
     }
     
     #region 单例的加载卸载

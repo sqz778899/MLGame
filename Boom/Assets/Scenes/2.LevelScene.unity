@@ -896,7 +896,7 @@ MonoBehaviour:
     TotalScore: 0
     TotalLoopCount: 0
     ExplorationPercent: 0
-  IsTestMode: 0
+  IsTestMode: 1
   TestMapID: 1
 --- !u!4 &446014250
 Transform:
@@ -1576,7 +1576,7 @@ MonoBehaviour:
   MapFightRoot: {fileID: 1355511863}
   MapBuleltRoot: {fileID: 440946030}
   MapMouseControl: {fileID: 1775846163}
-  IsTest: 0
+  IsTest: 1
 --- !u!1001 &1862441795
 PrefabInstance:
   m_ObjectHideFlags: 0

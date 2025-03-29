@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
@@ -205,6 +206,9 @@ namespace Code.Editor
                 curData.Price =
                     string.IsNullOrEmpty(curTable.Rows[i][5].ToString()) ? 0
                         : int.Parse(curTable.Rows[i][5].ToString());
+                curData.TalentType = (TalentEffectType)Enum.Parse(typeof(TalentEffectType), curTable.Rows[i][6].ToString());
+                curData.EffectID = int.Parse(curTable.Rows[i][7].ToString());
+                curData.EffectValue = int.Parse(curTable.Rows[i][8].ToString());
                 curTalentDesign.Add(curData);
             }
             

@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Serialization;
 
 public class PlayerData: ScriptableObject
 {
@@ -36,9 +37,13 @@ public class PlayerData: ScriptableObject
     public int OverflowDamageBonus = 2;   // 溢出伤害加成
     public float ScoreToDustRate = 0.1f;  // 分数转魔尘比例
     public float CoinToDustRate = 2f;     // 金币转魔尘比例
+    public int CoinAdd = 0;               // 局内金币加成
     
     //talent
     public List<TalentData> Talents;  // 天赋数据
+    
+    // 宝石伤害加成
+    public List<TalentGemBonus> TalentGemBonuses = new();
 
     #region 各类事件
     public event Action OnHPChanged;
@@ -78,6 +83,13 @@ public class PlayerData: ScriptableObject
         Score += amount;
         OnScoreChanged?.Invoke();
     }
+
+    public bool CostMagicDust(int amount)
+    {
+        if (amount > MagicDust) return false;
+        ModifyMagicDust(-amount);
+        return true;
+    }
     
     public void ModifyMagicDust(int amount)
     {
@@ -107,7 +119,13 @@ public class PlayerData: ScriptableObject
         Coins = 0;
         RoomKeys = 0;
         Score = 0;
-        //Buff类不清理
+        //Buff类初始化
+        PerfectDamageBonus = 100;  // 完美击杀加成
+        OverflowDamageBonus = 2;   // 溢出伤害加成
+        ScoreToDustRate = 0.1f;  // 分数转魔尘比例
+        CoinToDustRate = 2f;     // 金币转魔尘比例
+        CoinAdd = 0;               // 局内金币加成
+        TalentGemBonuses = new();
     }
     
     #region 人物属性

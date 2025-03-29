@@ -22,9 +22,11 @@ public class QuestManager : MonoBehaviour
 
         currentQuest = quest;
 
-        //同步数据给PlayerManager
+        //1)同步数据给PlayerManager
         PlayerManager.Instance._QuestData.UpdateQuestState(questID, QuestState.InProgress);
-        // 加载固定的游戏场景
+        //2)读取天赋
+        PlayerManager.Instance.LoadTalent();
+        //3)加载固定的游戏场景
         MSceneManager.Instance.LoadScene(2);
     }
 

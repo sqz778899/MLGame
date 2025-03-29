@@ -84,7 +84,7 @@ public class BulletInner:ItemBase
     void OnTriggerEnter2D(Collider2D other)
     {
         // 白名单标签
-        string[] whiteListTags = { "Enemy" };  // 你可以在这里定义多个标签
+        string[] whiteListTags = { "Enemy" ,"Shield"};  // 你可以在这里定义多个标签
         
         // 检查触发的对象的标签是否在白名单中
         if (Array.Exists(whiteListTags, tag => other.CompareTag(tag)))
@@ -95,7 +95,7 @@ public class BulletInner:ItemBase
 
             HandleEnemyHit(other.GetComponent<EnemyBase>());
             HandleHitEffect();
-            if (_state == BulletInnerState.Dead)
+            if (_state == BulletInnerState.Dead || other.tag=="Enemy")
             {
                 //如果是最后一个敌人，子弹消失
                 HandleBulletDisappear();

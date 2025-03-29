@@ -11,6 +11,7 @@ TagManager:
   - SButton
   - MapNode
   - BulletInnerSlot
+  - Shield
   layers:
   - Default
   - TransparentFX

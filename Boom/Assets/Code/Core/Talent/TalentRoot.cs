@@ -93,7 +93,7 @@ public class TalentRoot : MonoBehaviour
         foreach (var unlockID in data.UnlockTalents)
         {
             TalentData unlocked = PlayerManager.Instance._PlayerData.GetTalent(unlockID);
-            //if (unlocked == null || !unlocked.IsLocked) continue;
+            if (unlocked == null) continue;
             unlocked.IsLocked = false;
 
             // 找出对应的线条，播放流动动画

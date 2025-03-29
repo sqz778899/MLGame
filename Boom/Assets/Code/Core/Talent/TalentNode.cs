@@ -19,6 +19,7 @@ public class TalentNode : MonoBehaviour
     public Image _lockedIcon;
     public Image _learnedIcon;
     public TextMeshProUGUI _nameText;
+    public GameObject FloatingTextNode;
 
     public event Action<int> OnLearned;
     public void InitTalent()
@@ -42,6 +43,7 @@ public class TalentNode : MonoBehaviour
             _talentData = PlayerManager.Instance._PlayerData.GetTalent(ID);
         }
         
+        //_nameText.text = _talentData.Name + ": " +_talentData.ID;
         _nameText.text = _talentData.Name;
         _heighLight.IsLocked = _talentData.IsLocked; //同步UI状态
         switch (_talentData.Level)
@@ -50,6 +52,7 @@ public class TalentNode : MonoBehaviour
                 GetComponent<RectTransform>().localScale = new Vector3(0.7f, 0.7f, 0.7f);
                 break;
             case 2:
+                GetComponent<RectTransform>().localScale = Vector3.one;
                 break;
             case 3:
                 GetComponent<RectTransform>().localScale = new Vector3(1.2f, 1.2f, 1.2f);
@@ -60,10 +63,34 @@ public class TalentNode : MonoBehaviour
     
     public void OnClickLearn()
     {
-        if (_talentData.IsLocked || _talentData.IsLearned) return;
+        //1) 检查是否有已经解锁
+        if (_talentData.IsLocked)
+        {
+            GameObject textIns = ResManager.instance.CreatInstance(PathConfig.TxtFloatingUIPB);
+            textIns.transform.SetParent(FloatingTextNode.transform,false);
+            textIns.GetComponent<FloatingDamageText>().AnimateTextUI(
+                "请解锁", 
+                new Color(0.85f, 0.85f, 0.85f, 1));
+            return;
+        }
+        //2) 检查是否已学习
+        if (_talentData.IsLearned) return;
+        
+        //3) 检查是否有足够的魔尘
+        if(!PlayerManager.Instance._PlayerData.CostMagicDust(_talentData.Price))
+        {
+            GameObject textIns = ResManager.instance.CreatInstance(PathConfig.TxtFloatingUIPB);
+            textIns.transform.SetParent(FloatingTextNode.transform,false);
+            textIns.GetComponent<FloatingDamageText>().AnimateTextUI(
+                "魔尘不足", 
+                new Color(0.85f, 0.85f, 0.85f, 1));
+            return;
+        }
+        
         _talentData.IsLearned = true; // 学习
         UpdateState();
         OnLearned?.Invoke(ID); // 通知 Root
+        PlayerManager.Instance.LoadTalent();// 重新加载天赋数据
     }
     
     public void UpdateState()

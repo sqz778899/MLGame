@@ -47,9 +47,11 @@ public static class PathConfig
    
    public static string DialogueNamePortraitOBJ =  GetPrepath() + "Res/Manager/DialogueNamePortraitConfig.asset";
    ///.........................资源类.................................
+   //各种跳字
    public static string TooltipAsset = GetPrepath() + "Res/UI/Prefabs/P_Tooltip_01.prefab";
    public static string TxtHitPB = GetPrepath() + "Res/UI/Prefabs/Misc/P_txtHit_01.prefab";
    public static string TxtGetItemPB = GetPrepath() + "Res/UI/Prefabs/Misc/P_TextGetItem_01.prefab";
+   public static string TxtFloatingUIPB = GetPrepath() + "Res/UI/Prefabs/Misc/P_UIFloatingtxt_01.prefab";
    //商店
    public static string RollGemPB = GetPrepath() + "Res/UI/Gem/Prefabs/P_GemInShop_Template.prefab";
    public static string ItemImageDir = GetPrepath() + "Res/UI/Item/Textures/";

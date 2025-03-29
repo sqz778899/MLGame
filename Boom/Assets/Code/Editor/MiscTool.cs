@@ -19,6 +19,7 @@ namespace Code.Editor
             tree.Add("DesignTool", new DesignTool());
             tree.Add("主界面策划工具", new MainEnvTool());
             tree.Add("FXTranslate", new FXTranslateEditor());
+            tree.Add("GM", new GMTools());
             tree.Add("Debug", new DebugTool());
             return tree;
         }

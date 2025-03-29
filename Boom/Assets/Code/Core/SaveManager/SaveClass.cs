@@ -173,6 +173,9 @@ public class TalentJson
     public List<int> DependTalents;  // 依赖的天赋ID
     public List<int> UnlockTalents;  // 解锁的天赋ID
     public int Price;               // 价格
+    public TalentEffectType TalentType; //天赋效果类型
+    public int EffectID; //受影响的ID
+    public int EffectValue; //天赋效果值
     public TalentJson()
     {
         ID = -1;
