@@ -85,7 +85,7 @@ public class EnemyBase : MonoBehaviour
         GameObject txtHitIns = ResManager.instance.CreatInstance(PathConfig.TxtHitPB);
         txtHitIns.transform.SetParent(HitTextRoot);
         txtHitIns.transform.position = HitTextTrans.position;
-        txtHitIns.GetComponent<FloatingDamageText>().AnimateText("-" + damage,HitColor);
+        txtHitIns.GetComponent<FloatingDamageText>().AnimateText("-" + damage,HitColor,18f);
     }
     
     internal virtual void OnDestroy()

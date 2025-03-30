@@ -22,5 +22,5 @@ public class MainEnvTool
         for (int i = sc.LineRoot.transform.childCount-1; i >=0; i--)
             GameObject.DestroyImmediate(sc.LineRoot.transform.GetChild(i).gameObject);
         sc.InitTalentRoot();
-    } 
+    }
 }

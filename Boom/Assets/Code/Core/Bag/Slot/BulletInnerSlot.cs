@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BulletInnerSlot : SlotBase
 {
@@ -9,11 +8,21 @@ public class BulletInnerSlot : SlotBase
     
     [Header("气泡表现资产")]
     public GameObject BubbleGO;
+    [Header("锁定资产")] 
+    public GameObject LockedGO;
     
     void Start()
     {
         CurBulletSlotRole.OnIsHaveBullet += OnOffBubble;
         OnOffBubble();
+    }
+
+    public void InitData()
+    {
+        if (CurBulletSlotRole.State == UILockedState.isLocked)
+            GetComponent<Image>().color = new Color(1, 1, 1, 0.21f);
+        else
+            GetComponent<Image>().color =new Color(0, 0, 0, 0.21f);
     }
 
     public override void SOnDrop(GameObject _childIns)
@@ -33,4 +42,6 @@ public class BulletInnerSlot : SlotBase
         else
             BubbleGO.SetActive(true);
     }
+
+    void OnDestroy() => CurBulletSlotRole.OnIsHaveBullet -= OnOffBubble;
 }

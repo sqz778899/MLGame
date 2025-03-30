@@ -19,6 +19,7 @@ public class TalentNode : MonoBehaviour
     public Image _lockedIcon;
     public Image _learnedIcon;
     public TextMeshProUGUI _nameText;
+    public TextMeshProUGUI _priceText;
     public GameObject FloatingTextNode;
 
     public event Action<int> OnLearned;
@@ -45,6 +46,7 @@ public class TalentNode : MonoBehaviour
         
         //_nameText.text = _talentData.Name + ": " +_talentData.ID;
         _nameText.text = _talentData.Name;
+        _priceText.text = _talentData.Price.ToString();
         _heighLight.IsLocked = _talentData.IsLocked; //同步UI状态
         switch (_talentData.Level)
         {
@@ -70,7 +72,7 @@ public class TalentNode : MonoBehaviour
             textIns.transform.SetParent(FloatingTextNode.transform,false);
             textIns.GetComponent<FloatingDamageText>().AnimateTextUI(
                 "请解锁", 
-                new Color(0.85f, 0.85f, 0.85f, 1));
+                new Color(0.85f, 0.85f, 0.85f, 1),50f);
             return;
         }
         //2) 检查是否已学习
@@ -83,7 +85,7 @@ public class TalentNode : MonoBehaviour
             textIns.transform.SetParent(FloatingTextNode.transform,false);
             textIns.GetComponent<FloatingDamageText>().AnimateTextUI(
                 "魔尘不足", 
-                new Color(0.85f, 0.85f, 0.85f, 1));
+                new Color(0.85f, 0.85f, 0.85f, 1),50f);
             return;
         }
         

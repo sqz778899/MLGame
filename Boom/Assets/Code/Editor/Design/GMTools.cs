@@ -21,6 +21,14 @@ public class GMTools
         PlayerManager.Instance._PlayerData.ModifyCoins(1000);
     }
     
+    [Title("剧情解锁程度"),PropertyOrder(1)]
+    public int progress;
+    [Button("剧情解锁程度",ButtonSizes.Large),PropertyOrder(1)]
+    void SetStoryLine()
+    {
+        PlayerManager.Instance._QuestData.MainStoryProgress = progress;
+    }
+    
     [Title("道具测试")]
     [PropertyOrder(2)]
     public int ItemID;

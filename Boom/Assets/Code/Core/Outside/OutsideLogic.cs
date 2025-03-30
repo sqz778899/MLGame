@@ -7,6 +7,7 @@ using UnityEngine;
 public class OutsideLogic : MonoBehaviour
 {
     public GameObject BuildRoot;
+    public QusetRoot QuestRoot;
     public MapMouseControlMainEnv MapControl;
     public List<BuildBase> _builds;
 
@@ -25,7 +26,12 @@ public class OutsideLogic : MonoBehaviour
         EternalCavans.Instance.OnOpenBag += LockedAllThings;
         EternalCavans.Instance.OnCloseBag += UnLockedAllThings;
     }
-    
+
+    void Start()
+    {
+        QuestRoot.InitAllQuests();
+    }
+
     public void LockedMap() => MapControl.LockMap();
     public void UnLockedMap() => MapControl.UnLockMap();
     

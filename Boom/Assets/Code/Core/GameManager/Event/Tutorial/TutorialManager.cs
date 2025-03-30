@@ -19,6 +19,8 @@ public class TutorialManager : MonoBehaviour
     void Start()
     {
         CloseFX();
+        if (GM.Root.IsSkipStorylineMode)
+            return;
         tutorialController = new TutorialController();
         
         //构造引导序列
@@ -28,7 +30,7 @@ public class TutorialManager : MonoBehaviour
             TutorialBG, FXArrow,KeyBoardGO,btnSure,SureAPos,KeySpaceGO));
         tutorialController.AddStep(new L1Step4EquipGem(tutorialController, TutorialBG, FXArrow,FXHand));
 
-        //tutorialController.StartTutorial();
+        tutorialController.StartTutorial();
     }
 
     void CloseFX()

@@ -8,8 +8,8 @@ public class DialoguePortraitConfig : ScriptableObject
 {
     [SerializeField]
     public List<StringSpritePair> NameToPortrait;
-    Dictionary<string, Sprite> dict = new Dictionary<string, Sprite>();
-    public Dictionary<string, Sprite> GetDictionary() => dict;
+    Dictionary<string, Portrait> dict = new Dictionary<string, Portrait>();
+    public Dictionary<string, Portrait> GetDictionary() => dict;
     
     void Awake()
     {
@@ -53,14 +53,21 @@ public class DialoguePortraitConfig : ScriptableObject
     #endregion
 }
 
+[Serializable]
+public class Portrait
+{
+    public Sprite PortraitSprite;
+    public Vector2 PortraitSize;
+    public float PortraitY;
+}
 
 [Serializable]
 public class StringSpritePair
 {
     public string key;
-    public Sprite value;
+    public Portrait value;
     
-    public StringSpritePair(string key, Sprite value)
+    public StringSpritePair(string key, Portrait value)
     {
         this.key = key;
         this.value = value;

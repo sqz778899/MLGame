@@ -8,11 +8,6 @@ public class QusetRoot: MonoBehaviour
     public GameObject QuestBarPrefab;
     public GameObject QuestMenuGO;
     public float Yoffset = 10f;
-
-    void Start()
-    {
-        InitAllQuests();
-    }
     
     public void InitAllQuests()
     {

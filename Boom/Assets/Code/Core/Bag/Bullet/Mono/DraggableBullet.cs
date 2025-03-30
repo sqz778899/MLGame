@@ -96,6 +96,11 @@ public class DraggableBullet : Bullet
         if (result.gameObject.CompareTag("BulletInnerSlot"))
         {
             BulletInnerSlot curSlotSC = result.gameObject.GetComponent<BulletInnerSlot>();
+            //如果子弹槽是锁定状态，则无法拖拽
+            BulletSlotRole curRealSlot = curSlotSC.CurBulletSlotRole;
+            if (curRealSlot.State == UILockedState.isLocked)
+                return false;
+            
             //1) 查一下CurBullets,看看这个槽位下有无子弹,如果有，回退子弹
             InventoryManager.Instance._BulletInvData.UnEquipBullet(
                 curSlotSC.CurBulletSlotRole.CurBulletData);//回退老子弹

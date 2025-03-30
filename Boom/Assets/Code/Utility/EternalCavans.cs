@@ -102,6 +102,7 @@ public class EternalCavans : MonoBehaviour
         Bag.SetActive(true);
         MagicDust.SetActive(false);
         CurSceneState = SceneState.MapScene;
+        _bagRootSC.RefreshBulletSlotLockedState();
     }
     
     public void InLoadingScene()

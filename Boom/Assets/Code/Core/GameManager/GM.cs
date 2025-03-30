@@ -3,6 +3,8 @@
 
 public class GM: MonoBehaviour
 {
+    public bool IsSkipStorylineMode;
+    
     public PlayerManager PlayerMgr { get; private set; }
     public InventoryManager InventoryMgr { get; private set; }
     

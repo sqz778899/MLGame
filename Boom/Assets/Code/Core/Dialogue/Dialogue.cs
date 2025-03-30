@@ -24,7 +24,7 @@ public class Dialogue : MonoBehaviour
 
     //重要数据
     Dictionary<int, DiaSingle> _curDialogueDict;
-    Dictionary<string, Sprite> _spriteDict;
+    Dictionary<string, Portrait> _spriteDict;
     DiaState _curState;
     int nextDialogueID;
 
@@ -99,14 +99,20 @@ public class Dialogue : MonoBehaviour
             LeftGOs.ForEach(each => each.SetActive(true));
             RightGOs.ForEach(each => each.SetActive(false));
             NameLeft.text = curDia.Name;
-            PLeft.sprite = _spriteDict[curDia.Name];
+            PLeft.sprite = _spriteDict[curDia.Name].PortraitSprite;
+            RectTransform PLeftRect = PLeft.GetComponent<RectTransform>();
+            PLeftRect.sizeDelta= _spriteDict[curDia.Name].PortraitSize;
+            PLeftRect.anchoredPosition = new Vector2(PLeftRect.anchoredPosition.x, _spriteDict[curDia.Name].PortraitY);
         }
         else
         {
             LeftGOs.ForEach(each => each.SetActive(false));
             RightGOs.ForEach(each => each.SetActive(true));
             NameRight.text = curDia.Name;
-            PRight.sprite = _spriteDict[curDia.Name];
+            PRight.sprite = _spriteDict[curDia.Name].PortraitSprite;
+            RectTransform PLeftRect = PRight.GetComponent<RectTransform>();
+            PLeftRect.sizeDelta= _spriteDict[curDia.Name].PortraitSize;
+            PLeftRect.anchoredPosition = new Vector2(PLeftRect.anchoredPosition.x, _spriteDict[curDia.Name].PortraitY);
         }
         nextDialogueID = curDia.NextIdex;
     }

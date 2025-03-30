@@ -4,10 +4,10 @@
   "Score": 0,
   "Coins": 0,
   "RoomKeys": 0,
-  "MagicDust": 0,
+  "MagicDust": 9999,
   "UserBulletSpawner": [
     {
-      "SpawnerCount": 0,
+      "SpawnerCount": 5,
       "ID": 1,
       "SlotID": 1,
       "SlotType": 0
@@ -29,9 +29,9 @@
   "UserBulletSlotLockedState": {
     "0": true,
     "1": true,
-    "2": false,
-    "3": false,
-    "4": false
+    "2": true,
+    "3": true,
+    "4": true
   },
   "UserItems": [],
   "UserGems": [],

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Sirenix.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,6 +21,7 @@ public class BagRootMini : MonoBehaviour
     [Header("背包其它资源")] 
     public GameObject GroupBulletSpawnerSlot;
     public CanvasGroup MiniSlotCanvasGroup;
+    public GameObject BulletInnerSlotRoot;
     public GameObject DragObjRootGO;
     
     [Header("摄像机移动表现相关")]
@@ -40,6 +42,8 @@ public class BagRootMini : MonoBehaviour
     {
         OriginCameraPos = Camera.main.transform.position;
         orthographicSize = Camera.main.orthographicSize;
+        BulletInnerSlot[] slots = BulletInnerSlotRoot.GetComponentsInChildren<BulletInnerSlot>(true);
+        slots.ForEach(s => s.InitData());
     }
     
     //响应开始在战斗场景内拖拽的事件

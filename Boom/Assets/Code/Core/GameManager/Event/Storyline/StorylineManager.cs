@@ -8,12 +8,14 @@ public class StorylineManager:MonoBehaviour
 
     void Start()
     {
+        if (GM.Root.IsSkipStorylineMode)
+            return;
         StorylineController mainQuest = new StorylineController();
-        //mainQuest.AddStep(new ChapterOne(mainQuest));
-        /*mainQuest.AddStep(new StepDialogue(mainQuest, "MainQuest01"));
-        mainQuest.AddStep(new StepCombat(mainQuest, enemyID: 201));
-        mainQuest.AddStep(new StepCollectItem(mainQuest, itemID: 301));*/
-
+        mainQuest.AddStep(new ChapterOneStep1(mainQuest));
+        mainQuest.AddStep(new ChapterOneStep2(mainQuest));
+        mainQuest.AddStep(new ChapterOneStep3(mainQuest));
+        mainQuest.AddStep(new ChapterOneStep4(mainQuest));
+        
         mainQuest.StartQuest();
 
         activeQuests.Add(mainQuest);

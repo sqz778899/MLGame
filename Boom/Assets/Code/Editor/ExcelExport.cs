@@ -25,6 +25,7 @@ namespace Code.Editor
             ExportQuestDesign();//任务相关
             ExportTalent();//天赋相关
             AssetDatabase.Refresh();
+            TrunkManager.Instance.ForceRefresh();
         }
 
         #region 游戏设计

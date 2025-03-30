@@ -378,6 +378,9 @@ MonoBehaviour:
   dissolveDuration: 2
   RoomFog: {fileID: 4241417359909825434}
   DissolveDir: {x: 0, y: 1}
+  _arrows: []
+  _resources: []
+  IsFogUnLocked: 0
 --- !u!61 &7122891453133303045
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -628,6 +631,9 @@ MonoBehaviour:
   dissolveDuration: 2
   RoomFog: {fileID: 0}
   DissolveDir: {x: 1, y: 0}
+  _arrows: []
+  _resources: []
+  IsFogUnLocked: 0
 --- !u!61 &3525884445402723774
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -904,6 +910,9 @@ MonoBehaviour:
   dissolveDuration: 2
   RoomFog: {fileID: 1264758686634169127}
   DissolveDir: {x: 0, y: 1}
+  _arrows: []
+  _resources: []
+  IsFogUnLocked: 0
 --- !u!61 &8272234167096967667
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1241,7 +1250,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7689308751947476860
 Transform:
   m_ObjectHideFlags: 0
@@ -1779,7 +1788,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1734842480538459653
 Transform:
   m_ObjectHideFlags: 0
@@ -3537,7 +3546,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8337822636876173791
 Transform:
   m_ObjectHideFlags: 0
@@ -3685,7 +3694,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &906741722532352816
 Transform:
   m_ObjectHideFlags: 0
@@ -3810,7 +3819,7 @@ Transform:
   m_GameObject: {fileID: 5539995549746938781}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4049,7 +4058,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6598067135080818786
 Transform:
   m_ObjectHideFlags: 0
@@ -4311,6 +4320,9 @@ MonoBehaviour:
   dissolveDuration: 2
   RoomFog: {fileID: 6197726593720511251}
   DissolveDir: {x: 0, y: 1}
+  _arrows: []
+  _resources: []
+  IsFogUnLocked: 0
 --- !u!61 &900841729621020622
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4680,7 +4692,7 @@ MonoBehaviour:
   Ani: {fileID: 5562511129013191863}
   Portrait: {fileID: 0}
   CurAward:
-    Score: 0
+    BaseScore: 0
     Coin: 0
     SupremeCharms: 
     Items: 
@@ -4837,6 +4849,9 @@ MonoBehaviour:
   dissolveDuration: 2
   RoomFog: {fileID: 2377513825963223173}
   DissolveDir: {x: 0, y: 1}
+  _arrows: []
+  _resources: []
+  IsFogUnLocked: 0
 --- !u!61 &8394486081721924261
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6073,6 +6088,9 @@ MonoBehaviour:
   dissolveDuration: 2
   RoomFog: {fileID: 3253623611311677327}
   DissolveDir: {x: 1, y: 0}
+  _arrows: []
+  _resources: []
+  IsFogUnLocked: 0
 --- !u!61 &6849814026943911961
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6263,6 +6281,9 @@ MonoBehaviour:
   dissolveDuration: 2
   RoomFog: {fileID: 2551213660161362199}
   DissolveDir: {x: -1, y: 0}
+  _arrows: []
+  _resources: []
+  IsFogUnLocked: 0
 --- !u!61 &2310170801136780252
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6324,7 +6345,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2820488519534823437
 Transform:
   m_ObjectHideFlags: 0
@@ -6456,8 +6477,10 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   spriteRenderer: {fileID: 4553158444685116637}
+  _renderer: {fileID: 0}
   HeighLightColor: {r: 0.63207537, g: 0.9399065, b: 1, a: 1}
   IsLocked: 0
+  IsSpeTutorial: 0
   NodeTextNode: {fileID: 2958702016115569182}
   EPara:
     CurEffectType: 0
@@ -6737,6 +6760,10 @@ PrefabInstance:
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8492373345024864060, guid: 7e50c7fd7967db74ab7b234307124519, type: 3}
+      propertyPath: CurAward.BaseScore
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8492373345024864060, guid: 7e50c7fd7967db74ab7b234307124519, type: 3}
       propertyPath: Shields.Array.size
       value: 0
       objectReference: {fileID: 0}
@@ -6927,6 +6954,10 @@ PrefabInstance:
     - target: {fileID: 8492373345024864060, guid: 7e50c7fd7967db74ab7b234307124519, type: 3}
       propertyPath: CurAward.Score
       value: 999
+      objectReference: {fileID: 0}
+    - target: {fileID: 8492373345024864060, guid: 7e50c7fd7967db74ab7b234307124519, type: 3}
+      propertyPath: CurAward.BaseScore
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 8492373345024864060, guid: 7e50c7fd7967db74ab7b234307124519, type: 3}
       propertyPath: ShieldsHPs.Array.size
@@ -7385,6 +7416,10 @@ PrefabInstance:
       value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 8492373345024864060, guid: 7e50c7fd7967db74ab7b234307124519, type: 3}
+      propertyPath: CurAward.BaseScore
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 8492373345024864060, guid: 7e50c7fd7967db74ab7b234307124519, type: 3}
       propertyPath: ShieldsHPs.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -7717,6 +7752,10 @@ PrefabInstance:
       value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 8492373345024864060, guid: 7e50c7fd7967db74ab7b234307124519, type: 3}
+      propertyPath: CurAward.BaseScore
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 8492373345024864060, guid: 7e50c7fd7967db74ab7b234307124519, type: 3}
       propertyPath: ShieldsHPs.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -7744,11 +7783,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4089080604290718449, guid: 7e50c7fd7967db74ab7b234307124519, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.16
+      value: 0.002
       objectReference: {fileID: 0}
     - target: {fileID: 4089080604290718449, guid: 7e50c7fd7967db74ab7b234307124519, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.689
+      value: 1.187
       objectReference: {fileID: 0}
     - target: {fileID: 4089080604290718449, guid: 7e50c7fd7967db74ab7b234307124519, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7792,6 +7831,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8492373345024864060, guid: 7e50c7fd7967db74ab7b234307124519, type: 3}
       propertyPath: CurAward.Score
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 8492373345024864060, guid: 7e50c7fd7967db74ab7b234307124519, type: 3}
+      propertyPath: CurAward.BaseScore
       value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 8492373345024864060, guid: 7e50c7fd7967db74ab7b234307124519, type: 3}
@@ -7915,6 +7958,10 @@ PrefabInstance:
     - target: {fileID: 8492373345024864060, guid: 7e50c7fd7967db74ab7b234307124519, type: 3}
       propertyPath: CurAward.Score
       value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 8492373345024864060, guid: 7e50c7fd7967db74ab7b234307124519, type: 3}
+      propertyPath: CurAward.BaseScore
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 8492373345024864060, guid: 7e50c7fd7967db74ab7b234307124519, type: 3}
       propertyPath: ShieldsHPs.Array.size

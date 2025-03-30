@@ -45,6 +45,7 @@ public class BagRoot : MonoBehaviour
     //子弹槽锁定状态
     public void RefreshBulletSlotLockedState()
     {
+        InitData();
         Dictionary<int, bool> curDict = PlayerManager.Instance._PlayerData.CurBulletSlotLockedState;
         for (int i = 0; i < 5; i++)
             _btnReadySlotSC[i].State = curDict[i]?UILockedState.isNormal:UILockedState.isLocked;

@@ -50,6 +50,11 @@ public class BulletEditInner:ItemBase
             if (result.gameObject.CompareTag("BulletInnerSlot"))
             {
                 BulletInnerSlot targetSlotSC = result.gameObject.GetComponent<BulletInnerSlot>();
+                //如果子弹槽是锁定状态，则无法拖拽
+                BulletSlotRole curRealSlot = targetSlotSC.CurBulletSlotRole;
+                if (curRealSlot.State == UILockedState.isLocked)
+                    return nonHappen;
+                
                 if(targetSlotSC.CurBulletSlotRole.CurBulletData == _data) break;//如果是同一个子弹，不做任何操作
                 if (targetSlotSC.CurBulletSlotRole.CurBulletData != null) //走交换逻辑
                 {
