@@ -145,6 +145,8 @@ public class Gem : DragBase
             PlayerManager.Instance.OnTalentLearned += _data.AddTalentGemBonus;
             OnDataChangeGem(); // 立即刷新一遍
         }
+        
+        data.InstanceID = GetInstanceID();
     }
 
     void OnDestroy()

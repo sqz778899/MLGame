@@ -58,15 +58,46 @@ public class InventoryManager : MonoBehaviour
     #region 初始化所有宝石道具资产
     void InitItemGem()
     {
-        foreach (var gem in _InventoryData.BagGems)
-            BagItemTools<Gem>.InitSaveFileObject(gem, SlotType.GemBagSlot);
-        foreach (var gem in _InventoryData.EquipGems)
-            BagItemTools<Gem>.InitSaveFileObject(gem, SlotType.GemInlaySlot);
+        InitData(_InventoryData.BagGems);
+        InitData(_InventoryData.EquipGems);
         
-        foreach (var item in _InventoryData.BagItems)
-            BagItemTools<Item>.InitSaveFileObject(item, SlotType.BagItemSlot);
-        foreach (var item in _InventoryData.EquipItems)
-            BagItemTools<Item>.InitSaveFileObject(item, SlotType.BagEquipSlot);
+        InitData(_InventoryData.BagGems);
+        InitData(_InventoryData.EquipItems);
+    }
+
+    void InitData<T>(List<T> datas)where T : ItemDataBase
+    {
+        List<T> temp = new List<T>();
+        string flag = "";
+        foreach (var curData in datas)
+        {
+            if (curData is GemData gemData)
+            {
+                GemData newGemData = new GemData(gemData.ID, gemData.CurSlot);
+                temp.Add(newGemData as T);
+                flag = "Gem";
+            }
+            else if (curData is ItemData itemData)
+            {
+                ItemData newItemData = new ItemData(itemData.ID, itemData.CurSlot);
+                temp.Add(newItemData as T);
+                flag = "Item";
+            }
+        }
+
+        if (flag == "Gem")
+        {
+            _InventoryData.EquipGems.Clear();
+            _InventoryData.BagGems.Clear();
+            temp.ForEach(gem=>  BagItemTools<Gem>.InitSaveFileObject(gem, gem.CurSlot.SlotType));
+        }
+
+        if (flag == "Item")
+        {
+            _InventoryData.EquipItems.Clear();
+            _InventoryData.BagItems.Clear();
+            temp.ForEach(item=>  BagItemTools<Item>.InitSaveFileObject(item, item.CurSlot.SlotType));
+        }
     }
     #endregion
     

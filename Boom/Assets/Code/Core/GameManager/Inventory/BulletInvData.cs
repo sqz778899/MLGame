@@ -127,7 +127,7 @@ public class BulletInvData : ScriptableObject
         
         //处理共振簇
         ResonanceSlotCols.ForEach(s => s.CloseEffect());
-        
+        //return;
         foreach (var each in ResonanceClusterDict)
         {
             foreach (var slotCol in ResonanceSlotCols)
