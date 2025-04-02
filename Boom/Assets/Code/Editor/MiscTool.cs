@@ -18,6 +18,7 @@ namespace Code.Editor
             tree.Add("ExcelExport", new ExcelExport());
             tree.Add("DesignTool", new DesignTool());
             tree.Add("主界面策划工具", new MainEnvTool());
+            tree.Add("关卡编辑工具", new LevelEdit());
             tree.Add("FXTranslate", new FXTranslateEditor());
             tree.Add("GM", new GMTools());
             tree.Add("Debug", new DebugTool());

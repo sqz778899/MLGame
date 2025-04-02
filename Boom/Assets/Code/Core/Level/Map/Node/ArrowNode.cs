@@ -23,17 +23,6 @@ public class ArrowNode : MapNodeBase
         }
     }
     
-    internal override void OnMouseEnter()
-    {
-        spriteRenderer.color = HeighLightColor;// 将精灵高亮显示
-        if (Input.GetMouseButtonDown(0))
-            spriteRenderer.transform.localScale = defaultScale * 0.8f;
-        if (Input.GetMouseButtonUp(0))
-            spriteRenderer.transform.localScale = defaultScale;
-    }
-
-    internal override void OnMouseExit() => spriteRenderer.color = defaultColor;
-    
     //去下一个房间
     public void GoToOtherNode()
     {

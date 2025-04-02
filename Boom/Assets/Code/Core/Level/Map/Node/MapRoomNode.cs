@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.Utilities;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.Serialization;
 
 public class MapRoomNode : MonoBehaviour
@@ -34,6 +36,10 @@ public class MapRoomNode : MonoBehaviour
     Material _instanceFogMat;
     public Vector2 DissolveDir = new Vector2(1, 0);
     
+    [Header("渲染相关")]
+    public string SortingLayeName;
+    Renderer[] _renderers;
+    
     GameObject resRoot;
     GameObject _resRoot
     {
@@ -61,7 +67,28 @@ public class MapRoomNode : MonoBehaviour
             RoomFog.material = _instanceFogMat;
         }
         IsFogUnLocked = false;
+        
+        //2）设置渲染层级
+        SetRenderLayer();
     }
+
+    public void SetRenderLayer()
+    {
+        if (SortingLayeName == "") return;
+        
+        _renderers = GetComponentsInChildren<Renderer>(true);
+        int targetLayerID = SortingLayer.NameToID(SortingLayeName);
+        _renderers.ForEach(r=> r.sortingLayerID = targetLayerID);
+    }
+
+    public void SetRenderLayer(GameObject Role)
+    {
+        if (SortingLayeName == "") return;
+        Renderer[] allRenderers = Role.GetComponentsInChildren<Renderer>(true);
+        int targetLayerID = SortingLayer.NameToID(SortingLayeName);
+        allRenderers.ForEach(r=> r.sortingLayerID = targetLayerID);
+    }
+    
 
     #region 开启背包时锁定所有物体
     public void LockRes()

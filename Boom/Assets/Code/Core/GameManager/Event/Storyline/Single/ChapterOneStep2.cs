@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ChapterOneStep2:StorylineStepBase
 {
@@ -19,8 +20,11 @@ public class ChapterOneStep2:StorylineStepBase
     {
         if (PlayerManager.Instance._QuestData.MainStoryProgress == 1)
         {
-            GlobalTicker.Instance.OnUpdate -= Update;
-            PiercingLearn();
+            if (SceneManager.GetActiveScene().name == "1.MainEnv")
+            {
+                GlobalTicker.Instance.OnUpdate -= Update;
+                PiercingLearn();
+            }
         }
     }
 

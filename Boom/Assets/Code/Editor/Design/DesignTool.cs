@@ -196,33 +196,6 @@ public class DesignTool
         TempAddBullet(203);
     }
     #endregion
-
-    #region 地图编辑
-    [Title("雾"),PropertyOrder(98)]
-    public GameObject MapRoot;
-    [Button("雾关闭",ButtonSizes.Large),PropertyOrder(99)]
-    [ButtonGroup("雾")]
-    void CloseFog()
-    {
-        if (!MapRoot)
-            MapRoot = GameObject.Find("MapRoot");
-        MapRoomNode[] allRoom = MapRoot.GetComponentsInChildren<MapRoomNode>();
-
-        allRoom.Where(each => each.RoomFog != null).ToList() // 将结果转换为列表
-            .ForEach(each => each.RoomFog.gameObject.SetActive(false)); // 执行操作
-    }
-    
-    [Button("雾开启",ButtonSizes.Large),PropertyOrder(99)]
-    [ButtonGroup("雾")]
-    void OpenFog()
-    {
-        if (!MapRoot)
-            MapRoot = GameObject.Find("MapRoot");
-        MapRoomNode[] allRoom = MapRoot.GetComponentsInChildren<MapRoomNode>();
-        allRoom.Where(each => each.RoomFog != null).ToList() // 将结果转换为列表
-            .ForEach(each => each.RoomFog.gameObject.SetActive(true)); // 执行操作
-    }
-    #endregion
     
     [Title("是否跳过剧情"),PropertyOrder(100)]
     public bool IsSkipStorylineMode;

@@ -10,9 +10,6 @@ public class SpriteClickHandler : MonoBehaviour
     [Header("显示相关")]
     public SpriteRenderer spriteRenderer;
     public Renderer _renderer;
-    public Color HeighLightColor = Color.white;
-    internal Color defaultColor;
-    internal Vector3 defaultScale;
     
     [Header("功能相关")]
     public bool IsLocked = false;
@@ -20,11 +17,7 @@ public class SpriteClickHandler : MonoBehaviour
     
     internal virtual void Start()
     {
-        if (spriteRenderer != null)
-        {
-            defaultColor = spriteRenderer.color;
-            defaultScale = spriteRenderer.transform.localScale;
-        }
+        if (spriteRenderer != null) {}
         else
             _renderer = transform.GetChild(0).GetComponent<Renderer>();
     }

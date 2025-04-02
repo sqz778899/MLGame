@@ -33,6 +33,7 @@ public class ChapterOneStep1: StorylineStepBase
     {
         EternalCavans.Instance.DialogueSC.OnDialogueEnd -= BeginQuest;
         QuestManager.Instance.SelectQuest(1);
+        EventManager.OnChapterOne?.Invoke();
     }
      
     void OnChapterOneCompleted()

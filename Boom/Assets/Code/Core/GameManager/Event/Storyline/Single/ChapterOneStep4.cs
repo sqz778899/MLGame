@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ChapterOneStep4:StorylineStepBase
@@ -16,8 +17,11 @@ public class ChapterOneStep4:StorylineStepBase
     {
         if (PlayerManager.Instance._QuestData.MainStoryProgress == 3)
         {
-            GlobalTicker.Instance.OnUpdate -= Update;
-            Complete();
+            if (SceneManager.GetActiveScene().name == "1.MainEnv")
+            {
+                GlobalTicker.Instance.OnUpdate -= Update;
+                Complete();
+            }
         }
     }
 

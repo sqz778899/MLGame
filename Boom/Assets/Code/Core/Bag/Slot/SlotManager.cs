@@ -51,8 +51,8 @@ public static class SlotManager
         SlotBase[] allEuipItemSlot = UIManager.Instance.BagUI.EquipItemRoot.GetComponentsInChildren<SlotBase>();
         SlotBase[] allGemSlot = UIManager.Instance.BagUI.GemRoot.GetComponentsInChildren<SlotBase>();
         SlotBase[] allGemInlaySlot = UIManager.Instance.BagUI.EquipBulletSlotRoot.GetComponentsInChildren<SlotBase>();
-        SlotBase[] allCurBulletSlot = UIManager.Instance.BagUI.EquipBulletSlotRoot.GetComponentsInChildren<SlotBase>();
-        SlotBase[] allSlot = allItemSlot.Concat(allEuipItemSlot).Concat(allGemSlot).Concat(allGemInlaySlot).Concat(allCurBulletSlot).ToArray();
+        SlotBase[] allBagMiniSlot = UIManager.Instance.BagUI.BagRootMiniGO.GetComponentsInChildren<SlotBase>();
+        SlotBase[] allSlot = allItemSlot.Concat(allEuipItemSlot).Concat(allGemSlot).Concat(allGemInlaySlot).Concat(allBagMiniSlot).ToArray();
         return allSlot;
     }
 

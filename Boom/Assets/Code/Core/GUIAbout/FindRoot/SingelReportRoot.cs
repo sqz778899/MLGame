@@ -72,7 +72,6 @@ public class SingelReportRoot : MonoBehaviour
                         IconEnemy.transform.GetChild(0).gameObject.SetActive(false);
                     effectiveDamage += each.EffectiveDamage;
                     overflowDamage += each.OverflowDamage;
-                    totalDamage += effectiveDamage + overflowDamage;
                     continue;
                 } 
                 
@@ -85,7 +84,6 @@ public class SingelReportRoot : MonoBehaviour
                 
                 effectiveDamage += each.EffectiveDamage;
                 overflowDamage += each.OverflowDamage;
-                totalDamage += effectiveDamage + overflowDamage;
             }
             Debug.Log("敌人有盾");
         }
@@ -97,7 +95,8 @@ public class SingelReportRoot : MonoBehaviour
         if (overflowDamage == 0)
             txtOverflowDamage.gameObject.SetActive(false);
         txtOverflowDamage.text = overflowDamage.ToString();
-        
+
+        totalDamage = effectiveDamage + overflowDamage;
         BattleManager.Instance.battleData.CurWarReport.TotalDamage = totalDamage;
         BattleManager.Instance.battleData.CurWarReport.EffectiveDamage = effectiveDamage;
         BattleManager.Instance.battleData.CurWarReport.OverFlowDamage = overflowDamage;

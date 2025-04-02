@@ -196,6 +196,7 @@ public class MapManager : MonoBehaviour
         Vector3 newCameraPos = new Vector3(curRoom.CameraStartPos.position.x,
             curRoom.CameraStartPos.position.y, Camera.main.transform.position.z);
         Camera.main.transform.DOMove(newCameraPos, 0.5f);
+        curRoom.SetRenderLayer(roleInMap);
     }
     
     public void UnloadLevelData()

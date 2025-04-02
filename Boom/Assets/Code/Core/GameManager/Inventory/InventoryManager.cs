@@ -124,12 +124,15 @@ public class InventoryManager : MonoBehaviour
         //..............Clear Old Data..................
         GameObject spawnerSlotRoot = UIManager.Instance.BagUI.SpawnerSlotRoot;
         GameObject SpawnerSlotRootMini = UIManager.Instance.BagUI.SpawnerSlotRootMini;
-        DraggableBulletSpawner[] oldSpawner = spawnerSlotRoot.GetComponentsInChildren<DraggableBulletSpawner>();
+        DraggableBulletSpawner[] oldSpawner = spawnerSlotRoot.GetComponentsInChildren<DraggableBulletSpawner>(true);
         for (int i = oldSpawner.Length - 1; i >= 0; i--)
             Destroy(oldSpawner[i].gameObject);
+        DraggableBulletSpawner[] oldSpawnerMini = SpawnerSlotRootMini.GetComponentsInChildren<DraggableBulletSpawner>(true);
+        for (int i = oldSpawnerMini.Length - 1; i >= 0; i--)
+            Destroy(oldSpawnerMini[i].gameObject);
         //..............Instance New Data..................
-        BulletSlot[] slots = spawnerSlotRoot.GetComponentsInChildren<BulletSlot>();
-        BulletSlot[] slotMinis = SpawnerSlotRootMini.GetComponentsInChildren<BulletSlot>();
+        BulletSlot[] slots = spawnerSlotRoot.GetComponentsInChildren<BulletSlot>(true);
+        BulletSlot[] slotMinis = SpawnerSlotRootMini.GetComponentsInChildren<BulletSlot>(true);
         InitSpawnersSingel(slots);
         InitSpawnersSingel(slotMinis,true);
     }
