@@ -34,7 +34,7 @@ public class GemSlot : SlotBase
     }
     public GemSlotInner CurGemSlotInner;
     
-    [Header("锁定的美术资源")] 
+    [Header("锁定的美术资源")]
     public GameObject Locked;
     [Header("功能参数")]
     public Vector3 ChildScale = Vector3.one;
@@ -59,7 +59,7 @@ public class GemSlot : SlotBase
             InventoryManager.Instance._InventoryData.RemoveGemToBag(_gemNew._data);
         else
             InventoryManager.Instance._InventoryData.UnEquipGem(_gemNew._data);
-        SlotManager.ClearGemSlot(_gemNew._data.CurSlot);
+        //SlotManager.ClearGemSlot(_gemNew._data.CurSlot);
         _gemNew._data.CurSlot = this;
         MainID = _gemNew._data.ID;
         
@@ -75,7 +75,7 @@ public class GemSlot : SlotBase
             CreateTempObjectGO(_gemNew._data,CreateItemType.MiniBagGem);
         if (CurGemSlotInner != null)
         {
-            SlotManager.ClearSlot(CurGemSlotInner);
+            SlotManager.ClearSlot(CurGemSlotInner,true);
             CurGemSlotInner.SOnDrop(_newChildeIns);
         }
     }

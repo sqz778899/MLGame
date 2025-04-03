@@ -88,6 +88,9 @@ public class BulletInvData : ScriptableObject
                 GetComponentsInChildren<ResonanceSlotCol>(true);
       
         //处理共振
+        for (int i = 1; i < EquipBullets.Count; i++)
+            EquipBullets[i].ResonanceDamage = 0;
+        
         Dictionary<int,List<int>> ResonanceClusterDict = new Dictionary<int, List<int>>();
         int clusterCount = 1;
         int resonanceCount = 0;

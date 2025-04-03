@@ -22,7 +22,7 @@ public class TextSync : MonoBehaviour
     }
     public ValueType valueType;
 
-    void Start()
+    public void InitData()
     {
         _txt = GetComponent<TextMeshProUGUI>();
         // 根据 `valueType` 初始化

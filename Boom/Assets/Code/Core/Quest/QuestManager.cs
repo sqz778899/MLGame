@@ -26,6 +26,7 @@ public class QuestManager : MonoBehaviour
         PlayerManager.Instance._QuestData.UpdateQuestState(questID, QuestState.InProgress);
         //2)读取天赋
         PlayerManager.Instance.LoadTalent();
+        SaveManager.SaveFile();
         //3)加载固定的游戏场景
         MSceneManager.Instance.LoadScene(2);
     }

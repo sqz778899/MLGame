@@ -10634,6 +10634,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dc7158957454266a45da8dd48677eed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EternalCavans: {fileID: 904426537}
+  IsSkipStorylineMode: 0
 --- !u!4 &535633426
 Transform:
   m_ObjectHideFlags: 0
@@ -11097,6 +11099,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c57a295958849404ea39befae7dd6e2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &904426537 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 808570739096868345, guid: 79aacfe33e84d8e48bcf8db27e3a8858, type: 3}
+  m_PrefabInstance: {fileID: 3477590402500192859}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &925635571
 GameObject:
   m_ObjectHideFlags: 0
@@ -11715,6 +11722,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _orginStr: 
   _orginFondSize: 0
+--- !u!1 &1467555131
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1467555133}
+  - component: {fileID: 1467555132}
+  m_Layer: 0
+  m_Name: GlobalTicker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1467555132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1467555131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9f44742472a44bda91b45dd052d0669, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1467555133
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1467555131}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.3844237, y: -0.010451406, z: -1.0040703}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1473277120
 GameObject:
   m_ObjectHideFlags: 0
@@ -16718,7 +16769,11 @@ MonoBehaviour:
     Level: 0
     Description: 
     State: 0
+    IsCompleted: 0
     DifficultyLevel: 0
+    TotalScore: 0
+    TotalLoopCount: 0
+    ExplorationPercent: 0
   IsTestMode: 0
   TestMapID: 0
 --- !u!4 &1567720632
@@ -26989,6 +27044,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7959133093406263470, guid: 79aacfe33e84d8e48bcf8db27e3a8858, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -127.99988
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -27006,3 +27065,4 @@ SceneRoots:
   - {fileID: 38597907}
   - {fileID: 1567720632}
   - {fileID: 535633426}
+  - {fileID: 1467555133}

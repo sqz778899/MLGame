@@ -1,22 +1,20 @@
 ManifestFileVersion: 0
-CRC: 1412666068
+CRC: 1752395094
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 8341fdc4f6f4ad2e153473dd1b111841
+    Hash: 2ee52e08a7eb3e4c1f107971b16b58b9
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 1608a3a5a819a13de01b1bb18641d432
+    Hash: d018257b0c91f229382823a56ced6014
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 8341fdc4f6f4ad2e153473dd1b111841
+    Hash: 2ee52e08a7eb3e4c1f107971b16b58b9
 HashAppended: 0
 ClassTypes:
 - Class: 1
   Script: {instanceID: 0}
 - Class: 4
-  Script: {instanceID: 0}
-- Class: 20
   Script: {instanceID: 0}
 - Class: 21
   Script: {instanceID: 0}
@@ -44,14 +42,14 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 74
   Script: {instanceID: 0}
-- Class: 81
-  Script: {instanceID: 0}
 - Class: 82
   Script: {instanceID: 0}
 - Class: 83
   Script: {instanceID: 0}
 - Class: 111
   Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
 - Class: 114
@@ -61,25 +59,13 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 906028fdd5ec84d4eba9a1480deb2285, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: d5c5c58013818d4478a520307f6ff80b, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 3597c2a1ea51a6f42b7071ebe3d0e861, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 59681f0b6d425e141876bd62dcd3a381, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: d02ef3081096def458f821896f75092a, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: ee8d439ed0834fafaa6b904056f5bed2, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: dd99ff47bc9c28342827307f3a692869, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 1adee1ee73de999498115b7877509b70, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 3cc9c657779371047bd5a3f2184d953d, type: 3}
+  Script: {fileID: 11500000, guid: 74fcbb5c3b9e4f74da07d24cb24c7bcc, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 5ef25c4a1cc448f991369836f2f9b51b, type: 3}
 - Class: 114
@@ -87,27 +73,19 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 7c476447e8834b96b85b1bf3473b354c, type: 3}
+  Script: {fileID: 11500000, guid: df4b4da5a5754deba071a0add5501352, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  Script: {fileID: 11500000, guid: 7c476447e8834b96b85b1bf3473b354c, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 24d5a07f3b42bca4c84122fce41709b7, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 978986faa98350541be4f9f5f8b4a86b, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 6beae08cfc882c245a5c106c713a93fa, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 882680d8118757c43b2fd68de2c856e3, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: dd97bc2fb1dc47e0bba3375b762e05d1, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 7b743370ac3e4ec2a1668f5455a8ef8a, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: a6b194f808b1af6499c93410e504af42, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: c38890b61f384ff382d8bb53adab6f1b, type: 3}
+  Script: {fileID: 11500000, guid: 567f848c8c81c8a4fa7575919a123889, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  Script: {fileID: 11500000, guid: adfb64640879ced40bbaabddb0344760, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 8199ed6fa2be79f40a830393d21b7a71, type: 3}
 - Class: 114
@@ -119,75 +97,31 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: d60f8495b3acfc84fae320e7a4a421d3, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: dab1ec3dd43f6e14c9edaa5bcad9b682, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 2ea8ee56ee980e14496699a2524738fe, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: f6a8637845bc2c740a7afb77a5ceb50f, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: c3aca150b5484867be729f91562c76f3, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 560146146c07df540a118aa151f6fb59, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 3aead122794027d4db12bf5e131053c7, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: cfe3de5847756494999c50ba29eace8f, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: ce4d821d0e055894ba13a315dd1ad4e9, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 088e0aceed2daab44beab730cff1d2bc, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 5c414f298b42b334588b038b9f4cd9f5, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 3bd06ed541a9fa540850ddda3e0ed10d, type: 3}
+  Script: {fileID: 11500000, guid: 3cb7c6ba9ce6e124999c0ff98bb0e99e, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 939e8ca1c6e272c4c9f0c6bf2f7f6acf, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 61bff0a6a0ffe33428cbe98df86aafd9, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 96f49041aceb6774a8c7a65295640356, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 77d5da3c21f37734197b7819efb27784, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: f6b7407fcd9ef74449644cb3ed69cd4e, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: e5c2057c8aebf174cbe3041368d0b664, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 4a30f8c34e83082469f3a533d1d31c6b, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: ae3ae90214b25af41aadd490571efcce, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: dc48ac53a11f4f59bfb72fc1217da0fa, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 05e99f5196b148aa9ec6aa6c897e93cc, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 68dc6635dd3309e4984f856682fab823, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 871698f5fd4f4d38a95a7da6c057319c, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
+  Script: {fileID: 11500000, guid: 42a51ff9ebe5ce147b1a5d5b7b591e09, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 0bca688204ea3084d8e73e9ab59dc89e, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 3a986d0338451854d9a54b85cc79843a, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: a5ca255b000612542b82298896f2e76b, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 0fc8ff3667fa142408e9d67b00011027, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: ef08f0e602de09948bdd8357c8d1975e, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 55418648f0a835a468c263feebb0df15, type: 3}
+  Script: {fileID: 11500000, guid: d9bd892d34e31a241978cb302265db15, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 295260b41484f4a4d9de43239fe63ccc, type: 3}
 - Class: 114
@@ -195,13 +129,107 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: d85b887af7e6c3f45a2e2d2920d641bc, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: fc2d1d0c68770284c9c0db8adcd5eded, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 4de91b53bbaef9e4ba54d2a8447d8df3, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: ef7f20c543b94a61a52e9d1ebac1cc3c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: a78d9fb5a6aa95544b2650b71e200c31, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 73a1b4fc0a2404c42b8a762a5b864b24, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 364cc5afc1cc46119785892702892f40, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f1b3b4b945939a54ea0b23d3396115fb, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 20abc55745595584fa6299e57d436ca7, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 87ab001ee3a79854fbed51a4db4d8ee5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0b50deb62819cf943b0b8310f3b13da2, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: bd64f02711ae8a044943366f66e435d5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 174f926c55244647ab0e5076c09f56ee, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fdb3f314f0e3401e9e7ccbe56e7e4d67, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 53e70b8144690aa4d8d186252eea44bc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 0279737ebeba455d934686c04c67ba76, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 59681f0b6d425e141876bd62dcd3a381, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d02ef3081096def458f821896f75092a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1adee1ee73de999498115b7877509b70, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: abd0d187da7b9264393ea9c3056ca67f, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3cc9c657779371047bd5a3f2184d953d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 978986faa98350541be4f9f5f8b4a86b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 882680d8118757c43b2fd68de2c856e3, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: dd97bc2fb1dc47e0bba3375b762e05d1, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7b743370ac3e4ec2a1668f5455a8ef8a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: c38890b61f384ff382d8bb53adab6f1b, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d60f8495b3acfc84fae320e7a4a421d3, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: dab1ec3dd43f6e14c9edaa5bcad9b682, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 6148a3aab6314df88e6ea8995566f121, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: c3aca150b5484867be729f91562c76f3, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: a4baeed416511bd47ad81bb6674dcc52, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9148f25230937464eb348684ff0c9377, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 088e0aceed2daab44beab730cff1d2bc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5c414f298b42b334588b038b9f4cd9f5, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: bf21cbb0d9c74754962fdaa9602102d9, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3bd06ed541a9fa540850ddda3e0ed10d, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 060e6925c277401b822a80c8fc4b635e, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 61bff0a6a0ffe33428cbe98df86aafd9, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e5c2057c8aebf174cbe3041368d0b664, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: dc48ac53a11f4f59bfb72fc1217da0fa, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3a986d0338451854d9a54b85cc79843a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1f892ccdda3842c5973ffc37e281c231, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 1e3e8c2d6ede47e4a6534ea4dbfdbc8c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: dce3f08fed2eabf4999fc23fe90395a0, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 55418648f0a835a468c263feebb0df15, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: fc2d1d0c68770284c9c0db8adcd5eded, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 1bd9f7f8ba0d3e04a900f8bdec293598, type: 3}
 - Class: 114
@@ -211,53 +239,31 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 2a4db7a114972834c8e4117be1d82ba3, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: a78d9fb5a6aa95544b2650b71e200c31, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 73a1b4fc0a2404c42b8a762a5b864b24, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 364cc5afc1cc46119785892702892f40, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 22a4c7812d5d4ae5bf006945701b552b, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: 873d62595b6849d981dc0f27b844e7e5, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 2a3966ce4b935b84ea6ef519976a3d6f, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: ae99d9f08a93e8b4bac15312d2512578, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: f1b3b4b945939a54ea0b23d3396115fb, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: d9741303cabdd764b8a3360b94f0d6cf, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 0b50deb62819cf943b0b8310f3b13da2, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: bd64f02711ae8a044943366f66e435d5, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 557ca0bb455c2b0468aaf560d1a3fc31, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: a3271bddab848fd4b82aff55167b7d06, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: af62903d5a70454284fb333bae26c057, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 7e2658b9c9c21b249bf204f275eb204c, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3073d930f39747f29855598b81730b0f, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 57ca0112ee27dd44cb7964969f95190b, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: c52b8f2ed0efbc540b024edc990a5d8e, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: b377a40f9993dfb47bcb1d68438836da, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 9d128067e03b9264b835361d7eb8ebff, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: fdb3f314f0e3401e9e7ccbe56e7e4d67, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 53e70b8144690aa4d8d186252eea44bc, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 0279737ebeba455d934686c04c67ba76, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 09121d43a79d438295bbd43326b2daf6, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 1212d82c5c24dad488c27898a7623cd0, type: 3}
+  Script: {fileID: 11500000, guid: 05e99f5196b148aa9ec6aa6c897e93cc, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 49870575e59875349a41f01caa72f196, type: 3}
+  Script: {fileID: 11500000, guid: 22a4c7812d5d4ae5bf006945701b552b, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 0eb1b696718d36049a7ae473d125b8fa, type: 3}
 - Class: 114
@@ -286,27 +292,25 @@ SerializeReferenceClassIdentifiers:
 - AssemblyName: Assembly-CSharp
   ClassName: Award
 - AssemblyName: Assembly-CSharp
-  ClassName: BulletJson
+  ClassName: BulletBaseSaveData
 - AssemblyName: Assembly-CSharp
   ClassName: EParameter
 - AssemblyName: Assembly-CSharp
-  ClassName: GemAttribute
-- AssemblyName: Assembly-CSharp
   ClassName: ItemAttribute
 - AssemblyName: Assembly-CSharp
-  ClassName: ItemJson
+  ClassName: Portrait
 - AssemblyName: Assembly-CSharp
-  ClassName: MapSate
+  ClassName: Quest
+- AssemblyName: Assembly-CSharp
+  ClassName: QuestSaveData
 - AssemblyName: Assembly-CSharp
   ClassName: RollPR
 - AssemblyName: Assembly-CSharp
   ClassName: SaveFileJson
 - AssemblyName: Assembly-CSharp
-  ClassName: StandbyData
-- AssemblyName: Assembly-CSharp
   ClassName: StringSpritePair
-- AssemblyName: Unity.RenderPipelines.Universal.Runtime
-  ClassName: UnityEngine.Rendering.Universal.TemporalAA/Settings
+- AssemblyName: Assembly-CSharp
+  ClassName: TalentData
 - AssemblyName: Unity.TextMeshPro
   ClassName: TMPro.FaceInfo_Legacy
 - AssemblyName: Unity.TextMeshPro
@@ -380,431 +384,249 @@ SerializeReferenceClassIdentifiers:
 - AssemblyName: spine-unity
   ClassName: Spine.Unity.SkeletonRenderer/SpriteMaskInteractionMaterials
 Assets:
-- Assets/Res/Bullet/SpineData/Bullet_002/bullet_103_Material.mat
+- Assets/Res/Bullet/SpineData/Bullet_001/bullet_101_Material-Additive.mat
 - Assets/Res/FX/SpineData/Compass/compass.png
-- Assets/Res/UI/Prefabs/Popup/P_BulletUP_01.prefab
 - Assets/Res/Bullet/SpineData/Bullet_001/bullet_201.json
 - Assets/Res/FX/Material/M_FX_explosion_spritesheet_3x3.mat
-- Assets/Res/UI/Slots/T_ShopSlotTop_01.png
 - Assets/Res/Bullet/SpineData/Bullet_002/spfx_hit_202_Material.mat
 - Assets/Res/Bullet/SpineData/Bullet_003/bullet_003_Atlas.asset
-- Assets/Res/UI/Item/Textures/stone.png
-- Assets/Res/Bullet/Textures/Bullet_001/T_Bullet_Icon_001.png
-- Assets/Res/FX/SpineData/Compass/compass_Atlas.asset
-- Assets/Res/Character/SpineData/Enemy01/enemy_012.png
-- Assets/Res/Bullet/SpineData/Bullet_002/spfx_hit_202.png
 - Assets/Res/FX/Texture/fx_keybord_02.png
-- Assets/Res/Character/MainRole/MainRoleManager.asset
-- Assets/Res/Bullet/SpineData/Bullet_002/bullet_202_Material.mat
-- Assets/Res/Levels/P_Level_01.prefab
 - Assets/Res/Manager/RollManager.asset
-- Assets/Res/Map/Textures/MapNode/T_MapArrow_01.png
-- Assets/Res/FX/Texture/FXV_ActivationPattern1.png
+- Assets/Res/Levels/P_Level_01.prefab
+- Assets/Res/UI/Slots/T_BulletInnerSlot_01.png
 - Assets/Res/UI/Button/Button_Close_01.png
-- Assets/Res/Bullet/Textures/T_Star_01.png
 - Assets/Res/FX/SpineData/Compass/compass_compass_InsideMask.mat
-- Assets/Res/UI/Item/Textures/skull.png
-- Assets/Res/FX/SpineData/Compass/compass6.png
 - Assets/Res/Character/SpineData/Enemy02/P_Enemy_02.prefab
-- Assets/Res/UI/Prefabs/TitleRoot.prefab
 - Assets/Res/FX/Texture/fx_t_distortion.png
-- Assets/Res/FX/SpineData/Compass/compass_compass2.mat
-- Assets/Res/Bullet/SpineData/Bullet_003/spfx_hit_003_Material-Additive.mat
 - Assets/Res/Bullet/SpineData/Bullet_003/spfx_hit_203_Atlas.asset
 - Assets/Res/FX/Texture/fx_t_motion_02.png
-- Assets/Res/Map/Prefabs/P_RoomKey_01.prefab
-- Assets/Res/Levels/P_Level_03.prefab
 - Assets/Res/Bullet/SpineData/Bullet_003/bullet_203.atlas.txt
 - Assets/Res/Map/Textures/Rooms/T_Up3L1R1.png
 - Assets/Res/UI/Buff/Talent/P_Buff_Template.prefab
-- Assets/Res/UI/Item/Textures/egg_1.png
 - Assets/Res/UI/Prefabs/Misc/P_Dialogue_Fight_Template.prefab
-- Assets/Res/UI/Prefabs/Misc/P_Tooltip_Text_02.prefab
-- Assets/Res/Bullet/SpineData/Bullet_003/spfx_hit_103_Atlas.asset
 - Assets/Res/Map/Textures/MapNode/T_MapNode_01.png
 - Assets/Res/Shader/New_Graph_output_1.png
 - Assets/Res/UI/Buff/Talent/Textures/T_Buff_Inferno_04.png
-- Assets/Res/UI/Slots/T_BagSlot_01.png
-- Assets/Res/Bullet/SpineData/Bullet_003/bullet_103.json
-- Assets/Res/UI/Slots/T_RoleSlot_05.png
-- Assets/Res/Character/SpineData/Enemy01/enemy_01_enemy_01.mat
-- Assets/Res/Map/Textures/T_Map_01.png
+- Assets/Res/Character/Image/Enemy/P_ShieldMiniMap_01.prefab
 - Assets/Res/UI/Button/T_BtnRoll_01.png
-- Assets/Res/Character/SpineData/Enemy01/enemy_01_Atlas.asset
-- Assets/Res/Character/SpineData/Enemy03/enemy_03_enemy_034.mat
 - Assets/Res/Bullet/SpineData/Bullet_002/bullet_002_Atlas.asset
 - Assets/Res/Character/SpineData/Role/spfx_magic_circle_01_Atlas.asset
 - Assets/Res/FX/SpineData/Compass/compass_compass-Screen.mat
-- Assets/Res/UI/Item/Textures/element.png
+- Assets/Res/UI/Item/Textures/T_Item_KitchenKnife_01.png
 - Assets/Res/Bullet/SpineData/Bullet_001/spfx_hit_101.json
 - Assets/Res/Bullet/SpineData/Bullet_003/spfx_hit_103_Material.mat
-- Assets/Res/FX/Material/M_FX_Mark_01.mat
 - Assets/Res/Map/Materials/M_DrawLine.mat
-- Assets/Res/Bullet/SpineData/Bullet_003/bullet_203_bullet_2034.mat
 - Assets/Res/Character/SpineData/Enemy02/enemy_02_enemy_027.mat
-- Assets/Res/FX/Material/M_FX_wave3.mat
-- Assets/Res/UI/Item/Textures/T_Item_KitchenKnife_01.png
-- Assets/Res/Character/Display/Textures/BloodBar_Blood_02.png
 - Assets/Res/Bullet/SpineData/Bullet_001/bullet_001_Material.mat
 - Assets/Res/Bullet/Prefab/P_StandbyMat_Template.prefab
-- Assets/Res/FX/SpineData/Compass/compass_compass8_InsideMask.mat
-- Assets/Res/Character/SpineData/Enemy03/enemy_03_SkeletonData.asset
-- Assets/Res/Character/MainRole/T_RoleHead_01.png
-- Assets/Res/Character/SpineData/Connon01/cannon_01_2_SkeletonData.asset
 - Assets/Res/Bullet/Textures/Bullet_003/T_Bullet_Icon_003.png
-- Assets/Res/Character/SpineData/Enemy03/enemy_03_enemy_039.mat
-- Assets/Res/Bullet/SpineData/Bullet_001/spfx_hit_101.atlas.txt
-- Assets/Res/Bullet/SpineData/Bullet_002/bullet_103_Material-Additive.mat
 - Assets/Res/Bullet/Textures/Bullet_001/T_Bullet_Edit_a_101.png
-- Assets/Res/Character/SpineData/Role/spfx_magic_circle_01_SkeletonData.asset
-- Assets/Res/Bullet/Textures/Bullet_002/T_BulletMat_002.png
-- Assets/Res/Character/Display/Textures/BloodBar_Blood_01.png
-- Assets/Res/UI/BG/T_TopBarGoldBG_01.png
-- Assets/Res/UI/Item/Textures/fire_3.png
+- Assets/Res/Bullet/SpineData/Bullet_002/bullet_103_Material-Additive.mat
 - Assets/Res/UI/BG/T_BGMinMapBag_Mask_01.png
-- Assets/Res/FX/SpineData/Compass/compass_compass2_InsideMask.mat
+- Assets/Res/Bullet/Textures/Bullet_002/T_BulletMat_002.png
+- Assets/Res/UI/BG/T_WinLine_01.png
 - Assets/Res/Bullet/SpineData/Bullet_003/bullet_203_bullet_2036.mat
 - Assets/Res/UI/Item/Textures/meat.png
 - Assets/Res/Bullet/SpineData/Bullet_002/spfx_hit_102.atlas.txt
-- Assets/Res/Map/Textures/Rooms/T_Up2L1R0.png
-- Assets/Res/Map/Textures/Rooms/T_RoomPure.tga
-- Assets/Res/UI/BG/T_BGShop_05.png
+- Assets/Res/Map/Textures/Rooms/T_Up2L1R0_1.png
+- Assets/Res/Shader/NewUnlitShader.shader
 - Assets/Res/Bullet/SpineData/Bullet_003/spfx_hit_203_Material.mat
 - Assets/Res/Bullet/SpineData/Bullet_001/bullet_001.png
 - Assets/Res/FX/SpineData/Compass/compass_compass4-Multiply.mat
-- Assets/Res/Map/Prefabs/P_Arrow_CrossRoom_03.prefab
 - Assets/Res/UI/Slots/T_Slot_02.png
 - Assets/Res/Character/SpineData/Connon01/cannon_01_1_Material-Additive.mat
-- Assets/Res/FX/Texture/fx_cloud_2x2_hard.png
 - Assets/Res/Map/Textures/MapNode/T_Event_01.png
-- Assets/Res/Shader/CommonMaterial/RoomFogDissolve.mat
 - Assets/Res/UI/Button/Button_Rect_output.png
+- Assets/Res/Shader/CommonMaterial/RoomFogDissolve.mat
 - Assets/Res/UI/BG/T_HeadFrameMask_01.png
+- Assets/Res/Map/Textures/Rooms/T_Up3L1R0_2.png
 - "Assets/Res/UI/Fond/\u963F\u91CC\u5DF4\u5DF4\u666E\u60E0\u4F53\u97E9\u6587 Regular.ttf"
-- Assets/Res/Map/Textures/MapNode/T_ShopLock_01.png
+- Assets/Res/Character/Image/NPC/NPC_Duncan_02.png
 - Assets/Res/Map/Textures/MapNode/T_Main_01.png
-- Assets/Res/Bullet/SpineData/Bullet_003/spfx_hit_003_SkeletonData.asset
+- Assets/Res/UI/Misc/T_Line_01.png
 - Assets/Res/FX/SpineData/Compass/compass_compass6-Screen_InsideMask.mat
-- Assets/Res/FX/Texture/fx_keybord_01.png
-- Assets/Res/Animation/EnemyDie.anim
+- Assets/Res/UI/Misc/icon_TalentLocked_01.png
 - Assets/Res/Bullet/SpineData/Bullet_002/bullet_103_Atlas.asset
 - Assets/Res/Character/MainRole/T_RoleSel_99.png
-- Assets/Res/Map/Textures/Rooms/T_Up2L0R1.png
-- Assets/Res/Shader/SpriteDefault.shader
 - Assets/Res/Character/SpineData/Role/role_01.atlas.txt
 - Assets/Res/Character/Display/Textures/BloodBar_Mid_02.png
-- Assets/Res/Character/Display/Textures/BloodBar_Mid_04.png
-- Assets/Res/Bullet/SpineData/Bullet_001/bullet_201.atlas.txt
 - Assets/Res/Character/SpineData/Enemy03/enemy_03_enemy_032.mat
-- Assets/Res/UI/Prefabs/Misc/P_Award_Coin_01.prefab
+- Assets/Res/Bullet/SpineData/Bullet_001/bullet_201.atlas.txt
 - Assets/Res/FX/Prefab/FX_Bullet03_hit.prefab
-- Assets/Res/Bullet/SpineData/Bullet_002/bullet_202.atlas.txt
-- Assets/Res/Character/SpineData/Connon01/cannon_01_2.json
-- Assets/Res/Bullet/Textures/Bullet_003/T_Bullet_Edit_a_103.png
-- Assets/Res/Bullet/SpineData/Bullet_003/spfx_hit_103_Material-Additive.mat
-- Assets/Res/FX/SpineData/Compass/compass.json
-- Assets/Res/FX/Texture/fx_triangle_curve.png
-- Assets/Res/UI/Fond/ZH_Simplified.asset
-- Assets/Res/Character/SpineData/Enemy02/enemy_022.png
-- Assets/Res/Map/Materials/MapNodes/M_BB_Fight.mat
-- Assets/Res/Character/SpineData/Connon01/cannon_01_1.json
-- Assets/Res/FX/Texture/fx_Icon_yellow.png
+- Assets/Res/Map/Textures/Rooms/RoomWin/T_win_1_part1.png
 - Assets/Res/UI/BG/T_BGCommon_01.png
-- Assets/Res/UI/Misc/Icon_Heart_01.png
-- Assets/Res/UI/Gem/Textures/T_Gem_Resonance_02.png
-- Assets/Res/Shader/Dissove.shader
+- Assets/Res/UI/Misc/Icon_Perfect_01.png
+- Assets/Res/UI/Gem/Prefabs/P_GemInner_Template.prefab
 - Assets/Res/UI/Slots/T_ShopSlotTop_02.png
-- Assets/Res/Map/Prefabs/P_CoinsPile_01.prefab
-- Assets/Res/FX/SpineData/Compass/compass_compass8.mat
-- Assets/Res/Bullet/SpineData/Bullet_002/spfx_hit_002.png
-- Assets/Res/Character/SpineData/RoleHead/role_01_head.png
+- Assets/Res/Map/Textures/Rooms/T_Up2L0R0D0_1.png
 - Assets/Res/FX/Texture/fx_t_circle_79.png
 - Assets/Res/Bullet/SpineData/Bullet_001/bullet_201_Atlas.asset
-- Assets/Res/Bullet/SpineData/Bullet_001/spfx_hit_201_Material-Additive.mat
-- Assets/Res/Character/SpineData/Connon01/cannon_01_1.png
 - Assets/Res/Bullet/SpineData/Bullet_002/spfx_hit_202_Atlas.asset
 - Assets/Res/Character/SpineData/Enemy01/enemy_01_enemy_018.mat
 - Assets/Res/Bullet/SpineData/Bullet_003/spfx_hit_003.json
 - "Assets/Res/UI/Fond/\u66F4\u7EB1UIHC Regular.TTF"
-- Assets/Res/UI/Gem/Textures/T_Gem_Piercing_03.png
-- Assets/Res/Character/SpineData/Enemy01/enemy_01_enemy_015.mat
-- Assets/Res/Character/SpineData/RoleHead/role_01_head_Atlas.asset
-- Assets/Res/FX/Prefab/FX_Mark_01.prefab
 - Assets/Res/UI/Gem/Textures/T_Gem_Piercing_01.png
-- Assets/Res/Map/Textures/Rooms/T_Up2L0R0.png
-- Assets/Res/Map/Materials/M_BackGround.mat
+- Assets/Res/Character/SpineData/RoleHead/role_01_head_Atlas.asset
+- Assets/Res/UI/Material/New Material.mat
 - Assets/Res/Bullet/Textures/Bullet_001/T_Bullet_Edit_a_201.png
 - Assets/Res/Bullet/Prefab/P_Bullet_Inner_Spfx_Template.prefab
 - Assets/Res/Character/SpineData/Enemy01/enemy_015.png
-- Assets/Res/UI/Material/New Material.mat
-- Assets/Res/Bullet/SpineData/Bullet_002/bullet_002.json
-- Assets/Res/Bullet/SpineData/Bullet_002/bullet_103_SkeletonData.asset
-- Assets/Res/FX/SpineData/Compass/compass5.png
-- Assets/Res/Bullet/SpineData/Bullet_002/spfx_hit_202_SkeletonData.asset
-- Assets/Res/Shader/ParallaxCloud.shader
-- Assets/Res/Bullet/SpineData/Bullet_003/bullet_003.json
-- Assets/Res/Character/Display/Textures/BloodBar_Blood_03.png
 - Assets/Res/UI/Slots/T_RoleSlot_Locked_04.png
-- Assets/Res/UI/Slots/T_RoleSlot_04.png
-- Assets/Res/UI/Misc/T_Misc_06.png
+- Assets/Res/Bullet/SpineData/Bullet_002/spfx_hit_202_SkeletonData.asset
+- Assets/Res/Character/Display/Textures/BloodBar_Blood_03.png
 - Assets/Res/Manager/CalculateDamageManager.asset
 - Assets/Res/UI/Fond/Korean.asset
-- Assets/Res/Character/SpineData/Enemy03/enemy_03_enemy_038.mat
-- Assets/Res/UI/Misc/T_Misc_05.png
 - Assets/Res/UI/Gem/Textures/gongzhen_2.png
-- Assets/Res/UI/Misc/Icon_TooltipsBG_01.png
-- Assets/Res/Character/SpineData/Enemy03/enemy_039.png
-- Assets/Res/Bullet/SpineData/Bullet_002/bullet_102_Material.mat
 - Assets/Res/FX/SpineData/Compass/compass_compass3.mat
-- Assets/Res/FX/Texture/fx_runIcon_01.png
-- Assets/Res/UI/Animation/UIDisplay.anim
 - Assets/Res/Manager/MultiLa.asset
+- Assets/Res/FX/Texture/fx_runIcon_01.png
 - Assets/Res/Map/Textures/Rooms/T_Award_Up0L1R0.png
-- Assets/Res/Character/SpineData/Role/role_01_Atlas.asset
 - Assets/Res/Bullet/SpineData/Bullet_002/bullet_102_SkeletonData.asset
-- Assets/Res/UI/Button/T_BtnFire_01.png
-- Assets/Res/FX/Texture/fx_smoke_01.png
-- Assets/Res/UI/Button/T_BtnCommonLocked_01.png
-- Assets/Res/Bullet/Textures/Bullet_003/T_Bullet_Edit_a_203.png
-- Assets/Res/Character/SpineData/P_Enemy_Template.prefab
-- Assets/Res/UI/Gem/Textures/shanghai_3.png
+- Assets/Res/Character/Display/Textures/MapExploreBar_01.png
 - Assets/Res/Map/Materials/MapNodes/M_TreasureBox_Close_01.mat
+- Assets/Res/Character/SpineData/Enemy05/enemy_05.atlas.txt
 - Assets/Res/Character/Image/Enemy/Enemy_Portrait_01.png
-- Assets/Res/Manager/UIManager.asset
-- Assets/Res/UI/Misc/Icon_Gold_01.png
 - Assets/Res/FX/Texture/FXV_Pattern2a.png
+- Assets/Res/FX/Texture/fx_selbox_02.png
 - Assets/Res/UI/Item/Textures/tentacle.png
 - Assets/Res/Bullet/SpineData/Bullet_003/bullet_2033.png
-- Assets/Res/UI/Item/Textures/fire_1.png
-- Assets/Res/Bullet/Prefab/P_Bullet_Edit_a_01.prefab
-- Assets/Res/Bullet/Textures/Bullet_002/T_BulletMat_102.png
 - Assets/Res/Bullet/SpineData/Bullet_001/spfx_hit_001_SkeletonData.asset
 - Assets/Res/Bullet/SpineData/Bullet_001/bullet_001_SkeletonData.asset
-- Assets/Res/FX/SpineData/Compass/compass_compass5_InsideMask.mat
-- Assets/Res/OutSide/T_LibMap_01.png
+- Assets/Res/OutSide/Textures/T_LibMap_01.png
 - Assets/Res/FX/SpineData/Compass/compass_compass4-Multiply_InsideMask.mat
 - Assets/Res/UI/Slots/T_ShopSlotTop_04.png
 - Assets/Res/UI/BG/T_BGWarReport_01.png
-- Assets/Res/UI/Item/Textures/book_1.png
-- Assets/Res/FX/Texture/fx_nova_3x3_spritesheet.png
-- Assets/Res/FX/Material/M_FX_Arrow_01.mat
-- Assets/Res/Bullet/Textures/Bullet_002/T_Bullet_Edit_a_002.png
+- Assets/Res/Character/SpineData/Enemy05/enemy_05.png
 - Assets/Res/Bullet/SpineData/Bullet_003/bullet_003.png
+- Assets/Res/DataOBJ/InventoryData.asset
 - Assets/Res/UI/Material/M_UI_Q_3300.mat
-- Assets/Res/Map/Textures/MapNode/T_BBShop_01.png
+- Assets/Res/Character/SpineData/Enemy05/enemy_05_Material.mat
 - Assets/Res/FX/Texture/fx_line_01.png
 - Assets/Res/Bullet/SpineData/Bullet_002/bullet_002_Material.mat
-- Assets/Res/Character/SpineData/Enemy02/enemy_02_enemy_024.mat
-- Assets/Res/Character/SpineData/Enemy02/enemy_023.png
+- Assets/Res/Map/Prefabs/P_BulletMapNode_01.prefab
+- Assets/Res/Map/Textures/Rooms/T_Award_Up1L1R0.png
 - Assets/Res/Bullet/SpineData/Bullet_003/bullet_003_Material-Additive.mat
-- Assets/Res/Map/Textures/Rooms/T_Award_Up0L0R1.png
-- Assets/Res/Map/Textures/Rooms/T_Up1L0R0.png
 - Assets/Res/Bullet/SpineData/Bullet_001/bullet_001.json
 - Assets/Res/Character/SpineData/Enemy01/enemy_01_enemy_019.mat
-- Assets/Res/FX/Material/M_FX_cloud_2x2_hard.mat
 - Assets/Res/FX/Material/M_FX_smoke.mat
-- Assets/Res/TrunkManager.asset
-- Assets/Res/Bullet/SpineData/Bullet_002/spfx_hit_202.atlas.txt
-- Assets/Res/Character/SpineData/Enemy01/P_Enemy_01.prefab
-- Assets/Res/Map/Prefabs/P_BulletMapNode_01.prefab
-- Assets/Res/UI/Buff/Talent/Textures/T_Buff_GoldRush_06.png
+- Assets/Res/UI/Prefabs/CanvasQ01.prefab
 - Assets/Res/UI/Gem/Textures/T_Gem_Damage_03.png
-- Assets/Res/UI/Misc/T_Misc_03.png
-- Assets/Res/Bullet/Textures/Bullet_001/T_Bullet_Edit_b_001.png
-- Assets/Res/Bullet/SpineData/Bullet_001/bullet_101_Atlas.asset
+- Assets/Res/Shader/UIShader/Unlit_ScrollingLine.mat
 - Assets/Res/Character/SpineData/Connon01/cannon_01_1_Atlas.asset
-- Assets/Res/Manager/MSceneManager.asset
 - Assets/Res/Bullet/SpineData/Bullet_002/spfx_hit_102_Atlas.asset
-- Assets/Res/UI/Prefabs/Misc/P_Award_01.prefab
 - Assets/Res/Bullet/Textures/Bullet_003/T_BulletMat_003.png
 - Assets/Res/Map/Materials/MapNodes/M_MapFinish_01.mat
 - Assets/Res/UI/Gem/Textures/shanghai_1.png
-- Assets/Res/UI/Slots/T_SideSlot_01.png
 - Assets/Res/Map/Textures/MapNode/T_BubblesFight_01.png
-- Assets/Res/Character/SpineData/Enemy01/enemy_013.png
-- Assets/Res/UI/BG/T_Sidebar_01.png
 - Assets/Res/Bullet/SpineData/Bullet_003/bullet_203_SkeletonData.asset
-- Assets/Res/Bullet/SpineData/Bullet_002/spfx_hit_002.atlas.txt
-- Assets/Res/Character/SpineData/Connon01/cannon_01_2.png
-- Assets/Res/Character/Display/Textures/BloodBar_OutLine_04.png
+- Assets/Res/UI/Gem/Textures/T_Gem_Piercing_02.png
+- Assets/Res/UI/Slots/T_RoleSlot_03.png
 - Assets/Res/Character/Display/Textures/BloodBar_OutLine_05.png
 - Assets/Res/FX/SpineData/Compass/compass_compass4_InsideMask.mat
-- Assets/Res/UI/Item/Textures/tongue.png
 - Assets/Res/FX/Texture/fx_t_mask_124_01.png
-- Assets/Res/UI/Prefabs/Misc/PRBar_Template.prefab
-- Assets/Res/UI/Slots/T_RoleSlot_03.png
 - Assets/Res/Map/Prefabs/P_TreasureBox_01.prefab
-- Assets/Res/Bullet/Textures/Bullet_003/T_Bullet_Edit_a_003.png
 - Assets/Res/Shader/BreathingLight.shader
 - Assets/Res/UI/Button/T_BtnCommon_02.png
-- Assets/Res/Character/SpineData/Enemy03/enemy_036.png
-- Assets/Res/Bullet/SpineData/Bullet_003/bullet_103_SkeletonData.asset
 - Assets/Res/Bullet/SpineData/Bullet_003/spfx_hit_003.atlas.txt
 - Assets/Res/FX/SpineData/Compass/compass_compass3-Additive.mat
-- Assets/Res/UI/Item/Textures/egg_3.png
 - Assets/Res/Map/Materials/MapNodes/M_BB_CoinsPile.mat
 - Assets/Res/UI/Misc/Icon_Floating_01.png
 - Assets/Res/Character/SpineData/Enemy02/enemy_027.png
-- Assets/Res/Bullet/SpineData/Bullet_003/spfx_hit_003_Material.mat
-- Assets/Res/UI/Gem/Textures/T_Gem_Piercing_02.png
-- Assets/Res/UI/Item/Textures/bottle.png
 - Assets/Res/UI/Gem/Textures/gongzhen_1.png
 - Assets/Res/Character/SpineData/Enemy02/enemy_026.png
 - Assets/Res/Character/SpineData/Enemy03/enemy_03_enemy_033.mat
 - Assets/Res/GlobalGameDataManager.asset
 - Assets/Res/FX/Texture/fx_point_01.png
-- Assets/Res/Character/SpineData/Enemy03/enemy_03_Atlas.asset
-- Assets/Res/Character/SpineData/Enemy02/enemy_02_enemy_025.mat
-- Assets/Res/Bullet/SpineData/Bullet_003/bullet_003_SkeletonData.asset
-- Assets/Res/UI/Item/Textures/T_Item_BreakWand_01.png
+- Assets/Res/UI/Item/Textures/knife.png
 - Assets/Res/Bullet/SpineData/Bullet_003/spfx_hit_103.atlas.txt
-- Assets/Res/Character/SpineData/RoleHead/role_01_head.json
 - Assets/Res/Bullet/SpineData/Bullet_002/bullet_102_Atlas.asset
 - Assets/Res/Bullet/SpineData/Bullet_001/spfx_hit_101.png
-- Assets/Res/Bullet/SpineData/Bullet_003/bullet_103.atlas.txt
 - Assets/Res/Bullet/SpineData/Bullet_002/spfx_hit_002_SkeletonData.asset
 - Assets/Res/FX/SpineData/Compass/compass3.png
 - Assets/Res/FX/SpineData/Compass/compass_compass-Screen_InsideMask.mat
 - Assets/Res/Character/Display/Textures/BloodBar_Mid_05.png
 - Assets/Res/FX/Material/M_FX_HandPoint_01.mat
-- Assets/Res/FX/Texture/fx_trail_02.png
+- Assets/Res/UI/BG/T_MapFrame_01.png
 - Assets/Res/FX/Texture/fx_point_02.png
-- Assets/Res/UI/BG/T_TopBarScore_01.png
-- Assets/Res/Map/Materials/MapNodes/M_CoinsPile_01.mat
-- Assets/Res/Bullet/SpineData/Bullet_002/spfx_hit_102_SkeletonData.asset
+- Assets/Res/Shader/UIShader/Hole.shader
+- Assets/Res/UI/Slots/T_ShopSlot_01.png
 - Assets/Res/Bullet/SpineData/Bullet_002/spfx_hit_102_Material.mat
 - Assets/Res/Bullet/SpineData/Bullet_003/spfx_hit_203.atlas.txt
-- Assets/Res/Map/Materials/MapNodes/M_BB_Event.mat
-- Assets/Res/Character/SpineData/Enemy02/enemy_02_enemy_026.mat
-- Assets/Res/UI/Slots/T_ShopSlot_01.png
-- Assets/Res/Map/Prefabs/P_ShopNode_01.prefab
 - Assets/Res/Map/Prefabs/P_Arrow_Locked_02.prefab
-- Assets/Res/UI/BG/T_MapFrame_01.png
-- Assets/Res/Shader/UIShader/Hole.shader
-- Assets/Res/UI/Button/T_BtnHelp_01.png
+- Assets/Res/Map/Prefabs/P_ShopNode_01.prefab
 - Assets/Res/Character/SpineData/Enemy03/enemy_03.atlas.txt
-- Assets/Res/Bullet/SpineData/Bullet_002/bullet_202.png
-- Assets/Res/FX/SpineData/Compass/compass_SkeletonData.asset
 - Assets/Res/Character/Display/Textures/BloodBar_Blood_05.png
 - Assets/Res/UI/Item/Textures/crystal_1.png
-- Assets/Res/Bullet/SpineData/Bullet_002/bullet_202_Atlas.asset
-- Assets/Res/Character/SpineData/Enemy03/enemy_033.png
-- Assets/Res/Bullet/SpineData/Bullet_002/spfx_hit_102.json
-- Assets/Res/UI/Item/Textures/knife.png
 - Assets/Res/FX/SpineData/Compass/compass2.png
-- Assets/Res/Shader/OutLine.shader
+- Assets/Res/Bullet/SpineData/Bullet_002/spfx_hit_102.json
 - Assets/Res/Map/Materials/MapNodes/M_ShopLock_01.mat
 - Assets/Res/Bullet/SpineData/Bullet_003/bullet_103_Atlas.asset
-- Assets/Res/FX/SpineData/Compass/compass7.png
-- Assets/Res/UI/Item/Textures/leaf.png
-- Assets/Res/Bullet/SpineData/Bullet_001/spfx_hit_201_Atlas.asset
 - Assets/Res/Bullet/SpineData/Bullet_003/spfx_hit_003_Atlas.asset
-- Assets/Res/Map/Textures/MapNode/T_TreasureBox_Open_01.png
-- Assets/Res/Map/Materials/MapNodes/M_BB_TreasureBox.mat
-- Assets/Res/Map/Materials/MapNodes/M_Shop_01.mat
 - Assets/Res/Bullet/SpineData/Bullet_002/spfx_hit_202_Material-Additive.mat
-- Assets/Res/Bullet/SpineData/Bullet_003/bullet_2037.png
-- Assets/Res/FX/SpineData/Compass/compass_compass.mat
-- Assets/Res/Bullet/SpineData/Bullet_001/spfx_hit_201_Material.mat
 - Assets/Res/FX/Texture/fx_explosion_spritesheet_3x3.png
 - Assets/Res/Character/Image/Enemy/P_Shield_01.prefab
-- Assets/Res/Character/Display/Textures/BloodBlock_01.png
-- Assets/Res/Character/MainRole/T_Character_01.png
-- Assets/Res/FX/Texture/fx_arrow_01.png
-- Assets/Res/Character/MainRole/T_RoleSel_03.png
-- Assets/Res/UI/Item/Textures/note.png
 - Assets/Res/UI/Button/T_BtnStart_01.png
+- Assets/Res/UI/BG/T_BGDesk_01.png
+- Assets/Res/UI/Item/Textures/note.png
 - Assets/Res/FX/SpineData/Compass/compass_compass5-Screen.mat
 - Assets/Res/Character/SpineData/Enemy03/enemy_03_enemy_037.mat
 - Assets/Res/FX/SpineData/Compass/compass_compass6-Screen.mat
-- Assets/Res/Bullet/Prefab/P_RollScore_Template.prefab
-- Assets/Res/UI/BG/T_BGDesk_01.png
 - Assets/Res/Character/Display/Textures/BloodBar_Blood_04.png
-- Assets/Res/UI/BG/T_BGShop_01.png
 - "Assets/Res/UI/Fond/\u963F\u91CC\u5DF4\u5DF4\u666E\u60E0\u4F53 3.0 55 Regular.ttf"
-- Assets/Res/Character/SpineData/RoleHead/role_01_head_Material.mat
 - Assets/Res/UI/Item/Textures/bead.png
-- Assets/Res/FX/SpineData/Compass/compass_compass3-Additive_InsideMask.mat
+- Assets/Res/UI/Item/Textures/T_Item_Pot_01.png
 - Assets/Res/FX/Material/M_FX_circle.mat
-- Assets/Res/UI/Gem/Prefabs/P_Gem_Template_01.prefab
+- Assets/Res/DataOBJ/QuestData.asset
 - Assets/Res/Character/Image/Enemy/P_ObserveHP_01.prefab
 - Assets/Res/Bullet/Prefab/P_BulletRollMat_Template.prefab
+- Assets/Res/Shader/UIShader/ShaderGen.txt
 - Assets/Res/Bullet/SpineData/Bullet_002/spfx_hit_102_Material-Additive.mat
-- Assets/Res/Character/SpineData/Role/spfx_magic_circle_01.atlas.txt
-- Assets/Res/Shader/CommonMaterial/OutLine.mat
-- Assets/Res/UI/Item/Textures/T_Item_Pot_01.png
 - Assets/Res/Character/Image/Enemy/Enemy_Portrait_03.png
-- Assets/Res/FX/SpineData/Compass/compass8.png
 - Assets/Res/UI/Item/Textures/brain.png
+- Assets/Res/Shader/Unlit_NewUnlitShader.mat
 - Assets/Res/Character/SpineData/Enemy02/enemy_02.atlas.txt
-- Assets/Res/Character/SpineData/Enemy02/enemy_02.png
 - Assets/Res/UI/Gem/Textures/shanghai_2.png
-- Assets/Res/UI/Item/Textures/tooth.png
-- Assets/Res/Bullet/SpineData/Bullet_003/bullet_103.png
-- Assets/Res/FX/SpineData/Compass/compass_compass6.mat
-- Assets/Res/Bullet/SpineData/Bullet_003/bullet_2038.png
+- Assets/Res/Shader/UIShader/ScrollingLine.shader
 - Assets/Res/Bullet/SpineData/Bullet_001/bullet_001.atlas.txt
-- Assets/Res/Bullet/Prefab/P_Bullet_Spawner_01.prefab
+- Assets/Res/FX/Material/M_FX_SelBox_02.mat
 - Assets/Res/Bullet/SpineData/Bullet_001/spfx_hit_201.atlas.txt
-- Assets/Res/Character/SpineData/Enemy02/enemy_029.png
-- Assets/Res/Character/Display/Textures/BloodBar_Mid_01.png
 - Assets/Res/Character/Image/Bullet/Bullet_01.png
 - Assets/Res/Character/SpineData/Enemy02/enemy_02.json
-- Assets/Res/Character/SpineData/Enemy02/enemy_02_SkeletonData.asset
 - Assets/Res/Character/SpineData/Enemy03/enemy_03_enemy_03.mat
-- Assets/Res/Character/MainRole/T_RoleSel_02.png
 - Assets/Res/Character/SpineData/Connon01/cannon_01_1.atlas.txt
-- Assets/Res/FX/Material/M_FX_SelBox_02.mat
-- Assets/Res/Map/Textures/MapNode/T_BBCoinsPile_01.png
-- Assets/Res/Map/Materials/MapNodes/M_Main_01.mat
-- Assets/Res/UI/Gem/Textures/gongzhen_3.png
-- Assets/Res/UI/Material/M_UI_Q_3100.mat
-- Assets/Res/FX/Prefab/FX_SelBox_01.prefab
-- Assets/Res/UI/Item/Textures/egg_2.png
 - Assets/Res/UI/Slots/T_RoleSlot_Locked_05.png
-- Assets/Res/FX/Texture/fx_cardMask.png
-- Assets/Res/Bullet/Prefab/P_Bullet_Edit_Template.prefab
-- Assets/Res/UI/Item/Textures/eyeball.png
+- Assets/Res/FX/Prefab/FX_SelBox_01.prefab
 - Assets/Res/Character/SpineData/Enemy03/enemy_038.png
 - Assets/Res/FX/Material/M_FX_SelBox_01.mat
 - Assets/Res/Bullet/Textures/T_ScoreMat_01.png
 - Assets/Res/Map/Materials/MapNodes/M_Bubbles_01.mat
 - Assets/Res/Map/Textures/Rooms/T_MapGrid_01.png
-- Assets/Res/OutSide/T_Outside_01.png
+- Assets/Res/OutSide/Textures/T_Outside_01.png
 - Assets/Res/UI/Item/Textures/bone.png
-- Assets/Res/Character/SpineData/Enemy01/enemy_01_enemy_012.mat
 - Assets/Res/Character/SpineData/Role/spfx_magic_circle_01.png
 - Assets/Res/Character/SpineData/Enemy01/enemy_014.png
 - Assets/Res/Bullet/SpineData/Bullet_003/bullet_203.json
 - Assets/Res/Bullet/SpineData/Bullet_003/bullet_203_bullet_2038.mat
 - Assets/Res/FX/Material/M_FX_circle_additive.mat
-- Assets/Res/Character/SpineData/Enemy02/enemy_025.png
-- Assets/Res/UI/Gem/Textures/chuantou_2.png
-- Assets/Res/UI/Buff/Talent/Textures/T_Buff_SevereWinter_02.png
 - Assets/Res/Map/Textures/MapNode/T_MapFinish_01.png
 - Assets/Res/FX/SpineData/Compass/compass_compass7_InsideMask.mat
+- Assets/Res/UI/Misc/Icon_Dust_01.png
 - Assets/Res/Bullet/SpineData/Bullet_003/bullet_2032.png
-- Assets/Res/FX/SpineData/Compass/compass_compass3_InsideMask.mat
-- Assets/Res/Bullet/SpineData/Bullet_003/spfx_hit_203_SkeletonData.asset
-- Assets/Res/FX/SpineData/Compass/compass_compass5-Screen_InsideMask.mat
+- Assets/Res/Map/Prefabs/P_Arrow_Fight_01.prefab
+- Assets/Res/Map/Textures/T_MapFrame_01.png
 - Assets/Res/Bullet/Textures/Bullet_003/T_BulletMat_103.png
 - Assets/Res/FX/Prefab/FX_Bullet02_hit.prefab
 - Assets/Res/FX/SpineData/Compass/compass4.png
-- Assets/Res/Map/Prefabs/P_Arrow_Fight_01.prefab
+- Assets/Res/Map/Textures/Rooms/RoomWin/T_win_1.png
 - Assets/Res/Bullet/SpineData/Bullet_002/spfx_hit_002_Material-Additive.mat
 - Assets/Res/Character/SpineData/Role/Role_InMap_01.prefab
-- Assets/Res/Map/Textures/T_MapFrame_01.png
-- Assets/Res/Character/SpineData/Connon01/cannon_01_2.atlas.txt
 - Assets/Res/UI/Buff/Talent/Textures/T_Buff_Sharpness_01.png
-- Assets/Res/Map/Textures/Rooms/T_Up0L0R0.png
+- Assets/Res/Character/SpineData/Connon01/cannon_01_2.atlas.txt
+- Assets/Res/UI/BG/T_BGDialogue_01.png
 - Assets/Res/Map/Textures/MapNode/T_Bubbles_01.png
 - Assets/Res/Character/SpineData/Enemy02/enemy_02_enemy_022.mat
-- Assets/Res/UI/Button/T_BtnLoop_01.png
-- Assets/Res/UI/Misc/T_Misc_04.png
 - Assets/Res/UI/BG/T_BGEBI_01.png
-- Assets/Res/Bullet/SpineData/Bullet_003/bullet_203_bullet_2032.mat
-- Assets/Res/Bullet/SpineData/Bullet_003/bullet_2035.png
-- Assets/Res/UI/Item/Textures/fire_2.png
+- Assets/Res/Character/Image/NPC/NPC_Duncan_01.png
 - Assets/Res/UI/Misc/Icon_Enemy_WarReport_01.png
 - Assets/Res/Bullet/SpineData/Bullet_001/spfx_hit_001.png
 - Assets/Res/Bullet/Textures/Bullet_001/T_Bullet_Edit_a_001.png
@@ -813,109 +635,406 @@ Assets:
 - Assets/Res/Map/Textures/cloudtex.tga
 - Assets/Res/Shader/New Material.mat
 - Assets/Res/UI/Gem/Textures/T_Gem_Damage_02.png
-- Assets/Res/Bullet/SpineData/Bullet_001/bullet_201.png
 - Assets/Res/Map/Textures/MapNode/T_MapLock_01.png
-- Assets/Res/Bullet/SpineData/Bullet_003/spfx_hit_203.png
-- Assets/Res/Bullet/SpineData/Bullet_002/bullet_103.atlas.txt
-- Assets/Res/Character/SpineData/Enemy02/enemy_028.png
-- Assets/Res/Map/Textures/Rooms/T_Up2L1R1.png
+- Assets/Res/Map/Textures/Rooms/T_Up2L1R1_1.png
+- Assets/Res/UI/BG/T_BGDust_01.png
 - Assets/Res/UI/Prefabs/Popup/P_Shop.prefab
 - Assets/Res/Shader/CommonMaterial/UIOutLine.mat
-- Assets/Res/FX/SpineData/Compass/compass_compass7.mat
 - Assets/Res/Character/SpineData/Enemy03/enemy_032.png
-- Assets/Res/Character/Display/Textures/BloodBar_OutLine_02.png
 - Assets/Res/UI/Gem/Textures/T_Gem_Resonance_01.png
-- Assets/Res/Bullet/SpineData/Bullet_002/bullet_103.png
-- Assets/Res/Character/SpineData/Enemy03/enemy_03_enemy_035.mat
-- Assets/Res/UI/Prefabs/Misc/P_Award_RoomKey_01.prefab
 - Assets/Res/UI/Misc/Icon_Shield_WarReport_01.png
-- Assets/Res/Bullet/SpineData/Bullet_001/spfx_hit_201_SkeletonData.asset
+- Assets/Res/Bullet/SpineData/Bullet_002/bullet_103.png
+- Assets/Res/UI/Prefabs/Misc/P_Award_RoomKey_01.prefab
 - Assets/Res/FX/Texture/fx_handPoint_01.png
 - Assets/Res/Bullet/SpineData/Bullet_002/bullet_102.atlas.txt
-- Assets/Res/Bullet/SpineData/Bullet_002/spfx_hit_002_Atlas.asset
 - Assets/Res/Character/Image/Enemy/Shield_01.png
 - Assets/Res/Character/SpineData/Enemy01/enemy_017.png
-- Assets/Res/UI/Item/Textures/bottle_2.png
 - Assets/Res/UI/Fond/ZH_Traditional.asset
 - Assets/Res/Character/SpineData/Enemy01/enemy_01_enemy_017.mat
 - Assets/Res/Map/Models/G_PurePlane_01.fbx
-- Assets/Res/Map/Textures/MapNode/T_BBEvent_01.png
 - Assets/Res/Bullet/SpineData/Bullet_002/bullet_002.png
 - Assets/Res/FX/Texture/FXV_Pattern1d.png
-- Assets/Res/Bullet/SpineData/Bullet_003/bullet_203_bullet_2033.mat
 - Assets/Res/Character/SpineData/Enemy02/enemy_024.png
-- Assets/Res/UI/BG/T_BGHelp_01.png
-- Assets/Res/Bullet/SpineData/Bullet_003/bullet_003.atlas.txt
+- Assets/Res/UI/Misc/Icon_Key_01.png
+- Assets/Res/UI/Slots/T_GemMiniSlot_01.png
+- Assets/Res/UI/Slots/T_RoleSlot_01.png
 - Assets/Res/Character/SpineData/Enemy02/enemy_02_enemy_028.mat
-- Assets/Res/Map/Textures/MapNode/T_TreasureBox_Close_01.png
 - Assets/Res/Bullet/Textures/Bullet_002/T_Bullet_Icon_002.png
 - Assets/Res/Character/SpineData/Connon01/cannon_01_1_Material.mat
 - Assets/Res/Character/SpineData/Enemy02/enemy_02_enemy_029.mat
-- Assets/Res/UI/Slots/T_RoleSlot_01.png
 - Assets/Res/Levels/P_Level_02.prefab
-- Assets/Res/Character/SpineData/Enemy03/enemy_035.png
-- Assets/Res/Character/SpineData/Enemy01/enemy_01.json
-- Assets/Res/UI/Misc/Icon_Key_01.png
 - Assets/Res/Character/SpineData/Connon01/cannon_01_2_Material-Additive.mat
-- Assets/Res/Map/Textures/Rooms/T_Up3L1R0.png
+- Assets/Res/Map/Textures/Rooms/T_Up3L1R0_1.png
 - Assets/Res/Bullet/SpineData/Bullet_003/bullet_2036.png
-- Assets/Res/Map/Textures/Rooms/T_Up1L1R1.png
-- Assets/Res/Bullet/SpineData/Bullet_003/bullet_003_Material.mat
-- Assets/Res/Bullet/SpineData/Bullet_003/spfx_hit_003.png
-- Assets/Res/Character/SpineData/Enemy01/enemy_016.png
-- Assets/Res/Bullet/SpineData/Bullet_001/bullet_101.json
+- Assets/Res/Map/Textures/Rooms/T_Up1L1R1D1_1.png
 - Assets/Res/Character/SpineData/Connon01/P_Connon_01.prefab
-- Assets/Res/Map/Textures/MapNode/T_Shop_01.png
-- Assets/Res/Character/SpineData/RoleHead/role_01_head.atlas.txt
-- Assets/Res/Map/Materials/M_Cloud.mat
-- Assets/Res/Map/Textures/MapNode/T_BBTreasureBox_01.png
 - Assets/Res/Shader/UIShader/UIOutLine.shader
-- Assets/Res/UI/Misc/Icon_BagMisc_01.png
-- Assets/Res/Bullet/SpineData/Bullet_002/bullet_002.atlas.txt
 - Assets/Res/Bullet/SpineData/Bullet_003/bullet_103_Material.mat
-- Assets/Res/Character/MainRole/T_RoleSel_01.png
-- Assets/Res/Bullet/SpineData/Bullet_001/spfx_hit_101_SkeletonData.asset
-- Assets/Res/Character/SpineData/Enemy01/enemy_019.png
-- Assets/Res/Bullet/SpineData/Bullet_001/bullet_201_SkeletonData.asset
+- Assets/Res/OutSide/Textures/T_MagicBankMask_01.png
 - Assets/Res/UI/Button/T_BtnSetting_01.png
-- Assets/Res/Bullet/SpineData/Bullet_001/spfx_hit_201.png
 - Assets/Res/Map/Materials/MapNodes/M_MapLock_01.mat
-- Assets/Res/Character/SpineData/Role/role_01_SkeletonData.asset
-- Assets/Res/Bullet/SpineData/Bullet_003/spfx_hit_103.json
-- Assets/Res/UI/Button/T_BtnCommon_01.png
-- Assets/Res/UI/Item/Textures/T_Item_ToiletPlunger_01.png
-- Assets/Res/UI/Prefabs/Misc/P_TxtFloatingUI_01.prefab
+- Assets/Res/OutSide/Textures/T_LibraryMask_01.png
 - Assets/Res/FX/Texture/fx_circle.png
-- Assets/Res/FX/Texture/fx_glow.png
-- Assets/Res/Bullet/SpineData/Bullet_003/bullet_203_Material-Additive.mat
 - Assets/Res/Character/SpineData/Role/role_01_Material.mat
 - Assets/Res/UI/Gem/Textures/chuantou_1.png
-- Assets/Res/Bullet/SpineData/Bullet_003/bullet_203_bullet_2037.mat
-- Assets/Res/Character/Display/Textures/BloodBar_Mid_03.png
-- Assets/Res/UI/Item/Textures/ring_1.png
-- Assets/Res/Bullet/SpineData/Bullet_003/bullet_203_bullet_203.mat
 - Assets/Res/Character/SpineData/Enemy02/enemy_02_enemy_023.mat
 - Assets/Res/Bullet/SpineData/Bullet_001/spfx_hit_001_Material-Additive.mat
-- Assets/Res/Bullet/Textures/Bullet_001/T_BulletMat_101.png
-- Assets/Res/UI/Slots/T_Slot_03.png
-- Assets/Res/UI/Misc/Icon_Death_WarReport_01.png
-- Assets/Res/Character/SpineData/Enemy03/enemy_037.png
+- Assets/Res/Shader/Portalsss.shadergraph
 - Assets/Res/UI/Item/Textures/T_Item_Mithril _01.png
+- Assets/Res/UI/Misc/Icon_boom_01.png
 - Assets/Res/Character/SpineData/Enemy03/enemy_03_enemy_036.mat
 - Assets/Res/UI/Gem/Textures/chuantou_3.png
 - Assets/Res/UI/Item/Textures/hand.png
-- Assets/Res/Bullet/SpineData/Bullet_003/spfx_hit_203_Material-Additive.mat
 - Assets/Res/Character/SpineData/Connon01/cannon_01_2_Atlas.asset
-- Assets/Res/Character/SpineData/Enemy02/enemy_02_enemy_02.mat
 - Assets/Res/UI/Item/Textures/berry.png
 - Assets/Res/Bullet/Textures/Bullet_001/T_BulletMat_001.png
-- Assets/Res/Character/Display/Textures/BloodBar_OutLine_03.png
 - Assets/Res/Character/SpineData/Enemy02/enemy_02_Atlas.asset
 - Assets/Res/Map/Textures/MapNode/T_CoinsPile_01.png
 - Assets/Res/Bullet/SpineData/Bullet_003/bullet_103_Material-Additive.mat
 - Assets/Res/UI/Material/BreathingLight.mat
 - Assets/Res/Bullet/SpineData/Bullet_002/bullet_202.json
+- Assets/Res/FX/Material/particles_ring_red_mat.mat
 - Assets/Res/UI/Prefabs/P_Tooltip_01.prefab
+- Assets/Res/UI/Material/M_UI_Q_3200.mat
+- Assets/Res/UI/BG/T_BGShop_02.png
+- Assets/Res/Bullet/Textures/Bullet_003/T_Bullet_Edit_b_003.png
+- Assets/Res/Bullet/SpineData/Bullet_003/spfx_hit_103.png
+- Assets/Res/FX/Material/M_FX_triangle_curve.mat
+- Assets/Res/Character/SpineData/Role/spfx_magic_circle_01_Material.mat
+- Assets/Res/Map/P_Map_03.prefab
+- Assets/Res/UI/Item/Textures/T_Item_Can_01.png
+- Assets/Res/Bullet/SpineData/Bullet_002/spfx_hit_102.png
+- Assets/Res/Map/Textures/Rooms/T_Up2L0R1_2.png
+- Assets/Res/Character/SpineData/Enemy01/enemy_01.atlas.txt
+- Assets/Res/Character/SpineData/Enemy01/enemy_018.png
+- Assets/Res/UI/Button/T_BtnStartFX_01.png
+- Assets/Res/Bullet/SpineData/Bullet_001/spfx_hit_101_Material.mat
+- Assets/Res/UI/Item/Textures/water.png
+- Assets/Res/Character/SpineData/Enemy03/enemy_03.png
+- Assets/Res/UI/Button/icon_BtnBag_01.png
+- Assets/Res/Character/SpineData/RoleHead/role_01_head_SkeletonData.asset
+- Assets/Res/UI/BG/T_BGMinMapBag_01.png
+- Assets/Res/UI/Prefabs/RightClickMenu.prefab
+- Assets/Res/Bullet/SpineData/Bullet_003/spfx_hit_103_SkeletonData.asset
+- Assets/Res/FX/Material/M_FX_glow.mat
+- Assets/Res/UI/Item/Textures/stick.png
+- Assets/Res/FX/Prefab/FX_ArrowMarK_01.prefab
+- "Assets/Res/UI/Fond/\u66F4\u7EB1UIJP Regular.TTF"
+- Assets/Res/Bullet/SpineData/Bullet_001/spfx_hit_001.json
+- Assets/Res/OutSide/Textures/T_Tavern_01.png
+- Assets/Res/Character/SpineData/Enemy01/enemy_01_enemy_014.mat
+- Assets/Res/UI/Misc/Icon_Checkmark_01.png
+- Assets/Res/UI/Misc/Icon_TooltipsBG_03.png
+- Assets/Res/FX/Texture/fx_keybord_03.png
+- Assets/Res/UI/Buff/Talent/Textures/T_Buff_Thunderstrike_07.png
+- Assets/Res/UI/Slots/T_ShopSlotTop_03.png
+- Assets/Res/Bullet/SpineData/Bullet_002/spfx_hit_202.json
+- Assets/Res/Bullet/SpineData/Bullet_001/spfx_hit_101_Atlas.asset
+- Assets/Res/Bullet/SpineData/Bullet_001/spfx_hit_201.json
+- Assets/Res/Character/SpineData/Enemy03/P_Enemy_03.prefab
+- "Assets/Res/UI/Fond/\u963F\u91CC\u5DF4\u5DF4\u666E\u60E0\u4F53 3.0 55 Regular SDF.asset"
+- Assets/Res/UI/Misc/Icon_TooltipsBG_02.png
+- Assets/Res/Bullet/Prefab/P_Bullet_Standby_01.prefab
+- Assets/Res/Character/SpineData/Role/Role_01.prefab
+- Assets/Res/Bullet/SpineData/Bullet_002/bullet_103.json
+- Assets/Res/FX/Texture/fx_trail_01.png
+- Assets/Res/Bullet/SpineData/Bullet_001/bullet_201_Material.mat
+- Assets/Res/Bullet/SpineData/Bullet_002/bullet_002_SkeletonData.asset
+- Assets/Res/UI/Item/Textures/metal.png
+- Assets/Res/UI/Item/Textures/gas.png
+- Assets/Res/Character/Image/Enemy/Enemy_Portrait_02.png
+- Assets/Res/FX/SpineData/Compass/compass_compass5.mat
+- Assets/Res/UI/Misc/Icon_talent_01.png
+- Assets/Res/FX/Prefab/FX_SelBox_02.prefab
+- Assets/Res/Bullet/Prefab/P_Bullet_Spawner_Template.prefab
+- Assets/Res/Character/MainRole/T_RoleSel_04.png
+- Assets/Res/Character/SpineData/Enemy03/enemy_03.json
+- Assets/Res/Bullet/SpineData/Bullet_001/bullet_101.atlas.txt
+- Assets/Res/Bullet/SpineData/Bullet_003/bullet_203_bullet_2035.mat
+- Assets/Res/FX/Prefab/FX_HandMarK_01.prefab
+- Assets/Res/UI/Gem/Textures/T_Gem_Resonance_03.png
+- Assets/Res/UI/Prefabs/Misc/P_TextGetItem_01.prefab
+- Assets/Res/UI/Prefabs/Popup/P_BulletUP_01.prefab
+- Assets/Res/Bullet/SpineData/Bullet_001/spfx_hit_001_Atlas.asset
+- Assets/Res/Bullet/SpineData/Bullet_002/spfx_hit_002_Material.mat
+- Assets/Res/FX/SpineData/Compass/compass_compass4.mat
+- Assets/Res/Bullet/Prefab/P_Bullet_SpawnerInner_Template.prefab
+- Assets/Res/FX/SpineData/Compass/compass.atlas.txt
+- Assets/Res/Bullet/Prefab/P_Bullet_Inner_Template.prefab
+- Assets/Res/UI/Slots/T_ShopSlotTop_01.png
+- Assets/Res/Bullet/Textures/Bullet_001/T_Bullet_Icon_001.png
+- Assets/Res/UI/Item/Textures/stone.png
+- Assets/Res/FX/SpineData/Compass/compass_Atlas.asset
+- Assets/Res/Character/SpineData/Enemy01/enemy_012.png
+- Assets/Res/Bullet/SpineData/Bullet_002/spfx_hit_202.png
+- Assets/Res/UI/Prefabs/Misc/P_UIFloatingtxt_01.prefab
+- Assets/Res/Bullet/SpineData/Bullet_002/bullet_202_Material.mat
+- Assets/Res/Map/Textures/MapNode/T_MapArrow_01.png
+- Assets/Res/FX/Texture/FXV_ActivationPattern1.png
+- Assets/Res/UI/Item/Textures/skull.png
+- Assets/Res/Bullet/Textures/T_Star_01.png
+- Assets/Res/FX/SpineData/Compass/compass6.png
+- Assets/Res/FX/SpineData/Compass/compass_compass2.mat
+- Assets/Res/Bullet/SpineData/Bullet_003/spfx_hit_003_Material-Additive.mat
+- Assets/Res/Map/Prefabs/P_RoomKey_01.prefab
+- Assets/Res/Levels/P_Level_03.prefab
+- Assets/Res/UI/Item/Textures/egg_1.png
+- Assets/Res/Bullet/SpineData/Bullet_003/spfx_hit_103_Atlas.asset
+- Assets/Res/UI/Slots/T_RoleSlot_05.png
+- Assets/Res/UI/Slots/T_BagSlot_01.png
+- Assets/Res/Bullet/SpineData/Bullet_003/bullet_103.json
+- Assets/Res/Character/SpineData/Enemy01/enemy_01_enemy_01.mat
+- Assets/Res/Map/Textures/T_Map_01.png
+- Assets/Res/Character/SpineData/Enemy01/enemy_01_Atlas.asset
+- Assets/Res/Character/SpineData/Enemy03/enemy_03_enemy_034.mat
+- Assets/Res/UI/Item/Textures/element.png
+- Assets/Res/FX/Material/M_FX_Mark_01.mat
+- Assets/Res/Bullet/SpineData/Bullet_003/bullet_203_bullet_2034.mat
+- Assets/Res/FX/Material/M_FX_wave3.mat
+- Assets/Res/Character/Display/Textures/BloodBar_Blood_02.png
+- Assets/Res/FX/SpineData/Compass/compass_compass8_InsideMask.mat
+- Assets/Res/Character/SpineData/Enemy03/enemy_03_SkeletonData.asset
+- Assets/Res/Character/MainRole/T_RoleHead_01.png
+- Assets/Res/Character/SpineData/Connon01/cannon_01_2_SkeletonData.asset
+- Assets/Res/UI/BG/T_TopBarGoldBG_01.png
+- Assets/Res/Character/SpineData/Enemy03/enemy_03_enemy_039.mat
+- Assets/Res/Bullet/SpineData/Bullet_001/spfx_hit_101.atlas.txt
+- Assets/Res/Character/Display/Textures/BloodBar_Blood_01.png
+- Assets/Res/Character/SpineData/Role/spfx_magic_circle_01_SkeletonData.asset
+- Assets/Res/UI/Item/Textures/fire_3.png
+- Assets/Res/FX/SpineData/Compass/compass_compass2_InsideMask.mat
+- Assets/Res/Map/Textures/Rooms/T_RoomPure.tga
+- Assets/Res/UI/BG/T_BGShop_05.png
+- Assets/Res/Map/Prefabs/P_Arrow_CrossRoom_03.prefab
+- Assets/Res/FX/Texture/fx_cloud_2x2_hard.png
+- Assets/Res/Map/P_Map_02.prefab
+- Assets/Res/Map/Textures/MapNode/T_ShopLock_01.png
+- Assets/Res/Bullet/SpineData/Bullet_003/spfx_hit_003_SkeletonData.asset
+- Assets/Res/FX/Texture/fx_keybord_01.png
+- Assets/Res/Animation/EnemyDie.anim
+- Assets/Res/Map/Textures/Rooms/T_Up2L0R1_1.png
+- Assets/Res/Shader/SpriteDefault.shader
+- Assets/Res/Character/Display/Textures/BloodBar_Mid_04.png
+- Assets/Res/UI/Prefabs/Misc/P_Award_Coin_01.prefab
+- Assets/Res/FX/SpineData/Compass/compass.json
+- Assets/Res/Bullet/SpineData/Bullet_002/bullet_202.atlas.txt
+- Assets/Res/Character/SpineData/Connon01/cannon_01_2.json
+- Assets/Res/Bullet/Textures/Bullet_003/T_Bullet_Edit_a_103.png
+- Assets/Res/Bullet/SpineData/Bullet_003/spfx_hit_103_Material-Additive.mat
+- Assets/Res/UI/Fond/ZH_Simplified.asset
+- Assets/Res/FX/Texture/fx_triangle_curve.png
+- Assets/Res/UI/Misc/Icon_Heart_01.png
+- Assets/Res/Character/SpineData/Enemy02/enemy_022.png
+- Assets/Res/Map/Materials/MapNodes/M_BB_Fight.mat
+- Assets/Res/Character/SpineData/Connon01/cannon_01_1.json
+- Assets/Res/FX/Texture/fx_Icon_yellow.png
+- Assets/Res/UI/Gem/Textures/T_Gem_Resonance_02.png
+- Assets/Res/Shader/Dissove.shader
+- Assets/Res/Map/Prefabs/P_CoinsPile_01.prefab
+- Assets/Res/FX/SpineData/Compass/compass_compass8.mat
+- Assets/Res/Bullet/SpineData/Bullet_002/spfx_hit_002.png
+- Assets/Res/Character/SpineData/RoleHead/role_01_head.png
+- Assets/Res/Bullet/SpineData/Bullet_001/spfx_hit_201_Material-Additive.mat
+- Assets/Res/OutSide/Textures/T_Library_01.png
+- Assets/Res/Character/SpineData/Connon01/cannon_01_1.png
+- Assets/Res/UI/Gem/Textures/T_Gem_Piercing_03.png
+- Assets/Res/Character/SpineData/Enemy01/enemy_01_enemy_015.mat
+- Assets/Res/FX/Prefab/FX_Mark_01.prefab
+- Assets/Res/Map/Materials/M_BackGround.mat
+- Assets/Res/Bullet/SpineData/Bullet_002/bullet_002.json
+- Assets/Res/Bullet/SpineData/Bullet_002/bullet_103_SkeletonData.asset
+- Assets/Res/FX/SpineData/Compass/compass5.png
+- Assets/Res/Shader/ParallaxCloud.shader
+- Assets/Res/Bullet/SpineData/Bullet_003/bullet_003.json
+- Assets/Res/UI/Slots/T_RoleSlot_04.png
+- Assets/Res/UI/Misc/T_Misc_06.png
+- Assets/Res/Character/SpineData/Enemy03/enemy_03_enemy_038.mat
+- Assets/Res/UI/Misc/T_Misc_05.png
+- Assets/Res/UI/Misc/Icon_TooltipsBG_01.png
+- Assets/Res/Character/SpineData/Enemy03/enemy_039.png
+- Assets/Res/Bullet/SpineData/Bullet_002/bullet_102_Material.mat
+- Assets/Res/UI/Animation/UIDisplay.anim
+- Assets/Res/UI/Button/T_BtnCommonLocked_01.png
+- Assets/Res/Character/SpineData/Role/role_01_Atlas.asset
+- Assets/Res/FX/Texture/fx_smoke_01.png
+- Assets/Res/UI/Button/T_BtnFire_01.png
+- Assets/Res/Bullet/Textures/Bullet_003/T_Bullet_Edit_a_203.png
+- Assets/Res/Character/SpineData/P_Enemy_Template.prefab
+- Assets/Res/UI/Gem/Textures/shanghai_3.png
+- Assets/Res/Manager/UIManager.asset
+- Assets/Res/UI/Misc/Icon_Gold_01.png
+- Assets/Res/OutSide/Textures/T_MagicBank_01.png
+- Assets/Res/UI/Item/Textures/fire_1.png
+- Assets/Res/Bullet/Textures/Bullet_002/T_BulletMat_102.png
+- Assets/Res/FX/SpineData/Compass/compass_compass5_InsideMask.mat
+- Assets/Res/Character/Image/NPC/NPC_Businessmen_01.png
+- Assets/Res/UI/Item/Textures/book_1.png
+- Assets/Res/FX/Texture/fx_nova_3x3_spritesheet.png
+- Assets/Res/FX/Material/M_FX_Arrow_01.mat
+- Assets/Res/Bullet/Textures/Bullet_002/T_Bullet_Edit_a_002.png
+- Assets/Res/UI/Prefabs/Misc/TtNode_1.prefab
+- Assets/Res/Map/Textures/MapNode/T_BBShop_01.png
+- Assets/Res/Character/Image/NPC/NPC_Businessmen_01_Shadow.png
+- Assets/Res/Character/SpineData/Enemy02/enemy_02_enemy_024.mat
+- Assets/Res/Character/SpineData/Enemy02/enemy_023.png
+- Assets/Res/Map/Textures/Rooms/T_Award_Up0L0R1.png
+- Assets/Res/Map/Textures/Rooms/T_Up1L0R0D0_1.png
+- Assets/Res/FX/Material/M_FX_cloud_2x2_hard.mat
+- Assets/Res/TrunkManager.asset
+- Assets/Res/Bullet/SpineData/Bullet_002/spfx_hit_202.atlas.txt
+- Assets/Res/Character/SpineData/Enemy01/P_Enemy_01.prefab
+- Assets/Res/UI/Buff/Talent/Textures/T_Buff_GoldRush_06.png
+- Assets/Res/UI/Misc/T_Misc_03.png
+- Assets/Res/Bullet/Textures/Bullet_001/T_Bullet_Edit_b_001.png
+- Assets/Res/Bullet/SpineData/Bullet_001/bullet_101_Atlas.asset
+- Assets/Res/UI/Misc/icon_Medal_01.png
+- Assets/Res/Manager/MSceneManager.asset
+- Assets/Res/UI/Prefabs/Misc/QuestBar.prefab
+- Assets/Res/UI/Slots/T_SideSlot_01.png
+- Assets/Res/Character/SpineData/Enemy01/enemy_013.png
+- Assets/Res/UI/BG/T_Sidebar_01.png
+- Assets/Res/Bullet/SpineData/Bullet_002/spfx_hit_002.atlas.txt
+- Assets/Res/Character/SpineData/Connon01/cannon_01_2.png
+- Assets/Res/Character/Display/Textures/BloodBar_OutLine_04.png
+- Assets/Res/UI/Item/Textures/tongue.png
+- Assets/Res/Bullet/Textures/Bullet_003/T_Bullet_Edit_a_003.png
+- Assets/Res/Character/SpineData/Enemy03/enemy_036.png
+- Assets/Res/Bullet/SpineData/Bullet_003/bullet_103_SkeletonData.asset
+- Assets/Res/UI/Item/Textures/egg_3.png
+- Assets/Res/UI/BG/T_BGDialogue_02.png
+- Assets/Res/Bullet/SpineData/Bullet_003/spfx_hit_003_Material.mat
+- Assets/Res/UI/Item/Textures/bottle.png
+- Assets/Res/Character/SpineData/Enemy03/enemy_03_Atlas.asset
+- Assets/Res/Character/SpineData/RoleHead/role_01_head.json
+- Assets/Res/Bullet/SpineData/Bullet_003/bullet_003_SkeletonData.asset
+- Assets/Res/UI/Item/Textures/T_Item_BreakWand_01.png
+- Assets/Res/Character/SpineData/Enemy02/enemy_02_enemy_025.mat
+- Assets/Res/UI/Misc/icon_bubble_01.png
+- Assets/Res/Bullet/SpineData/Bullet_003/bullet_103.atlas.txt
+- Assets/Res/Map/Materials/MapNodes/M_CoinsPile_01.mat
+- Assets/Res/FX/Texture/fx_trail_02.png
+- Assets/Res/UI/Item/Textures/leaf.png
+- Assets/Res/UI/BG/T_TopBarScore_01.png
+- Assets/Res/Bullet/SpineData/Bullet_002/spfx_hit_102_SkeletonData.asset
+- Assets/Res/Map/Materials/MapNodes/M_BB_Event.mat
+- Assets/Res/Character/SpineData/Enemy02/enemy_02_enemy_026.mat
+- Assets/Res/UI/Button/T_BtnHelp_01.png
+- Assets/Res/Bullet/Prefab/P_BulletInner_Edit_Template.prefab
+- Assets/Res/Bullet/SpineData/Bullet_002/bullet_202.png
+- Assets/Res/FX/SpineData/Compass/compass_SkeletonData.asset
+- Assets/Res/Bullet/SpineData/Bullet_002/bullet_202_Atlas.asset
+- Assets/Res/Character/SpineData/Enemy03/enemy_033.png
+- Assets/Res/Shader/OutLine.shader
+- Assets/Res/FX/SpineData/Compass/compass7.png
+- Assets/Res/Bullet/SpineData/Bullet_001/spfx_hit_201_Atlas.asset
+- Assets/Res/Map/Textures/MapNode/T_TreasureBox_Open_01.png
+- Assets/Res/Map/Materials/MapNodes/M_BB_TreasureBox.mat
+- Assets/Res/Map/Materials/MapNodes/M_Shop_01.mat
+- Assets/Res/Character/Display/Textures/BloodBlock_01.png
+- Assets/Res/Bullet/SpineData/Bullet_003/bullet_2037.png
+- Assets/Res/FX/SpineData/Compass/compass_compass.mat
+- Assets/Res/Bullet/SpineData/Bullet_001/spfx_hit_201_Material.mat
+- Assets/Res/Character/Display/Textures/MapExploreBar_OutLine_01.png
+- Assets/Res/Character/MainRole/T_Character_01.png
+- Assets/Res/FX/Texture/fx_arrow_01.png
+- Assets/Res/Character/MainRole/T_RoleSel_03.png
+- Assets/Res/UI/BG/T_BGShop_01.png
+- Assets/Res/UI/Gem/Prefabs/P_Gem_Template_01.prefab
+- Assets/Res/Character/SpineData/RoleHead/role_01_head_Material.mat
+- Assets/Res/FX/SpineData/Compass/compass_compass3-Additive_InsideMask.mat
+- Assets/Res/Character/SpineData/Role/spfx_magic_circle_01.atlas.txt
+- Assets/Res/FX/SpineData/Compass/compass8.png
+- Assets/Res/Character/SpineData/Enemy02/enemy_02.png
+- Assets/Res/FX/Material/M_FX_SelBox_03.mat
+- Assets/Res/UI/Item/Textures/tooth.png
+- Assets/Res/Bullet/SpineData/Bullet_003/bullet_103.png
+- Assets/Res/FX/SpineData/Compass/compass_compass6.mat
+- Assets/Res/Character/SpineData/Enemy05/enemy_05_SkeletonData.asset
+- Assets/Res/Bullet/SpineData/Bullet_003/bullet_2038.png
+- Assets/Res/Character/SpineData/Enemy02/enemy_029.png
+- Assets/Res/Character/Display/Textures/BloodBar_Mid_01.png
+- Assets/Res/Map/Textures/MapNode/T_BBCoinsPile_01.png
+- Assets/Res/UI/Item/Textures/eyeball.png
+- Assets/Res/UI/Prefabs/Misc/QuestMenu.prefab
+- Assets/Res/Character/SpineData/Enemy02/enemy_02_SkeletonData.asset
+- Assets/Res/Map/Materials/MapNodes/M_Main_01.mat
+- Assets/Res/UI/Item/Textures/egg_2.png
+- Assets/Res/Character/MainRole/T_RoleSel_02.png
+- Assets/Res/UI/Misc/icon_loop_01.png
+- Assets/Res/UI/Gem/Textures/gongzhen_3.png
+- Assets/Res/Map/Textures/Rooms/T_Up1L1R1_1.png
+- Assets/Res/UI/Material/M_UI_Q_3100.mat
+- Assets/Res/FX/Texture/fx_cardMask.png
+- Assets/Res/Bullet/Prefab/P_Bullet_Edit_Template.prefab
+- Assets/Res/Character/SpineData/Enemy01/enemy_01_enemy_012.mat
+- Assets/Res/Character/SpineData/Enemy02/enemy_025.png
+- Assets/Res/UI/Gem/Textures/chuantou_2.png
+- Assets/Res/UI/Buff/Talent/Textures/T_Buff_SevereWinter_02.png
+- Assets/Res/Map/Textures/Rooms/T_Up1L1R0_1.png
+- Assets/Res/FX/SpineData/Compass/compass_compass3_InsideMask.mat
+- Assets/Res/Bullet/SpineData/Bullet_003/spfx_hit_203_SkeletonData.asset
+- Assets/Res/FX/SpineData/Compass/compass_compass5-Screen_InsideMask.mat
+- Assets/Res/UI/Misc/T_Misc_04.png
+- Assets/Res/Shader/Shader Graphs_Portal.mat
+- Assets/Res/UI/Button/T_BtnLoop_01.png
+- Assets/Res/Bullet/SpineData/Bullet_003/bullet_203_bullet_2032.mat
+- Assets/Res/Bullet/SpineData/Bullet_003/bullet_2035.png
+- Assets/Res/UI/Item/Textures/fire_2.png
+- Assets/Res/Bullet/SpineData/Bullet_001/bullet_201.png
+- Assets/Res/Manager/QuestDatabase.asset
+- Assets/Res/Bullet/SpineData/Bullet_003/spfx_hit_203.png
+- Assets/Res/Bullet/SpineData/Bullet_002/bullet_103.atlas.txt
+- Assets/Res/Character/SpineData/Enemy02/enemy_028.png
+- Assets/Res/DataOBJ/PlayerData.asset
+- Assets/Res/FX/SpineData/Compass/compass_compass7.mat
+- Assets/Res/Character/Display/Textures/BloodBar_OutLine_02.png
+- Assets/Res/Character/SpineData/Enemy03/enemy_03_enemy_035.mat
+- Assets/Res/Bullet/SpineData/Bullet_001/spfx_hit_201_SkeletonData.asset
+- Assets/Res/Bullet/SpineData/Bullet_002/spfx_hit_002_Atlas.asset
+- Assets/Res/UI/Item/Textures/bottle_2.png
+- Assets/Res/OutSide/Textures/T_MainOutSide_01.png
+- Assets/Res/Map/Textures/MapNode/T_BBEvent_01.png
+- Assets/Res/Map/Textures/Rooms/RoomWin/T_win_1_part2.png
+- Assets/Res/Bullet/SpineData/Bullet_003/bullet_203_bullet_2033.mat
+- Assets/Res/UI/BG/T_BGHelp_01.png
+- Assets/Res/Bullet/SpineData/Bullet_003/bullet_003.atlas.txt
+- Assets/Res/Map/Textures/MapNode/T_TreasureBox_Close_01.png
+- Assets/Res/Character/SpineData/Enemy03/enemy_035.png
+- Assets/Res/Character/SpineData/Enemy01/enemy_01.json
+- Assets/Res/Bullet/SpineData/Bullet_003/bullet_003_Material.mat
+- Assets/Res/Bullet/SpineData/Bullet_003/spfx_hit_003.png
+- Assets/Res/Character/SpineData/Enemy01/enemy_016.png
+- Assets/Res/Bullet/SpineData/Bullet_001/bullet_101.json
+- Assets/Res/Map/Textures/MapNode/T_Shop_01.png
+- Assets/Res/Character/SpineData/RoleHead/role_01_head.atlas.txt
+- Assets/Res/Map/Materials/M_Cloud.mat
+- Assets/Res/Map/Textures/MapNode/T_BBTreasureBox_01.png
+- Assets/Res/UI/Misc/Icon_BagMisc_01.png
+- Assets/Res/UI/Misc/icon_MapExplore_01.png
+- Assets/Res/Bullet/SpineData/Bullet_002/bullet_002.atlas.txt
+- Assets/Res/Character/MainRole/T_RoleSel_01.png
+- Assets/Res/Bullet/SpineData/Bullet_001/spfx_hit_101_SkeletonData.asset
+- Assets/Res/Character/SpineData/Enemy01/enemy_019.png
+- Assets/Res/Bullet/SpineData/Bullet_001/bullet_201_SkeletonData.asset
+- Assets/Res/Bullet/SpineData/Bullet_001/spfx_hit_201.png
+- Assets/Res/Character/SpineData/Role/role_01_SkeletonData.asset
+- Assets/Res/Bullet/SpineData/Bullet_003/spfx_hit_103.json
+- Assets/Res/UI/Button/T_BtnCommon_01.png
+- Assets/Res/UI/Item/Textures/T_Item_ToiletPlunger_01.png
+- Assets/Res/Map/Textures/Rooms/T_Award_Up1L1R0_1.png
+- Assets/Res/FX/Texture/fx_glow.png
+- Assets/Res/Bullet/SpineData/Bullet_003/bullet_203_Material-Additive.mat
+- Assets/Res/Bullet/SpineData/Bullet_003/bullet_203_bullet_2037.mat
+- Assets/Res/Character/Display/Textures/BloodBar_Mid_03.png
+- Assets/Res/UI/Item/Textures/ring_1.png
+- Assets/Res/Bullet/SpineData/Bullet_003/bullet_203_bullet_203.mat
+- Assets/Res/Character/SpineData/Enemy03/enemy_037.png
+- Assets/Res/UI/Misc/Icon_Death_WarReport_01.png
+- Assets/Res/Bullet/Textures/Bullet_001/T_BulletMat_101.png
+- Assets/Res/UI/Slots/T_Slot_03.png
+- Assets/Res/Bullet/SpineData/Bullet_003/spfx_hit_203_Material-Additive.mat
+- Assets/Res/Character/SpineData/Enemy02/enemy_02_enemy_02.mat
+- Assets/Res/Character/Display/Textures/BloodBar_OutLine_03.png
 - Assets/Res/Bullet/SpineData/Bullet_001/spfx_hit_001_Material.mat
 - Assets/Res/FX/Material/M_FX_Circle_01.mat
 - Assets/Res/UI/Gem/Prefabs/P_GemInShop_Template.prefab
@@ -923,124 +1042,78 @@ Assets:
 - Assets/Res/FX/Texture/fx_selbox_01.png
 - Assets/Res/UI/Button/Button_Return_output.png
 - Assets/Res/Map/Materials/MapNodes/M_BB_Shop.mat
-- Assets/Res/Bullet/Textures/Bullet_003/T_Bullet_Edit_b_003.png
-- Assets/Res/Bullet/SpineData/Bullet_001/bullet_001_Atlas.asset
-- Assets/Res/Bullet/SpineData/Bullet_003/spfx_hit_103.png
 - Assets/Res/Map/Materials/MapNodes/M_TreasureBox_01.mat
-- Assets/Res/UI/Material/M_UI_Q_3200.mat
-- Assets/Res/UI/BG/T_BGShop_02.png
-- Assets/Res/FX/Material/M_FX_triangle_curve.mat
-- Assets/Res/Character/SpineData/Role/spfx_magic_circle_01_Material.mat
-- Assets/Res/UI/BG/T_HeadFrame_01.png
+- Assets/Res/Bullet/SpineData/Bullet_001/bullet_001_Atlas.asset
+- Assets/Res/OutSide/Textures/T_TavernMask_01.png
 - Assets/Res/Manager/DialogueNamePortraitConfig.asset
-- Assets/Res/FX/SpineData/Compass/compass_compass6_InsideMask.mat
+- Assets/Res/UI/BG/T_HeadFrame_01.png
 - Assets/Res/UI/BG/T_WarReport_Bar_01.png
-- Assets/Res/UI/Item/Textures/T_Item_Can_01.png
+- Assets/Res/FX/SpineData/Compass/compass_compass6_InsideMask.mat
 - Assets/Res/UI/Slots/T_RoleSlot_02.png
-- Assets/Res/Bullet/SpineData/Bullet_002/spfx_hit_102.png
+- Assets/Res/FX/Texture/circle.png
 - Assets/Res/UI/Gem/Textures/T_Gem_Damage_01.png
-- Assets/Res/UI/Button/T_BtnStartFX_01.png
-- Assets/Res/Character/SpineData/Enemy01/enemy_01.atlas.txt
-- Assets/Res/Character/SpineData/Enemy01/enemy_018.png
-- Assets/Res/Bullet/SpineData/Bullet_001/spfx_hit_101_Material.mat
 - Assets/Res/FX/Sound/etfx_explosion_fireball.wav
-- Assets/Res/UI/Item/Textures/water.png
-- Assets/Res/Character/SpineData/Enemy03/enemy_03.png
+- Assets/Res/UI/Misc/icon_Sphere_01.png
 - Assets/Res/UI/Slots/T_Slot_01.png
 - Assets/Res/UI/DefultPureWite.png
 - Assets/Res/Bullet/SpineData/Bullet_002/bullet_102.png
-- Assets/Res/Character/SpineData/RoleHead/role_01_head_SkeletonData.asset
 - Assets/Res/UI/Item/Textures/book_2.png
 - Assets/Res/Bullet/SpineData/Bullet_003/bullet_203_Atlas.asset
-- Assets/Res/UI/BG/T_BGMinMapBag_01.png
-- Assets/Res/UI/Prefabs/RightClickMenu.prefab
-- Assets/Res/Character/SpineData/Role/role_01.png
 - Assets/Res/UI/Misc/T_Misc_01.png
-- Assets/Res/Bullet/SpineData/Bullet_003/spfx_hit_103_SkeletonData.asset
-- Assets/Res/FX/Material/M_FX_glow.mat
-- Assets/Res/UI/Item/Textures/stick.png
-- Assets/Res/FX/Prefab/FX_ArrowMarK_01.prefab
+- Assets/Res/Character/SpineData/Role/role_01.png
 - Assets/Res/Bullet/SpineData/Bullet_002/bullet_102.json
 - Assets/Res/UI/Fond/Japanese.asset
 - Assets/Res/Bullet/SpineData/Bullet_003/bullet_2034.png
-- "Assets/Res/UI/Fond/\u66F4\u7EB1UIJP Regular.TTF"
-- Assets/Res/Bullet/SpineData/Bullet_001/spfx_hit_001.json
+- Assets/Res/DataOBJ/BattleData.asset
 - Assets/Res/UI/Slots/T_RoleSlot_Locked_03.png
+- Assets/Res/DataOBJ/BulletInvData.asset
 - Assets/Res/UI/Prefabs/Misc/P_txtHit_01.prefab
 - Assets/Res/FX/Prefab/FX_Bullet01_hit.prefab
-- Assets/Res/Character/SpineData/Enemy01/enemy_01_enemy_014.mat
 - Assets/Res/Shader/CommonMaterial/HoleMat.mat
-- Assets/Res/UI/Misc/Icon_Checkmark_01.png
-- Assets/Res/UI/Misc/T_Misc_02.png
 - Assets/Res/UI/Prefabs/Popup/GroupSetting.prefab
+- Assets/Res/UI/Misc/T_Misc_02.png
 - Assets/Res/Map/Materials/MapNodes/M_Event_01.mat
-- Assets/Res/UI/Misc/Icon_TooltipsBG_03.png
 - Assets/Res/Bullet/BulletManager.asset
 - Assets/Res/UI/Misc/Icon_01.png
 - Assets/Res/Bullet/SpineData/Bullet_001/bullet_101_Material.mat
-- Assets/Res/UI/Buff/Talent/Textures/T_Buff_Thunderstrike_07.png
 - Assets/Res/FX/Texture/fx_t_motion_01.png
-- Assets/Res/UI/Slots/T_ShopSlotTop_03.png
+- Assets/Res/OutSide/Textures/T_CarvingRoom_01.png
+- Assets/Res/Shader/Portal.shadergraph
 - Assets/Res/Bullet/SpineData/Bullet_003/bullet_203.png
-- Assets/Res/Bullet/SpineData/Bullet_002/spfx_hit_202.json
 - Assets/Res/Bullet/Textures/Bullet_002/T_Bullet_Edit_b_002.png
+- Assets/Res/Shader/Shader Graphs_Portalsss.mat
 - Assets/Res/UI/Buff/Talent/Textures/T_Buff_ElementalRise_08.png
-- Assets/Res/UI/Prefabs/About.prefab
 - Assets/Res/Character/SpineData/Enemy01/enemy_01_enemy_013.mat
-- Assets/Res/Bullet/SpineData/Bullet_001/spfx_hit_101_Atlas.asset
-- Assets/Res/Bullet/SpineData/Bullet_001/spfx_hit_201.json
 - Assets/Res/FX/Texture/fx_wave3.png
-- Assets/Res/Character/SpineData/Enemy03/P_Enemy_03.prefab
-- "Assets/Res/UI/Fond/\u963F\u91CC\u5DF4\u5DF4\u666E\u60E0\u4F53 3.0 55 Regular SDF.asset"
 - Assets/Res/Character/Display/Textures/BloodBar_OutLine_01.png
-- Assets/Res/UI/Misc/Icon_TooltipsBG_02.png
+- Assets/Res/Map/P_Map_01.prefab
 - Assets/Res/Bullet/SpineData/Bullet_001/bullet_101.png
-- Assets/Res/Bullet/Prefab/P_Bullet_Standby_01.prefab
-- Assets/Res/Character/SpineData/Role/Role_01.prefab
-- Assets/Res/Bullet/SpineData/Bullet_002/bullet_103.json
-- Assets/Res/FX/Texture/fx_trail_01.png
 - Assets/Res/UI/BG/T_BGEBI_02.png
 - Assets/Res/Bullet/SpineData/Bullet_001/bullet_101_SkeletonData.asset
-- Assets/Res/Bullet/SpineData/Bullet_001/bullet_201_Material.mat
 - Assets/Res/Character/SpineData/Connon01/cannon_01_2_Material.mat
-- Assets/Res/Bullet/SpineData/Bullet_002/bullet_002_SkeletonData.asset
 - Assets/Res/UI/BG/T_BGShop_03.png
 - Assets/Res/Bullet/SpineData/Bullet_002/bullet_202_SkeletonData.asset
-- Assets/Res/Character/Image/Enemy/Enemy_Portrait_02.png
-- Assets/Res/Bullet/SpineData/Bullet_002/spfx_hit_002.json
-- Assets/Res/FX/SpineData/Compass/compass_compass5.mat
-- Assets/Res/UI/Item/Textures/metal.png
 - Assets/Res/UI/Button/T_BtnCommonSelected_01.png
+- Assets/Res/Character/SpineData/Enemy05/enemy_05_Atlas.asset
+- Assets/Res/Bullet/SpineData/Bullet_002/spfx_hit_002.json
 - Assets/Res/Bullet/SpineData/Bullet_003/spfx_hit_203.json
 - Assets/Res/Character/SpineData/Enemy01/enemy_01.png
-- Assets/Res/Bullet/Prefab/P_Bullet_Spawner_Template.prefab
-- Assets/Res/Character/MainRole/T_RoleSel_04.png
 - Assets/Res/Character/SpineData/Connon01/cannon_01_1_SkeletonData.asset
 - Assets/Res/UI/Slots/T_ShopSlotTop_05.png
-- Assets/Res/FX/Prefab/FX_HandMarK_01.prefab
-- Assets/Res/Bullet/SpineData/Bullet_001/bullet_101.atlas.txt
-- Assets/Res/Bullet/SpineData/Bullet_003/bullet_203_bullet_2035.mat
-- Assets/Res/Character/SpineData/Enemy01/enemy_01_enemy_016.mat
-- Assets/Res/UI/BG/T_BGStartGame_01.png
-- Assets/Res/UI/Gem/Textures/T_Gem_Resonance_03.png
 - Assets/Res/UI/Buff/Talent/Textures/T_Buff_Windrider_03.png
-- Assets/Res/Character/SpineData/Enemy03/enemy_03.json
-- Assets/Res/Bullet/SpineData/Bullet_001/spfx_hit_001_Atlas.asset
-- Assets/Res/Bullet/SpineData/Bullet_002/spfx_hit_002_Material.mat
-- Assets/Res/FX/SpineData/Compass/compass_compass4.mat
+- Assets/Res/Character/SpineData/Enemy05/enemy_05.json
+- Assets/Res/UI/BG/T_BGStartGame_01.png
+- Assets/Res/Character/SpineData/Enemy01/enemy_01_enemy_016.mat
+- Assets/Res/OutSide/Textures/T_Portal_01.png
 - Assets/Res/Character/SpineData/Role/spfx_magic_circle_01.json
 - Assets/Res/UI/Slots/T_ShopSlot_Locked_01.png
-- Assets/Res/UI/Prefabs/Misc/P_TextGetItem_01.prefab
 - Assets/Res/Character/SpineData/Enemy01/enemy_01_SkeletonData.asset
 - Assets/Res/Character/SpineData/Enemy03/enemy_034.png
-- Assets/Res/UI/Item/Textures/gas.png
 - Assets/Res/FX/Texture/fx_t_circle_90.tga
 - Assets/Res/UI/Animation/Ani_txt_01.anim
-- Assets/Res/FX/SpineData/Compass/compass.atlas.txt
 - Assets/Res/Bullet/SpineData/Bullet_001/spfx_hit_101_Material-Additive.mat
 - Assets/Res/Bullet/SpineData/Bullet_001/spfx_hit_001.atlas.txt
-- Assets/Res/Bullet/Prefab/P_Bullet_Inner_Template.prefab
 - Assets/Res/Character/SpineData/Role/role_01.json
 - Assets/Res/UI/BG/T_BGShop_04.png
-- Assets/Res/Bullet/SpineData/Bullet_001/bullet_101_Material-Additive.mat
+- Assets/Res/Bullet/SpineData/Bullet_002/bullet_103_Material.mat
 Dependencies: []

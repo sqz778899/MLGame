@@ -37,7 +37,7 @@ public class MapRoomNode : MonoBehaviour
     public Vector2 DissolveDir = new Vector2(1, 0);
     
     [Header("渲染相关")]
-    public string SortingLayeName;
+    public string SortingLayerName;
     Renderer[] _renderers;
     
     GameObject resRoot;
@@ -74,18 +74,19 @@ public class MapRoomNode : MonoBehaviour
 
     public void SetRenderLayer()
     {
-        if (SortingLayeName == "") return;
+        if (SortingLayerName == "") return;
         
         _renderers = GetComponentsInChildren<Renderer>(true);
-        int targetLayerID = SortingLayer.NameToID(SortingLayeName);
+        int targetLayerID = SortingLayer.NameToID(SortingLayerName);
         _renderers.ForEach(r=> r.sortingLayerID = targetLayerID);
+        _resources.ForEach(res => res.SortingLayerName = SortingLayerName);
     }
 
     public void SetRenderLayer(GameObject Role)
     {
-        if (SortingLayeName == "") return;
+        if (SortingLayerName == "") return;
         Renderer[] allRenderers = Role.GetComponentsInChildren<Renderer>(true);
-        int targetLayerID = SortingLayer.NameToID(SortingLayeName);
+        int targetLayerID = SortingLayer.NameToID(SortingLayerName);
         allRenderers.ForEach(r=> r.sortingLayerID = targetLayerID);
     }
     

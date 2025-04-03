@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using DG.Tweening;
 using Sirenix.Utilities;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class BagRootMini : MonoBehaviour
 {
@@ -31,6 +28,9 @@ public class BagRootMini : MonoBehaviour
     public Vector3 TargetCameraOffset;
     public float TargetOrthographicSize;
     bool IsCameraNear = false;
+
+    BulletInnerSlot[] bulletInnerSlots;
+    GemSlotInner[] gemSlots;
     void Start()
     {
         SwichBullet();
@@ -42,8 +42,21 @@ public class BagRootMini : MonoBehaviour
     {
         OriginCameraPos = Camera.main.transform.position;
         orthographicSize = Camera.main.orthographicSize;
-        BulletInnerSlot[] slots = BulletInnerSlotRoot.GetComponentsInChildren<BulletInnerSlot>(true);
-        slots.ForEach(s => s.InitData());
+        if (bulletInnerSlots == null || bulletInnerSlots.Length == 0)
+            bulletInnerSlots = BulletInnerSlotRoot.GetComponentsInChildren<BulletInnerSlot>(true);
+        bulletInnerSlots.ForEach(s => s.InitData());
+    }
+
+    public void RefreshGem()
+    {
+        if(gemSlots == null || gemSlots.Length == 0)
+            gemSlots = BagGemRootGO.GetComponentsInChildren<GemSlotInner>(true);
+        foreach (var each in gemSlots)
+        {
+            if (each.ChildIns!=null)
+                Destroy(each.ChildIns);
+        }
+        InventoryManager.Instance.InitAllBagGO();
     }
     
     //响应开始在战斗场景内拖拽的事件

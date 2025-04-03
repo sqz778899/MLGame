@@ -138,8 +138,13 @@ public class ConquerTheLevelGUI : MonoBehaviour
 
     void PlaySpecialEffect(RectTransform target)
     {
-        // 播放屏幕抖动或特效粒子，增强兴奋感
-        target.DOShakeAnchorPos(shakeDuration, shakeIntensity, shakeFrequency, shakeRadom);
+        Vector2 originalPos = target.anchoredPosition;
+
+        target.DOShakeAnchorPos(shakeDuration, shakeIntensity, shakeFrequency, shakeRadom)
+            .OnComplete(() =>
+            {
+                target.anchoredPosition = originalPos; // 手动还原位置
+            });
     }
     #endregion
 }

@@ -348,6 +348,7 @@ MonoBehaviour:
   HitEffect: {fileID: 3868051808788307342, guid: d6dd6b9ca7e787c469b8297e3953dff9, type: 3}
   HitSpfxAsset: {fileID: 0}
   _state: 0
+  rb: {fileID: 2754457306518854066}
   RunSpeed: 10
   FollowDis: 3
   AniScale: 1
@@ -395,7 +396,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3868051808788307342}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -412,7 +413,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!114 &5428181507585071487
 MonoBehaviour:

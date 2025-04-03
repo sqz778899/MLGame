@@ -92,7 +92,7 @@ public class MapManager : MonoBehaviour
     public void SwitchMapScene()
     {
         if (UIManager.Instance.IsLockedClick) return;
-        
+        GetComponent<MapMouseControl>().UnLockMap();
         Camera.main.transform.position = _preCameraPos;
         UIManager.Instance.BagUI.HideBag();
         FightSceneOff();

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Sirenix.Utilities;
 using TMPro;
 using UnityEngine;
 
@@ -9,8 +10,9 @@ public class MapNodeBase : SpriteClickHandler
     public Transform NodeTextNode;
     [Header("飞行特效参数")] 
     public EParameter EPara;
-
     EffectManager _effectManager;
+    [Header("渲染层级相关")]
+    public string SortingLayerName = "";
     internal EffectManager MEffectManager
     {
         get
@@ -25,6 +27,11 @@ public class MapNodeBase : SpriteClickHandler
     void SetFloatingIns(Transform textNode,out FloatingDamageText textSc)
     {
         GameObject textIns = ResManager.instance.CreatInstance(PathConfig.TxtGetItemPB);
+        //1)设置渲染层级
+        int targetLayerID = SortingLayer.NameToID(SortingLayerName);
+        Renderer[] renderers = textIns.GetComponentsInChildren<Renderer>();
+        renderers.ForEach(r => r.sortingLayerID = targetLayerID);
+        //2)设置脚本
         textSc = textIns.GetComponent<FloatingDamageText>();
         textIns.transform.SetParent(textNode.transform,false);
     }

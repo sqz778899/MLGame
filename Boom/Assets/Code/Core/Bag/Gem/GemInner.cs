@@ -109,15 +109,12 @@ public class GemInner:DragBase
     {
         //先把目标槽位的物品拿出来
         GemSlotInner slotInner = targetSlot as GemSlotInner;
-        GameObject targetFadeIns = slotInner.ChildIns;
-        GameObject tagetChildIns = slotInner.CurGemSlot.ChildIns;
         GameObject sorChildIns = _data.CurSlot.ChildIns;
-        _data.CurSlot.SOnDrop(tagetChildIns);
+        GemSlot curGemSlot = slotInner.CurGemSlot;
+        GameObject targetChildIns = curGemSlot.ChildIns;
+        _data.CurSlot.SOnDrop(targetChildIns);
         //再把自己放进去
-        slotInner.CurGemSlot.SOnDrop(sorChildIns);
-        
-        Destroy(targetFadeIns);
-        Destroy(gameObject);
+        curGemSlot.SOnDrop(sorChildIns);
     }
     
     internal override void NonFindSlot()

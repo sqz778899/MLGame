@@ -24,6 +24,7 @@ public class BulletInner:ItemBase
     [Header("重要属性")]
     public BulletInnerState _state;
     public List<BattleOnceHit> BattleOnceHits = new List<BattleOnceHit>();
+    public Rigidbody2D rb;
     public float RunSpeed = 10.0f;
     public float FollowDis = 3;
     public float AniScale = 1f;
@@ -38,6 +39,7 @@ public class BulletInner:ItemBase
         _resonance = 0;
         _state = BulletInnerState.Common;
         _materials = new List<Material>();
+        CurSpeed = 60f;
         foreach (var each in CurRenderer.materials)
         {
             Material newMat = new Material(each);
@@ -61,13 +63,23 @@ public class BulletInner:ItemBase
                 break;
             case BulletInnerState.AttackBegin:
                 break;
-            case BulletInnerState.Attacking:// 让子弹沿着Z轴向前移动
+            /*case BulletInnerState.Attacking:// 让子弹沿着Z轴向前移动
                 CurSpeed = 60f;
                 transform.Translate(forward * CurSpeed * Time.deltaTime);
-                break;
+                CheckCollisionWithRaycastAll();
+                break;*/
             case BulletInnerState.Dead:
                 Destroy(gameObject);
                 break;
+        }
+    }
+    
+    void FixedUpdate()
+    {
+        if (_state == BulletInnerState.Attacking)// 让子弹沿着Z轴向前移动
+        {
+            Vector2 move = forward * CurSpeed * Time.fixedDeltaTime;
+            rb.MovePosition(rb.position + move);
         }
     }
 

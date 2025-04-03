@@ -58,46 +58,22 @@ public class InventoryManager : MonoBehaviour
     #region 初始化所有宝石道具资产
     void InitItemGem()
     {
-        InitData(_InventoryData.BagGems);
-        InitData(_InventoryData.EquipGems);
-        
-        InitData(_InventoryData.BagGems);
-        InitData(_InventoryData.EquipItems);
-    }
-
-    void InitData<T>(List<T> datas)where T : ItemDataBase
-    {
-        List<T> temp = new List<T>();
-        string flag = "";
-        foreach (var curData in datas)
-        {
-            if (curData is GemData gemData)
-            {
-                GemData newGemData = new GemData(gemData.ID, gemData.CurSlot);
-                temp.Add(newGemData as T);
-                flag = "Gem";
-            }
-            else if (curData is ItemData itemData)
-            {
-                ItemData newItemData = new ItemData(itemData.ID, itemData.CurSlot);
-                temp.Add(newItemData as T);
-                flag = "Item";
-            }
-        }
-
-        if (flag == "Gem")
-        {
-            _InventoryData.EquipGems.Clear();
-            _InventoryData.BagGems.Clear();
-            temp.ForEach(gem=>  BagItemTools<Gem>.InitSaveFileObject(gem, gem.CurSlot.SlotType));
-        }
-
-        if (flag == "Item")
-        {
-            _InventoryData.EquipItems.Clear();
-            _InventoryData.BagItems.Clear();
-            temp.ForEach(item=>  BagItemTools<Item>.InitSaveFileObject(item, item.CurSlot.SlotType));
-        }
+        //初始化宝石
+        List<GemData> tempGem = _InventoryData.BagGems
+            .Concat(_InventoryData.EquipGems)
+            .Select(curData => new GemData(curData.ID, curData.CurSlot))
+            .ToList();
+        _InventoryData.BagGems.Clear();
+        _InventoryData.EquipGems.Clear();
+        tempGem.ForEach(gem=>  BagItemTools<Gem>.InitSaveFileObject(gem, gem.CurSlot.SlotType));
+        //初始化道具
+        List<ItemData> tempItem = _InventoryData.BagItems
+            .Concat(_InventoryData.EquipItems)
+            .Select(curData => new ItemData(curData.ID, curData.CurSlot))
+            .ToList();
+        _InventoryData.BagItems.Clear();
+        _InventoryData.EquipItems.Clear();
+        tempItem.ForEach(item=>  BagItemTools<Item>.InitSaveFileObject(item, item.CurSlot.SlotType));
     }
     #endregion
     

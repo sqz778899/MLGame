@@ -155,14 +155,12 @@ public class BulletData:ItemDataBase
     {
         Modifiers.Add(modifier);
         SyncFinalAttributes();
-        OnDataChanged?.Invoke();
     }
     
     public void ClearModifiers()
     {
         Modifiers.Clear();
         SyncFinalAttributes();
-        OnDataChanged?.Invoke();
     }
     #endregion
 
@@ -186,7 +184,6 @@ public class BulletData:ItemDataBase
         
         ElementalType = (ElementalTypes)json.ElementalType;
         SyncFinalAttributes();
-        OnDataChanged?.Invoke();
     }
     
     public void SyncFinalAttributes()
@@ -197,6 +194,7 @@ public class BulletData:ItemDataBase
         Modifiers.ForEach(mo => mo.Modify(this));
         
         FinalDamage += ResonanceDamage;
+        OnDataChanged?.Invoke();
     }
     #endregion
     

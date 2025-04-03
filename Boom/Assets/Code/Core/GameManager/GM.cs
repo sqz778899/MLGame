@@ -22,6 +22,7 @@ public class GM: MonoBehaviour
         {
             Root = this;
             DontDestroyOnLoad(gameObject);
+            GameObject.Find("CanvasQ01").GetComponent<EternalCavans>().InitData();
             PlayerMgr = Root.gameObject.AddComponent<PlayerManager>();
             InventoryMgr = Root.gameObject.AddComponent<InventoryManager>();
             BattleMgr = Root.gameObject.AddComponent<BattleManager>();

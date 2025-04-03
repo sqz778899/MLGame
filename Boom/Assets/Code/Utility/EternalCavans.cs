@@ -62,6 +62,11 @@ public class EternalCavans : MonoBehaviour
     public GameObject btnStart;
     public Transform btnStart_Apos;
     
+    [Header("需要数据同步的GUIText")]
+    public TextSync txtCoins;
+    public TextSync txtRoomKeys;
+    public TextSync txtScore;
+    
     public SceneState CurSceneState { get; private set; }
     BagRoot _bagRootSC => BagRoot.GetComponent<BagRoot>();
     float _preCameraOrthographicSize;
@@ -93,6 +98,7 @@ public class EternalCavans : MonoBehaviour
         MapFrame.SetActive(false);
         BtnSetting.SetActive(true);
         CurSceneState = SceneState.MainEnv;
+        InitTextSync();
     }
     
     public void InMapScene()
@@ -103,6 +109,7 @@ public class EternalCavans : MonoBehaviour
         MagicDust.SetActive(false);
         CurSceneState = SceneState.MapScene;
         _bagRootSC.RefreshBulletSlotLockedState();
+        InitTextSync();
     }
     
     public void InLoadingScene()
@@ -116,6 +123,13 @@ public class EternalCavans : MonoBehaviour
         MapFrame.SetActive(false);
         BtnSetting.SetActive(true);
         CurSceneState = SceneState.LoadingScene;
+    }
+    
+    void InitTextSync()
+    {
+        txtCoins.InitData();
+        txtRoomKeys.InitData();
+        txtScore.InitData();
     }
     #endregion
 
@@ -172,7 +186,7 @@ public class EternalCavans : MonoBehaviour
     
     #region 单例的加载卸载
     public static EternalCavans Instance { get; private set; }
-    void Awake()
+    public void InitData()
     {
         if (Instance == null)
         {
@@ -180,8 +194,16 @@ public class EternalCavans : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             SceneManager.sceneLoaded += OnSceneLoadedCavans;
         }
-        else
+        else if (Instance != this)
+        {
+            Debug.LogWarning($"[EternalCavans] Duplicate detected, destroying: {gameObject.name}");
             Destroy(gameObject);
+        }
+    }
+
+    void Awake()
+    {
+        InitData();
     }
 
     void OnDestroy() => SceneManager.sceneLoaded -= OnSceneLoadedCavans;

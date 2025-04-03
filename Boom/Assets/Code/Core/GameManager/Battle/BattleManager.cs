@@ -37,6 +37,8 @@ public class BattleManager: MonoBehaviour
         battleData.InitFightData(_enemyMidData, _levelID);
         battleLogic.InitFightData();
         battleUI.InitFightData();
+        //3)锁一下地图缩放
+        _MapManager.GetComponent<MapMouseControl>().LockMap();
     }
 
     #region 战后UI以及行为

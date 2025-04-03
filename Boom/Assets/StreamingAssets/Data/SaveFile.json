@@ -4,7 +4,7 @@
   "Score": 0,
   "Coins": 0,
   "RoomKeys": 0,
-  "MagicDust": 452,
+  "MagicDust": 0,
   "UserBulletSpawner": [
     {
       "SpawnerCount": 0,
@@ -38,21 +38,21 @@
   "UserQuests": [
     {
       "ID": 1,
-      "IsCompleted": true,
-      "State": 3,
+      "IsCompleted": false,
+      "State": 2,
       "DifficultyLevel": 0,
-      "TotalScore": 1384,
-      "TotalLoopCount": 1,
-      "ExplorationPercent": 100
+      "TotalScore": 0,
+      "TotalLoopCount": 0,
+      "ExplorationPercent": 0
     },
     {
       "ID": 2,
-      "IsCompleted": true,
-      "State": 3,
+      "IsCompleted": false,
+      "State": 1,
       "DifficultyLevel": 0,
-      "TotalScore": 2000,
-      "TotalLoopCount": 1,
-      "ExplorationPercent": 100
+      "TotalScore": 0,
+      "TotalLoopCount": 0,
+      "ExplorationPercent": 0
     },
     {
       "ID": 3,
@@ -118,7 +118,7 @@
       "ExplorationPercent": 0
     }
   ],
-  "UserMainStoryProgress": 2,
+  "UserMainStoryProgress": 0,
   "UserTalents": [
     {
       "ID": 1,

@@ -17,8 +17,11 @@ public class ChapterOneStep1: StorylineStepBase
     {
         if (PlayerManager.Instance._QuestData.MainStoryProgress == 0)
         {
-            GlobalTicker.Instance.OnUpdate -= Update;
-            HelloWorld();
+            if (SceneManager.GetActiveScene().name == "1.MainEnv")
+            {
+                GlobalTicker.Instance.OnUpdate -= Update;
+                HelloWorld();
+            }
         }
     }
 

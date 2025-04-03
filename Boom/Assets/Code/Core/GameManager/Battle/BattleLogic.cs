@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -24,7 +25,10 @@ public class BattleLogic : MonoBehaviour
         
         // 每帧调用当前状态的更新逻辑
         currentState?.Update();
-        
+    }
+
+    void FixedUpdate()
+    {
         //摄像机跟随子弹命中敌人动画
         _battleCameraController.HandleCameraFollow();
     }

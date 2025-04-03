@@ -141,6 +141,7 @@ MonoBehaviour:
     Radius: 1
     FlyRangeOffset: {x: -1, y: 1}
     FlyTimeRange: {x: 0.4, y: 0.6}
+  SortingLayerName: 
   CurEnemy: {fileID: 2451546376027965542}
   TargetRoom: {fileID: 0}
   ArrowUnlocked: {fileID: 0}
@@ -524,7 +525,7 @@ MonoBehaviour:
   dissolveDuration: 2
   RoomFog: {fileID: 4241417359909825434}
   DissolveDir: {x: 0, y: 1}
-  SortingLayeName: Q01
+  SortingLayerName: Q01
   _arrows: []
   _resources: []
   IsFogUnLocked: 0
@@ -699,7 +700,7 @@ MonoBehaviour:
   dissolveDuration: 2
   RoomFog: {fileID: 98985359176098194}
   DissolveDir: {x: 0, y: 1}
-  SortingLayeName: Q03
+  SortingLayerName: Q03
   _arrows: []
   _resources: []
   IsFogUnLocked: 0
@@ -941,7 +942,7 @@ MonoBehaviour:
   dissolveDuration: 2
   RoomFog: {fileID: 0}
   DissolveDir: {x: 1, y: 0}
-  SortingLayeName: 
+  SortingLayerName: 
   _arrows: []
   _resources: []
   IsFogUnLocked: 0
@@ -1221,7 +1222,7 @@ MonoBehaviour:
   dissolveDuration: 2
   RoomFog: {fileID: 1264758686634169127}
   DissolveDir: {x: 0, y: 1}
-  SortingLayeName: Q01
+  SortingLayerName: Q01
   _arrows: []
   _resources: []
   IsFogUnLocked: 0
@@ -5074,7 +5075,7 @@ MonoBehaviour:
   dissolveDuration: 2
   RoomFog: {fileID: 2377513825963223173}
   DissolveDir: {x: 0, y: 1}
-  SortingLayeName: Q01
+  SortingLayerName: Q01
   _arrows: []
   _resources: []
   IsFogUnLocked: 0
@@ -6589,7 +6590,7 @@ MonoBehaviour:
   dissolveDuration: 2
   RoomFog: {fileID: 3253623611311677327}
   DissolveDir: {x: 1, y: 0}
-  SortingLayeName: Q04
+  SortingLayerName: Q04
   _arrows: []
   _resources: []
   IsFogUnLocked: 0
@@ -6749,7 +6750,7 @@ MonoBehaviour:
   dissolveDuration: 2
   RoomFog: {fileID: 2551213660161362199}
   DissolveDir: {x: -1, y: 0}
-  SortingLayeName: Q04
+  SortingLayerName: Q04
   _arrows: []
   _resources: []
   IsFogUnLocked: 0
@@ -7743,7 +7744,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2854409879114146523, guid: 9ec5c3e37c05772489c436ebdcefe6c3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.65
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 2854409879114146523, guid: 9ec5c3e37c05772489c436ebdcefe6c3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8347,7 +8348,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2854409879114146523, guid: 9ec5c3e37c05772489c436ebdcefe6c3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.65
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 2854409879114146523, guid: 9ec5c3e37c05772489c436ebdcefe6c3, type: 3}
       propertyPath: m_LocalRotation.w
