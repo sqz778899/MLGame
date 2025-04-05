@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -65,8 +66,18 @@ public class Dialogue : MonoBehaviour
     }
 
     //加载当前对话块信息
-    public void LoadDialogue(string loadDiaName)
+    public void LoadDialogue(string loadDiaName,bool isHidePotrait = false)
     {
+        if (isHidePotrait)
+        {
+            PLeft.enabled = false;
+            PRight.enabled = false;
+        }
+        else
+        {
+            PLeft.enabled = true;
+            PRight.enabled = true;
+        }
         UIManager.Instance.IsLockedClick = true;
         _curState = DiaState.Start;
         DialogueRoot.SetActive(true);
@@ -93,7 +104,7 @@ public class Dialogue : MonoBehaviour
             return;
         }
         
-        Content.text = curDia.Content;
+        Content.text = ProcessRichText(curDia.Content);//标记的地方换色处理
         if (curDia.IsLeft == 1)
         {
             LeftGOs.ForEach(each => each.SetActive(true));
@@ -115,5 +126,12 @@ public class Dialogue : MonoBehaviour
             PLeftRect.anchoredPosition = new Vector2(PLeftRect.anchoredPosition.x, _spriteDict[curDia.Name].PortraitY);
         }
         nextDialogueID = curDia.NextIdex;
+    }
+    
+    
+    string ProcessRichText(string raw)
+    {
+        // 简单处理：将 #文字# 转为绿色
+        return Regex.Replace(raw, "#(.*?)#", "<color=#66ff66>$1</color>");
     }
 }

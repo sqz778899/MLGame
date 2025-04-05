@@ -20,25 +20,15 @@ public class L1Step1PickBullet : TutorialStepBase
     {
         //1)注册事件，结束流程后调用
         EventManager.OnBulletPicked += OnBulletPicked;
-        GlobalTicker.Instance.OnUpdate += Update;
+        BeginTutorial();
     }
-    
-    void Update()
-    {
-        if (PlayerManager.Instance._QuestData.MainStoryProgress == 0)
-        {
-            GlobalTicker.Instance.OnUpdate -= Update;
-            BeginTutorial();
-        }
-    }
-    
     void BeginTutorial()
     {
-        GlobalTicker.Instance.OnUpdate -= Update;
         //1)设置引导板状态
         tutorialBG.enabled = false;
         fxArrow.Clear();
         fxArrow.Stop();
+        EternalCavans.Instance.TutorialFightLock = true;
         //2)开启对话
         Dialogue curDia = EternalCavans.Instance.DialogueSC;
         curDia.LoadDialogue("魔法基础大聪明");
@@ -93,6 +83,7 @@ public class L1Step1PickBullet : TutorialStepBase
     {
         Exit();
         controller.NextStep();
+        PlayerManager.Instance._PlayerData._TutorialCompletionStatus.L1Step1 = true;
     }
 
     public override void Exit() => EventManager.OnBulletPicked -= OnBulletPicked;
@@ -151,6 +142,8 @@ public class L1Step2EquipBullet : TutorialStepBase
         _btnSWBullet.GetComponent<Button>().onClick.RemoveListener(EquipBullet);
         fxArrow.Clear();
         fxArrow.Stop();
+        EternalCavans.Instance.TutorialSwichGemLock = true; 
+        EternalCavans.Instance.TutorialCloseBagLock = true; 
         //1)设置槽位高亮
         HandPointMove tsc = fXHand.gameObject.GetComponent<HandPointMove>();
         //2)小手平移特效
@@ -171,6 +164,8 @@ public class L1Step2EquipBullet : TutorialStepBase
     void ReturnToRoom()
     {
         GlobalTicker.Instance.OnUpdate -= Update;
+        EternalCavans.Instance.TutorialSwichGemLock = false; 
+        EternalCavans.Instance.TutorialCloseBagLock = false; 
         //1）清空之前的状态
         fXHand.Clear();
         fXHand.Stop();
@@ -190,7 +185,7 @@ public class L1Step2EquipBullet : TutorialStepBase
         tutorialBG.enabled = false;
         fxArrow.Clear();
         fxArrow.Stop();
-        
+        EternalCavans.Instance.TutorialFightLock = false;//这时候才允许进入战斗
         EventManager.OnBulletEquipped?.Invoke();
     }
 
@@ -198,6 +193,7 @@ public class L1Step2EquipBullet : TutorialStepBase
     {
         Exit();
         controller.NextStep();
+        PlayerManager.Instance._PlayerData._TutorialCompletionStatus.L1Step2 = true;
     }
 
     public override void Exit() => EventManager.OnBulletEquipped -= OnBulletEquipped;
@@ -283,6 +279,7 @@ public class L1Step3Battle : TutorialStepBase
     {
         Exit();
         controller.NextStep();
+        PlayerManager.Instance._PlayerData._TutorialCompletionStatus.L1Step3 = true;
     }
 
     public override void Exit() => EventManager.OnFirstBattleEnd -= OnFirstBattleEnd;
@@ -317,7 +314,9 @@ public class L1Step4EquipGem : TutorialStepBase
     
     public void Update()
     {
-        if (PlayerManager.Instance.RoleInMapSC.CurRoom.IsFogUnLocked)
+        if (BattleManager.Instance._MapManager == null) return;
+        MapRoomNode CurRoom = BattleManager.Instance._MapManager.GetMapRoomNode(2);
+        if (CurRoom.IsFogUnLocked)
         {
             GlobalTicker.Instance.OnUpdate -= Update;
             OpenBox();
@@ -368,6 +367,9 @@ public class L1Step4EquipGem : TutorialStepBase
         _btnSWGem = EternalCavans.Instance.btnSWGem;
         _btnSWGem.AddComponent<ShaderHoleController>().radius = 0.08f;
         TutoConfig.SetArrow(fxArrow,EternalCavans.Instance.btnSWGem_Apos.position);
+        //3)锁定其他操作
+        EternalCavans.Instance.TutoriaSwichBulletLock = true;
+        EternalCavans.Instance.TutorialCloseBagLock = true;
         //2)给按钮注册引导事件
         _btnSWGem.GetComponent<Button>().onClick.AddListener(EquipGem);
     }
@@ -377,6 +379,8 @@ public class L1Step4EquipGem : TutorialStepBase
         fxArrow.Clear();
         fxArrow.Stop();
         _btnSWGem.GetComponent<Button>().onClick.RemoveListener(EquipGem);
+        EternalCavans.Instance.TutoriaSwichBulletLock = true;
+        EternalCavans.Instance.TutorialCloseBagLock = false;
         //1)设置槽位高亮
         HandPointMove tsc = fXHand.gameObject.GetComponent<HandPointMove>();
         //2)小手平移特效
@@ -428,7 +432,100 @@ public class L1Step4EquipGem : TutorialStepBase
     {
         Exit();
         controller.NextStep();
+        PlayerManager.Instance._PlayerData._TutorialCompletionStatus.L1Step4 = true;
     }
 
     public override void Exit() => EventManager.OnGemEquipped -= OnGemEquipped;
+}
+
+//Step5 战斗内拖拽子弹
+public class L1Step5DragBullet : TutorialStepBase
+{
+    Image tutorialBG;
+    ParticleSystem fxArrow;
+    ParticleSystem fXHand;
+
+    public L1Step5DragBullet(TutorialController controller, Image _tutorialBG,
+        ParticleSystem _fxArrow,ParticleSystem _fxHand)
+        : base(controller)
+    {
+        tutorialBG = _tutorialBG;
+        fxArrow = _fxArrow;
+        fXHand = _fxHand;
+        bagRootMini = EternalCavans.Instance.BagRootMini.GetComponent<BagRootMini>();
+    }
+
+    public override void Enter()
+    {
+        GlobalTicker.Instance.OnUpdate += Update;
+    }
+    
+    void Update()
+    {
+        if (BattleManager.Instance._MapManager == null) return;
+        if (BattleManager.Instance._MapManager.CurMapSate.CurRoomID == 5)
+        {
+            if (BattleManager.Instance.IsInBattle)
+            {
+                GlobalTicker.Instance.OnUpdate -= Update;
+                BeginDrag();
+            }
+        }
+    }
+
+    GameObject tmpStart;
+    GameObject tmpEnd;
+    GameObject slotGO;
+    BagRootMini bagRootMini;
+    void BeginDrag()
+    {
+        //1)设置各种高亮状态
+        tutorialBG.enabled = true;
+        fxArrow.Clear();
+        fxArrow.Stop();
+        //2)找到Spawner
+        GameObject SpawnerSlotRootMini = UIManager.Instance.BagUI.SpawnerSlotRootMini;
+        BulletSlot[] spawners = SpawnerSlotRootMini.GetComponentsInChildren<BulletSlot>();
+        slotGO = spawners.FirstOrDefault(s => s.SlotID == 1).gameObject;
+        TutoConfig.SetTutoHigh(slotGO,0.07f);
+        //2)小手平移特效
+        HandPointMove tsc = fXHand.gameObject.GetComponent<HandPointMove>();
+        fXHand.transform.position = slotGO.transform.position;
+        tsc.startTrans = slotGO.transform;
+        Vector3 slotPos = new Vector3(-4.13f, -1.69f, 90f); 
+        tmpStart = new GameObject("tmpStart");
+        tmpStart.transform.position = slotPos;
+        tsc.startTrans = tmpStart.transform;
+        Vector3 offset = new Vector3(4f,2f,0);
+        tmpEnd = new GameObject("tmp");
+        tmpEnd.transform.position = slotPos + offset;
+        tsc.endTrans = tmpEnd.transform;
+        tsc.ResetPos();
+        fXHand.Play();
+        
+        GlobalTicker.Instance.OnUpdate += Update2;
+    }
+    
+    void Update2()
+    {
+        if (bagRootMini.IsCameraNear)
+        {
+            GlobalTicker.Instance.OnUpdate -= Update2;
+            fXHand.Clear();
+            fXHand.Stop();
+            tutorialBG.enabled = false;
+            OnDragged();
+        }
+    }
+    
+    void OnDragged()
+    {
+        TutorialCompletionStatus curStatus = PlayerManager.Instance._PlayerData._TutorialCompletionStatus;
+        curStatus.L1 = true;
+        curStatus.L1Step5 = true;
+        Exit();
+        controller.NextStep();
+    }
+
+    public override void Exit() {}
 }

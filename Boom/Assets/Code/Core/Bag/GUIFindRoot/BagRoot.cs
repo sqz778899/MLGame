@@ -55,6 +55,8 @@ public class BagRoot : MonoBehaviour
     //页签切换为Bullet
     public void SwichBullet()
     {
+        if (EternalCavans.Instance.TutoriaSwichBulletLock) return;
+        
         BagBulletRootGO.SetActive(true);
         BagReadySlotGO.SetActive(true);
         BagItemRootGO.SetActive(false);
@@ -83,6 +85,8 @@ public class BagRoot : MonoBehaviour
     //页签切换为Gem
     public void SwichGem()
     {
+        if (EternalCavans.Instance.TutorialSwichGemLock) return;
+        
         BagBulletRootGO.SetActive(false);
         BagReadySlotGO.SetActive(true);
         BagItemRootGO.SetActive(false);

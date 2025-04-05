@@ -29,6 +29,7 @@
 
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Spine {
 
@@ -347,7 +348,8 @@ namespace Spine {
 		}
 
 		override public void Apply (Skeleton skeleton, float lastTime, float time, ExposedList<Event> firedEvents, float alpha, MixBlend blend,
-									MixDirection direction) {
+									MixDirection direction)
+		{
 			Bone bone = skeleton.bones.Items[boneIndex];
 			if (!bone.active) return;
 			float[] frames = this.frames;

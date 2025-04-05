@@ -119,6 +119,16 @@
     }
   ],
   "UserMainStoryProgress": 0,
+  "UserTutorial": {
+    "L1": false,
+    "L1Step1": false,
+    "L1Step2": false,
+    "L1Step3": false,
+    "L1Step4": false,
+    "L1Step5": false,
+    "L3": false,
+    "L3Step1": false
+  },
   "UserTalents": [
     {
       "ID": 1,

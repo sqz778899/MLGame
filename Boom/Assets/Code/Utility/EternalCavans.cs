@@ -2,15 +2,20 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class EternalCavans : MonoBehaviour
 {
     public Canvas MCanvas;
+    public bool TutorialCloseBagLock = false;
+    public bool TutorialFightLock = false;
+    public bool TutoriaSwichBulletLock = false;
+    public bool TutorialSwichGemLock = false;
+    
     [Header("永不凋零的GUI资产")]
     [Header("Bag")]
     public GameObject BagRoot;
     public GameObject BagRootMini;
+    public GameObject BagButtonGO;
     [Header("Common")]
     public GameObject DragObjRootGO;
     public GameObject DialogueRoot;
@@ -66,9 +71,10 @@ public class EternalCavans : MonoBehaviour
     public TextSync txtCoins;
     public TextSync txtRoomKeys;
     public TextSync txtScore;
+    public TextSync txtScoreEnd;
     
     public SceneState CurSceneState { get; private set; }
-    BagRoot _bagRootSC => BagRoot.GetComponent<BagRoot>();
+    public BagRoot BagRootSC => BagRoot.GetComponent<BagRoot>();
     float _preCameraOrthographicSize;
     public event Action OnOpenBag;
     public event Action OnCloseBag;
@@ -108,7 +114,7 @@ public class EternalCavans : MonoBehaviour
         Bag.SetActive(true);
         MagicDust.SetActive(false);
         CurSceneState = SceneState.MapScene;
-        _bagRootSC.RefreshBulletSlotLockedState();
+        BagRootSC.RefreshBulletSlotLockedState();
         InitTextSync();
     }
     
@@ -130,6 +136,7 @@ public class EternalCavans : MonoBehaviour
         txtCoins.InitData();
         txtRoomKeys.InitData();
         txtScore.InitData();
+        txtScoreEnd.InitData();
     }
     #endregion
 
@@ -138,7 +145,7 @@ public class EternalCavans : MonoBehaviour
     {
         if(UIManager.Instance.IsLockedClick) return;
         UIManager.Instance.BagUI.ShowBag();
-        _bagRootSC.RefreshBulletSlotLockedState();
+        BagRootSC.RefreshBulletSlotLockedState();
         btnBag.SetActive(false);
         TitleRoot.SetActive(true);
         _preCameraOrthographicSize = Camera.main.orthographicSize;
@@ -148,6 +155,7 @@ public class EternalCavans : MonoBehaviour
     
     public void CloseBag()
     {
+        if (TutorialCloseBagLock) return; //教程锁
         if(UIManager.Instance.IsLockedClick) return;
         UIManager.Instance.BagUI.HideBag();
         if(CurSceneState == SceneState.MainEnv)

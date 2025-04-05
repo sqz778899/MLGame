@@ -77,30 +77,26 @@ public static class DraggableSceneButtonsWithFold
 
         GUILayout.FlexibleSpace();
         GUILayout.EndHorizontal();
-
         if (!isFolded)
         {
             GUILayout.Space(5);
             GUILayout.BeginHorizontal();
-
             if (GUILayout.Button("主界面"))
-            {
                 EditorSceneManager.OpenScene("Assets/Scenes/1.MainEnv.unity");
-            }
-
             if (GUILayout.Button("关卡"))
-            {
                 EditorSceneManager.OpenScene("Assets/Scenes/2.LevelScene.unity");
-            }
-
             if (GUILayout.Button("开始游戏"))
-            {
                 EditorSceneManager.OpenScene("Assets/Scenes/0.StartGame.unity");
-            }
-
+            GUILayout.EndHorizontal();
+            
+            GUILayout.Space(5);
+            GUILayout.BeginHorizontal();
+            if (GUILayout.Button("跳过剧情"))
+                GameObject.Find("GM").GetComponent<GM>().IsSkipStorylineMode = true;
+            if (GUILayout.Button("不跳过剧情"))
+                GameObject.Find("GM").GetComponent<GM>().IsSkipStorylineMode = false;
             GUILayout.EndHorizontal();
         }
-
         GUI.DragWindow(new Rect(0, 0, 10000, 20));
     }
 }

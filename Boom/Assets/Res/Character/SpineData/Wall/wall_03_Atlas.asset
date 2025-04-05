@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6b194f808b1af6499c93410e504af42, type: 3}
-  m_Name: bullet_103_Atlas
+  m_Name: wall_03_Atlas
   m_EditorClassIdentifier: 
-  atlasFile: {fileID: 4900000, guid: e9cba0f64a28a9941ab1d3aee4c1b5c3, type: 3}
+  atlasFile: {fileID: 4900000, guid: 83f5c80dce6252a41a33c7c3094237a2, type: 3}
   materials:
-  - {fileID: 2100000, guid: b134d5166109dad46a2e0491af49abc7, type: 2}
+  - {fileID: 2100000, guid: a842c418ce64b174180496bb20ee3a27, type: 2}

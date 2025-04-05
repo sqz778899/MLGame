@@ -60,8 +60,8 @@ public class BulletInvData : ScriptableObject
         if (EquipBullets.Count >= 5) return;
         if (!EquipBullets.Contains(bulletData))
             EquipBullets.Add(bulletData);
-        SortEquipBullet();//子弹内部数据进行排序
         RefreshModifiers();
+        SortEquipBullet();//子弹内部数据进行排序
     }
     
     public void SortEquipBullet()

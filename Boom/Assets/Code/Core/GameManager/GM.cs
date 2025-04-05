@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 
 public class GM: MonoBehaviour
@@ -33,5 +34,13 @@ public class GM: MonoBehaviour
             Destroy(gameObject);
         }
     }
-    #endregion  
+    #endregion
+
+    #region 鼠标设置
+    [SerializeField]
+    private Texture2D cursorTexture; // 鼠标图标
+    [SerializeField] private Vector2 hotspot = Vector2.zero; // 点击热点的偏移（例如箭头尖的位置）
+
+    void Start() => Cursor.SetCursor(cursorTexture, hotspot, CursorMode.Auto);
+    #endregion
 }

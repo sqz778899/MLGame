@@ -41,6 +41,8 @@ public class PlayerData: ScriptableObject
     
     //talent
     public List<TalentData> Talents;  // 天赋数据
+    //新手教程完成情况
+    public TutorialCompletionStatus _TutorialCompletionStatus;
     
     // 宝石伤害加成
     public List<TalentGemBonus> TalentGemBonuses = new();

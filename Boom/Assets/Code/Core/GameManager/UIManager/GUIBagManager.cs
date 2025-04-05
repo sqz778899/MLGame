@@ -49,8 +49,11 @@ public class GUIBagManager
         BagRootMiniSC.InitData();
     }
 
-    public void HideBag() => BagRootGO.SetActive(false);
-    
+    public void HideBag()
+    {
+        BagRootGO.SetActive(false);
+    }
+
     public void HideMiniBag() => BagRootMiniGO.SetActive(false);
     #endregion
 }

@@ -51,7 +51,8 @@ public static class SaveManager
         curBullets.AddRange(saveFile.UserCurBullets.Select(LoadBulletData));
         
         InventoryManager.Instance.InitAllBagGO();//初始化背包数据
-        
+        //读取新手教程完成情况
+        PlayerManager.Instance._PlayerData._TutorialCompletionStatus = saveFile.UserTutorial;
         //读取天赋信息
         PlayerManager.Instance._PlayerData.Talents = saveFile.UserTalents;
         #endregion
@@ -147,7 +148,8 @@ public static class SaveManager
         
         //存子弹槽状态信息
         saveFile.UserBulletSlotLockedState = PlayerManager.Instance._PlayerData.CurBulletSlotLockedState;
-        
+        //存新手教程完成情况
+        saveFile.UserTutorial = PlayerManager.Instance._PlayerData._TutorialCompletionStatus;
         //存天赋信息状态
         saveFile.UserTalents = PlayerManager.Instance._PlayerData.Talents;
         #endregion

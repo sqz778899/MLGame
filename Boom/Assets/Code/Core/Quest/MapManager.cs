@@ -95,6 +95,7 @@ public class MapManager : MonoBehaviour
         GetComponent<MapMouseControl>().UnLockMap();
         Camera.main.transform.position = _preCameraPos;
         UIManager.Instance.BagUI.HideBag();
+        EternalCavans.Instance.BagButtonGO.SetActive(true);
         FightSceneOff();
         MapSceneOn();
     }
@@ -105,6 +106,7 @@ public class MapManager : MonoBehaviour
         
         _preCameraPos = Camera.main.transform.position;
         UIManager.Instance.BagUI.HideBag();
+        EternalCavans.Instance.BagButtonGO.SetActive(false);
         MapSceneOff();
         FightSceneOn();
     }

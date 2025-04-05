@@ -28,4 +28,12 @@ public class DebugTool
             each.material = _defaultMaterial;
         }
     }
+    
+    [Button(ButtonSizes.Large)]
+    [ButtonGroup("打印POS")]
+    void SetBulletID()
+    {
+       GameObject s = Selection.activeGameObject;
+       Debug.Log(s.transform.position);
+    }
 }

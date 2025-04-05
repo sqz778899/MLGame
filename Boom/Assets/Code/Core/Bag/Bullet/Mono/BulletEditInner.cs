@@ -62,14 +62,19 @@ public class BulletEditInner:ItemBase
                     SlotManager.ClearSlot(_data.CurSlot);
                     _data.CurSlot.SOnDrop(targerChildIns);
                     targetSlotSC.CurBulletSlotRole.SOnDrop(_data);
+                    InventoryManager.Instance._BulletInvData.RefreshModifiers();
+                    InventoryManager.Instance._BulletInvData.SortEquipBullet();
                 }
                 else
                 {
                     SlotManager.ClearSlot(_data.CurSlot);
                     targetSlotSC.CurBulletSlotRole.SOnDrop(_data);//走空插逻辑
+                    //这个时候槽位ID才确定下来
+                    InventoryManager.Instance._BulletInvData.EquipBullet(_data);
                 }
              
                 //3)刷新GO
+                //_data.SyncFinalAttributes();
                 PlayerManager.Instance.RoleInFightGO.GetComponent<RoleInner>().CreateBulletInner(true);
                 Destroy(gameObject);
                 nonHappen = false;

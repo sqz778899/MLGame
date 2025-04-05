@@ -102,7 +102,9 @@ public class TrunkManager: ScriptableObject
         _saveFile.RoomKeys = 0;
         _saveFile.MagicDust = 0;
         //_saveFile.UserStandbyBullet = newGameSD;
-        
+        //.................新手教程完成情况........................
+        _saveFile.UserTutorial = new TutorialCompletionStatus();
+        //.................天赋情况........................
         _saveFile.UserTalents = new List<TalentData>();
         foreach (var each in TalentDesignJsons)
         {
@@ -112,7 +114,7 @@ public class TrunkManager: ScriptableObject
         #endregion
         
         #region Quest
-        int questDesignCount = 2;
+        int questDesignCount = 3;
         List<QuestSaveData> UserQuests = new List<QuestSaveData>();
         for (int i = 0; i < questDesignCount; i++)
         {
@@ -167,6 +169,9 @@ public class TrunkManager: ScriptableObject
         _saveFile.RoomKeys = 0;
         _saveFile.MagicDust = 9999;
         //_saveFile.UserStandbyBullet = newGameSD;
+        //.................新手教程完成情况........................
+        _saveFile.UserTutorial = new TutorialCompletionStatus();
+        
         _saveFile.UserTalents = new List<TalentData>();
         foreach (var each in TalentDesignJsons)
         {
@@ -176,7 +181,7 @@ public class TrunkManager: ScriptableObject
         #endregion
         
         #region Quest
-        int questDesignCount = 2;
+        int questDesignCount = 3;
         List<QuestSaveData> UserQuests = new List<QuestSaveData>();
         for (int i = 0; i < questDesignCount; i++)
         {
@@ -229,7 +234,9 @@ public class TrunkManager: ScriptableObject
         _saveFile.Coins = 0;
         _saveFile.RoomKeys = 0;
         _saveFile.MagicDust = 9999;
-        //_saveFile.UserStandbyBullet = newGameSD;
+        //.................新手教程完成情况........................
+        _saveFile.UserTutorial = new TutorialCompletionStatus();
+        
         _saveFile.UserTalents = new List<TalentData>();
         foreach (var each in TalentDesignJsons)
         {
@@ -239,7 +246,7 @@ public class TrunkManager: ScriptableObject
         #endregion
         
         #region Quest
-        int questDesignCount = 2;
+        int questDesignCount = 3;
         List<QuestSaveData> UserQuests = new List<QuestSaveData>();
         for (int i = 0; i < questDesignCount; i++)
         {

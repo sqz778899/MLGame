@@ -196,20 +196,4 @@ public class DesignTool
         TempAddBullet(203);
     }
     #endregion
-    
-    [Title("是否跳过剧情"),PropertyOrder(100)]
-    public bool IsSkipStorylineMode;
-    [Button("跳过剧情",ButtonSizes.Large),PropertyOrder(100)]
-    [ButtonGroup("是否跳过剧情")]
-    void SkipStoryline()
-    {  
-        GameObject.Find("GM").GetComponent<GM>().IsSkipStorylineMode = IsSkipStorylineMode = true;
-    }
-    
-    [Button("不跳过剧情",ButtonSizes.Large),PropertyOrder(100)]
-    [ButtonGroup("是否跳过剧情")]
-    void NonSkipStoryline()
-    {
-        GameObject.Find("GM").GetComponent<GM>().IsSkipStorylineMode = IsSkipStorylineMode = false;
-    }
 }

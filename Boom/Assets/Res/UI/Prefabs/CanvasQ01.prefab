@@ -11773,8 +11773,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MCanvas: {fileID: 278418333218321760}
+  TutorialCloseBagLock: 0
+  TutorialFightLock: 0
+  TutoriaSwichBulletLock: 0
+  TutorialSwichGemLock: 0
   BagRoot: {fileID: 5279992805434983098}
   BagRootMini: {fileID: 8039840632640149052}
+  BagButtonGO: {fileID: 8548043320813987916}
   DragObjRootGO: {fileID: 4580467282366668572}
   DialogueRoot: {fileID: 8783541447940654907}
   EffectRoot: {fileID: 9156271452588712061}
@@ -11812,6 +11817,7 @@ MonoBehaviour:
   txtCoins: {fileID: 12682445568247879}
   txtRoomKeys: {fileID: 3277618835692245498}
   txtScore: {fileID: 7666422333230820271}
+  txtScoreEnd: {fileID: 3675681471751945506}
 --- !u!1 &811911521355651910
 GameObject:
   m_ObjectHideFlags: 0
@@ -40956,7 +40962,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1911745053469911849
 RectTransform:
   m_ObjectHideFlags: 0
@@ -50212,7 +50218,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u6E38\u620F\u7ED3\u675F  ! !"
+  m_text: "\u5931\u8D25  ! !"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 29bbd16ceac763e4a9e86ab3b9e696a3, type: 2}
   m_sharedMaterial: {fileID: -3753182883971963134, guid: 29bbd16ceac763e4a9e86ab3b9e696a3, type: 2}
@@ -51695,7 +51701,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: -168908417
+  m_SortingLayerID: 380817553
   m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!1 &3507052024844726027
@@ -53583,7 +53589,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6693863791331840319
 RectTransform:
   m_ObjectHideFlags: 0
@@ -54875,7 +54881,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3174706507147364752
 RectTransform:
   m_ObjectHideFlags: 0
@@ -109878,6 +109884,7 @@ MonoBehaviour:
   orthographicSize: 0
   TargetCameraOffset: {x: 0, y: 0, z: 0}
   TargetOrthographicSize: 0
+  IsCameraNear: 0
 --- !u!1 &8040411297364500831
 GameObject:
   m_ObjectHideFlags: 0

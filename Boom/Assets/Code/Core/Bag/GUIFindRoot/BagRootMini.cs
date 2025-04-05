@@ -27,7 +27,7 @@ public class BagRootMini : MonoBehaviour
     
     public Vector3 TargetCameraOffset;
     public float TargetOrthographicSize;
-    bool IsCameraNear = false;
+    public bool IsCameraNear = false;
 
     BulletInnerSlot[] bulletInnerSlots;
     GemSlotInner[] gemSlots;

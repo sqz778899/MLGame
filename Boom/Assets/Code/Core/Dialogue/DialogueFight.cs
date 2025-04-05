@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class DialogueFight : MonoBehaviour
@@ -17,7 +18,6 @@ public class DialogueFight : MonoBehaviour
     [Header("按钮")]
     public Button BtnFight;
     public List<GameObject> HPGOList = new List<GameObject>();
-    public bool isLocked = false;
     
     public void InitData(ArrowNode _arraow)
     {
@@ -45,13 +45,8 @@ public class DialogueFight : MonoBehaviour
     
     public void EnterFight()
     {
-        if (isLocked ) return;
-        //
-        if (InventoryManager.Instance._BulletInvData.EquipBullets.Count == 0)
-        {
-            CotentText.text = "把你的子弹装备好再来找我！杂鱼！";
-            return;
-        }
+        if (EternalCavans.Instance.TutorialFightLock) return;
+        
         UIManager.Instance.IsLockedClick = false;
         BattleManager.Instance.EnterFight(CurArrow.CurEnemy.ToMiddleData(),LevelID);
         QuitSelf();
@@ -59,7 +54,6 @@ public class DialogueFight : MonoBehaviour
 
     public void QuitSelf()
     {
-        if (isLocked ) return;
         UIManager.Instance.IsLockedClick = false;
         CurArrow.IsLocked = false;
         DestroyImmediate(gameObject);

@@ -50,6 +50,15 @@ public class BulletInner:ItemBase
         AniUtility.PlayIdle(Skeleton,AniScale);
         foreach (Material material in _materials)
             material.SetFloat("_Transparency", 1);
+
+        StartCoroutine(InitSkeleton());
+    }
+    
+    IEnumerator InitSkeleton()
+    {
+        // 等待 1 帧，确保 Spine 所有依赖生命周期跑完
+        yield return null;
+        Skeleton.Initialize(true);
     }
 
     void Update()
@@ -63,11 +72,6 @@ public class BulletInner:ItemBase
                 break;
             case BulletInnerState.AttackBegin:
                 break;
-            /*case BulletInnerState.Attacking:// 让子弹沿着Z轴向前移动
-                CurSpeed = 60f;
-                transform.Translate(forward * CurSpeed * Time.deltaTime);
-                CheckCollisionWithRaycastAll();
-                break;*/
             case BulletInnerState.Dead:
                 Destroy(gameObject);
                 break;
@@ -159,6 +163,7 @@ public class BulletInner:ItemBase
         _state = BulletInnerState.AttackBegin;
         float aniTime = 0f;
         Vector3 curScale = transform.localScale;
+        Skeleton.Initialize(true);//不初始化会有BUG，spine的莫名其妙
         AniUtility.PlayAttack(Skeleton,ref aniTime,AniScale);
         transform.DOMove(targetPos, aniTime);
         transform.DOScale(curScale * 0.5f , aniTime);
@@ -242,10 +247,7 @@ public class BulletInner:ItemBase
             AniUtility.PlayIdle(Skeleton, AniScale);
     }
     
-    float CurDistance()
-    {
-        return transform.position.x - PlayerManager.Instance.RoleInFightGO.transform.position.x;
-    }
+    float CurDistance() =>transform.position.x - PlayerManager.Instance.RoleInFightGO.transform.position.x;
     #endregion
 
     #region 数据绑定相关
@@ -266,7 +268,6 @@ public class BulletInner:ItemBase
     {
         Skeleton.skeletonDataAsset = ResManager.instance.GetAssetCache<SkeletonDataAsset>
             (PathConfig.GetBulletImageOrSpinePath(_data.ID,BulletInsMode.Inner));
-        Skeleton.Initialize(true);
         HitEffect = ResManager.instance.GetAssetCache<GameObject>(
             PathConfig.BulletSpfxTemplate);
         HitSpfxAsset = ResManager.instance.GetAssetCache<SkeletonDataAsset>

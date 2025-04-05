@@ -79,11 +79,12 @@ public class DraggableBullet : Bullet
             SlotBase oldSlot = _data.CurSlot;
             targetSlotSC.SOnDrop(gameObject);
             oldSlot.SOnDrop(orIns);
+            InventoryManager.Instance._BulletInvData.RefreshModifiers();
             InventoryManager.Instance._BulletInvData.SortEquipBullet();
         }
         return true;
     }
-    
+     
     bool HandleBulletSlot(RaycastResult result)
     {
         if (!result.gameObject.CompareTag("BulletSlot")) return false;

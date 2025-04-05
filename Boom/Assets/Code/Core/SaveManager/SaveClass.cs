@@ -7,6 +7,32 @@ public interface ISaveable
     public ItemBaseSaveData ToSaveData();
 }
 
+[Serializable]
+public class TutorialCompletionStatus
+{
+    public bool L1;
+    public bool L1Step1;
+    public bool L1Step2;
+    public bool L1Step3;
+    public bool L1Step4;
+    public bool L1Step5;
+    
+    public bool L3;
+    public bool L3Step1;
+    
+    public TutorialCompletionStatus()
+    {
+        L1 = false;
+        L1Step1 = false;
+        L1Step2 = false;
+        L1Step3 = false;
+        L1Step4 = false;
+        L1Step5 = false;
+        L3 = false;
+        L3Step1 = false;
+    }
+}
+
 #region 存档结构
 [Serializable]
 public class SaveFileJson
@@ -30,6 +56,9 @@ public class SaveFileJson
     //public List<MapSate> UserMapSate;         //地图状态
     public List<QuestSaveData> UserQuests;          //用户任务完成情况
     public int UserMainStoryProgress; //主线剧情进度
+    public TutorialCompletionStatus UserTutorial;  //用户新手教程完成度
+    
+    
     public List<TalentData> UserTalents; //用户天赋
 
     public SaveFileJson()

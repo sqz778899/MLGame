@@ -1289,8 +1289,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.28100002, y: -0.14109999, z: 0}
-    m_Extent: {x: 0.5714, y: 1.3323, z: 0}
+    m_Center: {x: 0.28825, y: -0.12805003, z: 0}
+    m_Extent: {x: 0.57015, y: 1.33565, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 1.26
@@ -21309,8 +21309,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 1.4286001, y: 0.13475001, z: 0}
-    m_Extent: {x: 1.7096, y: 1.76445, z: 0}
+    m_Center: {x: 1.4216499, y: 0.13120002, z: 0}
+    m_Extent: {x: 1.71615, y: 1.7567999, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 1.26
@@ -40023,7 +40023,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: -168908417
+  m_SortingLayerID: 380817553
   m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &9012466309680685777
