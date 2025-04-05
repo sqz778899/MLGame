@@ -10,7 +10,6 @@ public class ArrowNode : MapNodeBase
 
     [Header("横向房间专用")]
     public GameObject ArrowUnlocked;
-    public bool TutorialLocked = false; //新手教程用
     
     MapRoomNode _curRoom;
     MapRoomNode curRoom
@@ -26,9 +25,19 @@ public class ArrowNode : MapNodeBase
     //去下一个房间
     public void GoToOtherNode()
     {
-        if (TutorialLocked)
+        if (EternalCavans.Instance.TutorialFightLock)
         {
-            FloatingText("需要解锁横向房间",new Color(1,1,1,1f));
+            FloatingText("请完成引导教程",new Color(1,1,1,1f));
+            return;
+        }
+
+        BulletInvData _bulletInvData = InventoryManager.Instance._BulletInvData;
+        int allSpawnerCount = 0;
+        foreach (var each in _bulletInvData.BagBulletSpawners)
+            allSpawnerCount +=each.SpawnerCount;
+        if (_bulletInvData.EquipBullets.Count + allSpawnerCount == 0)
+        {
+            FloatingText("请持有奇迹子弹再来",new Color(1,1,1,1f));
             return;
         }
         if (IsLocked) return;

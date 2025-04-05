@@ -8,6 +8,7 @@ public class PlayerManager : MonoBehaviour
     public GameObject RoleInFightGO;
     public GameObject RoleInMapGO;
     public RoleInMap RoleInMapSC;
+    public RoleInner RoleInFightSC;
     [Header("重要数据")]
     public PlayerData _PlayerData;
     public QuestData _QuestData;

@@ -95,6 +95,7 @@ public class DragBase : ToolTipsBase, IPointerDownHandler, IPointerUpHandler, ID
 
     public virtual void OnDrag(PointerEventData eventData)
     {
+        if (EternalCavans.Instance.TutorialDragGemLock) return;
         if (eventData.button == PointerEventData.InputButton.Right)
             return;
         _eventData = eventData;

@@ -192,7 +192,8 @@ public class BulletData:ItemDataBase
         FinalPiercing = Piercing;
         FinalResonance = Resonance;
         Modifiers.ForEach(mo => mo.Modify(this));
-        
+        if (FinalResonance == 0)
+            ResonanceDamage = 0;
         FinalDamage += ResonanceDamage;
         OnDataChanged?.Invoke();
     }

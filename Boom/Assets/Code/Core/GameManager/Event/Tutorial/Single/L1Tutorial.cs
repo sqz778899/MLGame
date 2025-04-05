@@ -115,7 +115,6 @@ public class L1Step2EquipBullet : TutorialStepBase
         //2)设置按钮高亮&&引导箭头
         _btnBag = EternalCavans.Instance.btnBag;
         _btnBag.AddComponent<ShaderHoleController>().radius = 0.08f;
-        Debug.Log($"position : {EternalCavans.Instance.btnBag_Apos.position} name: {EternalCavans.Instance.btnBag_Apos.name}");
         TutoConfig.SetArrow(fxArrow,EternalCavans.Instance.btnBag_Apos.position);
         //3)给按钮注册引导事件
         _btnBag.GetComponent<Button>().onClick.AddListener(OpenBag);
@@ -379,7 +378,7 @@ public class L1Step4EquipGem : TutorialStepBase
         fxArrow.Clear();
         fxArrow.Stop();
         _btnSWGem.GetComponent<Button>().onClick.RemoveListener(EquipGem);
-        EternalCavans.Instance.TutoriaSwichBulletLock = true;
+        EternalCavans.Instance.TutoriaSwichBulletLock = false;
         EternalCavans.Instance.TutorialCloseBagLock = false;
         //1)设置槽位高亮
         HandPointMove tsc = fXHand.gameObject.GetComponent<HandPointMove>();

@@ -17,6 +17,9 @@ public class TutorialCompletionStatus
     public bool L1Step4;
     public bool L1Step5;
     
+    public bool L2;
+    public bool L2Step1;
+    
     public bool L3;
     public bool L3Step1;
     
@@ -28,6 +31,8 @@ public class TutorialCompletionStatus
         L1Step3 = false;
         L1Step4 = false;
         L1Step5 = false;
+        L2 = false;
+        L2Step1 = false;
         L3 = false;
         L3Step1 = false;
     }

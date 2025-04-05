@@ -34,6 +34,8 @@ public class Bullet:DragBase
             _data.OnDataChanged -= OnDataChanged; // 先退订旧Data的事件
         
         _data = data as BulletData;
+        _data.InstanceID= GetInstanceID();
+        name = _data.InstanceID.ToString();
         if (_data != null)
         {
             _data.OnDataChanged += OnDataChanged;

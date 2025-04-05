@@ -1,22 +1,20 @@
 ManifestFileVersion: 0
-CRC: 2659058399
+CRC: 2705749668
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 0256ee68d9115667709cc749f93b5dd8
+    Hash: 2246547fe6b401827b882bd0c615b390
   TypeTreeHash:
     serializedVersion: 2
-    Hash: bf21b93cc71e9dc92f892bd01649c414
+    Hash: 3a28bccc8dd7c6cceb136741e8c9d0f1
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 0256ee68d9115667709cc749f93b5dd8
+    Hash: 2246547fe6b401827b882bd0c615b390
 HashAppended: 0
 ClassTypes:
 - Class: 1
   Script: {instanceID: 0}
 - Class: 4
-  Script: {instanceID: 0}
-- Class: 20
   Script: {instanceID: 0}
 - Class: 21
   Script: {instanceID: 0}
@@ -43,8 +41,6 @@ ClassTypes:
 - Class: 70
   Script: {instanceID: 0}
 - Class: 74
-  Script: {instanceID: 0}
-- Class: 81
   Script: {instanceID: 0}
 - Class: 82
   Script: {instanceID: 0}
@@ -185,8 +181,6 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: c38890b61f384ff382d8bb53adab6f1b, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
-- Class: 114
   Script: {fileID: 11500000, guid: d60f8495b3acfc84fae320e7a4a421d3, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: dab1ec3dd43f6e14c9edaa5bcad9b682, type: 3}
@@ -319,8 +313,6 @@ SerializeReferenceClassIdentifiers:
   ClassName: TalentData
 - AssemblyName: Assembly-CSharp
   ClassName: TutorialCompletionStatus
-- AssemblyName: Unity.RenderPipelines.Universal.Runtime
-  ClassName: UnityEngine.Rendering.Universal.TemporalAA/Settings
 - AssemblyName: Unity.TextMeshPro
   ClassName: TMPro.FaceInfo_Legacy
 - AssemblyName: Unity.TextMeshPro
@@ -538,6 +530,7 @@ Assets:
 - Assets/Res/Shader/BreathingLight.shader
 - Assets/Res/UI/Button/T_BtnCommon_02.png
 - Assets/Res/Bullet/SpineData/Bullet_002/spfx_hit_003_Atlas.asset
+- Assets/Res/FX/Texture/fx_DoubleCLick_01.png
 - Assets/Res/Bullet/SpineData/Bullet_003/spfx_hit_003.atlas.txt
 - Assets/Res/FX/SpineData/Compass/compass_compass3-Additive.mat
 - Assets/Res/Map/Materials/MapNodes/M_BB_CoinsPile.mat
@@ -852,6 +845,7 @@ Assets:
 - Assets/Res/Character/SpineData/Connon01/cannon_01_1.png
 - Assets/Res/UI/Gem/Textures/T_Gem_Piercing_03.png
 - Assets/Res/Character/SpineData/Enemy01/enemy_01_enemy_015.mat
+- Assets/Res/FX/Material/M_FX_DoubleClick_01.mat
 - Assets/Res/FX/Prefab/FX_Mark_01.prefab
 - Assets/Res/Map/Materials/M_BackGround.mat
 - Assets/Res/Bullet/SpineData/Bullet_002/bullet_002.json

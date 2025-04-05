@@ -45,8 +45,6 @@ public class DialogueFight : MonoBehaviour
     
     public void EnterFight()
     {
-        if (EternalCavans.Instance.TutorialFightLock) return;
-        
         UIManager.Instance.IsLockedClick = false;
         BattleManager.Instance.EnterFight(CurArrow.CurEnemy.ToMiddleData(),LevelID);
         QuitSelf();

@@ -42,7 +42,9 @@ public class MapManager : MonoBehaviour
         //todo ......................
         UIManager.Instance.InitLogic();
         BattleManager.Instance._MapManager = this;
-        PlayerManager.Instance.RoleInFightGO = MapFightRoot.GetComponentInChildren<RoleInner>(true).gameObject;
+        RoleInner curRoleInFight = MapFightRoot.GetComponentInChildren<RoleInner>(true);
+        PlayerManager.Instance.RoleInFightSC = curRoleInFight;
+        PlayerManager.Instance.RoleInFightGO = curRoleInFight.gameObject;
         EternalCavans.Instance.InMapScene();
         EternalCavans.Instance.OnOpenBag += LockAllThings;
         EternalCavans.Instance.OnCloseBag += UnLockAllThings;
@@ -107,6 +109,7 @@ public class MapManager : MonoBehaviour
         _preCameraPos = Camera.main.transform.position;
         UIManager.Instance.BagUI.HideBag();
         EternalCavans.Instance.BagButtonGO.SetActive(false);
+        PlayerManager.Instance.RoleInFightSC.ClearConnon();
         MapSceneOff();
         FightSceneOn();
     }

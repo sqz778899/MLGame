@@ -162,5 +162,11 @@ public class RoleInner : BaseMove
         yield return new WaitForSeconds(2);
         Destroy(CurConnon.gameObject);
     }
+
+    public void ClearConnon()
+    {
+        for (int i = ConnonNode.childCount - 1; i >= 0; i--)
+            Destroy(ConnonNode.GetChild(i).gameObject);
+    }
     #endregion
 }

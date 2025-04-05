@@ -7,6 +7,7 @@ public class TutorialManager : MonoBehaviour
     public Image TutorialBG;
     public ParticleSystem FXArrow;
     public ParticleSystem FXHand;
+    public ParticleSystem DoubleClick;
     [Header("AD&Space教学提示资产")]
     public GameObject KeyBoardGO;
     public GameObject btnSure;
@@ -37,8 +38,15 @@ public class TutorialManager : MonoBehaviour
                 tutorialController.AddStep(new L1Step5DragBullet(tutorialController, TutorialBG, FXArrow,FXHand));
         }
         
-        //2）构造教学关卡3的引导序列
-        if (curStatus.L3 == false)
+        //2）构造教学关卡2的引导序列
+        if (curStatus.L1 && curStatus.L2 == false)
+        {
+            if (curStatus.L2Step1 == false)
+                tutorialController.AddStep(new L2Step1Tutorial(tutorialController, TutorialBG, FXArrow,DoubleClick));
+        }
+        
+        //3）构造教学关卡3的引导序列
+        if (curStatus.L2 && curStatus.L3 == false)
         {
             if (curStatus.L3Step1 == false)
                 tutorialController.AddStep(new L3Step1Tutorial(tutorialController, TutorialBG, FXArrow));

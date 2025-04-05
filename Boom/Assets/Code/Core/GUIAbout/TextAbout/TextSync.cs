@@ -29,20 +29,26 @@ public class TextSync : MonoBehaviour
         switch (valueType)
         {
             case ValueType.Coins:
+                PlayerManager.Instance._PlayerData.OnCoinsAdd -= CommonChange;
                 PlayerManager.Instance._PlayerData.OnCoinsAdd += CommonChange;
+                PlayerManager.Instance._PlayerData.OnCoinsSub -= CommonSub;
                 PlayerManager.Instance._PlayerData.OnCoinsSub += CommonSub;
                 _curValue = _targetValue = PlayerManager.Instance._PlayerData.Coins;
                 break;
             case ValueType.RoomKeys:
+                PlayerManager.Instance._PlayerData.OnRoomKeysChanged -= CommonChange;
                 PlayerManager.Instance._PlayerData.OnRoomKeysChanged += CommonChange;
                 _curValue = _targetValue = PlayerManager.Instance._PlayerData.RoomKeys;
                 break;
             case ValueType.Score:
+                PlayerManager.Instance._PlayerData.OnScoreChanged -= CommonChange;
                 PlayerManager.Instance._PlayerData.OnScoreChanged += CommonChange;
                 _curValue = _targetValue =  PlayerManager.Instance._PlayerData.Score;
                 break;
             case ValueType.MagicDust:
+                PlayerManager.Instance._PlayerData.OnMagicDustAdd -= CommonChange;
                 PlayerManager.Instance._PlayerData.OnMagicDustAdd += CommonChange;
+                PlayerManager.Instance._PlayerData.OnMagicDustSub -= CommonSub;
                 PlayerManager.Instance._PlayerData.OnMagicDustSub += CommonSub;
                 _curValue = _targetValue = PlayerManager.Instance._PlayerData.MagicDust;
                 break;

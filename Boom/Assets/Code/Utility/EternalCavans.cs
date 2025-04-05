@@ -10,6 +10,7 @@ public class EternalCavans : MonoBehaviour
     public bool TutorialFightLock = false;
     public bool TutoriaSwichBulletLock = false;
     public bool TutorialSwichGemLock = false;
+    public bool TutorialDragGemLock = false;
     
     [Header("永不凋零的GUI资产")]
     [Header("Bag")]
@@ -71,6 +72,7 @@ public class EternalCavans : MonoBehaviour
     public TextSync txtCoins;
     public TextSync txtRoomKeys;
     public TextSync txtScore;
+    public TextSync txtMagicDust;
     public TextSync txtScoreEnd;
     
     public SceneState CurSceneState { get; private set; }
@@ -112,6 +114,8 @@ public class EternalCavans : MonoBehaviour
         TitleRoot.SetActive(true);
         MapFrame.SetActive(true);
         Bag.SetActive(true);
+        BagRoot.SetActive(false);
+        BagButtonGO.SetActive(true);
         MagicDust.SetActive(false);
         CurSceneState = SceneState.MapScene;
         BagRootSC.RefreshBulletSlotLockedState();
@@ -137,6 +141,7 @@ public class EternalCavans : MonoBehaviour
         txtRoomKeys.InitData();
         txtScore.InitData();
         txtScoreEnd.InitData();
+        txtMagicDust.InitData();
     }
     #endregion
 

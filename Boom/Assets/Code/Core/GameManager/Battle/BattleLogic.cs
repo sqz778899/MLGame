@@ -51,11 +51,11 @@ public class BattleLogic : MonoBehaviour
     //判定战斗是否结束
     public bool IsBattleOver()
     {
-        if (!_battleData.IsAfterAttack)//如果还没有攻击过,则不会结束
-            return false;
-
         if (_battleData.CurEnemy.EState == EnemyState.dead)
             return true;
+        
+        if (!_battleData.IsAfterAttack)//如果还没有攻击过,则不会结束
+            return false;
         
         bool isOver = _battleData.CurRole.Bullets.All(each => each == null);
         return isOver;

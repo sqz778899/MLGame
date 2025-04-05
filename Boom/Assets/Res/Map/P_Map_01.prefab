@@ -8423,7 +8423,6 @@ MonoBehaviour:
   CurEnemy: {fileID: 3737086747869382088}
   TargetRoom: {fileID: 0}
   ArrowUnlocked: {fileID: 0}
-  TutorialLocked: 0
 --- !u!61 &8185593512523397866
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11231,7 +11230,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6888136326317888262, guid: a18b688c63c6b2c45bb3b249a4fe336e, type: 3}
       propertyPath: CoinsNum
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -49,6 +49,12 @@ public class DraggableBulletSpawner :DragBase
             DraBuSC.originalPosition = transform.position;
             DraBuSC.IsSpawnerCreate = true;
             _data.SpawnerCount--;
+            
+            RectTransform rectTransform = childBulletIns.transform.GetComponent<RectTransform>();
+            Vector3 worldPoint;
+            if (RectTransformUtility.ScreenPointToWorldPointInRectangle(rectTransform, 
+                    eventData.position, eventData.pressEventCamera, out worldPoint))
+                rectTransform.position = worldPoint;
         }
     }
 

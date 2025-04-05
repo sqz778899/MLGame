@@ -55,6 +55,7 @@ public class Gem : DragBase
     //落下空槽逻辑
     public override void OnDropEmptySlot(SlotBase targetSlot)
     {
+        if (EternalCavans.Instance.TutorialDragGemLock) return;
         GemSlot slot = targetSlot as GemSlot;
         SlotManager.ClearSlot(_data.CurSlot);
         slot.SOnDrop(gameObject);
@@ -86,6 +87,7 @@ public class Gem : DragBase
     //右击逻辑
     internal override void RightClick()
     {
+        if (EternalCavans.Instance.TutorialDragGemLock) return;
         if (_data.CurSlot.SlotType == SlotType.GemBagSlot)
             DisplayRightClickMenu(_eventData);
         else if (_data.CurSlot.SlotType == SlotType.GemInlaySlot)//如果是镶嵌的宝石.右键直接卸下
