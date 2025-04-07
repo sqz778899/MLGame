@@ -8,12 +8,8 @@ public class GM: MonoBehaviour
     
     public PlayerManager PlayerMgr { get; private set; }
     public InventoryManager InventoryMgr { get; private set; }
-    
     public BattleManager BattleMgr{ get; private set; }
     
-    public StorylineManager StorylineMgr{ get; private set; }
-    
-
     #region 单例的加载卸载
     public static GM Root { get; private set; }
     
@@ -24,10 +20,10 @@ public class GM: MonoBehaviour
             Root = this;
             DontDestroyOnLoad(gameObject);
             GameObject.Find("CanvasQ01").GetComponent<EternalCavans>().InitData();
+            GameObject.Find("StorylineSystem").GetComponent<StorylineSystem>().InitData();
             PlayerMgr = Root.gameObject.AddComponent<PlayerManager>();
             InventoryMgr = Root.gameObject.AddComponent<InventoryManager>();
             BattleMgr = Root.gameObject.AddComponent<BattleManager>();
-            StorylineMgr = Root.gameObject.AddComponent<StorylineManager>();
         }
         else
         {

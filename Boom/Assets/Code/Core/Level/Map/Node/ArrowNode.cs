@@ -76,8 +76,5 @@ public class ArrowNode : MapNodeBase
     }
     
     //游戏胜利返回城镇
-    public void ReturnTown()
-    {
-        EternalCavans.Instance.ShowConquerTheLevelGUI();
-    }
+    public void ReturnTown() => EternalCavans.Instance.ShowConquerTheLevelGUI();
 }

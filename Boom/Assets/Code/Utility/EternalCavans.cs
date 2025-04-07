@@ -87,6 +87,7 @@ public class EternalCavans : MonoBehaviour
     #region 初始化各个场景中的UI显示状态
     public void InStartGame()
     {
+        //背包相关
         Bag.SetActive(false);
         MagicDust.SetActive(false);
         TitleRoot.SetActive(false);
@@ -97,10 +98,13 @@ public class EternalCavans : MonoBehaviour
     
     public void InMainEnv()
     {
+        //背包相关
         Bag.SetActive(true);
-        MagicDust.SetActive(true);
         BagRoot.SetActive(false);
         BagRootMini.SetActive(false);
+        BagButtonGO.SetActive(true);
+        
+        MagicDust.SetActive(true);
         GUIFightMapRootGO.SetActive(false);
         TitleRoot.SetActive(false);
         MapFrame.SetActive(false);
@@ -111,11 +115,15 @@ public class EternalCavans : MonoBehaviour
     
     public void InMapScene()
     {
-        TitleRoot.SetActive(true);
-        MapFrame.SetActive(true);
+        //背包相关
         Bag.SetActive(true);
         BagRoot.SetActive(false);
+        BagRootMini.SetActive(false);
         BagButtonGO.SetActive(true);
+        
+        TitleRoot.SetActive(true);
+        G_SideBar.SetActive(true);
+        MapFrame.SetActive(true);
         MagicDust.SetActive(false);
         CurSceneState = SceneState.MapScene;
         BagRootSC.RefreshBulletSlotLockedState();
@@ -126,8 +134,6 @@ public class EternalCavans : MonoBehaviour
     {
         Bag.SetActive(false);
         MagicDust.SetActive(false);
-        BagRoot.SetActive(false);
-        BagRootMini.SetActive(false);
         GUIFightMapRootGO.SetActive(false);
         TitleRoot.SetActive(false);
         MapFrame.SetActive(false);
@@ -188,7 +194,8 @@ public class EternalCavans : MonoBehaviour
         QuestManager.Instance.CompleteQuest();
         ConquerTheLevel.SetActive(false);
     }
-
+    
+    public void ReturnTownMidWay() => QuestManager.Instance.CompleteQuest(true);
     #endregion
     
     public void OpenSettingLv2()

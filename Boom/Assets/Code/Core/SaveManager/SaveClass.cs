@@ -38,6 +38,14 @@ public class TutorialCompletionStatus
     }
 }
 
+[Serializable]
+public class StorylineNodeStateData
+{
+    public int ID;                          // 节点ID
+    public StorylineState State;            // 当前状态（Inactive、Active、Completed）
+    public string CustomDataJson;           // 可选：剧情中用到的自定义状态
+}
+
 #region 存档结构
 [Serializable]
 public class SaveFileJson
@@ -56,12 +64,16 @@ public class SaveFileJson
     //public List<StandbyData> UserStandbyBullet; //子弹材料的状态
     public Dictionary<int, bool> UserBulletSlotLockedState;  //用户子弹槽的锁定状态
     
-    public List<ItemSaveData> UserItems;          //用户道具
-    public List<GemBaseSaveData> UserGems;        //用户宝石
-    //public List<MapSate> UserMapSate;         //地图状态
-    public List<QuestSaveData> UserQuests;          //用户任务完成情况
-    public int UserMainStoryProgress; //主线剧情进度
-    public TutorialCompletionStatus UserTutorial;  //用户新手教程完成度
+    public List<ItemSaveData> UserItems;           //用户道具
+    public List<GemBaseSaveData> UserGems;         //用户宝石
+    //public List<MapSate> UserMapSate;            //地图状态
+
+    #region 任务剧情新手教程等
+    public int UserMainStoryProgress;              //主线剧情进度
+    public List<StorylineNodeStateData> UserStorylineNodesState;  //剧情节点状态
+    public List<QuestSaveData> UserQuests;         //用户任务完成情况
+    public TutorialCompletionStatus UserTutorial;   //用户新手教程完成度
+    #endregion
     
     
     public List<TalentData> UserTalents; //用户天赋
@@ -79,7 +91,11 @@ public class SaveFileJson
         UserBulletSlotLockedState = new Dictionary<int, bool>();
         UserItems = new List<ItemSaveData>();
         UserGems = new List<GemBaseSaveData>();
+
+        UserMainStoryProgress = 0;
+        UserStorylineNodesState = new List<StorylineNodeStateData>();
         UserQuests = new List<QuestSaveData>();
+        UserTutorial = new TutorialCompletionStatus();
     }
 }
 

@@ -45,11 +45,12 @@ public class QuestManager : MonoBehaviour
         }
     }
 
-    public void CompleteQuest()
+    public void CompleteQuest(bool IsMidway = false)
     {
         //1)更新任务数据
-        PlayerManager.Instance._QuestData.UpdateQuestState(
-            currentQuest.ID, QuestState.Completed);
+        if (!IsMidway)//如果中途返回则不更新任务状态
+            PlayerManager.Instance._QuestData.UpdateQuestState(
+                currentQuest.ID, QuestState.Completed);
         //2）清理战斗数据
         BattleManager.Instance.battleData.ClearData();
         PlayerManager.Instance.ClearPlayerData();

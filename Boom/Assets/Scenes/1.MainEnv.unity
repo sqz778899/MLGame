@@ -1289,8 +1289,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0.27765, y: -0.13484997, z: 0}
-    m_Extent: {x: 0.57245, y: 1.3296499, z: 0}
+    m_Center: {x: 0.2812, y: -0.12995005, z: 0}
+    m_Extent: {x: 0.5737, y: 1.33805, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 1.26
@@ -9522,6 +9522,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &588388296
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 588388297}
+  m_Layer: 0
+  m_Name: ------------Singleton------------------
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &588388297
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588388296}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.2092056, y: 4.3650274, z: 9.201457}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!21 &606216105
 Material:
   serializedVersion: 8
@@ -16346,6 +16377,51 @@ Transform:
   - {fileID: 402977869}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1401899877
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1401899879}
+  - component: {fileID: 1401899878}
+  m_Layer: 0
+  m_Name: StorylineSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1401899878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401899877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df8ee96f2ade4cb7a877aec68e8c7efe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StorylineSaveData: []
+--- !u!4 &1401899879
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401899877}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.7813978, y: -1.69068, z: 9.207847}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1404964742
 GameObject:
   m_ObjectHideFlags: 0
@@ -16513,7 +16589,7 @@ GameObject:
   - component: {fileID: 1410404431}
   - component: {fileID: 1410404430}
   m_Layer: 0
-  m_Name: QuestManager(singleton)
+  m_Name: QuestManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21311,8 +21387,8 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 1.4295, y: 0.13145, z: 0}
-    m_Extent: {x: 1.7104, y: 1.75225, z: 0}
+    m_Center: {x: 1.4283501, y: 0.13765001, z: 0}
+    m_Extent: {x: 1.70725, y: 1.76135, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 1.26
@@ -38803,6 +38879,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3885665599082716277, guid: 79aacfe33e84d8e48bcf8db27e3a8858, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7959133093406263470, guid: 79aacfe33e84d8e48bcf8db27e3a8858, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -128
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -40061,7 +40145,9 @@ SceneRoots:
   - {fileID: 1027914393}
   - {fileID: 2038537327}
   - {fileID: 1568792279}
-  - {fileID: 1410404431}
+  - {fileID: 588388297}
   - {fileID: 530808259}
+  - {fileID: 1410404431}
+  - {fileID: 1401899879}
   - {fileID: 126209640}
   - {fileID: 4645485535460898523}

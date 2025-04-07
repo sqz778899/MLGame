@@ -123,6 +123,7 @@ public class TrunkManager: ScriptableObject
         }
         _saveFile.UserQuests = UserQuests;
         _saveFile.UserMainStoryProgress = 0;
+        _saveFile.UserStorylineNodesState = new List<StorylineNodeStateData>();
         #endregion
 
         string content01 = JsonConvert.SerializeObject(_saveFile,(Formatting) Formatting.Indented);
@@ -190,6 +191,7 @@ public class TrunkManager: ScriptableObject
         }
         _saveFile.UserQuests = UserQuests;
         _saveFile.UserMainStoryProgress = 0;
+        _saveFile.UserStorylineNodesState = new List<StorylineNodeStateData>();
         #endregion
 
         string content01 = JsonConvert.SerializeObject(_saveFile,(Formatting) Formatting.Indented);
@@ -255,6 +257,7 @@ public class TrunkManager: ScriptableObject
         }
         _saveFile.UserQuests = UserQuests;
         _saveFile.UserMainStoryProgress = 0;
+        _saveFile.UserStorylineNodesState = new List<StorylineNodeStateData>();
         #endregion
 
         string content01 = JsonConvert.SerializeObject(_saveFile,(Formatting) Formatting.Indented);

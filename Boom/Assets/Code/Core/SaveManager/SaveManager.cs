@@ -51,8 +51,6 @@ public static class SaveManager
         curBullets.AddRange(saveFile.UserCurBullets.Select(LoadBulletData));
         
         InventoryManager.Instance.InitAllBagGO();//初始化背包数据
-        //读取新手教程完成情况
-        PlayerManager.Instance._PlayerData._TutorialCompletionStatus = saveFile.UserTutorial;
         //读取天赋信息
         PlayerManager.Instance._PlayerData.Talents = saveFile.UserTalents;
         #endregion
@@ -103,7 +101,12 @@ public static class SaveManager
                 curQuests.Add(newQuest);
             }
         }
+        //读取剧情节点状态
+        StorylineSystem.Instance.StorylineSaveData = saveFile.UserStorylineNodesState;
+        //读取主线剧情推进状态
         PlayerManager.Instance._QuestData.MainStoryProgress = saveFile.UserMainStoryProgress;
+        //读取新手教程完成情况
+        PlayerManager.Instance._PlayerData._TutorialCompletionStatus = saveFile.UserTutorial;
         #endregion
         
         LoadUserConfig();
@@ -148,20 +151,19 @@ public static class SaveManager
         
         //存子弹槽状态信息
         saveFile.UserBulletSlotLockedState = PlayerManager.Instance._PlayerData.CurBulletSlotLockedState;
-        //存新手教程完成情况
-        saveFile.UserTutorial = PlayerManager.Instance._PlayerData._TutorialCompletionStatus;
         //存天赋信息状态
         saveFile.UserTalents = PlayerManager.Instance._PlayerData.Talents;
         #endregion
         
-        #region Quest
+        #region 任务剧情新手教程等
         List<QuestSaveData> UserQuests = new List<QuestSaveData>();
-        PlayerManager.Instance._QuestData.Quests.ForEach(each =>
-        {
-            UserQuests.Add(new QuestSaveData(each));
-        });
+        PlayerManager.Instance._QuestData.Quests.ForEach(each => {UserQuests.Add(new QuestSaveData(each)); });
         saveFile.UserQuests = UserQuests;
         saveFile.UserMainStoryProgress = PlayerManager.Instance._QuestData.MainStoryProgress;
+        //存新手教程完成情况
+        saveFile.UserTutorial = PlayerManager.Instance._PlayerData._TutorialCompletionStatus;
+        //存储剧情节点状态
+        saveFile.UserStorylineNodesState = StorylineSystem.Instance.SaveStorylineData();
         #endregion
         
         string content01 = JsonConvert.SerializeObject(saveFile,(Formatting) Formatting.Indented);

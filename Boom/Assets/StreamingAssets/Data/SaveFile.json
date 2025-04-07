@@ -35,11 +35,13 @@
   },
   "UserItems": [],
   "UserGems": [],
+  "UserMainStoryProgress": 0,
+  "UserStorylineNodesState": [],
   "UserQuests": [
     {
       "ID": 1,
       "IsCompleted": false,
-      "State": 2,
+      "State": 1,
       "DifficultyLevel": 0,
       "TotalScore": 0,
       "TotalLoopCount": 0,
@@ -118,7 +120,6 @@
       "ExplorationPercent": 0
     }
   ],
-  "UserMainStoryProgress": 0,
   "UserTutorial": {
     "L1": false,
     "L1Step1": false,
