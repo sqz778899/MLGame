@@ -37,19 +37,6 @@ public enum ElementalTypes
     Fire = 3,
     Electric = 4
 }
-
-[Serializable]
-public class StandbyData:HaveID
-{
-    public int SlotID;
-    public int InstanceID;
-
-    public StandbyData(int slotID = 0,int instanceID = 0)
-    {
-        SlotID = slotID;
-        InstanceID = instanceID;
-    }
-}
 #endregion
 
 

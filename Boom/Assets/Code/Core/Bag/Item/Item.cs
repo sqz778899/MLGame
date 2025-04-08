@@ -1,34 +1,19 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class Item : DragBase
 {
     public ItemData _data;
     
-    public override void BindData(ItemDataBase data)
-    {
-        if (_data != null)
-            _data.OnDataChanged -= OnDataChangeItem; // 先退订旧Data的事件
-        
-        _data = data as ItemData;
-        if (_data != null)
-        {
-            _data.OnDataChanged += OnDataChangeItem;
-            OnDataChangeItem(); // 立即刷新一遍
-        }
-    }
-    
     [Header("重要属性")]
     public int Rare;
-    public ItemAttribute Attribute;
     
     [Header("表现相关")]
     public Image ItemSprite;
     public Image ItemBGInBag;
-    public Image ItemBGInElement;
+    public Image ItemBGInEquip;
     public Color RareColor;
     
     public Color Rare1;
@@ -36,59 +21,100 @@ public class Item : DragBase
     public Color Rare3;
     public Color Rare4;
     
+    #region UI交互逻辑
+    bool IsBGInBag;
+    bool IsBGInEquip;
     internal override void VOnDrag()
     {
         //在拖动中把Item显示后面的背景图关掉
+        IsBGInBag = ItemBGInBag.gameObject.activeSelf;
+        IsBGInEquip = ItemBGInEquip.gameObject.activeSelf;
         ItemBGInBag.gameObject.SetActive(false);
-        ItemBGInElement.gameObject.SetActive(false);
+        ItemBGInEquip.gameObject.SetActive(false);
     }
     
+    public override void OnPointerUp(PointerEventData eventData)
+    {
+        UIManager.Instance.IsLockedClick = false;
+        if (eventData.button == PointerEventData.InputButton.Right)
+            return;
+        HideTooltips();
+        
+        // 在释放鼠标按钮时，我们检查这个位置下是否有一个Slot
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, results);
+        bool NonHappen = true; // 发生Slot drop down 逻辑
+        
+        foreach (RaycastResult result in results)
+        {
+            if (result.gameObject.TryGetComponent(out SlotBase curSlotSC))
+            {
+                //1）前置判断，如果Slot是GemSlot类型，才能继续
+                ItemSlot curItemSlot = curSlotSC as ItemSlot;
+                if (curItemSlot == null) continue;
+                if (curItemSlot.CurItemData == _data) break;//如果是同一个宝石，不做任何操作
+                
+                //2）空槽逻辑
+                if (curItemSlot.MainID == -1)
+                {
+                    OnDropEmptySlot(curItemSlot);
+                    NonHappen = false;
+                }
+                else//3）满槽逻辑
+                {
+                    OnDropFillSlot(curItemSlot);
+                    NonHappen = false;
+                    break;
+                }
+            }
+        }
+        
+        if (NonHappen)
+            NonFindSlot();
+    }
+    
+    //落下空槽逻辑
     public override void OnDropEmptySlot(SlotBase targetSlot)
     {
-        //清除旧的Slot信息
-        //SlotManager.ClearSlotByID(SlotID,SlotType.BagSlot);
-        //同步新的Slot信息，这一步会改变SlotID,所以放在后面
-        //CurSlot.SOnDrop(gameObject);
-        //数据层同步
-        //MainRoleManager.Instance.MoveItem(this);
-        //OnDataChangeGem();
+        if (EternalCavans.Instance.TutorialDragGemLock) return;
+        ItemSlot slot = targetSlot as ItemSlot;
+        SlotManager.ClearSlot(_data.CurSlot);
+        slot.SOnDrop(gameObject);
+        if (slot.SlotType == SlotType.BagItemSlot)
+        {
+            ItemBGInBag.gameObject.SetActive(true);
+        }
+        if (slot.SlotType == SlotType.BagEquipSlot)
+        {
+            ItemBGInEquip.gameObject.SetActive(true);
+        }
     }
+    
+    //落下交换逻辑
+    internal override void OnDropFillSlot(SlotBase targetSlot)
+    {
+        //先把目标槽位的物品拿出来
+        GameObject tagetChildIns = targetSlot.ChildIns;
+        _data.CurSlot.SOnDrop(tagetChildIns);
+        //再把自己放进去
+        targetSlot.SOnDrop(gameObject);
+    }
+    
+    internal override void NonFindSlot()
+    {
+        base.NonFindSlot();
+        ItemBGInBag.gameObject.SetActive(IsBGInBag);
+        ItemBGInEquip.gameObject.SetActive(IsBGInEquip);
+    }
+    #endregion
     
     #region ToolTips相关
     internal override void SetTooltipInfo()
     {
-        ToolTipsInfo curToolTipsInfo = new ToolTipsInfo(_data.Name);
-        CurTooltipsSC.SetInfo(curToolTipsInfo);
+        TooltipsInfo curTooltipsInfo = new TooltipsInfo(_data.Name);
+        CurTooltipsSC.SetInfo(curTooltipsInfo);
     }
     
-    string GetItemAttriInfo()
-    {
-        string str = "";
-        if (Attribute.waterElement != 0)
-            str += $"<color=#32AFE0>水元素: <color=#ECECEC> + {Attribute.waterElement}\n";
-        if (Attribute.fireElement != 0)
-            str += $"<color=#FF4F00>火元素: <color=#ECECEC> + {Attribute.fireElement}\n";
-        if (Attribute.thunderElement != 0)
-            str += $"<color=#8927B5>雷元素: <color=#ECECEC> + {Attribute.thunderElement}\n";
-        if (Attribute.lightElement != 0)
-            str += $"<color=#E7D889>光元素: <color=#ECECEC> + {Attribute.lightElement}\n";
-        if (Attribute.darkElement != 0)
-            str += $"<color=#2F985B>暗元素: <color=#ECECEC> + {Attribute.darkElement}\n";
-        
-        if (Attribute.extraWaterDamage != 0)
-            str += $"<color=#32AFE0>额外水伤害: <color=#ECECEC> + {Attribute.extraWaterDamage}%\n";
-        if (Attribute.extraFireDamage != 0)
-            str += $"<color=#FF4F00>额外火伤害: <color=#ECECEC> + {Attribute.extraFireDamage}%\n";
-        if (Attribute.extraThunderDamage != 0)
-            str += $"<color=#8927B5>额外雷伤害: <color=#ECECEC> + {Attribute.extraThunderDamage}%\n";
-        if (Attribute.extraLightDamage != 0)
-            str += $"<color=#E7D889>额外光伤害: <color=#ECECEC> + {Attribute.extraLightDamage}%\n";
-        if (Attribute.extraDarkDamage != 0)
-            str += $"<color=#2F985B>额外暗伤害: <color=#ECECEC> + {Attribute.extraDarkDamage}%\n";
-        
-        str += $"<color=#ECECEC>总伤害: <color=#ECECEC> + {Attribute.maxDamage}%\n";
-        return str;
-    }
     #endregion
 
     #region 同步各种数据
@@ -96,20 +122,19 @@ public class Item : DragBase
     {
         //同步数据
         ItemJson itemDesignData = TrunkManager.Instance.GetItemJson(_data.ID);
-        Attribute = itemDesignData.Attribute;
         Rare = itemDesignData.Rare;
-        //Debug.LogError(PathConfig.GetItemPath(gemDesignData.ImageName));
         ItemSprite.sprite = ResManager.instance.GetAssetCache<Sprite>(
-            PathConfig.GetItemPath(itemDesignData.ImageName));
+            PathConfig.GetItemPath(itemDesignData.ResName));
+        gameObject.name = itemDesignData.Name + _data.InstanceID;
         //同步背景形状
         switch (_data.CurSlot.SlotType)
         {
             case SlotType.BagItemSlot:
                 ItemBGInBag.gameObject.SetActive(true);
-                ItemBGInElement.gameObject.SetActive(false);
+                ItemBGInEquip.gameObject.SetActive(false);
                 break;
             case SlotType.BagEquipSlot:
-                ItemBGInElement.gameObject.SetActive(true);
+                ItemBGInEquip.gameObject.SetActive(true);
                 ItemBGInBag.gameObject.SetActive(false);
                 break;
         }
@@ -132,8 +157,23 @@ public class Item : DragBase
         }
 
         if (ItemBGInBag != null) ItemBGInBag.color = RareColor;
-        if (ItemBGInElement != null) ItemBGInElement.color = RareColor;
+        if (ItemBGInEquip != null) ItemBGInEquip.color = RareColor;
     }
     
+    public override void BindData(ItemDataBase data)
+    {
+        if (_data != null)
+            _data.OnDataChanged -= OnDataChangeItem; // 先退订旧Data的事件
+        
+        _data = data as ItemData;
+        if (_data != null)
+        {
+            data.InstanceID = GetInstanceID();
+            _data.OnDataChanged += OnDataChangeItem;
+            OnDataChangeItem(); // 立即刷新一遍
+        }
+    }
+    
+    void OnDestroy() => _data.OnDataChanged -= OnDataChangeItem;
     #endregion
 }

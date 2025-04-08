@@ -51,28 +51,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bca688204ea3084d8e73e9ab59dc89e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: 0
-  InstanceID: 0
-  SlotID: 0
-  SlotType: 0
-  preID: 0
+  DobuleClickTime: 6
+  CurToolTipsMenuState: 0
   Rare: 0
-  Name: 
-  Attribute:
-    waterElement: 0
-    fireElement: 0
-    thunderElement: 0
-    lightElement: 0
-    darkElement: 0
-    extraWaterDamage: 0
-    extraFireDamage: 0
-    extraThunderDamage: 0
-    extraLightDamage: 0
-    extraDarkDamage: 0
-    maxDamage: 0
   ItemSprite: {fileID: 7565019352125093693}
   ItemBGInBag: {fileID: 8670285074962067189}
-  ItemBGInElement: {fileID: 346373297690352967}
+  ItemBGInEquip: {fileID: 346373297690352967}
   RareColor: {r: 1, g: 1, b: 1, a: 0}
   Rare1: {r: 0.5411765, g: 0.5411765, b: 0.5411765, a: 1}
   Rare2: {r: 0.27411884, g: 0.45285472, b: 0.7924528, a: 1}
@@ -240,7 +224,7 @@ GameObject:
   - component: {fileID: 8587956450617277175}
   - component: {fileID: 346373297690352967}
   m_Layer: 5
-  m_Name: imgBGElement
+  m_Name: imgBGEquip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

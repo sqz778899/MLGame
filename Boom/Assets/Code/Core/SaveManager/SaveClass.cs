@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using UnityEngine.Serialization;
 
 public interface ISaveable
 {
@@ -152,7 +152,6 @@ public class BulletJson : ItemJsonBase
     }
 }
 
-
 [Serializable]
 public class GemJson : ItemJsonBase
 {
@@ -178,22 +177,18 @@ public class GemJson : ItemJsonBase
 public class ItemJson:ItemJsonBase
 {
     public int Rare;
-    public string ImageName;
-    public ItemAttribute Attribute;
+    public string ResName;
+    public string Desc;
     
-    public ItemJson(int _id = -1, int _instanceID = -1,
-        int _rare = -1, string _name = "", 
-        string _imageName = "", ItemAttribute _attribute = null,
-        int _SlotID = 0, int _SlotType = 0)
+    public ItemJson(int _id = -1, string _name = "",int _rare = -1,
+        string _desc = "",int _price = 0, string resName = "")
     {
         ID = _id;
         Rare = _rare;
         Name = _name;
-        ImageName = _imageName;
-        if (_attribute == null)
-            _attribute = new ItemAttribute();
-        Attribute = _attribute; ;
-        Price = 0;
+        Desc = _desc;
+        ResName = resName;
+        Price = _price;
     }
 }
 

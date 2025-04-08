@@ -33,15 +33,7 @@ public class InventoryData: ScriptableObject
     public void AddItemToBag(ItemData item) => BagItems.Add(item);
     public void AddItemToEquip(ItemData item) => EquipItems.Add(item);
     public void RemoveItem(ItemData itemData) =>BagItems.Remove(itemData);
-    public void EquipItem(ItemData item)
-    {
-        if (BagItems.Remove(item))
-            EquipItems.Add(item);
-    }
-    public void UnEquipItem(ItemData item)
-    {
-        if (EquipItems.Remove(item))
-            BagItems.Add(item);
-    }
+    public void EquipItem(ItemData item) => EquipItems.Add(item);
+    public void UnEquipItem(ItemData item) => EquipItems.Remove(item);
     #endregion
 }

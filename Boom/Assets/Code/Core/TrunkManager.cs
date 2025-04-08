@@ -82,11 +82,6 @@ public class TrunkManager: ScriptableObject
         spawner03.SpawnerCount = 0;
         UserBulletSpawner.Add(spawner03);
         
-        //..............StandbyData.........................
-        List<StandbyData> newGameSD = new List<StandbyData>();
-        for (int i = 0; i < 5; i++)
-            newGameSD.Add(new StandbyData(i,0));
-        
         //...................Items.................................
         _saveFile.UserItems = new List<ItemSaveData>();
         //...................Gems..................................
@@ -150,11 +145,6 @@ public class TrunkManager: ScriptableObject
         spawner03.SpawnerCount = 0;
         UserBulletSpawner.Add(spawner03);
         
-        //..............StandbyData.........................
-        List<StandbyData> newGameSD = new List<StandbyData>();
-        for (int i = 0; i < 5; i++)
-            newGameSD.Add(new StandbyData(i,0));
-        
         //...................Items.................................
         _saveFile.UserItems = new List<ItemSaveData>();
         //...................Gems..................................
@@ -216,11 +206,6 @@ public class TrunkManager: ScriptableObject
         BulletBaseSaveData spawner03 = new BulletBaseSaveData(3,3,SlotType.SpawnnerSlot,0);
         spawner03.SpawnerCount = 0;
         UserBulletSpawner.Add(spawner03);
-        
-        //..............StandbyData.........................
-        List<StandbyData> newGameSD = new List<StandbyData>();
-        for (int i = 0; i < 5; i++)
-            newGameSD.Add(new StandbyData(i,0));
         
         //...................Items.................................
         _saveFile.UserItems = new List<ItemSaveData>();

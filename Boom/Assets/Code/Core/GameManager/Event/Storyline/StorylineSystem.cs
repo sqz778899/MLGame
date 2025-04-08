@@ -83,7 +83,7 @@ public class StorylineSystem: MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        else if (Instance != this)
+        else
             Destroy(gameObject);
     }
     #endregion

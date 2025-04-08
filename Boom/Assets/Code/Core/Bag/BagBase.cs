@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 #region 接口
@@ -48,19 +49,22 @@ public abstract class ItemDataBase:ISaveable
     //动态数据层 运行时数据
     public int InstanceID;
     public SlotBase CurSlot;
-    
+    public SlotController  CurSlotController;
+
+    public virtual TooltipsInfo BuildTooltip() { throw new NotImplementedException(); }
     public virtual ItemBaseSaveData ToSaveData() { throw new NotImplementedException(); }
 }
 #endregion
 
 #region 宝石类
-public class GemData : ItemDataBase
+public class GemData : ItemDataBase,ITooltipBuilder
 {
     public event Action OnDataChanged;
     //静态数据层 配表数据
     public int Damage;
     public int Piercing;
     public int Resonance;
+    public string ImageName;
     public BulletModifierGem Modifier;
     
     public GemData(int _id,SlotBase _slot)
@@ -77,6 +81,7 @@ public class GemData : ItemDataBase
         Name = json.Name;
         Price = json.Price;
         Level = json.Level;
+        ImageName = json.ImageName;
         
         Damage = json.Damage;
         Piercing = json.Piercing;
@@ -107,6 +112,20 @@ public class GemData : ItemDataBase
     {
         GemJson json = TrunkManager.Instance.GetGemJson(ID);
         InitData(json);
+    }
+    
+    public TooltipsInfo BuildTooltip()
+    {
+        TooltipsInfo info = new TooltipsInfo(Name, Level);
+
+        if (Damage != 0)
+            info.AttriInfos.Add(new ToolTipsAttriSingleInfo(ToolTipsAttriType.Damage, Damage));
+        if (Piercing != 0)
+            info.AttriInfos.Add(new ToolTipsAttriSingleInfo(ToolTipsAttriType.Piercing, Piercing));
+        if (Resonance != 0)
+            info.AttriInfos.Add(new ToolTipsAttriSingleInfo(ToolTipsAttriType.Resonance, Resonance));
+
+        return info;
     }
 }
 #endregion
@@ -227,9 +246,9 @@ public class ItemData : ItemDataBase
     public event Action OnDataChanged;
     //静态数据层 配表数据
     public int Rare;
-    public int Damage;
-    public int Piercing;
-    public int Resonance;
+    public string Desc;
+    
+    public IItemEffect EffectLogic; //运行时逻辑引用
     
     public ItemData(int _id,SlotBase _slot)
     {
@@ -244,68 +263,14 @@ public class ItemData : ItemDataBase
         Name = json.Name;
         Price = json.Price;
         Rare = json.Rare;
+        Desc = json.Desc;
+        EffectLogic = ItemEffectFactory.CreateEffect(json.ID);
         OnDataChanged?.Invoke();
     }
     protected override void OnIDChanged()
     {
         ItemJson json = TrunkManager.Instance.GetItemJson(ID);
         InitData(json);
-    }
-}
-
-[Serializable]
-public class ItemAttribute
-{
-    public int waterElement;
-    public int fireElement;
-    public int thunderElement;
-    public int lightElement;
-    public int darkElement;
-
-    public int extraWaterDamage;
-    public int extraFireDamage;
-    public int extraThunderDamage;
-    public int extraLightDamage;
-    public int extraDarkDamage;
-    
-    public int maxDamage;
-
-    public ItemAttribute(int _waterElement = 0, int _fireElement= 0, int _thunderElement= 0,
-        int _lightElement = 0, int _darkElement = 0,int _extraWaterDamage = 0,
-        int _extraFireDamage = 0,int _extraThunderDamage = 0,int _extraLightDamage = 0,
-        int _extraDarkDamage = 0,int _maxDamage = 0)
-    {
-        waterElement = _waterElement;
-        fireElement = _fireElement;
-        thunderElement = _thunderElement;
-        lightElement = _lightElement;
-        darkElement = _darkElement;
-        
-        //
-        extraWaterDamage = _extraWaterDamage;
-        extraFireDamage = _extraFireDamage;
-        extraThunderDamage = _extraThunderDamage;
-        extraLightDamage = _extraLightDamage;
-        extraDarkDamage = _extraDarkDamage;
-        maxDamage = _maxDamage;
-    }
-    
-    // 聚合其他 ItemAttribute 对象的属性
-    public void Aggregate(ItemJson other)
-    {
-        waterElement += other.Attribute.waterElement;
-        fireElement += other.Attribute.fireElement;
-        thunderElement += other.Attribute.thunderElement;
-        lightElement += other.Attribute.lightElement;
-        darkElement += other.Attribute.darkElement;
-
-        extraWaterDamage += other.Attribute.extraWaterDamage;
-        extraFireDamage += other.Attribute.extraFireDamage;
-        extraThunderDamage += other.Attribute.extraThunderDamage;
-        extraLightDamage += other.Attribute.extraLightDamage;
-        extraDarkDamage += other.Attribute.extraDarkDamage;
-
-        maxDamage += other.Attribute.maxDamage;
     }
 }
 #endregion

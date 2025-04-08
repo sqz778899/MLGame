@@ -1,122 +1,90 @@
 [
   {
     "Rare": 1,
-    "ImageName": "T_Item_Can_01",
-    "Attribute": {
-      "waterElement": 0,
-      "fireElement": 1,
-      "thunderElement": 0,
-      "lightElement": 0,
-      "darkElement": 0,
-      "extraWaterDamage": 0,
-      "extraFireDamage": 20,
-      "extraThunderDamage": 0,
-      "extraLightDamage": 0,
-      "extraDarkDamage": 0,
-      "maxDamage": 30
-    },
+    "ResName": "T_Item_Cap_01",
+    "Desc": "你第一个子弹的伤害随机变化（1～6），发射前无法预知。",
     "ID": 1,
-    "Name": "易拉罐",
-    "Price": 0
+    "Name": "蹩脚的魔术师帽子",
+    "Price": 20
   },
   {
     "Rare": 1,
-    "ImageName": "T_Item_ToiletPlunger_01",
-    "Attribute": {
-      "waterElement": 1,
-      "fireElement": 0,
-      "thunderElement": 0,
-      "lightElement": 0,
-      "darkElement": 0,
-      "extraWaterDamage": 10,
-      "extraFireDamage": 0,
-      "extraThunderDamage": 0,
-      "extraLightDamage": 0,
-      "extraDarkDamage": 0,
-      "maxDamage": 40
-    },
+    "ResName": "T_Item_Pot_01",
+    "Desc": "若本轮第一次击中敌人未能造成任何伤害，则后续1颗子弹伤害+2。",
     "ID": 2,
-    "Name": "马桶搋子",
-    "Price": 0
+    "Name": "尖叫陶罐",
+    "Price": 25
   },
   {
     "Rare": 1,
-    "ImageName": "T_Item_KitchenKnife_01",
-    "Attribute": {
-      "waterElement": 0,
-      "fireElement": 0,
-      "thunderElement": 1,
-      "lightElement": 0,
-      "darkElement": 0,
-      "extraWaterDamage": 0,
-      "extraFireDamage": 0,
-      "extraThunderDamage": 35,
-      "extraLightDamage": 0,
-      "extraDarkDamage": 0,
-      "maxDamage": 35
-    },
-    "ID": 3,
-    "Name": "生锈菜刀",
-    "Price": 0
+    "ResName": "T_Item_Statue_01",
+    "Desc": "所有敌人护盾随机增减1层（-1～+1），房间开启时立即生效。",
+    "ID": 4,
+    "Name": "晕头转向的猫头鹰雕像",
+    "Price": 18
+  },
+  {
+    "Rare": 1,
+    "ResName": "T_Item_Key_01",
+    "Desc": "开门时50%几率额外赠送2硬币，50%几率扣除2硬币。",
+    "ID": 5,
+    "Name": "胆小鬼的黄金钥匙",
+    "Price": 22
+  },
+  {
+    "Rare": 1,
+    "ResName": "T_Item_Broom_01",
+    "Desc": "若你的子弹未击中任何护盾直接击中敌人本体，则该子弹伤害+1。",
+    "ID": 6,
+    "Name": "漏风的飞天扫帚",
+    "Price": 21
+  },
+  {
+    "Rare": 1,
+    "ResName": "T_Item_Boots_01",
+    "Desc": "房间开始时随机一个子弹获得穿透+1。",
+    "ID": 7,
+    "Name": "左脚的幸运靴",
+    "Price": 23
   },
   {
     "Rare": 2,
-    "ImageName": "T_Item_BreakWand_01",
-    "Attribute": {
-      "waterElement": 1,
-      "fireElement": 0,
-      "thunderElement": 1,
-      "lightElement": 0,
-      "darkElement": 0,
-      "extraWaterDamage": 30,
-      "extraFireDamage": 30,
-      "extraThunderDamage": 30,
-      "extraLightDamage": 0,
-      "extraDarkDamage": 0,
-      "maxDamage": 100
-    },
-    "ID": 4,
-    "Name": "折断魔杖",
-    "Price": 0
+    "ResName": "T_Item_BadBook_01",
+    "Desc": "每次进入宝箱房间时，可以免费重开一次宝箱，重开有更高的概率带来Debuff。",
+    "ID": 200,
+    "Name": "写满错字的魔法书",
+    "Price": 48
+  },
+  {
+    "Rare": 2,
+    "ResName": "T_Item_Candle_01",
+    "Desc": "你的宝石若以『伤害-穿透-共振』顺序镶嵌，则该子弹所有宝石效果额外+1。",
+    "ID": 201,
+    "Name": "忽明忽暗的蜡烛",
+    "Price": 52
   },
   {
     "Rare": 3,
-    "ImageName": "T_Item_Mithril _01",
-    "Attribute": {
-      "waterElement": 0,
-      "fireElement": 0,
-      "thunderElement": 0,
-      "lightElement": 4,
-      "darkElement": 3,
-      "extraWaterDamage": 0,
-      "extraFireDamage": 0,
-      "extraThunderDamage": 0,
-      "extraLightDamage": 200,
-      "extraDarkDamage": 200,
-      "maxDamage": 300
-    },
-    "ID": 5,
-    "Name": "小块秘银",
-    "Price": 0
+    "ResName": "T_Item_Glove_01",
+    "Desc": "若子弹击穿护盾后，下一个发射的子弹伤害+3。",
+    "ID": 300,
+    "Name": "黏糊糊的巫师手套",
+    "Price": 87
   },
   {
     "Rare": 4,
-    "ImageName": "T_Item_Pot_01",
-    "Attribute": {
-      "waterElement": 16,
-      "fireElement": 25,
-      "thunderElement": 50,
-      "lightElement": 33,
-      "darkElement": 20,
-      "extraWaterDamage": 0,
-      "extraFireDamage": 0,
-      "extraThunderDamage": 0,
-      "extraLightDamage": 0,
-      "extraDarkDamage": 0,
-      "maxDamage": 600
-    },
-    "ID": 5,
-    "Name": "瓦迪的元素壶",
-    "Price": 0
+    "ResName": "T_Item_RainbowBook_01",
+    "Desc": "若你的宝石镶嵌槽内每个宝石种类都不重复，所有宝石效果额外+1。",
+    "ID": 401,
+    "Name": "虹彩的魔法书",
+    "Price": 152
+  },
+  {
+    "Rare": 4,
+    "ResName": "T_Item_Crown_01",
+    "Desc": "若你仅镶嵌一种类型的宝石（全部为伤害、穿透或共振），则所有宝石效果额外+2。",
+    "ID": 402,
+    "Name": "自大的国王王冠",
+    "Price": 165
   }
 ]

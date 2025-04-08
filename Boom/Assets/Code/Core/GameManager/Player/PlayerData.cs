@@ -146,6 +146,5 @@ public class PlayerData: ScriptableObject
     public int LightDamage;
     public int DarkDamage;
     public int MaxDamage;
-    ItemAttribute _attrInfo;
     #endregion
 }

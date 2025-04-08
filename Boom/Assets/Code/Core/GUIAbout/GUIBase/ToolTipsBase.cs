@@ -19,7 +19,7 @@ public class ToolTipsBase : ItemBase,IPointerMoveHandler,IPointerExitHandler
         DobuleClickTime = 0.35f;
         CurToolTipsMenuState = ToolTipsMenuState.Normal;
         RightClickMenuOffset = new Vector3(0.75f, -0.35f, 0);
-        CurTooltipsSC = UIManager.Instance.CommonUI.TooltipsGO.GetComponentInChildren<Tooltips>();
+        CurTooltipsSC = TooltipsManager.Instance.tooltipSC;
         CurRightClickMenuSC = UIManager.Instance.CommonUI.RightClickGO.GetComponentInChildren<RightClickMenu>();
     }
     
@@ -51,13 +51,13 @@ public class ToolTipsBase : ItemBase,IPointerMoveHandler,IPointerExitHandler
         // 加载Tooltips
         if (!IsOpenedTooltip)
         {
-            UIManager.Instance.CommonUI.TooltipsGO.SetActive(true);
+            TooltipsManager.Instance.tooltipGO.SetActive(true);
             IsOpenedTooltip = true;
             SetTooltipInfo();
         }
         
         // 把Tooltips的位置设置为鼠标位置
-        UIManager.Instance.CommonUI.TooltipsGO.transform.position = GetWPosByMouse(eventData) + ToolTipsOffset;
+        TooltipsManager.Instance.tooltipGO.transform.position = GetWPosByMouse(eventData) + ToolTipsOffset;
     }
     
     internal virtual void SetTooltipInfo(){}
@@ -65,7 +65,7 @@ public class ToolTipsBase : ItemBase,IPointerMoveHandler,IPointerExitHandler
     public void HideTooltips()
     {
         CurTooltipsSC?.ClearInfo();
-        UIManager.Instance.CommonUI.TooltipsGO.SetActive(false);
+        TooltipsManager.Instance.tooltipGO.SetActive(false);
         IsOpenedTooltip = false;
     }
     #endregion

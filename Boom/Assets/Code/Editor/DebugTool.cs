@@ -1,10 +1,6 @@
-using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEditor;
-using UnityEditor.SceneManagement;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class DebugTool
 {
@@ -28,12 +24,16 @@ public class DebugTool
             each.material = _defaultMaterial;
         }
     }
-    
-    [Button(ButtonSizes.Large)]
+
+    public SlotView slot;
+    [Button(ButtonSizes.Large)] 
     [ButtonGroup("打印POS")]
-    void SetBulletID()
+    void SetGemData()
     {
        GameObject s = Selection.activeGameObject;
-       Debug.Log(s.transform.position);
+       GemNew gem = s.GetComponent<GemNew>();
+       GemData dt = new GemData(1, null);
+       gem.BindData(dt);
+       s.GetComponent<ItemInteractionHandler>().BindData(dt);
     }
 }

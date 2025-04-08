@@ -72,29 +72,29 @@ public class Bullet:DragBase
     #region ToolTips相关
     internal override void SetTooltipInfo()
     {
-        ToolTipsInfo curToolTipsInfo = new ToolTipsInfo(_data.Name,_data.Level);
+        TooltipsInfo curTooltipsInfo = new TooltipsInfo(_data.Name,_data.Level);
 
         if (_data.FinalDamage != 0)
         {
             ToolTipsAttriSingleInfo curInfo = new ToolTipsAttriSingleInfo(
                 ToolTipsAttriType.Damage, _data.FinalDamage,_data.FinalDamage-_data.Damage);
-            curToolTipsInfo.AttriInfos.Add(curInfo);
+            curTooltipsInfo.AttriInfos.Add(curInfo);
         }
         if (_data.FinalPiercing != 0)
         {
             ToolTipsAttriSingleInfo curInfo = new ToolTipsAttriSingleInfo(
                 ToolTipsAttriType.Piercing, _data.FinalPiercing,_data.FinalPiercing-_data.Piercing);
-            curToolTipsInfo.AttriInfos.Add(curInfo);
+            curTooltipsInfo.AttriInfos.Add(curInfo);
         }
         if (_data.FinalResonance != 0)
         {
             ToolTipsAttriSingleInfo curInfo = new ToolTipsAttriSingleInfo(
                 ToolTipsAttriType.Resonance, _data.FinalResonance,_data.FinalResonance-_data.Resonance);
-            curToolTipsInfo.AttriInfos.Add(curInfo);
+            curTooltipsInfo.AttriInfos.Add(curInfo);
         }
         //把元素最后加上
-        curToolTipsInfo.AttriInfos.Add(new ToolTipsAttriSingleInfo(ToolTipsAttriType.Element, elementType: _data.ElementalType));
-        CurTooltipsSC.SetInfo(curToolTipsInfo);
+        curTooltipsInfo.AttriInfos.Add(new ToolTipsAttriSingleInfo(ToolTipsAttriType.Element, elementType: _data.ElementalType));
+        CurTooltipsSC.SetInfo(curTooltipsInfo);
     }
     #endregion
 

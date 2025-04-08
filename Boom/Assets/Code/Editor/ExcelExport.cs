@@ -8,7 +8,6 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
-using Unity.VisualScripting;
 
 namespace Code.Editor
 {
@@ -57,38 +56,19 @@ namespace Code.Editor
         public void ExportItem()
         {
             DataSet curTables = GetDataSet();
-            DataTable curTable = curTables.Tables["ItemDesign"];
-
-            if (curTable == null)
-            {
-                Debug.LogError("没有找到\"ItemDesign\"表");
-                return;
-            }
-
+            DataTable curTable = curTables.Tables["道具设计"];
+            
             List<ItemJson> curItemDesign = new List<ItemJson>();
             for (int i = 1; i < curTable.Rows.Count; i++)
             {
                 ItemJson curItem = new ItemJson();
-                var s = curTable.Rows[i][1];
                 if (curTable.Rows[i][1].ToString() == "") continue;
-                curItem.ID = int.Parse(curTable.Rows[i][0].ToString());
-                curItem.Rare = int.Parse(curTable.Rows[i][1].ToString());
-                curItem.Name = curTable.Rows[i][2].ToString();
-                curItem.Attribute.waterElement = GetCellInt(curTable.Rows[i][3].ToString());
-                curItem.Attribute.fireElement = GetCellInt(curTable.Rows[i][4].ToString());
-                curItem.Attribute.thunderElement = GetCellInt(curTable.Rows[i][5].ToString());
-                curItem.Attribute.lightElement = GetCellInt(curTable.Rows[i][6].ToString());
-                curItem.Attribute.darkElement = GetCellInt(curTable.Rows[i][7].ToString());
-                //
-                curItem.Attribute.extraWaterDamage = GetCellInt(curTable.Rows[i][8].ToString());
-                curItem.Attribute.extraFireDamage = GetCellInt(curTable.Rows[i][9].ToString());
-                curItem.Attribute.extraThunderDamage = GetCellInt(curTable.Rows[i][10].ToString());
-                curItem.Attribute.extraLightDamage = GetCellInt(curTable.Rows[i][11].ToString());
-                curItem.Attribute.extraDarkDamage = GetCellInt(curTable.Rows[i][12].ToString());
-
-                curItem.Attribute.maxDamage = GetCellInt(curTable.Rows[i][13].ToString());
-
-                curItem.ImageName = curTable.Rows[i][14].ToString();
+                curItem.ID = GetCellInt(curTable.Rows[i][0].ToString());
+                curItem.Name = curTable.Rows[i][1].ToString();
+                curItem.Rare = GetCellInt(curTable.Rows[i][2].ToString());
+                curItem.Desc = curTable.Rows[i][3].ToString();
+                curItem.Price = GetCellInt(curTable.Rows[i][4].ToString());
+                curItem.ResName = curTable.Rows[i][5].ToString();
                 curItemDesign.Add(curItem);
             }
 
@@ -199,17 +179,17 @@ namespace Code.Editor
             {
                 TalentJson curData = new TalentJson();
                 if (curTable.Rows[i][1].ToString() == "") continue;
-                curData.ID = int.Parse(curTable.Rows[i][0].ToString());
+                curData.ID = GetCellInt(curTable.Rows[i][0].ToString());
                 curData.Name = curTable.Rows[i][1].ToString();
-                curData.Level = int.Parse(curTable.Rows[i][2].ToString());
+                curData.Level = GetCellInt(curTable.Rows[i][2].ToString());
                 curData.DependTalents = GetCellIntList(curTable.Rows[i][3].ToString());
                 curData.UnlockTalents = GetCellIntList(curTable.Rows[i][4].ToString());
                 curData.Price =
                     string.IsNullOrEmpty(curTable.Rows[i][5].ToString()) ? 0
-                        : int.Parse(curTable.Rows[i][5].ToString());
+                        : GetCellInt(curTable.Rows[i][5].ToString());
                 curData.TalentType = (TalentEffectType)Enum.Parse(typeof(TalentEffectType), curTable.Rows[i][6].ToString());
-                curData.EffectID = int.Parse(curTable.Rows[i][7].ToString());
-                curData.EffectValue = int.Parse(curTable.Rows[i][8].ToString());
+                curData.EffectID = GetCellInt(curTable.Rows[i][7].ToString());
+                curData.EffectValue = GetCellInt(curTable.Rows[i][8].ToString());
                 curTalentDesign.Add(curData);
             }
             

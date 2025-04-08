@@ -98,26 +98,26 @@ public class Gem : DragBase
     #region ToolTips相关
     internal override void SetTooltipInfo()
     {
-        ToolTipsInfo curToolTipsInfo = new ToolTipsInfo(_data.Name,_data.Level);
+        TooltipsInfo curTooltipsInfo = new TooltipsInfo(_data.Name,_data.Level);
         if (_data.Damage != 0)
         {
             ToolTipsAttriSingleInfo curInfo = new ToolTipsAttriSingleInfo(
                 ToolTipsAttriType.Damage,_data.Damage);
-            curToolTipsInfo.AttriInfos.Add(curInfo);
+            curTooltipsInfo.AttriInfos.Add(curInfo);
         }
         if (_data.Piercing != 0)
         {
             ToolTipsAttriSingleInfo curInfo = new ToolTipsAttriSingleInfo(
                 ToolTipsAttriType.Piercing, _data.Piercing);
-            curToolTipsInfo.AttriInfos.Add(curInfo);
+            curTooltipsInfo.AttriInfos.Add(curInfo);
         }
         if (_data.Resonance != 0)
         {
             ToolTipsAttriSingleInfo curInfo = new ToolTipsAttriSingleInfo(
                 ToolTipsAttriType.Resonance, _data.Resonance);
-            curToolTipsInfo.AttriInfos.Add(curInfo);
+            curTooltipsInfo.AttriInfos.Add(curInfo);
         }
-        CurTooltipsSC.SetInfo(curToolTipsInfo);
+        CurTooltipsSC.SetInfo(curTooltipsInfo);
     }
     #endregion
     
@@ -125,7 +125,6 @@ public class Gem : DragBase
     //数据同步
     public void OnDataChangeGem()
     {
-        _data.InstanceID = gameObject.GetInstanceID();
         GemJson gemDesignData = TrunkManager.Instance.GetGemJson(_data.ID);
         gameObject.name = gemDesignData.Name + _data.InstanceID;
         ItemSprite.sprite = ResManager.instance.GetAssetCache<Sprite>(
@@ -143,12 +142,11 @@ public class Gem : DragBase
         _data = data as GemData;
         if (_data != null)
         {
+            data.InstanceID = GetInstanceID();
             _data.OnDataChanged += OnDataChangeGem;
             PlayerManager.Instance.OnTalentLearned += _data.AddTalentGemBonus;
             OnDataChangeGem(); // 立即刷新一遍
         }
-        
-        data.InstanceID = GetInstanceID();
     }
 
     void OnDestroy()

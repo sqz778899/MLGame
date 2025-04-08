@@ -122,8 +122,8 @@ public class EternalCavans : MonoBehaviour
         BagButtonGO.SetActive(true);
         
         TitleRoot.SetActive(true);
-        G_SideBar.SetActive(true);
-        MapFrame.SetActive(true);
+        //G_SideBar.SetActive(true);
+        //MapFrame.SetActive(true);
         MagicDust.SetActive(false);
         CurSceneState = SceneState.MapScene;
         BagRootSC.RefreshBulletSlotLockedState();

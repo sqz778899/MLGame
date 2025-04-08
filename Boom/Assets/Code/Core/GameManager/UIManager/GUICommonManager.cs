@@ -12,15 +12,12 @@ public class GUICommonManager
     public GameObject G_StandbyIcon{ get; private set; } //侧边栏待机图标
     
     //Tooltip和右键菜单
-    GameObject _tooltipsRoot; //外部不关心
-    public GameObject TooltipsGO;
     GameObject _rightClickMenuRoot; //外部不关心
     public GameObject RightClickGO;
     
     public GUICommonManager()
     {
         DragObjRoot = EternalCavans.Instance.DragObjRootGO;
-        _tooltipsRoot = EternalCavans.Instance.TooltipsRoot;
         EffectRoot = EternalCavans.Instance.EffectRoot;
         DialogueRoot = EternalCavans.Instance.DialogueRoot;
         StandbyRoot = EternalCavans.Instance.StandbyRoot;
@@ -28,10 +25,6 @@ public class GUICommonManager
         G_CurBulletIcon = EternalCavans.Instance.G_CurBulletIcon;
         G_StandbyIcon = EternalCavans.Instance.G_StandbyIcon;
         
-        //加载Tooltip
-        if(TooltipsGO == null)  TooltipsGO = ResManager.instance.CreatInstance(PathConfig.TooltipAsset);
-        TooltipsGO.transform.SetParent(_tooltipsRoot.transform,false);
-        TooltipsGO.SetActive(false);
         //加载右键菜单
         _rightClickMenuRoot = EternalCavans.Instance.RightClickMenuRoot;
         if (RightClickGO == null) RightClickGO = ResManager.instance.CreatInstance(PathConfig.RightClickMenu);

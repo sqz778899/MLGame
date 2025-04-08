@@ -21,53 +21,6 @@ public struct Award
     }
 }
 
-#region ToolTips相
-public struct ToolTipsInfo
-{
-    public string Name;
-    public int Level;
-    public List<ToolTipsAttriSingleInfo> AttriInfos;
-
-    public ToolTipsInfo(string name = "", int level = 0,
-        List<ToolTipsAttriSingleInfo> attriInfos = null)
-    {
-        Name = name;
-        Level = level;
-        AttriInfos = attriInfos ?? new List<ToolTipsAttriSingleInfo>();
-    }
-}
-
-public struct ToolTipsAttriSingleInfo
-{
-    public ToolTipsAttriType Type;
-    public int OriginValue;
-    public int AddedValue;
-    public ElementalTypes ElementType;
-    public ToolTipsAttriSingleInfo(ToolTipsAttriType type = default, 
-        int originValue = 0, int addedValue = 0,ElementalTypes elementType = default)
-    {
-        Type = type;
-        OriginValue = originValue;
-        AddedValue = addedValue;
-        ElementType = elementType;
-    }
-}
-
-public enum ToolTipsAttriType
-{
-    Damage = 0,
-    Piercing = 1,
-    Resonance = 2,
-    Element = 10,
-}
-
-public enum ToolTipsMenuState
-{
-    Normal = 0,
-    RightClick = 1,
-    Locked = 2
-}
-#endregion
 
 #region 战斗相关
 public struct BattleOnceHit
@@ -243,19 +196,6 @@ public class SupremeCharm
     {
         ID = _id;
     }
-}
-
-//Slot的类型
-public enum SlotType
-{
-    SpawnnerSlot = 0,
-    BagItemSlot = 1,
-    BulletSlot = 2,
-    BagEquipSlot = 3,
-    GemBagSlot = 4,
-    GemInlaySlot = 5,
-    CurBulletSlot = 6,
-    BulletInnerSlot = 7
 }
 
 public enum SceneState

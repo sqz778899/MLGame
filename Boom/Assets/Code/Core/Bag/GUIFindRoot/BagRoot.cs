@@ -34,8 +34,8 @@ public class BagRoot : MonoBehaviour
     void Start()
     {
         SwichGem();
-        if (!IsUnLockedItem)
-            BtnItemSC.State = UILockedState.isLocked;
+        /*if (!IsUnLockedItem)
+            BtnItemSC.State = UILockedState.isLocked;*/
         //注册事件。背包Slot解锁的话，这边会函数响应更新状态
         PlayerManager.Instance._PlayerData.BulletSlotStateChanged += RefreshBulletSlotLockedState;
         RefreshBulletSlotLockedState();//最开始先更新一次状态
@@ -63,14 +63,14 @@ public class BagRoot : MonoBehaviour
         BagGemRootGO.SetActive(false);
         //页签选中状态
         BtnBulletSC.State = UILockedState.isSelected;
-        BtnItemSC.State = IsUnLockedItem? UILockedState.isNormal : UILockedState.isLocked;
+        BtnItemSC.State = UILockedState.isNormal;
         BtnGemSC.State = UILockedState.isNormal;
     }
 
     //页签切换为Item
     public void SwichItem()   
     {
-        if(!IsUnLockedItem) return;
+        //if(!IsUnLockedItem) return;
         
         BagBulletRootGO.SetActive(false);
         BagReadySlotGO.SetActive(false);
@@ -93,7 +93,7 @@ public class BagRoot : MonoBehaviour
         BagGemRootGO.SetActive(true);
         //页签选中状态
         BtnBulletSC.State = UILockedState.isNormal;
-        BtnItemSC.State = IsUnLockedItem? UILockedState.isNormal : UILockedState.isLocked;
+        BtnItemSC.State = UILockedState.isNormal;
         BtnGemSC.State = UILockedState.isSelected;
     }
     #endregion

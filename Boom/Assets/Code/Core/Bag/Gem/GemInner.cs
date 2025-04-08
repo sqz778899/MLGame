@@ -128,26 +128,26 @@ public class GemInner:DragBase
     #region ToolTips相关
     internal override void SetTooltipInfo()
     {
-        ToolTipsInfo curToolTipsInfo = new ToolTipsInfo(_data.Name,_data.Level);
+        TooltipsInfo curTooltipsInfo = new TooltipsInfo(_data.Name,_data.Level);
         if (_data.Damage != 0)
         {
             ToolTipsAttriSingleInfo curInfo = new ToolTipsAttriSingleInfo(
                 ToolTipsAttriType.Damage,_data.Damage);
-            curToolTipsInfo.AttriInfos.Add(curInfo);
+            curTooltipsInfo.AttriInfos.Add(curInfo);
         }
         if (_data.Piercing != 0)
         {
             ToolTipsAttriSingleInfo curInfo = new ToolTipsAttriSingleInfo(
                 ToolTipsAttriType.Piercing, _data.Piercing);
-            curToolTipsInfo.AttriInfos.Add(curInfo);
+            curTooltipsInfo.AttriInfos.Add(curInfo);
         }
         if (_data.Resonance != 0)
         {
             ToolTipsAttriSingleInfo curInfo = new ToolTipsAttriSingleInfo(
                 ToolTipsAttriType.Resonance, _data.Resonance);
-            curToolTipsInfo.AttriInfos.Add(curInfo);
+            curTooltipsInfo.AttriInfos.Add(curInfo);
         }
-        CurTooltipsSC.SetInfo(curToolTipsInfo);
+        CurTooltipsSC.SetInfo(curTooltipsInfo);
     }
     #endregion
     

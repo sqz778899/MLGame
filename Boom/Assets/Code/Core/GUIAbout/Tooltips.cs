@@ -32,9 +32,9 @@ public class Tooltips : MonoBehaviour
         txtLV.color = TitleColor;
     }
     
-    public void SetInfo(ToolTipsInfo toolTipsInfo)
+    public void SetInfo(TooltipsInfo tooltipsInfo)
     {
-        int attriCount = toolTipsInfo.AttriInfos.Count;
+        int attriCount = tooltipsInfo.AttriInfos.Count;
         //设置背景大小
         if (attriCount <= 3)
             SetBGSmall();
@@ -44,16 +44,16 @@ public class Tooltips : MonoBehaviour
             SetBGLarge();
         
         //加载标题
-        txtTitle.text = toolTipsInfo.Name;
-        if(toolTipsInfo.Level != 0)
-            txtLV.text = $"Lv.{toolTipsInfo.Level}";
+        txtTitle.text = tooltipsInfo.Name;
+        if(tooltipsInfo.Level != 0)
+            txtLV.text = $"Lv.{tooltipsInfo.Level}";
         else
             txtLV.text = "";
         
         //逐条加载属性
         for (int i = 0; i < attriCount; i++)
         {
-            ToolTipsAttriSingleInfo attriInfo = toolTipsInfo.AttriInfos[i];
+            ToolTipsAttriSingleInfo attriInfo = tooltipsInfo.AttriInfos[i];
             //实例化属性词条UI
             GameObject attriGO = Instantiate(OriginAttriGO, AttriRoot.transform);
             attriGO.SetActive(true);
