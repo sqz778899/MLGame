@@ -3,22 +3,18 @@ using UnityEngine.Serialization;
 
 public class TooltipsManager:MonoBehaviour
 {
-    public static TooltipsManager Instance { get; private set; }
-
-    [Header("Tooltip UI Root")]
+    [Header("Tooltip资产")]
     [SerializeField] public GameObject tooltipGO;
     [SerializeField] public Tooltips tooltipSC;
+    
+    bool isEnabled = true;
+    public void Disable() => isEnabled = false;
+    public void Enable() => isEnabled = true;
+    public static TooltipsManager Instance { get; private set; }
 
-    void Awake()
+    public void Init()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-            Destroy(gameObject);
-
+        Instance = this;
         if (tooltipGO != null)
             tooltipGO.SetActive(false);
     }
@@ -28,6 +24,8 @@ public class TooltipsManager:MonoBehaviour
     /// </summary>
     public void Show(TooltipsInfo info, Vector3 worldPosition)
     {
+        if (!isEnabled) return;
+        
         if (tooltipGO == null || tooltipSC == null) return;
 
         tooltipGO.SetActive(true);
@@ -44,7 +42,7 @@ public class TooltipsManager:MonoBehaviour
     public void Hide()
     {
         if (tooltipGO == null || tooltipSC == null) return;
-
+        
         tooltipSC.ClearInfo();
         tooltipGO.SetActive(false);
     }

@@ -5,20 +5,12 @@ using UnityEngine.EventSystems;
 public class DragManager : MonoBehaviour
 {
     public static DragManager Instance;
+    public RectTransform dragRoot;
     GameObject draggedObject;
     Vector3 originalPosition;
     Transform originalParent;
-    RectTransform dragRoot;
 
-    void Awake()
-    {
-        Instance = this;
-    }
-
-    void Start()
-    {
-        dragRoot = UIManager.Instance.CommonUI.DragObjRoot.GetComponent<RectTransform>();
-    }
+    public void Init() => Instance = this;
 
     public bool CanDrag() => !EternalCavans.Instance.TutorialDragGemLock;
 
@@ -49,12 +41,29 @@ public class DragManager : MonoBehaviour
         bool dropped = false;
         foreach (var result in results)
         {
-            if (result.gameObject.TryGetComponent(out SlotView slotView))
+            if (result.gameObject.TryGetComponent(out SlotView targetView))
             {
-                GemNew gem = draggedObject.GetComponent<GemNew>();
-                if (slotView.Controller.CanAccept(gem.Data))
+                ItemBase curItem = draggedObject.GetComponent<ItemBase>();
+                ItemDataBase Data = null;
+                if (curItem is GemNew gem)
+                    Data = gem.Data;
+                if (Data == null) continue;
+                
+                SlotController targetCtrl = targetView.Controller;
+                if (!targetCtrl.CanAccept(Data)) continue;//先判断是否合法
+                
+                //如果槽位已满，且是可交换的
+                if (!targetCtrl.IsEmpty && targetCtrl.CurData != Data)
                 {
-                    slotView.Controller.Assign(gem.Data, draggedObject);
+                    SlotManager.Swap(targetCtrl, Data.CurSlotController as SlotController);
+                   
+                    dropped = true;
+                    break;
+                }
+                //正常放入空槽
+                if (targetCtrl.IsEmpty)
+                {
+                    targetCtrl.Assign(Data, draggedObject);
                     dropped = true;
                     break;
                 }

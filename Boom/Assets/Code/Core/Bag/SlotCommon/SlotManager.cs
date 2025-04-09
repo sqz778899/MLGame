@@ -12,22 +12,9 @@ public static class SlotManager
         if (isClearChildIns && curSlot.ChildIns != null)
             GameObject.Destroy(curSlot.ChildIns);
         
-        if (curSlot is GemSlot _gemSlot)
-            _gemSlot.CurGemData = null;
         if (curSlot is BulletSlotRole _roleSlot)
             _roleSlot.CurBulletData = null;
         curSlot.MainID = -1;
-    }
-
-    public static void ClearGemSlot(SlotBase slot)
-    {
-        if (slot == null) return;
-        if (slot is GemSlot gemSlot)
-        {
-            GemSlotInner innerSlot = gemSlot.CurGemSlotInner;
-           // ClearSlot(gemSlot, true);
-            ClearSlot(innerSlot, true);
-        }
     }
     
     public static SlotBase GetEmptySlot(SlotType slotType)
@@ -51,6 +38,13 @@ public static class SlotManager
         SlotBase curTargetSlot = allSlot.FirstOrDefault(each => each.SlotID == SlotID);
         return curTargetSlot;
     }
+    
+    public static SlotController GetSlotController(int SlotID, SlotType slotType)
+    {
+        SlotView[] allSlot = GetCurSlotArraySlotView(slotType);
+        SlotController curTargetSlot = allSlot.FirstOrDefault(each => each.Controller.SlotID == SlotID).Controller;
+        return curTargetSlot;
+    }
 
     public static SlotBase[] GetAllSlotBase()
     {
@@ -71,9 +65,6 @@ public static class SlotManager
         {
             case SlotType.GemBagSlot:
                 allSlot = UIManager.Instance.BagUI.GemRoot.GetComponentsInChildren<SlotBase>();
-                break;
-            case SlotType.GemInlaySlot:
-                allSlot = UIManager.Instance.BagUI.EquipBulletSlotRoot.GetComponentsInChildren<GemSlot>();
                 break;
             case SlotType.BulletSlot:
                 allSlot = UIManager.Instance.BagUI.SpawnerSlotRoot.GetComponentsInChildren<SlotBase>();
@@ -98,34 +89,51 @@ public static class SlotManager
         return allSlot;
     }
     
+    public static void Swap(SlotController a, SlotController b)
+    {
+        var dataA = a.CurData;
+        var dataB = b.CurData;
+
+        var goA = a.GetGameObject();
+        var goB = b.GetGameObject();
+
+        /*// 清空两边
+        a.Unassign();
+        b.Unassign();*/
+
+        // 分别放入
+        a.AssignDirectly(dataB, goB);
+        b.AssignDirectly(dataA, goA);
+    }
+    
     static SlotView[] GetCurSlotArraySlotView(SlotType slotType)
     {
         SlotView[] allSlot;
         switch (slotType)
         {
             case SlotType.GemBagSlot:
-                allSlot = UIManager.Instance.BagUI.GemRoot.GetComponentsInChildren<SlotView>();
+                allSlot = UIManager.Instance.BagUI.GemRoot.GetComponentsInChildren<SlotView>(true);
                 break;
             case SlotType.GemInlaySlot:
-                allSlot = UIManager.Instance.BagUI.EquipBulletSlotRoot.GetComponentsInChildren<SlotView>();
+                allSlot = UIManager.Instance.BagUI.EquipBulletSlotRoot.GetComponentsInChildren<SlotView>(true);
                 break;
             case SlotType.BulletSlot:
-                allSlot = UIManager.Instance.BagUI.SpawnerSlotRoot.GetComponentsInChildren<SlotView>();
+                allSlot = UIManager.Instance.BagUI.SpawnerSlotRoot.GetComponentsInChildren<SlotView>(true);
                 break;
             case SlotType.CurBulletSlot:
-                allSlot = UIManager.Instance.BagUI.EquipBulletSlotRoot.GetComponentsInChildren<SlotView>();
+                allSlot = UIManager.Instance.BagUI.EquipBulletSlotRoot.GetComponentsInChildren<SlotView>(true);
                 break;
             case SlotType.BagEquipSlot:
-                allSlot = UIManager.Instance.BagUI.EquipItemRoot.GetComponentsInChildren<SlotView>();
+                allSlot = UIManager.Instance.BagUI.EquipItemRoot.GetComponentsInChildren<SlotView>(true);
                 break;
             case SlotType.BagItemSlot:
-                allSlot = UIManager.Instance.BagUI.ItemRoot.GetComponentsInChildren<SlotView>();
+                allSlot = UIManager.Instance.BagUI.ItemRoot.GetComponentsInChildren<SlotView>(true);
                 break;
             case SlotType.SpawnnerSlot:
-                allSlot = UIManager.Instance.BagUI.SpawnerSlotRoot.GetComponentsInChildren<SlotView>();
+                allSlot = UIManager.Instance.BagUI.SpawnerSlotRoot.GetComponentsInChildren<SlotView>(true);
                 break;
             default:
-                allSlot = UIManager.Instance.BagUI.ItemRoot.GetComponentsInChildren<SlotView>();
+                allSlot = UIManager.Instance.BagUI.ItemRoot.GetComponentsInChildren<SlotView>(true);
                 break;
         }
 

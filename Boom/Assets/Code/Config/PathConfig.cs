@@ -60,7 +60,6 @@ public static class PathConfig
    ///.........................GUI.................................
    public static string ShopAsset = GetPrepath() + "Res/UI/Prefabs/Popup/P_Shop.prefab";
    public static string  BulletUPPB = GetPrepath() + "Res/UI/Prefabs/Popup/P_BulletUP_01.prefab";
-   public static string RightClickMenu = GetPrepath() + "Res/UI/Prefabs/RightClickMenu.prefab";
    public static string AwardCoin = GetPrepath() + "Res/UI/Prefabs/Misc/P_Award_Coin_01.prefab";
    public static string AwardRoomKey = GetPrepath() + "Res/UI/Prefabs/Misc/P_Award_RoomKey_01.prefab";
    public static string DialogueFightPB = GetPrepath() + "Res/UI/Prefabs/Misc/P_Dialogue_Fight_Template.prefab";

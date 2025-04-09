@@ -30,9 +30,10 @@ public class BulletInvData : ScriptableObject
             eSlot.CurBulletData.ClearModifiers();
             foreach (var eGemSlot in eSlot.GemSlots)
             {
-                if(eGemSlot.CurGemData == null)
+                if(eGemSlot.Controller.CurData == null)
                     continue;
-                eSlot.CurBulletData.AddModifier(new BulletModifierGem(eGemSlot.CurGemData));
+                GemData gemData = eGemSlot.Controller.CurData as GemData;
+                eSlot.CurBulletData.AddModifier(new BulletModifierGem(gemData));
             }
         }
         

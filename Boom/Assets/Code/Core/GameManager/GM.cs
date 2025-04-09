@@ -10,6 +10,7 @@ public class GM: MonoBehaviour
     public InventoryManager InventoryMgr { get; private set; }
     public BattleManager BattleMgr{ get; private set; }
     public GlobalTicker GlobalTickerMgr { get; private set; }
+    public GameInitializer Initializer { get; private set; }
     public StorylineSystem StorylineSys{ get; private set; }
     
     #region 单例的加载卸载
@@ -21,10 +22,9 @@ public class GM: MonoBehaviour
         {
             Root = this;
             DontDestroyOnLoad(gameObject);
-            GameObject.Find("CanvasQ01").GetComponent<EternalCavans>().InitData();
+            Initializer = gameObject.AddComponent<GameInitializer>();
+            Initializer.InitGameData();//初始化全局需要手动初始化的数据
             StorylineSys = gameObject.AddComponent<StorylineSystem>();
-            StorylineSys.InitData();
-            
             // 添加核心管理器组件
             PlayerMgr = gameObject.AddComponent<PlayerManager>();
             InventoryMgr = gameObject.AddComponent<InventoryManager>();

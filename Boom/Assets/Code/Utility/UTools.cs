@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public static class UTools
 {
@@ -17,5 +15,13 @@ public static class UTools
             (viewportPos.x - canvasRectTransform.pivot.x) * canvasRealSize.x,
             (viewportPos.y - canvasRectTransform.pivot.y) * canvasRealSize.y);
         return uiLocalPos;
+    }
+    
+    //把鼠标的空间转化为UI空间坐标
+    public static Vector3 GetWPosByMouse(RectTransform rectTransform)
+    {
+        RectTransformUtility.ScreenPointToWorldPointInRectangle(rectTransform, 
+            Input.mousePosition, Camera.main, out Vector3 worldPoint);
+        return worldPoint;
     }
 }

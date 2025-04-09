@@ -18,13 +18,9 @@ public class EternalCavans : MonoBehaviour
     public GameObject BagRootMini;
     public GameObject BagButtonGO;
     [Header("Common")]
-    public GameObject DragObjRootGO;
     public GameObject DialogueRoot;
     public GameObject EffectRoot;
     public GameObject StandbyRoot;
-    
-    public GameObject TooltipsRoot;
-    public GameObject RightClickMenuRoot;
     
     [Header("侧栏相关")]
     public GameObject G_SideBar;    //侧边栏
@@ -74,6 +70,12 @@ public class EternalCavans : MonoBehaviour
     public TextSync txtScore;
     public TextSync txtMagicDust;
     public TextSync txtScoreEnd;
+    
+    [Header("Managers")]
+    public DragManager DragManager;
+    public TooltipsManager TooltipsManager;
+    public RightClickMenuManager RightClickMenuManager;
+    
     
     public SceneState CurSceneState { get; private set; }
     public BagRoot BagRootSC => BagRoot.GetComponent<BagRoot>();

@@ -43,7 +43,7 @@ public class DraggableBulletSpawner :DragBase
         if (childBulletIns == null && _data.SpawnerCount > 0)
         {
             childBulletIns = BulletFactory.CreateBullet(new BulletData(_data.ID,null),BulletInsMode.EditA).gameObject;
-            childBulletIns.transform.SetParent(UIManager.Instance.CommonUI.DragObjRoot.transform,false);
+            childBulletIns.transform.SetParent(DragManager.Instance.dragRoot.transform,false);
            
             DraggableBullet DraBuSC = childBulletIns.GetComponentInChildren<DraggableBullet>();
             DraBuSC.originalPosition = transform.position;

@@ -37,7 +37,7 @@ public class BulletSlotRole: SlotBase
     [Header("锁定的美术资源")] 
     public GameObject Locked;
     [Header("Gems")]
-    public List<GemSlot> GemSlots;
+    public List<GemSlotView> GemSlots;
     public event Action OnIsHaveBullet;//战斗内是否显示气泡
     
     public void InitData() =>ChangeState();

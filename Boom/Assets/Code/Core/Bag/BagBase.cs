@@ -49,10 +49,59 @@ public abstract class ItemDataBase:ISaveable
     //动态数据层 运行时数据
     public int InstanceID;
     public SlotBase CurSlot;
-    public SlotController  CurSlotController;
+    public ISlotController CurSlotController;
 
     public virtual TooltipsInfo BuildTooltip() { throw new NotImplementedException(); }
     public virtual ItemBaseSaveData ToSaveData() { throw new NotImplementedException(); }
+}
+
+//基础的SlotController类
+public interface ISlotController
+{
+    public SlotType SlotType { get; }
+    public int SlotID { get; }
+    public ItemDataBase CurData { get; }
+    void Unassign();
+    bool CanAccept(ItemDataBase data);
+    void Assign(ItemDataBase data, GameObject itemGO);
+}
+
+public abstract class BaseSlotController<T> :ISlotController where T : ItemDataBase
+{
+    protected int _slotID;
+    protected  SlotType _slotType;
+    protected T _curData;
+    protected GameObject CachedGO;
+    protected SlotView _view;
+    
+    // 实现 ISlotController 接口
+    public SlotType SlotType => _slotType;
+    public int SlotID => _slotID;
+    public ItemDataBase CurData => _curData;
+
+    public virtual void BindView(SlotView view) => _view = view;
+    
+    public void Init(int slotID, SlotType slotType)
+    {
+        _slotID = slotID;
+        _slotType = slotType;
+    }
+
+    public virtual bool CanAccept(ItemDataBase data) { return data is T; }
+
+    public virtual void Assign(ItemDataBase data, GameObject itemGO) {}
+
+    public virtual void Unassign()
+    {
+        if (_curData != null)
+            _curData.CurSlotController = null;
+
+        _curData = null;
+        CachedGO = null;
+        _view?.Clear();
+    }
+
+    public GameObject GetGameObject() => CachedGO;
 }
 #endregion
 
@@ -67,10 +116,10 @@ public class GemData : ItemDataBase,ITooltipBuilder
     public string ImageName;
     public BulletModifierGem Modifier;
     
-    public GemData(int _id,SlotBase _slot)
+    public GemData(int _id,SlotController _slotController)
     {
         GemJson json = TrunkManager.Instance.GetGemJson(_id);
-        CurSlot = _slot;
+        CurSlotController = _slotController;
         InitData(json);
         Modifier = new BulletModifierGem(this);
     }
@@ -217,6 +266,33 @@ public class BulletData:ItemDataBase
         OnDataChanged?.Invoke();
     }
     #endregion
+    
+    public TooltipsInfo BuildTooltip()
+    {
+        TooltipsInfo info = new TooltipsInfo(Name,Level);
+
+        if (FinalDamage != 0)
+        {
+            ToolTipsAttriSingleInfo curInfo = new ToolTipsAttriSingleInfo(
+                ToolTipsAttriType.Damage, FinalDamage,FinalDamage - Damage);
+            info.AttriInfos.Add(curInfo);
+        }
+        if (FinalPiercing != 0)
+        {
+            ToolTipsAttriSingleInfo curInfo = new ToolTipsAttriSingleInfo(
+                ToolTipsAttriType.Piercing, FinalPiercing,FinalPiercing - Piercing);
+            info.AttriInfos.Add(curInfo);
+        }
+        if (FinalResonance != 0)
+        {
+            ToolTipsAttriSingleInfo curInfo = new ToolTipsAttriSingleInfo(
+                ToolTipsAttriType.Resonance, FinalResonance,FinalResonance - Resonance);
+            info.AttriInfos.Add(curInfo);
+        }
+        //把元素最后加上
+        info.AttriInfos.Add(new ToolTipsAttriSingleInfo(ToolTipsAttriType.Element, elementType: ElementalType));
+        return info;
+    }
     
     public override ItemBaseSaveData ToSaveData() => new BulletBaseSaveData(this);
 }

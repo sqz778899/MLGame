@@ -1,27 +1,23 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
-public class GemNew: MonoBehaviour,IItemInteractionBehaviour
+public class GemNew: ItemBase,IItemInteractionBehaviour
 {
     public GemData Data { get; private set; }
     [Header("UI表现")]
     public Image Icon;
-    public Image Frame;
-    RectTransform rectTransform => GetComponent<RectTransform>();
-    public SlotController CurSlotController;
+    RectTransform rectTransform;
 
-    public event Action<GemNew> OnDoubleClick;//双击的外部绑定事件
-    public event Action<GemNew> OnRightClick;//右击的外部绑定事件
-
-    float lastClickTime;
-    const float doubleClickThreshold = 0.3f;
-
+    void Awake() => rectTransform = GetComponent<RectTransform>();
+    
+    
     #region 数据交互相关
-    public void BindData(GemData data)
+    public override void BindData(ItemDataBase data)
     {
-        Data = data;
+        Data = data as GemData;
+        PlayerManager.Instance.OnTalentLearned -= Data.AddTalentGemBonus;
+        PlayerManager.Instance.OnTalentLearned += Data.AddTalentGemBonus;
         RefreshUI();
     }
 
@@ -31,16 +27,22 @@ public class GemNew: MonoBehaviour,IItemInteractionBehaviour
             PathConfig.GetGemPath(Data.ImageName));
         // TODO: 设置稀有度边框颜色等
     }
-    #endregion
-    
 
+    void OnDestroy() => PlayerManager.Instance.OnTalentLearned -= Data.AddTalentGemBonus;
+    #endregion
+
+    #region 双击与右键逻辑
     void IItemInteractionBehaviour.OnDoubleClick()
     {
-        Debug.Log("GemNew OnDoubleClick");
+        SlotController from = Data.CurSlotController as SlotController;
+        var toSlot = (from.SlotType == SlotType.GemInlaySlot)
+            ? SlotManager.GetEmptySlotController(SlotType.GemBagSlot)
+            : SlotManager.GetEmptySlotController(SlotType.GemInlaySlot);
+        
+        toSlot.Assign(Data, gameObject);
     }
 
-    void IItemInteractionBehaviour.OnRightClick()
-    {
-        Debug.Log("GemNew OnRightClick");
-    }
+    void IItemInteractionBehaviour.OnRightClick() =>
+        RightClickMenuManager.Instance.Show(gameObject, UTools.GetWPosByMouse(rectTransform));
+    #endregion
 }

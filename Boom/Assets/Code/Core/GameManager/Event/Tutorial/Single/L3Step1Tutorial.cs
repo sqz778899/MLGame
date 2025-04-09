@@ -57,12 +57,10 @@ public class L3Step1Tutorial:TutorialStepBase
         _BulletInvData.EquipBullet(new BulletData(1, bslot02));
 
         _InventoryData.ClearData();
-        SlotBase slot01 = SlotManager.GetSlot(3, SlotType.GemInlaySlot);
-        GemSlot gemSlot01 = slot01 as GemSlot;
-        SlotBase slot02 = SlotManager.GetSlot(6, SlotType.GemInlaySlot);
-        GemSlot gemSlot02 = slot02 as GemSlot;
-        _InventoryData.EquipGem(new GemData(20,gemSlot01));
-        _InventoryData.EquipGem(new GemData(20,gemSlot02));
+        SlotController slot01 = SlotManager.GetSlotController(3, SlotType.GemInlaySlot);
+        SlotController slot02 = SlotManager.GetSlotController(6, SlotType.GemInlaySlot);
+        _InventoryData.EquipGem(new GemData(20,slot01));
+        _InventoryData.EquipGem(new GemData(20,slot02));
 
         InventoryManager.Instance.InitAllBagGO();
         //3)设置背景板状态

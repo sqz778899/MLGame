@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 409102938915065347}
   - component: {fileID: 2139649737402363962}
   - component: {fileID: 7170900170311537683}
-  - component: {fileID: 3032464290657910444}
+  - component: {fileID: 3759385155642942481}
+  - component: {fileID: 1307420124496222219}
   m_Layer: 5
   m_Name: P_Gem_Template_01
   m_TagString: Untagged
@@ -122,7 +123,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &3032464290657910444
+--- !u!114 &3759385155642942481
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -131,21 +132,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 7020566741990845911}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53e70b8144690aa4d8d186252eea44bc, type: 3}
+  m_Script: {fileID: 11500000, guid: 1a89fdfc78254d89a0c25e725e639427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: 0
-  CurSlot: {fileID: 0}
-  Name: 
-  InstanceID: 0
-  SlotID: 0
-  SlotType: 0
-  DobuleClickTime: 6
-  CurToolTipsMenuState: 0
-  Attribute:
-    Damage: 0
-    Piercing: 0
-    Resonance: 0
-  IsInLay: 0
-  BulletSlotIndex: 0
-  ItemSprite: {fileID: 2139649737402363962}
+  Icon: {fileID: 2139649737402363962}
+--- !u!114 &1307420124496222219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7020566741990845911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2707c922163480c92bc139a81d616c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

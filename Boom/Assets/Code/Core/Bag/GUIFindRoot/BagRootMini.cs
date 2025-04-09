@@ -30,7 +30,7 @@ public class BagRootMini : MonoBehaviour
     public bool IsCameraNear = false;
 
     BulletInnerSlot[] bulletInnerSlots;
-    GemSlotInner[] gemSlots;
+    //GemSlotInner[] gemSlots;
     void Start()
     {
         SwichBullet();
@@ -47,7 +47,7 @@ public class BagRootMini : MonoBehaviour
         bulletInnerSlots.ForEach(s => s.InitData());
     }
 
-    public void RefreshGem()
+    /*public void RefreshGem()
     {
         if(gemSlots == null || gemSlots.Length == 0)
             gemSlots = BagGemRootGO.GetComponentsInChildren<GemSlotInner>(true);
@@ -57,7 +57,7 @@ public class BagRootMini : MonoBehaviour
                 Destroy(each.ChildIns);
         }
         InventoryManager.Instance.InitAllBagGO();
-    }
+    }*/
     
     //响应开始在战斗场景内拖拽的事件
     public void BulletDragged()

@@ -6,24 +6,22 @@ public class SlotView:MonoBehaviour
 {
     public int ViewSlotID;
     public SlotType ViewSlotType;
+    public int InstanceID;
 
-    private void Awake()
+    public SlotController Controller;
+
+    public virtual void Init()
     {
-        Init(new SlotController{
-            SlotID = ViewSlotID,
-            SlotType = ViewSlotType
-        });
-    }
-
-    public SlotController Controller { get; private set; }
-
-    public void Init(SlotController controller)
-    {
+        InstanceID = GetInstanceID();
+        var controller = new SlotController(); // 或 BulletSlotController
+        controller.Init(ViewSlotID, ViewSlotType); // 用公开方法初始化
         Controller = controller;
         Controller.BindView(this);
     }
 
-    public void Display(GameObject itemGO)
+    public virtual void InitStep2() {}
+
+    public virtual void Display(GameObject itemGO)
     {
         itemGO.transform.SetParent(transform);
         itemGO.transform.localPosition = Vector3.zero;
@@ -33,6 +31,6 @@ public class SlotView:MonoBehaviour
     public void Clear()
     {
         for (int i = transform.childCount - 1; i >= 0; i--)
-            Destroy(transform.GetChild(i));
+            Destroy(transform.GetChild(i).gameObject);
     }
 }

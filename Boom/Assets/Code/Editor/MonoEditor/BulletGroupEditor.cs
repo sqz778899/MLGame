@@ -17,7 +17,6 @@ public class BulletGroupEditor: Editor
         if(GUILayout.Button("SyncSlot"))
         {
             Debug.Log("SyncSlot");
-            myScript.SyncSlotGem();
         }
     }
 }

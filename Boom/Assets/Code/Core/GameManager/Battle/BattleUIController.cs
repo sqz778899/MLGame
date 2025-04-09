@@ -20,7 +20,7 @@ public class BattleUIController
         InitData();
         //初始化小地图背包界面
         BagRootMiniSC.InitData();
-        BagRootMiniSC.RefreshGem();
+        //BagRootMiniSC.RefreshGem();
         //初始化小地图敌人信息界面
         EnemyMiniMapSC.InitData(_battleData.CurEnemy);
     }

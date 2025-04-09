@@ -7,7 +7,7 @@
   "MagicDust": 0,
   "UserBulletSpawner": [
     {
-      "SpawnerCount": 0,
+      "SpawnerCount": 1,
       "ID": 1,
       "SlotID": 1,
       "SlotType": 0
@@ -34,7 +34,23 @@
     "4": false
   },
   "UserItems": [],
-  "UserGems": [],
+  "UserGems": [
+    {
+      "ID": 20,
+      "SlotID": 1,
+      "SlotType": 4
+    },
+    {
+      "ID": 1,
+      "SlotID": 2,
+      "SlotType": 4
+    },
+    {
+      "ID": 10,
+      "SlotID": 3,
+      "SlotType": 4
+    }
+  ],
   "UserMainStoryProgress": 0,
   "UserStorylineNodesState": [],
   "UserQuests": [

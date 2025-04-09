@@ -5,7 +5,7 @@ using UnityEngine;
 public static class BagItemTools<T> where T:ItemBase
 {
     #region 重要功能
-    public static GameObject CreateTempObjectGO<TData>(TData curObjectData,CreateItemType insType)where TData : ItemDataBase
+    public static GameObject  CreateTempObjectGO<TData>(TData curObjectData,CreateItemType insType)where TData : ItemDataBase
     {
         //实例化宝石
         GameObject objectIns = null;
@@ -27,6 +27,7 @@ public static class BagItemTools<T> where T:ItemBase
         objectIns = ResManager.instance.CreatInstance(assetpath);
         objectSC = objectIns.GetComponent<T>();
         objectSC.BindData(curObjectData);
+        objectIns.GetComponent<ItemInteractionHandler>()?.BindData(curObjectData);//影子模型没这个组件
         return objectIns;
     }
     
@@ -43,12 +44,8 @@ public static class BagItemTools<T> where T:ItemBase
     public static void DeleteObject(GameObject objectIns)
     {
         ItemBase curSC = objectIns.GetComponent<ItemBase>();
-        if (curSC is Gem curGem)
-        {
-            InventoryManager.Instance._InventoryData.RemoveGemToBag(curGem._data);
-            SlotManager.ClearSlot(curGem._data.CurSlot);
-            GameObject.Destroy(objectIns);
-        }
+        if (curSC is GemNew curGem)
+            curGem.Data.CurSlotController.Unassign();
         
         if (curSC is Item curItem)
         {
@@ -85,19 +82,17 @@ public static class BagItemTools<T> where T:ItemBase
     static void InitObjectIns<TData>(TData curObjectData, ref GameObject objectIns,
         ref T objectSC) where TData : ItemDataBase
     {
-        SlotType curSlotType = curObjectData.CurSlot.SlotType;
+        SlotType curSlotType = curObjectData.CurSlotController.SlotType;
         string assetPath = curSlotType == SlotType.GemBagSlot || curSlotType == SlotType.GemInlaySlot
             ? PathConfig.GemTemplate
             : PathConfig.ItemPB;
-
-        if (curObjectData.CurSlot is GemSlotInner)
-            assetPath = PathConfig.GemInnerTemplate;
         
         objectIns = ResManager.instance.CreatInstance(assetPath);
         objectIns.transform.SetParent(UIManager.Instance.BagUI.ItemRoot.transform, false);
         objectSC = objectIns.GetComponent<T>();
         objectSC.BindData(curObjectData);
-        curObjectData.CurSlot.SOnDrop(objectIns);
+        objectIns.GetComponent<ItemInteractionHandler>().BindData(curObjectData);
+        curObjectData.CurSlotController.Assign(curObjectData,objectIns);
     }
     #endregion
 }

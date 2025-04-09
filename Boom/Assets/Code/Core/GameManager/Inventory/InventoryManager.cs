@@ -34,8 +34,9 @@ public class InventoryManager : MonoBehaviour
     
     public void AddGemToBag(int gemID)
     {
-        GemData newGemData = new GemData(gemID, SlotManager.GetEmptySlot(SlotType.GemBagSlot));
-        BagItemTools<Gem>.AddObjectGO(newGemData);//在OnDrop中添加到数据层
+        SlotController emptySlotController = SlotManager.GetEmptySlotController(SlotType.GemBagSlot);
+        GemData newGemData = new GemData(gemID, emptySlotController);
+        BagItemTools<GemNew>.AddObjectGO(newGemData);//在OnDrop中添加到数据层
     }
     
     //把当前子弹，归还给子弹槽
@@ -61,11 +62,11 @@ public class InventoryManager : MonoBehaviour
         //初始化宝石
         List<GemData> tempGem = _InventoryData.BagGems
             .Concat(_InventoryData.EquipGems)
-            .Select(curData => new GemData(curData.ID, curData.CurSlot))
+            .Select(curData => new GemData(curData.ID, curData.CurSlotController as SlotController))
             .ToList();
         _InventoryData.BagGems.Clear();
         _InventoryData.EquipGems.Clear();
-        tempGem.ForEach(gem=>  BagItemTools<Gem>.InitSaveFileObject(gem, gem.CurSlot.SlotType));
+        tempGem.ForEach(gem=>  BagItemTools<GemNew>.InitSaveFileObject(gem, gem.CurSlotController.SlotType));
         //初始化道具
         List<ItemData> tempItem = _InventoryData.BagItems
             .Concat(_InventoryData.EquipItems)

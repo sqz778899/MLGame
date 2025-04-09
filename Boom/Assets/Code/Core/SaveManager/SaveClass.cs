@@ -278,8 +278,8 @@ public class GemBaseSaveData:ItemBaseSaveData
     public GemBaseSaveData(GemData data)
     {
         ID = data.ID; //有了ID，其他静态数据通过配表索引出来
-        SlotID = data.CurSlot.SlotID;
-        SlotType = data.CurSlot.SlotType;
+        SlotID = data.CurSlotController.SlotID;
+        SlotType = data.CurSlotController.SlotType;
     }
     public GemBaseSaveData() {}// 让无参构造也保留，以免 JsonUtility/序列化报错
 }

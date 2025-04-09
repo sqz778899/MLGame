@@ -5,16 +5,7 @@ public class GlobalTicker:MonoBehaviour
 {
     public static GlobalTicker Instance { get; private set; }
     
-    void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-            Destroy(gameObject);
-    }
+    void Awake() => Instance = this;
 
     public event Action OnUpdate;
 

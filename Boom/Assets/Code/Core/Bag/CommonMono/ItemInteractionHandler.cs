@@ -18,33 +18,12 @@ public class ItemInteractionHandler: MonoBehaviour,
         rectTransform = GetComponent<RectTransform>();
         behaviour = GetComponent<IItemInteractionBehaviour>();
     }
-    
-    public void Remove()
-    {
-        var slot = Data.CurSlotController;
-        if (slot != null)
-        {
-            slot.Unassign(); // 清除当前槽位
-            // 移回背包或销毁等操作
-            
-            GM.Root.InventoryMgr._InventoryData.AddGemToBag((GemData)Data); // 示例
-        }
-    }
 
     #region UI交互逻辑
     // 绑定数据（泛型适配）
     public void BindData(ItemDataBase data) => Data = data;
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        if (Data is ITooltipBuilder builder)
-        {
-            Vector3 pos = GetWPosByMouse(eventData);
-            if (Data.CurSlotController != null)
-                pos += Data.CurSlotController.TooltipOffset;
-            TooltipsManager.Instance.Show(builder.BuildTooltip(), pos);
-        }
-    }
+    public void OnPointerEnter(PointerEventData eventData) => ShowTooltips();
     public void OnPointerExit(PointerEventData eventData) => TooltipsManager.Instance.Hide();
     
     public void OnPointerDown(PointerEventData eventData) => TooltipsManager.Instance.Hide();
@@ -63,22 +42,43 @@ public class ItemInteractionHandler: MonoBehaviour,
     {
         if (!DragManager.Instance.CanDrag()) return;
         TooltipsManager.Instance.Hide();
+        TooltipsManager.Instance.Disable();
         DragManager.Instance.BeginDrag(gameObject, eventData);
     }
 
     public void OnDrag(PointerEventData eventData) => DragManager.Instance.OnDrag(eventData);
-    public void OnEndDrag(PointerEventData eventData) => DragManager.Instance.EndDrag(eventData);
-    public void OnPointerMove(PointerEventData eventData) => 
-        TooltipsManager.Instance.UpdatePosition(GetWPosByMouse(eventData) 
-            + Data.CurSlotController?.TooltipOffset ?? Vector3.zero);
-    
-    Vector3 GetWPosByMouse(PointerEventData eventData)
+    public void OnEndDrag(PointerEventData eventData)
     {
-        RectTransformUtility.ScreenPointToWorldPointInRectangle(rectTransform, 
-            eventData.position, eventData.pressEventCamera, out Vector3 worldPoint);
-        return worldPoint;
+        DragManager.Instance.EndDrag(eventData);
+        TooltipsManager.Instance.Enable();
+        ShowTooltips();
     }
+
+    public void OnPointerMove(PointerEventData eventData)
+    {
+        if (Data.CurSlotController == null) return;
+       
+        SlotController s = Data.CurSlotController as SlotController;
+        Vector3 pos = UTools.GetWPosByMouse(rectTransform) + s.TooltipOffset;
+        TooltipsManager.Instance.UpdatePosition(pos);
+    }
+
     #endregion
+
+    void ShowTooltips()
+    {
+        if (Data is ITooltipBuilder builder)
+        {
+            Vector3 pos = UTools.GetWPosByMouse(rectTransform);
+            if (Data.CurSlotController != null)
+            {
+                SlotController s = Data.CurSlotController as SlotController;
+                pos += s.TooltipOffset;
+            }
+            TooltipsManager.Instance.Show(builder.BuildTooltip(), pos);
+        }
+    }
+    
 }
 
 public interface IItemInteractionBehaviour

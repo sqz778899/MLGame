@@ -34,9 +34,9 @@ public static class SaveManager
         for (int i = 0; i < saveFile.UserGems.Count; i++)
         {
             GemData curGem = LoadGemData(saveFile.UserGems[i]);
-            if (curGem.CurSlot.SlotType == SlotType.GemBagSlot)
+            if (curGem.CurSlotController.SlotType == SlotType.GemBagSlot)
                 InventoryManager.Instance._InventoryData.AddGemToBag(curGem);
-            if (curGem.CurSlot.SlotType == SlotType.GemInlaySlot)
+            if (curGem.CurSlotController.SlotType == SlotType.GemInlaySlot)
                 InventoryManager.Instance._InventoryData.EquipGem(curGem);
         }
         
@@ -184,7 +184,7 @@ public static class SaveManager
     
     static GemData LoadGemData(GemBaseSaveData itemBaseSaveData)
     {
-        SlotBase CurSlot = SlotManager.GetSlot(itemBaseSaveData.SlotID, itemBaseSaveData.SlotType);
+        SlotController CurSlot = SlotManager.GetSlotController(itemBaseSaveData.SlotID, itemBaseSaveData.SlotType);
         GemData curGemData = new GemData(itemBaseSaveData.ID,CurSlot);
         return curGemData;
     }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class StorylineSystem: MonoBehaviour
@@ -76,15 +77,7 @@ public class StorylineSystem: MonoBehaviour
 
     #region 单例的加载卸载
     public static StorylineSystem Instance { get; private set; }
-    public void InitData()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-            Destroy(gameObject);
-    }
+
+    public void Awake()=> Instance = this;
     #endregion
 }
