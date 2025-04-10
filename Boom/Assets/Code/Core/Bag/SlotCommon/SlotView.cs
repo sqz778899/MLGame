@@ -8,15 +8,15 @@ public class SlotView:MonoBehaviour
     public SlotType ViewSlotType;
     public int InstanceID;
 
-    public SlotController Controller;
+    public ISlotController Controller;
 
     public virtual void Init()
     {
         InstanceID = GetInstanceID();
         var controller = new SlotController(); // 或 BulletSlotController
         controller.Init(ViewSlotID, ViewSlotType); // 用公开方法初始化
+        controller.BindView(this);
         Controller = controller;
-        Controller.BindView(this);
     }
 
     public virtual void InitStep2() {}

@@ -146,8 +146,8 @@ public class L1Step2EquipBullet : TutorialStepBase
         //1)设置槽位高亮
         HandPointMove tsc = fXHand.gameObject.GetComponent<HandPointMove>();
         //2)小手平移特效
-        GameObject bulletSlot01 = SlotManager.GetSlot(1, SlotType.BulletSlot).gameObject;
-        GameObject EquipSlot01 = SlotManager.GetSlot(1, SlotType.CurBulletSlot).gameObject;
+        GameObject bulletSlot01 = SlotManager.GetSlotGO(1, SlotType.BulletSlot);
+        GameObject EquipSlot01 = SlotManager.GetSlotGO(1, SlotType.CurBulletSlot);
         bulletSlot01.AddComponent<ShaderHoleController>().radius = 0.08f;
         tsc.startTrans = bulletSlot01.transform;
         tsc.endTrans = EquipSlot01.transform;
@@ -168,7 +168,7 @@ public class L1Step2EquipBullet : TutorialStepBase
         //1）清空之前的状态
         fXHand.Clear();
         fXHand.Stop();
-        GameObject bulletSlot01 = SlotManager.GetSlot(1, SlotType.BulletSlot).gameObject;
+        GameObject bulletSlot01 = SlotManager.GetSlotGO(1, SlotType.BulletSlot);
         Object.Destroy(bulletSlot01.GetComponent<ShaderHoleController>());
         //2）设置按钮高亮&&引导箭头
         _btnStart = EternalCavans.Instance.btnStart;
@@ -383,8 +383,8 @@ public class L1Step4EquipGem : TutorialStepBase
         //1)设置槽位高亮
         HandPointMove tsc = fXHand.gameObject.GetComponent<HandPointMove>();
         //2)小手平移特效
-        GameObject gemSlot01 = SlotManager.GetSlot(1, SlotType.GemBagSlot).gameObject;
-        GameObject equipGemSlot01 = SlotManager.GetSlot(3, SlotType.GemInlaySlot).gameObject;
+        GameObject gemSlot01 = SlotManager.GetSlotGO(1, SlotType.GemBagSlot).gameObject;
+        GameObject equipGemSlot01 = SlotManager.GetSlotGO(3, SlotType.GemInlaySlot).gameObject;
         equipGemSlot01.AddComponent<ShaderHoleController>().radius = 0.05f;
         fXHand.transform.position = gemSlot01.transform.position;
         tsc.startTrans = gemSlot01.transform;
@@ -408,7 +408,7 @@ public class L1Step4EquipGem : TutorialStepBase
         //1）清空之前的状态
         fXHand.Clear();
         fXHand.Stop();
-        GameObject bulletSlot01 = SlotManager.GetSlot(1, SlotType.GemBagSlot).gameObject;
+        GameObject bulletSlot01 = SlotManager.GetSlotGO(1, SlotType.GemBagSlot).gameObject;
         Object.Destroy(bulletSlot01.GetComponent<ShaderHoleController>());
         //2）设置按钮高亮&&引导箭头
         _btnStart = EternalCavans.Instance.btnStart;

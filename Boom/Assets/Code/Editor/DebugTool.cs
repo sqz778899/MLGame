@@ -46,15 +46,14 @@ public class DebugTool
         int count = 1;
         foreach (var each in trans)
         {
-            if (each.name.StartsWith("GemSlot") && !each.name.StartsWith("GemSlotRoot"))
+            if (each.name.StartsWith("Slot") && !each.name.StartsWith("GemSlotRoot"))
             {
-                GemSlotInnerView slotView = each.GetComponent<GemSlotInnerView>();
+                SlotView slotView = each.GetComponent<SlotView>();
                 if (slotView == null)
-                {
-                    slotView = each.gameObject.AddComponent<GemSlotInnerView>();
-                }
+                    slotView = each.gameObject.AddComponent<SlotView>();
+                
                 GameObject.DestroyImmediate(each.GetComponent<SlotBase>());
-                slotView.ViewSlotType = SlotType.GemBagSlot;
+                slotView.ViewSlotType = SlotType.SpawnnerSlotInner;
                 slotView.ViewSlotID = count;
                 count++;
             }

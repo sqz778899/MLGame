@@ -11,15 +11,18 @@ public static class BulletFactory
             CreatInstance(PathConfig.GetBulletTemplate(bulletInsMode));
         
         ItemBase bulletSC = bulletIns.GetComponent<ItemBase>();
-        if (bulletSC is Bullet bulletNew)
+        if (bulletSC is BulletNew bulletNew)
         {
             bulletNew.BindData(_bulletData);
-            bulletNew.BulletInsMode = bulletInsMode;
+            bulletIns.GetComponent<ItemInteractionHandler>().BindData(_bulletData);
         }
         if (bulletSC is BulletInner _bulletInner)
             _bulletInner.BindData(_bulletData);
-        if (bulletSC is DraggableBulletSpawner bulletSpawner)
-            bulletSpawner.BindData(_bulletData);
+        /*if (bulletSC is DraggableBulletSpawner bulletSpawner)
+            bulletSpawner.BindData(_bulletData);*/
+        
+        if (bulletSC is BulletSpawnerNew BulletSpawnerNew)
+            BulletSpawnerNew.BindData(_bulletData);
         
         return bulletSC;
     }   

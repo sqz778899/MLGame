@@ -175,8 +175,8 @@ public static class SaveManager
     #region 不关心的私有方法
     static BulletData LoadBulletData(BulletBaseSaveData itemBaseSaveData)
     {
-        SlotBase CurSlot = SlotManager.GetSlot(itemBaseSaveData.SlotID, itemBaseSaveData.SlotType);
-        BulletData bulletData = new BulletData(itemBaseSaveData.ID,CurSlot);
+        ISlotController CurSlot = SlotManager.GetSlotController(itemBaseSaveData.SlotID, itemBaseSaveData.SlotType);
+        BulletData bulletData = new BulletData(itemBaseSaveData.ID,CurSlot as BulletSlotController);
         if (itemBaseSaveData is BulletBaseSaveData bulletSaveData)
             bulletData.SpawnerCount = bulletSaveData.SpawnerCount;
         return bulletData;
@@ -184,15 +184,15 @@ public static class SaveManager
     
     static GemData LoadGemData(GemBaseSaveData itemBaseSaveData)
     {
-        SlotController CurSlot = SlotManager.GetSlotController(itemBaseSaveData.SlotID, itemBaseSaveData.SlotType);
-        GemData curGemData = new GemData(itemBaseSaveData.ID,CurSlot);
+        ISlotController CurSlot = SlotManager.GetSlotController(itemBaseSaveData.SlotID, itemBaseSaveData.SlotType);
+        GemData curGemData = new GemData(itemBaseSaveData.ID,CurSlot as SlotController);
         return curGemData;
     }
     
     static ItemData LoadItemData(ItemBaseSaveData itemBaseSaveData)
     {
-        SlotBase CurSlot = SlotManager.GetSlot(itemBaseSaveData.SlotID, itemBaseSaveData.SlotType);
-        ItemData curItemData = new ItemData(itemBaseSaveData.ID,CurSlot);
+        ISlotController CurSlot = SlotManager.GetSlotController(itemBaseSaveData.SlotID, itemBaseSaveData.SlotType);
+        ItemData curItemData = new ItemData(itemBaseSaveData.ID,CurSlot as SlotController);
         return curItemData;
     }
 

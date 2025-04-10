@@ -51,16 +51,16 @@ public class L3Step1Tutorial:TutorialStepBase
         _btnBag.GetComponent<Button>().onClick.RemoveListener(OpenBag);
         //2)自动装备好共振
         _BulletInvData.ClearData();
-        SlotBase bslot01 = SlotManager.GetSlot(1, SlotType.CurBulletSlot);
-        SlotBase bslot02 = SlotManager.GetSlot(2, SlotType.CurBulletSlot);
-        _BulletInvData.EquipBullet(new BulletData(1, bslot01));
-        _BulletInvData.EquipBullet(new BulletData(1, bslot02));
+        ISlotController bslot01 = SlotManager.GetSlotController(1, SlotType.CurBulletSlot);
+        ISlotController bslot02 = SlotManager.GetSlotController(2, SlotType.CurBulletSlot);
+        _BulletInvData.EquipBullet(new BulletData(1, bslot01 as BulletSlotController));
+        _BulletInvData.EquipBullet(new BulletData(1, bslot02 as BulletSlotController));
 
         _InventoryData.ClearData();
-        SlotController slot01 = SlotManager.GetSlotController(3, SlotType.GemInlaySlot);
-        SlotController slot02 = SlotManager.GetSlotController(6, SlotType.GemInlaySlot);
-        _InventoryData.EquipGem(new GemData(20,slot01));
-        _InventoryData.EquipGem(new GemData(20,slot02));
+        ISlotController slot01 = SlotManager.GetSlotController(3, SlotType.GemInlaySlot);
+        ISlotController slot02 = SlotManager.GetSlotController(6, SlotType.GemInlaySlot);
+        _InventoryData.EquipGem(new GemData(20,slot01 as SlotController));
+        _InventoryData.EquipGem(new GemData(20,slot02 as SlotController));
 
         InventoryManager.Instance.InitAllBagGO();
         //3)设置背景板状态

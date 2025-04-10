@@ -1,26 +1,63 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class BulletSlotView: MonoBehaviour
+public class BulletSlotView: SlotView
 {
+    [Header("锁定状态")]
     public GameObject LockedGO;
-    public bool IsUnlocked => LockedGO != null && !LockedGO.activeSelf;
-    public BulletSlotController Controller { get; private set; }
+    public BulletInnerSlotView InnerSlot;
+    [SerializeField] List<GemSlotView> gemSlotViews;
+    BulletSlotController _controller;//把这个类的Controller也改成BulletSlotController，避免多次转换
 
-    public void Init()
+    public override void Init()
     {
-        Controller = new BulletSlotController();
-        Controller.BindView(this);
+        var controller = new BulletSlotController();
+        controller.Init(ViewSlotID, ViewSlotType); // 用公开方法初始化
+        controller.BindView(this);
+        Controller = controller;
+    }
+    
+    public override void InitStep2()
+    {
+        _controller = Controller as BulletSlotController;
+        _controller.LinkedInnerSlotController = InnerSlot.BulletInnerController;
+        InnerSlot.Controller = Controller;
+        _controller.IsLocked = _state == UILockedState.isLocked; //同步锁状态
+    }
+    
+    public override void Display(GameObject itemGO)
+    {
+        base.Display(itemGO);
+        // 切换成 EditB 模式
+        if (itemGO.TryGetComponent<BulletNew>(out var bullet))
+            bullet.SwitchMode(BulletInsMode.EditB);
+        // 落下即刻显示Tooltips
+        TooltipsManager.Instance.Enable();
+        if (itemGO.TryGetComponent<ItemInteractionHandler>(out var bulletInteractionHandler))
+            bulletInteractionHandler.ShowTooltips();
     }
 
-    public void Display(GameObject bulletGO)
-    {
-        bulletGO.transform.SetParent(transform);
-        bulletGO.transform.localPosition = Vector3.zero;
-    }
 
-    public void Clear()
+    #region 管理宝石槽
+    [SerializeField] UILockedState _state;
+    public UILockedState State
     {
-        foreach (Transform child in transform)
-            Destroy(child.gameObject);
+        get => _state;
+        set
+        {
+            if (_state != value)
+            {
+                _state = value;
+                ChangeState();
+            }
+        }
     }
+    void ChangeState()
+    {
+        bool locked = State == UILockedState.isLocked;
+        LockedGO?.SetActive(locked);
+        gemSlotViews.ForEach(g => g.State = State);
+    }
+    #endregion
 }

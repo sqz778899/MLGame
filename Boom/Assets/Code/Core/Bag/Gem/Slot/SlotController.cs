@@ -7,21 +7,6 @@ public class SlotController : BaseSlotController<ItemDataBase>
     
     public bool IsEmpty => CurData == null; //槽位是不是空的
     public bool IsLocked; //槽位是不是锁定的
-    
-    public Vector3 TooltipOffset
-    {
-        get
-        {
-            return SlotType switch
-            {
-                SlotType.GemBagSlot => new Vector3(1.01f, -0.5f, 0),
-                SlotType.BagItemSlot => new Vector3(1.01f, -0.5f, 0),
-                SlotType.GemInlaySlot => new Vector3(-0.92f, -0.52f, 0),
-                SlotType.BagEquipSlot => new Vector3(-0.92f, -0.52f, 0),
-                _ => Vector3.zero
-            };
-        }
-    }
 
     public override bool CanAccept(ItemDataBase data)
     {
@@ -134,5 +119,6 @@ public enum SlotType
     GemBagSlot = 4,
     GemInlaySlot = 5,
     CurBulletSlot = 6,
-    BulletInnerSlot = 7
+    BulletInnerSlot = 7,
+    SpawnnerSlotInner = 8,
 }

@@ -57,7 +57,6 @@ public class BulletSlotRole: SlotBase
         }
     }
     
-
     public void SOnDrop(BulletData bulletData)
     {
         GameObject bulletIns = BulletFactory.CreateBullet(bulletData, BulletInsMode.EditB).gameObject;
@@ -75,5 +74,4 @@ public class BulletSlotRole: SlotBase
         //持有这个BulletData
         CurBulletData = _bulletNew._data;
     }
-    
 }

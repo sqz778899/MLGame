@@ -51,7 +51,6 @@ public class BulletInvData : ScriptableObject
     {
         if (_data == null) return;
         RemoveEquipBullet(_data);
-        AddSpawner(_data.ID);
         OnBulletsChanged?.Invoke();
         RefreshModifiers();
     }
@@ -77,6 +76,7 @@ public class BulletInvData : ScriptableObject
         EquipBullets.Remove(_data);  
         OnBulletsChanged?.Invoke();
     }
+    
     #endregion
 
     #region 子弹共振关系处理（单独方法封装）

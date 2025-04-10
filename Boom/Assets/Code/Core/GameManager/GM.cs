@@ -10,8 +10,10 @@ public class GM: MonoBehaviour
     public InventoryManager InventoryMgr { get; private set; }
     public BattleManager BattleMgr{ get; private set; }
     public GlobalTicker GlobalTickerMgr { get; private set; }
-    public GameInitializer Initializer { get; private set; }
+    
     public StorylineSystem StorylineSys{ get; private set; }
+
+    public GameInitializer Initializer { get; private set; }
     
     #region 单例的加载卸载
     public static GM Root { get; private set; }
@@ -22,14 +24,15 @@ public class GM: MonoBehaviour
         {
             Root = this;
             DontDestroyOnLoad(gameObject);
-            Initializer = gameObject.AddComponent<GameInitializer>();
-            Initializer.InitGameData();//初始化全局需要手动初始化的数据
-            StorylineSys = gameObject.AddComponent<StorylineSystem>();
             // 添加核心管理器组件
             PlayerMgr = gameObject.AddComponent<PlayerManager>();
             InventoryMgr = gameObject.AddComponent<InventoryManager>();
             BattleMgr = gameObject.AddComponent<BattleManager>();
             GlobalTickerMgr = gameObject.AddComponent<GlobalTicker>();
+            StorylineSys = gameObject.AddComponent<StorylineSystem>();
+            
+            Initializer = gameObject.AddComponent<GameInitializer>();
+            Initializer.InitGameData();//初始化全局需要手动初始化的数据
         }
         else
         {

@@ -64,6 +64,9 @@ public interface ISlotController
     void Unassign();
     bool CanAccept(ItemDataBase data);
     void Assign(ItemDataBase data, GameObject itemGO);
+    
+    public Vector3 TooltipOffset{ get; }
+    bool IsEmpty => CurData == null;
 }
 
 public abstract class BaseSlotController<T> :ISlotController where T : ItemDataBase
@@ -72,7 +75,7 @@ public abstract class BaseSlotController<T> :ISlotController where T : ItemDataB
     protected  SlotType _slotType;
     protected T _curData;
     protected GameObject CachedGO;
-    protected SlotView _view;
+    public SlotView _view{get; private set;}
     
     // 实现 ISlotController 接口
     public SlotType SlotType => _slotType;
@@ -99,6 +102,24 @@ public abstract class BaseSlotController<T> :ISlotController where T : ItemDataB
         _curData = null;
         CachedGO = null;
         _view?.Clear();
+    }
+    
+    public Vector3 TooltipOffset
+    {
+        get
+        {
+            return SlotType switch
+            {
+                SlotType.GemBagSlot => new Vector3(1.01f, -0.5f, 0),
+                SlotType.BagItemSlot => new Vector3(1.01f, -0.5f, 0),
+                SlotType.GemInlaySlot => new Vector3(-0.92f, -0.52f, 0),
+                SlotType.BagEquipSlot => new Vector3(-0.92f, -0.52f, 0),
+                SlotType.SpawnnerSlot => new Vector3(1.01f, -0.5f, 0),
+                SlotType.SpawnnerSlotInner => new Vector3(1.01f, -0.5f, 0),
+                SlotType.CurBulletSlot => new Vector3(1.01f, -0.5f, 0),
+                _ => Vector3.zero
+            };
+        }
     }
 
     public GameObject GetGameObject() => CachedGO;
@@ -181,7 +202,7 @@ public class GemData : ItemDataBase,ITooltipBuilder
 
 #region 子弹类
 //动态数据层 运行时数据（数值计算、宝石镶嵌、元素关系）
-public class BulletData:ItemDataBase
+public class BulletData:ItemDataBase,ITooltipBuilder
 {
     public event Action OnDataChanged;
     //静态数据层 配表数据
@@ -211,10 +232,10 @@ public class BulletData:ItemDataBase
         }
     }
     
-    public BulletData(int _id,SlotBase _slot)
+    public BulletData(int _id,BulletSlotController _slot)
     {
         BulletJson json = TrunkManager.Instance.GetBulletJson(_id);
-        CurSlot = _slot;
+        CurSlotController = _slot;
         InitData(json);
     }
 
@@ -317,7 +338,7 @@ public class BulletModifierGem : IBulletModifier
 #endregion
 
 #region 道具类
-public class ItemData : ItemDataBase
+public class ItemData : ItemDataBase,ITooltipBuilder
 {
     public event Action OnDataChanged;
     //静态数据层 配表数据
@@ -326,10 +347,10 @@ public class ItemData : ItemDataBase
     
     public IItemEffect EffectLogic; //运行时逻辑引用
     
-    public ItemData(int _id,SlotBase _slot)
+    public ItemData(int _id,SlotController _slot)
     {
         ItemJson json = TrunkManager.Instance.GetItemJson(_id);
-        CurSlot = _slot;
+        CurSlotController = _slot;
         InitData(json);
     }
 

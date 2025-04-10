@@ -26,7 +26,7 @@ public class GemInnerNew : ItemBase, IBeginDragHandler, IEndDragHandler,
     {
         behaviour = SourceGem.GetComponent<IItemInteractionBehaviour>();
         //战场镜头移动消息注册
-        _bagRootMini = UIManager.Instance.BagUI.BagRootMiniGO.GetComponent<BagRootMini>();
+        _bagRootMini = EternalCavans.Instance.BagRootMini.GetComponent<BagRootMini>();
         OnGemDragged += _bagRootMini.BulletDragged;
     }
 
@@ -72,8 +72,9 @@ public class GemInnerNew : ItemBase, IBeginDragHandler, IEndDragHandler,
                 if (!slotView.Controller.CanAccept(Data)) continue;//先判断是否合法
                
                 //如果槽位已满，且是可交换的
-                if (!slotView.Controller.IsEmpty && slotView.Controller.CurData != Data)
-                    SlotManager.Swap(slotView.Controller, Data.CurSlotController as SlotController);
+                SlotController s = slotView.Controller as SlotController;
+                if (!s.IsEmpty && slotView.Controller.CurData != Data)
+                    SlotManager.Swap(s, Data.CurSlotController as SlotController);
                 else
                     slotView.Controller.Assign(Data, SourceGem.gameObject); // 回收主 Gem
                 dropped = true;

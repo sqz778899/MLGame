@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class BagRoot : MonoBehaviour
@@ -19,23 +16,21 @@ public class BagRoot : MonoBehaviour
     public GameObject GroupBulletSpawnerSlot;
     public GameObject BagReadySlotGO;  //子弹槽
     public GameObject EquipItemRoot;  //装备栏
-    BulletSlotRole[] _btnReadySlotSC;
+    //BulletSlotRole[] _btnReadySlotSC;
     
     #region 初始化数据
     //游戏最开始时候需要初始化的数据
     public void InitData()
     {
         //子弹槽初始化
-        _btnReadySlotSC = BagReadySlotGO.GetComponentsInChildren<BulletSlotRole>(true);
-        _btnReadySlotSC.ToList().ForEach(perSlot => perSlot.InitData());
+        //_btnReadySlotSC = BagReadySlotGO.GetComponentsInChildren<BulletSlotRole>(true);
+        //_btnReadySlotSC.ToList().ForEach(perSlot => perSlot.InitData());
         InventoryManager.Instance._BulletInvData.RefreshModifiers();
     }
     
     void Start()
     {
         SwichGem();
-        /*if (!IsUnLockedItem)
-            BtnItemSC.State = UILockedState.isLocked;*/
         //注册事件。背包Slot解锁的话，这边会函数响应更新状态
         PlayerManager.Instance._PlayerData.BulletSlotStateChanged += RefreshBulletSlotLockedState;
         RefreshBulletSlotLockedState();//最开始先更新一次状态
@@ -46,9 +41,6 @@ public class BagRoot : MonoBehaviour
     public void RefreshBulletSlotLockedState()
     {
         InitData();
-        Dictionary<int, bool> curDict = PlayerManager.Instance._PlayerData.CurBulletSlotLockedState;
-        for (int i = 0; i < 5; i++)
-            _btnReadySlotSC[i].State = curDict[i]?UILockedState.isNormal:UILockedState.isLocked;
     }
 
     #region 页签切换

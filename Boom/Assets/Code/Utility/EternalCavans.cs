@@ -17,6 +17,14 @@ public class EternalCavans : MonoBehaviour
     public GameObject BagRoot;
     public GameObject BagRootMini;
     public GameObject BagButtonGO;
+
+    public GameObject GemRoot;
+    public GameObject EquipBulletSlotRoot;
+    public GameObject SpawnerSlotRoot;
+    public GameObject SpawnerSlotRootMini;
+    public GameObject ItemRoot;
+    public GameObject EquipItemRoot;
+    
     [Header("Common")]
     public GameObject DialogueRoot;
     public GameObject EffectRoot;

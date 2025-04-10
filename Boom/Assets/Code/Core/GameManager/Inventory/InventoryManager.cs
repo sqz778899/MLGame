@@ -27,9 +27,9 @@ public class InventoryManager : MonoBehaviour
 
     public void AddItemToBag(int itemID)
     {
-        ItemData newItemData = new ItemData(itemID, SlotManager.GetEmptySlot(SlotType.BagItemSlot));
-        _InventoryData.AddItemToBag(newItemData);
-        BagItemTools<Item>.AddObjectGO(newItemData);
+        //ItemData newItemData = new ItemData(itemID, SlotManager.GetEmptySlotController(SlotType.BagItemSlot));
+        //_InventoryData.AddItemToBag(newItemData);
+        //BagItemTools<Item>.AddObjectGO(newItemData);
     }
     
     public void AddGemToBag(int gemID)
@@ -70,7 +70,7 @@ public class InventoryManager : MonoBehaviour
         //初始化道具
         List<ItemData> tempItem = _InventoryData.BagItems
             .Concat(_InventoryData.EquipItems)
-            .Select(curData => new ItemData(curData.ID, curData.CurSlot))
+            .Select(curData => new ItemData(curData.ID, curData.CurSlotController as SlotController))
             .ToList();
         _InventoryData.BagItems.Clear();
         _InventoryData.EquipItems.Clear();
@@ -83,15 +83,14 @@ public class InventoryManager : MonoBehaviour
     void InitEquipBullets()
     {
         //...............Clear Old Data....................
-        Bullet[] oldBullets = UIManager.Instance.BagUI.EquipBulletSlotRoot.GetComponentsInChildren<Bullet>();
+        Bullet[] oldBullets = EternalCavans.Instance.EquipBulletSlotRoot.GetComponentsInChildren<Bullet>();
         for (int i = oldBullets.Length - 1; i >= 0; i--)
             Destroy(oldBullets[i].gameObject);
-        SlotManager.GetEmptySlot(SlotType.CurBulletSlot);
         //..............Instance New Data..................
         foreach (BulletData each in _BulletInvData.EquipBullets)
         {
             GameObject BulletIns = BulletFactory.CreateBullet(each, BulletInsMode.EditB).gameObject;
-            each.CurSlot.SOnDrop(BulletIns);
+            each.CurSlotController.Assign(each,BulletIns);
         }
     }
     
@@ -99,36 +98,35 @@ public class InventoryManager : MonoBehaviour
     void InitSpawners()
     {
         //..............Clear Old Data..................
-        GameObject spawnerSlotRoot = UIManager.Instance.BagUI.SpawnerSlotRoot;
-        GameObject SpawnerSlotRootMini = UIManager.Instance.BagUI.SpawnerSlotRootMini;
-        DraggableBulletSpawner[] oldSpawner = spawnerSlotRoot.GetComponentsInChildren<DraggableBulletSpawner>(true);
+        GameObject spawnerSlotRoot = EternalCavans.Instance.SpawnerSlotRoot;
+        GameObject SpawnerSlotRootMini = EternalCavans.Instance.SpawnerSlotRootMini;
+        BulletSpawnerNew[] oldSpawner = spawnerSlotRoot.GetComponentsInChildren<BulletSpawnerNew>(true);
         for (int i = oldSpawner.Length - 1; i >= 0; i--)
             Destroy(oldSpawner[i].gameObject);
-        DraggableBulletSpawner[] oldSpawnerMini = SpawnerSlotRootMini.GetComponentsInChildren<DraggableBulletSpawner>(true);
+        BulletSpawnerNew[] oldSpawnerMini = SpawnerSlotRootMini.GetComponentsInChildren<BulletSpawnerNew>(true);
         for (int i = oldSpawnerMini.Length - 1; i >= 0; i--)
             Destroy(oldSpawnerMini[i].gameObject);
         //..............Instance New Data..................
-        BulletSlot[] slots = spawnerSlotRoot.GetComponentsInChildren<BulletSlot>(true);
-        BulletSlot[] slotMinis = SpawnerSlotRootMini.GetComponentsInChildren<BulletSlot>(true);
+        ISlotController[] slots = SlotManager.GetAllSlotController(SlotType.SpawnnerSlot);
+        ISlotController[] slotMinis = SlotManager.GetAllSlotController(SlotType.SpawnnerSlotInner);
         InitSpawnersSingel(slots);
         InitSpawnersSingel(slotMinis,true);
     }
     
-    void InitSpawnersSingel(BulletSlot[] slots, bool isMini = false)
+    void InitSpawnersSingel(ISlotController[] slots, bool isMini = false)
     {
         foreach (BulletData each in _BulletInvData.BagBulletSpawners)
         {
             int curSpawnerFindID = each.ID % 10;
-            var slot = slots.FirstOrDefault(s => s.SlotID == curSpawnerFindID);
-            if (slot != null)
+            ISlotController slot = slots.FirstOrDefault(s => s.SlotID == curSpawnerFindID);
+            if (slot.IsEmpty)
             {
-                slot.MainID = each.ID;
                 GameObject newSpawnerIns = null;
                 if (isMini)
                     newSpawnerIns = BulletFactory.CreateBullet(each, BulletInsMode.SpawnerInner).gameObject;
                 else
                     newSpawnerIns = BulletFactory.CreateBullet(each, BulletInsMode.Spawner).gameObject;
-                newSpawnerIns.transform.SetParent(slot.gameObject.transform, false);
+                slot.Assign(each,newSpawnerIns);
             }
         }
     }

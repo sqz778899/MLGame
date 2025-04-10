@@ -80,11 +80,11 @@ public class L2Step1Tutorial:TutorialStepBase
         EternalCavans.Instance.TutoriaSwichBulletLock = false;
         EternalCavans.Instance.TutorialCloseBagLock = false;
         //3)设置引导状态
-        SlotBase slot = SlotManager.GetSlot(1, SlotType.GemBagSlot);
-        TutoConfig.SetTutoHigh(slot.gameObject,0.06f);
-        TutoConfig.SetArrow(fxArrow,slot.transform.position+ TutoConfig.arrowOffset);
+        GameObject slotGO = SlotManager.GetSlotGO(1, SlotType.GemBagSlot);
+        TutoConfig.SetTutoHigh(slotGO,0.06f);
+        TutoConfig.SetArrow(fxArrow,slotGO.transform.position+ TutoConfig.arrowOffset);
         Vector3 doubleOffet = new (1.6f,0.2f,0);
-        TutoConfig.SetArrow(fxDoubleClick,slot.transform.position + doubleOffet);
+        TutoConfig.SetArrow(fxDoubleClick,slotGO.transform.position + doubleOffet);
         //4)注册下一步
         GlobalTicker.Instance.OnUpdate += Update2;
     }

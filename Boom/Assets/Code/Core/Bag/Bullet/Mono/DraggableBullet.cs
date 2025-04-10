@@ -61,7 +61,7 @@ public class DraggableBullet : Bullet
         //落入装备槽位，如果是Spawner诞生的，创建新的Data绑定
         if (IsSpawnerCreate)
         {
-            BindData(new BulletData(_data.ID,_data.CurSlot));
+           // BindData(new BulletData(_data.ID,_data.CurSlot));
             IsSpawnerCreate = false;
         }
      

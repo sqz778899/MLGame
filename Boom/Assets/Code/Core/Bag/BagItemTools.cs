@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -68,13 +69,9 @@ public static class BagItemTools<T> where T:ItemBase
     
     public static void ClearAllObject()
     {
-        SlotBase[] allSlot = SlotManager.GetAllSlotBase();
-        foreach (SlotBase each in allSlot)
-        {
-            if (each.ChildIns == null) continue;
-            GameObject.Destroy(each.ChildIns);
-            SlotManager.ClearSlot(each, true);
-        }
+        SlotView[] allSlot = SlotManager.GetAllSlotBase();
+        foreach (SlotView each in allSlot)
+            each.Clear();
     }
     
     #region 私有方法
@@ -88,7 +85,6 @@ public static class BagItemTools<T> where T:ItemBase
             : PathConfig.ItemPB;
         
         objectIns = ResManager.instance.CreatInstance(assetPath);
-        objectIns.transform.SetParent(UIManager.Instance.BagUI.ItemRoot.transform, false);
         objectSC = objectIns.GetComponent<T>();
         objectSC.BindData(curObjectData);
         objectIns.GetComponent<ItemInteractionHandler>().BindData(curObjectData);

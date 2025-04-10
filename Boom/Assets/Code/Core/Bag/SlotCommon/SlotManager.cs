@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,78 +18,47 @@ public static class SlotManager
         curSlot.MainID = -1;
     }
     
-    public static SlotBase GetEmptySlot(SlotType slotType)
+    //获得当前Slot的GameObject
+    public static GameObject GetSlotGO(int SlotID, SlotType slotType)
     {
-        SlotBase[] allSlot = GetCurSlotArray(slotType);
-        SlotBase curTargetSlot = allSlot.FirstOrDefault(each => each.MainID == -1);
-        return curTargetSlot;
+        ISlotController curController = GetSlotController(SlotID, slotType);
+        BaseSlotController<ItemDataBase> curBaseController = curController as BaseSlotController<ItemDataBase>;
+        return curBaseController._view?.gameObject;
+    }
+    
+    public static ISlotController[] GetAllSlotController(SlotType slotType)
+    {
+        SlotView[] allSlot = GetCurSlotArraySlotView(slotType);
+        ISlotController[] allController = allSlot.Select(each => each.Controller).ToArray();
+        return allController;
     }
     
     public static SlotController GetEmptySlotController(SlotType slotType)
     {
         SlotView[] allSlot = GetCurSlotArraySlotView(slotType);
-        SlotController curTargetSlot = allSlot.FirstOrDefault(each => each.Controller.IsEmpty).Controller;
-        return curTargetSlot;
-    }
-
-    //根据SlotID 和SlotType精准定位到具体的Slot
-    public static SlotBase GetSlot(int SlotID, SlotType slotType)
-    {
-        SlotBase[] allSlot = GetCurSlotArray(slotType);
-        SlotBase curTargetSlot = allSlot.FirstOrDefault(each => each.SlotID == SlotID);
+        SlotController curTargetSlot = allSlot.FirstOrDefault(each => each.Controller.IsEmpty).Controller as SlotController;
         return curTargetSlot;
     }
     
-    public static SlotController GetSlotController(int SlotID, SlotType slotType)
+    public static ISlotController GetSlotController(int SlotID, SlotType slotType)
     {
         SlotView[] allSlot = GetCurSlotArraySlotView(slotType);
-        SlotController curTargetSlot = allSlot.FirstOrDefault(each => each.Controller.SlotID == SlotID).Controller;
+        ISlotController curTargetSlot = allSlot.FirstOrDefault(each => each.Controller.SlotID == SlotID).Controller;
         return curTargetSlot;
     }
 
-    public static SlotBase[] GetAllSlotBase()
+    public static SlotView[] GetAllSlotBase()
     {
-        SlotBase[] allItemSlot = UIManager.Instance.BagUI.ItemRoot.GetComponentsInChildren<SlotBase>();
-        SlotBase[] allEuipItemSlot = UIManager.Instance.BagUI.EquipItemRoot.GetComponentsInChildren<SlotBase>();
-        SlotBase[] allGemSlot = UIManager.Instance.BagUI.GemRoot.GetComponentsInChildren<SlotBase>();
-        SlotBase[] allGemInlaySlot = UIManager.Instance.BagUI.EquipBulletSlotRoot.GetComponentsInChildren<SlotBase>();
-        SlotBase[] allBagMiniSlot = UIManager.Instance.BagUI.BagRootMiniGO.GetComponentsInChildren<SlotBase>();
-        SlotBase[] allSlot = allItemSlot.Concat(allEuipItemSlot).Concat(allGemSlot).Concat(allGemInlaySlot).Concat(allBagMiniSlot).ToArray();
-        return allSlot;
-    }
-
-    #region 不需要关心的私有方法
-    static SlotBase[] GetCurSlotArray(SlotType slotType)
-    {
-        SlotBase[] allSlot;
-        switch (slotType)
-        {
-            case SlotType.GemBagSlot:
-                allSlot = UIManager.Instance.BagUI.GemRoot.GetComponentsInChildren<SlotBase>();
-                break;
-            case SlotType.BulletSlot:
-                allSlot = UIManager.Instance.BagUI.SpawnerSlotRoot.GetComponentsInChildren<SlotBase>();
-                break;
-            case SlotType.CurBulletSlot:
-                allSlot = UIManager.Instance.BagUI.EquipBulletSlotRoot.GetComponentsInChildren<BulletSlotRole>();
-                break;
-            case SlotType.BagEquipSlot:
-                allSlot = UIManager.Instance.BagUI.EquipItemRoot.GetComponentsInChildren<SlotBase>();
-                break;
-            case SlotType.BagItemSlot:
-                allSlot = UIManager.Instance.BagUI.ItemRoot.GetComponentsInChildren<SlotBase>();
-                break;
-            case SlotType.SpawnnerSlot:
-                allSlot = UIManager.Instance.BagUI.SpawnerSlotRoot.GetComponentsInChildren<SlotBase>();
-                break;
-            default:
-                allSlot = UIManager.Instance.BagUI.ItemRoot.GetComponentsInChildren<SlotBase>();
-                break;
-        }
-
+        SlotView[] allItemSlot = EternalCavans.Instance.ItemRoot.GetComponentsInChildren<SlotView>();
+        SlotView[] allEuipItemSlot = EternalCavans.Instance.EquipItemRoot.GetComponentsInChildren<SlotView>();
+        SlotView[] allGemSlot = EternalCavans.Instance.GemRoot.GetComponentsInChildren<SlotView>();
+        SlotView[] allGemInlaySlot = EternalCavans.Instance.EquipBulletSlotRoot.GetComponentsInChildren<SlotView>();
+        SlotView[] allBagMiniSlot = EternalCavans.Instance.BagRootMini.GetComponentsInChildren<SlotView>();
+        SlotView[] allSlot = allItemSlot.Concat(allEuipItemSlot).Concat(allGemSlot).Concat(allGemInlaySlot).Concat(allBagMiniSlot).ToArray();
         return allSlot;
     }
     
+    //宝石交换逻辑
     public static void Swap(SlotController a, SlotController b)
     {
         var dataA = a.CurData;
@@ -97,43 +67,42 @@ public static class SlotManager
         var goA = a.GetGameObject();
         var goB = b.GetGameObject();
 
-        /*// 清空两边
-        a.Unassign();
-        b.Unassign();*/
-
         // 分别放入
         a.AssignDirectly(dataB, goB);
         b.AssignDirectly(dataA, goA);
     }
-    
+    #region 不需要关心的私有方法
     static SlotView[] GetCurSlotArraySlotView(SlotType slotType)
     {
         SlotView[] allSlot;
         switch (slotType)
         {
             case SlotType.GemBagSlot:
-                allSlot = UIManager.Instance.BagUI.GemRoot.GetComponentsInChildren<SlotView>(true);
+                allSlot = EternalCavans.Instance.GemRoot.GetComponentsInChildren<SlotView>(true);
                 break;
             case SlotType.GemInlaySlot:
-                allSlot = UIManager.Instance.BagUI.EquipBulletSlotRoot.GetComponentsInChildren<SlotView>(true);
+                allSlot = EternalCavans.Instance.EquipBulletSlotRoot.GetComponentsInChildren<GemSlotView>(true);
                 break;
             case SlotType.BulletSlot:
-                allSlot = UIManager.Instance.BagUI.SpawnerSlotRoot.GetComponentsInChildren<SlotView>(true);
+                allSlot = EternalCavans.Instance.SpawnerSlotRoot.GetComponentsInChildren<SlotView>(true);
                 break;
             case SlotType.CurBulletSlot:
-                allSlot = UIManager.Instance.BagUI.EquipBulletSlotRoot.GetComponentsInChildren<SlotView>(true);
+                allSlot = EternalCavans.Instance.EquipBulletSlotRoot.GetComponentsInChildren<BulletSlotView>(true);
                 break;
             case SlotType.BagEquipSlot:
-                allSlot = UIManager.Instance.BagUI.EquipItemRoot.GetComponentsInChildren<SlotView>(true);
+                allSlot = EternalCavans.Instance.EquipItemRoot.GetComponentsInChildren<SlotView>(true);
                 break;
             case SlotType.BagItemSlot:
-                allSlot = UIManager.Instance.BagUI.ItemRoot.GetComponentsInChildren<SlotView>(true);
+                allSlot = EternalCavans.Instance.ItemRoot.GetComponentsInChildren<SlotView>(true);
                 break;
             case SlotType.SpawnnerSlot:
-                allSlot = UIManager.Instance.BagUI.SpawnerSlotRoot.GetComponentsInChildren<SlotView>(true);
+                allSlot = EternalCavans.Instance.SpawnerSlotRoot.GetComponentsInChildren<SlotView>(true);
+                break;
+            case SlotType.SpawnnerSlotInner:
+                allSlot = EternalCavans.Instance.SpawnerSlotRootMini.GetComponentsInChildren<SlotView>(true);
                 break;
             default:
-                allSlot = UIManager.Instance.BagUI.ItemRoot.GetComponentsInChildren<SlotView>(true);
+                allSlot = EternalCavans.Instance.ItemRoot.GetComponentsInChildren<SlotView>(true);
                 break;
         }
 

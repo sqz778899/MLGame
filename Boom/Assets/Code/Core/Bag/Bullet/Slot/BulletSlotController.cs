@@ -1,23 +1,28 @@
 ﻿using UnityEngine;
+using System;
 
-public class BulletSlotController
+public class BulletSlotController: BaseSlotController<ItemDataBase>
 {
     public BulletData CurData;
-    public GameObject CachedGO;
-    BulletSlotView _view;
+    public event Action OnBulletChanged;
+    public BulletInnerSlotController LinkedInnerSlotController;
+    public bool IsLocked; //槽位是不是锁定的
+    BulletSlotView _bulletView;
+    public override void BindView(SlotView view)
+    {
+        base.BindView(view);
+        _bulletView = _view as BulletSlotView;
+    }
 
-    public void BindView(BulletSlotView view) => _view = view;
-
-    public void Assign(BulletData data, GameObject bulletGO)
+    public override void Assign(ItemDataBase data, GameObject itemGO)
     {
         Unassign();
-        CurData = data;
-        //CurData.CurSlotController = this;
-        CachedGO = bulletGO;
-        _view?.Display(bulletGO);
+        CurData = data as BulletData;
+        CurData.CurSlotController = this;
+        CachedGO = itemGO;
+        _view?.Display(itemGO);
 
-        // 装备逻辑
-        GM.Root.InventoryMgr._BulletInvData.EquipBullet(data);
+        GM.Root.InventoryMgr._BulletInvData.EquipBullet(CurData);
         GM.Root.InventoryMgr._BulletInvData.RefreshModifiers();
     }
 
@@ -33,8 +38,6 @@ public class BulletSlotController
         _view?.Clear();
     }
 
-    public bool CanAccept(BulletData data)
-    {
-        return data != null && _view.IsUnlocked;
-    }
+    public bool CanAccept(BulletData data) => 
+        data != null && _bulletView.State == UILockedState.isNormal;
 }

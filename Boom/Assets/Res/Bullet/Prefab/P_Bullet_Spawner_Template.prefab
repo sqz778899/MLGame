@@ -293,7 +293,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3550475874872731627}
-  - component: {fileID: 6676177174455874396}
+  - component: {fileID: 7184217760870105141}
   m_Layer: 5
   m_Name: P_Bullet_Spawner_Template
   m_TagString: Untagged
@@ -323,7 +323,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6676177174455874396
+--- !u!114 &7184217760870105141
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -332,21 +332,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3800383386113728593}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dc2ee539f03a37409343e10b7d88c93, type: 3}
+  m_Script: {fileID: 11500000, guid: 5c093cc6b63c4a34a7390c6f6458a0dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: 0
-  CurSlot: {fileID: 0}
-  Name: 
-  InstanceID: 0
-  SlotID: 0
-  SlotType: 0
-  DobuleClickTime: 6
-  CurToolTipsMenuState: 0
-  IconSpawner: {fileID: 7684855849994658922}
-  GroupStar: {fileID: 3847564016434351185}
-  childBulletIns: {fileID: 0}
+  Icon: {fileID: 7684855849994658922}
   txtCount: {fileID: 7225459898815611356}
+  StarGroup: {fileID: 426107729241396049}
 --- !u!1 &3847564016434351185
 GameObject:
   m_ObjectHideFlags: 0

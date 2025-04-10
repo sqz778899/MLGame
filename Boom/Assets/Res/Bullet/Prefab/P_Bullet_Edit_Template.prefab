@@ -772,7 +772,8 @@ GameObject:
   - component: {fileID: 6724191812520245812}
   - component: {fileID: 8418879571226689705}
   - component: {fileID: 1416929783526677165}
-  - component: {fileID: 8993628548475942185}
+  - component: {fileID: 3673060258315594047}
+  - component: {fileID: 714409443818914181}
   m_Layer: 0
   m_Name: P_Bullet_Edit_Template
   m_TagString: Untagged
@@ -841,7 +842,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 55
---- !u!114 &8993628548475942185
+--- !u!114 &3673060258315594047
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -850,24 +851,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 8573389509980627070}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef7f20c543b94a61a52e9d1ebac1cc3c, type: 3}
+  m_Script: {fileID: 11500000, guid: 9398b63873714c94b83b087c4b84b4ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: 0
-  CurSlot: {fileID: 0}
-  Name: 
-  InstanceID: 0
-  SlotID: 0
-  SlotType: 0
-  DobuleClickTime: 6
-  CurToolTipsMenuState: 0
-  EditA: {fileID: 6357494558779006968}
-  EditB: {fileID: 9150009719306848518}
   IconEditA: {fileID: 2992298705235526589}
   IconEditB: {fileID: 2879946628548675555}
-  EditA_GroupStar: {fileID: 5531656790639264171}
-  EditB_GroupStar: {fileID: 2089091102569232032}
-  IsSpawnerCreate: 0
+  GroupStarEditA: {fileID: 5531656790639264171}
+  GroupStarEditB: {fileID: 2089091102569232032}
+  EditA: {fileID: 6357494558779006968}
+  EditB: {fileID: 9150009719306848518}
+  Spawner: {fileID: 0}
+--- !u!114 &714409443818914181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8573389509980627070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2707c922163480c92bc139a81d616c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9150009719306848518
 GameObject:
   m_ObjectHideFlags: 0

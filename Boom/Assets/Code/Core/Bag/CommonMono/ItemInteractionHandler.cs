@@ -13,6 +13,8 @@ public class ItemInteractionHandler: MonoBehaviour,
     float lastClickTime;
     const float doubleClickThreshold = 0.3f;
     
+    public bool DisableTooltip { get; set; } = false;
+    
     void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -51,34 +53,29 @@ public class ItemInteractionHandler: MonoBehaviour,
     {
         DragManager.Instance.EndDrag(eventData);
         TooltipsManager.Instance.Enable();
-        ShowTooltips();
+        if (!DisableTooltip)
+            ShowTooltips();
     }
-
+    
     public void OnPointerMove(PointerEventData eventData)
     {
-        if (Data.CurSlotController == null) return;
-       
-        SlotController s = Data.CurSlotController as SlotController;
-        Vector3 pos = UTools.GetWPosByMouse(rectTransform) + s.TooltipOffset;
+        Vector3 pos = UTools.GetWPosByMouse(rectTransform);
+        if (Data.CurSlotController != null)
+            pos += Data.CurSlotController.TooltipOffset;
         TooltipsManager.Instance.UpdatePosition(pos);
     }
-
     #endregion
 
-    void ShowTooltips()
+    public void ShowTooltips()
     {
         if (Data is ITooltipBuilder builder)
         {
             Vector3 pos = UTools.GetWPosByMouse(rectTransform);
             if (Data.CurSlotController != null)
-            {
-                SlotController s = Data.CurSlotController as SlotController;
-                pos += s.TooltipOffset;
-            }
+                pos += Data.CurSlotController.TooltipOffset;
             TooltipsManager.Instance.Show(builder.BuildTooltip(), pos);
         }
     }
-    
 }
 
 public interface IItemInteractionBehaviour
