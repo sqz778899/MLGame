@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-public class SlotController : BaseSlotController<ItemDataBase>
+public class GemSlotController : BaseSlotController<ItemDataBase>
 {
     //持有的视窗数据
-    public InnerSlotController LinkedInnerSlotController; // 指向关联的 GemSlotInner 的 controller
+    public GemInnerSlotController LinkedGemInnerSlotController; // 指向关联的 GemSlotInner 的 controller
     
     public bool IsEmpty => CurData == null; //槽位是不是空的
     public bool IsLocked; //槽位是不是锁定的
@@ -27,56 +27,33 @@ public class SlotController : BaseSlotController<ItemDataBase>
     public override void Assign(ItemDataBase data, GameObject itemGO)
     {
         // step 1: 卸载原槽位
-        SlotController from = data.CurSlotController as SlotController;
+        GemSlotController from = data.CurSlotController as GemSlotController;
         itemGO.transform.SetParent(DragManager.Instance.dragRoot.transform);
         from?.Unassign();
-        from?.LinkedInnerSlotController?.Unassign();
+        from?.LinkedGemInnerSlotController?.Unassign();
 
-        // step 2: 赋值自己
-        _curData = data;
-        _curData.CurSlotController = this;
-        CachedGO = itemGO;
-
-        // step 3: UI更新
-        _view.Display(itemGO);
-
-        // step 4: 创建影子
-        if (data is GemData gemData && LinkedInnerSlotController != null)
-        {
-            var shadow = BagItemTools<GemInnerNew>.CreateTempObjectGO(gemData, CreateItemType.MiniBagGem);
-            shadow.GetComponent<GemInnerNew>().SourceGem = itemGO.GetComponent<GemNew>();
-            LinkedInnerSlotController.Assign(gemData, shadow);
-        }
-
-        // step 5: 刷新数据层
-        switch (SlotType)
-        {
-            case SlotType.GemBagSlot:
-                GM.Root.InventoryMgr._InventoryData.AddGemToBag((GemData)data);
-                break;
-            case SlotType.GemInlaySlot:
-                GM.Root.InventoryMgr._InventoryData.EquipGem((GemData)data);
-                break;
-        }
-
-        GM.Root.InventoryMgr._BulletInvData?.RefreshModifiers();
+        AssignDirectly(data, itemGO);
     }
     
-    public void AssignDirectly(ItemDataBase data, GameObject itemGO)
+    public override void AssignDirectly(ItemDataBase data, GameObject itemGO)
     {
+        //赋值自己
         _curData = data;
         _curData.CurSlotController = this;
         CachedGO = itemGO;
-
+        
+        //UI更新
         _view?.Display(itemGO);
-
-        if (data is GemData gemData && LinkedInnerSlotController != null)
+        
+        //创建影子
+        if (data is GemData gemData && LinkedGemInnerSlotController != null)
         {
             var shadow = BagItemTools<GemInnerNew>.CreateTempObjectGO(gemData, CreateItemType.MiniBagGem);
             shadow.GetComponent<GemInnerNew>().SourceGem = itemGO.GetComponent<GemNew>();
-            LinkedInnerSlotController.Assign(gemData, shadow);
+            LinkedGemInnerSlotController.Assign(gemData, shadow);
         }
-
+        
+        //刷新数据层
         switch (SlotType)
         {
             case SlotType.GemBagSlot:
@@ -86,7 +63,6 @@ public class SlotController : BaseSlotController<ItemDataBase>
                 GM.Root.InventoryMgr._InventoryData.EquipGem((GemData)data);
                 break;
         }
-
         GM.Root.InventoryMgr._BulletInvData?.RefreshModifiers();
     }
 

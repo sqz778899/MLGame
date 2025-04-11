@@ -13,24 +13,40 @@ public class BulletSpawnerNew:ItemBase,
     public Image Icon;
     public TextMeshProUGUI txtCount;
     public Transform StarGroup;
+    internal RectTransform rectTransform;
+    
+    public virtual void OnPointerDown(PointerEventData eventData) =>
+        Spawner(eventData, BulletCreateFlag.Spawner);
 
-    RectTransform rectTransform;
-
-    void Awake() => rectTransform = GetComponent<RectTransform>();
-
-    void Update()
+    internal void Spawner(PointerEventData eventData,BulletCreateFlag createFlag)
     {
-        Debug.Log($"SpawnerCount {Data.SpawnerCount}");
-        Debug.Log($"[Spawner] Origin Data Hash: {Data.GetHashCode()}");
+        if (Data.SpawnerCount <= 0) return;
+
+        // 克隆一份新的数据
+        BulletData newData = new BulletData(Data.ID, null);
+        // 减去 1
+        Data.SpawnerCount--;
+        // 创建新子弹
+        BulletNew bulletSC = BulletFactory.CreateBullet(newData, BulletInsMode.EditA) as BulletNew;
+        bulletSC.transform.SetParent(DragManager.Instance.dragRoot, false);
+        bulletSC.transform.position = UTools.GetWPosByMouse(rectTransform);
+        bulletSC.CreateFlag = createFlag;
+        //用DragManager管理后续拖拽
+        DragManager.Instance.ForceDrag(bulletSC.gameObject,eventData);
     }
 
+    #region 不关心的部分
+    void Awake() => rectTransform = GetComponent<RectTransform>();
+    
     public override void BindData(ItemDataBase data)
     {
         Data = data as BulletData;
+        Data.OnDataChanged -= RefreshUI;
+        Data.OnDataChanged += RefreshUI;
         RefreshUI();
     }
-
-    void RefreshUI()
+    
+    internal void RefreshUI()
     {
         // 设置图标
         Icon.sprite = ResManager.instance.GetAssetCache<Sprite>(
@@ -41,7 +57,7 @@ public class BulletSpawnerNew:ItemBase,
         for (int i = 0; i < StarGroup.childCount; i++)
             StarGroup.GetChild(i).gameObject.SetActive(i < Data.Level);
     }
-
+    
     public void OnPointerEnter(PointerEventData eventData) => ShowTooltips();
     
     public void OnPointerMove(PointerEventData eventData)
@@ -54,12 +70,6 @@ public class BulletSpawnerNew:ItemBase,
 
     public void OnPointerExit(PointerEventData eventData) => TooltipsManager.Instance.Hide();
     
-    public void OnDragCanceled()
-    {
-        Data.SpawnerCount++;
-        RefreshUI();
-    }
-
     void ShowTooltips()
     {
         if (Data is ITooltipBuilder builder)
@@ -71,23 +81,8 @@ public class BulletSpawnerNew:ItemBase,
         }
         TooltipsManager.Instance.Show(Data.BuildTooltip(), UTools.GetWPosByMouse(rectTransform));
     }
-    
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        if (Data.SpawnerCount <= 0) return;
 
-        // 克隆一份新的数据
-        BulletData newData = new BulletData(Data.ID, null);
-        // 减去 1
-        Data.SpawnerCount--;
-        RefreshUI();
-        // 创建新子弹
-        GameObject bulletGO = BulletFactory.CreateBullet(newData, BulletInsMode.EditA).gameObject;
-        bulletGO.transform.SetParent(DragManager.Instance.dragRoot, false);
-        bulletGO.transform.position = UTools.GetWPosByMouse(rectTransform);
-        var bulletSC = bulletGO.GetComponent<BulletNew>();
-        bulletSC.Spawner = this;//让拖出的子弹持有“父 Spawner”引用
-        //用DragManager管理后续拖拽
-        DragManager.Instance.ForceDrag(bulletGO,eventData);
-    }
+    void OnDestroy() =>
+        Data.OnDataChanged -= RefreshUI;
+    #endregion
 }

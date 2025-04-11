@@ -4,25 +4,25 @@
   "Score": 0,
   "Coins": 0,
   "RoomKeys": 0,
-  "MagicDust": 0,
+  "MagicDust": 9999,
   "UserBulletSpawner": [
     {
       "SpawnerCount": 1,
       "ID": 1,
       "SlotID": 1,
-      "SlotType": 0
+      "SlotType": 8
     },
     {
-      "SpawnerCount": 0,
+      "SpawnerCount": 1,
       "ID": 2,
       "SlotID": 2,
-      "SlotType": 0
+      "SlotType": 8
     },
     {
       "SpawnerCount": 0,
       "ID": 3,
       "SlotID": 3,
-      "SlotType": 0
+      "SlotType": 8
     }
   ],
   "UserCurBullets": [],
@@ -36,17 +36,17 @@
   "UserItems": [],
   "UserGems": [
     {
-      "ID": 20,
+      "ID": 1,
       "SlotID": 1,
       "SlotType": 4
     },
     {
-      "ID": 1,
+      "ID": 10,
       "SlotID": 2,
       "SlotType": 4
     },
     {
-      "ID": 10,
+      "ID": 20,
       "SlotID": 3,
       "SlotType": 4
     }

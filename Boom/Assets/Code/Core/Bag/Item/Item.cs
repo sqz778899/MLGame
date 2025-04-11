@@ -78,7 +78,7 @@ public class Item : DragBase
     {
         if (EternalCavans.Instance.TutorialDragGemLock) return;
         ItemSlot slot = targetSlot as ItemSlot;
-        SlotManager.ClearSlot(_data.CurSlot);
+        SlotManager.ClearSlot(_data.CurSlotController);
         slot.SOnDrop(gameObject);
         if (slot.SlotType == SlotType.BagItemSlot)
         {
@@ -93,11 +93,11 @@ public class Item : DragBase
     //落下交换逻辑
     internal override void OnDropFillSlot(SlotBase targetSlot)
     {
-        //先把目标槽位的物品拿出来
+        /*//先把目标槽位的物品拿出来
         GameObject tagetChildIns = targetSlot.ChildIns;
         _data.CurSlot.SOnDrop(tagetChildIns);
         //再把自己放进去
-        targetSlot.SOnDrop(gameObject);
+        targetSlot.SOnDrop(gameObject);*/
     }
     
     internal override void NonFindSlot()
@@ -127,7 +127,7 @@ public class Item : DragBase
             PathConfig.GetItemPath(itemDesignData.ResName));
         gameObject.name = itemDesignData.Name + _data.InstanceID;
         //同步背景形状
-        switch (_data.CurSlot.SlotType)
+        switch (_data.CurSlotController.SlotType)
         {
             case SlotType.BagItemSlot:
                 ItemBGInBag.gameObject.SetActive(true);

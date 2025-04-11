@@ -12,17 +12,11 @@ public class BulletNew : ItemBase, IItemInteractionBehaviour
     public GameObject GroupStarEditB;
     public GameObject EditA;
     public GameObject EditB;
-    
-    public BulletSpawnerNew Spawner;
+   
+    public BulletCreateFlag CreateFlag;
     public BulletInsMode Mode { get; private set; } = BulletInsMode.EditA;
-
     RectTransform rectTransform;
     
-    void Update()
-    {
-        Debug.Log($"[Spawner] BulletNew Data Hash: {Data.GetHashCode()}");
-    }
-
     void RefreshUI()
     {
         IconEditA.sprite = ResManager.instance.GetAssetCache<Sprite>(
@@ -40,6 +34,7 @@ public class BulletNew : ItemBase, IItemInteractionBehaviour
     {
         for (int i = 0; i < group.transform.childCount; i++)
             group.transform.GetChild(i).gameObject.SetActive(i < count);
+        
     }
 
     public void SwitchMode(BulletInsMode mode)
@@ -54,9 +49,8 @@ public class BulletNew : ItemBase, IItemInteractionBehaviour
     /// </summary>
     public void OnDragCanceled()
     {
-        Spawner?.OnDragCanceled();
         GetComponent<ItemInteractionHandler>().DisableTooltip = true;
-        Destroy(gameObject);
+        GM.Root.InventoryMgr.ReturnToSpawner(gameObject,Data);
     }
 
     #region IItemInteractionBehaviour 实现
@@ -75,7 +69,6 @@ public class BulletNew : ItemBase, IItemInteractionBehaviour
         var mousePos = UTools.GetWPosByMouse(rectTransform);
         RightClickMenuManager.Instance.Show(gameObject, mousePos);
     }
-
     #endregion
 
     #region 数据初始化绑定卸载等
@@ -105,4 +98,11 @@ public class BulletNew : ItemBase, IItemInteractionBehaviour
             Data.OnDataChanged -= RefreshUI;
     }
     #endregion
+}
+
+public enum BulletCreateFlag
+{
+    None = 0,
+    Spawner = 1,
+    SpawnerInner = 2,
 }

@@ -17,8 +17,8 @@ public class TreasureNode:MapNodeBase
         spriteRenderer.sprite = TreasureOpened;
         
         //创建一个临时的宝石，只用来表现，用完即销毁
-        SlotController emptySlotController = SlotManager.GetEmptySlotController(SlotType.GemBagSlot);
-        GemData rollGemData = new GemData(GemID, emptySlotController);
+        GemSlotController emptyGemSlotController = SlotManager.GetEmptySlotController(SlotType.GemBagSlot);
+        GemData rollGemData = new GemData(GemID, emptyGemSlotController);
         string gemName = rollGemData.Name;
         GameObject GemIns = BagItemTools<GemNew>.CreateTempObjectGO(rollGemData,CreateItemType.TempGem);
         

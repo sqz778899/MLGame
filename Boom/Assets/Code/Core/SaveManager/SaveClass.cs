@@ -245,8 +245,8 @@ public class ItemBaseSaveData
     public ItemBaseSaveData(ItemData item)
     {
         ID = item.ID;
-        SlotID = item.CurSlot.SlotID;
-        SlotType = item.CurSlot.SlotType;
+        SlotID = item.CurSlotController.SlotID;
+        SlotType = item.CurSlotController.SlotType;
     }
 }
 
@@ -257,8 +257,8 @@ public class BulletBaseSaveData:ItemBaseSaveData
     public BulletBaseSaveData(BulletData data)
     {
         ID = data.ID; //有了ID，其他静态数据通过配表索引出来
-        SlotID = data.CurSlot.SlotID;
-        SlotType = data.CurSlot.SlotType;
+        SlotID = data.CurSlotController.SlotID;
+        SlotType = data.CurSlotController.SlotType;
         SpawnerCount = data.SpawnerCount;
     }
     public BulletBaseSaveData(int _id = -1, int _slotID = -1, 
@@ -290,8 +290,8 @@ public class ItemSaveData:ItemBaseSaveData
     public ItemSaveData(ItemData data)
     {
         ID = data.ID; //有了ID，其他静态数据通过配表索引出来
-        SlotID = data.CurSlot.SlotID;
-        SlotType = data.CurSlot.SlotType;
+        SlotID = data.CurSlotController.SlotID;
+        SlotType = data.CurSlotController.SlotType;
     }
     public ItemSaveData() {}// 让无参构造也保留，以免 JsonUtility/序列化报错
 }

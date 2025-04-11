@@ -68,7 +68,7 @@ public class BulletSlotRole: SlotBase
         base.SOnDrop(_childIns);
         ItemBase curSC = _childIns.GetComponentInChildren<ItemBase>();
         Bullet _bulletNew = curSC as Bullet;
-        _bulletNew._data.CurSlot = this;
+        //_bulletNew._data.CurSlot = this;
         MainID = _bulletNew._data.ID;
         
         //持有这个BulletData

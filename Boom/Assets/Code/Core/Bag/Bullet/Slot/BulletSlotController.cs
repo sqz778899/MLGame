@@ -3,7 +3,6 @@ using System;
 
 public class BulletSlotController: BaseSlotController<ItemDataBase>
 {
-    public BulletData CurData;
     public event Action OnBulletChanged;
     public BulletInnerSlotController LinkedInnerSlotController;
     public bool IsLocked; //槽位是不是锁定的
@@ -16,25 +15,34 @@ public class BulletSlotController: BaseSlotController<ItemDataBase>
 
     public override void Assign(ItemDataBase data, GameObject itemGO)
     {
-        Unassign();
-        CurData = data as BulletData;
-        CurData.CurSlotController = this;
-        CachedGO = itemGO;
-        _view?.Display(itemGO);
+        // step 1:卸载原槽位
+        BulletSlotController from = data.CurSlotController as BulletSlotController;
+        itemGO.transform.SetParent(DragManager.Instance.dragRoot.transform);
+        from?.Unassign();
+        AssignDirectly(data, itemGO);
+    }
 
-        GM.Root.InventoryMgr._BulletInvData.EquipBullet(CurData);
+    public override void AssignDirectly(ItemDataBase data, GameObject itemGO)
+    {
+        // step 2: 赋值自己
+        _curData = data;
+        _curData.CurSlotController = this;
+        CachedGO = itemGO;
+        // step 3: UI更新
+        _view?.Display(itemGO);
+        // step 4: 刷新数据层
+        GM.Root.InventoryMgr._BulletInvData.EquipBullet(_curData as BulletData);
         GM.Root.InventoryMgr._BulletInvData.RefreshModifiers();
     }
 
     public void Unassign()
     {
-        if (CurData != null)
+        if (_curData != null)
         {
-            GM.Root.InventoryMgr._BulletInvData.UnEquipBullet(CurData);
+            GM.Root.InventoryMgr._BulletInvData.UnEquipBullet(_curData as BulletData);
             CurData.CurSlotController = null;
         }
-
-        CurData = null;
+        _curData = null;
         _view?.Clear();
     }
 

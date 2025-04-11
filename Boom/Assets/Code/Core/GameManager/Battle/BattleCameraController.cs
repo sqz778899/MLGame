@@ -8,10 +8,13 @@ public class BattleCameraController
     RoleInner CurRole;
     
     Transform _firstBulletTrans => 
-        CurRole.Bullets != null && CurRole.Bullets.Count > 0 && CurRole.Bullets[0] != null && CurRole.Bullets[0].gameObject != null
-            ? CurRole.Bullets[0].transform
+        GM.Root.InventoryMgr.CurBulletsInFight != null &&
+        GM.Root.InventoryMgr.CurBulletsInFight.Count > 0 &&
+        GM.Root.InventoryMgr.CurBulletsInFight[0] != null && 
+        GM.Root.InventoryMgr.CurBulletsInFight[0].gameObject != null
+            ? GM.Root.InventoryMgr.CurBulletsInFight[0].transform
             : null;
-    int _curBulletCount => CurRole.Bullets.Count;
+    int _curBulletCount => GM.Root.InventoryMgr.CurBulletsInFight.Count;
     
     bool isCameraStopping;
     bool isBeginCatch;
@@ -70,7 +73,7 @@ public class BattleCameraController
 
         if (isBeginCatch)
         {
-            BulletInner firstBullet = CurRole.Bullets[0];
+            BulletInner firstBullet = GM.Root.InventoryMgr.CurBulletsInFight[0];
             float curSpeed = firstBullet.CurSpeed; // 直接拿实时速度
             // 镜头的加速度
             _cameraCurSpeed = Mathf.Lerp(_cameraCurSpeed, Mathf.Max(curSpeed * 1.5f, curSpeed + 10f), Time.deltaTime * 14f);

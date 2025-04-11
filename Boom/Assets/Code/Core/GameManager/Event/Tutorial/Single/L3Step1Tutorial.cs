@@ -59,8 +59,8 @@ public class L3Step1Tutorial:TutorialStepBase
         _InventoryData.ClearData();
         ISlotController slot01 = SlotManager.GetSlotController(3, SlotType.GemInlaySlot);
         ISlotController slot02 = SlotManager.GetSlotController(6, SlotType.GemInlaySlot);
-        _InventoryData.EquipGem(new GemData(20,slot01 as SlotController));
-        _InventoryData.EquipGem(new GemData(20,slot02 as SlotController));
+        _InventoryData.EquipGem(new GemData(20,slot01 as GemSlotController));
+        _InventoryData.EquipGem(new GemData(20,slot02 as GemSlotController));
 
         InventoryManager.Instance.InitAllBagGO();
         //3)设置背景板状态

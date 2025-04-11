@@ -104,7 +104,7 @@ public class Enemy : EnemyBase
        
         CurHP -= damage;
         OnTakeDamage?.Invoke();//MiniMap中的UI显示敌人状态
-        CurBullet.BattleOnceHits.Add(new BattleOnceHit(CurBullet._data.CurSlot.SlotID,
+        CurBullet.BattleOnceHits.Add(new BattleOnceHit(CurBullet._data.CurSlotController.SlotID,
             -1,1,EffectiveDamage,OverflowDamage,damage,CurHP<=0));
         
         float hitTime = 0f;

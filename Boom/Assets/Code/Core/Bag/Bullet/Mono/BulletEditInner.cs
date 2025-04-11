@@ -42,7 +42,7 @@ public class BulletEditInner:ItemBase
             {
                 ReturnToSpawner();
                 //3)刷新GO
-                PlayerManager.Instance.RoleInFightGO.GetComponent<RoleInner>().CreateBulletInner(true);
+                //PlayerManager.Instance.RoleInFightGO.GetComponent<RoleInner>().CreateBulletInner(true);
                 nonHappen = false;
                 break;
             }
@@ -59,15 +59,15 @@ public class BulletEditInner:ItemBase
                 if (targetSlotSC.CurBulletSlotRole.CurBulletData != null) //走交换逻辑
                 {
                     GameObject targerChildIns = targetSlotSC.CurBulletSlotRole.ChildIns;
-                    SlotManager.ClearSlot(_data.CurSlot);
-                    _data.CurSlot.SOnDrop(targerChildIns);
+                    SlotManager.ClearSlot(_data.CurSlotController);
+                    _data.CurSlotController.Assign(_data,targerChildIns);
                     targetSlotSC.CurBulletSlotRole.SOnDrop(_data);
                     InventoryManager.Instance._BulletInvData.RefreshModifiers();
                     InventoryManager.Instance._BulletInvData.SortEquipBullet();
                 }
                 else
                 {
-                    SlotManager.ClearSlot(_data.CurSlot);
+                    SlotManager.ClearSlot(_data.CurSlotController);
                     targetSlotSC.CurBulletSlotRole.SOnDrop(_data);//走空插逻辑
                     //这个时候槽位ID才确定下来
                     InventoryManager.Instance._BulletInvData.EquipBullet(_data);
@@ -75,7 +75,7 @@ public class BulletEditInner:ItemBase
              
                 //3)刷新GO
                 //_data.SyncFinalAttributes();
-                PlayerManager.Instance.RoleInFightGO.GetComponent<RoleInner>().CreateBulletInner(true);
+                //PlayerManager.Instance.RoleInFightGO.GetComponent<RoleInner>().CreateBulletInner(true);
                 Destroy(gameObject);
                 nonHappen = false;
                 break;
@@ -91,9 +91,9 @@ public class BulletEditInner:ItemBase
             if (eachBulletData.ID == _data.ID)
             {
                 eachBulletData.SpawnerCount++;
-                InventoryManager.Instance._BulletInvData.RemoveEquipBullet(_data);
+                InventoryManager.Instance._BulletInvData.UnEquipBullet(_data);
                 Destroy(gameObject);
-                SlotManager.ClearSlot(_data.CurSlot);
+                SlotManager.ClearSlot(_data.CurSlotController);
                 break;
             }
         }

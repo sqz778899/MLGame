@@ -55,9 +55,9 @@ public class RightClickMenuManager:MonoBehaviour
         ItemBase curBaseSC = CurIns.GetComponent<ItemBase>();
         if (curBaseSC is GemNew curGem)
         {
-            SlotController curEmptySlot = SlotManager.GetEmptySlotController(SlotType.GemInlaySlot);
-            if (curEmptySlot == null) return;
-            curEmptySlot.Assign(curGem.Data, CurIns);
+            GemSlotController curEmptyGemSlot = SlotManager.GetEmptySlotController(SlotType.GemInlaySlot);
+            if (curEmptyGemSlot == null) return;
+            curEmptyGemSlot.Assign(curGem.Data, CurIns);
         }
         Hide();
     }

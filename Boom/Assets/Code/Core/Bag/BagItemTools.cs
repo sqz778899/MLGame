@@ -51,7 +51,7 @@ public static class BagItemTools<T> where T:ItemBase
         if (curSC is Item curItem)
         {
             InventoryManager.Instance._InventoryData.RemoveItem(curItem._data);
-            SlotManager.ClearSlot(curItem._data.CurSlot);
+            SlotManager.ClearSlot(curItem._data.CurSlotController);
             GameObject.Destroy(objectIns);
         }
     }
@@ -69,7 +69,7 @@ public static class BagItemTools<T> where T:ItemBase
     
     public static void ClearAllObject()
     {
-        SlotView[] allSlot = SlotManager.GetAllSlotBase();
+        SlotView[] allSlot = SlotManager.GetAllSlotView();
         foreach (SlotView each in allSlot)
             each.Clear();
     }

@@ -37,7 +37,6 @@ public class MapManager : MonoBehaviour
         {
             TrunkManager.Instance.ForceRefresh();
             UIManager.Instance.InitStartGame();
-            SaveManager.LoadSaveFile();
         }
         //todo ......................
         UIManager.Instance.InitLogic();

@@ -9597,7 +9597,7 @@ GameObject:
   - component: {fileID: 6546474968272570427}
   - component: {fileID: 3179793444910199617}
   - component: {fileID: 7112176063288398927}
-  - component: {fileID: 7631849132387191413}
+  - component: {fileID: 4840994834885011198}
   m_Layer: 5
   m_Name: Slot01
   m_TagString: BulletSlot
@@ -9662,7 +9662,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7631849132387191413
+--- !u!114 &4840994834885011198
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9671,7 +9671,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 510516453798729098}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582a5084d26f4630b679ba57b06ba03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eddd1f047be48589d908183981b1da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ViewSlotID: 1
@@ -17320,7 +17320,7 @@ GameObject:
   - component: {fileID: 1079318338795762127}
   - component: {fileID: 1523349398782811824}
   - component: {fileID: 6733740083014659205}
-  - component: {fileID: 34819747532320158}
+  - component: {fileID: 9140574276899685241}
   m_Layer: 5
   m_Name: Slot04
   m_TagString: BulletSlot
@@ -17385,7 +17385,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &34819747532320158
+--- !u!114 &9140574276899685241
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -17394,11 +17394,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 946861172963483100}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582a5084d26f4630b679ba57b06ba03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eddd1f047be48589d908183981b1da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ViewSlotID: 9
-  ViewSlotType: 0
+  ViewSlotType: 8
   InstanceID: 0
 --- !u!1 &949686623960031093
 GameObject:
@@ -24692,7 +24692,7 @@ GameObject:
   - component: {fileID: 6066994830573713980}
   - component: {fileID: 1985309286593640819}
   - component: {fileID: 5376071114475953284}
-  - component: {fileID: 338353617701991943}
+  - component: {fileID: 1219969406905847001}
   m_Layer: 5
   m_Name: Slot01
   m_TagString: BulletSlot
@@ -24757,7 +24757,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &338353617701991943
+--- !u!114 &1219969406905847001
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -24766,11 +24766,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1238215166867007099}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582a5084d26f4630b679ba57b06ba03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eddd1f047be48589d908183981b1da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ViewSlotID: 11
-  ViewSlotType: 0
+  ViewSlotType: 8
   InstanceID: 0
 --- !u!1 &1241368828389182797
 GameObject:
@@ -25517,7 +25517,7 @@ GameObject:
   - component: {fileID: 9112391298123792396}
   - component: {fileID: 4940807334282799405}
   - component: {fileID: 2056058341516931670}
-  - component: {fileID: 404494951269007873}
+  - component: {fileID: 3681696632243073982}
   m_Layer: 5
   m_Name: Slot05
   m_TagString: BulletSlot
@@ -25582,7 +25582,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &404494951269007873
+--- !u!114 &3681696632243073982
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -25591,7 +25591,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1364505757289465815}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582a5084d26f4630b679ba57b06ba03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eddd1f047be48589d908183981b1da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ViewSlotID: 5
@@ -26967,7 +26967,7 @@ GameObject:
   - component: {fileID: 933557845148895600}
   - component: {fileID: 8579408544306876407}
   - component: {fileID: 2544116751672877860}
-  - component: {fileID: 4677537645139955836}
+  - component: {fileID: 7854920792795705304}
   m_Layer: 5
   m_Name: Slot02
   m_TagString: BulletSlot
@@ -27032,7 +27032,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4677537645139955836
+--- !u!114 &7854920792795705304
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -27041,11 +27041,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1568228514321399366}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582a5084d26f4630b679ba57b06ba03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eddd1f047be48589d908183981b1da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ViewSlotID: 12
-  ViewSlotType: 0
+  ViewSlotType: 8
   InstanceID: 0
 --- !u!1 &1575092877824953438
 GameObject:
@@ -30933,7 +30933,7 @@ GameObject:
   - component: {fileID: 3497840042571100555}
   - component: {fileID: 2156109850705407446}
   - component: {fileID: 3674665272097385829}
-  - component: {fileID: 4325494477075203006}
+  - component: {fileID: 3006810249150460186}
   m_Layer: 5
   m_Name: Slot02
   m_TagString: BulletSlot
@@ -30998,7 +30998,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4325494477075203006
+--- !u!114 &3006810249150460186
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -31007,11 +31007,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2148312316859974914}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582a5084d26f4630b679ba57b06ba03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eddd1f047be48589d908183981b1da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ViewSlotID: 2
-  ViewSlotType: 0
+  ViewSlotType: 8
   InstanceID: 0
 --- !u!1 &2156182965942129767
 GameObject:
@@ -31971,7 +31971,7 @@ GameObject:
   - component: {fileID: 8990768376084860325}
   - component: {fileID: 5330053551945994076}
   - component: {fileID: 7212855541277174629}
-  - component: {fileID: 3937591306705519347}
+  - component: {fileID: 7527800591090337362}
   m_Layer: 5
   m_Name: Slot03
   m_TagString: BulletSlot
@@ -32036,7 +32036,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3937591306705519347
+--- !u!114 &7527800591090337362
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -32045,11 +32045,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2302621117552202093}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582a5084d26f4630b679ba57b06ba03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eddd1f047be48589d908183981b1da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ViewSlotID: 13
-  ViewSlotType: 0
+  ViewSlotType: 8
   InstanceID: 0
 --- !u!1 &2309297155903669398
 GameObject:
@@ -32324,7 +32324,7 @@ GameObject:
   - component: {fileID: 3905369549043589109}
   - component: {fileID: 2222202231453075348}
   - component: {fileID: 4864396155948695669}
-  - component: {fileID: 6902601237536834911}
+  - component: {fileID: 1379791598045230524}
   m_Layer: 5
   m_Name: Slot01
   m_TagString: BulletSlot
@@ -32389,7 +32389,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6902601237536834911
+--- !u!114 &1379791598045230524
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -32398,7 +32398,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2318860123737107099}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582a5084d26f4630b679ba57b06ba03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eddd1f047be48589d908183981b1da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ViewSlotID: 6
@@ -33028,7 +33028,7 @@ GameObject:
   - component: {fileID: 6430062878213522401}
   - component: {fileID: 9101857694792074494}
   - component: {fileID: 4528462863064748042}
-  - component: {fileID: 8178177367621684503}
+  - component: {fileID: 3260940764231076402}
   m_Layer: 5
   m_Name: Slot04
   m_TagString: BulletSlot
@@ -33093,7 +33093,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8178177367621684503
+--- !u!114 &3260940764231076402
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -33102,7 +33102,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2373018347604794489}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582a5084d26f4630b679ba57b06ba03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eddd1f047be48589d908183981b1da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ViewSlotID: 9
@@ -39737,7 +39737,7 @@ GameObject:
   - component: {fileID: 6856326841152343716}
   - component: {fileID: 1675480408859870603}
   - component: {fileID: 7886449784896706287}
-  - component: {fileID: 5314501013890851342}
+  - component: {fileID: 7371134815557294918}
   m_Layer: 5
   m_Name: Slot01
   m_TagString: BulletSlot
@@ -39802,7 +39802,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5314501013890851342
+--- !u!114 &7371134815557294918
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -39811,11 +39811,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2708496684968437395}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582a5084d26f4630b679ba57b06ba03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eddd1f047be48589d908183981b1da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ViewSlotID: 6
-  ViewSlotType: 0
+  ViewSlotType: 8
   InstanceID: 0
 --- !u!1 &2716349672508593057
 GameObject:
@@ -40096,7 +40096,7 @@ GameObject:
   - component: {fileID: 794525762593787380}
   - component: {fileID: 907043520323817080}
   - component: {fileID: 1641319002417671918}
-  - component: {fileID: 7303525786864840188}
+  - component: {fileID: 1999388463003062402}
   m_Layer: 5
   m_Name: Slot02
   m_TagString: BulletSlot
@@ -40161,7 +40161,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7303525786864840188
+--- !u!114 &1999388463003062402
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40170,11 +40170,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2725704949820854862}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582a5084d26f4630b679ba57b06ba03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eddd1f047be48589d908183981b1da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ViewSlotID: 7
-  ViewSlotType: 0
+  ViewSlotType: 8
   InstanceID: 0
 --- !u!1 &2736459057643535085
 GameObject:
@@ -42768,7 +42768,7 @@ GameObject:
   - component: {fileID: 8780868522036418310}
   - component: {fileID: 9217197450098349393}
   - component: {fileID: 6596044208302189778}
-  - component: {fileID: 4169055483800283816}
+  - component: {fileID: 5380872956851589083}
   m_Layer: 5
   m_Name: BagBulletRoot
   m_TagString: Untagged
@@ -42835,7 +42835,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4169055483800283816
+--- !u!114 &5380872956851589083
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42844,13 +42844,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2945522022076720591}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
+  m_Script: {fileID: 11500000, guid: f186ebbcd4dcf664789bcf3db39c254f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 21692607834983739}
   m_Horizontal: 1
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
@@ -42858,9 +42858,9 @@ MonoBehaviour:
   m_Viewport: {fileID: 149915339477762054}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 973885195036202162}
-  m_HorizontalScrollbarVisibility: 2
+  m_HorizontalScrollbarVisibility: 0
   m_VerticalScrollbarVisibility: 2
-  m_HorizontalScrollbarSpacing: -3
+  m_HorizontalScrollbarSpacing: 0
   m_VerticalScrollbarSpacing: -3
   m_OnValueChanged:
     m_PersistentCalls:
@@ -45220,7 +45220,7 @@ GameObject:
   - component: {fileID: 1700727223445470355}
   - component: {fileID: 8010747625781300158}
   - component: {fileID: 2103352160797922740}
-  - component: {fileID: 3723311648778199653}
+  - component: {fileID: 7861099420015340170}
   m_Layer: 5
   m_Name: Slot02
   m_TagString: BulletSlot
@@ -45285,7 +45285,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3723311648778199653
+--- !u!114 &7861099420015340170
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45294,7 +45294,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3200880589934093020}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582a5084d26f4630b679ba57b06ba03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eddd1f047be48589d908183981b1da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ViewSlotID: 12
@@ -53836,7 +53836,7 @@ GameObject:
   - component: {fileID: 7368431564175245135}
   - component: {fileID: 1633889081206644147}
   - component: {fileID: 465400628159869537}
-  - component: {fileID: 7863963691186295527}
+  - component: {fileID: 1464117926832090626}
   m_Layer: 5
   m_Name: Slot04
   m_TagString: BulletSlot
@@ -53901,7 +53901,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7863963691186295527
+--- !u!114 &1464117926832090626
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -53910,11 +53910,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3782354259214424385}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582a5084d26f4630b679ba57b06ba03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eddd1f047be48589d908183981b1da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ViewSlotID: 14
-  ViewSlotType: 0
+  ViewSlotType: 8
   InstanceID: 0
 --- !u!1 &3802324163383715333
 GameObject:
@@ -56765,7 +56765,7 @@ GameObject:
   - component: {fileID: 2186098868108406968}
   - component: {fileID: 5600798461601036717}
   - component: {fileID: 6926106966599892188}
-  - component: {fileID: 3153077461050136282}
+  - component: {fileID: 8934635149288440774}
   m_Layer: 5
   m_Name: Slot03
   m_TagString: BulletSlot
@@ -56830,7 +56830,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3153077461050136282
+--- !u!114 &8934635149288440774
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -56839,11 +56839,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4215192499848435137}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582a5084d26f4630b679ba57b06ba03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eddd1f047be48589d908183981b1da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ViewSlotID: 8
-  ViewSlotType: 0
+  ViewSlotType: 8
   InstanceID: 0
 --- !u!1 &4217850918590519371
 GameObject:
@@ -64397,7 +64397,7 @@ GameObject:
   - component: {fileID: 3385210123305919092}
   - component: {fileID: 8024213977296041772}
   - component: {fileID: 6737396858293560441}
-  - component: {fileID: 391872808121207714}
+  - component: {fileID: 2537693380903935866}
   m_Layer: 5
   m_Name: Slot03
   m_TagString: BulletSlot
@@ -64462,7 +64462,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &391872808121207714
+--- !u!114 &2537693380903935866
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -64471,11 +64471,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4717769311427842174}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582a5084d26f4630b679ba57b06ba03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eddd1f047be48589d908183981b1da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ViewSlotID: 3
-  ViewSlotType: 0
+  ViewSlotType: 8
   InstanceID: 0
 --- !u!1 &4723230662953546901
 GameObject:
@@ -64842,7 +64842,7 @@ GameObject:
   - component: {fileID: 8842169407643870209}
   - component: {fileID: 5908896223201250636}
   - component: {fileID: 4178661803201707415}
-  - component: {fileID: 1544655029146667818}
+  - component: {fileID: 6004813707676687170}
   m_Layer: 5
   m_Name: Slot03
   m_TagString: BulletSlot
@@ -64907,7 +64907,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1544655029146667818
+--- !u!114 &6004813707676687170
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -64916,7 +64916,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4786577291368147002}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582a5084d26f4630b679ba57b06ba03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eddd1f047be48589d908183981b1da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ViewSlotID: 3
@@ -65569,7 +65569,7 @@ GameObject:
   - component: {fileID: 3337785292176927333}
   - component: {fileID: 8374708915450622186}
   - component: {fileID: 956608987024778369}
-  - component: {fileID: 3151724004729808863}
+  - component: {fileID: 6962689872524869144}
   m_Layer: 5
   m_Name: Slot05
   m_TagString: BulletSlot
@@ -65634,7 +65634,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3151724004729808863
+--- !u!114 &6962689872524869144
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -65643,7 +65643,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4843752611822779028}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582a5084d26f4630b679ba57b06ba03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eddd1f047be48589d908183981b1da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ViewSlotID: 15
@@ -66734,7 +66734,7 @@ GameObject:
   - component: {fileID: 7961515712462902905}
   - component: {fileID: 9109500767771753880}
   - component: {fileID: 2970480068043600290}
-  - component: {fileID: 5264131105004363713}
+  - component: {fileID: 7506492168575217899}
   m_Layer: 5
   m_Name: Slot05
   m_TagString: BulletSlot
@@ -66799,7 +66799,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5264131105004363713
+--- !u!114 &7506492168575217899
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -66808,11 +66808,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5016474930657919985}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582a5084d26f4630b679ba57b06ba03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eddd1f047be48589d908183981b1da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ViewSlotID: 5
-  ViewSlotType: 0
+  ViewSlotType: 8
   InstanceID: 0
 --- !u!1 &5019232804270989261
 GameObject:
@@ -66825,7 +66825,7 @@ GameObject:
   - component: {fileID: 5911838373355318765}
   - component: {fileID: 6894366886731049768}
   - component: {fileID: 6403290351630922453}
-  - component: {fileID: 7534239583097138657}
+  - component: {fileID: 1367492000863755032}
   m_Layer: 5
   m_Name: Slot02
   m_TagString: BulletSlot
@@ -66890,7 +66890,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7534239583097138657
+--- !u!114 &1367492000863755032
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -66899,7 +66899,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5019232804270989261}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582a5084d26f4630b679ba57b06ba03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eddd1f047be48589d908183981b1da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ViewSlotID: 7
@@ -67788,7 +67788,7 @@ GameObject:
   - component: {fileID: 8564254961172000663}
   - component: {fileID: 4089920193594080807}
   - component: {fileID: 1073375958508144611}
-  - component: {fileID: 2227375201613997360}
+  - component: {fileID: 5423244944531293846}
   m_Layer: 5
   m_Name: Slot05
   m_TagString: BulletSlot
@@ -67853,7 +67853,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2227375201613997360
+--- !u!114 &5423244944531293846
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -67862,11 +67862,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5093319883521283814}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582a5084d26f4630b679ba57b06ba03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eddd1f047be48589d908183981b1da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ViewSlotID: 10
-  ViewSlotType: 0
+  ViewSlotType: 8
   InstanceID: 0
 --- !u!1 &5097914281664348283
 GameObject:
@@ -70768,7 +70768,7 @@ GameObject:
   - component: {fileID: 238906030990347875}
   - component: {fileID: 6925453834848763699}
   - component: {fileID: 8308381294449854232}
-  - component: {fileID: 4405769693718266381}
+  - component: {fileID: 7997986724263933891}
   m_Layer: 5
   m_Name: Slot05
   m_TagString: BulletSlot
@@ -70833,7 +70833,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4405769693718266381
+--- !u!114 &7997986724263933891
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -70842,7 +70842,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5443598584862408937}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582a5084d26f4630b679ba57b06ba03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eddd1f047be48589d908183981b1da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ViewSlotID: 10
@@ -72367,7 +72367,7 @@ GameObject:
   - component: {fileID: 804397129972313447}
   - component: {fileID: 9154705271581734307}
   - component: {fileID: 2143065724996311273}
-  - component: {fileID: 1966296475186559730}
+  - component: {fileID: 7142714514848234700}
   m_Layer: 5
   m_Name: Slot03
   m_TagString: BulletSlot
@@ -72432,7 +72432,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1966296475186559730
+--- !u!114 &7142714514848234700
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -72441,7 +72441,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5604338900459502846}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582a5084d26f4630b679ba57b06ba03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eddd1f047be48589d908183981b1da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ViewSlotID: 8
@@ -72566,7 +72566,7 @@ GameObject:
   - component: {fileID: 2295887100191235758}
   - component: {fileID: 2946189445794468650}
   - component: {fileID: 520939979219584961}
-  - component: {fileID: 8940606973644464391}
+  - component: {fileID: 7078875346868381020}
   m_Layer: 5
   m_Name: Slot05
   m_TagString: BulletSlot
@@ -72631,7 +72631,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8940606973644464391
+--- !u!114 &7078875346868381020
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -72640,11 +72640,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5667143628485360597}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582a5084d26f4630b679ba57b06ba03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eddd1f047be48589d908183981b1da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ViewSlotID: 15
-  ViewSlotType: 0
+  ViewSlotType: 8
   InstanceID: 0
 --- !u!1 &5672477029619444501
 GameObject:
@@ -75572,7 +75572,7 @@ GameObject:
   - component: {fileID: 6982490386468722926}
   - component: {fileID: 4531872334559948884}
   - component: {fileID: 5349659631510173078}
-  - component: {fileID: 5885187345305583212}
+  - component: {fileID: 4046344898505972584}
   m_Layer: 5
   m_Name: Slot01
   m_TagString: BulletSlot
@@ -75637,7 +75637,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5885187345305583212
+--- !u!114 &4046344898505972584
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -75646,11 +75646,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6035400961532814757}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582a5084d26f4630b679ba57b06ba03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eddd1f047be48589d908183981b1da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ViewSlotID: 1
-  ViewSlotType: 0
+  ViewSlotType: 8
   InstanceID: 0
 --- !u!1 &6043317658162452768
 GameObject:
@@ -84786,7 +84786,7 @@ GameObject:
   - component: {fileID: 5582537102375792554}
   - component: {fileID: 8025609500854513162}
   - component: {fileID: 5236778285688963546}
-  - component: {fileID: 4951712525179086592}
+  - component: {fileID: 765825767164030914}
   m_Layer: 5
   m_Name: Slot04
   m_TagString: BulletSlot
@@ -84851,7 +84851,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4951712525179086592
+--- !u!114 &765825767164030914
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -84860,7 +84860,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6561209382792835032}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582a5084d26f4630b679ba57b06ba03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eddd1f047be48589d908183981b1da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ViewSlotID: 4
@@ -86111,7 +86111,7 @@ GameObject:
   - component: {fileID: 8835824913507721551}
   - component: {fileID: 8140959194907953131}
   - component: {fileID: 5499811431106979655}
-  - component: {fileID: 3592650110692193413}
+  - component: {fileID: 6870278842139056710}
   m_Layer: 5
   m_Name: Slot02
   m_TagString: BulletSlot
@@ -86176,7 +86176,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3592650110692193413
+--- !u!114 &6870278842139056710
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -86185,7 +86185,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6701322551477937062}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582a5084d26f4630b679ba57b06ba03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eddd1f047be48589d908183981b1da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ViewSlotID: 2
@@ -86561,7 +86561,7 @@ GameObject:
   - component: {fileID: 8665613442118453523}
   - component: {fileID: 2466612534424826807}
   - component: {fileID: 7192060863588057787}
-  - component: {fileID: 1188863584853070924}
+  - component: {fileID: 6227794542889289414}
   m_Layer: 5
   m_Name: Slot01
   m_TagString: BulletSlot
@@ -86626,7 +86626,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1188863584853070924
+--- !u!114 &6227794542889289414
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -86635,7 +86635,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6742934647166328799}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582a5084d26f4630b679ba57b06ba03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eddd1f047be48589d908183981b1da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ViewSlotID: 11
@@ -94857,7 +94857,7 @@ GameObject:
   - component: {fileID: 3288043711926735919}
   - component: {fileID: 1613460642469593256}
   - component: {fileID: 4840522428949459238}
-  - component: {fileID: 6369492104518776550}
+  - component: {fileID: 8128229190844945355}
   m_Layer: 5
   m_Name: Slot03
   m_TagString: BulletSlot
@@ -94922,7 +94922,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6369492104518776550
+--- !u!114 &8128229190844945355
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94931,7 +94931,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7144776519398110470}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582a5084d26f4630b679ba57b06ba03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eddd1f047be48589d908183981b1da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ViewSlotID: 13
@@ -119869,7 +119869,7 @@ GameObject:
   - component: {fileID: 521612628169061813}
   - component: {fileID: 1996742169774097418}
   - component: {fileID: 8584369654361259963}
-  - component: {fileID: 2324908597970533640}
+  - component: {fileID: 4489314286804409468}
   m_Layer: 5
   m_Name: Slot04
   m_TagString: BulletSlot
@@ -119934,7 +119934,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2324908597970533640
+--- !u!114 &4489314286804409468
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119943,11 +119943,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8908829137203277703}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582a5084d26f4630b679ba57b06ba03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eddd1f047be48589d908183981b1da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ViewSlotID: 4
-  ViewSlotType: 0
+  ViewSlotType: 8
   InstanceID: 0
 --- !u!1 &8912666321961002104
 GameObject:
@@ -120862,7 +120862,7 @@ GameObject:
   - component: {fileID: 3035938245166283017}
   - component: {fileID: 3455337502590195770}
   - component: {fileID: 6985581322326759637}
-  - component: {fileID: 2042407283110769662}
+  - component: {fileID: 7570820570768264672}
   m_Layer: 5
   m_Name: Slot04
   m_TagString: BulletSlot
@@ -120927,7 +120927,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2042407283110769662
+--- !u!114 &7570820570768264672
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120936,7 +120936,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9006240433421748109}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 582a5084d26f4630b679ba57b06ba03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eddd1f047be48589d908183981b1da3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ViewSlotID: 14

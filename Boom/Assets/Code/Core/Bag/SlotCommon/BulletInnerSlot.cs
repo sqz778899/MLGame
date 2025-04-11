@@ -31,7 +31,7 @@ public class BulletInnerSlot : SlotBase
         
         ItemBase curSC = _childIns.GetComponentInChildren<ItemBase>();
         Bullet _bulletNew = curSC as Bullet;
-        _bulletNew._data.CurSlot = CurBulletSlotRole;
+        //_bulletNew._data.CurSlotController = CurBulletSlotRole;
         CurBulletSlotRole.MainID = _bulletNew._data.ID;
     }
 

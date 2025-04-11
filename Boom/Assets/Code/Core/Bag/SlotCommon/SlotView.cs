@@ -7,13 +7,13 @@ public class SlotView:MonoBehaviour
     public int ViewSlotID;
     public SlotType ViewSlotType;
     public int InstanceID;
-
+    public bool IsLocked;
     public ISlotController Controller;
 
     public virtual void Init()
     {
         InstanceID = GetInstanceID();
-        var controller = new SlotController(); // 或 BulletSlotController
+        var controller = new GemSlotController(); // 或 BulletSlotController
         controller.Init(ViewSlotID, ViewSlotType); // 用公开方法初始化
         controller.BindView(this);
         Controller = controller;

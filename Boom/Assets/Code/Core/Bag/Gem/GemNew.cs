@@ -34,7 +34,7 @@ public class GemNew: ItemBase,IItemInteractionBehaviour
     #region 双击与右键逻辑
     void IItemInteractionBehaviour.OnDoubleClick()
     {
-        SlotController from = Data.CurSlotController as SlotController;
+        GemSlotController from = Data.CurSlotController as GemSlotController;
         var toSlot = (from.SlotType == SlotType.GemInlaySlot)
             ? SlotManager.GetEmptySlotController(SlotType.GemBagSlot)
             : SlotManager.GetEmptySlotController(SlotType.GemInlaySlot);

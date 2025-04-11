@@ -39,22 +39,8 @@ public class BulletInvData : ScriptableObject
         
         InventoryManager.Instance._BulletInvData.ProcessBulletRelations();
     }
-
-    #region 子弹操作
-    public void AddSpawner(int bulletID)
-    {
-        BulletData spawner = BagBulletSpawners.FirstOrDefault(each => each.ID == bulletID);
-        if (spawner != null) spawner.SpawnerCount++;
-    }
     
-    public void UnEquipBullet(BulletData _data)
-    {
-        if (_data == null) return;
-        RemoveEquipBullet(_data);
-        OnBulletsChanged?.Invoke();
-        RefreshModifiers();
-    }
-
+    #region 子弹操作
     public void EquipBullet(BulletData bulletData)
     {
         if (EquipBullets.Count >= 5) return;
@@ -64,19 +50,26 @@ public class BulletInvData : ScriptableObject
         SortEquipBullet();//子弹内部数据进行排序
     }
     
+    public void UnEquipBullet(BulletData _data)
+    {
+        if (_data == null) return;
+        EquipBullets.Remove(_data);
+        OnBulletsChanged?.Invoke();
+        RefreshModifiers();
+    }
+    
+    public void AddSpawner(int bulletID)
+    {
+        BulletData spawner = BagBulletSpawners.FirstOrDefault(each => each.ID == bulletID);
+        if (spawner != null) spawner.SpawnerCount++;
+    }
+    
     public void SortEquipBullet()
     {
         EquipBullets.Sort((bullet1, bullet2) => 
-            bullet1.CurSlot.SlotID.CompareTo(bullet2.CurSlot.SlotID));
+            bullet1.CurSlotController.SlotID.CompareTo(bullet2.CurSlotController.SlotID));
         OnBulletsChanged?.Invoke();
     }
-
-    public void RemoveEquipBullet(BulletData _data)
-    {
-        EquipBullets.Remove(_data);  
-        OnBulletsChanged?.Invoke();
-    }
-    
     #endregion
 
     #region 子弹共振关系处理（单独方法封装）
@@ -118,9 +111,9 @@ public class BulletInvData : ScriptableObject
                 nextBullet.SyncFinalAttributes();
                 //构建共振簇
                 if (ResonanceClusterDict.ContainsKey(clusterCount))
-                    ResonanceClusterDict[clusterCount].Add(nextBullet.CurSlot.SlotID);
+                    ResonanceClusterDict[clusterCount].Add(nextBullet.CurSlotController.SlotID);
                 else
-                    ResonanceClusterDict[clusterCount] = new List<int>{preBullet.CurSlot.SlotID,nextBullet.CurSlot.SlotID};
+                    ResonanceClusterDict[clusterCount] = new List<int>{preBullet.CurSlotController.SlotID,nextBullet.CurSlotController.SlotID};
             }
             else
                 resonanceCount = 0;

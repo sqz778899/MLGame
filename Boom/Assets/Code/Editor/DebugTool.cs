@@ -48,11 +48,11 @@ public class DebugTool
         {
             if (each.name.StartsWith("Slot") && !each.name.StartsWith("GemSlotRoot"))
             {
-                SlotView slotView = each.GetComponent<SlotView>();
+                BulletSpawnerSlotView slotView = each.GetComponent<BulletSpawnerSlotView>();
                 if (slotView == null)
-                    slotView = each.gameObject.AddComponent<SlotView>();
+                    slotView = each.gameObject.AddComponent<BulletSpawnerSlotView>();
                 
-                GameObject.DestroyImmediate(each.GetComponent<SlotBase>());
+                GameObject.DestroyImmediate(each.GetComponent<BulletSlotView>());
                 slotView.ViewSlotType = SlotType.SpawnnerSlotInner;
                 slotView.ViewSlotID = count;
                 count++;

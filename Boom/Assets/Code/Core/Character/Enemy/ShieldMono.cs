@@ -27,7 +27,7 @@ public class ShieldMono : EnemyBase
        
         CurHP -= damage;
         OnTakeDamage?.Invoke();
-        CurBullet.BattleOnceHits.Add(new BattleOnceHit(CurBullet._data.CurSlot.SlotID,
+        CurBullet.BattleOnceHits.Add(new BattleOnceHit(CurBullet._data.CurSlotController.SlotID,
             ShieldIndex,-1,EffectiveDamage,OverflowDamage,damage,CurHP<=0));
         
         if (CurHP <= 0)

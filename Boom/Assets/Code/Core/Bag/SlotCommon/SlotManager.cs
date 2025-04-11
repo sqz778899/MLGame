@@ -1,21 +1,13 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public static class SlotManager
 {
     //根据SlotId 和 SlotType 还原Slot的MainID和InstanceID
-    public static void ClearSlot(SlotBase curSlot,bool isClearChildIns = false)
+    public static void ClearSlot(ISlotController curSlot)
     {
         if (curSlot == null) return;
-        if (isClearChildIns && curSlot.ChildIns != null)
-            GameObject.Destroy(curSlot.ChildIns);
-        
-        if (curSlot is BulletSlotRole _roleSlot)
-            _roleSlot.CurBulletData = null;
-        curSlot.MainID = -1;
+        curSlot.Unassign();
     }
     
     //获得当前Slot的GameObject
@@ -33,11 +25,11 @@ public static class SlotManager
         return allController;
     }
     
-    public static SlotController GetEmptySlotController(SlotType slotType)
+    public static GemSlotController GetEmptySlotController(SlotType slotType)
     {
         SlotView[] allSlot = GetCurSlotArraySlotView(slotType);
-        SlotController curTargetSlot = allSlot.FirstOrDefault(each => each.Controller.IsEmpty).Controller as SlotController;
-        return curTargetSlot;
+        GemSlotController curTargetGemSlot = allSlot.FirstOrDefault(each => each.Controller.IsEmpty).Controller as GemSlotController;
+        return curTargetGemSlot;
     }
     
     public static ISlotController GetSlotController(int SlotID, SlotType slotType)
@@ -47,7 +39,7 @@ public static class SlotManager
         return curTargetSlot;
     }
 
-    public static SlotView[] GetAllSlotBase()
+    public static SlotView[] GetAllSlotView()
     {
         SlotView[] allItemSlot = EternalCavans.Instance.ItemRoot.GetComponentsInChildren<SlotView>();
         SlotView[] allEuipItemSlot = EternalCavans.Instance.EquipItemRoot.GetComponentsInChildren<SlotView>();
@@ -58,18 +50,41 @@ public static class SlotManager
         return allSlot;
     }
     
-    //宝石交换逻辑
-    public static void Swap(SlotController a, SlotController b)
+    //交换逻辑
+    public static void Swap(ItemDataBase dtA, ItemDataBase dtB,GameObject curDragGO = null)
     {
-        var dataA = a.CurData;
-        var dataB = b.CurData;
+        ISlotController a = dtA.CurSlotController;
+        ISlotController b = dtB.CurSlotController;
+        
+        if (a is BulletInnerSlotController && b == null)
+        {
+            //回退老子弹
+            GM.Root.InventoryMgr.ReturnToSpawner(null,a.CurData as BulletData);
+            a.Assign(dtB, curDragGO);
+        }
+        else if (a is BulletInnerSlotController && b is BulletInnerSlotController)
+        {
+            GM.Root.InventoryMgr.RemoveBulletToFight(a.CurData as BulletData);
+            //暂存Data
+            var dataA = a.CurData;
+            var dataB = b.CurData;
+            // 分别放入
+            a.AssignDirectly(dataB as BulletData, null);
+            b.AssignDirectly(dataA as BulletData, null);
+            GameObject.Destroy(curDragGO);
+        }
+        else
+        {
+            var dataA = a.CurData;
+            var dataB = b.CurData;
 
-        var goA = a.GetGameObject();
-        var goB = b.GetGameObject();
+            GameObject goA = a.GetGameObject();
+            GameObject goB = b.GetGameObject();
 
-        // 分别放入
-        a.AssignDirectly(dataB, goB);
-        b.AssignDirectly(dataA, goA);
+            // 分别放入
+            a.AssignDirectly(dataB, goB);
+            b.AssignDirectly(dataA, goA);   
+        }
     }
     #region 不需要关心的私有方法
     static SlotView[] GetCurSlotArraySlotView(SlotType slotType)

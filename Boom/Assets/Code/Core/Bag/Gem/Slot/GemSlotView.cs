@@ -8,12 +8,12 @@ public class GemSlotView:SlotView
     public GameObject LockedGO;
     public GemSlotInnerView InnerSlot;
     [SerializeField] Vector3 customScale = Vector3.one;
-    SlotController _controller;//把这个类的Controller也改成SlotController，避免多次转换
+    GemSlotController _controller;//把这个类的Controller也改成SlotController，避免多次转换
 
     public override void InitStep2()
     {
-        _controller = Controller as SlotController;
-        _controller.LinkedInnerSlotController = InnerSlot.InnerController;
+        _controller = Controller as GemSlotController;
+        _controller.LinkedGemInnerSlotController = InnerSlot.GemInnerController;
         InnerSlot.Controller = Controller;
         _controller.IsLocked = _state == UILockedState.isLocked; //同步锁状态
     }

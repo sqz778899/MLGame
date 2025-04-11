@@ -48,7 +48,6 @@ public abstract class ItemDataBase:ISaveable
     
     //动态数据层 运行时数据
     public int InstanceID;
-    public SlotBase CurSlot;
     public ISlotController CurSlotController;
 
     public virtual TooltipsInfo BuildTooltip() { throw new NotImplementedException(); }
@@ -64,9 +63,10 @@ public interface ISlotController
     void Unassign();
     bool CanAccept(ItemDataBase data);
     void Assign(ItemDataBase data, GameObject itemGO);
-    
+    void AssignDirectly(ItemDataBase data, GameObject itemGO);
     public Vector3 TooltipOffset{ get; }
     bool IsEmpty => CurData == null;
+    public GameObject GetGameObject();
 }
 
 public abstract class BaseSlotController<T> :ISlotController where T : ItemDataBase
@@ -93,7 +93,7 @@ public abstract class BaseSlotController<T> :ISlotController where T : ItemDataB
     public virtual bool CanAccept(ItemDataBase data) { return data is T; }
 
     public virtual void Assign(ItemDataBase data, GameObject itemGO) {}
-
+    public virtual void AssignDirectly(ItemDataBase data, GameObject itemGO) {}
     public virtual void Unassign()
     {
         if (_curData != null)
@@ -137,10 +137,10 @@ public class GemData : ItemDataBase,ITooltipBuilder
     public string ImageName;
     public BulletModifierGem Modifier;
     
-    public GemData(int _id,SlotController _slotController)
+    public GemData(int _id,GemSlotController gemSlotController)
     {
         GemJson json = TrunkManager.Instance.GetGemJson(_id);
-        CurSlotController = _slotController;
+        CurSlotController = gemSlotController;
         InitData(json);
         Modifier = new BulletModifierGem(this);
     }
@@ -347,10 +347,10 @@ public class ItemData : ItemDataBase,ITooltipBuilder
     
     public IItemEffect EffectLogic; //运行时逻辑引用
     
-    public ItemData(int _id,SlotController _slot)
+    public ItemData(int _id,GemSlotController gemSlot)
     {
         ItemJson json = TrunkManager.Instance.GetItemJson(_id);
-        CurSlotController = _slot;
+        CurSlotController = gemSlot;
         InitData(json);
     }
 

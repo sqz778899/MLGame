@@ -129,7 +129,7 @@ public class BulletInner:ItemBase
                 {
                     [_data] = BattleOnceHits
                 };
-                s.InfoDict[_data.CurSlot.SlotID] = new KeyValuePair<BulletData, List<BattleOnceHit>>(_data, BattleOnceHits);
+                s.InfoDict[_data.CurSlotController.SlotID] = new KeyValuePair<BulletData, List<BattleOnceHit>>(_data, BattleOnceHits);
             }
             _piercingCount++;
         }
@@ -262,6 +262,14 @@ public class BulletInner:ItemBase
             _data.OnDataChanged += OnDataChangedInner;
             OnDataChangedInner(); // 立即刷新一遍
         }
+        //绑定战场数据
+        CurRole = PlayerManager.Instance.RoleInFightSC;
+        FollowDis = Mathf.Abs(data.CurSlotController.SlotID  * 1f);
+        
+        Vector3 startPos = new Vector3(CurRole.transform.position.x - 1, -0.64f, -0.15f);
+        float offsetX = startPos.x - (data.CurSlotController.SlotID - 1) * 1f;
+        transform.position = new Vector3(offsetX,startPos.y,startPos.z + (data.CurSlotController.SlotID - 1));
+        transform.SetParent(UIManager.Instance.Logic.MapManagerSC.MapBuleltRoot.transform,false);
     }
 
     void OnDataChangedInner()

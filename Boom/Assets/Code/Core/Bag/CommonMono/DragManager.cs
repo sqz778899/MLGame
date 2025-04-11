@@ -41,8 +41,8 @@ public class DragManager : MonoBehaviour
         if (draggedObject == null) return;
 
         List<RaycastResult> results = new List<RaycastResult>();
+        eventData.position = Input.mousePosition;
         EventSystem.current.RaycastAll(eventData, results);
-
         bool dropped = false;
         foreach (var result in results)
         {
@@ -60,55 +60,91 @@ public class DragManager : MonoBehaviour
                 if (!targetCtrl.CanAccept(Data)) continue;//先判断是否合法
                 
                 //如果槽位已满，且是可交换的
-                if (!targetCtrl.IsEmpty && targetCtrl.CurData != Data)
+                if (!targetCtrl.IsEmpty 
+                    && targetCtrl.CurData != Data
+                    && targetCtrl.SlotType != SlotType.SpawnnerSlot
+                    && targetCtrl.SlotType != SlotType.SpawnnerSlotInner)
                 {
-                    if (targetCtrl is SlotController gemCtrl)
-                        SlotManager.Swap(gemCtrl, Data.CurSlotController as SlotController);
-                    else
-                        Debug.Log("子弹互换");
+                    SlotManager.Swap(targetCtrl.CurData, Data,draggedObject);
                     dropped = true;
                     break;
                 }
                 //正常放入空槽
-                if (targetCtrl.IsEmpty)
+                if (targetCtrl.IsEmpty
+                    && targetCtrl.SlotType != SlotType.SpawnnerSlot
+                    && targetCtrl.SlotType != SlotType.SpawnnerSlotInner)
                 {
                     targetCtrl.Assign(Data, draggedObject);
                     dropped = true;
                     break;
                 }
+                //战场内放回Spawner
+                if (targetCtrl.SlotType == SlotType.SpawnnerSlotInner)
+                {
+                    draggedObject.TryGetComponent(out BulletNew bulletNew);
+                    bulletNew.OnDragCanceled();
+                    dropped = true;
+                    break;
+                }
             }
         }
-
+        
+        //未成功落槽的判断
         if (!dropped)
-        {
-            draggedObject.transform.SetParent(originalParent);
-            draggedObject.transform.position = originalPosition;
-            //拖拽失败，通知 Spawner 回滚
-            if (draggedObject.TryGetComponent(out BulletNew bulletNew))
-                bulletNew.OnDragCanceled();
-        }
-
+            NonDropped();
+        
         draggedObject = null;
         originalParent = null;
     }
 
+    //未成功落槽的判断
+    void NonDropped()
+    {
+        //是子弹
+        if (draggedObject.TryGetComponent(out BulletNew bulletNew))
+        {
+            //拖拽失败，通知 Spawner 回滚
+            if (bulletNew.CreateFlag == BulletCreateFlag.Spawner || 
+                bulletNew.CreateFlag == BulletCreateFlag.SpawnerInner)
+                bulletNew.OnDragCanceled();
+            
+            //战场内空拖回弹
+            if (bulletNew.CreateFlag == BulletCreateFlag.None)
+                bulletNew.Data.CurSlotController.Assign(bulletNew.Data,draggedObject);
+        }
+        else//是宝石
+        {
+            draggedObject.transform.SetParent(originalParent);
+            draggedObject.transform.position = originalPosition;
+        }
+    }
+    
     #region 手动模拟拖拽
     PointerEventData lastEventData; // 记录传入的 PointerEventData
+    
     public void ForceDrag(GameObject go, PointerEventData eventData)
+    {
+        ForceDrag(go);
+        lastEventData = eventData;
+    }
+    
+    public void ForceDrag(GameObject go)
     {
         draggedObject = go;
         go.transform.SetParent(dragRoot, false);
-        lastEventData = eventData;
         TooltipsManager.Instance.Hide();
         TooltipsManager.Instance.Disable();
+        PointerEventData simulatedEvent = new PointerEventData(EventSystem.current)
+            { position = Input.mousePosition };
+        lastEventData = simulatedEvent;
     }
 
     void Update()
     {
-        if (draggedObject != null && lastEventData != null)
+        if (draggedObject != null)
         {
             RectTransformUtility.ScreenPointToWorldPointInRectangle(
-                dragRoot, lastEventData.position, lastEventData.enterEventCamera, out var worldPoint);
+                dragRoot, Input.mousePosition, Camera.main, out Vector3 worldPoint);
             draggedObject.transform.position = worldPoint;
             
             // 监听鼠标松开（左键）

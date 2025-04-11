@@ -9,7 +9,6 @@ public class RoleInner : BaseMove
     public SkeletonAnimation AttackFX;
     [Header("Others")]
     public float FireDelay = 0.3f;
-    public List<BulletInner> Bullets;
     public Connon CurConnon;
     public Transform ConnonNode;
     [Header("移动范围设置")]
@@ -23,50 +22,15 @@ public class RoleInner : BaseMove
         if (CurLevel != null)
             _mapBounds = CurLevel.MapCollider.bounds;
         _cameraOffsetX = _mCamera.transform.position.x - transform.position.x;
-        //_cameraOffsetX = 2.5f;
-        CreateBulletInner();
     }
     
     public void SetBulletPos()
     {
-        foreach (var curBullet in Bullets)
+        foreach (var curBullet in GM.Root.InventoryMgr.CurBulletsInFight)
         {
             curBullet.transform.position = new Vector3(
-                transform.position.x - curBullet._data.CurSlot.SlotID,
+                transform.position.x - curBullet._data.CurSlotController.SlotID,
                 -0.64f, -0.15f);
-        }
-    }
-    
-    //在开始战斗的时候，根据角色槽位的子弹，创建五个跟着他跑的傻逼嘻嘻的小子弹
-    public void CreateBulletInner(bool IsUpText = false)
-    {
-        //清空子弹
-        if (Bullets != null)
-        {
-            Bullets.RemoveAll(bullet => bullet == null);
-            if (Bullets.Count > 0)
-            {
-                for (int i = 0; i < Bullets.Count; i++)
-                    Destroy(Bullets[i].gameObject);
-            }
-        }
-        Bullets = new List<BulletInner>();
-        //创建子弹
-        Vector3 startPos = new Vector3(transform.position.x - 1, -0.64f, -0.15f);
-        List<BulletData> CurBullets = InventoryManager.Instance._BulletInvData.EquipBullets;
-        for (int i = 0; i < CurBullets.Count; i++)
-        {
-            BulletData curB = CurBullets[i];
-            GameObject bulletIns = BulletFactory.CreateBullet(curB, BulletInsMode.Inner).gameObject;
-            BulletInner curSC = bulletIns.GetComponent<BulletInner>();
-            curSC.CurRole = this;
-            float offsetX = startPos.x - (curB.CurSlot.SlotID - 1) * 1f;
-            curSC.FollowDis = Mathf.Abs(curB.CurSlot.SlotID  * 1f);
-            bulletIns.transform.position = new Vector3(offsetX,startPos.y,startPos.z + i);
-            bulletIns.transform.SetParent(UIManager.Instance.Logic.MapManagerSC.MapBuleltRoot.transform,false);
-            if(IsUpText)
-                curSC.UpText();
-            Bullets.Add(curSC);
         }
     }
     #endregion
@@ -144,15 +108,16 @@ public class RoleInner : BaseMove
         yield return new WaitForSeconds(connonReloadTime);  //大炮装填子弹动画
         //...
         //进行子弹装填
-        for (int i = 0; i < Bullets.Count; i++)
+        List<BulletInner> _bullets = GM.Root.InventoryMgr.CurBulletsInFight;
+        for (int i = 0; i < _bullets.Count; i++)
         {
-            BulletInner curBullet = Bullets[i];
-            CurConnon.AllBullets.Add(Bullets[i]);//并且把弹药数据装填进大炮
+            BulletInner curBullet = _bullets[i];
+            CurConnon.AllBullets.Add(_bullets[i]);//并且把弹药数据装填进大炮
             StartCoroutine(curBullet.ReadyToAttack(CurConnon.FillNode.transform.position));
             yield return new WaitForSeconds(delay);  // 在发射下一个子弹之前，等待delay秒
         }
         //播放大炮攻击动画
-        for (int i = 0; i < Bullets.Count; i++)
+        for (int i = 0; i < _bullets.Count; i++)
         {
             //填弹药动画
             float connonAttackTime = 0f;

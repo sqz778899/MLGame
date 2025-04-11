@@ -57,7 +57,7 @@ public class BattleLogic : MonoBehaviour
         if (!_battleData.IsAfterAttack)//如果还没有攻击过,则不会结束
             return false;
         
-        bool isOver = _battleData.CurRole.Bullets.All(each => each == null);
+        bool isOver = GM.Root.InventoryMgr.CurBulletsInFight.All(each => each == null);
         return isOver;
     }
     

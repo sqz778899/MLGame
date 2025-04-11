@@ -25,9 +25,9 @@ public static class SaveManager
         for (int i = 0; i < saveFile.UserItems.Count; i++)
         {
             ItemData curItem = LoadItemData(saveFile.UserItems[i]);
-            if (curItem.CurSlot.SlotType == SlotType.BagItemSlot)
+            if (curItem.CurSlotController.SlotType == SlotType.BagItemSlot)
                 InventoryManager.Instance._InventoryData.AddItemToBag(curItem);
-            if (curItem.CurSlot.SlotType == SlotType.BagEquipSlot)
+            if (curItem.CurSlotController.SlotType == SlotType.BagEquipSlot)
                 InventoryManager.Instance._InventoryData.AddItemToEquip(curItem);
         }
         //读取Gem
@@ -185,14 +185,14 @@ public static class SaveManager
     static GemData LoadGemData(GemBaseSaveData itemBaseSaveData)
     {
         ISlotController CurSlot = SlotManager.GetSlotController(itemBaseSaveData.SlotID, itemBaseSaveData.SlotType);
-        GemData curGemData = new GemData(itemBaseSaveData.ID,CurSlot as SlotController);
+        GemData curGemData = new GemData(itemBaseSaveData.ID,CurSlot as GemSlotController);
         return curGemData;
     }
     
     static ItemData LoadItemData(ItemBaseSaveData itemBaseSaveData)
     {
         ISlotController CurSlot = SlotManager.GetSlotController(itemBaseSaveData.SlotID, itemBaseSaveData.SlotType);
-        ItemData curItemData = new ItemData(itemBaseSaveData.ID,CurSlot as SlotController);
+        ItemData curItemData = new ItemData(itemBaseSaveData.ID,CurSlot as GemSlotController);
         return curItemData;
     }
 

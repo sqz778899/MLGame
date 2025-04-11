@@ -12,18 +12,17 @@ public class BulletSlotView: SlotView
 
     public override void Init()
     {
-        var controller = new BulletSlotController();
-        controller.Init(ViewSlotID, ViewSlotType); // 用公开方法初始化
-        controller.BindView(this);
-        Controller = controller;
+        _controller = new BulletSlotController();
+        _controller.Init(ViewSlotID, ViewSlotType); // 用公开方法初始化
+        _controller.BindView(this);
+        _controller.IsLocked = _state == UILockedState.isLocked; //同步锁状态
+        Controller = _controller;
     }
     
     public override void InitStep2()
     {
-        _controller = Controller as BulletSlotController;
         _controller.LinkedInnerSlotController = InnerSlot.BulletInnerController;
-        InnerSlot.Controller = Controller;
-        _controller.IsLocked = _state == UILockedState.isLocked; //同步锁状态
+        InnerSlot.SetLocked(_state == UILockedState.isLocked); //同步锁状态
     }
     
     public override void Display(GameObject itemGO)

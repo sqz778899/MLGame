@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Linq;
 using UnityEngine;
 using Spine.Unity;
-using UnityEngine.EventSystems;
 
 public class BulletInnerSelect:MonoBehaviour
 {

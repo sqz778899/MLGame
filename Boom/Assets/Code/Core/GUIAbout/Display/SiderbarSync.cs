@@ -18,7 +18,7 @@ public class SiderbarSync : MonoBehaviour
             BulletData quipBullet = null;
             foreach (BulletData each in InventoryManager.Instance._BulletInvData.EquipBullets)
             {
-                if (each.CurSlot.SlotID == curSlotID)
+                if (each.CurSlotController.SlotID == curSlotID)
                     quipBullet = each;
             }
             GameObject curIconSlot = IconRoot.transform.GetChild(curSlotID).gameObject;//找到对应的IconSlot

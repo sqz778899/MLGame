@@ -30,7 +30,7 @@ public class ItemSlot : SlotBase
         if (SlotType == SlotType.BagEquipSlot)
             _itemNew.ToolTipsOffset = new Vector3(-0.92f, -0.52f, 0);
         //同步数据
-        _itemNew._data.CurSlot = this;
+        //_itemNew._data.CurSlot = this;
         MainID = _itemNew._data.ID;
         CurItemData = _itemNew._data;//槽位持有数据
         if (SlotType == SlotType.GemBagSlot)

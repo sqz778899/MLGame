@@ -18,8 +18,6 @@ public class BagRootMini : MonoBehaviour
     [Header("背包其它资源")] 
     public GameObject GroupBulletSpawnerSlot;
     public CanvasGroup MiniSlotCanvasGroup;
-    public GameObject BulletInnerSlotRoot;
-    public GameObject DragObjRootGO;
     
     [Header("摄像机移动表现相关")]
     public Vector3 OriginCameraPos;
@@ -28,9 +26,7 @@ public class BagRootMini : MonoBehaviour
     public Vector3 TargetCameraOffset;
     public float TargetOrthographicSize;
     public bool IsCameraNear = false;
-
-    BulletInnerSlot[] bulletInnerSlots;
-    //GemSlotInner[] gemSlots;
+    
     void Start()
     {
         SwichBullet();
@@ -42,22 +38,7 @@ public class BagRootMini : MonoBehaviour
     {
         OriginCameraPos = Camera.main.transform.position;
         orthographicSize = Camera.main.orthographicSize;
-        if (bulletInnerSlots == null || bulletInnerSlots.Length == 0)
-            bulletInnerSlots = BulletInnerSlotRoot.GetComponentsInChildren<BulletInnerSlot>(true);
-        bulletInnerSlots.ForEach(s => s.InitData());
     }
-
-    /*public void RefreshGem()
-    {
-        if(gemSlots == null || gemSlots.Length == 0)
-            gemSlots = BagGemRootGO.GetComponentsInChildren<GemSlotInner>(true);
-        foreach (var each in gemSlots)
-        {
-            if (each.ChildIns!=null)
-                Destroy(each.ChildIns);
-        }
-        InventoryManager.Instance.InitAllBagGO();
-    }*/
     
     //响应开始在战斗场景内拖拽的事件
     public void BulletDragged()
@@ -77,19 +58,15 @@ public class BagRootMini : MonoBehaviour
         }
     }
 
-    
+    #region 不关心的方法
     //把伤害数字抬起来
-    void SetBulletInnerTextUp()
-    {
-        RoleInner role = PlayerManager.Instance.RoleInFightGO.GetComponent<RoleInner>();
-        role.Bullets.ForEach(b=>b.UpText());
-    }
+    void SetBulletInnerTextUp() =>
+        GM.Root.InventoryMgr.CurBulletsInFight.ForEach(b=>b.UpText());
+    
     //把伤害数字位置还原
-    void SetBulletInnerTextReturn()
-    {
-        RoleInner role = PlayerManager.Instance.RoleInFightGO.GetComponent<RoleInner>();
-        role.Bullets.ForEach(b=>b.ReturnText());
-    }
+    void SetBulletInnerTextReturn() =>
+        GM.Root.InventoryMgr.CurBulletsInFight.ForEach(b=>b.ReturnText());
+    
     //拉近摄像机
     void SetCameraEdit()
     {
@@ -124,6 +101,7 @@ public class BagRootMini : MonoBehaviour
         
         seq.Join(MiniSlotCanvasGroup.DOFade(0, 0).SetEase(Ease.Linear));
     }
+    #endregion
 
     #region Switch Tab
     //页签切换为Bullet

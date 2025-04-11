@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class InnerSlotController
+public class GemInnerSlotController
 {
     SlotView _view;
     public void BindView(SlotView view) => _view = view;

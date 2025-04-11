@@ -72,9 +72,9 @@ public class GemInnerNew : ItemBase, IBeginDragHandler, IEndDragHandler,
                 if (!slotView.Controller.CanAccept(Data)) continue;//先判断是否合法
                
                 //如果槽位已满，且是可交换的
-                SlotController s = slotView.Controller as SlotController;
+                GemSlotController s = slotView.Controller as GemSlotController;
                 if (!s.IsEmpty && slotView.Controller.CurData != Data)
-                    SlotManager.Swap(s, Data.CurSlotController as SlotController);
+                    SlotManager.Swap(s.CurData, Data);
                 else
                     slotView.Controller.Assign(Data, SourceGem.gameObject); // 回收主 Gem
                 dropped = true;
@@ -98,7 +98,7 @@ public class GemInnerNew : ItemBase, IBeginDragHandler, IEndDragHandler,
     {
         if (Data.CurSlotController == null) return;
        
-        SlotController s = Data.CurSlotController as SlotController;
+        GemSlotController s = Data.CurSlotController as GemSlotController;
         Vector3 pos = UTools.GetWPosByMouse(rectTransform) + s.TooltipOffset;
         TooltipsManager.Instance.UpdatePosition(pos);
     }
@@ -110,7 +110,7 @@ public class GemInnerNew : ItemBase, IBeginDragHandler, IEndDragHandler,
             Vector3 pos = UTools.GetWPosByMouse(rectTransform);
             if (Data.CurSlotController != null)
             {
-                SlotController s = Data.CurSlotController as SlotController;
+                GemSlotController s = Data.CurSlotController as GemSlotController;
                 pos += s.TooltipOffset;
             }
             TooltipsManager.Instance.Show(builder.BuildTooltip(), pos);

@@ -22,7 +22,8 @@ public class BattleData: ScriptableObject
     {
         //CurMapSate.CurLevelID = _levelID;
         CurLevel = LevelManager.LoadLevel(_levelID);
-        CurRole = PlayerManager.Instance.RoleInFightGO.GetComponent<RoleInner>();
+        CurRole = PlayerManager.Instance.RoleInFightSC;
+        GM.Root.InventoryMgr.CreateAllBulletToFight();//初始化局内子弹
         CurRole.InitData(CurLevel);//初始化角色数据
         CurLevel.SetEnemy(_enemyMidData);//初始化敌人属性
         CurEnemy = CurLevel.CurEnemy;

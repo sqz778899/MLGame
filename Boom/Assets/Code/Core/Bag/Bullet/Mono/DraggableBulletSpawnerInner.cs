@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using TMPro;
-using UnityEngine;
 using UnityEngine.EventSystems;
-using System.Linq;
-using UnityEngine.UI;
 
 public class DraggableBulletSpawnerInner:DraggableBulletSpawner
 {
