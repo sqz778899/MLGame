@@ -20,9 +20,9 @@ public class GUIWarReport : MonoBehaviour
         //Enemy  这个类
         //List<BattleOnceHit> 战场表现收集
         int totalDamage = 0;
-        SingelBattleInfo curInfo = BattleManager.Instance.battleData.CurWarReport.GetCurBattleInfo();
+        SingelBattleInfoOld curInfoOld = BattleManager.Instance.battleData.CurWarReport.GetCurBattleInfoOld();
         int count = 0;
-        foreach (var eachInfo in curInfo.InfoDict)
+        foreach (var eachInfo in curInfoOld.InfoDict)
         {
             GameObject curSingelReport = Instantiate(SingelReportTemplate, ReportRoot.transform);
             curSingelReport.SetActive(true);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine.Serialization;
 
@@ -27,23 +28,57 @@ public struct BattleOnceHit
 {
     public int HitIndex;
     public int ShieldIndex;
-    public int EnmyIndex;
+    public int EnemyIndex;
     public int EffectiveDamage;
     public int OverflowDamage;
     public int Damage;
     public bool IsDestroyed;
 
-    public BattleOnceHit(int _hitIndex = -1,int _shieldIndex = -1,
-        int _enmyIndex = -1,int _effectiveDamage = 0,
-        int _overflowDamage = 0,int _damage = 0,bool _isDestroyed = false)
+    public BattleOnceHit(int hitIndex = -1, int shieldIndex = -1, int enemyIndex = -1,
+        int effectiveDamage = 0, int overflowDamage = 0, int damage = 0, bool isDestroyed = false)
     {
-        HitIndex = _hitIndex;
-        ShieldIndex = _shieldIndex;
-        EnmyIndex = _enmyIndex;
-        EffectiveDamage = _effectiveDamage;
-        OverflowDamage = _overflowDamage;
-        Damage = _damage;
-        IsDestroyed = _isDestroyed;
+        HitIndex = hitIndex;
+        ShieldIndex = shieldIndex;
+        EnemyIndex = enemyIndex;
+        EffectiveDamage = effectiveDamage;
+        OverflowDamage = overflowDamage;
+        Damage = damage;
+        IsDestroyed = isDestroyed;
+    }
+}
+
+// 单个子弹在一场战斗中的全部表现
+public class BulletAttackRecord
+{
+    public BulletData BulletData;                // 攻击时使用的子弹数据
+    public int BulletSlotID;                     // 子弹槽位索引
+    public List<BattleOnceHit> Hits;             // 每次Hit记录
+
+    public BulletAttackRecord(BulletData bulletData, int bulletSlotID)
+    {
+        BulletData = bulletData;
+        BulletSlotID = bulletSlotID;
+        Hits = new List<BattleOnceHit>();
+    }
+    public void RecordHit(BattleOnceHit hit) => Hits.Add(hit);
+}
+
+// 单场战斗信息（一个战斗回合）
+public class SingleBattleReport
+{
+    public List<BulletAttackRecord> BulletAttackRecords = new List<BulletAttackRecord>();
+
+    // 快速查找当前子弹的记录（按SlotID）
+    public BulletAttackRecord GetOrCreateBulletRecord(BulletData bulletData)
+    {
+        int slotID = bulletData.CurSlotController.SlotID;
+        var record = BulletAttackRecords.FirstOrDefault(r => r.BulletSlotID == slotID);
+        if (record == null)
+        {
+            record = new BulletAttackRecord(bulletData, slotID);
+            BulletAttackRecords.Add(record);
+        }
+        return record;
     }
 }
 
@@ -54,25 +89,37 @@ public class WarReport
     public int TotalDamage;
     public int EffectiveDamage;
     public int OverFlowDamage;
-    public Dictionary<int,SingelBattleInfo> WarIndexToBattleInfo;
+    public Dictionary<int,SingelBattleInfoOld> WarIndexToBattleInfoOld;
+    public Dictionary<int, SingleBattleReport> WarIndexToBattleInfo;
 
     public WarReport()
     {
         CurWarIndex = 0;
         IsWin = false;
-        WarIndexToBattleInfo = new Dictionary<int, SingelBattleInfo>();
+        WarIndexToBattleInfoOld = new Dictionary<int, SingelBattleInfoOld>();
+        WarIndexToBattleInfo = new Dictionary<int, SingleBattleReport>();
     }
     
-    public SingelBattleInfo GetCurBattleInfo()
+    public SingleBattleReport GetCurBattleInfo()
     {
-        return WarIndexToBattleInfo[CurWarIndex];
+        if (!WarIndexToBattleInfo.TryGetValue(CurWarIndex, out var report))
+        {
+            report = new SingleBattleReport();
+            WarIndexToBattleInfo[CurWarIndex] = report;
+        }
+        return report;
+    }
+    
+    public SingelBattleInfoOld GetCurBattleInfoOld()
+    {
+        return WarIndexToBattleInfoOld[CurWarIndex];
     }
 }
 
-public class SingelBattleInfo
+public class SingelBattleInfoOld
 {
     public Dictionary<int, KeyValuePair<BulletData, List<BattleOnceHit>>> InfoDict;
-    public SingelBattleInfo()
+    public SingelBattleInfoOld()
     {
         InfoDict = new Dictionary<int, KeyValuePair<BulletData, List<BattleOnceHit>>>();
     }

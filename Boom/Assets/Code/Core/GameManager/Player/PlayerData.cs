@@ -16,7 +16,6 @@ public class PlayerData: ScriptableObject
     public int MagicDust;//魔尘
       
     #region 子弹槽锁定状态
-    public event Action BulletSlotStateChanged;
     Dictionary<int, bool> _curBulletSlotLockedState = new();
     public Dictionary<int, bool> CurBulletSlotLockedState
     {
@@ -24,10 +23,8 @@ public class PlayerData: ScriptableObject
         set
         {
             if (_curBulletSlotLockedState != value)
-            {
                 _curBulletSlotLockedState = value;
-                BulletSlotStateChanged?.Invoke(); // 通知变化
-            }
+            GM.Root.InventoryMgr.RefreshBulletSlotLockedState();
         }
     }
     #endregion

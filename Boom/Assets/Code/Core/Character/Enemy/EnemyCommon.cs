@@ -69,7 +69,7 @@ public class EnemyBase : MonoBehaviour
     public Transform HitTextTrans;  //伤害跳字的位置节点
     
     //伤害
-    public virtual void TakeDamage(BulletInner curBullet,int damage)
+    public virtual void TakeDamage(BulletInner _bulletData,int damage)
     {
         //伤害跳字
         HitText(damage);
@@ -77,8 +77,6 @@ public class EnemyBase : MonoBehaviour
         
         EState = EnemyState.hit;
     }
-    
-    
     //伤害跳字
     void HitText(int damage)
     {
@@ -88,8 +86,27 @@ public class EnemyBase : MonoBehaviour
         txtHitIns.GetComponent<FloatingDamageText>().AnimateText("-" + damage,HitColor,18f);
     }
     
-    internal virtual void OnDestroy()
+    internal virtual void OnDestroy() => OnTakeDamage = null; // 清空事件的所有绑定
+}
+
+public class EnemyData
+{
+    public int ID;
+    public int MaxHP;
+    public int CurHP;
+    public EnemyState EState;
+    public Award CurAward;
+    public List<int> ShieldsHPs{ get; private set; }
+    public bool IsDead => CurHP <= 0;
+    public event Action OnTakeDamage;
+    
+    public EnemyData() {}
+
+    public void TakeDamage(int damage)
     {
-        OnTakeDamage = null; // 清空事件的所有绑定
+        CurHP = Mathf.Clamp(CurHP - damage, 0, MaxHP);
+        OnTakeDamage?.Invoke();
     }
+    
+    public void SetShieldData(List<int> shields) => ShieldsHPs = shields;
 }

@@ -54,14 +54,6 @@ public static class ShopUtility
     //.获取目标槽位
     public static Vector3 GetTargetSlotPos()
     {
-        SlotStandbyMat[] SDSlots = UIManager.Instance.
-            CommonUI.G_StandbyIcon.GetComponentsInChildren<SlotStandbyMat>();
-
-        foreach (var each in SDSlots)
-        {
-            if (each.MainID == 0)
-                return each.transform.position;
-        }
         return Vector3.zero;
     }
 }

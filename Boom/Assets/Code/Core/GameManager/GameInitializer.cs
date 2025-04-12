@@ -11,20 +11,22 @@ public class GameInitializer:MonoBehaviour
 
     public void InitGameData()
     {
+        //1）初始化GUI相关的Manager数据
         GameObject.Find("CanvasQ01").GetComponent<EternalCavans>().InitData();
-        //初始化GUI相关的Manager数据
         EternalCavans.Instance.TooltipsManager.Init();
         EternalCavans.Instance.DragManager.Init();
         EternalCavans.Instance.RightClickMenuManager.Init();
-        //初始化背包Slot数据
+        //2）初始化背包Slot数据
         SlotView[] views = EternalCavans.Instance.Bag.GetComponentsInChildren<SlotView>(true);
         views.ForEach(v => v.Init());
         views.ForEach(v => v.InitStep2());
-        //初始化BulletSlotView的锁定状态
+        //3) 初始化全局Manager依赖UI的容器数据
+        BulletSlotView[] bulletViews = EternalCavans.Instance.
+            Bag.GetComponentsInChildren<BulletSlotView>(true);
+        BulletInnerSlotView[] bulletInnerViews = EternalCavans.Instance.
+            Bag.GetComponentsInChildren<BulletInnerSlotView>(true);
+        GM.Root.InventoryMgr.InitStep2(bulletViews,bulletInnerViews);
+        //4) 读档
         SaveManager.LoadSaveFile();
-        Dictionary<int, bool> curDict = PlayerManager.Instance._PlayerData.CurBulletSlotLockedState;
-        BulletSlotView[] bulletViews = EternalCavans.Instance.Bag.GetComponentsInChildren<BulletSlotView>(true);
-        for (int i = 0; i < 5; i++)
-            bulletViews[i].State = curDict[i]?UILockedState.isNormal:UILockedState.isLocked;
     }
 }

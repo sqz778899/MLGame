@@ -13,7 +13,7 @@ public class Connon : MonoBehaviour
     public SkeletonAnimation Ani02;
     public AnimationCurve AniCurve;
     [Header("子弹相关")] 
-    public List<BulletInner> AllBullets;
+    public List<BulletInnerNew> AllBullets;
     public Transform FillNode; //装填自己的子弹的位置
     public Transform FireNode; //发射子弹的位置
     
@@ -25,7 +25,7 @@ public class Connon : MonoBehaviour
     {
         // 监听 Spine 动画中的事件
         Ani01.AnimationState.Event += SpEventFire;
-        AllBullets = new List<BulletInner>();
+        AllBullets = new List<BulletInnerNew>();
     }
     
     void SpEventFire(TrackEntry trackEntry, Event e)
@@ -39,7 +39,7 @@ public class Connon : MonoBehaviour
                     //发射子弹
                     GameObject curBulletIns = AllBullets[curBulletIndex].gameObject;
                     curBulletIns.transform.position = FireNode.transform.position;
-                    AllBullets[curBulletIndex].Attack();
+                    AllBullets[curBulletIndex].controller.Attacking();
                     isFiring = false; // 重置标志
                 }
                 break;

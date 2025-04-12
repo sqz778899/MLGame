@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 4621188327167039812}
   - component: {fileID: 8319005195416386444}
   - component: {fileID: 8904087945959619008}
-  - component: {fileID: 8071501275141201522}
+  - component: {fileID: 9039760192293982448}
   m_Layer: 0
   m_Name: P_Enemy_Template
   m_TagString: Enemy
@@ -258,11 +258,12 @@ MonoBehaviour:
   HitTextTrans: {fileID: 7240787214066684924}
   CurHealthBar: {fileID: 3694549218633813643}
   ShieldsHPs: 
+  Shields: []
   ShieldsNode: {fileID: 1615124517095623965}
   Ani: {fileID: 2008770084707223584}
   Portrait: {fileID: 0}
   CurAward:
-    Score: 0
+    BaseScore: 0
     Coin: 0
     SupremeCharms: 
     Items: 
@@ -293,22 +294,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!111 &8071501275141201522
-Animation:
+--- !u!114 &9039760192293982448
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5993941228292115327}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: a7968b215247ee24aa693b033e12a291, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: a7968b215247ee24aa693b033e12a291, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a649ca68e73a493caabb769ffebaecef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Ani: {fileID: 2008770084707223584}
+  HealthBar: {fileID: 3694549218633813643}
+  HitTextPos: {fileID: 7240787214066684924}
+  HitColor: {r: 0.6603774, g: 0, b: 0, a: 1}
 --- !u!1 &6804161443784449580
 GameObject:
   m_ObjectHideFlags: 0

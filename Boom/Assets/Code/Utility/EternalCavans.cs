@@ -19,6 +19,7 @@ public class EternalCavans : MonoBehaviour
     public GameObject BagButtonGO;
 
     public GameObject GemRoot;
+    public GameObject GemRootInner;
     public GameObject EquipBulletSlotRoot;
     public GameObject SpawnerSlotRoot;
     public GameObject SpawnerSlotRootMini;
@@ -83,10 +84,7 @@ public class EternalCavans : MonoBehaviour
     public DragManager DragManager;
     public TooltipsManager TooltipsManager;
     public RightClickMenuManager RightClickMenuManager;
-    
-    
     public SceneState CurSceneState { get; private set; }
-    public BagRoot BagRootSC => BagRoot.GetComponent<BagRoot>();
     float _preCameraOrthographicSize;
     public event Action OnOpenBag;
     public event Action OnCloseBag;
@@ -136,7 +134,6 @@ public class EternalCavans : MonoBehaviour
         //MapFrame.SetActive(true);
         MagicDust.SetActive(false);
         CurSceneState = SceneState.MapScene;
-        BagRootSC.RefreshBulletSlotLockedState();
         InitTextSync();
     }
     
@@ -166,7 +163,6 @@ public class EternalCavans : MonoBehaviour
     {
         if(UIManager.Instance.IsLockedClick) return;
         UIManager.Instance.BagUI.ShowBag();
-        BagRootSC.RefreshBulletSlotLockedState();
         btnBag.SetActive(false);
         TitleRoot.SetActive(true);
         _preCameraOrthographicSize = Camera.main.orthographicSize;

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -79,9 +80,18 @@ public class DragManager : MonoBehaviour
                     break;
                 }
                 //战场内放回Spawner
-                if (targetCtrl.SlotType == SlotType.SpawnnerSlotInner)
+                if (targetCtrl.IsEmpty &&
+                    targetCtrl.SlotType == SlotType.SpawnnerSlotInner)
                 {
                     draggedObject.TryGetComponent(out BulletNew bulletNew);
+                    try
+                    {
+                        Data.CurSlotController.Unassign();
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.Log("xxxxxxxxxxxxxx");
+                    }
                     bulletNew.OnDragCanceled();
                     dropped = true;
                     break;
@@ -96,6 +106,14 @@ public class DragManager : MonoBehaviour
         draggedObject = null;
         originalParent = null;
     }
+    
+    public void CancelDrag()
+    {
+        PointerEventData fakeEvent = new PointerEventData(EventSystem.current)
+        {position = Input.mousePosition };
+        EndDrag(fakeEvent);
+        EndForceDrag();
+    }
 
     //未成功落槽的判断
     void NonDropped()
@@ -108,6 +126,12 @@ public class DragManager : MonoBehaviour
                 bulletNew.CreateFlag == BulletCreateFlag.SpawnerInner)
                 bulletNew.OnDragCanceled();
             
+            if (bulletNew.CreateFlag == BulletCreateFlag.Spawnered)
+            {
+                bulletNew.SwitchMode(BulletInsMode.EditB);
+                draggedObject.transform.SetParent(originalParent);
+                draggedObject.transform.position = originalPosition;
+            }
             //战场内空拖回弹
             if (bulletNew.CreateFlag == BulletCreateFlag.None)
                 bulletNew.Data.CurSlotController.Assign(bulletNew.Data,draggedObject);

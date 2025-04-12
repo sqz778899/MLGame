@@ -483,9 +483,9 @@ public class L1Step5DragBullet : TutorialStepBase
         fxArrow.Clear();
         fxArrow.Stop();
         //2)找到Spawner
-        GameObject SpawnerSlotRootMini = UIManager.Instance.BagUI.SpawnerSlotRootMini;
-        BulletSlot[] spawners = SpawnerSlotRootMini.GetComponentsInChildren<BulletSlot>();
-        slotGO = spawners.FirstOrDefault(s => s.SlotID == 1).gameObject;
+        ISlotController[] spawners = SlotManager.GetAllSlotController(SlotType.SpawnnerSlotInner);
+        BulletSlotSpawnerController c = spawners.FirstOrDefault(s => s.SlotID == 1) as BulletSlotSpawnerController;
+        slotGO = c._view.gameObject;
         TutoConfig.SetTutoHigh(slotGO,0.07f);
         //2)小手平移特效
         HandPointMove tsc = fXHand.gameObject.GetComponent<HandPointMove>();

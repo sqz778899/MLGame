@@ -8,7 +8,7 @@ public class BulletInvData : ScriptableObject
 {
     public List<BulletData> BagBulletSpawners = new();//全部的子弹
     public List<BulletData> EquipBullets = new();// 有顺序要求的装备子弹
-    public List<BulletSlotRole> EquipBulletSlots; //子弹槽
+    public List<BulletSlotController> CurBulletSlotControllers;//子弹槽
     
     public event Action OnBulletsChanged;//子弹数据变化
     
@@ -19,21 +19,21 @@ public class BulletInvData : ScriptableObject
         EquipBullets.Clear();
         OnBulletsChanged?.Invoke();
     }
-    
+
     //宝石操作和子弹槽操作都会响应这个函数
     public void RefreshModifiers()
     {
-        foreach (var eSlot in EquipBulletSlots)
+        foreach (var bulletData in EquipBullets)
         {
-            if (eSlot.CurBulletData == null)
-                continue;
-            eSlot.CurBulletData.ClearModifiers();
-            foreach (var eGemSlot in eSlot.GemSlots)
+            bulletData.ClearModifiers();
+            BulletSlotController mainController = CurBulletSlotControllers.FirstOrDefault(
+                b => b.SlotID == bulletData.CurSlotController.SlotID);
+            foreach (var eGemSlotController in mainController.GemSlotControllers)
             {
-                if(eGemSlot.Controller.CurData == null)
+                if(eGemSlotController.CurData == null)
                     continue;
-                GemData gemData = eGemSlot.Controller.CurData as GemData;
-                eSlot.CurBulletData.AddModifier(new BulletModifierGem(gemData));
+                GemData gemData = eGemSlotController.CurData as GemData;
+                bulletData.AddModifier(new BulletModifierGem(gemData));
             }
         }
         
@@ -139,10 +139,4 @@ public class BulletInvData : ScriptableObject
         }
     }
     #endregion
-    
-    public void InitData()
-    {
-        GameObject equipBulletSlotRoot = EternalCavans.Instance.BagRoot.GetComponent<BagRoot>().BagReadySlotGO;
-        EquipBulletSlots = equipBulletSlotRoot.GetComponentsInChildren<BulletSlotRole>(true).ToList();
-    }
 }

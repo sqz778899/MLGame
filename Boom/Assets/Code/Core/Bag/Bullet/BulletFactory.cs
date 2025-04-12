@@ -16,7 +16,12 @@ public static class BulletFactory
             bulletIns.GetComponent<ItemInteractionHandler>().BindData(_bulletData);
         }
 
-        if (bulletSC is BulletInner _bulletInner)
+        /*if (bulletSC is BulletInner _bulletInner)
+        {
+            _bulletInner.BindData(_bulletData);
+        }*/
+        
+        if (bulletSC is BulletInnerNew _bulletInner)
         {
             _bulletInner.BindData(_bulletData);
         }

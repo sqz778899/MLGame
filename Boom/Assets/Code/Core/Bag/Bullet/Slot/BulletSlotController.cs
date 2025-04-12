@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 public class BulletSlotController: BaseSlotController<ItemDataBase>
 {
-    public event Action OnBulletChanged;
-    public BulletInnerSlotController LinkedInnerSlotController;
     public bool IsLocked; //槽位是不是锁定的
+    public List<GemSlotController> GemSlotControllers;
     BulletSlotView _bulletView;
     public override void BindView(SlotView view)
     {
@@ -20,6 +20,8 @@ public class BulletSlotController: BaseSlotController<ItemDataBase>
         itemGO.transform.SetParent(DragManager.Instance.dragRoot.transform);
         from?.Unassign();
         AssignDirectly(data, itemGO);
+        if (itemGO.TryGetComponent(out BulletNew bulletNew))
+            bulletNew.CreateFlag = BulletCreateFlag.Spawnered;
     }
 
     public override void AssignDirectly(ItemDataBase data, GameObject itemGO)
@@ -46,6 +48,10 @@ public class BulletSlotController: BaseSlotController<ItemDataBase>
         _view?.Clear();
     }
 
-    public bool CanAccept(BulletData data) => 
-        data != null && _bulletView.State == UILockedState.isNormal;
+    public override bool CanAccept(ItemDataBase data)
+    {
+        if (data == null) return false;
+        if (!(data is BulletData)) return false;
+        return _bulletView.State == UILockedState.isNormal;
+    }
 }

@@ -8,7 +8,7 @@ public class BaseMove : MonoBehaviour
     public SkeletonAnimation Ani;
     
     BagRootMini _bagRootMini;
-    public Action OnEditEndInner;
+    public event Action OnEditEndInner;
     RoleState _state;
     public RoleState State
     {
@@ -84,8 +84,5 @@ public class BaseMove : MonoBehaviour
 
     internal virtual void Move(Vector3 direction) {}
 
-    private void OnDestroy()
-    {
-        OnEditEndInner -= _bagRootMini.EditEnd;
-    }
+    void OnDestroy() => OnEditEndInner -= _bagRootMini.EditEnd;
 }

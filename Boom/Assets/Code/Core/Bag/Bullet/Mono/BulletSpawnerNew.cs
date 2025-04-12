@@ -20,6 +20,8 @@ public class BulletSpawnerNew:ItemBase,
 
     internal void Spawner(PointerEventData eventData,BulletCreateFlag createFlag)
     {
+        if (eventData.button != PointerEventData.InputButton.Left) return;
+        
         if (Data.SpawnerCount <= 0) return;
 
         // 克隆一份新的数据

@@ -95,6 +95,9 @@ public static class SlotManager
             case SlotType.GemBagSlot:
                 allSlot = EternalCavans.Instance.GemRoot.GetComponentsInChildren<SlotView>(true);
                 break;
+            case SlotType.GemBagSlotInner:
+                allSlot = EternalCavans.Instance.GemRootInner.GetComponentsInChildren<SlotView>(true);
+                break;
             case SlotType.GemInlaySlot:
                 allSlot = EternalCavans.Instance.EquipBulletSlotRoot.GetComponentsInChildren<GemSlotView>(true);
                 break;

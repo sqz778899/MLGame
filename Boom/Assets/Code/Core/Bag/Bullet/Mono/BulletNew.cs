@@ -34,7 +34,6 @@ public class BulletNew : ItemBase, IItemInteractionBehaviour
     {
         for (int i = 0; i < group.transform.childCount; i++)
             group.transform.GetChild(i).gameObject.SetActive(i < count);
-        
     }
 
     public void SwitchMode(BulletInsMode mode)
@@ -105,4 +104,5 @@ public enum BulletCreateFlag
     None = 0,
     Spawner = 1,
     SpawnerInner = 2,
+    Spawnered = 3
 }

@@ -15,14 +15,14 @@ public class BulletSlotView: SlotView
         _controller = new BulletSlotController();
         _controller.Init(ViewSlotID, ViewSlotType); // 用公开方法初始化
         _controller.BindView(this);
-        _controller.IsLocked = _state == UILockedState.isLocked; //同步锁状态
         Controller = _controller;
     }
     
     public override void InitStep2()
     {
-        _controller.LinkedInnerSlotController = InnerSlot.BulletInnerController;
-        InnerSlot.SetLocked(_state == UILockedState.isLocked); //同步锁状态
+        _controller.GemSlotControllers = new List<GemSlotController>();
+        foreach (var eGemSlotView in gemSlotViews)
+            _controller.GemSlotControllers.Add(eGemSlotView.Controller as GemSlotController);
     }
     
     public override void Display(GameObject itemGO)
@@ -46,10 +46,8 @@ public class BulletSlotView: SlotView
         set
         {
             if (_state != value)
-            {
                 _state = value;
-                ChangeState();
-            }
+            ChangeState();
         }
     }
     void ChangeState()
@@ -57,6 +55,8 @@ public class BulletSlotView: SlotView
         bool locked = State == UILockedState.isLocked;
         LockedGO?.SetActive(locked);
         gemSlotViews.ForEach(g => g.State = State);
+        InnerSlot.SetLocked(locked);
+        IsLocked = locked; //同步锁状态
     }
     #endregion
 }

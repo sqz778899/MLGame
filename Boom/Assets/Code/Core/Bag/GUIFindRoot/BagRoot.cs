@@ -16,32 +16,8 @@ public class BagRoot : MonoBehaviour
     public GameObject GroupBulletSpawnerSlot;
     public GameObject BagReadySlotGO;  //子弹槽
     public GameObject EquipItemRoot;  //装备栏
-    //BulletSlotRole[] _btnReadySlotSC;
     
-    #region 初始化数据
-    //游戏最开始时候需要初始化的数据
-    public void InitData()
-    {
-        //子弹槽初始化
-        //_btnReadySlotSC = BagReadySlotGO.GetComponentsInChildren<BulletSlotRole>(true);
-        //_btnReadySlotSC.ToList().ForEach(perSlot => perSlot.InitData());
-        InventoryManager.Instance._BulletInvData.RefreshModifiers();
-    }
-    
-    void Start()
-    {
-        SwichGem();
-        //注册事件。背包Slot解锁的话，这边会函数响应更新状态
-        PlayerManager.Instance._PlayerData.BulletSlotStateChanged += RefreshBulletSlotLockedState;
-        RefreshBulletSlotLockedState();//最开始先更新一次状态
-    }
-    #endregion
-    
-    //子弹槽锁定状态
-    public void RefreshBulletSlotLockedState()
-    {
-        InitData();
-    }
+    void Start() => SwichGem();
 
     #region 页签切换
     //页签切换为Bullet
@@ -89,9 +65,4 @@ public class BagRoot : MonoBehaviour
         BtnGemSC.State = UILockedState.isSelected;
     }
     #endregion
-
-    void OnDestroy()
-    {
-        PlayerManager.Instance._PlayerData.BulletSlotStateChanged -= RefreshBulletSlotLockedState;
-    }
 }

@@ -43,9 +43,10 @@ public enum ElementalTypes
 //在场内子弹的状态
 public enum BulletInnerState
 {
-    Common,
-    AttackBegin,
-    Attacking,
-    Dead,
-    Edit
+    Idle = 0,
+    AttackBegin = 1,
+    Attacking = 2,
+    Dead = 3,
+    Edit = 4,
+    Moving = 5
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Item : DragBase
+public class Item : ItemBase,IItemInteractionBehaviour
 {
     public ItemData _data;
     
@@ -24,7 +24,7 @@ public class Item : DragBase
     #region UI交互逻辑
     bool IsBGInBag;
     bool IsBGInEquip;
-    internal override void VOnDrag()
+    internal void VOnDrag()
     {
         //在拖动中把Item显示后面的背景图关掉
         IsBGInBag = ItemBGInBag.gameObject.activeSelf;
@@ -33,87 +33,6 @@ public class Item : DragBase
         ItemBGInEquip.gameObject.SetActive(false);
     }
     
-    public override void OnPointerUp(PointerEventData eventData)
-    {
-        UIManager.Instance.IsLockedClick = false;
-        if (eventData.button == PointerEventData.InputButton.Right)
-            return;
-        HideTooltips();
-        
-        // 在释放鼠标按钮时，我们检查这个位置下是否有一个Slot
-        List<RaycastResult> results = new List<RaycastResult>();
-        EventSystem.current.RaycastAll(eventData, results);
-        bool NonHappen = true; // 发生Slot drop down 逻辑
-        
-        foreach (RaycastResult result in results)
-        {
-            if (result.gameObject.TryGetComponent(out SlotBase curSlotSC))
-            {
-                //1）前置判断，如果Slot是GemSlot类型，才能继续
-                ItemSlot curItemSlot = curSlotSC as ItemSlot;
-                if (curItemSlot == null) continue;
-                if (curItemSlot.CurItemData == _data) break;//如果是同一个宝石，不做任何操作
-                
-                //2）空槽逻辑
-                if (curItemSlot.MainID == -1)
-                {
-                    OnDropEmptySlot(curItemSlot);
-                    NonHappen = false;
-                }
-                else//3）满槽逻辑
-                {
-                    OnDropFillSlot(curItemSlot);
-                    NonHappen = false;
-                    break;
-                }
-            }
-        }
-        
-        if (NonHappen)
-            NonFindSlot();
-    }
-    
-    //落下空槽逻辑
-    public override void OnDropEmptySlot(SlotBase targetSlot)
-    {
-        if (EternalCavans.Instance.TutorialDragGemLock) return;
-        ItemSlot slot = targetSlot as ItemSlot;
-        SlotManager.ClearSlot(_data.CurSlotController);
-        slot.SOnDrop(gameObject);
-        if (slot.SlotType == SlotType.BagItemSlot)
-        {
-            ItemBGInBag.gameObject.SetActive(true);
-        }
-        if (slot.SlotType == SlotType.BagEquipSlot)
-        {
-            ItemBGInEquip.gameObject.SetActive(true);
-        }
-    }
-    
-    //落下交换逻辑
-    internal override void OnDropFillSlot(SlotBase targetSlot)
-    {
-        /*//先把目标槽位的物品拿出来
-        GameObject tagetChildIns = targetSlot.ChildIns;
-        _data.CurSlot.SOnDrop(tagetChildIns);
-        //再把自己放进去
-        targetSlot.SOnDrop(gameObject);*/
-    }
-    
-    internal override void NonFindSlot()
-    {
-        base.NonFindSlot();
-        ItemBGInBag.gameObject.SetActive(IsBGInBag);
-        ItemBGInEquip.gameObject.SetActive(IsBGInEquip);
-    }
-    #endregion
-    
-    #region ToolTips相关
-    internal override void SetTooltipInfo()
-    {
-        TooltipsInfo curTooltipsInfo = new TooltipsInfo(_data.Name);
-        CurTooltipsSC.SetInfo(curTooltipsInfo);
-    }
     
     #endregion
 
@@ -176,4 +95,14 @@ public class Item : DragBase
     
     void OnDestroy() => _data.OnDataChanged -= OnDataChangeItem;
     #endregion
+
+    public void OnDoubleClick()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void OnRightClick()
+    {
+        throw new System.NotImplementedException();
+    }
 }

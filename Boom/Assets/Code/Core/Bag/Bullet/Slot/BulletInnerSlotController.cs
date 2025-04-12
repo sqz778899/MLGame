@@ -25,10 +25,13 @@ public class BulletInnerSlotController: BaseSlotController<ItemDataBase>
         GM.Root.InventoryMgr._BulletInvData.EquipBullet(data as BulletData);//添加新子弹
         GM.Root.InventoryMgr.AddBulletToFight(data as BulletData);//战场创建傻逼兮兮的小子弹
         
+        // step 3: UI更新
+        _view?.Display(null);
+        
         GameObject.Destroy(itemGO);
     }
     
-    public void Unassign()
+    public override void Unassign()
     {
         if (_curData != null)
         {
@@ -37,5 +40,12 @@ public class BulletInnerSlotController: BaseSlotController<ItemDataBase>
         }
         _curData = null;
         _view?.Clear();
+    }
+    
+    public override bool CanAccept(ItemDataBase data)
+    {
+        if (data == null) return false;
+        if (!(data is BulletData)) return false;
+        return !_view.IsLocked;
     }
 }

@@ -11,17 +11,7 @@ public class GemSlotController : BaseSlotController<ItemDataBase>
     public override bool CanAccept(ItemDataBase data)
     {
         if (IsLocked || data == null) return false;
-
-        switch (SlotType)
-        {
-            case SlotType.GemBagSlot:
-            case SlotType.GemInlaySlot:
-                return data is GemData;
-            case SlotType.BagItemSlot:
-            case SlotType.BagEquipSlot:
-                return data is ItemData;
-        }
-        return false;
+        return data is GemData;
     }
 
     public override void Assign(ItemDataBase data, GameObject itemGO)
@@ -97,4 +87,5 @@ public enum SlotType
     CurBulletSlot = 6,
     BulletInnerSlot = 7,
     SpawnnerSlotInner = 8,
+    GemBagSlotInner = 9,
 }

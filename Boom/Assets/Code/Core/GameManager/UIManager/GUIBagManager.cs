@@ -40,7 +40,6 @@ public class GUIBagManager
     public void ShowBag()
     {
         BagRootGO.SetActive(true);
-        BagRootSC.InitData();
     }
     
     public void ShowMiniBag()

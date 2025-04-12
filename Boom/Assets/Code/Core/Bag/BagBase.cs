@@ -3,15 +3,30 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+//基础抽象类
 #region 接口
 public interface IBulletModifier
 {
     void Modify(BulletData data);
 }
-
 public interface IBindData
 {
     void BindData(ItemDataBase data);
+}
+
+public interface ISlotController
+{
+    public SlotType SlotType { get; }
+    public int SlotID { get; }
+    public ItemDataBase CurData { get; }
+    void Unassign();
+    bool CanAccept(ItemDataBase data);
+    void Assign(ItemDataBase data, GameObject itemGO);
+    void AssignDirectly(ItemDataBase data, GameObject itemGO);
+    public Vector3 TooltipOffset{ get; }
+    bool IsEmpty => CurData == null;
+    bool IsCameraNear { get; set; }
+    public GameObject GetGameObject();
 }
 #endregion
 
@@ -55,20 +70,6 @@ public abstract class ItemDataBase:ISaveable
 }
 
 //基础的SlotController类
-public interface ISlotController
-{
-    public SlotType SlotType { get; }
-    public int SlotID { get; }
-    public ItemDataBase CurData { get; }
-    void Unassign();
-    bool CanAccept(ItemDataBase data);
-    void Assign(ItemDataBase data, GameObject itemGO);
-    void AssignDirectly(ItemDataBase data, GameObject itemGO);
-    public Vector3 TooltipOffset{ get; }
-    bool IsEmpty => CurData == null;
-    public GameObject GetGameObject();
-}
-
 public abstract class BaseSlotController<T> :ISlotController where T : ItemDataBase
 {
     protected int _slotID;
@@ -103,25 +104,31 @@ public abstract class BaseSlotController<T> :ISlotController where T : ItemDataB
         CachedGO = null;
         _view?.Clear();
     }
-    
+    public bool IsCameraNear { get; set; }//是否摄像机切近景了
     public Vector3 TooltipOffset
     {
         get
         {
             return SlotType switch
             {
-                SlotType.GemBagSlot => new Vector3(1.01f, -0.5f, 0),
-                SlotType.BagItemSlot => new Vector3(1.01f, -0.5f, 0),
-                SlotType.GemInlaySlot => new Vector3(-0.92f, -0.52f, 0),
-                SlotType.BagEquipSlot => new Vector3(-0.92f, -0.52f, 0),
-                SlotType.SpawnnerSlot => new Vector3(1.01f, -0.5f, 0),
-                SlotType.SpawnnerSlotInner => new Vector3(1.01f, -0.5f, 0),
-                SlotType.CurBulletSlot => new Vector3(1.01f, -0.5f, 0),
+                SlotType.GemBagSlot =>IsCameraNear?
+                    new Vector3(0.7f, -0.39f, 0) :
+                    new Vector3(1.01f, -0.6f, 0),
+                SlotType.GemBagSlotInner=>IsCameraNear?
+                    new Vector3(0.7f, -0.39f, 0) :
+                    new Vector3(1.01f, -0.6f, 0),
+                SlotType.BagItemSlot => new Vector3(1.01f, -0.6f, 0),
+                SlotType.GemInlaySlot => new Vector3(-0.92f, -0.6f, 0),
+                SlotType.BagEquipSlot => new Vector3(-0.92f, -0.6f, 0),
+                SlotType.SpawnnerSlot => new Vector3(1.01f, -0.6f, 0),
+                SlotType.SpawnnerSlotInner =>IsCameraNear?
+                    new Vector3(0.7f, -0.39f, 0) :
+                    new Vector3(1.01f, -0.6f, 0),
+                SlotType.CurBulletSlot => new Vector3(1.01f, -0.6f, 0),
                 _ => Vector3.zero
             };
         }
     }
-
     public GameObject GetGameObject() => CachedGO;
 }
 #endregion

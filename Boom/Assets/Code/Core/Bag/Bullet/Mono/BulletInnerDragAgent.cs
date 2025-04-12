@@ -4,7 +4,7 @@ using UnityEngine.Serialization;
 public class BulletInnerDragAgent : MonoBehaviour
 {
     [Header("战斗表现引用")]
-    public BulletInner BulletInnerSC;
+    public BulletInnerNew BulletInnerSC;
     public Renderer MainRenderer;
 
     [Header("UI 分身资产")]
@@ -15,7 +15,7 @@ public class BulletInnerDragAgent : MonoBehaviour
 
     void Start()
     {
-        data = BulletInnerSC._data;
+        data = BulletInnerSC.controller.Data;
         // 初始化拖拽影子
         dragGhostSC = BulletFactory.CreateBullet(data, BulletInsMode.EditA) as BulletNew;
         dragGhostSC.gameObject.SetActive(false);

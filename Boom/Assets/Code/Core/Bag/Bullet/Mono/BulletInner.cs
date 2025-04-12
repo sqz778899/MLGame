@@ -37,7 +37,7 @@ public class BulletInner:ItemBase
     {
         _piercingCount = 0;
         _resonance = 0;
-        _state = BulletInnerState.Common;
+        _state = BulletInnerState.Idle;
         _materials = new List<Material>();
         CurSpeed = 60f;
         foreach (var each in CurRenderer.materials)
@@ -65,7 +65,7 @@ public class BulletInner:ItemBase
     {
         switch (_state)
         {
-            case BulletInnerState.Common:
+            case BulletInnerState.Idle:
                 Run();//在界面跟着主角跑
                 break;
             case BulletInnerState.Edit:
@@ -119,10 +119,10 @@ public class BulletInner:ItemBase
                 WarReport warReport = BattleManager.Instance.battleData.CurWarReport;
                 int curWarIndex = warReport.CurWarIndex;
                 
-                if (!warReport.WarIndexToBattleInfo.TryGetValue(curWarIndex, out SingelBattleInfo s))
+                if (!warReport.WarIndexToBattleInfoOld.TryGetValue(curWarIndex, out SingelBattleInfoOld s))
                 {
-                    s = new SingelBattleInfo();
-                    warReport.WarIndexToBattleInfo[curWarIndex] = s;
+                    s = new SingelBattleInfoOld();
+                    warReport.WarIndexToBattleInfoOld[curWarIndex] = s;
                 }
                 
                 var dic = new Dictionary<BulletData, List<BattleOnceHit>>

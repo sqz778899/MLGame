@@ -28,7 +28,7 @@ public class SlotView:MonoBehaviour
         itemGO.transform.localScale = Vector3.one;
     }
 
-    public void Clear()
+    public virtual void Clear()
     {
         for (int i = transform.childCount - 1; i >= 0; i--)
             Destroy(transform.GetChild(i).gameObject);

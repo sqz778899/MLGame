@@ -73,6 +73,8 @@ public class GemInnerNew : ItemBase, IBeginDragHandler, IEndDragHandler,
                
                 //如果槽位已满，且是可交换的
                 GemSlotController s = slotView.Controller as GemSlotController;
+                if (s == null) continue;
+               
                 if (!s.IsEmpty && slotView.Controller.CurData != Data)
                     SlotManager.Swap(s.CurData, Data);
                 else

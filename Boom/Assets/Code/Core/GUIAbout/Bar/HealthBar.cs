@@ -1,8 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
@@ -25,6 +25,8 @@ public class HealthBar : MonoBehaviour
     public TextMeshPro Text;
     
     float Threshold;
+    Func<int> GetCurHP;
+    Func<int> GetMaxHP;
 
     void Start()
     {
@@ -44,6 +46,16 @@ public class HealthBar : MonoBehaviour
         SelBar();
     }
     
+    public void InitHealthBar(Func<int> getCurHP, Func<int> getMaxHP)
+    {
+        GetCurHP = getCurHP;
+        GetMaxHP = getMaxHP;
+
+        SelectBarByHP();
+
+        Refresh(); // 初始化时立即刷新一次
+    }
+    
     public void InitHealthBar(ShieldMono _shield)
     {
         CurBarType = HealthBarType.Shield;
@@ -53,10 +65,12 @@ public class HealthBar : MonoBehaviour
 
     void Update()
     {   
-        //BloodBar_Blood.localScale;
-        float CurRatio = Mathf.Max(0,(float)GetCurHP() / GetMaxHP());
-        BloodBar_Blood.localScale = new Vector3(CurRatio, 1, 1);
-        Text.text = string.Format("{0} / {1}", GetCurHP(), GetMaxHP());
+        if (GetCurHP == null || GetMaxHP == null) return;
+        
+        float ratio = Mathf.Max(0f, (float)GetCurHP() / GetMaxHP());
+        BloodBar_Blood.localScale = new Vector3(ratio, 1f, 1f);
+        Text.text = $"{GetCurHP()} / {GetMaxHP()}";
+        
         if (BloodBar_Mid.localScale.x > BloodBar_Blood.localScale.x)
         {
             float tmp = BloodBar_Mid.localScale.x;
@@ -64,42 +78,50 @@ public class HealthBar : MonoBehaviour
             BloodBar_Mid.localScale = new Vector3(tmp, 1, 1);
         }
         else
-        {
             BloodBar_Mid.localScale = BloodBar_Blood.localScale;
-        }
     }
 
     #region 一些私有方法
-    int GetCurHP()
+    void SelectBarByHP()
     {
-        int CurHP = 0;
-        switch (CurBarType)
+        int maxHP = GetMaxHP?.Invoke() ?? 1;
+
+        Dictionary<int, GameObject> barMapping = new()
         {
-            case HealthBarType.Enemy:
-                CurHP = CurEnemy.CurHP;
+            { 30, Bar01 },
+            { 20, Bar02 },
+            { 15, Bar03 },
+            { 9, Bar04 },
+            { 0, Bar05 }
+        };
+
+        GameObject barRoot = null;
+        foreach (var kv in barMapping.OrderByDescending(kv => kv.Key))
+        {
+            if (maxHP >= kv.Key)
+            {
+                barRoot = kv.Value;
                 break;
-            case HealthBarType.Shield:
-                CurHP = CurShield.CurHP;
-                break;
+            }
         }
-        return CurHP;
+
+        if (barRoot != null)
+        {
+            barRoot.SetActive(true);
+            BloodBar_Mid = barRoot.transform.GetChild(0);
+            BloodBar_Blood = barRoot.transform.GetChild(1);
+            Text = barRoot.GetComponentInChildren<TextMeshPro>();
+        }
     }
     
-    int GetMaxHP()
+    public void Refresh()
     {
-        int CurHP = 0;
-        switch (CurBarType)
-        {
-            case HealthBarType.Enemy:
-                CurHP = CurEnemy.MaxHP;
-                break;
-            case HealthBarType.Shield:
-                CurHP = CurShield.MaxHP;
-                break;
-        }
-        return CurHP;
+        if (GetCurHP == null || GetMaxHP == null) return;
+
+        float ratio = Mathf.Max(0f, (float)GetCurHP() / GetMaxHP());
+        BloodBar_Blood.localScale = new Vector3(ratio, 1f, 1f);
+        Text.text = $"{GetCurHP()} / {GetMaxHP()}";
     }
-    
     void SelBar()
     {
         int maxHP = GetMaxHP();
