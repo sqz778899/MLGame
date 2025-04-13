@@ -93,9 +93,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1765694821460592519}
-  - component: {fileID: 1845418626041984808}
   - component: {fileID: 2377133877971429394}
   - component: {fileID: 3045602233354682486}
+  - component: {fileID: 3138923300269392201}
+  - component: {fileID: 6918117480802313282}
   m_Layer: 0
   m_Name: P_Shield_01
   m_TagString: Shield
@@ -121,27 +122,6 @@ Transform:
   - {fileID: 6998564190850937381}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1845418626041984808
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2850503035749327742}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bd06ed541a9fa540850ddda3e0ed10d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ID: 0
-  MaxHP: 0
-  EState: 0
-  HitColor: {r: 0, g: 0, b: 0, a: 0}
-  HitTextRoot: {fileID: 0}
-  HitTextTrans: {fileID: 6769627413520047789}
-  ShieldIndex: 0
-  CurHealthBar: {fileID: 8144157474905544718}
-  InsStep: -1.83
 --- !u!50 &2377133877971429394
 Rigidbody2D:
   serializedVersion: 4
@@ -214,6 +194,34 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 2.7025309}
   m_EdgeRadius: 0
+--- !u!114 &3138923300269392201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2850503035749327742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8365d4a6eb344c2cb64d94ea64ca493e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6918117480802313282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2850503035749327742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0cd257f2ecc43098ca941b926fe5a6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthBar: {fileID: 8144157474905544718}
+  InsStep: -1.83
+  HitColor: {r: 0, g: 0, b: 0, a: 0}
+  HitTextRoot: {fileID: 6769627413520047789}
 --- !u!1 &7335168202912424046
 GameObject:
   m_ObjectHideFlags: 0

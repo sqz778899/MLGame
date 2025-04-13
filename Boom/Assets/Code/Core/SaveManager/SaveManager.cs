@@ -192,7 +192,7 @@ public static class SaveManager
     static ItemData LoadItemData(ItemBaseSaveData itemBaseSaveData)
     {
         ISlotController CurSlot = SlotManager.GetSlotController(itemBaseSaveData.SlotID, itemBaseSaveData.SlotType);
-        ItemData curItemData = new ItemData(itemBaseSaveData.ID,CurSlot as GemSlotController);
+        ItemData curItemData = new ItemData(itemBaseSaveData.ID,CurSlot as ItemSlotController);
         return curItemData;
     }
 

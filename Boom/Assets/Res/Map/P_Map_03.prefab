@@ -1925,10 +1925,19 @@ MonoBehaviour:
     FlyRangeOffset: {x: -1, y: 1}
     FlyTimeRange: {x: 0.4, y: 0.6}
   SortingLayerName: 
+  Config:
+    ID: 0
+    HP: 0
+    ShieldConfig:
+      ShieldsHPs: 
+    CurAward:
+      BaseScore: 0
+      Coin: 0
+      SupremeCharms: 
+      Items: 
   CurEnemy: {fileID: 4311878849888260657}
   TargetRoom: {fileID: 0}
   ArrowUnlocked: {fileID: 0}
-  TutorialLocked: 0
 --- !u!61 &8549223074596255619
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7212,9 +7221,37 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 5986156531292534341, guid: 7e50c7fd7967db74ab7b234307124519, type: 3}
+      propertyPath: Config.HP
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5986156531292534341, guid: 7e50c7fd7967db74ab7b234307124519, type: 3}
+      propertyPath: Config.ID
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5986156531292534341, guid: 7e50c7fd7967db74ab7b234307124519, type: 3}
       propertyPath: TargetRoom
       value: 
       objectReference: {fileID: 4822194543900484690}
+    - target: {fileID: 5986156531292534341, guid: 7e50c7fd7967db74ab7b234307124519, type: 3}
+      propertyPath: Config.ShieldsHPs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5986156531292534341, guid: 7e50c7fd7967db74ab7b234307124519, type: 3}
+      propertyPath: Config.ShieldsHPs.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5986156531292534341, guid: 7e50c7fd7967db74ab7b234307124519, type: 3}
+      propertyPath: Config.ShieldConfig.ShieldsHPs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5986156531292534341, guid: 7e50c7fd7967db74ab7b234307124519, type: 3}
+      propertyPath: Config.ShieldConfig.ShieldsHPs.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5986156531292534341, guid: 7e50c7fd7967db74ab7b234307124519, type: 3}
+      propertyPath: Config.ShieldConfig.ShieldsHPs.Array.data[1]
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6474019902168887566, guid: 7e50c7fd7967db74ab7b234307124519, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

@@ -8,7 +8,7 @@ public class EnemyConfigMono : MonoBehaviour
     public int MaxHP;
 
     [Header("盾牌血量（每个值代表一个盾）")]
-    public List<int> ShieldsHPs = new();
+    public ShieldConfigData ShieldsHPs = new();
 
     [Header("战斗掉落奖励")]
     public Award CurAward;
@@ -16,15 +16,7 @@ public class EnemyConfigMono : MonoBehaviour
     // 转换成运行时数据结构
     public EnemyData ToEnemyData()
     {
-        var data = new EnemyData
-        {
-            ID = ID,
-            MaxHP = MaxHP,
-            CurHP = MaxHP,
-            CurAward = CurAward,
-            EState = EnemyState.live
-        };
-        data.SetShieldData(new List<int>(ShieldsHPs));
+        EnemyData data = new EnemyData(ID,MaxHP,ShieldsHPs,CurAward);
         return data;
     }
 }

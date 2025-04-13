@@ -29,14 +29,16 @@ public class InventoryManager : MonoBehaviour
 
     public void AddItemToBag(int itemID)
     {
-        ItemData newItemData = new ItemData(itemID, SlotManager.GetEmptySlotController(SlotType.BagItemSlot));
+        ItemData newItemData = new ItemData(itemID, 
+            SlotManager.GetEmptySlotController(SlotType.BagItemSlot) as ItemSlotController);
         _InventoryData.AddItemToBag(newItemData);
         BagItemTools<Item>.AddObjectGO(newItemData);
     }
     
     public void AddGemToBag(int gemID)
     {
-        GemSlotController emptyGemSlotController = SlotManager.GetEmptySlotController(SlotType.GemBagSlot);
+        GemSlotController emptyGemSlotController = 
+            SlotManager.GetEmptySlotController(SlotType.GemBagSlot) as GemSlotController;
         GemData newGemData = new GemData(gemID, emptyGemSlotController);
         BagItemTools<GemNew>.AddObjectGO(newGemData);//在OnDrop中添加到数据层
     }
@@ -146,7 +148,7 @@ public class InventoryManager : MonoBehaviour
         //初始化道具
         List<ItemData> tempItem = _InventoryData.BagItems
             .Concat(_InventoryData.EquipItems)
-            .Select(curData => new ItemData(curData.ID, curData.CurSlotController as GemSlotController))
+            .Select(curData => new ItemData(curData.ID, curData.CurSlotController as ItemSlotController))
             .ToList();
         _InventoryData.BagItems.Clear();
         _InventoryData.EquipItems.Clear();

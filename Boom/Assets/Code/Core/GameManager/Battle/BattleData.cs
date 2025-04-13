@@ -3,7 +3,7 @@
 public class BattleData: ScriptableObject
 {
     [Header("角色")] 
-    public Enemy CurEnemy;
+    public EnemyNew CurEnemy;
     public RoleInner CurRole;
     
     [Header("战报")]
@@ -18,14 +18,14 @@ public class BattleData: ScriptableObject
     public bool IsAttacking;          //是否正在攻击
     public bool IsAfterAttack;           //是否被已经攻击过了
     
-    public void InitFightData(EnemyMiddleData _enemyMidData,int _levelID)
+    public void InitFightData(EnemyConfigData _enemyConfig,int _levelID)
     {
         //CurMapSate.CurLevelID = _levelID;
         CurLevel = LevelManager.LoadLevel(_levelID);
         CurRole = PlayerManager.Instance.RoleInFightSC;
         GM.Root.InventoryMgr.CreateAllBulletToFight();//初始化局内子弹
         CurRole.InitData(CurLevel);//初始化角色数据
-        CurLevel.SetEnemy(_enemyMidData);//初始化敌人属性
+        CurLevel.SetEnemy(_enemyConfig);//初始化敌人属性
         CurEnemy = CurLevel.CurEnemy;
         //初始化各类数据
         IsBattleEnded = false;

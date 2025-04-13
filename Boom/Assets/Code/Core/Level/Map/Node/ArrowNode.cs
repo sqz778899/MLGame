@@ -1,11 +1,11 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class ArrowNode : MapNodeBase
 {
+    [Header("关卡数据")]
+    public EnemyConfigData Config;
+    
     [Header("重要属性")]
-    public Enemy CurEnemy;
     public MapRoomNode TargetRoom;
 
     [Header("横向房间专用")]

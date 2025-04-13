@@ -60,7 +60,7 @@ public class BulletInnerController
             _view.PlayIdleAnimation();
     }
 
-    // 处理攻击动画和相关逻辑（子弹前摇、发射状态切换）
+    //处理攻击动画和相关逻辑（子弹前摇、发射状态切换）
     void HandleAttackAnimation(float deltaTime) {}
 
     //外部调用
@@ -75,43 +75,41 @@ public class BulletInnerController
         _state = BulletInnerState.Attacking;
         _view.PlayAttackingLoopAnimation();
     }
-
+    
+    //子弹击中敌人之后
     public void HandleCollision(Collider2D collider)
     {
         if (_state != BulletInnerState.Attacking) return;
-
-        if (collider.CompareTag("Enemy") || collider.CompareTag("Shield"))
+        
+        if (collider.TryGetComponent<IDamageable>(out var target))
         {
-            var enemy = collider.GetComponent<EnemyBase>();
-            CalculateDamageManager.Instance.CalDamage(Data, enemy);
+            // 命中处理：伤害结算
+            DamageResult result = target.TakeDamage(Data, Data.FinalDamage);
             _view.PlayHitEffect();
 
-            _piercingCount++;
+            // 战报记录
+            RecordBattleHit(result, target);
             if (_piercingCount >= Data.FinalPiercing)
+                _state = BulletInnerState.Dead;
+            _piercingCount++;
+            if (target is EnemyNew) //最后一个如果是敌人，则不再贯穿
                 _state = BulletInnerState.Dead;
         }
     }
     
-    // BulletInnerController 内的命中逻辑
-    public void OnBulletHitEnemy(EnemyBase enemy,BulletData bulletData, int enemyIndex, int damage, int shieldIndex, bool isDestroyed)
+    void RecordBattleHit(DamageResult result, IDamageable target)
     {
-        SingleBattleReport battleReport = BattleManager.Instance.battleData.CurWarReport.GetCurBattleInfo();
-
-        var bulletRecord = battleReport.GetOrCreateBulletRecord(bulletData);
-
-        int overflowDamage = Mathf.Max(0, damage - enemy.CurHP);
-        int effectiveDamage = damage - overflowDamage;
-
-        BattleOnceHit hit = new BattleOnceHit(
-            hitIndex: bulletRecord.Hits.Count,
-            shieldIndex: shieldIndex,
-            enemyIndex: enemyIndex,
-            effectiveDamage: effectiveDamage,
-            overflowDamage: overflowDamage,
-            damage: damage,
-            isDestroyed: isDestroyed
+        SingleBattleReport report = BattleManager.Instance.battleData.CurWarReport.GetCurBattleInfo();
+        BulletAttackRecord record = report.GetOrCreateBulletRecord(Data);// 单个子弹在一场战斗中的全部表现
+        var hit = new BattleOnceHit(
+            record.Hits.Count,
+            result.TargetIndex,
+            (target is EnemyController) ? 1 : -1,  //1表示敌人，-1表示不是
+            result.EffectiveDamage,
+            result.OverflowDamage,
+            result.TotalDamage,
+            result.IsDestroyed
         );
-
-        bulletRecord.RecordHit(hit);
+        record.RecordHit(hit);
     }
 }

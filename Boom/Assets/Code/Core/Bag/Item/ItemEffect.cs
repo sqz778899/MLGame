@@ -1,14 +1,8 @@
-﻿public interface IItemEffect
-{
-    void OnRoomStart();
-    void OnBulletFire(BulletData bullet);
-    void OnChestRoomEnter();
-    void OnDamageCalculate(BulletData bullet);
-}
+﻿
 
 public static class ItemEffectFactory
 {
-    public static IItemEffect CreateEffect(int itemId)
+    public static IItemEffect CreateEffectLogic(int itemId)
     {
         return itemId switch
         {

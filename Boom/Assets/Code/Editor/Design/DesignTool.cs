@@ -121,9 +121,9 @@ public class DesignTool
     [ButtonGroup("调试总功能")]
     void SetEnemyHp()
     {
-        Enemy curEnemy = BattleManager.Instance.battleData.CurEnemy;
-        curEnemy.MaxHP = 9999;
-        curEnemy.CurHP = 9999;
+        EnemyNew curEnemy = BattleManager.Instance.battleData.CurEnemy;
+        /*curEnemy.MaxHP = 9999;
+        curEnemy.CurHP = 9999;*/
     }
 
     void TempAddBullet(int bulletID)

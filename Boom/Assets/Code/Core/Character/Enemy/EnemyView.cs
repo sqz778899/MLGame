@@ -13,7 +13,7 @@ public class EnemyView : MonoBehaviour
     
     [Header("Shields资产")]
     public GameObject ShieldsNode;
-    public List<ShieldMono> Shields = new List<ShieldMono>();
+    public List<ShieldNew> Shields = new List<ShieldNew>();
 
     public void InitSpine(EnemyData data)
     {
@@ -23,7 +23,7 @@ public class EnemyView : MonoBehaviour
             PathConfig.GetEnemySkelentonDataPath(data.ID));
         Ani.skeletonDataAsset = asset;
         Ani.Initialize(true);
-        InitShields(data.ShieldsHPs);
+        InitShields(data.Shields);
     }
 
     public void PlayIdle(bool isFullHP)
@@ -43,7 +43,7 @@ public class EnemyView : MonoBehaviour
         txt.GetComponent<FloatingDamageText>().AnimateText($"-{damage}", HitColor, 18f);
     }
     
-    public void InitShields(List<int> shieldsHPs)
+    public void InitShields(List<ShieldData> shields)
     {
         // 清理旧盾
         foreach (Transform child in ShieldsNode.transform)
@@ -51,17 +51,13 @@ public class EnemyView : MonoBehaviour
         Shields.Clear();
 
         // 创建新盾
-        for (int i = 0; i < shieldsHPs.Count; i++)
+        for (int i = 0; i < shields.Count; i++)
         {
-            GameObject shieldIns = ResManager.instance.CreatInstance(PathConfig.ShieldPB);
-            ShieldMono mono = shieldIns.GetComponent<ShieldMono>();
-            mono.ShieldIndex = i;
-            mono.InitShield(shieldsHPs[i]);
-            mono.HitColor = HitColor;
-            shieldIns.transform.SetParent(ShieldsNode.transform,false);
-            float curStep = i * mono.InsStep;
-            shieldIns.transform.localPosition = new Vector3(curStep,0,0);
-            Shields.Add(mono);
+            ShieldNew shieldSC = ShieldFactory.CreateShield(shields[i],ShieldsNode.transform);
+            shieldSC.View.HitColor = HitColor;
+            float curStep = i * shieldSC.View.InsStep;
+            shieldSC.transform.localPosition = new Vector3(curStep,0,0);
+            Shields.Add(shieldSC);
         }
     }
 }

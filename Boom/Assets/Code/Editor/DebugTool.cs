@@ -12,7 +12,9 @@ public class DebugTool
     [ButtonGroup("S")]
     void DealMissingScript()
     {
-        GameObjectUtility.RemoveMonoBehavioursWithMissingScript(Root);
+        Transform[] all = Root.GetComponentsInChildren<Transform>(true);
+        foreach (var each in all)
+            GameObjectUtility.RemoveMonoBehavioursWithMissingScript(each.gameObject);
     }
     
     [Button(ButtonSizes.Large)]

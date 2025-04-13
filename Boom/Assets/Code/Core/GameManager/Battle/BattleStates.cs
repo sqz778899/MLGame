@@ -1,6 +1,7 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 
+//战斗状态机
 #region 接口
 public interface IFightState
 {
@@ -18,7 +19,7 @@ public class InLevelState : IFightState
 {
     BattleLogic _battleLogic;
     BattleData _battleData;
-    Enemy _curEnemy;
+    EnemyNew _curEnemy;
     RoleInner _curRole;
 
     public InLevelState()

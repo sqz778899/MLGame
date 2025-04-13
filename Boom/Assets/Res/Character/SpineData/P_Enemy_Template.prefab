@@ -164,9 +164,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6566263836257845155}
   - component: {fileID: 4621188327167039812}
-  - component: {fileID: 8319005195416386444}
-  - component: {fileID: 8904087945959619008}
+  - component: {fileID: 1209727205005587698}
+  - component: {fileID: 4271789321765186006}
   - component: {fileID: 9039760192293982448}
+  - component: {fileID: 8904087945959619008}
   m_Layer: 0
   m_Name: P_Enemy_Template
   m_TagString: Enemy
@@ -238,7 +239,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.3830678, y: 2.1772916}
   m_EdgeRadius: 0
---- !u!114 &8319005195416386444
+--- !u!114 &1209727205005587698
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -247,26 +248,48 @@ MonoBehaviour:
   m_GameObject: {fileID: 5993941228292115327}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6db6d97e977b2f4fb31211b32721169, type: 3}
+  m_Script: {fileID: 11500000, guid: ea57ea9a85364db9911e1c309bc0bc8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ID: 1
-  MaxHP: 1
-  EState: 0
-  HitColor: {r: 0.6603774, g: 0, b: 0, a: 1}
-  HitTextRoot: {fileID: 0}
-  HitTextTrans: {fileID: 7240787214066684924}
-  CurHealthBar: {fileID: 3694549218633813643}
+--- !u!114 &4271789321765186006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5993941228292115327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f6ffe94fe1547b9bfae8d5055f9b7f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 0
+  MaxHP: 0
   ShieldsHPs: 
-  Shields: []
-  ShieldsNode: {fileID: 1615124517095623965}
-  Ani: {fileID: 2008770084707223584}
-  Portrait: {fileID: 0}
   CurAward:
     BaseScore: 0
     Coin: 0
     SupremeCharms: 
     Items: 
+--- !u!114 &9039760192293982448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5993941228292115327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a649ca68e73a493caabb769ffebaecef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Portrait: {fileID: 0}
+  Ani: {fileID: 2008770084707223584}
+  HealthBar: {fileID: 3694549218633813643}
+  HitTextPos: {fileID: 7240787214066684924}
+  HitColor: {r: 0.6603774, g: 0, b: 0, a: 1}
+  ShieldsNode: {fileID: 1615124517095623965}
+  Shields: []
 --- !u!50 &8904087945959619008
 Rigidbody2D:
   serializedVersion: 4
@@ -294,22 +317,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &9039760192293982448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5993941228292115327}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a649ca68e73a493caabb769ffebaecef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Ani: {fileID: 2008770084707223584}
-  HealthBar: {fileID: 3694549218633813643}
-  HitTextPos: {fileID: 7240787214066684924}
-  HitColor: {r: 0.6603774, g: 0, b: 0, a: 1}
 --- !u!1 &6804161443784449580
 GameObject:
   m_ObjectHideFlags: 0

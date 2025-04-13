@@ -16,20 +16,19 @@ public class GUIWarReport : MonoBehaviour
     {
         for (int i = ReportRoot.transform.childCount -1; i >= 0; i--)
             Destroy(ReportRoot.transform.GetChild(i).gameObject);
-        //Bullet 这个类
-        //Enemy  这个类
+  
         //List<BattleOnceHit> 战场表现收集
         int totalDamage = 0;
-        SingelBattleInfoOld curInfoOld = BattleManager.Instance.battleData.CurWarReport.GetCurBattleInfoOld();
-        int count = 0;
-        foreach (var eachInfo in curInfoOld.InfoDict)
+        SingleBattleReport curInfo = BattleManager.Instance.battleData.CurWarReport.GetCurBattleInfo();
+
+        for (int i = 0; i < curInfo.BulletAttackRecords.Count; i++)
         {
+            BulletAttackRecord record = curInfo.BulletAttackRecords[i];
             GameObject curSingelReport = Instantiate(SingelReportTemplate, ReportRoot.transform);
             curSingelReport.SetActive(true);
-            curSingelReport.GetComponent<RectTransform>().anchoredPosition = SingelYOffset * count;
-            curSingelReport.GetComponent<SingelReportRoot>().SyncReport(eachInfo.Value,out int totalTemp);
+            curSingelReport.GetComponent<RectTransform>().anchoredPosition = SingelYOffset * i;
+            curSingelReport.GetComponent<SingelReportRoot>().SyncReport(record,out int totalTemp);
             totalDamage += totalTemp;
-            count++;
         }
         txtTotalDamage.text = totalDamage.ToString();
     }

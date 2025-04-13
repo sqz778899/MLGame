@@ -25,10 +25,10 @@ public static class SlotManager
         return allController;
     }
     
-    public static GemSlotController GetEmptySlotController(SlotType slotType)
+    public static ISlotController GetEmptySlotController(SlotType slotType)
     {
         SlotView[] allSlot = GetCurSlotArraySlotView(slotType);
-        GemSlotController curTargetGemSlot = allSlot.FirstOrDefault(each => each.Controller.IsEmpty).Controller as GemSlotController;
+        ISlotController curTargetGemSlot = allSlot.FirstOrDefault(each => each.Controller.IsEmpty).Controller;
         return curTargetGemSlot;
     }
     

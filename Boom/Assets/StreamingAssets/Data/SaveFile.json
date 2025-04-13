@@ -34,7 +34,18 @@
     "4": false
   },
   "UserItems": [],
-  "UserGems": [],
+  "UserGems": [
+    {
+      "ID": 10,
+      "SlotID": 1,
+      "SlotType": 4
+    },
+    {
+      "ID": 3,
+      "SlotID": 2,
+      "SlotType": 4
+    }
+  ],
   "UserMainStoryProgress": 0,
   "UserStorylineNodesState": [],
   "UserQuests": [

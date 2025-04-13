@@ -26,7 +26,7 @@ public class BattleManager: MonoBehaviour
     #endregion
 
     //进入战斗唯一入口
-    public void EnterFight(EnemyMiddleData _enemyMidData,int _levelID)
+    public void EnterFight(EnemyConfigData _enemyConfig,int _levelID)
     {
         InitData();
         IsInBattle = true;
@@ -34,7 +34,7 @@ public class BattleManager: MonoBehaviour
         _MapManager.SwitchFightScene();
         //2)初始化战斗数据
         battleLogic._battleCameraController = new BattleCameraController();//加载摄像机控制器
-        battleData.InitFightData(_enemyMidData, _levelID);
+        battleData.InitFightData(_enemyConfig, _levelID);
         battleLogic.InitFightData();
         battleUI.InitFightData();
         //3)锁一下地图缩放

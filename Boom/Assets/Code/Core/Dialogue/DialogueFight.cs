@@ -14,22 +14,16 @@ public class DialogueFight : MonoBehaviour
     public ArrowNode CurArrow;
     public float observeHPYOffset = 145;
     public TextMeshProUGUI CotentText;
-
-    [Header("按钮")]
-    public Button BtnFight;
     public List<GameObject> HPGOList = new List<GameObject>();
     
     public void InitData(ArrowNode _arraow)
     {
         CurArrow = _arraow;
-        //头像的初始化
-        Enemy curEnemy = CurArrow.CurEnemy;
-        curEnemy.InitData();
-        Portrait.sprite = curEnemy.Portrait;
+        Portrait.sprite = EnemyFactory.GetEnemyPortrait(_arraow.Config.ID);//头像的初始化
         //战斗对话框的界面初始化
         GameObject observeHPAsset = ResManager.instance.GetAssetCache<GameObject>(PathConfig.ObserveHPPB);
-        int HPCounts = curEnemy.ShieldsHPs.Count + 1;
-        for (int i = 0; i < HPCounts; i++)
+        List<int> ShieldsHPs = _arraow.Config.ShieldConfig.ShieldsHPs;
+        for (int i = 0; i < ShieldsHPs.Count + 1; i++)
         {
             GameObject observeHPIns = Instantiate(observeHPAsset, ObserveHPRoot.transform);
             HPGOList.Add(observeHPIns);
@@ -38,7 +32,7 @@ public class DialogueFight : MonoBehaviour
             observeHPRectTrans.anchoredPosition = new Vector2(0,0 + observeHPYOffset*i);
             // 获取并设置文本
             TextMeshProUGUI curObserveHPText = observeHPIns.GetComponentInChildren<TextMeshProUGUI>(true);
-            int currentHP = (i == 0) ? curEnemy.MaxHP : curEnemy.ShieldsHPs[i - 1]; // 根据i来选择显示的血量
+            int currentHP = (i == 0) ? _arraow.Config.HP : ShieldsHPs[i - 1]; // 根据i来选择显示的血量
             curObserveHPText.text = currentHP.ToString();
         }
     }
@@ -46,7 +40,7 @@ public class DialogueFight : MonoBehaviour
     public void EnterFight()
     {
         UIManager.Instance.IsLockedClick = false;
-        BattleManager.Instance.EnterFight(CurArrow.CurEnemy.ToMiddleData(),LevelID);
+        BattleManager.Instance.EnterFight(CurArrow.Config,LevelID);
         QuitSelf();
     }
 

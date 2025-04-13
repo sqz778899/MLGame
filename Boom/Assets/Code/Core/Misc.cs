@@ -4,127 +4,12 @@ using System.Linq;
 using TMPro;
 using UnityEngine.Serialization;
 
-
-[Serializable]
-public struct Award
+public enum ShopType
 {
-    public int BaseScore;
-    public int Coin;
-    public List<int> SupremeCharms;
-    public List<int> Items;
-
-    public Award(int baseScore = 0,int _coin = 0,List<int> _supremeCharms = null,List<int> _items = null)
-    {
-        BaseScore = baseScore;
-        Coin = _coin;
-        SupremeCharms = _supremeCharms ?? new List<int>();
-        Items = _items ?? new List<int>();
-    }
+    All = 0,
+    GemShop = 1,
+    BulletShop = 2
 }
-
-
-#region 战斗相关
-public struct BattleOnceHit
-{
-    public int HitIndex;
-    public int ShieldIndex;
-    public int EnemyIndex;
-    public int EffectiveDamage;
-    public int OverflowDamage;
-    public int Damage;
-    public bool IsDestroyed;
-
-    public BattleOnceHit(int hitIndex = -1, int shieldIndex = -1, int enemyIndex = -1,
-        int effectiveDamage = 0, int overflowDamage = 0, int damage = 0, bool isDestroyed = false)
-    {
-        HitIndex = hitIndex;
-        ShieldIndex = shieldIndex;
-        EnemyIndex = enemyIndex;
-        EffectiveDamage = effectiveDamage;
-        OverflowDamage = overflowDamage;
-        Damage = damage;
-        IsDestroyed = isDestroyed;
-    }
-}
-
-// 单个子弹在一场战斗中的全部表现
-public class BulletAttackRecord
-{
-    public BulletData BulletData;                // 攻击时使用的子弹数据
-    public int BulletSlotID;                     // 子弹槽位索引
-    public List<BattleOnceHit> Hits;             // 每次Hit记录
-
-    public BulletAttackRecord(BulletData bulletData, int bulletSlotID)
-    {
-        BulletData = bulletData;
-        BulletSlotID = bulletSlotID;
-        Hits = new List<BattleOnceHit>();
-    }
-    public void RecordHit(BattleOnceHit hit) => Hits.Add(hit);
-}
-
-// 单场战斗信息（一个战斗回合）
-public class SingleBattleReport
-{
-    public List<BulletAttackRecord> BulletAttackRecords = new List<BulletAttackRecord>();
-
-    // 快速查找当前子弹的记录（按SlotID）
-    public BulletAttackRecord GetOrCreateBulletRecord(BulletData bulletData)
-    {
-        int slotID = bulletData.CurSlotController.SlotID;
-        var record = BulletAttackRecords.FirstOrDefault(r => r.BulletSlotID == slotID);
-        if (record == null)
-        {
-            record = new BulletAttackRecord(bulletData, slotID);
-            BulletAttackRecords.Add(record);
-        }
-        return record;
-    }
-}
-
-public class WarReport
-{
-    public int CurWarIndex;
-    public bool IsWin;
-    public int TotalDamage;
-    public int EffectiveDamage;
-    public int OverFlowDamage;
-    public Dictionary<int,SingelBattleInfoOld> WarIndexToBattleInfoOld;
-    public Dictionary<int, SingleBattleReport> WarIndexToBattleInfo;
-
-    public WarReport()
-    {
-        CurWarIndex = 0;
-        IsWin = false;
-        WarIndexToBattleInfoOld = new Dictionary<int, SingelBattleInfoOld>();
-        WarIndexToBattleInfo = new Dictionary<int, SingleBattleReport>();
-    }
-    
-    public SingleBattleReport GetCurBattleInfo()
-    {
-        if (!WarIndexToBattleInfo.TryGetValue(CurWarIndex, out var report))
-        {
-            report = new SingleBattleReport();
-            WarIndexToBattleInfo[CurWarIndex] = report;
-        }
-        return report;
-    }
-    
-    public SingelBattleInfoOld GetCurBattleInfoOld()
-    {
-        return WarIndexToBattleInfoOld[CurWarIndex];
-    }
-}
-
-public class SingelBattleInfoOld
-{
-    public Dictionary<int, KeyValuePair<BulletData, List<BattleOnceHit>>> InfoDict;
-    public SingelBattleInfoOld()
-    {
-        InfoDict = new Dictionary<int, KeyValuePair<BulletData, List<BattleOnceHit>>>();
-    }
-}
-#endregion
 
 #region 多语言相关
 public enum MultiLaEN
@@ -190,12 +75,6 @@ public enum TalentType
     Gem = 2,
     Bullet = 3,
 }
-public enum ShopType
-{
-    All = 0,
-    GemShop = 1,
-    BulletShop = 2
-}
 
 public enum CreateItemType
 {
@@ -203,7 +82,6 @@ public enum CreateItemType
     MiniBagGem = 1,
     TempGem = 2,
 }
-
 
 public enum UILockedState
 {

@@ -7,7 +7,7 @@ public class BattleUIController
     [Header("一些脚本")] 
     MapManager _MapManager;
     BagRootMini BagRootMiniSC;
-    EnemyMiniMap EnemyMiniMapSC;
+    EnemyMiniMapView EnemyMiniMapSC;
     BattleData _battleData;
     
     [Header("一些GUI")] 
@@ -20,9 +20,8 @@ public class BattleUIController
         InitData();
         //初始化小地图背包界面
         BagRootMiniSC.InitData();
-        //BagRootMiniSC.RefreshGem();
         //初始化小地图敌人信息界面
-        EnemyMiniMapSC.InitData(_battleData.CurEnemy);
+        EnemyMiniMapSC.Bind(_battleData.CurEnemy.Controller._data);
     }
     
     public void ShowWarReport()
@@ -39,7 +38,8 @@ public class BattleUIController
         if (_battleData.CurWarReport.IsWin)
         {
             winGUI.SetActive(true);
-            winGUI.GetComponent<GUIWin>().Win(_battleData.CurEnemy.CurAward);
+            winGUI.GetComponent<GUIWin>().
+                Win(_battleData.CurEnemy.Controller.GetAward());
         }
         else
         {
@@ -60,7 +60,7 @@ public class BattleUIController
     {
         _MapManager ??= UIManager.Instance.Logic.MapManagerSC;
         BagRootMiniSC ??=UIManager.Instance.BagUI.BagRootMiniGO.GetComponent<BagRootMini>();
-        EnemyMiniMapSC ??=UIManager.Instance.MapUI.EnemyMiniMapGO.GetComponent<EnemyMiniMap>();
+        EnemyMiniMapSC ??=UIManager.Instance.MapUI.EnemyMiniMapGO.GetComponent<EnemyMiniMapView>();
         _battleData ??= BattleManager.Instance.battleData;
         warReportRootGUI ??= UIManager.Instance.MapUI.WarReportGO.transform.GetChild(0).gameObject;
         winGUI??=UIManager.Instance.MapUI.WinGUI;

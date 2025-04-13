@@ -18,24 +18,23 @@ public class SingelReportRoot : MonoBehaviour
     Vector2 _shieldStartPos = new Vector2(560, 512); 
     Vector2 _shieldOffset = new Vector2(-100, 0); 
     
-    public void SyncReport(KeyValuePair<BulletData,List<BattleOnceHit>> curInfo ,out int totalDamage)
+    public void SyncReport(BulletAttackRecord curInfo, out int totalDamage)
     {
-        BulletData curBulletData = curInfo.Key;
-        List<BattleOnceHit> curBattleOnceHits = curInfo.Value;
-        txtDamage.text = curBulletData.FinalDamage.ToString();
+        BulletData curBulletData = curInfo.BulletData;
+        List<BattleOnceHit> curBattleOnceHits = curInfo.Hits;
+        //战报标题部分
+        txtDamage.text = curBulletData.FinalDamage.ToString();//伤害
         if (curBulletData.FinalPiercing == 0)
             txtPiercing.gameObject.SetActive(false);
-        txtPiercing.text = curBulletData.FinalPiercing.ToString();
+        txtPiercing.text = curBulletData.FinalPiercing.ToString();//穿透
         if (curBulletData.FinalResonance == 0)
             txtResonance.gameObject.SetActive(false);
         txtResonance.text = curBulletData.FinalResonance.ToString();
+        //细节部分参数
         int effectiveDamage = 0;
         int overflowDamage = 0;
         totalDamage = 0;
-
-        if (curBattleOnceHits.Count == 0) return;
-        
-        //记录每一次攻击的状态
+        //细节部分
         BattleOnceHit firstHit = curBattleOnceHits[0];
         if (firstHit.ShieldIndex == -1)//敌人无盾
         {
@@ -85,17 +84,16 @@ public class SingelReportRoot : MonoBehaviour
                 effectiveDamage += each.EffectiveDamage;
                 overflowDamage += each.OverflowDamage;
             }
-            Debug.Log("敌人有盾");
         }
-        
+        //有效伤害
         if (effectiveDamage == 0)
             txtEffectiveDamage.gameObject.SetActive(false);
         txtEffectiveDamage.text = effectiveDamage.ToString();
-        
+        //溢出伤害
         if (overflowDamage == 0)
             txtOverflowDamage.gameObject.SetActive(false);
         txtOverflowDamage.text = overflowDamage.ToString();
-
+        
         totalDamage = effectiveDamage + overflowDamage;
         BattleManager.Instance.battleData.CurWarReport.TotalDamage = totalDamage;
         BattleManager.Instance.battleData.CurWarReport.EffectiveDamage = effectiveDamage;

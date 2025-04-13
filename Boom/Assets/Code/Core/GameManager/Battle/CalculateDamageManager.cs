@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 
 public class CalculateDamageManager : ScriptableObject
 {
@@ -19,32 +16,32 @@ public class CalculateDamageManager : ScriptableObject
     }
     #endregion
     
-    public void CalDamage(BulletData bullet,EnemyBase curEnemy)
+    public void CalDamage(BulletData bullet,EnemyNew curEnemy)
     {
         
     }
 
-    public void CalDamage(BulletInner bullet,EnemyBase curEnemy)
+    /*public void CalDamage(BulletInner bullet)
     {
         int curDamage = bullet._data.FinalDamage;
         switch (bullet._data.ElementalType)
         {
             case ElementalTypes.Non:
-                curEnemy.TakeDamage(bullet,curDamage);
+                //curEnemy.TakeDamage(bullet,curDamage);
                 break;
             case ElementalTypes.Ice:
-                CalIce(bullet, curEnemy);
+                CalIce(bullet);
                 break;
             case ElementalTypes.Fire:
-                CalFire(bullet, curEnemy);
+                CalFire(bullet);
                 break;
             case ElementalTypes.Electric:
-                CalElectric(bullet, curEnemy);
+                CalElectric(bullet);
                 break;
         }
     }
 
-    void CalIce(BulletInner bullet,EnemyBase curEnemy)
+    void CalIce(BulletInner bullet)
     {
         int curDamage = bullet._data.Damage;
         DamageState curDamageState = curEnemy.DState;
@@ -121,5 +118,5 @@ public class CalculateDamageManager : ScriptableObject
         }
         
         curDamageState.Electric += curDamage;
-    }
+    }*/
 }

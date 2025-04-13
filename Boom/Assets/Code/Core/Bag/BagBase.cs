@@ -14,6 +14,12 @@ public interface IBindData
     void BindData(ItemDataBase data);
 }
 
+public interface IItemEffect
+{
+    void Apply(BattleContext ctx);
+    string GetDescription();
+}
+
 public interface ISlotController
 {
     public SlotType SlotType { get; }
@@ -325,7 +331,6 @@ public class BulletData:ItemDataBase,ITooltipBuilder
     public override ItemBaseSaveData ToSaveData() => new BulletBaseSaveData(this);
 }
 
-
 //宝石修饰器
 public class BulletModifierGem : IBulletModifier
 {
@@ -348,33 +353,43 @@ public class BulletModifierGem : IBulletModifier
 public class ItemData : ItemDataBase,ITooltipBuilder
 {
     public event Action OnDataChanged;
-    //静态数据层 配表数据
-    public int Rare;
+    public int ID;
+    public string Name;
     public string Desc;
-    
-    public IItemEffect EffectLogic; //运行时逻辑引用
-    
-    public ItemData(int _id,GemSlotController gemSlot)
-    {
-        ItemJson json = TrunkManager.Instance.GetItemJson(_id);
-        CurSlotController = gemSlot;
-        InitData(json);
-    }
+    public string ImageName;
+    public int Rare;
 
-    public void InitData(ItemJson json)
+    public IItemEffect EffectLogic; // 每个道具一个策略实现
+
+    public ItemData(int id,ItemSlotController itemSlotController)
     {
+        var json = TrunkManager.Instance.GetItemJson(id);
+        CurSlotController = itemSlotController;
         ID = json.ID;
         Name = json.Name;
-        Price = json.Price;
-        Rare = json.Rare;
         Desc = json.Desc;
-        EffectLogic = ItemEffectFactory.CreateEffect(json.ID);
-        OnDataChanged?.Invoke();
+        Rare = json.Rare;
+        ImageName = json.ResName;
+        EffectLogic = ItemEffectFactory.CreateEffectLogic(ID);
     }
-    protected override void OnIDChanged()
+
+    public void ApplyEffect(BattleContext ctx)
     {
-        ItemJson json = TrunkManager.Instance.GetItemJson(ID);
-        InitData(json);
+        EffectLogic?.Apply(ctx);
     }
+
+    public TooltipsInfo BuildTooltip()
+    {
+        TooltipsInfo info = new TooltipsInfo(Name,Level);
+        return info;
+    }
+}
+
+public class BattleContext
+{
+    public List<BulletData> AllBullets;
+    public List<EnemyData> AllEnemies;
+    public int RoundIndex;
+    public bool IsTreasureRoom;
 }
 #endregion
