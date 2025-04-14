@@ -2,7 +2,7 @@ using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 
-public class DebugTool
+public class   DebugTool
 {
     public GameObject Root;
     public GameObject Root2;
@@ -48,15 +48,15 @@ public class DebugTool
         int count = 1;
         foreach (var each in trans)
         {
-            if (each.name.StartsWith("GemSlot") && !each.name.StartsWith("GemSlotRoot"))
+            if (each.name.StartsWith("BagSlot") && !each.name.StartsWith("BagSlotRoot"))
             {
-                GemSlotInnerView slotView = each.GetComponent<GemSlotInnerView>();
-                /*if (slotView == null)
-                    slotView = each.gameObject.AddComponent<BulletSpawnerSlotView>();
+                ItemSlotView slotView = each.GetComponent<ItemSlotView>();
+                if (slotView == null)
+                    slotView = each.gameObject.AddComponent<ItemSlotView>();
                 
-                GameObject.DestroyImmediate(each.GetComponent<BulletSlotView>());*/
-                slotView.ViewSlotType = SlotType.GemBagSlotInner;
+                slotView.ViewSlotType = SlotType.ItemBagSlot;
                 slotView.ViewSlotID = count;
+                each.name = "ItemSlot" + count.ToString("D2");
                 count++;
             }
         }

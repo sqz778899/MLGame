@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 //基础抽象类
@@ -16,6 +15,7 @@ public interface IBindData
 
 public interface IItemEffect
 {
+    ItemTriggerTiming TriggerTiming { get; }
     void Apply(BattleContext ctx);
     string GetDescription();
 }
@@ -71,7 +71,7 @@ public abstract class ItemDataBase:ISaveable
     public int InstanceID;
     public ISlotController CurSlotController;
 
-    public virtual TooltipsInfo BuildTooltip() { throw new NotImplementedException(); }
+    public virtual ToolTipsInfo BuildTooltip() { throw new NotImplementedException(); }
     public virtual ItemBaseSaveData ToSaveData() { throw new NotImplementedException(); }
 }
 
@@ -123,9 +123,9 @@ public abstract class BaseSlotController<T> :ISlotController where T : ItemDataB
                 SlotType.GemBagSlotInner=>IsCameraNear?
                     new Vector3(0.7f, -0.39f, 0) :
                     new Vector3(1.01f, -0.6f, 0),
-                SlotType.BagItemSlot => new Vector3(1.01f, -0.6f, 0),
+                SlotType.ItemBagSlot => new Vector3(1.01f, -0.6f, 0),
                 SlotType.GemInlaySlot => new Vector3(-0.92f, -0.6f, 0),
-                SlotType.BagEquipSlot => new Vector3(-0.92f, -0.6f, 0),
+                SlotType.ItemEquipSlot => new Vector3(-0.92f, -0.6f, 0),
                 SlotType.SpawnnerSlot => new Vector3(1.01f, -0.6f, 0),
                 SlotType.SpawnnerSlotInner =>IsCameraNear?
                     new Vector3(0.7f, -0.39f, 0) :
@@ -197,9 +197,9 @@ public class GemData : ItemDataBase,ITooltipBuilder
         InitData(json);
     }
     
-    public TooltipsInfo BuildTooltip()
+    public ToolTipsInfo BuildTooltip()
     {
-        TooltipsInfo info = new TooltipsInfo(Name, Level);
+        ToolTipsInfo info = new ToolTipsInfo(Name, Level,"", ToolTipsType.Gem);
 
         if (Damage != 0)
             info.AttriInfos.Add(new ToolTipsAttriSingleInfo(ToolTipsAttriType.Damage, Damage));
@@ -301,9 +301,9 @@ public class BulletData:ItemDataBase,ITooltipBuilder
     }
     #endregion
     
-    public TooltipsInfo BuildTooltip()
+    public ToolTipsInfo BuildTooltip()
     {
-        TooltipsInfo info = new TooltipsInfo(Name,Level);
+        ToolTipsInfo info = new ToolTipsInfo(Name,Level,"", ToolTipsType.Bullet);
 
         if (FinalDamage != 0)
         {
@@ -357,7 +357,7 @@ public class ItemData : ItemDataBase,ITooltipBuilder
     public string Name;
     public string Desc;
     public string ImageName;
-    public int Rare;
+    public int Rarity;
 
     public IItemEffect EffectLogic; // 每个道具一个策略实现
 
@@ -368,7 +368,7 @@ public class ItemData : ItemDataBase,ITooltipBuilder
         ID = json.ID;
         Name = json.Name;
         Desc = json.Desc;
-        Rare = json.Rare;
+        Rarity = json.Rarity;
         ImageName = json.ResName;
         EffectLogic = ItemEffectFactory.CreateEffectLogic(ID);
     }
@@ -378,9 +378,10 @@ public class ItemData : ItemDataBase,ITooltipBuilder
         EffectLogic?.Apply(ctx);
     }
 
-    public TooltipsInfo BuildTooltip()
+    public ToolTipsInfo BuildTooltip()
     {
-        TooltipsInfo info = new TooltipsInfo(Name,Level);
+        ToolTipsInfo info = new ToolTipsInfo(Name,Level,Desc, ToolTipsType.Item,
+            Rarity);
         return info;
     }
 }
@@ -388,8 +389,19 @@ public class ItemData : ItemDataBase,ITooltipBuilder
 public class BattleContext
 {
     public List<BulletData> AllBullets;
-    public List<EnemyData> AllEnemies;
+    public EnemyData CurEnemy;
     public int RoundIndex;
     public bool IsTreasureRoom;
 }
+
+public enum ItemTriggerTiming
+{
+    OnBattleStart,
+    OnBulletFire,
+    OnBulletHit,
+    OnShieldPenetrate,
+    OnEnterTreasureRoom,
+    // ...
+}
+
 #endregion

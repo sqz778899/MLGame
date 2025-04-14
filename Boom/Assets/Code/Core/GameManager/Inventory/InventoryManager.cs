@@ -6,6 +6,7 @@ public class InventoryManager : MonoBehaviour
 {
     public InventoryData _InventoryData;
     public BulletInvData _BulletInvData;
+    public ItemEffectManager _ItemEffectMrg;
     
     public List<BulletInnerNew> CurBulletsInFight;
     public List<BulletSlotController> CurBulletSlotControllers;
@@ -30,9 +31,9 @@ public class InventoryManager : MonoBehaviour
     public void AddItemToBag(int itemID)
     {
         ItemData newItemData = new ItemData(itemID, 
-            SlotManager.GetEmptySlotController(SlotType.BagItemSlot) as ItemSlotController);
+            SlotManager.GetEmptySlotController(SlotType.ItemBagSlot) as ItemSlotController);
         _InventoryData.AddItemToBag(newItemData);
-        BagItemTools<Item>.AddObjectGO(newItemData);
+        BagItemTools<ItemNew>.AddObjectGO(newItemData);
     }
     
     public void AddGemToBag(int gemID)
@@ -152,7 +153,7 @@ public class InventoryManager : MonoBehaviour
             .ToList();
         _InventoryData.BagItems.Clear();
         _InventoryData.EquipItems.Clear();
-        tempItem.ForEach(item=>  BagItemTools<Item>.InitSaveFileObject(item, item.CurSlotController.SlotType));
+        tempItem.ForEach(item=>  BagItemTools<ItemNew>.InitSaveFileObject(item, item.CurSlotController.SlotType));
     }
     #endregion
     
@@ -224,6 +225,7 @@ public class InventoryManager : MonoBehaviour
             Destroy(gameObject);
 
         CurBulletsInFight = new List<BulletInnerNew>();
+        _ItemEffectMrg = new ItemEffectManager();
         _InventoryData =  ResManager.instance.GetAssetCache<InventoryData>(PathConfig.InventoryDataPath);
         _BulletInvData =  ResManager.instance.GetAssetCache<BulletInvData>(PathConfig.BulletInvDataPath);
     }

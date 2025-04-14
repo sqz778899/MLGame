@@ -11,21 +11,8 @@ public class ShieldController:IDamageable
         _view = view;
 
         _view.Init(data);
-        _data.OnTakeDamage += OnTakeDamage;
     }
-
-    void OnTakeDamage()
-    {
-        _view.ShowHitText(1); // 实际值根据需求调整
-        if (_data.IsDestroyed)
-            GameObject.Destroy(_view.gameObject);
-    }
-
-    public void Dispose()
-    {
-        _data.OnTakeDamage -= OnTakeDamage;
-    }
-
+    
     #region IDamageable接口相关的实现
     public DamageResult TakeDamage(BulletData source, int damage)
     {
@@ -33,6 +20,7 @@ public class ShieldController:IDamageable
         int effective = damage - overflow;
 
         _data.TakeDamage(damage);
+        _view.ShowHitText(damage); // 实际值根据需求调整
 
         bool isDestroyed = _data.IsDestroyed;
         if (isDestroyed)
@@ -44,6 +32,5 @@ public class ShieldController:IDamageable
     public bool IsDead => _data.IsDestroyed;
     public int CurHP => _data.CurHP;
     public int MaxHP => _data.MaxHP;
-    public Vector3 GetHitPosition() => _view.HitTextRoot.position;
     #endregion
 }

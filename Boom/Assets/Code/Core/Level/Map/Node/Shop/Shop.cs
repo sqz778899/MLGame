@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-public class Shop:GUIBase
+public class Shop:MonoBehaviour,ICloseOnClickOutside
 {
     [Header("基本资产")] 
     public TextMeshProUGUI Title;
@@ -22,6 +22,8 @@ public class Shop:GUIBase
     public ShopNode CurShopNode;
     public ShopType CurShopType;
     public List<RollPR> RollProbs;
+    
+    void Start() => GM.Root.HotkeyMgr.OnEscapePressed += Hide; //注册快捷键
     void Update()
     {
         switch (CurShopType)
@@ -36,8 +38,6 @@ public class Shop:GUIBase
                 Title.text = "子弹商店";
                 break;
         }
-
-        if (Input.GetKeyDown(KeyCode.Escape)) { QuitSelf(); }
 
         if (CurShopNode.IsFirstOpen)
             TextRollCost.text = "0";
@@ -147,6 +147,20 @@ public class Shop:GUIBase
     
 
     #endregion
-    
-    public override void QuitSelf() => gameObject.SetActive(false);
+
+    #region Hide/Show
+    public void Show()
+    {
+        gameObject.SetActive(true);
+        UIClickOutsideManager.Register(this);
+    }
+
+    public void Hide()
+    {
+        gameObject.SetActive(false);
+        UIClickOutsideManager.Unregister(this);
+    }
+    public void OnClickOutside() => Hide();
+    void OnDestroy() => GM.Root.HotkeyMgr.OnEscapePressed -= Hide; //注册快捷键
+    #endregion
 }

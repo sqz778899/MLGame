@@ -20,17 +20,17 @@ public class L2Step1Tutorial:TutorialStepBase
 
     public override void Enter()
     {
-        _btnBag = EternalCavans.Instance.btnBag;
+        _btnBag = EternalCavans.Instance.BagButtonGO;
         _dialogue = EternalCavans.Instance.DialogueSC;
         _InventoryData = InventoryManager.Instance._InventoryData;
-        GlobalTicker.Instance.OnUpdate += Update;
+        GM.Root.GlobalTickerMgr.OnUpdate += Update;
     }
 
     void Update()
     {
         if (_InventoryData.BagGems.Count > 0 && QuestManager.Instance.currentQuest.ID == 2)
         {
-            GlobalTicker.Instance.OnUpdate -= Update;
+            GM.Root.GlobalTickerMgr.OnUpdate -= Update;
             BeginTutorial();
         }
     }
@@ -86,14 +86,14 @@ public class L2Step1Tutorial:TutorialStepBase
         Vector3 doubleOffet = new (1.6f,0.2f,0);
         TutoConfig.SetArrow(fxDoubleClick,slotGO.transform.position + doubleOffet);
         //4)注册下一步
-        GlobalTicker.Instance.OnUpdate += Update2;
+        GM.Root.GlobalTickerMgr.OnUpdate += Update2;
     }
     
     void Update2()
     {
         if (_InventoryData.EquipGems.Count > 0)
         {
-            GlobalTicker.Instance.OnUpdate -= Update2;
+            GM.Root.GlobalTickerMgr.OnUpdate -= Update2;
             EndTutorial();
         }
     }

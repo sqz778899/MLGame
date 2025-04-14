@@ -65,7 +65,7 @@ namespace Code.Editor
                 if (curTable.Rows[i][1].ToString() == "") continue;
                 curItem.ID = GetCellInt(curTable.Rows[i][0].ToString());
                 curItem.Name = curTable.Rows[i][1].ToString();
-                curItem.Rare = GetCellInt(curTable.Rows[i][2].ToString());
+                curItem.Rarity = GetCellInt(curTable.Rows[i][2].ToString());
                 curItem.Desc = curTable.Rows[i][3].ToString();
                 curItem.Price = GetCellInt(curTable.Rows[i][4].ToString());
                 curItem.ResName = curTable.Rows[i][5].ToString();

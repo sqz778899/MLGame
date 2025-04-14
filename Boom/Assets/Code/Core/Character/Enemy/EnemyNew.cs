@@ -2,6 +2,7 @@
 
 public class EnemyNew : MonoBehaviour,IDamageable
 {
+    public EnemyData Data { get; private set; }
     public EnemyController Controller { get; private set; }
     public EnemyView View { get; private set; }
 
@@ -11,7 +12,11 @@ public class EnemyNew : MonoBehaviour,IDamageable
         Controller = new EnemyController();
     }
 
-    public void BindData(EnemyData data) => Controller.Bind(data, View,this);
+    public void BindData(EnemyData data)
+    {
+        Data = data;
+        Controller.Bind(data, View,this);
+    }
     void Update() => Controller.Tick(Time.deltaTime);
     void OnDestroy() => Controller?.Dispose();
     

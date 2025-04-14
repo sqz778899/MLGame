@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 741252958351894732}
-  - component: {fileID: 5859342663554968164}
+  - component: {fileID: 8496213021472071248}
+  - component: {fileID: 645643082507338829}
   m_Layer: 5
   m_Name: P_Item_Template_01
   m_TagString: Untagged
@@ -39,7 +40,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5859342663554968164
+--- !u!114 &8496213021472071248
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -48,13 +49,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2621614607781689709}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bca688204ea3084d8e73e9ab59dc89e, type: 3}
+  m_Script: {fileID: 11500000, guid: 8c869da942704619b34d525a6a6dfa04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DobuleClickTime: 6
-  CurToolTipsMenuState: 0
-  Rare: 0
-  ItemSprite: {fileID: 7565019352125093693}
+  Icon: {fileID: 7565019352125093693}
   ItemBGInBag: {fileID: 8670285074962067189}
   ItemBGInEquip: {fileID: 346373297690352967}
   RareColor: {r: 1, g: 1, b: 1, a: 0}
@@ -62,6 +60,18 @@ MonoBehaviour:
   Rare2: {r: 0.27411884, g: 0.45285472, b: 0.7924528, a: 1}
   Rare3: {r: 0.6115514, g: 0.31149873, b: 0.7075472, a: 1}
   Rare4: {r: 0.9150943, g: 0.78728676, b: 0.3856057, a: 1}
+--- !u!114 &645643082507338829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2621614607781689709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2707c922163480c92bc139a81d616c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4516936844340576216
 GameObject:
   m_ObjectHideFlags: 0

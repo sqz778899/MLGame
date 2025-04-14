@@ -113,14 +113,14 @@ public class L1Step2EquipBullet : TutorialStepBase
         //1)设置引导板状态
         tutorialBG.enabled = true;
         //2)设置按钮高亮&&引导箭头
-        _btnBag = EternalCavans.Instance.btnBag;
+        _btnBag = EternalCavans.Instance.BagButtonGO;
         _btnBag.AddComponent<ShaderHoleController>().radius = 0.08f;
         TutoConfig.SetArrow(fxArrow,EternalCavans.Instance.btnBag_Apos.position);
         //3)给按钮注册引导事件
         _btnBag.GetComponent<Button>().onClick.AddListener(OpenBag);
         //4)注册结束事件
         EventManager.OnBulletEquipped += OnBulletEquipped;
-        GlobalTicker.Instance.OnUpdate += Update;
+        GM.Root.GlobalTickerMgr.OnUpdate += Update;
     }
 
     void OpenBag()
@@ -162,7 +162,7 @@ public class L1Step2EquipBullet : TutorialStepBase
 
     void ReturnToRoom()
     {
-        GlobalTicker.Instance.OnUpdate -= Update;
+        GM.Root.GlobalTickerMgr.OnUpdate -= Update;
         EternalCavans.Instance.TutorialSwichGemLock = false; 
         EternalCavans.Instance.TutorialCloseBagLock = false; 
         //1）清空之前的状态
@@ -224,7 +224,7 @@ public class L1Step3Battle : TutorialStepBase
     public override void Enter()
     {
         EventManager.OnFirstBattleEnd += OnFirstBattleEnd;
-        GlobalTicker.Instance.OnUpdate += Update;
+        GM.Root.GlobalTickerMgr.OnUpdate += Update;
     }
     
     public void Update()
@@ -234,7 +234,7 @@ public class L1Step3Battle : TutorialStepBase
 
     void BeginBattle()
     {
-        GlobalTicker.Instance.OnUpdate -= Update;
+        GM.Root.GlobalTickerMgr.OnUpdate -= Update;
         //1)设置各种高亮状态
         tutorialBG.enabled = true;
         keyBoardGO.SetActive(true);
@@ -255,14 +255,14 @@ public class L1Step3Battle : TutorialStepBase
         keySpaceGO.SetActive(true);
         keySpaceGO.transform.GetChild(0).gameObject.AddComponent<ShaderHoleController>().radius = 0.08f;
         //2)注册监听
-        GlobalTicker.Instance.OnUpdate += Update2;
+        GM.Root.GlobalTickerMgr.OnUpdate += Update2;
     }
 
     void Update2()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            GlobalTicker.Instance.OnUpdate -= Update2;
+            GM.Root.GlobalTickerMgr.OnUpdate -= Update2;
             Pressed();
         }
     }
@@ -308,7 +308,7 @@ public class L1Step4EquipGem : TutorialStepBase
     public override void Enter()
     {
         EventManager.OnGemEquipped += OnGemEquipped;
-        GlobalTicker.Instance.OnUpdate += Update;
+        GM.Root.GlobalTickerMgr.OnUpdate += Update;
     }
     
     public void Update()
@@ -317,7 +317,7 @@ public class L1Step4EquipGem : TutorialStepBase
         MapRoomNode CurRoom = BattleManager.Instance._MapManager.GetMapRoomNode(2);
         if (CurRoom.IsFogUnLocked)
         {
-            GlobalTicker.Instance.OnUpdate -= Update;
+            GM.Root.GlobalTickerMgr.OnUpdate -= Update;
             OpenBox();
         }
     }
@@ -351,7 +351,7 @@ public class L1Step4EquipGem : TutorialStepBase
         _curBox.IsSpeTutorial = false;
         UIManager.Instance.IsLockedClick = false;
         //2)背包按钮
-        _btnBag = EternalCavans.Instance.btnBag;
+        _btnBag = EternalCavans.Instance.BagButtonGO;
         _btnBag.AddComponent<ShaderHoleController>().radius = 0.08f;
         TutoConfig.SetArrow(fxArrow,EternalCavans.Instance.btnBag_Apos.position);
         //3)给按钮注册引导事件
@@ -391,7 +391,7 @@ public class L1Step4EquipGem : TutorialStepBase
         tsc.endTrans = equipGemSlot01.transform;
         tsc.ResetPos();
         fXHand.Play();
-        GlobalTicker.Instance.OnUpdate += Update2;
+        GM.Root.GlobalTickerMgr.OnUpdate += Update2;
     }
     
     public void Update2()
@@ -404,7 +404,7 @@ public class L1Step4EquipGem : TutorialStepBase
     
     void ReturnToRoom()
     {
-        GlobalTicker.Instance.OnUpdate -= Update2;
+        GM.Root.GlobalTickerMgr.OnUpdate -= Update2;
         //1）清空之前的状态
         fXHand.Clear();
         fXHand.Stop();
@@ -456,7 +456,7 @@ public class L1Step5DragBullet : TutorialStepBase
 
     public override void Enter()
     {
-        GlobalTicker.Instance.OnUpdate += Update;
+        GM.Root.GlobalTickerMgr.OnUpdate += Update;
     }
     
     void Update()
@@ -466,7 +466,7 @@ public class L1Step5DragBullet : TutorialStepBase
         {
             if (BattleManager.Instance.IsInBattle)
             {
-                GlobalTicker.Instance.OnUpdate -= Update;
+                GM.Root.GlobalTickerMgr.OnUpdate -= Update;
                 BeginDrag();
             }
         }
@@ -502,14 +502,14 @@ public class L1Step5DragBullet : TutorialStepBase
         tsc.ResetPos();
         fXHand.Play();
         
-        GlobalTicker.Instance.OnUpdate += Update2;
+        GM.Root.GlobalTickerMgr.OnUpdate += Update2;
     }
     
     void Update2()
     {
         if (bagRootMini.IsCameraNear)
         {
-            GlobalTicker.Instance.OnUpdate -= Update2;
+            GM.Root.GlobalTickerMgr.OnUpdate -= Update2;
             fXHand.Clear();
             fXHand.Stop();
             tutorialBG.enabled = false;

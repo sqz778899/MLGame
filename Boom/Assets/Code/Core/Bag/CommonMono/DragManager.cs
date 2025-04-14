@@ -55,6 +55,8 @@ public class DragManager : MonoBehaviour
                     Data = gem.Data;
                 else if (curItem is BulletNew bullet)
                     Data = bullet.Data;
+                else if (curItem is ItemNew item)
+                    Data = item.Data;
                 if (Data == null) continue;
                 
                 ISlotController targetCtrl = targetView.Controller;
@@ -84,14 +86,7 @@ public class DragManager : MonoBehaviour
                     targetCtrl.SlotType == SlotType.SpawnnerSlotInner)
                 {
                     draggedObject.TryGetComponent(out BulletNew bulletNew);
-                    try
-                    {
-                        Data.CurSlotController.Unassign();
-                    }
-                    catch (Exception e)
-                    {
-                        Debug.Log("xxxxxxxxxxxxxx");
-                    }
+                    Data.CurSlotController.Unassign();
                     bulletNew.OnDragCanceled();
                     dropped = true;
                     break;

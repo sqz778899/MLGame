@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingMono : GUIBase
+public class SettingMono : MonoBehaviour
 {
     public TMP_Dropdown MultiLaDP;
     public TMP_Dropdown ScreenResolutionDP;
@@ -18,7 +16,6 @@ public class SettingMono : GUIBase
         MultiLaDP.value = (int)MultiLa.Instance.CurLanguage;
         ScreenResolutionDP.value = TrunkManager.Instance._userConfig.UserScreenResolution;
         ScreenMode(TrunkManager.Instance._userConfig.UserScreenMode);
-        CloseWindow();
     }
 
     public void ScreenMode(int value)

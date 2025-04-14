@@ -25,9 +25,9 @@ public static class SaveManager
         for (int i = 0; i < saveFile.UserItems.Count; i++)
         {
             ItemData curItem = LoadItemData(saveFile.UserItems[i]);
-            if (curItem.CurSlotController.SlotType == SlotType.BagItemSlot)
+            if (curItem.CurSlotController.SlotType == SlotType.ItemBagSlot)
                 InventoryManager.Instance._InventoryData.AddItemToBag(curItem);
-            if (curItem.CurSlotController.SlotType == SlotType.BagEquipSlot)
+            if (curItem.CurSlotController.SlotType == SlotType.ItemEquipSlot)
                 InventoryManager.Instance._InventoryData.AddItemToEquip(curItem);
         }
         //读取Gem

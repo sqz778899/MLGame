@@ -22,14 +22,13 @@ public class TooltipsManager:MonoBehaviour
     /// <summary>
     /// 显示 Tooltips
     /// </summary>
-    public void Show(TooltipsInfo info, Vector3 worldPosition)
+    public void Show(ToolTipsInfo info, Vector3 worldPosition)
     {
         if (!isEnabled) return;
         
         if (tooltipGO == null || tooltipSC == null) return;
 
         tooltipGO.SetActive(true);
-        tooltipSC.ClearInfo();
         tooltipSC.SetInfo(info);
         tooltipGO.transform.position = worldPosition;
     }
@@ -43,12 +42,11 @@ public class TooltipsManager:MonoBehaviour
     {
         if (tooltipGO == null || tooltipSC == null) return;
         
-        tooltipSC.ClearInfo();
         tooltipGO.SetActive(false);
     }
 }
 
 public interface ITooltipBuilder
 {
-    TooltipsInfo BuildTooltip();
+    ToolTipsInfo BuildTooltip();
 }

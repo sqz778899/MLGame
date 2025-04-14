@@ -33,7 +33,28 @@
     "3": false,
     "4": false
   },
-  "UserItems": [],
+  "UserItems": [
+    {
+      "ID": 2,
+      "SlotID": 2,
+      "SlotType": 1
+    },
+    {
+      "ID": 201,
+      "SlotID": 1,
+      "SlotType": 1
+    },
+    {
+      "ID": 201,
+      "SlotID": 1,
+      "SlotType": 1
+    },
+    {
+      "ID": 1,
+      "SlotID": 1,
+      "SlotType": 3
+    }
+  ],
   "UserGems": [
     {
       "ID": 10,
@@ -43,6 +64,11 @@
     {
       "ID": 3,
       "SlotID": 2,
+      "SlotType": 4
+    },
+    {
+      "ID": 20,
+      "SlotID": 3,
       "SlotType": 4
     }
   ],

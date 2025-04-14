@@ -175,16 +175,16 @@ public class GemJson : ItemJsonBase
 
 [Serializable]
 public class ItemJson:ItemJsonBase
-{
-    public int Rare;
+{ 
+    public int Rarity;
     public string ResName;
     public string Desc;
     
-    public ItemJson(int _id = -1, string _name = "",int _rare = -1,
+    public ItemJson(int _id = -1, string _name = "",int rarity = -1,
         string _desc = "",int _price = 0, string resName = "")
     {
         ID = _id;
-        Rare = _rare;
+        Rarity = rarity;
         Name = _name;
         Desc = _desc;
         ResName = resName;

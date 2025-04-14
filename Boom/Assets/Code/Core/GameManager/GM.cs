@@ -10,6 +10,7 @@ public class GM: MonoBehaviour
     public InventoryManager InventoryMgr { get; private set; }
     public BattleManager BattleMgr{ get; private set; }
     public GlobalTicker GlobalTickerMgr { get; private set; }
+    public HotkeyManager HotkeyMgr { get; private set; }
     
     public StorylineSystem StorylineSys{ get; private set; }
 
@@ -29,6 +30,7 @@ public class GM: MonoBehaviour
             InventoryMgr = gameObject.AddComponent<InventoryManager>();
             BattleMgr = gameObject.AddComponent<BattleManager>();
             GlobalTickerMgr = gameObject.AddComponent<GlobalTicker>();
+            HotkeyMgr = gameObject.AddComponent<HotkeyManager>();
             StorylineSys = gameObject.AddComponent<StorylineSystem>();
             
             Initializer = gameObject.AddComponent<GameInitializer>();

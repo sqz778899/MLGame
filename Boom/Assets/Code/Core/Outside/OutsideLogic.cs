@@ -30,6 +30,7 @@ public class OutsideLogic : MonoBehaviour
     void Start()
     {
         QuestRoot.InitAllQuests();
+        GM.Root.HotkeyMgr.OnEscapePressed += CloseBuild; //注册快捷键
     }
 
     public void LockedMap() => MapControl.LockMap();
@@ -47,18 +48,16 @@ public class OutsideLogic : MonoBehaviour
         _builds.ForEach(s=>s.UnLockBuild());
     }
 
-    void Update()
+    void CloseBuild()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            _builds.ForEach(menu => menu.CloseBuild());
-            UnLockedMap();
-        }
+        _builds.ForEach(menu => menu.CloseBuild());
+        UnLockedMap();
     }
 
     void OnDestroy()
     {
         EternalCavans.Instance.OnOpenBag -= LockedAllThings;
         EternalCavans.Instance.OnCloseBag -= UnLockedAllThings;
+        GM.Root.HotkeyMgr.OnEscapePressed -= CloseBuild;
     }
 }

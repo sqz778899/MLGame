@@ -48,10 +48,10 @@ public static class BagItemTools<T> where T:ItemBase
         if (curSC is GemNew curGem)
             curGem.Data.CurSlotController.Unassign();
         
-        if (curSC is Item curItem)
+        if (curSC is ItemNew curItem)
         {
-            InventoryManager.Instance._InventoryData.RemoveItem(curItem._data);
-            SlotManager.ClearSlot(curItem._data.CurSlotController);
+            InventoryManager.Instance._InventoryData.RemoveItemToBag(curItem.Data);
+            SlotManager.ClearSlot(curItem.Data.CurSlotController);
             GameObject.Destroy(objectIns);
         }
     }

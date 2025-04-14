@@ -9,10 +9,19 @@ public class GemSlotView:SlotView
     public GemSlotInnerView InnerSlot;
     [SerializeField] Vector3 customScale = Vector3.one;
     GemSlotController _controller;//把这个类的Controller也改成SlotController，避免多次转换
+    
+    public override void Init()
+    {
+        InstanceID = GetInstanceID();
+        GemSlotController controller = new GemSlotController();
+        controller.Init(ViewSlotID, ViewSlotType); // 用公开方法初始化
+        controller.BindView(this);
+        Controller = controller;
+        _controller = Controller as GemSlotController;
+    }
 
     public override void InitStep2()
     {
-        _controller = Controller as GemSlotController;
         _controller.LinkedGemInnerSlotController = InnerSlot.GemInnerController;
         InnerSlot.Controller = Controller;
         _controller.IsLocked = _state == UILockedState.isLocked; //同步锁状态

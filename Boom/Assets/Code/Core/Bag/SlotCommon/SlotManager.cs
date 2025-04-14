@@ -107,10 +107,10 @@ public static class SlotManager
             case SlotType.CurBulletSlot:
                 allSlot = EternalCavans.Instance.EquipBulletSlotRoot.GetComponentsInChildren<BulletSlotView>(true);
                 break;
-            case SlotType.BagEquipSlot:
+            case SlotType.ItemEquipSlot:
                 allSlot = EternalCavans.Instance.EquipItemRoot.GetComponentsInChildren<SlotView>(true);
                 break;
-            case SlotType.BagItemSlot:
+            case SlotType.ItemBagSlot:
                 allSlot = EternalCavans.Instance.ItemRoot.GetComponentsInChildren<SlotView>(true);
                 break;
             case SlotType.SpawnnerSlot:

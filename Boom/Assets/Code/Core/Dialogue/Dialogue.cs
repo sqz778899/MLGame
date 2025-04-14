@@ -104,7 +104,7 @@ public class Dialogue : MonoBehaviour
             return;
         }
         
-        Content.text = ProcessRichText(curDia.Content);//标记的地方换色处理
+        Content.text = TextProcessor.Parse(curDia.Content,false);//标记的地方换色处理
         if (curDia.IsLeft == 1)
         {
             LeftGOs.ForEach(each => each.SetActive(true));
@@ -126,12 +126,5 @@ public class Dialogue : MonoBehaviour
             PLeftRect.anchoredPosition = new Vector2(PLeftRect.anchoredPosition.x, _spriteDict[curDia.Name].PortraitY);
         }
         nextDialogueID = curDia.NextIdex;
-    }
-    
-    
-    string ProcessRichText(string raw)
-    {
-        // 简单处理：将 #文字# 转为绿色
-        return Regex.Replace(raw, "#(.*?)#", "<color=#66ff66>$1</color>");
     }
 }

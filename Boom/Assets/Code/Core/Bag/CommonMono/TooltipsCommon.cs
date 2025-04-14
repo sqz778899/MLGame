@@ -1,18 +1,33 @@
 ﻿using System.Collections.Generic;
 
-public struct TooltipsInfo
+public struct ToolTipsInfo
 {
     public string Name;
     public int Level;
+    public int Rarity;
+    public string Description;
+    public ToolTipsType CurToolTipsType;
     public List<ToolTipsAttriSingleInfo> AttriInfos;
 
-    public TooltipsInfo(string name = "", int level = 0,
+    public ToolTipsInfo(string name = "", int level = 0,string desc = "",
+        ToolTipsType type = ToolTipsType.None,int _rarity = 0,
         List<ToolTipsAttriSingleInfo> attriInfos = null)
     {
         Name = name;
         Level = level;
+        Description = desc;
         AttriInfos = attriInfos ?? new List<ToolTipsAttriSingleInfo>();
+        CurToolTipsType = type;
+        Rarity = _rarity;
     }
+}
+
+public enum ToolTipsType
+{
+    None = 0,
+    Item = 1,
+    Bullet = 2,
+    Gem = 3
 }
 
 public struct ToolTipsAttriSingleInfo

@@ -32,6 +32,8 @@ public class GemNew: ItemBase,IItemInteractionBehaviour
     #endregion
 
     #region 双击与右键逻辑
+    public void OnBeginDrag() {}
+    public void OnEndDrag() {}
     void IItemInteractionBehaviour.OnDoubleClick()
     {
         GemSlotController from = Data.CurSlotController as GemSlotController;

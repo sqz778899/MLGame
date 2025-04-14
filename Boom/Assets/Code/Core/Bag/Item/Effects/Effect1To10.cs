@@ -2,6 +2,8 @@
 
 public class Effect_CrazyHat: IItemEffect
 {
+    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnBulletFire;
+
     public void Apply(BattleContext ctx)
     {
         if (ctx.AllBullets.Count > 0)
@@ -15,6 +17,8 @@ public class Effect_CrazyHat: IItemEffect
 
 public class Effect_LuckyBoots : IItemEffect
 {
+    public ItemTriggerTiming TriggerTiming { get; }
+
     public void Apply(BattleContext ctx)
     {
     }

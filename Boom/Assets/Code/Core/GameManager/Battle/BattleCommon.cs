@@ -8,7 +8,6 @@ public interface IDamageable
     bool IsDead { get; }
     int CurHP { get; }
     int MaxHP { get; }
-    Vector3 GetHitPosition();
 }
 public struct DamageResult
 {

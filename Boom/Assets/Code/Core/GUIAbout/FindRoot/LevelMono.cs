@@ -8,6 +8,5 @@ public class LevelMono : MonoBehaviour
     public EnemyNew CurEnemy;
     public GameObject EnemyRoot;
     public Collider2D MapCollider;
-    
     public void SetEnemy(EnemyConfigData config) => CurEnemy = EnemyFactory.CreateEnemy(config,EnemyRoot.transform);
 }

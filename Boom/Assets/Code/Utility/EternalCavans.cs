@@ -17,6 +17,7 @@ public class EternalCavans : MonoBehaviour
     public GameObject BagRoot;
     public GameObject BagRootMini;
     public GameObject BagButtonGO;
+    public GameObject BagButtonReturnGO;
 
     public GameObject GemRoot;
     public GameObject GemRootInner;
@@ -57,9 +58,8 @@ public class EternalCavans : MonoBehaviour
     public GameObject BtnSetting;
     
     [Header("内部UI交互操作相关")]
-    public GUIBase SettingUILv1;
-    public GUIBase SettingUILv2;
-    public GameObject btnBag;
+    public GameObject SettingUILv1;
+    public GameObject SettingUILv2;
     
     [Header(("对话系统"))]
     public Dialogue DialogueSC;
@@ -92,6 +92,13 @@ public class EternalCavans : MonoBehaviour
     public event Action OnWinToNextRoom; //成功返回塔楼
     public event Action OnFailToThisRoom; //失败返回塔楼
     
+    void Start()
+    {
+        GM.Root.HotkeyMgr.OnEscapePressed += CloseBag;//注册快捷键
+        GM.Root.HotkeyMgr.OnEscapePressed += CloseSetting;
+        _preCameraOrthographicSize = Camera.main.orthographicSize;
+    }
+
     #region 初始化各个场景中的UI显示状态
     public void InStartGame()
     {
@@ -157,27 +164,30 @@ public class EternalCavans : MonoBehaviour
         txtMagicDust.InitData();
     }
     #endregion
-
+    
     #region 开关背包
     public void OpendBag()
     {
         if(UIManager.Instance.IsLockedClick) return;
-        UIManager.Instance.BagUI.ShowBag();
-        btnBag.SetActive(false);
+        BagRoot.SetActive(true);
+        BagButtonGO.SetActive(false);
+        BagButtonReturnGO.SetActive(true);
         TitleRoot.SetActive(true);
         _preCameraOrthographicSize = Camera.main.orthographicSize;
         Camera.main.orthographicSize = 5;
         OnOpenBag?.Invoke();
     }
-    
+
     public void CloseBag()
     {
         if (TutorialCloseBagLock) return; //教程锁
         if(UIManager.Instance.IsLockedClick) return;
-        UIManager.Instance.BagUI.HideBag();
+        
+        BagRoot.SetActive(false);
         if(CurSceneState == SceneState.MainEnv)
             TitleRoot.SetActive(false);
-        btnBag.SetActive(true);
+        BagButtonGO.SetActive(true);
+        BagButtonReturnGO.SetActive(false);
         Camera.main.orthographicSize = _preCameraOrthographicSize;
         OnCloseBag?.Invoke();
     }
@@ -203,12 +213,28 @@ public class EternalCavans : MonoBehaviour
     
     public void ReturnTownMidWay() => QuestManager.Instance.CompleteQuest(true);
     #endregion
-    
+
+    #region Setting界面相关
     public void OpenSettingLv2()
     {
-        SettingUILv1.CloseWindow();
-        SettingUILv2.OnOffWindow();
+        SettingUILv1.GetComponent<ICloseOnClickOutside>().Hide();
+        SettingUILv2.SetActive(true);
     }
+
+    public void OpenSettingLv1()
+    {
+        SettingUILv1.GetComponent<ICloseOnClickOutside>().Show();
+        SettingUILv2.SetActive(false);
+    }
+
+    public void CloseSetting()
+    {
+        SettingUILv1.GetComponent<ICloseOnClickOutside>().Hide();
+        SettingUILv2.SetActive(false);
+    }
+    #endregion
+    
+    public void ExitGame() =>MSceneManager.Instance.ExitGame();
     
     #region 单例的加载卸载
     public static EternalCavans Instance { get; private set; }
@@ -221,18 +247,16 @@ public class EternalCavans : MonoBehaviour
             SceneManager.sceneLoaded += OnSceneLoadedCavans;
         }
         else if (Instance != this)
-        {
-            Debug.LogWarning($"[EternalCavans] Duplicate detected, destroying: {gameObject.name}");
             Destroy(gameObject);
-        }
     }
-
-    void Awake()
+    void Awake() =>  InitData();
+    void OnDestroy()
     {
-        InitData();
+        SceneManager.sceneLoaded -= OnSceneLoadedCavans;
+        GM.Root.HotkeyMgr.OnEscapePressed -= CloseBag; //注册快捷键
+        GM.Root.HotkeyMgr.OnEscapePressed -= CloseSetting;
     }
 
-    void OnDestroy() => SceneManager.sceneLoaded -= OnSceneLoadedCavans;
     void OnSceneLoadedCavans(Scene scene, LoadSceneMode mode) =>MCanvas.worldCamera = Camera.main;
     #endregion
 }

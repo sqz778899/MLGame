@@ -17,13 +17,12 @@ public class ShopNode: MapNodeBase
         ShopIns = ResManager.instance.CreatInstance(PathConfig.ShopAsset);
         ShopIns.transform.SetParent(UIManager.Instance.MapUI.ShopRoot.transform,false);
         ShopIns.GetComponent<Shop>().InitData(this);//建立链接
-        ShopIns.SetActive(false);
+        ShopIns.GetComponent<ICloseOnClickOutside>().Hide();
     }
     
     public void EnterShop()
     {
         if (UIManager.Instance.IsLockedClick) return;
-        
-        ShopIns.SetActive(true);
+        ShopIns.GetComponent<ICloseOnClickOutside>().Show();
     }
 }

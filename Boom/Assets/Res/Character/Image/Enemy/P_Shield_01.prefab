@@ -221,7 +221,8 @@ MonoBehaviour:
   HealthBar: {fileID: 8144157474905544718}
   InsStep: -1.83
   HitColor: {r: 0, g: 0, b: 0, a: 0}
-  HitTextRoot: {fileID: 6769627413520047789}
+  HitTextPos: {fileID: 6769627413520047789}
+  hitStartPos: {x: 0, y: 0, z: 0}
 --- !u!1 &7335168202912424046
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,7 +233,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6769627413520047789}
   m_Layer: 0
-  m_Name: textNode
+  m_Name: textPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -60,6 +60,8 @@ public class InLevelState : IFightState
         
         if (Input.GetKeyDown(KeyCode.Space) && !_battleData.IsAttacking)
         {
+            GM.Root.InventoryMgr._ItemEffectMrg.Trigger(ItemTriggerTiming.OnBulletFire);
+            
             _battleData.IsAttacking = true;
             _battleData.IsAfterAttack = true;
             _curRole.Fire();

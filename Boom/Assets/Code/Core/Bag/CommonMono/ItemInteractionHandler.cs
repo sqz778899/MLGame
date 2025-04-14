@@ -43,6 +43,7 @@ public class ItemInteractionHandler: MonoBehaviour,
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (!DragManager.Instance.CanDrag()) return;
+        behaviour?.OnBeginDrag();
         TooltipsManager.Instance.Hide();
         TooltipsManager.Instance.Disable();
         DragManager.Instance.BeginDrag(gameObject, eventData);
@@ -53,6 +54,7 @@ public class ItemInteractionHandler: MonoBehaviour,
     {
         DragManager.Instance.EndDrag(eventData);
         TooltipsManager.Instance.Enable();
+        behaviour?.OnEndDrag();
         if (!DisableTooltip)
             ShowTooltips();
     }
@@ -80,6 +82,8 @@ public class ItemInteractionHandler: MonoBehaviour,
 
 public interface IItemInteractionBehaviour
 {
+    void OnBeginDrag();
+    void OnEndDrag();
     void OnDoubleClick();
     void OnRightClick();
 }

@@ -53,6 +53,9 @@ public class BulletNew : ItemBase, IItemInteractionBehaviour
     }
 
     #region IItemInteractionBehaviour 实现
+    public void OnBeginDrag() {}
+    public void OnEndDrag() {}
+
     public void OnDoubleClick()
     {
         var from = Data.CurSlotController;

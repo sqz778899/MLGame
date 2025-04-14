@@ -7,13 +7,23 @@ public class ItemNew : ItemBase,IItemInteractionBehaviour
    
     [Header("UI表现")]
     public Image Icon;
+    public Image ItemBGInBag;
+    public Image ItemBGInEquip;
+    public Color RareColor;
+    
+    public Color Rare1;
+    public Color Rare2;
+    public Color Rare3;
+    public Color Rare4;
     RectTransform rectTransform;
 
     void Awake() => rectTransform = GetComponent<RectTransform>();
 
-    public void BindData(ItemDataBase data)
+    #region 数据交互相关
+    public override void BindData(ItemDataBase data)
     {
         Data = data as ItemData;
+        Data.InstanceID = GetInstanceID();
         RefreshUI();
     }
 
@@ -21,18 +31,55 @@ public class ItemNew : ItemBase,IItemInteractionBehaviour
     {
         Icon.sprite = ResManager.instance.GetAssetCache<Sprite>(
             PathConfig.GetItemPath(Data.ImageName));
-        // TODO: 设置稀有度边框颜色等
+        gameObject.name = Data.Name + Data.InstanceID;
+        //同步背景形状
+        SyncBackground();
+        //同步稀有度颜色
+        switch (Data.Rarity)
+        {
+            case 1:
+                RareColor = Rare1;
+                break;
+            case 2:
+                RareColor = Rare2;
+                break;
+            case 3:
+                RareColor = Rare3;
+                break;
+            case 4:
+                RareColor = Rare4;
+                break;
+        }
+        if (ItemBGInBag != null) ItemBGInBag.color = RareColor;
+        if (ItemBGInEquip != null) ItemBGInEquip.color = RareColor;
     }
+    #endregion
 
     #region 双击与右键逻辑
+    public void OnBeginDrag() => HideBackground();
+    public void OnEndDrag() => SyncBackground();
+
+    void HideBackground()
+    {
+        ItemBGInBag.gameObject.SetActive(false);
+        ItemBGInEquip.gameObject.SetActive(false);
+    }
+    
+    void SyncBackground()
+    {
+        ItemBGInBag.gameObject.SetActive(Data.CurSlotController.SlotType == SlotType.ItemBagSlot);
+        ItemBGInEquip.gameObject.SetActive(Data.CurSlotController.SlotType == SlotType.ItemEquipSlot);
+    }
+
     void IItemInteractionBehaviour.OnDoubleClick()
     {
         ItemSlotController from = Data.CurSlotController as ItemSlotController;
-        var toSlot = (from.SlotType == SlotType.GemInlaySlot)
-            ? SlotManager.GetEmptySlotController(SlotType.BagItemSlot)
-            : SlotManager.GetEmptySlotController(SlotType.BagEquipSlot);
+        ISlotController toSlot = (from.SlotType == SlotType.ItemEquipSlot)
+            ? SlotManager.GetEmptySlotController(SlotType.ItemBagSlot)
+            : SlotManager.GetEmptySlotController(SlotType.ItemEquipSlot);
         
         toSlot.Assign(Data, gameObject);
+        SyncBackground();
     }
 
     void IItemInteractionBehaviour.OnRightClick() =>

@@ -23,7 +23,7 @@ public class L3Step1Tutorial:TutorialStepBase
         _InventoryData = InventoryManager.Instance._InventoryData;
         _BulletInvData = InventoryManager.Instance._BulletInvData;
         _dialogue = EternalCavans.Instance.DialogueSC;
-        GlobalTicker.Instance.OnUpdate += Update;
+        GM.Root.GlobalTickerMgr.OnUpdate += Update;
     }
 
     void Update()
@@ -32,7 +32,7 @@ public class L3Step1Tutorial:TutorialStepBase
             _BulletInvData.BagBulletSpawners[0].SpawnerCount + _BulletInvData.EquipBullets.Count == 2 &&
             QuestManager.Instance.currentQuest.ID == 3)
         {
-            GlobalTicker.Instance.OnUpdate -= Update;
+            GM.Root.GlobalTickerMgr.OnUpdate -= Update;
             BeginTutorial();
         }
     }
@@ -40,7 +40,7 @@ public class L3Step1Tutorial:TutorialStepBase
     void BeginTutorial()
     {
         _dialogue.LoadDialogue("邓肯教学共振1");
-        _btnBag = EternalCavans.Instance.btnBag;
+        _btnBag = EternalCavans.Instance.BagButtonGO;
         _btnBag.GetComponent<Button>().onClick.AddListener(OpenBag);
     }
 
