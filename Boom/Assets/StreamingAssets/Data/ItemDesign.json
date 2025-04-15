@@ -2,7 +2,9 @@
   {
     "Rarity": 1,
     "ResName": "T_Item_Cap_01",
-    "Desc": "第一颗子弹伤害随机#Red(『1～6』)#",
+    "Desc": "第一颗子弹伤害随机#Red(1～6)#",
+    "Category": 0,
+    "PersistentType": 0,
     "ID": 1,
     "Name": "蹩脚的魔术师帽子",
     "Price": 20
@@ -11,6 +13,8 @@
     "Rarity": 1,
     "ResName": "T_Item_Pot_01",
     "Desc": "若本轮首次命中无伤害，下一颗子弹伤害#Red(+2)#",
+    "Category": 0,
+    "PersistentType": 0,
     "ID": 2,
     "Name": "尖叫陶罐",
     "Price": 25
@@ -18,7 +22,9 @@
   {
     "Rarity": 1,
     "ResName": "T_Item_Statue_01",
-    "Desc": "房间开始时，敌方护盾#Blue(±1)#层。",
+    "Desc": "房间开始时，敌方护盾随机#Blue(±1)#层。",
+    "Category": 0,
+    "PersistentType": 0,
     "ID": 4,
     "Name": "晕头转向的猫头鹰雕像",
     "Price": 18
@@ -26,7 +32,9 @@
   {
     "Rarity": 1,
     "ResName": "T_Item_Key_01",
-    "Desc": "开门时：50%得2金币，50%失2金币。",
+    "Desc": "开门时：50%得#Yellow(2)金币，50%失#Yellow(2)金币。",
+    "Category": 0,
+    "PersistentType": 0,
     "ID": 5,
     "Name": "胆小鬼的黄金钥匙",
     "Price": 22
@@ -34,7 +42,9 @@
   {
     "Rarity": 1,
     "ResName": "T_Item_Broom_01",
-    "Desc": "子弹跳过护盾命中敌人时，伤害+1。",
+    "Desc": "子弹跳过护盾命中敌人时，伤害#Red(+1)",
+    "Category": 0,
+    "PersistentType": 0,
     "ID": 6,
     "Name": "漏风的飞天扫帚",
     "Price": 21
@@ -42,7 +52,9 @@
   {
     "Rarity": 1,
     "ResName": "T_Item_Boots_01",
-    "Desc": "开局随机一颗子弹获得穿透+1。",
+    "Desc": "开局随机一颗子弹获得穿透#Blue(+1)#",
+    "Category": 0,
+    "PersistentType": 0,
     "ID": 7,
     "Name": "左脚的幸运靴",
     "Price": 23
@@ -51,6 +63,8 @@
     "Rarity": 2,
     "ResName": "T_Item_BadBook_01",
     "Desc": "宝箱房可免费重开一次，重开概率更高但可能带Debuff。",
+    "Category": 0,
+    "PersistentType": 0,
     "ID": 200,
     "Name": "写满错字的魔法书",
     "Price": 48
@@ -58,7 +72,9 @@
   {
     "Rarity": 2,
     "ResName": "T_Item_Candle_01",
-    "Desc": "若宝石顺序为『伤害-穿透-共振』，则该子弹所有宝石效果#Blue(+1)#。",
+    "Desc": "若宝石顺序为『伤害-穿透-共振』，则该子弹所有宝石效果#Blue(+1)#",
+    "Category": 0,
+    "PersistentType": 0,
     "ID": 201,
     "Name": "忽明忽暗的蜡烛",
     "Price": 52
@@ -66,7 +82,9 @@
   {
     "Rarity": 3,
     "ResName": "T_Item_Glove_01",
-    "Desc": "\t击穿护盾后，下一发子弹伤害+3。",
+    "Desc": "\t击穿护盾后，下一发子弹伤害#Red(+3)#",
+    "Category": 0,
+    "PersistentType": 0,
     "ID": 300,
     "Name": "黏糊糊的巫师手套",
     "Price": 87
@@ -74,7 +92,9 @@
   {
     "Rarity": 4,
     "ResName": "T_Item_RainbowBook_01",
-    "Desc": "若每种宝石不重复，所有宝石效果+1。",
+    "Desc": "若每种宝石不重复，所有宝石效果#Blue(+1)#",
+    "Category": 0,
+    "PersistentType": 0,
     "ID": 401,
     "Name": "虹彩的魔法书",
     "Price": 152
@@ -82,9 +102,111 @@
   {
     "Rarity": 4,
     "ResName": "T_Item_Crown_01",
-    "Desc": "若仅镶嵌一种类型宝石，所有宝石效果+2。",
+    "Desc": "若仅镶嵌一种类型宝石，所有宝石效果#Blue(+2)#",
+    "Category": 0,
+    "PersistentType": 0,
     "ID": 402,
     "Name": "自大的国王王冠",
     "Price": 165
+  },
+  {
+    "Rarity": -1,
+    "ResName": "T_Item_Letter_01",
+    "Desc": "一封署名为“教授”的信件，上面写着：“你准备好接受真正的试炼了吗？”",
+    "Category": 1,
+    "PersistentType": 1,
+    "ID": 1000,
+    "Name": "神秘的信件",
+    "Price": 20
+  },
+  {
+    "Rarity": -1,
+    "ResName": "T_Item_Badge_01",
+    "Desc": "魔法学院初级学徒的徽章，象征着你的身份。",
+    "Category": 1,
+    "PersistentType": 1,
+    "ID": 1001,
+    "Name": "学院的徽章",
+    "Price": 25
+  },
+  {
+    "Rarity": -1,
+    "ResName": "T_Item_Licence_01",
+    "Desc": "允许你进入城镇中某些被封锁的区域。",
+    "Category": 1,
+    "PersistentType": 1,
+    "ID": 1002,
+    "Name": "城镇通行许可证",
+    "Price": 5
+  },
+  {
+    "Rarity": -1,
+    "ResName": "T_Item_Note_01",
+    "Desc": "\t用潦草字迹写满了“变形术”与“时间延展”的内容，看不懂，却难以丢弃。",
+    "Category": 1,
+    "PersistentType": 1,
+    "ID": 1003,
+    "Name": "魔法课程笔记",
+    "Price": 6
+  },
+  {
+    "Rarity": -1,
+    "ResName": "T_Item_Authorize_01",
+    "Desc": "教授亲自盖章的特训许可，允许你挑战“魔法塔的隐藏层”。",
+    "Category": 1,
+    "PersistentType": 1,
+    "ID": 1004,
+    "Name": "特训授权书",
+    "Price": 7
+  },
+  {
+    "Rarity": -1,
+    "ResName": "T_Item_Seal_01",
+    "Desc": "曾用于封印某种强大力量的符文，依然残存微弱魔力。",
+    "Category": 1,
+    "PersistentType": 1,
+    "ID": 1005,
+    "Name": "被遗忘的封印符文",
+    "Price": 88
+  },
+  {
+    "Rarity": -1,
+    "ResName": "T_Item_Obsidian_01",
+    "Desc": "散发微弱光芒的碎片，似乎可以嵌入某种遗迹中",
+    "Category": 1,
+    "PersistentType": 0,
+    "ID": 1100,
+    "Name": "微光的黑曜石碎片",
+    "Price": 36
+  },
+  {
+    "Rarity": -1,
+    "ResName": "T_Item_Hourglass_01",
+    "Desc": "时间似乎停滞在最后一刻，可用于研究“时间魔法”的材料之一。",
+    "Category": 1,
+    "PersistentType": 0,
+    "ID": 1101,
+    "Name": "破损的时间沙漏",
+    "Price": 22
+  },
+  {
+    "Rarity": -1,
+    "ResName": "T_Item_FlashCoins_01",
+    "Desc": "已退出流通的金币，背面刻着“魔法的荣耀”。",
+    "Category": 1,
+    "PersistentType": 0,
+    "ID": 1102,
+    "Name": "闪光的金币（纪念币）",
+    "Price": 21
+  },
+  {
+    "Rarity": -1,
+    "ResName": "T_Item_Crystal_01",
+    "Desc": "古代遗迹中提炼的魔力结晶，可能用于法阵或仪式。",
+    "Category": 1,
+    "PersistentType": 0,
+    "ID": 1103,
+    "Name": "古代魔力水晶",
+    "Price": 23
   }
 ]

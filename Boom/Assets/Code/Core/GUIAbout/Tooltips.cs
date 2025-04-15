@@ -39,6 +39,9 @@ public class Tooltips : MonoBehaviour
     public Color Epic;
     public Color Legendary;
     public Image IconDrividerLine;
+    
+    [Header("Badge")]
+    public GameObject Badge;
 
     void Awake()
     {
@@ -74,6 +77,8 @@ public class Tooltips : MonoBehaviour
             4 => Legendary,
             _ => Common
         };
+        //
+        Badge.SetActive(toolTipsInfo.Category == ItemCategory.Persistent);
     }
     
     void SetGemBulletInfo(ToolTipsInfo toolTipsInfo)

@@ -179,6 +179,8 @@ public class ItemJson:ItemJsonBase
     public int Rarity;
     public string ResName;
     public string Desc;
+    public ItemCategory Category;
+    public PersistentItemType PersistentType;
     
     public ItemJson(int _id = -1, string _name = "",int rarity = -1,
         string _desc = "",int _price = 0, string resName = "")

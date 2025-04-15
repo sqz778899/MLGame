@@ -53,7 +53,8 @@ public static class PathConfig
    public static string TxtFloatingUIPB = GetPrepath() + "Res/UI/Prefabs/Misc/P_UIFloatingtxt_01.prefab";
    //商店
    public static string RollGemPB = GetPrepath() + "Res/UI/Gem/Prefabs/P_GemInShop_Template.prefab";
-   public static string ItemImageDir = GetPrepath() + "Res/UI/Item/Textures/";
+   public static string ItemPersistentImageDir = GetPrepath() + "Res/UI/Item/Textures/Persistent/";
+   public static string ItemEquipableImageDir = GetPrepath() + "Res/UI/Item/Textures/Equipable/";
    public static string GemImageDir = GetPrepath() + "Res/UI/Gem/Textures/";
    public static string ItemPB = GetPrepath() + "Res/UI/Item/Prefabs/P_Item_Template_01.prefab";
 
@@ -109,9 +110,12 @@ public static class PathConfig
       return LevelAssetDir + $"P_Level_{levelID.ToString("00")}.prefab";
    }
    //获得宝石资产的路径
-   public static string GetItemPath(string name)
+   public static string GetItemPath(string name,ItemCategory Category)
    {
-      return ItemImageDir + $"{name}.png";
+      string curDir = ItemPersistentImageDir;
+      if (Category == ItemCategory.Equipable)
+         curDir = ItemEquipableImageDir;
+      return curDir + $"{name}.png";
    }
    //获得宝石资产的路径
    public static string GetGemPath(string name)

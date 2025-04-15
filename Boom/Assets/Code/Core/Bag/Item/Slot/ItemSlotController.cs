@@ -8,6 +8,9 @@ public class ItemSlotController:BaseSlotController<ItemDataBase>
     public override bool CanAccept(ItemDataBase data)
     {
         if (IsLocked || data == null) return false;
+        //不允许 Persistent 道具进装备槽
+        if (SlotType == SlotType.ItemEquipSlot && data is ItemData item && item.IsPersistent)
+            return false;
         return data is ItemData;
     }
     

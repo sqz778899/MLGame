@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class InventoryData: ScriptableObject
 {
+    public event Action OnEquipItemChanged;
     // 存放在背包内的道具和宝石
     public List<ItemData> BagItems = new();
     public List<GemData> BagGems = new();
@@ -33,7 +34,16 @@ public class InventoryData: ScriptableObject
     public void AddItemToBag(ItemData item) => BagItems.Add(item);
     public void AddItemToEquip(ItemData item) => EquipItems.Add(item);
     public void RemoveItemToBag(ItemData itemData) =>BagItems.Remove(itemData);
-    public void EquipItem(ItemData item) => EquipItems.Add(item);
-    public void UnEquipItem(ItemData item) => EquipItems.Remove(item);
+    public void EquipItem(ItemData item)
+    {
+        EquipItems.Add(item);
+        OnEquipItemChanged?.Invoke();
+    }
+
+    public void UnEquipItem(ItemData item)
+    {
+        EquipItems.Remove(item);
+        OnEquipItemChanged?.Invoke();
+    }
     #endregion
 }

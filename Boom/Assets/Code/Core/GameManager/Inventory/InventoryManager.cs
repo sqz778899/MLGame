@@ -225,9 +225,9 @@ public class InventoryManager : MonoBehaviour
             Destroy(gameObject);
 
         CurBulletsInFight = new List<BulletInnerNew>();
-        _ItemEffectMrg = new ItemEffectManager();
         _InventoryData =  ResManager.instance.GetAssetCache<InventoryData>(PathConfig.InventoryDataPath);
         _BulletInvData =  ResManager.instance.GetAssetCache<BulletInvData>(PathConfig.BulletInvDataPath);
+        _ItemEffectMrg = new ItemEffectManager();
     }
 
     //初始化一些依赖UI的容器
@@ -242,6 +242,7 @@ public class InventoryManager : MonoBehaviour
             CurBulletInnerSlotControllers.Add(bulletInnerViews[i].Controller as BulletInnerSlotController);
 
         _BulletInvData.CurBulletSlotControllers = CurBulletSlotControllers;
+        _ItemEffectMrg.InitData();
     }
     #endregion 
 }

@@ -30,7 +30,7 @@ public class ItemNew : ItemBase,IItemInteractionBehaviour
     void RefreshUI()
     {
         Icon.sprite = ResManager.instance.GetAssetCache<Sprite>(
-            PathConfig.GetItemPath(Data.ImageName));
+            PathConfig.GetItemPath(Data.ImageName,Data.Category));
         gameObject.name = Data.Name + Data.InstanceID;
         //同步背景形状
         SyncBackground();
@@ -57,7 +57,7 @@ public class ItemNew : ItemBase,IItemInteractionBehaviour
 
     #region 双击与右键逻辑
     public void OnBeginDrag() => HideBackground();
-    public void OnEndDrag() => SyncBackground();
+    public void OnEndDrag() {}
 
     void HideBackground()
     {
@@ -65,7 +65,7 @@ public class ItemNew : ItemBase,IItemInteractionBehaviour
         ItemBGInEquip.gameObject.SetActive(false);
     }
     
-    void SyncBackground()
+    public void SyncBackground()
     {
         ItemBGInBag.gameObject.SetActive(Data.CurSlotController.SlotType == SlotType.ItemBagSlot);
         ItemBGInEquip.gameObject.SetActive(Data.CurSlotController.SlotType == SlotType.ItemEquipSlot);
@@ -77,12 +77,17 @@ public class ItemNew : ItemBase,IItemInteractionBehaviour
         ISlotController toSlot = (from.SlotType == SlotType.ItemEquipSlot)
             ? SlotManager.GetEmptySlotController(SlotType.ItemBagSlot)
             : SlotManager.GetEmptySlotController(SlotType.ItemEquipSlot);
-        
-        toSlot.Assign(Data, gameObject);
+
+        if (toSlot.CanAccept(Data))
+            toSlot.Assign(Data, gameObject);
         SyncBackground();
     }
 
-    void IItemInteractionBehaviour.OnRightClick() =>
-        RightClickMenuManager.Instance.Show(gameObject, UTools.GetWPosByMouse(rectTransform));
+    void IItemInteractionBehaviour.OnRightClick()
+    {
+        if (Data.CurSlotController.SlotType == SlotType.ItemBagSlot)
+            RightClickMenuManager.Instance.Show(
+                gameObject, UTools.GetWPosByMouse(rectTransform));
+    }
     #endregion
 }

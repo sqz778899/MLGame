@@ -44,7 +44,10 @@ public class GemNew: ItemBase,IItemInteractionBehaviour
         toSlot.Assign(Data, gameObject);
     }
 
-    void IItemInteractionBehaviour.OnRightClick() =>
-        RightClickMenuManager.Instance.Show(gameObject, UTools.GetWPosByMouse(rectTransform));
+    void IItemInteractionBehaviour.OnRightClick() 
+    {
+        if (Data.CurSlotController.SlotType == SlotType.GemBagSlot)
+            RightClickMenuManager.Instance.Show(gameObject, UTools.GetWPosByMouse(rectTransform));
+    }
     #endregion
 }

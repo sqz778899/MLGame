@@ -69,6 +69,26 @@ namespace Code.Editor
                 curItem.Desc = curTable.Rows[i][3].ToString();
                 curItem.Price = GetCellInt(curTable.Rows[i][4].ToString());
                 curItem.ResName = curTable.Rows[i][5].ToString();
+                curItem.Category = ItemCategory.Equipable;
+                curItemDesign.Add(curItem);
+            }
+            
+            DataTable persistentTable = curTables.Tables["局外物品设计"];
+            for (int i = 1; i < persistentTable.Rows.Count; i++)
+            {
+                ItemJson curItem = new ItemJson();
+                if (persistentTable.Rows[i][1].ToString() == "") continue;
+                curItem.ID = GetCellInt(persistentTable.Rows[i][0].ToString());
+                curItem.Name = persistentTable.Rows[i][1].ToString();
+                string typeStr = persistentTable.Rows[i][2].ToString();
+                curItem.Desc = persistentTable.Rows[i][3].ToString();
+                curItem.Price = GetCellInt(persistentTable.Rows[i][4].ToString());
+                curItem.ResName = persistentTable.Rows[i][5].ToString();
+                curItem.Category = ItemCategory.Persistent;
+                if (typeStr == "任务道具")
+                    curItem.PersistentType = PersistentItemType.QuestItem;
+                if (typeStr == "养成道具")
+                    curItem.PersistentType = PersistentItemType.Resource;
                 curItemDesign.Add(curItem);
             }
 

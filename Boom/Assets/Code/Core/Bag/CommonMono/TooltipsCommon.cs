@@ -7,16 +7,23 @@ public struct ToolTipsInfo
     public int Rarity;
     public string Description;
     public ToolTipsType CurToolTipsType;
+    public ItemCategory Category;
+    public PersistentItemType PersistentType;
+    
     public List<ToolTipsAttriSingleInfo> AttriInfos;
 
     public ToolTipsInfo(string name = "", int level = 0,string desc = "",
         ToolTipsType type = ToolTipsType.None,int _rarity = 0,
+        ItemCategory _category = ItemCategory.Equipable,
+        PersistentItemType _persistentType = PersistentItemType.QuestItem,
         List<ToolTipsAttriSingleInfo> attriInfos = null)
     {
         Name = name;
         Level = level;
         Description = desc;
         AttriInfos = attriInfos ?? new List<ToolTipsAttriSingleInfo>();
+        Category = _category;
+        PersistentType = _persistentType;
         CurToolTipsType = type;
         Rarity = _rarity;
     }

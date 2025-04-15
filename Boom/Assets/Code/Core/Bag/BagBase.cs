@@ -13,13 +13,6 @@ public interface IBindData
     void BindData(ItemDataBase data);
 }
 
-public interface IItemEffect
-{
-    ItemTriggerTiming TriggerTiming { get; }
-    void Apply(BattleContext ctx);
-    string GetDescription();
-}
-
 public interface ISlotController
 {
     public SlotType SlotType { get; }
@@ -123,9 +116,9 @@ public abstract class BaseSlotController<T> :ISlotController where T : ItemDataB
                 SlotType.GemBagSlotInner=>IsCameraNear?
                     new Vector3(0.7f, -0.39f, 0) :
                     new Vector3(1.01f, -0.6f, 0),
-                SlotType.ItemBagSlot => new Vector3(1.01f, -0.6f, 0),
+                SlotType.ItemBagSlot => new Vector3(1.2f, -0.6f, 0),
                 SlotType.GemInlaySlot => new Vector3(-0.92f, -0.6f, 0),
-                SlotType.ItemEquipSlot => new Vector3(-0.92f, -0.6f, 0),
+                SlotType.ItemEquipSlot => new Vector3(-1.1f, -0.6f, 0),
                 SlotType.SpawnnerSlot => new Vector3(1.01f, -0.6f, 0),
                 SlotType.SpawnnerSlotInner =>IsCameraNear?
                     new Vector3(0.7f, -0.39f, 0) :
@@ -347,61 +340,4 @@ public class BulletModifierGem : IBulletModifier
         data.FinalResonance += gem.Resonance;
     }
 }
-#endregion
-
-#region 道具类
-public class ItemData : ItemDataBase,ITooltipBuilder
-{
-    public event Action OnDataChanged;
-    public int ID;
-    public string Name;
-    public string Desc;
-    public string ImageName;
-    public int Rarity;
-
-    public IItemEffect EffectLogic; // 每个道具一个策略实现
-
-    public ItemData(int id,ItemSlotController itemSlotController)
-    {
-        var json = TrunkManager.Instance.GetItemJson(id);
-        CurSlotController = itemSlotController;
-        ID = json.ID;
-        Name = json.Name;
-        Desc = json.Desc;
-        Rarity = json.Rarity;
-        ImageName = json.ResName;
-        EffectLogic = ItemEffectFactory.CreateEffectLogic(ID);
-    }
-
-    public void ApplyEffect(BattleContext ctx)
-    {
-        EffectLogic?.Apply(ctx);
-    }
-
-    public ToolTipsInfo BuildTooltip()
-    {
-        ToolTipsInfo info = new ToolTipsInfo(Name,Level,Desc, ToolTipsType.Item,
-            Rarity);
-        return info;
-    }
-}
-
-public class BattleContext
-{
-    public List<BulletData> AllBullets;
-    public EnemyData CurEnemy;
-    public int RoundIndex;
-    public bool IsTreasureRoom;
-}
-
-public enum ItemTriggerTiming
-{
-    OnBattleStart,
-    OnBulletFire,
-    OnBulletHit,
-    OnShieldPenetrate,
-    OnEnterTreasureRoom,
-    // ...
-}
-
 #endregion

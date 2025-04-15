@@ -57,7 +57,15 @@ public class RightClickMenuManager:MonoBehaviour
         {
             GemSlotController curEmptyGemSlot = SlotManager.GetEmptySlotController(SlotType.GemInlaySlot) as GemSlotController;
             if (curEmptyGemSlot == null) return;
-            curEmptyGemSlot.Assign(curGem.Data, CurIns);
+            if (curEmptyGemSlot.CanAccept(curGem.Data))
+                curEmptyGemSlot.Assign(curGem.Data, CurIns);
+        }
+        if (curBaseSC is ItemNew curItem)
+        {
+            ItemSlotController curEmptyItemSlot = SlotManager.GetEmptySlotController(SlotType.ItemEquipSlot) as ItemSlotController;
+            if (curEmptyItemSlot == null) return;
+            if (curEmptyItemSlot.CanAccept(curItem.Data))
+                curEmptyItemSlot.Assign(curItem.Data, CurIns);
         }
         Hide();
     }

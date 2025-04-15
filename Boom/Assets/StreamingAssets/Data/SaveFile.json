@@ -35,23 +35,33 @@
   },
   "UserItems": [
     {
-      "ID": 2,
-      "SlotID": 2,
-      "SlotType": 1
-    },
-    {
       "ID": 201,
       "SlotID": 1,
       "SlotType": 1
     },
     {
-      "ID": 201,
-      "SlotID": 1,
+      "ID": 1000,
+      "SlotID": 3,
       "SlotType": 1
+    },
+    {
+      "ID": 300,
+      "SlotID": 3,
+      "SlotType": 3
     },
     {
       "ID": 1,
       "SlotID": 1,
+      "SlotType": 3
+    },
+    {
+      "ID": 300,
+      "SlotID": 3,
+      "SlotType": 3
+    },
+    {
+      "ID": 2,
+      "SlotID": 2,
       "SlotType": 3
     }
   ],
