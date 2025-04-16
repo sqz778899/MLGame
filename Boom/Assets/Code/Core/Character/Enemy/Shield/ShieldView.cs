@@ -7,12 +7,8 @@ public class ShieldView : MonoBehaviour
     public Color HitColor;
     public Transform HitTextPos;
 
-    public void Init(ShieldData data) =>  HealthBar.InitHealthBar(() => data.CurHP, () => data.MaxHP);
-    public void ShowHitText(int damage)
-    {
-        GameObject txt = ResManager.instance.CreatInstance(PathConfig.TxtHitPB);
-        txt.transform.position = HitTextPos.position;
-        txt.transform.SetParent(transform.parent,true);
-        txt.GetComponent<FloatingDamageText>().AnimateText($"-{damage}", HitColor, 18f);
-    }
+    public void Init(ShieldData data) =>
+        HealthBar.InitHealthBar(() => data.CurHP, () => data.MaxHP);
+    public void ShowHitText(int damage) =>
+        FloatingTextFactory.CreateWorldText($"-{damage}",HitTextPos.position,HitColor,18f);
 }

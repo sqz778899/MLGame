@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System;
-using System.Collections.Generic;
 using Sirenix.Utilities;
 
 
@@ -28,5 +26,9 @@ public class GameInitializer:MonoBehaviour
         GM.Root.InventoryMgr.InitStep2(bulletViews,bulletInnerViews);
         //4) 读档
         SaveManager.LoadSaveFile();
+        
+        
+        //5)重置随机概率
+        //ProbabilityService.Reset("WeaponRackLoot");
     }
 }

@@ -27,11 +27,10 @@ public class BuildBase : SpriteClickHandler
     {
         if (IsStorylineLocked)
         {
-            GameObject textIns = ResManager.instance.CreatInstance(PathConfig.TxtGetItemPB);
-            FloatingDamageText textSc = textIns.GetComponent<FloatingDamageText>();
-            textIns.transform.SetParent(FloatingTextNode.transform,false);
-            //textSc.
-            textSc.AnimateText($"请推进相关剧情解锁",new Color(218f/255f,218f/255f,218f/255f,1f),7f);
+            FloatingTextFactory.CreateWorldText(
+                "请推进相关剧情解锁", FloatingTextNode.transform.position + new Vector3(0, 2, 0), 
+                new Color(218f / 255f, 218f / 255f, 218f / 255f, 1f), 
+                7f);
             return;
         }
         _outsideLogic._builds.ForEach(menu => { if (menu != this) menu.CloseBuild(); });

@@ -26,7 +26,7 @@ public class MapNodeBase : SpriteClickHandler
     #region 浮动消息滑块
     void SetFloatingIns(Transform textNode,out FloatingDamageText textSc)
     {
-        GameObject textIns = ResManager.instance.CreatInstance(PathConfig.TxtGetItemPB);
+        GameObject textIns = ResManager.instance.CreatInstance(PathConfig.TxtFloatingPB);
         //1)设置渲染层级
         int targetLayerID = SortingLayer.NameToID(SortingLayerName);
         Renderer[] renderers = textIns.GetComponentsInChildren<Renderer>();
@@ -54,5 +54,4 @@ public class MapNodeBase : SpriteClickHandler
         textSc.AnimateText($"{Content}",col);
     }
     #endregion
-
 }

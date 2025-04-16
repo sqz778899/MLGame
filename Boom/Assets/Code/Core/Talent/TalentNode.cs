@@ -68,11 +68,8 @@ public class TalentNode : MonoBehaviour
         //1) 检查是否有已经解锁
         if (_talentData.IsLocked)
         {
-            GameObject textIns = ResManager.instance.CreatInstance(PathConfig.TxtFloatingUIPB);
-            textIns.transform.SetParent(FloatingTextNode.transform,false);
-            textIns.GetComponent<FloatingDamageText>().AnimateTextUI(
-                "请解锁", 
-                new Color(0.85f, 0.85f, 0.85f, 1),50f);
+            FloatingTextFactory.CreateUIText("请解锁", FloatingTextNode.transform,
+                new Color(0.85f, 0.85f, 0.85f, 1), 50f);
             return;
         }
         //2) 检查是否已学习
@@ -81,11 +78,8 @@ public class TalentNode : MonoBehaviour
         //3) 检查是否有足够的魔尘
         if(!PlayerManager.Instance._PlayerData.CostMagicDust(_talentData.Price))
         {
-            GameObject textIns = ResManager.instance.CreatInstance(PathConfig.TxtFloatingUIPB);
-            textIns.transform.SetParent(FloatingTextNode.transform,false);
-            textIns.GetComponent<FloatingDamageText>().AnimateTextUI(
-                "魔尘不足", 
-                new Color(0.85f, 0.85f, 0.85f, 1),50f);
+            FloatingTextFactory.CreateUIText("魔尘不足", FloatingTextNode.transform,
+                new Color(0.85f, 0.85f, 0.85f, 1), 50f);
             return;
         }
         

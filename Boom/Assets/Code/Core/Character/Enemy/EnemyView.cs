@@ -36,12 +36,7 @@ public class EnemyView : MonoBehaviour
 
     public void PlayDead() => AniUtility.PlayDead01(Ani);
 
-    public void ShowHitText(int damage)
-    {
-        GameObject txt = ResManager.instance.CreatInstance(PathConfig.TxtHitPB);
-        txt.transform.SetParent(HitTextPos,false);
-        txt.GetComponent<FloatingDamageText>().AnimateText($"-{damage}", HitColor, 18f);
-    }
+    public void ShowHitText(int damage) => FloatingTextFactory.CreateWorldText($"-{damage}",HitTextPos.position,HitColor,18f);
     
     public void InitShields(List<ShieldData> shields)
     {
