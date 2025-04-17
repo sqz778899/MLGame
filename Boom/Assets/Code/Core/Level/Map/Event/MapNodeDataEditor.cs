@@ -7,7 +7,6 @@ public class MapNodeDataEditor : Editor
     public override void OnInspectorGUI()
     {
         var mono = (MapNodeDataConfigMono)target;
-
         serializedObject.Update();
 
         EditorGUILayout.PropertyField(serializedObject.FindProperty("ID"));
@@ -22,6 +21,18 @@ public class MapNodeDataEditor : Editor
                 break;
             case MapEventType.WeaponRack:
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("WeaponRackConfig"));
+                break;
+            case MapEventType.Skeleton:
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("SkeletonConfig"));
+                break;
+            case MapEventType.StoneTablet:
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("StoneTabletConfig"));
+                break;
+            case MapEventType.MysticalInteraction:
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("WigglingBoxConfig"));
+                break;
+            case MapEventType.TreasureBox:
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("TreasureBoxConfig"));
                 break;
         }
 

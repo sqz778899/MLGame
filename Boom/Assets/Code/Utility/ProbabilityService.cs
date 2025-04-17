@@ -44,10 +44,10 @@ public class PseudoRandomBucket<T>
 
     public PseudoRandomBucket(Dictionary<T, int> weights, int seed)
     {
-        System.Random rng = new System.Random(seed); // ✅ 可控随机数生成器
+        System.Random rng = new System.Random(seed); //可控随机数生成器
 
         _entries = weights.Select(pair =>
-                new Entry(pair.Key, pair.Value, (float)rng.NextDouble()) // ✅ 独立初始值
+                new Entry(pair.Key, pair.Value, (float)rng.NextDouble()) //独立初始值
         ).ToList();
 
         _totalWeight = _entries.Sum(e => e.Weight);

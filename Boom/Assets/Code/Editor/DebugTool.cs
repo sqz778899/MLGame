@@ -2,7 +2,7 @@ using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
 
-public class   DebugTool
+public class DebugTool
 {
     public GameObject Root;
     public GameObject Root2;
@@ -77,5 +77,12 @@ public class   DebugTool
                 }
             }
         }
+    }
+
+    public Sprite sprite;
+    [Button(ButtonSizes.Large)]
+    void TestBanner()
+    {
+        GameObject.Find("RewardBannerManager").GetComponent<RewardBannerManager>().ShowReward(sprite, 3);
     }
 }

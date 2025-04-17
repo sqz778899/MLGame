@@ -19,6 +19,15 @@ public class CoinsPileRuntimeData : MapEventRuntimeData
     public int MinGold;
     public int MaxGold;
 }
+
+[Serializable]
+public class ChestRuntimeData : MapEventRuntimeData
+{
+    public ChestRarity Rarity;
+    public int MinLootCount;
+    public int MaxLootCount;
+    public List<ChestDropEntry> DropTable;
+}
 #endregion
 
 #region 赌博型
@@ -75,6 +84,23 @@ public class GoldPileConfigData : MapEventConfigData
 
     public override MapEventRuntimeData ToRuntimeData() =>
         new CoinsPileRuntimeData { MinGold = MinGold, MaxGold = MaxGold };
+}
+
+[Serializable]
+public class TreasureBoxConfigData : MapEventConfigData
+{
+    public ChestRarity Rarity;
+    public int MinLootCount;
+    public int MaxLootCount;
+    public List<ChestDropEntry> DropTable = new();
+    
+    public override MapEventRuntimeData ToRuntimeData() => new ChestRuntimeData
+    {
+        Rarity = Rarity,
+        MinLootCount = MinLootCount,
+        MaxLootCount = MaxLootCount,
+        DropTable = DropTable
+    };
 }
 #endregion
 
@@ -166,4 +192,22 @@ public class WigglingBoxConfigData : MapEventConfigData
     }
 }
 #endregion
+#endregion
+
+
+#region 一些枚举定义
+public enum ChestRarity
+{
+    Common,
+    Rare,
+    Legendary
+}
+
+[Serializable]
+public class ChestDropEntry
+{
+    public int ItemID; // 掉落物ID
+    public int Weight; // 权重
+    public bool IsGem; // 是宝石还是道具
+}
 #endregion

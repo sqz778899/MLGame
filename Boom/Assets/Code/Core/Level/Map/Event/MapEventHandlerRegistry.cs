@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-
 
 public interface IMapEventHandler
 {
@@ -20,15 +20,14 @@ public static class MapEventHandlerRegistry
         Register(MapEventType.Skeleton, new SkeletonHandler());
         Register(MapEventType.StoneTablet,new StoneTabletHandler());
         Register(MapEventType.MysticalInteraction,new WigglingBoxHandler());
+        Register(MapEventType.TreasureBox,new TreasureBoxEventHandler());
         // 更多事件类型...
     }
 
     public static void Register(MapEventType type, IMapEventHandler handler) => _handlers[type] = handler;
 
-    public static IMapEventHandler GetHandler(MapEventType type)
-    {
-        return _handlers.TryGetValue(type, out var handler) ? handler : null;
-    }
+    public static IMapEventHandler GetHandler(MapEventType type) => 
+        _handlers.TryGetValue(type, out var handler) ? handler : null;
 }
 
 #region 奖励类
@@ -44,6 +43,60 @@ public class CoinsPileEventHandler : IMapEventHandler
         view.SetAsTriggered(amount); //把数量传回 View
     }
 }
+
+public class TreasureBoxEventHandler : IMapEventHandler
+{
+    public void Handle(MapNodeData data, MapNodeView view)
+    {
+        if (data.EventData is not ChestRuntimeData chestData)
+        {
+            Debug.LogWarning("宝箱事件数据为空！");
+            return;
+        }
+
+        int count = Random.Range(chestData.MinLootCount, chestData.MaxLootCount + 1);
+        var drops = RollDrops(chestData.DropTable, count);
+
+        foreach (var drop in drops)
+        {
+            if (drop.IsGem)
+                InventoryManager.Instance.AddGemToBag(drop.ItemID);
+            else
+                InventoryManager.Instance.AddItemToBag(drop.ItemID);
+
+            view.ShowFloatingText($"获得了 {(drop.IsGem ? "宝石" : "道具")}！");
+        }
+
+        view.SetAsTriggered();
+    }
+
+    List<ChestDropEntry> RollDrops(List<ChestDropEntry> table, int count)
+    {
+        List<ChestDropEntry> result = new();
+        var pool = new Dictionary<ChestDropEntry, int>();
+        foreach (var entry in table)
+            pool[entry] = entry.Weight;
+
+        for (int i = 0; i < count; i++)
+        {
+            int total = pool.Values.Sum();
+            int roll = UnityEngine.Random.Range(1, total + 1);
+            int acc = 0;
+            foreach (var pair in pool)
+            {
+                acc += pair.Value;
+                if (roll <= acc)
+                {
+                    result.Add(pair.Key);
+                    break;
+                }
+            }
+        }
+
+        return result;
+    }
+}
+
 #endregion
 
 #region 伪随机赌博类
@@ -103,24 +156,14 @@ public class SkeletonHandler : IMapEventHandler
 
         switch (result)
         {
-            case "Empty":
-                view.ShowFloatingText("只剩一堆骨头…");
-                break;
-            case "Note":
-                view.ShowFloatingText($"发现了一张纸条：");
-                break;
+            case "Empty": view.ShowFloatingText("只剩一堆骨头…"); break;
+            case "Note": view.ShowFloatingText($"发现了一张纸条："); break;
             case "Item":
-                // 假设掉一个金币
                 PlayerManager.Instance._PlayerData.ModifyCoins(1);
                 view.ShowFloatingText("找到了一枚生锈的金币");
                 break;
-            case "Debuff":
-                // 示例逻辑：下场战斗第一颗子弹 -1 穿透
-                view.ShowFloatingText("你感到一阵阴冷…");
-                break;
-            case "Key":
-                view.ShowFloatingText("从骨缝中找到了一把腐朽的钥匙！");
-                break;
+            case "Debuff": view.ShowFloatingText("你感到一阵阴冷…"); break;
+            case "Key": view.ShowFloatingText("从骨缝中找到了一把腐朽的钥匙！"); break;
         }
 
         data.IsTriggered = true;

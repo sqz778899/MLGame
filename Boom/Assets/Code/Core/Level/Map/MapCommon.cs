@@ -89,7 +89,7 @@ public enum MapEventType
     Skeleton = 3,
     StoneTablet = 4,
     MysticalInteraction = 5,
-    Treasure,
+    TreasureBox = 6,
     Enemy,
     Shop,
     Event,
