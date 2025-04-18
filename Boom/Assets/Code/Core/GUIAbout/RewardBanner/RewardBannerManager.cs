@@ -20,7 +20,7 @@ public class RewardBannerManager : MonoBehaviour
         else Instance = this;
     }
 
-    public void ShowReward(Sprite icon, int count)
+    public void ShowReward(Sprite icon, int count,DropedRarity rarity)
     {
         GameObject ins = Instantiate(bannerPrefab, bannerRoot);
         RectTransform rt = ins.GetComponent<RectTransform>();
@@ -28,7 +28,7 @@ public class RewardBannerManager : MonoBehaviour
 
         activeBanners.Add(rt);
         RewardBanner banner = ins.GetComponent<RewardBanner>();
-        banner.Init(icon, count);
+        banner.Init(icon, count,rarity);
 
         StartCoroutine(CleanupWhenDone(ins, rt));
     }

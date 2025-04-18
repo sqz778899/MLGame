@@ -23,8 +23,7 @@ public class GemNew: ItemBase,IItemInteractionBehaviour
 
     void RefreshUI()
     {
-        Icon.sprite = ResManager.instance.GetAssetCache<Sprite>(
-            PathConfig.GetGemPath(Data.ImageName));
+        Icon.sprite = ResManager.instance.GetGemIcon(Data.ID);
         // TODO: 设置稀有度边框颜色等
     }
 

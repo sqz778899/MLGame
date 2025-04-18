@@ -21,12 +21,12 @@ public class CoinsPileRuntimeData : MapEventRuntimeData
 }
 
 [Serializable]
-public class ChestRuntimeData : MapEventRuntimeData
+public class TreasureBoxRuntimeData : MapEventRuntimeData
 {
-    public ChestRarity Rarity;
+    public TreasureBoxRarity Rarity;
     public int MinLootCount;
     public int MaxLootCount;
-    public List<ChestDropEntry> DropTable;
+    public List<DropedObjEntry> DropTable;
 }
 #endregion
 
@@ -89,12 +89,12 @@ public class GoldPileConfigData : MapEventConfigData
 [Serializable]
 public class TreasureBoxConfigData : MapEventConfigData
 {
-    public ChestRarity Rarity;
+    public TreasureBoxRarity Rarity;
     public int MinLootCount;
     public int MaxLootCount;
-    public List<ChestDropEntry> DropTable = new();
+    public List<DropedObjEntry> DropTable = new();
     
-    public override MapEventRuntimeData ToRuntimeData() => new ChestRuntimeData
+    public override MapEventRuntimeData ToRuntimeData() => new TreasureBoxRuntimeData
     {
         Rarity = Rarity,
         MinLootCount = MinLootCount,
@@ -196,18 +196,30 @@ public class WigglingBoxConfigData : MapEventConfigData
 
 
 #region 一些枚举定义
-public enum ChestRarity
-{
-    Common,
-    Rare,
-    Legendary
-}
-
 [Serializable]
-public class ChestDropEntry
+public class DropedObjEntry
 {
-    public int ItemID; // 掉落物ID
+    public int ID; // 掉落物ID
     public int Weight; // 权重
-    public bool IsGem; // 是宝石还是道具
+    public DropedCategory DropedCategory; // 是宝石还是道具
+    public Sprite Icon;
+    public DropedRarity Rarity;
+
+    public void InitData()
+    {
+        switch (DropedCategory)
+        {
+            case DropedCategory.Item:
+                ItemJson itemjson = TrunkManager.Instance.GetItemJson(ID);
+                Icon = ResManager.instance.GetItemIcon(ID);
+                Rarity = itemjson.Rarity;
+                break;
+            case DropedCategory.Gem:
+                GemJson gemjson = TrunkManager.Instance.GetGemJson(ID);
+                Icon = ResManager.instance.GetGemIcon(ID);
+                Rarity = gemjson.Rarity;
+                break;
+        }
+    }
 }
 #endregion

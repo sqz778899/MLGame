@@ -14,6 +14,7 @@ public class RewardBanner : MonoBehaviour
     
     [Header("UI参数")]
     public float BannerLenth = 1000f;
+    public Image rarityBorder;
 
     [Header("动画参数")]
     public float SlideInDuration = 0.4f;
@@ -21,14 +22,51 @@ public class RewardBanner : MonoBehaviour
     public float SlideOutDuration = 0.5f;
     public float IconBounceScale = 1.2f;
     public float CountScale = 1.3f;
+    
+    [Header("稀有度颜色（HDR）")]
+    [ColorUsage(true, true)]public Color rareColor = new Color(0.3f, 0.6f, 1.5f);      // 蓝
+    [ColorUsage(true, true)]public Color epicColor = new Color(1.2f, 0.4f, 1.5f);      // 紫
+    [ColorUsage(true, true)]public Color legendaryColor = new Color(2.2f, 1.0f, 0.1f); // 橙
+    
+    static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor");
 
-    public void Init(Sprite icon, int count)
+    public void Init(Sprite icon, int count, DropedRarity rarity = DropedRarity.Common)
     {
         iconImage.sprite = icon;
         countText.text = "0";
+        
+        ApplyRarityColor(rarity);
+        
         StartCoroutine(PlaySequence(count));
     }
+    
+    void ApplyRarityColor(DropedRarity rarity)
+    {
+        Color color = Color.black; // 默认无光
+        switch (rarity)
+        {
+            case DropedRarity.Common:
+                rarityBorder.enabled = false;
+                return;
+            case DropedRarity.Rare:
+                color = rareColor;
+                break;
+            case DropedRarity.Epic:
+                color = epicColor;
+                break;
+            case DropedRarity.Legendary:
+                color = legendaryColor;
+                break;
+        }
 
+        rarityBorder.enabled = true;
+
+        // 取出当前属性
+        Material insMat = new Material(rarityBorder.material);
+        rarityBorder.material = insMat;
+        insMat.SetColor(EmissionColor, color);
+    }
+    
     IEnumerator PlaySequence(int targetCount)
     {
         // 初始化位置

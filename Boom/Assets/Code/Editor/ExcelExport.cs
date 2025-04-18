@@ -65,7 +65,7 @@ namespace Code.Editor
                 if (curTable.Rows[i][1].ToString() == "") continue;
                 curItem.ID = GetCellInt(curTable.Rows[i][0].ToString());
                 curItem.Name = curTable.Rows[i][1].ToString();
-                curItem.Rarity = GetCellInt(curTable.Rows[i][2].ToString());
+                curItem.Rarity = (DropedRarity)GetCellInt(curTable.Rows[i][2].ToString());
                 curItem.Desc = curTable.Rows[i][3].ToString();
                 curItem.Price = GetCellInt(curTable.Rows[i][4].ToString());
                 curItem.ResName = curTable.Rows[i][5].ToString();
@@ -100,7 +100,7 @@ namespace Code.Editor
         {
             DataSet curTables = GetDataSet();
             List<GemJson> curGemDesign = new List<GemJson>();
-            DataTable curTable = curTables.Tables["GemDesign"];
+            DataTable curTable = curTables.Tables["宝石设计"];
 
             for (int i = 1; i < curTable.Rows.Count; i++)
             {
@@ -108,24 +108,17 @@ namespace Code.Editor
                 if (curTable.Rows[i][1].ToString() == "") continue;
                 curData.ID = int.Parse(curTable.Rows[i][0].ToString());
                 curData.Name = curTable.Rows[i][1].ToString();
-                curData.Level = int.Parse(curTable.Rows[i][2].ToString());
-                curData.Damage =
-                    string.IsNullOrEmpty(curTable.Rows[i][3].ToString()) ? 0
-                        : int.Parse(curTable.Rows[i][3].ToString());
-                curData.Piercing =
-                    string.IsNullOrEmpty(curTable.Rows[i][4].ToString()) ? 0
-                        : int.Parse(curTable.Rows[i][4].ToString());
-                curData.Resonance =
-                    string.IsNullOrEmpty(curTable.Rows[i][5].ToString()) ? 0
-                        : int.Parse(curTable.Rows[i][5].ToString());
-                curData.Price = string.IsNullOrEmpty(curTable.Rows[i][6].ToString()) ? 0
-                        : int.Parse(curTable.Rows[i][6].ToString());
-                curData.ImageName = curTable.Rows[i][7].ToString();
+                curData.Rarity = (DropedRarity)GetCellInt(curTable.Rows[i][2].ToString());
+                curData.Level = GetCellInt(curTable.Rows[i][3].ToString());
+                curData.Damage = GetCellInt(curTable.Rows[i][4].ToString());
+                curData.Piercing = GetCellInt(curTable.Rows[i][5].ToString());
+                curData.Resonance = GetCellInt(curTable.Rows[i][6].ToString());
+                curData.Price = GetCellInt(curTable.Rows[i][7].ToString());
+                curData.ImageName = curTable.Rows[i][8].ToString();
                 curGemDesign.Add(curData);
             }
 
-            string content01 = JsonConvert.SerializeObject(curGemDesign,
-                (Formatting)Formatting.Indented);
+            string content01 = JsonConvert.SerializeObject(curGemDesign, Formatting.Indented);
             File.WriteAllText(PathConfig.GemDesignJson, content01);
         }
 

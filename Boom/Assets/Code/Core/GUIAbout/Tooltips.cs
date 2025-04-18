@@ -71,10 +71,10 @@ public class Tooltips : MonoBehaviour
         //设置稀有度颜色
         IconDrividerLine.color = toolTipsInfo.Rarity switch
         {
-            1 => Common,
-            2 => Rare,
-            3 => Epic,
-            4 => Legendary,
+            DropedRarity.Common => Common,
+            DropedRarity.Rare => Rare,
+            DropedRarity.Epic => Epic,
+            DropedRarity.Legendary => Legendary,
             _ => Common
         };
         //

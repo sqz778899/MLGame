@@ -80,9 +80,10 @@ public class DebugTool
     }
 
     public Sprite sprite;
+    public DropedRarity rarity;
     [Button(ButtonSizes.Large)]
     void TestBanner()
     {
-        GameObject.Find("RewardBannerManager").GetComponent<RewardBannerManager>().ShowReward(sprite, 3);
+        GameObject.Find("RewardBannerManager").GetComponent<RewardBannerManager>().ShowReward(sprite, 3,rarity);
     }
 }

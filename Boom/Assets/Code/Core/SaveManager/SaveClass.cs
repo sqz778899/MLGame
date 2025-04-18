@@ -155,6 +155,7 @@ public class BulletJson : ItemJsonBase
 [Serializable]
 public class GemJson : ItemJsonBase
 {
+    public DropedRarity Rarity;
     public int Level;
     public string ImageName;
     
@@ -163,10 +164,11 @@ public class GemJson : ItemJsonBase
     public int Resonance;
     
     public GemJson(int id = -1,
-        string name = "", int _level = 1,string imageName = "")
+        string name = "", int _rarity = 1,int _level = 1,string imageName = "")
     {
         ID = id;
         Name = name;
+        Rarity = (DropedRarity)_rarity;
         Level = _level;
         ImageName = imageName;
         Price = 0;
@@ -176,7 +178,7 @@ public class GemJson : ItemJsonBase
 [Serializable]
 public class ItemJson:ItemJsonBase
 { 
-    public int Rarity;
+    public DropedRarity Rarity;
     public string ResName;
     public string Desc;
     public ItemCategory Category;
@@ -186,7 +188,7 @@ public class ItemJson:ItemJsonBase
         string _desc = "",int _price = 0, string resName = "")
     {
         ID = _id;
-        Rarity = rarity;
+        Rarity = (DropedRarity)rarity;
         Name = _name;
         Desc = _desc;
         ResName = resName;

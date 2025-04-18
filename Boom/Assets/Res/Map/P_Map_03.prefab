@@ -7885,12 +7885,32 @@ PrefabInstance:
       value: "\u5B9D\u7BB1"
       objectReference: {fileID: 0}
     - target: {fileID: 3623884437662145695, guid: bb192eba302c9264abd122ea731127ea, type: 3}
+      propertyPath: TreasureBoxConfig.DropTable.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3623884437662145695, guid: bb192eba302c9264abd122ea731127ea, type: 3}
+      propertyPath: TreasureBoxConfig.DropTable.Array.data[0].ID
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3623884437662145695, guid: bb192eba302c9264abd122ea731127ea, type: 3}
+      propertyPath: TreasureBoxConfig.DropTable.Array.data[1].ID
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3623884437662145695, guid: bb192eba302c9264abd122ea731127ea, type: 3}
       propertyPath: TreasureBoxConfig.DropTable.Array.data[0].IsGem
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3623884437662145695, guid: bb192eba302c9264abd122ea731127ea, type: 3}
       propertyPath: TreasureBoxConfig.DropTable.Array.data[0].ItemID
       value: 201
+      objectReference: {fileID: 0}
+    - target: {fileID: 3623884437662145695, guid: bb192eba302c9264abd122ea731127ea, type: 3}
+      propertyPath: TreasureBoxConfig.DropTable.Array.data[0].Weight
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3623884437662145695, guid: bb192eba302c9264abd122ea731127ea, type: 3}
+      propertyPath: TreasureBoxConfig.DropTable.Array.data[1].Weight
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3935278250514151954, guid: bb192eba302c9264abd122ea731127ea, type: 3}
       propertyPath: m_LocalPosition.x

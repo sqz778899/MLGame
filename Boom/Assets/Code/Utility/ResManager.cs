@@ -13,16 +13,30 @@ public class ResManager : Singleton<ResManager>
        return ABManager.instance.LoadRes<T>(FileName) as T;
     }
 
-    public GameObject CreatInstance(string AssetPath)
+    //直接创建GamObject的简便方法
+    public GameObject CreatInstance(string AssetPath) => GameObject.Instantiate(GetAssetCache<GameObject>(AssetPath));
+    
+    //直接获得ItemIcon的简便方法
+    public Sprite GetItemIcon(int id)
     {
-        return GameObject.Instantiate(GetAssetCache<GameObject>(AssetPath));
+        ItemJson json = TrunkManager.Instance.GetItemJson(id);
+        string AssetPath = PathConfig.GetItemPath(json.ResName, json.Category);
+        return GetAssetCache<Sprite>(AssetPath);
     }
     
+    //直接获得GemIcon的简便方法
+    public Sprite GetGemIcon(int id)
+    {
+        GemJson json = TrunkManager.Instance.GetGemJson(id);
+        string AssetPath = PathConfig.GetGemPath(json.ImageName);
+        return GetAssetCache<Sprite>(AssetPath);
+    }
+
     static string GetFileNameByPath(string CurPath)
-   {
-      CurPath = CurPath.Replace("\\","/");
-      var x = CurPath.Split('/');
-      string FileName = x[x.Length - 1];
-      return FileName;
-   }
+    {
+        CurPath = CurPath.Replace("\\","/");
+        var x = CurPath.Split('/');
+        string FileName = x[x.Length - 1];
+        return FileName;
+    }
 }

@@ -341,3 +341,44 @@ public class BulletModifierGem : IBulletModifier
     }
 }
 #endregion
+
+#region 最大的物品类划分细则
+//全局物品划分
+public enum DropedCategory
+{
+    Gem = 0,
+    Item = 1,
+    Key = 2,
+}
+
+//Item类划分
+public enum ItemCategory
+{
+    Equipable = 0, // 原有的可装备型道具
+    Persistent = 1,      // 新增：可保留、无效果型道具
+}
+//Item的Persistent类型划分
+public enum PersistentItemType
+{
+    Resource = 0,
+    QuestItem = 1,
+}
+#endregion
+
+#region 稀有度类型细则划分
+public enum DropedRarity
+{
+    None = 0, // 无
+    Common = 1,     // 白色
+    Rare = 2,       // 蓝色
+    Epic = 3,       // 紫色
+    Legendary = 4   // 橙色
+}
+
+public enum TreasureBoxRarity
+{
+    Common,     // 普通
+    Rare,       // 稀有
+    Legendary   // 传奇
+}
+#endregion

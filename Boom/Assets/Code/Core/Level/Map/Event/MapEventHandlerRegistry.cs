@@ -48,51 +48,63 @@ public class TreasureBoxEventHandler : IMapEventHandler
 {
     public void Handle(MapNodeData data, MapNodeView view)
     {
-        if (data.EventData is not ChestRuntimeData chestData)
+        if (data.EventData is not TreasureBoxRuntimeData chestData)
         {
             Debug.LogWarning("宝箱事件数据为空！");
             return;
         }
 
         int count = Random.Range(chestData.MinLootCount, chestData.MaxLootCount + 1);
-        var drops = RollDrops(chestData.DropTable, count);
+        List<DropedObjEntry> drops = RollDrops(data, count);
 
-        foreach (var drop in drops)
+        foreach (DropedObjEntry perDrop in drops)
         {
-            if (drop.IsGem)
-                InventoryManager.Instance.AddGemToBag(drop.ItemID);
-            else
-                InventoryManager.Instance.AddItemToBag(drop.ItemID);
-
-            view.ShowFloatingText($"获得了 {(drop.IsGem ? "宝石" : "道具")}！");
+            switch (perDrop.DropedCategory)
+            {
+                case DropedCategory.Gem: InventoryManager.Instance.AddGemToBag(perDrop.ID);break;
+                case DropedCategory.Item: InventoryManager.Instance.AddItemToBag(perDrop.ID);break;
+            }
+            
+            // 显示 RewardBanner
+            perDrop.InitData();
+            RewardBannerManager.Instance.ShowReward(perDrop.Icon, 1, perDrop.Rarity);
+            //view.ShowFloatingText($"获得了！");
         }
 
         view.SetAsTriggered();
     }
 
-    List<ChestDropEntry> RollDrops(List<ChestDropEntry> table, int count)
+    List<DropedObjEntry> RollDrops(MapNodeData data, int count)
     {
-        List<ChestDropEntry> result = new();
-        var pool = new Dictionary<ChestDropEntry, int>();
-        foreach (var entry in table)
-            pool[entry] = entry.Weight;
+        List<DropedObjEntry> result = new();
+        TreasureBoxRuntimeData chestData = data.EventData as TreasureBoxRuntimeData;
+        List<DropedObjEntry> table = chestData.DropTable; //找到配置表
+        // 构造 key：每个宝箱的伪随机 key 应该唯一
+        string bucketKey = $"Chest:{data.ID}"; // 假设每个 MapNodeData 有唯一 ID
 
-        for (int i = 0; i < count; i++)
+        // 构建概率字典：把 DropedObjEntry 转成 Dictionary<string, int>
+        Dictionary<string, int> weightDict = new();
+        Dictionary<string, DropedObjEntry> idToEntry = new();
+
+        foreach (var entry in table)
         {
-            int total = pool.Values.Sum();
-            int roll = UnityEngine.Random.Range(1, total + 1);
-            int acc = 0;
-            foreach (var pair in pool)
-            {
-                acc += pair.Value;
-                if (roll <= acc)
-                {
-                    result.Add(pair.Key);
-                    break;
-                }
-            }
+            string key = entry.ID.ToString();
+            weightDict[key] = entry.Weight;
+            idToEntry[key] = entry;
         }
 
+        // 使用伪随机系统抽取 count 个物品
+        for (int i = 0; i < count; i++)
+        {
+            string rollResult = ProbabilityService.Draw(bucketKey, weightDict, 
+                GM.Root.BattleMgr._MapManager.CurMapSate.MapRandomSeed);
+            if (idToEntry.TryGetValue(rollResult, out var drop))
+            {
+                result.Add(drop);
+            }
+            else
+                Debug.LogError($"掉落表中找不到ID为 {rollResult} 的物品");
+        }
         return result;
     }
 }

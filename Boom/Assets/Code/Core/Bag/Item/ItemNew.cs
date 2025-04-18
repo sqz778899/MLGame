@@ -29,24 +29,23 @@ public class ItemNew : ItemBase,IItemInteractionBehaviour
 
     void RefreshUI()
     {
-        Icon.sprite = ResManager.instance.GetAssetCache<Sprite>(
-            PathConfig.GetItemPath(Data.ImageName,Data.Category));
+        Icon.sprite = ResManager.instance.GetItemIcon(Data.ID);
         gameObject.name = Data.Name + Data.InstanceID;
         //同步背景形状
         SyncBackground();
         //同步稀有度颜色
         switch (Data.Rarity)
         {
-            case 1:
+            case DropedRarity.Common:
                 RareColor = Rare1;
                 break;
-            case 2:
+            case DropedRarity.Rare:
                 RareColor = Rare2;
                 break;
-            case 3:
+            case DropedRarity.Epic:
                 RareColor = Rare3;
                 break;
-            case 4:
+            case DropedRarity.Legendary:
                 RareColor = Rare4;
                 break;
         }

@@ -4,7 +4,7 @@ public struct ToolTipsInfo
 {
     public string Name;
     public int Level;
-    public int Rarity;
+    public DropedRarity Rarity;
     public string Description;
     public ToolTipsType CurToolTipsType;
     public ItemCategory Category;
@@ -13,7 +13,7 @@ public struct ToolTipsInfo
     public List<ToolTipsAttriSingleInfo> AttriInfos;
 
     public ToolTipsInfo(string name = "", int level = 0,string desc = "",
-        ToolTipsType type = ToolTipsType.None,int _rarity = 0,
+        ToolTipsType type = ToolTipsType.None,DropedRarity _rarity = 0,
         ItemCategory _category = ItemCategory.Equipable,
         PersistentItemType _persistentType = PersistentItemType.QuestItem,
         List<ToolTipsAttriSingleInfo> attriInfos = null)

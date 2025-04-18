@@ -23,7 +23,7 @@ public class ItemData : ItemDataBase,ITooltipBuilder
     public string Name;
     public string Desc;
     public string ImageName;
-    public int Rarity;
+    public DropedRarity Rarity;
 
     public IItemEffect EffectLogic; // 每个道具一个策略实现
     //区分是否是任务物品
@@ -72,18 +72,6 @@ public enum ItemTriggerTiming
     OnBulletHit = 3,
     OnShieldPenetrate = 4,
     OnEnterTreasureRoom = 5,
-}
-
-public enum ItemCategory
-{
-    Equipable = 0, // 原有的可装备型道具
-    Persistent = 1,      // 新增：可保留、无效果型道具
-}
-
-public enum PersistentItemType
-{
-    Resource = 0,
-    QuestItem = 1,
 }
 
 //用于UI显示的特质的信息结构体

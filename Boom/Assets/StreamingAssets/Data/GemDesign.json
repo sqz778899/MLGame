@@ -1,5 +1,6 @@
 [
   {
+    "Rarity": 1,
     "Level": 1,
     "ImageName": "T_Gem_Damage_01",
     "Damage": 1,
@@ -10,6 +11,7 @@
     "Price": 2
   },
   {
+    "Rarity": 2,
     "Level": 2,
     "ImageName": "T_Gem_Damage_02",
     "Damage": 2,
@@ -20,6 +22,7 @@
     "Price": 20
   },
   {
+    "Rarity": 3,
     "Level": 3,
     "ImageName": "T_Gem_Damage_03",
     "Damage": 3,
@@ -30,6 +33,7 @@
     "Price": 100
   },
   {
+    "Rarity": 1,
     "Level": 1,
     "ImageName": "T_Gem_Piercing_01",
     "Damage": 0,
@@ -40,6 +44,7 @@
     "Price": 2
   },
   {
+    "Rarity": 2,
     "Level": 2,
     "ImageName": "T_Gem_Piercing_02",
     "Damage": 0,
@@ -50,6 +55,7 @@
     "Price": 20
   },
   {
+    "Rarity": 3,
     "Level": 3,
     "ImageName": "T_Gem_Piercing_03",
     "Damage": 0,
@@ -60,6 +66,7 @@
     "Price": 100
   },
   {
+    "Rarity": 1,
     "Level": 1,
     "ImageName": "T_Gem_Resonance_01",
     "Damage": 0,
@@ -70,6 +77,7 @@
     "Price": 2
   },
   {
+    "Rarity": 2,
     "Level": 2,
     "ImageName": "T_Gem_Resonance_02",
     "Damage": 0,
@@ -80,6 +88,7 @@
     "Price": 20
   },
   {
+    "Rarity": 3,
     "Level": 3,
     "ImageName": "T_Gem_Resonance_03",
     "Damage": 0,

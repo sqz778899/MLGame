@@ -58,7 +58,7 @@ public class Trait_PurityGlory : IItemSynergies
     public bool Match(List<ItemData> equippedItems)
     {
         if (equippedItems.Count != 3) return false;
-        int rare = equippedItems[0].Rarity;
+        DropedRarity rare = equippedItems[0].Rarity;
         return equippedItems.All(item => item.Rarity == rare);
     }
 
