@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine;
 public class LevelEdit
 {
+    #region 渲染
     [Title("渲染"),PropertyOrder(1)]
     public int ss;
     [Button("设置渲染层级",ButtonSizes.Large),PropertyOrder(1)]
@@ -22,6 +23,37 @@ public class LevelEdit
         }
         nodes.ForEach(m=> m.SetRenderLayer());
     }
+    #endregion
+    
+    [Title("房间编辑"),PropertyOrder(97)]
+    public int RayDistance = 100;
+    [Button("房间ID整理", ButtonSizes.Large), PropertyOrder(97)]
+    void SetRoomID()
+    {
+        GameObject Root = Selection.gameObjects[0];
+        if (!Root.name.StartsWith("P_Map")) return;
+        MapRoomNode[] allRoom = Root.GetComponentsInChildren<MapRoomNode>();
+        int IDStart = 2;
+        for (int i = 0; i < allRoom.Length; i++)
+        {
+            MapRoomNode curRoom = allRoom[i];
+            if (curRoom.IsStartRoom) 
+                curRoom.RoomID = 1;
+            else
+                curRoom.RoomID = IDStart+ i;
+        }
+    }
+
+    [Button("箭头房间绑定", ButtonSizes.Large), PropertyOrder(97)]
+    void SetArrowBindRoom()
+    {
+        GameObject arrowGO = Selection.gameObjects[0];
+        if (!arrowGO.name.StartsWith("Arrow")) return;
+        ArrowNode arrowNode = arrowGO.GetComponent<ArrowNode>();
+        //
+        
+    }
+    
     #region 雾
     [Title("雾"),PropertyOrder(98)]
     public GameObject MapRoot;
@@ -56,7 +88,8 @@ public class LevelEdit
         EditorUtility.SetDirty(MapRoot);
     }
     #endregion
-    
+
+    #region 关卡测试开关
     [Title("关卡测试开关"),PropertyOrder(100)]
     public bool IsLevelTest;
     [Button("关卡测试开",ButtonSizes.Large),PropertyOrder(100)]
@@ -83,4 +116,5 @@ public class LevelEdit
         EditorUtility.SetDirty(MM);
         EditorUtility.SetDirty(QuestManager);
     }
+    #endregion
 }

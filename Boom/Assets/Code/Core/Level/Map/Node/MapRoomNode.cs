@@ -1,16 +1,13 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using Sirenix.Utilities;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
-using UnityEngine.Serialization;
 
 public class MapRoomNode : MonoBehaviour
 {
     [Header("重要属性")]
     public int RoomID;
+    public bool IsStartRoom; //是否是起始房间
 
     [SerializeField]
     private MapRoomState _state;
