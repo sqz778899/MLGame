@@ -3,7 +3,7 @@
 public class MapNodeController
 {
     private MapNodeData _data;
-    private MapNodeView _view;
+    public MapNodeView _view;
 
     public MapNodeController(MapNodeData data, MapNodeView view)
     {
@@ -13,13 +13,9 @@ public class MapNodeController
 
     public void OnInteract()
     {
-        if (_data.IsLocked)
-        {
-            _view.ShowFloatingText("这里好像上了锁...");
-            return;
-        }
-
-        if (_data.IsTriggered)
+        if (_data.IsLocked) return;
+        
+        if (_data.IsTriggered && !EventTypeRules.IsRepeatable(_data.EventType))
         {
             _view.ShowFloatingText("已经没什么好拿的了");
             return;
@@ -30,7 +26,8 @@ public class MapNodeController
             handler.Handle(_data, _view);
         else
             _view.ShowFloatingText("这里什么也没有");
-
-        _data.IsTriggered = true;
     }
+
+    public void Locked() => _data.IsLocked = true;
+    public void UnLocked() => _data.IsLocked = false;
 }

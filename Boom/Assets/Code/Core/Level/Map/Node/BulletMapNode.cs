@@ -1,5 +1,4 @@
 using System.Linq;
-using UnityEngine;
 using Spine.Unity;
 
 public class BulletMapNode : MapNodeBase
@@ -22,7 +21,6 @@ public class BulletMapNode : MapNodeBase
         QuitHighLight();
     }
     
-   
     public void JoinYou()
     {
         QuitHighLight();

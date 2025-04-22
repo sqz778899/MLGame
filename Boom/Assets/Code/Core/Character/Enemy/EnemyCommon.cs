@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using UnityEngine.Serialization;
 
 public class DamageState
 {

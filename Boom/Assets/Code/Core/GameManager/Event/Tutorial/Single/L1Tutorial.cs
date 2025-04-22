@@ -7,7 +7,7 @@ public class L1Step1PickBullet : TutorialStepBase
 {
     Image tutorialBG;
     ParticleSystem fxArrow;
-    BulletMapNode _curBullet;
+    MapNodeController _curBullet;
 
     public L1Step1PickBullet(TutorialController controller, Image _tutorialBG, ParticleSystem _fxArrow)
         : base(controller)
@@ -43,39 +43,39 @@ public class L1Step1PickBullet : TutorialStepBase
         tutorialBG.enabled = true;
         //2）找到需要引导的黏土子弹
         MapRoomNode curRoom = BattleManager.Instance._MapManager.GetMapRoomNode(1);
-        _curBullet = curRoom._resources.FirstOrDefault(s => s is BulletMapNode) as BulletMapNode;
-        _curBullet.gameObject.AddComponent<ShaderHoleController>().radius = 0.06f;
+        _curBullet = curRoom.BulletRes[0];
+        _curBullet._view.gameObject.AddComponent<ShaderHoleController>().radius = 0.06f;
         //3）计算一下引导箭头特效的坐标，赋予并显示
         RectTransform arrowRTrans = fxArrow.GetComponent<RectTransform>();
-        Vector3 newPos = _curBullet.transform.position + TutoConfig.arrowOffset;
+        Vector3 newPos = _curBullet._view.transform.position + TutoConfig.arrowOffset;
         Vector2 UIPos = UTools.GetUISpacePos(newPos,arrowRTrans);
         
         arrowRTrans.anchoredPosition = UIPos;
         arrowRTrans.GetComponent<FloatingIcon>().ResetPos(arrowRTrans.transform.localPosition);
         fxArrow.Play();
         //3)锁定角色，锁定资产
-        _curBullet.IsSpeTutorial = true;
+        _curBullet.Locked();
         //4)添加临时点击事件，切换引导状态。
-        _curBullet.onClick.AddListener(JoinYou);
+        _curBullet._view.OnClick += JoinYou;
         //5)注册回调事件，进入下一步
         EternalCavans.Instance.DialogueSC.OnDialogueEnd += diaCallback;
     }
     void JoinYou()
     {
-        _curBullet.onClick.RemoveListener(JoinYou);
+        _curBullet._view.OnClick -= JoinYou;
         //1）关闭各种宏
-        _curBullet.IsSpeTutorial = false;
+        _curBullet.UnLocked();
         //2)关闭背景板和引导特效
         tutorialBG.enabled = false;
         fxArrow.Clear();
         fxArrow.Stop();
         //3)销毁ShaderHoleController脚本
-        Object.Destroy(_curBullet.GetComponent<ShaderHoleController>());
+        Object.Destroy(_curBullet._view.GetComponent<ShaderHoleController>());
     }
     
     void diaCallback()
     {
-        _curBullet._dialogue.OnDialogueEnd -= diaCallback;
+        //_curBullet._dialogue.OnDialogueEnd -= diaCallback;
         EventManager.OnBulletPicked?.Invoke();
     }
 
@@ -291,7 +291,7 @@ public class L1Step4EquipGem : TutorialStepBase
     ParticleSystem fxArrow;
     ParticleSystem fXHand;
     
-    TreasureNode _curBox; //宝箱
+    MapNodeController _curBox; //宝箱
     GameObject _btnBag; //背包按钮
     GameObject _btnSWGem;//宝石页签切换的按钮
     GameObject _btnStart;//开始按钮
@@ -328,27 +328,26 @@ public class L1Step4EquipGem : TutorialStepBase
         tutorialBG.enabled = true;
         UIManager.Instance.IsLockedClick = true;
         //2）找到需要开启的宝箱
-        _curBox = PlayerManager.Instance.RoleInMapSC.CurRoom.
-            _resources.FirstOrDefault(s => s is TreasureNode) as TreasureNode;
-        _curBox.gameObject.AddComponent<ShaderHoleController>().radius = 0.06f;
+        _curBox = PlayerManager.Instance.RoleInMapSC.CurRoom.Treasures[0];
+        _curBox._view.gameObject.AddComponent<ShaderHoleController>().radius = 0.06f;
         //3）计算一下引导箭头特效的坐标，赋予并显示
         RectTransform arrowRTrans = fxArrow.GetComponent<RectTransform>();
-        Vector3 newPos = _curBox.transform.position + TutoConfig.arrowOffset;
+        Vector3 newPos = _curBox._view.transform.position + TutoConfig.arrowOffset;
         Vector2 UIPos = UTools.GetUISpacePos(newPos,arrowRTrans);
         arrowRTrans.anchoredPosition = UIPos;
         arrowRTrans.GetComponent<FloatingIcon>().ResetPos(arrowRTrans.transform.localPosition);
         fxArrow.Play();
         //3)锁定角色，锁定资产
-        _curBox.IsSpeTutorial = true;
+        _curBox.Locked();
         //4)添加临时点击事件
-        _curBox.onClick.AddListener(OpenBag);
+        //_curBox.onClick.AddListener(OpenBag);
     }
 
     public void OpenBag()
     {
-        _curBox.onClick.RemoveListener(OpenBag);
+        //_curBox.onClick.RemoveListener(OpenBag);
         //1）关闭各种宏
-        _curBox.IsSpeTutorial = false;
+        _curBox.UnLocked();
         UIManager.Instance.IsLockedClick = false;
         //2)背包按钮
         _btnBag = EternalCavans.Instance.BagButtonGO;

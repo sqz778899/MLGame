@@ -27,6 +27,7 @@ public static class AniUtility
     {
         #region 容错
         //动画不存在的话直接Return
+        if (curAni == null)return;
         if (curAni.Skeleton == null) return;
         if (curAni.Skeleton.Data.FindAnimation(AniType) == null) return;
         #endregion

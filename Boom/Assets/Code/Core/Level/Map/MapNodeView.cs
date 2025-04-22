@@ -1,12 +1,20 @@
-﻿using UnityEngine;
+﻿using System;
+using Spine.Unity;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class MapNodeView:MonoBehaviour
 {
+    [Header("Sprite 渲染")]
     public SpriteRenderer spriteRenderer;
-    public Sprite triggeredSprite;
+    public SpriteRenderer triggeredRenderer;
+    
+    [Header("Spine 渲染")]
+    public Renderer spineRenderer;
+    public SkeletonAnimation Ain;
+    
     public MapNodeData Data { get; private set; }
-    private MapNodeController controller;
+    public MapNodeController controller;
     
     [Header("跳字相关")]
     float lastFloatingTime = -999f;
@@ -24,6 +32,10 @@ public class MapNodeView:MonoBehaviour
         }
     }
 
+    public Action OnClick; //新手引导等外部注册
+    
+    void Awake() => AniUtility.PlayIdle(Ain);
+
     public void Init(MapNodeData data)
     {
         Data = data;
@@ -33,8 +45,12 @@ public class MapNodeView:MonoBehaviour
     
     public void SetAsTriggered(int coinsAmount = 0)
     {
-        if (triggeredSprite != null)
-            spriteRenderer.sprite = triggeredSprite;
+        if (triggeredRenderer != null)
+        {
+            spriteRenderer.gameObject.SetActive(false);
+            triggeredRenderer.gameObject.SetActive(true);
+            spriteRenderer = triggeredRenderer;
+        }
         QuitHighLight();
         
         // 针对不同事件类型添加额外表现逻辑
@@ -88,19 +104,28 @@ public class MapNodeView:MonoBehaviour
             return; // 如果有UI遮挡，直接返回
         }*/
         controller.OnInteract();
+        
+        OnClick?.Invoke();
     }
     
     void SetDefaultVisual()
     {
-        if (Data.IsTriggered && triggeredSprite != null)
-            spriteRenderer.sprite = triggeredSprite;
+        if (spriteRenderer != null) spriteRenderer.gameObject.SetActive(true);
+        if (triggeredRenderer != null) triggeredRenderer.gameObject.SetActive(false);
+        
+        if (Data.IsTriggered && triggeredRenderer != null)
+        {
+            spriteRenderer.gameObject.SetActive(false);
+            triggeredRenderer.gameObject.SetActive(true);
+        }
+        QuitHighLight();
     }
 
     #region 高亮显示相关
     void OnMouseEnter()
     {
         if (EventSystem.current.IsPointerOverGameObject()) return; // 如果鼠标在 UI 上，则直接返回 false
-        if ((Data.IsLocked || Data.IsTriggered)) return;
+        if (Data.IsLocked || (Data.IsTriggered && !EventTypeRules.IsRepeatable(Data.EventType))) return;
         HighLight();
     }
     
@@ -109,20 +134,29 @@ public class MapNodeView:MonoBehaviour
     public void HighLight()
     {
         uint layerToAdd = 1u << 1;
-        if (spriteRenderer == null)
-            spriteRenderer.renderingLayerMask |= layerToAdd;
-        else
-            spriteRenderer.renderingLayerMask |= layerToAdd;
-     
+        if (ActiveRenderer != null)
+            ActiveRenderer.renderingLayerMask |= layerToAdd;
     }
     
     public void QuitHighLight()
     {
         uint layerToRemove = 1u << 1;
-        if (spriteRenderer == null)
-            spriteRenderer.renderingLayerMask &= ~layerToRemove;
-        else
-            spriteRenderer.renderingLayerMask &= ~layerToRemove;
+        if (ActiveRenderer != null)
+            ActiveRenderer.renderingLayerMask &= ~layerToRemove;
+    }
+    
+    public Renderer ActiveRenderer
+    {
+        get
+        {
+            if (triggeredRenderer != null && triggeredRenderer.gameObject.activeSelf)
+                return triggeredRenderer;
+            if (spriteRenderer != null && spriteRenderer.gameObject.activeSelf)
+                return spriteRenderer;
+            if (spineRenderer != null && spineRenderer.gameObject.activeSelf)
+                return spineRenderer;
+            return null;
+        }
     }
     #endregion
 }

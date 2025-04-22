@@ -12,12 +12,18 @@ public class MapNodeDataEditor : Editor
         EditorGUILayout.PropertyField(serializedObject.FindProperty("ID"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("NodeName"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("Desc"));
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("EventType"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("_MapEventType"));
 
-        switch (mono.EventType)
+        switch (mono._MapEventType)
         {
             case MapEventType.CoinsPile:
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("GoldPileConfig"));
+                break;
+            case MapEventType.TreasureBox:
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("TreasureBoxConfig"));
+                break;
+            case MapEventType.Bullet:
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("BulletEventConfig"));
                 break;
             case MapEventType.WeaponRack:
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("WeaponRackConfig"));
@@ -31,8 +37,16 @@ public class MapNodeDataEditor : Editor
             case MapEventType.MysticalInteraction:
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("WigglingBoxConfig"));
                 break;
-            case MapEventType.TreasureBox:
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("TreasureBoxConfig"));
+            case MapEventType.RoomArrow:
+                var arrowProp = serializedObject.FindProperty("RoomArrowConfig");
+                EditorGUILayout.PropertyField(arrowProp.FindPropertyRelative("ArrowType"));
+                EditorGUILayout.PropertyField(arrowProp.FindPropertyRelative("TargetRoomID"));
+
+                RoomArrowType arrowType = mono.RoomArrowConfig.ArrowType;
+                if (arrowType == RoomArrowType.Fight)
+                {
+                    EditorGUILayout.PropertyField(arrowProp.FindPropertyRelative("BattleConfig"));
+                }
                 break;
         }
 

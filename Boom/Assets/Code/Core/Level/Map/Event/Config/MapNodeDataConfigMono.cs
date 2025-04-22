@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 public class MapNodeDataConfigMono : MonoBehaviour
 {
@@ -8,8 +9,8 @@ public class MapNodeDataConfigMono : MonoBehaviour
     [TextArea(2, 5)]
     public string Desc;
 
-    [Header("事件类型")]
-    public MapEventType EventType = MapEventType.TreasureBox;
+    [FormerlySerializedAs("EventType")] [Header("事件类型")]
+    public MapEventType _MapEventType = MapEventType.TreasureBox;
 
     [Header("显示控制")]
     public bool StartLocked = false;
@@ -18,26 +19,31 @@ public class MapNodeDataConfigMono : MonoBehaviour
     // 每种事件配置
     public GoldPileConfigData GoldPileConfig;
     public TreasureBoxConfigData TreasureBoxConfig;
+    public BulletEventConfigData BulletEventConfig;
     public WeaponRackConfigData WeaponRackConfig;
     public SkeletonConfigData SkeletonConfig;
     public StoneTabletConfigData StoneTabletConfig;
     public WigglingBoxConfigData WigglingBoxConfig;
+    public RoomArrowConfigData RoomArrowConfig;
 
     public void Start() => GetComponent<MapNode>().Init(ToRuntimeData());
     
     public MapNodeData ToRuntimeData()
     {
-        MapEventRuntimeData runtime = EventType switch
+        Debug.Log($"VAR{_MapEventType.ToString()}");
+        MapEventRuntimeData runtime = _MapEventType switch
         {
             MapEventType.CoinsPile => GoldPileConfig?.ToRuntimeData(),
             MapEventType.TreasureBox => TreasureBoxConfig?.ToRuntimeData(),
+            MapEventType.Bullet => BulletEventConfig?.ToRuntimeData(),
             MapEventType.Skeleton => SkeletonConfig?.ToRuntimeData(),
             MapEventType.StoneTablet => StoneTabletConfig?.ToRuntimeData(),
             MapEventType.MysticalInteraction => WigglingBoxConfig?.ToRuntimeData(),
             MapEventType.WeaponRack => WeaponRackConfig?.ToRuntimeData(),
-            _ => null
+            MapEventType.RoomArrow =>RoomArrowConfig?.ToRuntimeData(),
+            _ =>null,
         };
 
-        return new MapNodeData(ID, NodeName, Desc, EventType, runtime);
+        return new MapNodeData(ID, NodeName, Desc, _MapEventType, runtime);
     }
 }

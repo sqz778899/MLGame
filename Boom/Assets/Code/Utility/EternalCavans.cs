@@ -35,7 +35,6 @@ public class EternalCavans : MonoBehaviour
     [Header("侧栏相关")]
     public GameObject G_SideBar;    //侧边栏
     public GameObject G_CurBulletIcon; //侧边栏当前子弹图标
-    public GameObject G_StandbyIcon; //侧边栏待机图标
     
     [Header("GUIMap")]
     public GameObject GUIMapRootGO;
@@ -63,7 +62,8 @@ public class EternalCavans : MonoBehaviour
     
     [Header(("对话系统"))]
     public Dialogue DialogueSC;
-
+    public DialogueFight DialogueFightSC;
+    
     [Header("新手引导使用的资产")] 
     public Transform btnBag_Apos;
     public GameObject btnSWBullet;

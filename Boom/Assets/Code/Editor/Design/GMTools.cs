@@ -21,6 +21,13 @@ public class GMTools
         PlayerManager.Instance._PlayerData.ModifyCoins(1000);
     }
     
+    [Button("钥匙添加",ButtonSizes.Large),PropertyOrder(0)]
+    [ButtonGroup("魔尘&&金币添加")]
+    void AddKeys()
+    {
+        PlayerManager.Instance._PlayerData.ModifyRoomKeys(1);
+    }
+    
     [Title("剧情解锁程度"),PropertyOrder(1)]
     public int progress;
     [Button("剧情解锁程度",ButtonSizes.Large),PropertyOrder(1)]

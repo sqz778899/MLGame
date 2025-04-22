@@ -16,11 +16,14 @@ public static class MapEventHandlerRegistry
     {
         // 注册各类事件处理器（只初始化一次）
         Register(MapEventType.CoinsPile, new CoinsPileEventHandler());
+        Register(MapEventType.TreasureBox,new TreasureBoxEventHandler());
+        Register(MapEventType.Bullet,new BulletEventHandler());
         Register(MapEventType.WeaponRack, new WeaponRackEventHandler());
         Register(MapEventType.Skeleton, new SkeletonHandler());
         Register(MapEventType.StoneTablet,new StoneTabletHandler());
         Register(MapEventType.MysticalInteraction,new WigglingBoxHandler());
-        Register(MapEventType.TreasureBox,new TreasureBoxEventHandler());
+        
+        Register(MapEventType.RoomArrow, new RoomArrowEventHandler());// 房间箭头
         // 更多事件类型...
     }
 
@@ -31,6 +34,7 @@ public static class MapEventHandlerRegistry
 }
 
 #region 奖励类
+//金币堆事件
 public class CoinsPileEventHandler : IMapEventHandler
 {
     public void Handle(MapNodeData data, MapNodeView view)
@@ -43,7 +47,7 @@ public class CoinsPileEventHandler : IMapEventHandler
         view.SetAsTriggered(amount); //把数量传回 View
     }
 }
-
+//宝箱事件
 public class TreasureBoxEventHandler : IMapEventHandler
 {
     public void Handle(MapNodeData data, MapNodeView view)
@@ -70,7 +74,7 @@ public class TreasureBoxEventHandler : IMapEventHandler
             RewardBannerManager.Instance.ShowReward(perDrop.Icon, 1, perDrop.Rarity);
             //view.ShowFloatingText($"获得了！");
         }
-
+        data.IsTriggered = true;
         view.SetAsTriggered();
     }
 
@@ -106,6 +110,37 @@ public class TreasureBoxEventHandler : IMapEventHandler
                 Debug.LogError($"掉落表中找不到ID为 {rollResult} 的物品");
         }
         return result;
+    }
+}
+//子弹事件
+public class BulletEventHandler : IMapEventHandler
+{
+    public void Handle(MapNodeData data, MapNodeView view)
+    {
+        var runtime = data.EventData as BulletEventRuntimeData;
+        if (runtime == null)
+        {
+            Debug.LogWarning("BulletEventRuntimeData 为空");
+            return;
+        }
+
+        Dialogue dialogue = EternalCavans.Instance.DialogueSC;
+        dialogue.LoadDialogue(runtime.DialogueName);
+        dialogue.OnDialogueEnd += OnDialogueEnd;
+        view.SetAsTriggered();
+
+        void OnDialogueEnd()
+        {
+            dialogue.OnDialogueEnd -= OnDialogueEnd;
+            InventoryManager.Instance._BulletInvData.AddSpawner(runtime.BulletID);
+
+            BulletJson bulletDesignJson = TrunkManager.Instance.BulletDesignJsons
+                .FirstOrDefault(b => b.ID == runtime.BulletID) ?? new BulletJson();
+            FloatingTextFactory.CreateWorldText($"获得 {bulletDesignJson.Name}",
+                GM.Root.PlayerMgr.RoleInMapGO.transform.position, new Color(0.8f, 0.8f, 0.8f, 1), 3f);
+
+            GameObject.Destroy(view.gameObject);
+        }
     }
 }
 
@@ -277,4 +312,27 @@ public class WigglingBoxHandler : IMapEventHandler
 
 #endregion
 
+#region 房间箭头功能类
+public class RoomArrowEventHandler : IMapEventHandler
+{
+    public void Handle(MapNodeData data, MapNodeView view)
+    {
+        if (data.EventData is not RoomArrowRuntimeData runtime)
+        {
+            Debug.LogWarning("RoomArrowRuntimeData 无效");
+            return;
+        }
 
+        IArrowStrategy strategy = runtime.ArrowType switch
+        {
+            RoomArrowType.Normal => new RoomArrowNormalStrategy(),
+            RoomArrowType.Fight => new RoomArrowFightStrategy(),
+            RoomArrowType.KeyGate => new RoomArrowKeyGateStrategy(),
+            RoomArrowType.ReturnStone => new RoomArrowReturnStoneStrategy(),
+            _ => null
+        };
+
+        strategy?.Execute(data, view);
+    }
+}
+#endregion

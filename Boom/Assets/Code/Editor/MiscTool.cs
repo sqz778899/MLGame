@@ -10,7 +10,6 @@ namespace Code.Editor
         {
             GetWindow<MiscToolBox>().Show();
         }
-
         protected override OdinMenuTree BuildMenuTree()
         {
             var tree = new OdinMenuTree();

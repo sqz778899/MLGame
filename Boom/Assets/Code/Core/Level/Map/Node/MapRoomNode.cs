@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Sirenix.Utilities;
 using UnityEngine;
@@ -37,27 +38,39 @@ public class MapRoomNode : MonoBehaviour
     public string SortingLayerName;
     Renderer[] _renderers;
     
-    GameObject resRoot;
-    GameObject _resRoot
-    {
-        get
-        {
-            if (!resRoot)
-                resRoot = transform.Cast<Transform>()
-                    .FirstOrDefault(t => t.name == "ResRoot")?.gameObject;
-            return resRoot;
-        }
-    }
-    
     //Room节点下全部资产信息
-    public ArrowNode[] _arrows;     //全部的箭头
-    public MapNodeBase[] _resources; //全部的资源
+    public MapNodeController[] _resources; //全部的资源
+    public MapNodeController[] _arrows;     //全部的箭头
+    public MapNodeController[] Treasures; //全部的宝箱类
+    public MapNodeController[] BulletRes; //全部的子弹类
+    
     public bool IsFogUnLocked; //播放完解锁动画了，已经全部解锁了
 
     public void InitData()
     {
-        _arrows = GetComponentsInChildren<ArrowNode>();
-        _resources = _resRoot.GetComponentsInChildren<MapNodeBase>();
+        MapNodeDataConfigMono[] allMapNodeConfig =  GetComponentsInChildren<MapNodeDataConfigMono>(true);
+        List<MapNodeController> arrows = new List<MapNodeController>();
+        List<MapNodeController> resources = new List<MapNodeController>();
+        List<MapNodeController> treasures = new List<MapNodeController>();
+        List<MapNodeController> bulletRes = new List<MapNodeController>();
+        foreach (MapNodeDataConfigMono each in allMapNodeConfig)
+        {
+            MapNodeController curNode = each.GetComponent<MapNodeView>().controller;
+            if (each._MapEventType == MapEventType.RoomArrow)
+                arrows.Add(curNode);
+            else
+            {
+                resources.Add(curNode);
+                switch (each._MapEventType)
+                {
+                    case MapEventType.TreasureBox: treasures.Add(curNode); break;
+                    case MapEventType.Bullet: bulletRes.Add(curNode); break;
+                }
+            }
+        }
+
+        _arrows = arrows.ToArray();
+        _resources = resources.ToArray();
         if (RoomFog)
         {
             _instanceFogMat = new Material(RoomFog.material);
@@ -75,8 +88,16 @@ public class MapRoomNode : MonoBehaviour
         
         _renderers = GetComponentsInChildren<Renderer>(true);
         int targetLayerID = SortingLayer.NameToID(SortingLayerName);
+        foreach (Renderer each in _renderers)
+        {
+            if (each.gameObject.name.StartsWith("RoomFog"))
+            {
+                each.sortingLayerID = SortingLayer.NameToID("Fog");
+                continue;
+            }
+            each.sortingLayerID = targetLayerID;
+        }
         _renderers.ForEach(r=> r.sortingLayerID = targetLayerID);
-        _resources.ForEach(res => res.SortingLayerName = SortingLayerName);
     }
 
     public void SetRenderLayer(GameObject Role)
@@ -92,15 +113,15 @@ public class MapRoomNode : MonoBehaviour
     public void LockRes()
     {
         if (State == MapRoomState.IsLocked) return;
-        _resources.ToList().ForEach(r => r.IsLocked = true);
-        _arrows.ToList().ForEach(r => r.IsLocked = true);
+        _resources.ToList().ForEach(r => r.Locked());
+        _arrows.ToList().ForEach(r => r.Locked());
     }
     
     public void UnLockRes()
     {
         if (State == MapRoomState.IsLocked) return;
-        _resources.ToList().ForEach(r => r.IsLocked = false);
-        _arrows.ToList().ForEach(r => r.IsLocked = false);
+        _resources.ToList().ForEach(r => r.UnLocked());
+        _arrows.ToList().ForEach(r => r.UnLocked());
     }
     #endregion
 
@@ -109,8 +130,8 @@ public class MapRoomNode : MonoBehaviour
     {
         if (State == MapRoomState.IsLocked)
         {
-            _resources.ToList().ForEach(r => r.IsLocked = true);
-            _arrows.ToList().ForEach(r => r.IsLocked = true);
+            _resources.ToList().ForEach(r => r.Locked());
+            _arrows.ToList().ForEach(r => r.Locked());
         }
         else
         {
@@ -118,8 +139,8 @@ public class MapRoomNode : MonoBehaviour
                 StartCoroutine(UnlockRoomAnimation());
             else
             {
-                _resources.ToList().ForEach(r => r.IsLocked = false);
-                _arrows.ToList().ForEach(r => r.IsLocked = false);
+                _resources.ToList().ForEach(r => r.UnLocked());
+                _arrows.ToList().ForEach(r => r.UnLocked());
             }
         }
     }
@@ -151,8 +172,8 @@ public class MapRoomNode : MonoBehaviour
         // 确保结束时的值是准确的
         _instanceFogMat.SetFloat("_DissolveAmount", endDissolveAmount);
         
-        _resources.ToList().ForEach(r => r.IsLocked = false);
-        _arrows.ToList().ForEach(r => r.IsLocked = false);
+        _resources.ToList().ForEach(r => r.Locked());
+        _arrows.ToList().ForEach(r => r.Locked());
         IsFogUnLocked = true;
     }
     #endregion

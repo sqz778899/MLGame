@@ -13,13 +13,14 @@ public abstract class MapEventConfigData
 
 #region 事件具体数据结构分别实现
 #region 奖励型
+//金币堆事件
 [Serializable]
 public class CoinsPileRuntimeData : MapEventRuntimeData
 {
     public int MinGold;
     public int MaxGold;
 }
-
+//宝箱事件
 [Serializable]
 public class TreasureBoxRuntimeData : MapEventRuntimeData
 {
@@ -27,6 +28,13 @@ public class TreasureBoxRuntimeData : MapEventRuntimeData
     public int MinLootCount;
     public int MaxLootCount;
     public List<DropedObjEntry> DropTable;
+}
+//子弹事件
+[Serializable]
+public class BulletEventRuntimeData : MapEventRuntimeData
+{
+    public int BulletID;
+    public string DialogueName;
 }
 #endregion
 
@@ -71,11 +79,21 @@ public class WigglingBoxRuntimeData : MapEventRuntimeData
     public int LootChance;
 }
 #endregion
-#endregion
 
+#region 房间箭头功能类
+[Serializable]
+public class RoomArrowRuntimeData : MapEventRuntimeData
+{
+    public RoomArrowType ArrowType;
+    public int TargetRoomID;
+    public EnemyConfigData BattleConfig;
+}
+#endregion
+#endregion
 
 #region 事件具体ConfigData分别实现
 #region 奖励型
+//金币堆事件
 [Serializable]
 public class GoldPileConfigData : MapEventConfigData
 {
@@ -85,7 +103,7 @@ public class GoldPileConfigData : MapEventConfigData
     public override MapEventRuntimeData ToRuntimeData() =>
         new CoinsPileRuntimeData { MinGold = MinGold, MaxGold = MaxGold };
 }
-
+//宝箱事件
 [Serializable]
 public class TreasureBoxConfigData : MapEventConfigData
 {
@@ -101,6 +119,22 @@ public class TreasureBoxConfigData : MapEventConfigData
         MaxLootCount = MaxLootCount,
         DropTable = DropTable
     };
+}
+//子弹事件
+[Serializable]
+public class BulletEventConfigData : MapEventConfigData
+{
+    public int BulletID;
+    public string DialogueName;
+
+    public override MapEventRuntimeData ToRuntimeData()
+    {
+        return new BulletEventRuntimeData
+        {
+            BulletID = this.BulletID,
+            DialogueName = this.DialogueName
+        };
+    }
 }
 #endregion
 
@@ -192,8 +226,27 @@ public class WigglingBoxConfigData : MapEventConfigData
     }
 }
 #endregion
-#endregion
 
+#region 房间箭头功能类
+[Serializable]
+public class RoomArrowConfigData : MapEventConfigData
+{
+    public RoomArrowType ArrowType;
+    public int TargetRoomID;
+    public EnemyConfigData BattleConfig;
+
+    public override MapEventRuntimeData ToRuntimeData()
+    {
+        return new RoomArrowRuntimeData
+        {
+            ArrowType = ArrowType,
+            TargetRoomID = TargetRoomID,
+            BattleConfig = BattleConfig
+        };
+    }
+}
+#endregion
+#endregion
 
 #region 一些枚举定义
 [Serializable]
@@ -220,6 +273,64 @@ public class DropedObjEntry
                 Rarity = gemjson.Rarity;
                 break;
         }
+    }
+}
+
+//主类别
+public enum MapEventType
+{
+    None = 0,
+    CoinsPile = 1,
+    WeaponRack = 2,
+    Skeleton = 3,
+    StoneTablet = 4,
+    MysticalInteraction = 5,
+    TreasureBox = 6,
+    Bullet = 7,
+    Enemy,
+    Shop,
+    Event,
+    Boss,
+    RoomArrow = 100,
+}
+
+//EventType规则定义（可重复触发判断）
+public static class EventTypeRules
+{
+    public static bool IsRepeatable(MapEventType type)
+    {
+        return type switch
+        {
+            MapEventType.RoomArrow => true,
+            MapEventType.Shop => true,
+            MapEventType.Event => true,
+            _ => false
+        };
+    }
+}
+
+public class MapNodeData
+{
+    public int ID;
+    public string Name;
+    public string Desc;
+    public MapEventType EventType;
+    
+    public MapEventRuntimeData EventData;
+
+    public bool IsLocked;
+    public bool IsTriggered;
+
+    public MapNodeData(int id, string name, string desc, 
+        MapEventType eventType,MapEventRuntimeData eventData)
+    {
+        ID = id;
+        Name = name;
+        Desc = desc;
+        EventType = eventType;
+        IsLocked = false;
+        IsTriggered = false;
+        EventData = eventData;
     }
 }
 #endregion

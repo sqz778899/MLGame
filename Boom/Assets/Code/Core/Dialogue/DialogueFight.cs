@@ -11,43 +11,54 @@ public class DialogueFight : MonoBehaviour
     public Image Portrait;
     public int LevelID = 1;
     public Transform ObserveHPRoot;
-    public ArrowNode CurArrow;
     public float observeHPYOffset = 145;
-    public TextMeshProUGUI CotentText;
     public List<GameObject> HPGOList = new List<GameObject>();
     
-    public void InitData(ArrowNode _arraow)
+    MapNodeData _sourceNode;
+    EnemyConfigData _enemyConfig;
+    
+    public void InitData(MapNodeData nodeData)
     {
-        CurArrow = _arraow;
-        Portrait.sprite = EnemyFactory.GetEnemyPortrait(_arraow.Config.ID);//头像的初始化
-        //战斗对话框的界面初始化
+        _sourceNode = nodeData;
+
+        if (nodeData.EventData is not RoomArrowRuntimeData arrowData || arrowData.BattleConfig == null)
+        {
+            Debug.LogError("传入的不是 RoomArrow 或者敌人配置为空！");
+            return;
+        }
+
+        _enemyConfig = arrowData.BattleConfig;
+        Portrait.sprite = EnemyFactory.GetEnemyPortrait(_enemyConfig.ID);
+
+        // 初始化观察HP界面
         GameObject observeHPAsset = ResManager.instance.GetAssetCache<GameObject>(PathConfig.ObserveHPPB);
-        List<int> ShieldsHPs = _arraow.Config.ShieldConfig.ShieldsHPs;
-        for (int i = 0; i < ShieldsHPs.Count + 1; i++)
+        List<int> shields = _enemyConfig.ShieldConfig?.ShieldsHPs ?? new();
+        for (int i = 0; i < shields.Count + 1; i++)
         {
             GameObject observeHPIns = Instantiate(observeHPAsset, ObserveHPRoot.transform);
             HPGOList.Add(observeHPIns);
-            RectTransform observeHPRectTrans = observeHPIns.GetComponent<RectTransform>();
-            // 设置位置
-            observeHPRectTrans.anchoredPosition = new Vector2(0,0 + observeHPYOffset*i);
-            // 获取并设置文本
-            TextMeshProUGUI curObserveHPText = observeHPIns.GetComponentInChildren<TextMeshProUGUI>(true);
-            int currentHP = (i == 0) ? _arraow.Config.HP : ShieldsHPs[i - 1]; // 根据i来选择显示的血量
-            curObserveHPText.text = currentHP.ToString();
+            RectTransform rectTrans = observeHPIns.GetComponent<RectTransform>();
+            rectTrans.anchoredPosition = new Vector2(0, observeHPYOffset * i);
+            
+            int currentHP = (i == 0) ? _enemyConfig.HP : shields[i - 1];
+            var hpText = observeHPIns.GetComponentInChildren<TextMeshProUGUI>(true);
+            hpText.text = currentHP.ToString();
         }
     }
     
     public void EnterFight()
     {
         UIManager.Instance.IsLockedClick = false;
-        BattleManager.Instance.EnterFight(CurArrow.Config,LevelID);
+        BattleManager.Instance.EnterFight(_enemyConfig, LevelID);
         QuitSelf();
     }
 
     public void QuitSelf()
     {
         UIManager.Instance.IsLockedClick = false;
-        CurArrow.IsLocked = false;
-        DestroyImmediate(gameObject);
+        // 解锁原节点（如果你还需要这么处理）
+        if (_sourceNode != null)
+            _sourceNode.IsLocked = false;
+        gameObject.SetActive(false);
     }
 }

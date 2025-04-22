@@ -27,17 +27,16 @@ public class DebugTool
             each.material = _defaultMaterial;
         }
     }
-
-    public SlotView slot;
+    
     [Button(ButtonSizes.Large)] 
     [ButtonGroup("打印POS")]
     void SetGemData()
     {
-       GameObject s = Selection.activeGameObject;
-       GemNew gem = s.GetComponent<GemNew>();
-       GemData dt = new GemData(1, null);
-       gem.BindData(dt);
-       s.GetComponent<ItemInteractionHandler>().BindData(dt);
+        Vector3 OnePos = new Vector3(5.75f, 0.37f, 0);
+        Vector3 Pos1 = new Vector3(6.12974977f, 12.2808266f, 11.033061f);
+        Vector3 Pos2 = new Vector3(8.1297493f, 8.78082657f, 11.033061f);
+        Debug.Log($"Pos1 {Vector3.Distance(OnePos,Pos1)}");
+        Debug.Log($"Pos2 {Vector3.Distance(OnePos,Pos2)}");
     }
     
     
