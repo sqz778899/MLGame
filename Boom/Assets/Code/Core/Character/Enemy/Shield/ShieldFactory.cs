@@ -3,12 +3,12 @@ using UnityEngine;
 
 public static class ShieldFactory
 {
-    public static ShieldNew CreateShield(ShieldData data,Transform parent = null)
+    public static Shield CreateShield(ShieldData data,Transform parent = null)
     {
         GameObject shieldIns = ResManager.instance.CreatInstance(PathConfig.ShieldPB);
         if (parent != null)
             shieldIns.transform.SetParent(parent, false);
-        ShieldNew shieldSC = shieldIns.GetComponent<ShieldNew>();
+        Shield shieldSC = shieldIns.GetComponent<Shield>();
         // Controller 绑定
         shieldSC.BindData(data);
         return shieldSC;  

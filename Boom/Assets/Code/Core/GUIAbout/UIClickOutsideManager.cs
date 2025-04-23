@@ -20,10 +20,10 @@ public class UIClickOutsideManager : MonoBehaviour
                     continue;
                 }
 
-                RectTransform rect = popup.transform as RectTransform;
-                if (RectTransformUtility.RectangleContainsScreenPoint(rect, mousePos))
+                RectTransform rect = tracked[i].ClickArea;
+                if (RectTransformUtility.RectangleContainsScreenPoint(rect, mousePos,Camera.main))
                     continue;
-
+                
                 // 点击在外部，触发关闭
                 tracked[i].OnClickOutside();
             }
@@ -45,4 +45,6 @@ public interface ICloseOnClickOutside
     void Hide();
     /// 面板点击外部后触发的关闭逻辑
     void OnClickOutside();
+    
+    RectTransform ClickArea { get; } // 指定检测点击的区域
 }

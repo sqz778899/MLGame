@@ -1,15 +1,23 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 
 public static class FloatingTextFactory
 {
-    // 配置路径（根据你资源管理方式调整）
+    // 配置路径
     static readonly string WorldTextPrefabPath = PathConfig.TxtFloatingPB;     // 世界用 TextMeshPro
     static readonly string UITextPrefabPath = PathConfig.TxtFloatingUIPB;
+    
+    // 不同跳字对应不同字体
+    public static TMP_FontAsset DamageFontAsset;
+    public static TMP_FontAsset MapHintFontAsset;
 
+    public static Material DamageFontMaterial;
+    
     /// <summary>
     /// 创建一个世界坐标系中的浮动文字
     /// </summary>
     public static void CreateWorldText(string content, Vector3 worldPos, 
+        FloatingTextType type = FloatingTextType.MapHint,
         Color? color = null, float fontSize = 4f, Transform parent = null)
     {
         GameObject prefab = ResManager.instance.CreatInstance(WorldTextPrefabPath);
@@ -18,7 +26,21 @@ public static class FloatingTextFactory
             prefab.transform.SetParent(parent, true);
 
         FloatingText floating = prefab.GetComponent<FloatingText>();
+        TextMeshPro curText = prefab.GetComponent<TextMeshPro>();
         floating.textRenderer.sortingLayerName = "FloatingText";
+        
+        // 应用材质和字体
+        switch (type)
+        {
+            case FloatingTextType.Damage:
+                curText.font = DamageFontAsset;
+                curText.fontMaterial = DamageFontMaterial;
+                break;
+            case FloatingTextType.MapHint:
+                curText.font = MapHintFontAsset;
+                break;
+        }
+        
         floating.Animate(content, color ?? Color.white, fontSize);
     }
 
@@ -35,4 +57,10 @@ public static class FloatingTextFactory
         floating.textRenderer.sortingLayerName = "FloatingText";
         floating.Animate(content, color ?? Color.white, fontSize);
     }
+}
+
+public enum FloatingTextType
+{
+    Damage,
+    MapHint
 }

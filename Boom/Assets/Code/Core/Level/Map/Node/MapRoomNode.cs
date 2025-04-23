@@ -80,6 +80,9 @@ public class MapRoomNode : MonoBehaviour
         
         //2）设置渲染层级
         SetRenderLayer();
+        
+        //3)初始化锁定状态
+        UpdateResState();
     }
 
     public void SetRenderLayer()
@@ -172,8 +175,8 @@ public class MapRoomNode : MonoBehaviour
         // 确保结束时的值是准确的
         _instanceFogMat.SetFloat("_DissolveAmount", endDissolveAmount);
         
-        _resources.ToList().ForEach(r => r.Locked());
-        _arrows.ToList().ForEach(r => r.Locked());
+        _resources.ToList().ForEach(r => r.UnLocked());
+        _arrows.ToList().ForEach(r => r.UnLocked());
         IsFogUnLocked = true;
     }
     #endregion

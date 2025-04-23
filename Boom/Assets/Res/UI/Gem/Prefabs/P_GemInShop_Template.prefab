@@ -145,8 +145,9 @@ GameObject:
   - component: {fileID: 4933838963927970425}
   - component: {fileID: 7818426853065708029}
   - component: {fileID: 1081066080780118012}
+  - component: {fileID: 5399033661845352436}
+  - component: {fileID: 6129265998266523472}
   - component: {fileID: 177933427033065609}
-  - component: {fileID: 6759256417485295396}
   m_Layer: 5
   m_Name: P_GemInShop_Template
   m_TagString: Untagged
@@ -213,6 +214,41 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5399033661845352436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6593837393530578276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba13acdb91f840a38b0d125d49fd306c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemSprite: {fileID: 1081066080780118012}
+  PriceText: {fileID: 104149203160529776}
+  EPara:
+    CurEffectType: 2
+    StartPos: {x: 0, y: 0, z: 0}
+    InsNum: 1
+    SpawntimeRange: {x: 0.01, y: 0.1}
+    Radius: 1
+    FlyRangeOffset: {x: -1, y: 1}
+    FlyTimeRange: {x: 0.1, y: 0.3}
+  OutlineColor: {r: 0.55743295, g: 3.0853553, b: 3.109891, a: 1}
+--- !u!114 &6129265998266523472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6593837393530578276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2707c922163480c92bc139a81d616c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!61 &177933427033065609
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -258,34 +294,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &6759256417485295396
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6593837393530578276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 939e8ca1c6e272c4c9f0c6bf2f7f6acf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DobuleClickTime: 6
-  CurToolTipsMenuState: 0
-  Price: 0
-  PriceText: {fileID: 104149203160529776}
-  CurShopNode: {fileID: 0}
-  ShopSlotIndex: 0
-  ItemSprite: {fileID: 1081066080780118012}
-  OutlineColor: {r: 0.55743295, g: 3.0853553, b: 3.109891, a: 1}
-  EPara:
-    CurEffectType: 2
-    StartPos: {x: 0, y: 0, z: 0}
-    InsNum: 1
-    SpawntimeRange: {x: 0, y: 0}
-    Radius: 2
-    FlyRangeOffset: {x: -1, y: 1}
-    FlyTimeRange: {x: 0.2, y: 0.4}
 --- !u!1 &8254328683893014195
 GameObject:
   m_ObjectHideFlags: 0

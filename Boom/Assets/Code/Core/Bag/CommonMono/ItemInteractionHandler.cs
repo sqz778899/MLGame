@@ -4,7 +4,8 @@ using UnityEngine.EventSystems;
 
 public class ItemInteractionHandler: MonoBehaviour, 
     IPointerEnterHandler, IPointerExitHandler,IPointerDownHandler,
-    IPointerClickHandler, IBeginDragHandler, IEndDragHandler, IDragHandler,IPointerMoveHandler
+    IPointerClickHandler, IBeginDragHandler, IEndDragHandler,
+    IDragHandler,IPointerMoveHandler,IPointerUpHandler
 {
     IItemInteractionBehaviour behaviour;
     RectTransform rectTransform;
@@ -25,17 +26,55 @@ public class ItemInteractionHandler: MonoBehaviour,
     // 绑定数据（泛型适配）
     public void BindData(ItemDataBase data) => Data = data;
 
-    public void OnPointerEnter(PointerEventData eventData) => ShowTooltips();
-    public void OnPointerExit(PointerEventData eventData) => TooltipsManager.Instance.Hide();
-    
-    public void OnPointerDown(PointerEventData eventData) => TooltipsManager.Instance.Hide();
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        //商店宝石的UI高亮
+        if (gameObject.TryGetComponent<IHighlightableUI>(out var highlightable))
+            highlightable.SetHighlight(true);
+        
+        ShowTooltips();
+    }
 
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        //商店宝石的UI高亮
+        if (gameObject.TryGetComponent<IHighlightableUI>(out var highlightable))
+            highlightable.SetHighlight(false);
+        
+        TooltipsManager.Instance.Hide();
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        //点击小优化的接口触发
+        if (gameObject.TryGetComponent<IPressEffect>(out var pressEffect))
+            pressEffect.OnPressDown();
+        
+        TooltipsManager.Instance.Hide();
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        //点击小优化的接口触发
+        if (gameObject.TryGetComponent<IPressEffect>(out var pressEffect))
+            pressEffect.OnPressUp();
+    }
+    
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Right)
+        {
             behaviour?.OnRightClick();
-        else if (Time.time - lastClickTime < doubleClickThreshold)
-            behaviour?.OnDoubleClick();
+        }
+        else
+        {
+            behaviour?.OnClick(); //主动调用 OnClick()！
+
+            if (Time.time - lastClickTime < doubleClickThreshold)
+                behaviour?.OnDoubleClick();
+
+            lastClickTime = Time.time;
+        }
 
         lastClickTime = Time.time;
     }
@@ -43,6 +82,8 @@ public class ItemInteractionHandler: MonoBehaviour,
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (!DragManager.Instance.CanDrag()) return;
+        if (behaviour is { CanDrag: false }) return; //新增判断
+        
         behaviour?.OnBeginDrag();
         TooltipsManager.Instance.Hide();
         TooltipsManager.Instance.Disable();
@@ -86,4 +127,7 @@ public interface IItemInteractionBehaviour
     void OnEndDrag();
     void OnDoubleClick();
     void OnRightClick();
+    
+    void OnClick(); // 用于 GemShopPreview 或特殊交互用例
+    bool CanDrag { get; }
 }

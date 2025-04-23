@@ -51,11 +51,11 @@ public class DragManager : MonoBehaviour
             {
                 ItemBase curItem = draggedObject.GetComponent<ItemBase>();
                 ItemDataBase Data = null;
-                if (curItem is GemNew gem)
+                if (curItem is Gem gem)
                     Data = gem.Data;
                 else if (curItem is BulletNew bullet)
                     Data = bullet.Data;
-                else if (curItem is ItemNew item)
+                else if (curItem is Item item)
                     Data = item.Data;
                 if (Data == null) continue;
                 

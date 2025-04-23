@@ -13,7 +13,7 @@ public class EnemyView : MonoBehaviour
     
     [Header("Shields资产")]
     public GameObject ShieldsNode;
-    public List<ShieldNew> Shields = new List<ShieldNew>();
+    public List<Shield> Shields = new List<Shield>();
 
     public void InitSpine(EnemyData data)
     {
@@ -36,7 +36,8 @@ public class EnemyView : MonoBehaviour
 
     public void PlayDead() => AniUtility.PlayDead01(Ani);
 
-    public void ShowHitText(int damage) => FloatingTextFactory.CreateWorldText($"-{damage}",HitTextPos.position,HitColor,18f);
+    public void ShowHitText(int damage) => FloatingTextFactory.CreateWorldText(
+        $"-{damage}",HitTextPos.position+Vector3.up*0.5f,FloatingTextType.Damage,HitColor,15f);
     
     public void InitShields(List<ShieldData> shields)
     {
@@ -48,7 +49,7 @@ public class EnemyView : MonoBehaviour
         // 创建新盾
         for (int i = 0; i < shields.Count; i++)
         {
-            ShieldNew shieldSC = ShieldFactory.CreateShield(shields[i],ShieldsNode.transform);
+            Shield shieldSC = ShieldFactory.CreateShield(shields[i],ShieldsNode.transform);
             shieldSC.View.HitColor = HitColor;
             float curStep = i * shieldSC.View.InsStep;
             shieldSC.transform.localPosition = new Vector3(curStep,0,0);

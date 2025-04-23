@@ -8,22 +8,13 @@ public class UIManager : ScriptableObject
     
     public GUICommonManager CommonUI { get; private set; }
     public GUIBagManager BagUI { get; private set; }
-    public GUIMapManager MapUI { get; private set; }
-    public LogicManager Logic { get; private set; }  //只有在LevelScene中才会用到
+   
     
     public void InitStartGame()
     {
         IsLockedClick = false;
         CommonUI = new GUICommonManager();
         BagUI = new GUIBagManager();
-        MapUI = new GUIMapManager();
-        Logic = new LogicManager();
-    }
-    
-    public void InitLogic()
-    {
-        Logic??=new LogicManager();
-        Logic.InitData();
     }
     
     #region 单例

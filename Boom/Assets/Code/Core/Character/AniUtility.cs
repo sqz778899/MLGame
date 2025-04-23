@@ -16,7 +16,9 @@ public static class AniUtility
     public const string Run = "run";
     
     public const string Hit01 = "hit_01"; //受击动画
+    public const string Hit = "hit"; //受击动画
     public const string Dead01 = "dead_01"; //死亡动画
+    public const string Broken = "broken"; //死亡动画
     
     public const string Appear = "appear"; //出现动画
     
@@ -91,6 +93,8 @@ public static class AniUtility
     public static void PlayIdle01(SkeletonAnimation curAni,float timeScale=1f) =>
         PlayCommon(curAni, timeScale, Idle01,true);
     
+    public static void PlayBroken(SkeletonAnimation curAni,float timeScale=1f) =>
+        PlayCommon(curAni, timeScale, Broken,false);
     public static void PlayDead01(SkeletonAnimation curAni,float timeScale=1f) =>
         PlayCommon(curAni, timeScale, Dead01,false);
     public static void PlayDead01(SkeletonGraphic curAni,float timeScale=1f) =>
@@ -113,6 +117,12 @@ public static class AniUtility
     public static void PlayAppear(SkeletonAnimation curAni,ref float anitime,float timeScale=1f)
     {
         PlayCommon(curAni, timeScale, Appear,false);
+        anitime = curAni.state.GetCurrent(0).Animation.Duration;
+    }
+    
+    public static void PlayHit(SkeletonAnimation curAni,ref float anitime,float timeScale=1f)
+    {
+        PlayResetAni(curAni, timeScale, Hit);
         anitime = curAni.state.GetCurrent(0).Animation.Duration;
     }
     

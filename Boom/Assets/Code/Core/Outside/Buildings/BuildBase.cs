@@ -29,7 +29,7 @@ public class BuildBase : SpriteClickHandler
         {
             FloatingTextFactory.CreateWorldText(
                 "请推进相关剧情解锁", FloatingTextNode.transform.position + new Vector3(0, 2, 0), 
-                new Color(218f / 255f, 218f / 255f, 218f / 255f, 1f), 
+                FloatingTextType.MapHint,new Color(218f / 255f, 218f / 255f, 218f / 255f, 1f), 
                 7f);
             return;
         }

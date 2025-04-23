@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Sirenix.Utilities;
+using TMPro;
 
 
 public class GameInitializer:MonoBehaviour
@@ -27,7 +28,13 @@ public class GameInitializer:MonoBehaviour
         //4) 读档
         SaveManager.LoadSaveFile();
         
-        
+        //5)初始化各种静态类需要的配置
+        FloatingTextFactory.DamageFontAsset =
+            ResManager.instance.GetAssetCache<TMP_FontAsset>(PathConfig.DamageFontAsset);
+        FloatingTextFactory.DamageFontMaterial =
+            ResManager.instance.GetAssetCache<Material>(PathConfig.DamageFontMaterial);
+        FloatingTextFactory.MapHintFontAsset =
+            ResManager.instance.GetAssetCache<TMP_FontAsset>(PathConfig.MapHintFontAsset);
         //5)重置随机概率
         //ProbabilityService.Reset("WeaponRackLoot");
     }

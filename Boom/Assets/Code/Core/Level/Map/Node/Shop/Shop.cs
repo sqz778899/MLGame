@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using Spine.Unity;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
-using Random = UnityEngine.Random;
 
 public class Shop:MonoBehaviour,ICloseOnClickOutside
 {
@@ -13,17 +11,28 @@ public class Shop:MonoBehaviour,ICloseOnClickOutside
     public TextMeshProUGUI Title;
     public TextMeshProUGUI TextRollCost;
     public GameObject RollInsRoot;
-    public GameObject ShopSlotRoot;
-    public GameObject BarRoot;
+    public List<ShopSlotView> ShopSlots;
     public SkeletonGraphic Ani;
 
     [Header("基本属性")] 
+    public bool IsFirstOpen;
     public int ShopCost = 5;
-    public ShopNode CurShopNode;
     public ShopType CurShopType;
     public List<RollPR> RollProbs;
     
-    void Start() => GM.Root.HotkeyMgr.OnEscapePressed += Hide; //注册快捷键
+    [Header("UI 面板根节点（点击内部）")]
+    public RectTransform ClickRoot;
+    public RectTransform ClickArea => ClickRoot;
+
+    
+    void Start()
+    {
+        //注册快捷键
+        GM.Root.HotkeyMgr.OnEscapePressed += Hide;
+        //初始化槽位Controllar
+        ShopSlots.ForEach(s=>s.Init());
+    }
+
     void Update()
     {
         switch (CurShopType)
@@ -39,18 +48,18 @@ public class Shop:MonoBehaviour,ICloseOnClickOutside
                 break;
         }
 
-        if (CurShopNode.IsFirstOpen)
+        if (IsFirstOpen)
             TextRollCost.text = "0";
         else
             TextRollCost.text = ShopCost.ToString();
     }
-
-    public void InitData(ShopNode _curShopNode)
+    
+    public void InitData(ShopEventRuntimeData runtimeData)
     {
-        CurShopNode = _curShopNode;
-        CurShopType = _curShopNode.CurShopType;
-        ShopCost = _curShopNode.ShopCost;
-        RollProbs = RollManager.Instance.DealProb(_curShopNode.RollPRs);
+        // 适配新地图事件系统
+        CurShopType = runtimeData.ShopType;
+        ShopCost = runtimeData.ShopCost;
+        RollProbs = RollManager.Instance.DealProb(runtimeData.RollPRs);
     }
 
     #region Roll
@@ -71,14 +80,14 @@ public class Shop:MonoBehaviour,ICloseOnClickOutside
     bool ReadyToRoll()
     {
         //Cal gold
-        if (!CurShopNode.IsFirstOpen) //商店第一次打开免费
+        if (!IsFirstOpen) //商店第一次打开免费
         {
             int curGold = PlayerManager.Instance._PlayerData.Coins;
             if (curGold < ShopCost) return false;
             PlayerManager.Instance._PlayerData.ModifyCoins(-ShopCost);
         }
         else
-            CurShopNode.IsFirstOpen = false;
+            IsFirstOpen = false;
         
         //Clean Ins
         int preRollIns = RollInsRoot.transform.childCount;
@@ -102,50 +111,16 @@ public class Shop:MonoBehaviour,ICloseOnClickOutside
     {
         yield return new WaitForSeconds(aniTime);
         
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < ShopSlots.Count; i++)
         {
             //抽一发
             RollPR curProb = RollManager.Instance.SingleRoll(RollProbs);
             //实例化商店宝石
             GemData tempData = new GemData(curProb.ID, null);
-            GameObject curShopGem = BagItemTools<GemInShop>.CreateTempObjectGO(tempData,CreateItemType.ShopGem);
-            GemInShop curGem = curShopGem.GetComponent<GemInShop>();
-            curGem.CurShopNode = CurShopNode;
-            Transform curPivot = ShopSlotRoot.transform.GetChild(i);
-            curShopGem.transform.SetParent(RollInsRoot.transform,false);
-            curShopGem.transform.position = curPivot.position;
+            GameObject curShopGem = BagItemTools<GemShopPreview>.CreateTempObjectGO(tempData, CreateItemType.ShopGem);
+            ShopSlots[i].Controller.Assign(tempData, curShopGem);
         }
     }
-    #endregion
-
-    #region Bar
-    //1086 -151
-    //1086 -276
-    /*void GetCurPRBarDisplay()
-    {
-        List<RollPR> CurRollPR = MainRoleManager.Instance.CurRollPR;
-        int column = 0;
-        int row = 0;
-        for (int i = 0; i < CurRollPR.Count; i++)
-        {
-            if (i % 4 == 0 && i!=0)
-            {
-                row++;
-                column = 0;
-            }
-            Vector2 curPos = new Vector2(1086 + row*rowOffet, -151 + column*columnOffet);
-            
-            GameObject curBar = ResManager.instance.CreatInstance(PathConfig.PRDisplayBarPB);
-            curBar.transform.SetParent(BarRoot.transform,false);
-            curBar.transform.GetComponent<RectTransform>().anchoredPosition = curPos;
-            PRDisplayBar curBarSC = curBar.GetComponent<PRDisplayBar>();
-            curBarSC.ID = CurRollPR[i].ID;
-            curBarSC.InitDataByID();
-            column++;
-        }
-    }*/
-    
-
     #endregion
 
     #region Hide/Show
@@ -161,6 +136,7 @@ public class Shop:MonoBehaviour,ICloseOnClickOutside
         UIClickOutsideManager.Unregister(this);
     }
     public void OnClickOutside() => Hide();
+    
     void OnDestroy() => GM.Root.HotkeyMgr.OnEscapePressed -= Hide; //注册快捷键
     #endregion
 }

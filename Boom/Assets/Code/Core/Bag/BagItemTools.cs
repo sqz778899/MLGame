@@ -45,10 +45,10 @@ public static class BagItemTools<T> where T:ItemBase
     public static void DeleteObject(GameObject objectIns)
     {
         ItemBase curSC = objectIns.GetComponent<ItemBase>();
-        if (curSC is GemNew curGem)
+        if (curSC is Gem curGem)
             curGem.Data.CurSlotController.Unassign();
         
-        if (curSC is ItemNew curItem)
+        if (curSC is Item curItem)
         {
             InventoryManager.Instance._InventoryData.RemoveItemToBag(curItem.Data);
             SlotManager.ClearSlot(curItem.Data.CurSlotController);

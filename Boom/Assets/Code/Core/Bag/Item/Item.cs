@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class ItemNew : ItemBase,IItemInteractionBehaviour
+public class Item : ItemBase,IItemInteractionBehaviour
 {
     public ItemData Data { get; private set; }
    
@@ -57,6 +57,8 @@ public class ItemNew : ItemBase,IItemInteractionBehaviour
     #region 双击与右键逻辑
     public void OnBeginDrag() => HideBackground();
     public void OnEndDrag() {}
+    public void OnClick() {}
+    public bool CanDrag => true;
 
     void HideBackground()
     {

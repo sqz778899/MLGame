@@ -6,6 +6,7 @@ public class ShieldData
 {
     public int MaxHP { get; private set; }
     public int CurHP { get; private set; }
+    public EnemyState EState;
     public int ShieldIndex { get; private set; }
     public bool IsDestroyed => CurHP <= 0;
     public event Action OnTakeDamage;

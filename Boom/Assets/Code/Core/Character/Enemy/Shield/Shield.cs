@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class ShieldNew : MonoBehaviour,IDamageable
+public class Shield : MonoBehaviour,IDamageable
 {
     public ShieldController Controller { get; private set; }
     public ShieldView View { get; private set; }
@@ -11,8 +11,9 @@ public class ShieldNew : MonoBehaviour,IDamageable
         Controller = new ShieldController();
     }
 
-    public void BindData(ShieldData data) => Controller.Bind(data, View);
-     
+    public void BindData(ShieldData data) => Controller.Bind(data, View,this);
+    void Update() => Controller.Tick();
+    
     // 代理接口实现
     public bool IsDead => Controller.IsDead;
     public int CurHP => Controller.CurHP;

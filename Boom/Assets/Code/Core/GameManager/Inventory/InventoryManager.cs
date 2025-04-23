@@ -33,7 +33,7 @@ public class InventoryManager : MonoBehaviour
         ItemData newItemData = new ItemData(itemID, 
             SlotManager.GetEmptySlotController(SlotType.ItemBagSlot) as ItemSlotController);
         _InventoryData.AddItemToBag(newItemData);
-        BagItemTools<ItemNew>.AddObjectGO(newItemData);
+        BagItemTools<Item>.AddObjectGO(newItemData);
     }
     
     public void AddGemToBag(int gemID)
@@ -41,7 +41,7 @@ public class InventoryManager : MonoBehaviour
         GemSlotController emptyGemSlotController = 
             SlotManager.GetEmptySlotController(SlotType.GemBagSlot) as GemSlotController;
         GemData newGemData = new GemData(gemID, emptyGemSlotController);
-        BagItemTools<GemNew>.AddObjectGO(newGemData);//在OnDrop中添加到数据层
+        BagItemTools<Gem>.AddObjectGO(newGemData);//在OnDrop中添加到数据层
     }
 
     #region 子弹的一些外部操作
@@ -50,21 +50,25 @@ public class InventoryManager : MonoBehaviour
         BulletInnerNew bulletInnerSC = BulletFactory.CreateBullet(bulletData, BulletInsMode.Inner) as BulletInnerNew;
         bulletInnerSC.view.UpText();
         CurBulletsInFight.Add(bulletInnerSC);
+        CurBulletsInFight = CurBulletsInFight
+            .OrderBy(bullet => bullet.controller.Data.CurSlotController.SlotID)
+            .ToList();
     }
     
     public void SyncMainBulletSlot()
     {
-        List<BulletData> Cash = new List<BulletData>();
+        List<BulletData> cash = new List<BulletData>();
         foreach (var each in _BulletInvData.EquipBullets)
-            Cash.Add(each);
-        for (int i = Cash.Count - 1; i >=0; i--)
+            cash.Add(each);
+        for (int i = cash.Count - 1; i >=0; i--)
         {
-            BulletData curBullet = Cash[i];
+            BulletData curBullet = cash[i];
             BulletSlotController mainController = CurBulletSlotControllers.
                 FirstOrDefault(c => c.SlotID == curBullet.CurSlotController.SlotID);
             BulletNew bulletSC = BulletFactory.CreateBullet(curBullet, BulletInsMode.EditA) as BulletNew;
             bulletSC.transform.SetParent(DragManager.Instance.dragRoot, false);
             mainController.Assign(curBullet,bulletSC.gameObject);
+            TooltipsManager.Instance.Hide();
         }
     }
 
@@ -145,7 +149,7 @@ public class InventoryManager : MonoBehaviour
             .ToList();
         _InventoryData.BagGems.Clear();
         _InventoryData.EquipGems.Clear();
-        tempGem.ForEach(gem=>  BagItemTools<GemNew>.InitSaveFileObject(gem, gem.CurSlotController.SlotType));
+        tempGem.ForEach(gem=>  BagItemTools<Gem>.InitSaveFileObject(gem, gem.CurSlotController.SlotType));
         //初始化道具
         List<ItemData> tempItem = _InventoryData.BagItems
             .Concat(_InventoryData.EquipItems)
@@ -153,7 +157,7 @@ public class InventoryManager : MonoBehaviour
             .ToList();
         _InventoryData.BagItems.Clear();
         _InventoryData.EquipItems.Clear();
-        tempItem.ForEach(item=>  BagItemTools<ItemNew>.InitSaveFileObject(item, item.CurSlotController.SlotType));
+        tempItem.ForEach(item=>  BagItemTools<Item>.InitSaveFileObject(item, item.CurSlotController.SlotType));
     }
     #endregion
     

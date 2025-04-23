@@ -3,7 +3,7 @@
 public class BattleData: ScriptableObject
 {
     [Header("角色")] 
-    public EnemyNew CurEnemy;
+    public Enemy CurEnemy;
     public RoleInner CurRole;
     
     [Header("战报")]

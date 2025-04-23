@@ -19,6 +19,6 @@ public class ItemSlotView:SlotView
     {
         base.Display(itemGO);
         itemGO.transform.localScale = customScale;
-        itemGO.GetComponent<ItemNew>().SyncBackground();
+        itemGO.GetComponent<Item>().SyncBackground();
     }
 }

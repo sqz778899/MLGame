@@ -4,14 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class GemInnerNew : ItemBase, IBeginDragHandler, IEndDragHandler, 
+public class GemInner : ItemBase, IBeginDragHandler, IEndDragHandler, 
     IDragHandler, IPointerEnterHandler, IPointerExitHandler,IPointerMoveHandler,IPointerClickHandler
 {
     [Header("UI元素")]
     public Image Icon;
 
     [HideInInspector] public GemData Data;
-    [HideInInspector] public GemNew SourceGem; // 指向主 GemNew，用于拖拽反馈
+    [HideInInspector] public Gem SourceGem; // 指向主 GemNew，用于拖拽反馈
 
     RectTransform rectTransform;
     BagRootMini _bagRootMini;

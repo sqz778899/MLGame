@@ -25,8 +25,8 @@ public class BulletInnerView : MonoBehaviour
         //初始化Spine资产
         StartCoroutine(InitSkeleton());
         SetInitialPosition();
-        transform.SetParent(UIManager.Instance.Logic.
-            MapManagerSC.MapBuleltRoot.transform,false);
+        transform.SetParent( BattleManager.Instance._MapManager
+            .MapBuleltRoot.transform,false);
     }
     
     void SetInitialPosition()

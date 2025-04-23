@@ -18,10 +18,12 @@ public static class MapEventHandlerRegistry
         Register(MapEventType.CoinsPile, new CoinsPileEventHandler());
         Register(MapEventType.TreasureBox,new TreasureBoxEventHandler());
         Register(MapEventType.Bullet,new BulletEventHandler());
+        Register(MapEventType.RoomKey, new RoomKeyEventHandler());
         Register(MapEventType.WeaponRack, new WeaponRackEventHandler());
         Register(MapEventType.Skeleton, new SkeletonHandler());
         Register(MapEventType.StoneTablet,new StoneTabletHandler());
         Register(MapEventType.MysticalInteraction,new WigglingBoxHandler());
+        Register(MapEventType.Shop, new ShopEventHandler());
         
         Register(MapEventType.RoomArrow, new RoomArrowEventHandler());// 房间箭头
         // 更多事件类型...
@@ -137,10 +139,40 @@ public class BulletEventHandler : IMapEventHandler
             BulletJson bulletDesignJson = TrunkManager.Instance.BulletDesignJsons
                 .FirstOrDefault(b => b.ID == runtime.BulletID) ?? new BulletJson();
             FloatingTextFactory.CreateWorldText($"获得 {bulletDesignJson.Name}",
-                GM.Root.PlayerMgr.RoleInMapGO.transform.position, new Color(0.8f, 0.8f, 0.8f, 1), 3f);
+                GM.Root.PlayerMgr.RoleInMapGO.transform.position, FloatingTextType.MapHint,new Color(0.8f, 0.8f, 0.8f, 1), 3f);
 
             GameObject.Destroy(view.gameObject);
         }
+    }
+}
+//钥匙事件
+public class RoomKeyEventHandler : IMapEventHandler
+{
+    public void Handle(MapNodeData data, MapNodeView view)
+    {
+        var runtime = data.EventData as RoomKeyRuntimeData;
+        if (runtime == null)
+        {
+            Debug.LogWarning("RoomKeyRuntimeData is null");
+            return;
+        }
+
+        EParameter para = new EParameter
+        {
+            CurEffectType = EffectType.RoomKeys,
+            InsNum = runtime.RoomKeysNum,
+            StartPos = view.transform.position
+        };
+
+        EffectManager effectManager = UIManager.Instance.CommonUI.EffectRoot.GetComponent<EffectManager>();
+        effectManager.CreatEffect(para, false, () =>
+        {
+            FloatingTextFactory.CreateWorldText("获得一个钥匙！", 
+                view.transform.position + Vector3.up, FloatingTextType.MapHint,Color.yellow, 2f);
+        });
+
+        PlayerManager.Instance._PlayerData.ModifyRoomKeys(runtime.RoomKeysNum);
+        GameObject.Destroy(view.gameObject); // 直接移除地图物体
     }
 }
 
@@ -309,7 +341,34 @@ public class WigglingBoxHandler : IMapEventHandler
         view.gameObject.SetActive(false);
     }
 }
+//商店事件
+public class ShopEventHandler : IMapEventHandler
+{
+    public void Handle(MapNodeData data, MapNodeView view)
+    {
+        var runtime = data.EventData as ShopEventRuntimeData;
+        if (runtime == null)
+        {
+            Debug.LogWarning("ShopEventRuntimeData 为空！");
+            return;
+        }
 
+        // 第一次打开：创建并缓存商店
+        if (runtime.ShopInstance == null)
+        {
+            GameObject shopIns = ResManager.instance.CreatInstance(PathConfig.ShopAsset);
+            shopIns.transform.SetParent(EternalCavans.Instance.ShopRoot.transform, false);
+            runtime.ShopInstance = shopIns;
+
+            Shop shop = shopIns.GetComponent<Shop>();
+            shop.InitData(runtime);
+            shop.IsFirstOpen = true; // 默认第一次开启免费
+        }
+        view?.SetAsTriggered();
+        // 每次点击都显示（但只创建一次）
+        runtime.ShopInstance.GetComponent<ICloseOnClickOutside>()?.Show();
+    }
+}
 #endregion
 
 #region 房间箭头功能类

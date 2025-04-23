@@ -17,14 +17,14 @@ public class MapManager : MonoBehaviour
     MapController _mapController;
     MapRoomNode[] _allMapRooms;
     
-    [Header("一些脚本")] 
-    BattleData _battleData;
-    BattleLogic _battleLogicSC;
+    //[Header("一些脚本")] 
+    BattleData _battleData => BattleManager.Instance.battleData;
+    BattleLogic _battleLogicSC => BattleManager.Instance.battleLogic;
     
-    [Header("一些UI")] 
-    GameObject _GUIUIFightMapRootGO;
-    GameObject _GUIMapRootGO;
-    GameObject _sideBar;
+    //[Header("一些UI")] 
+    GameObject _GUIUIFightMapRootGO => EternalCavans.Instance.GUIFightMapRootGO;
+    GameObject _GUIMapRootGO => EternalCavans.Instance.GUIMapRootGO;
+    GameObject _sideBar => EternalCavans.Instance.G_SideBar;
     
     Vector3 _preCameraPos;
 
@@ -39,7 +39,6 @@ public class MapManager : MonoBehaviour
             UIManager.Instance.InitStartGame();
         }
         //todo ......................
-        UIManager.Instance.InitLogic();
         BattleManager.Instance._MapManager = this;
         RoleInner curRoleInFight = MapFightRoot.GetComponentInChildren<RoleInner>(true);
         PlayerManager.Instance.RoleInFightSC = curRoleInFight;
@@ -85,7 +84,7 @@ public class MapManager : MonoBehaviour
         CurMapSate.AllRoomCount = _allMapRooms.Length;
         _allMapRooms.ForEach(e=>e.InitData());
         //设置角色位置
-        SetRolePos();
+        ToTargetRoom();
     }
     #endregion
     
@@ -185,27 +184,44 @@ public class MapManager : MonoBehaviour
     #region 不太关心的各种方法
     public void SetAllRoomIDs() => _allMapRooms.Select((room, index) => room.RoomID = index + 1).ToList();
     
-    public void SetRolePos()
+    public void ToCurRoom()
     {
-        InitData();
         //找到当前房间的节点
-        MapRoomNode curRoom = _allMapRooms.FirstOrDefault(
+        MapRoomNode CurRoom = _allMapRooms.FirstOrDefault(
             each => each.RoomID == CurMapSate.CurRoomID);
-        curRoom.State = MapRoomState.Unlocked;
+        CurRoom.State = MapRoomState.Unlocked;
         
         //设置角色&&摄像机位置
+        SetRoomInfo(CurRoom);
+    }
+    
+    public void ToTargetRoom()
+    {
+        //找到当前房间的节点
+        MapRoomNode targetRoom = _allMapRooms.FirstOrDefault(
+            each => each.RoomID == CurMapSate.TargetRoomID);
+        CurMapSate.FinishAndToNextRoom();//记录下探索度
+        targetRoom.State = MapRoomState.Unlocked;
+        //设置角色&&摄像机位置
+        SetRoomInfo(targetRoom);
+        //设置当前房间ID
+        CurMapSate.CurRoomID = targetRoom.RoomID;
+    }
+
+    void SetRoomInfo(MapRoomNode roomNode)
+    {
+        //设置角色&&摄像机位置
         GameObject roleInMap = PlayerManager.Instance.RoleInMapGO;
-        roleInMap.GetComponent<RoleInMap>().CurRoom = curRoom;
-        roleInMap.transform.position = curRoom.RoleStartPos.position;
-        Vector3 newCameraPos = new Vector3(curRoom.CameraStartPos.position.x,
-            curRoom.CameraStartPos.position.y, Camera.main.transform.position.z);
+        roleInMap.GetComponent<RoleInMap>().CurRoom = roomNode;
+        roleInMap.transform.position = roomNode.RoleStartPos.position;
+        Vector3 newCameraPos = new Vector3(roomNode.CameraStartPos.position.x,
+            roomNode.CameraStartPos.position.y, Camera.main.transform.position.z);
         Camera.main.transform.DOMove(newCameraPos, 0.5f);
-        curRoom.SetRenderLayer(roleInMap);
+        roomNode.SetRenderLayer(roleInMap);
     }
     
     public void UnloadLevelData()
     {
-        InitData();
         //清除场景内遗留子弹
         for (int i = MapBuleltRoot.transform.childCount - 1; i >= 0; i--)
             Destroy(MapBuleltRoot.transform.GetChild(i).gameObject);
@@ -213,17 +229,7 @@ public class MapManager : MonoBehaviour
         if (_battleData.CurLevel != null)
             Destroy(_battleData.CurLevel.gameObject);
     }
-
-    void InitData()
-    {
-        _battleData ??= BattleManager.Instance.battleData;
-        _battleLogicSC ??= BattleManager.Instance.battleLogic;
-
-        _GUIUIFightMapRootGO ??= UIManager.Instance.MapUI.GUIFightMapRootGO;
-        _GUIMapRootGO ??= UIManager.Instance.MapUI.GUIMapRootGO;
-        _sideBar ??= UIManager.Instance.CommonUI.G_SideBar;
-    }
-
+    
     void OnDestroy()
     {
         EternalCavans.Instance.OnOpenBag -= LockAllThings;

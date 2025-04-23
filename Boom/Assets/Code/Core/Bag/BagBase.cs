@@ -3,16 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //基础抽象类
-#region 接口
 public interface IBulletModifier
 {
     void Modify(BulletData data);
 }
+#region 接口
 public interface IBindData
 {
     void BindData(ItemDataBase data);
 }
 
+//高亮接口
+public interface IHighlightableUI
+{
+    void SetHighlight(bool highlight);
+}
+
+//点击响应小接口
+public interface IPressEffect
+{
+    void OnPressDown();
+    void OnPressUp();
+}
 public interface ISlotController
 {
     public SlotType SlotType { get; }
@@ -124,6 +136,7 @@ public abstract class BaseSlotController<T> :ISlotController where T : ItemDataB
                     new Vector3(0.7f, -0.39f, 0) :
                     new Vector3(1.01f, -0.6f, 0),
                 SlotType.CurBulletSlot => new Vector3(1.01f, -0.6f, 0),
+                SlotType.ShopSlot => new Vector3(1.01f, -0.6f, 0),
                 _ => Vector3.zero
             };
         }

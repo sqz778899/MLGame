@@ -36,6 +36,12 @@ public class BulletEventRuntimeData : MapEventRuntimeData
     public int BulletID;
     public string DialogueName;
 }
+//钥匙事件
+[Serializable]
+public class RoomKeyRuntimeData : MapEventRuntimeData
+{
+    public int RoomKeysNum = 1;
+}
 #endregion
 
 #region 赌博型
@@ -77,6 +83,18 @@ public class WigglingBoxRuntimeData : MapEventRuntimeData
     public int TalkChance;
     public int ExplosionChance;
     public int LootChance;
+}
+//商店事件
+[Serializable]
+public class ShopEventRuntimeData : MapEventRuntimeData
+{
+    public ShopType ShopType;
+    public List<RollPR> RollPRs;
+    public int ShopCost;
+    
+    // 缓存实例化的 Shop 对象
+    [NonSerialized] public GameObject ShopInstance;
+    [NonSerialized] public bool IsFirstOpen = true;
 }
 #endregion
 
@@ -135,6 +153,15 @@ public class BulletEventConfigData : MapEventConfigData
             DialogueName = this.DialogueName
         };
     }
+}
+//钥匙事件
+[Serializable]
+public class RoomKeyConfigData : MapEventConfigData
+{
+    public int RoomKeysNum = 1;
+
+    public override MapEventRuntimeData ToRuntimeData() =>
+        new RoomKeyRuntimeData { RoomKeysNum = RoomKeysNum };
 }
 #endregion
 
@@ -225,6 +252,25 @@ public class WigglingBoxConfigData : MapEventConfigData
         };
     }
 }
+//商店事件
+[Serializable]
+public class ShopEventConfigData : MapEventConfigData
+{
+    public ShopType ShopType;
+    public List<RollPR> RollPRs;
+    public int ShopCost;
+
+    public override MapEventRuntimeData ToRuntimeData()
+    {
+        return new ShopEventRuntimeData
+        {
+            ShopType = ShopType,
+            RollPRs = new List<RollPR>(RollPRs),
+            ShopCost = ShopCost
+        };
+    }
+}
+
 #endregion
 
 #region 房间箭头功能类
@@ -287,6 +333,7 @@ public enum MapEventType
     MysticalInteraction = 5,
     TreasureBox = 6,
     Bullet = 7,
+    RoomKey = 8,
     Enemy,
     Shop,
     Event,

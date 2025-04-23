@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GemNew: ItemBase,IItemInteractionBehaviour
+public class Gem: ItemBase,IItemInteractionBehaviour
 {
     public GemData Data { get; private set; }
     [Header("UI表现")]
@@ -10,7 +10,6 @@ public class GemNew: ItemBase,IItemInteractionBehaviour
     RectTransform rectTransform;
 
     void Awake() => rectTransform = GetComponent<RectTransform>();
-    
     
     #region 数据交互相关
     public override void BindData(ItemDataBase data)
@@ -33,6 +32,7 @@ public class GemNew: ItemBase,IItemInteractionBehaviour
     #region 双击与右键逻辑
     public void OnBeginDrag() {}
     public void OnEndDrag() {}
+    public void OnClick(){}
     void IItemInteractionBehaviour.OnDoubleClick()
     {
         GemSlotController from = Data.CurSlotController as GemSlotController;
@@ -48,5 +48,7 @@ public class GemNew: ItemBase,IItemInteractionBehaviour
         if (Data.CurSlotController.SlotType == SlotType.GemBagSlot)
             RightClickMenuManager.Instance.Show(gameObject, UTools.GetWPosByMouse(rectTransform));
     }
+    
+    public bool CanDrag => true;
     #endregion
 }

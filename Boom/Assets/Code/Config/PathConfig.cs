@@ -101,6 +101,11 @@ public static class PathConfig
    public static string BulletInvDataPath = GetPrepath() + "Res/DataOBJ/BulletInvData.asset";
    public static string BattleDataPath = GetPrepath() + "Res/DataOBJ/BattleData.asset";
    
+   //...............................字体................................................
+   public static string DamageFontAsset = GetPrepath() + "TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF.asset";
+   public static string DamageFontMaterial = GetPrepath() + "TextMesh Pro/Resources/Fonts & Materials/LiberationSans SDF - Outline.mat";
+   public static string MapHintFontAsset = GetPrepath() + "Res/UI/Fond/ZH_Simplified.asset";
+   
    #region Function
    //获得关卡的路径
    public static string GetLevelPath(int levelID)

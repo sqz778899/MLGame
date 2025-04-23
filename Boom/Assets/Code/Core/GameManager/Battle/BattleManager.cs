@@ -60,8 +60,7 @@ public class BattleManager: MonoBehaviour
         IsInBattle = false;
         battleUI.InitWinFailGUI();
         _MapManager.SwitchMapScene();
-        _MapManager.CurMapSate.FinishAndToNextRoom();//切换当前房间
-        _MapManager.SetRolePos();
+        _MapManager.ToTargetRoom();
     }
 
     //战斗失败
@@ -70,7 +69,7 @@ public class BattleManager: MonoBehaviour
         IsInBattle = false;
         battleUI.InitWinFailGUI();
         _MapManager.SwitchMapScene();
-        _MapManager.SetRolePos();
+        _MapManager.ToCurRoom();
     }
     #endregion
     

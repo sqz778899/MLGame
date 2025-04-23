@@ -36,18 +36,18 @@ public static class ShopUtility
         }
     }
 
-    public static bool SelOne(GemInShop SelGem)
+    public static bool SelOne(GemShopPreview SelGem)
     {
         //............Cost Money.................
-        if (PlayerManager.Instance._PlayerData.Coins < SelGem.Price)
+        if (PlayerManager.Instance._PlayerData.Coins < SelGem.Data.Price)
         {
             Debug.Log("No Money");
             return false;
         }
-        PlayerManager.Instance._PlayerData.ModifyCoins(-SelGem.Price);
+        PlayerManager.Instance._PlayerData.ModifyCoins(-SelGem.Data.Price);
         
         //...........Buy This One................
-        InventoryManager.Instance.AddGemToBag(SelGem._data.ID);
+        InventoryManager.Instance.AddGemToBag(SelGem.Data.ID);
         return true;
     }
 

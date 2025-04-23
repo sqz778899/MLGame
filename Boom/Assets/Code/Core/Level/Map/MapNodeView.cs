@@ -75,7 +75,7 @@ public class MapNodeView:MonoBehaviour
     public void ShowFloatingText(string message)
     {
         if (Time.time - lastFloatingTime < FloatingCooldown) return;
-        FloatingTextFactory.CreateWorldText(message, transform.position,
+        FloatingTextFactory.CreateWorldText(message, transform.position,FloatingTextType.MapHint,
             new Color(0.8f,0.8f,0.8f,1),3f);
         lastFloatingTime = Time.time;
     }

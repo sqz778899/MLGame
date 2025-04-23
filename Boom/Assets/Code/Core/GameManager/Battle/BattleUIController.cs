@@ -58,13 +58,13 @@ public class BattleUIController
     #region 不关心的私有方法
     void InitData()
     {
-        _MapManager ??= UIManager.Instance.Logic.MapManagerSC;
+        _MapManager ??=  BattleManager.Instance._MapManager;
         BagRootMiniSC ??=UIManager.Instance.BagUI.BagRootMiniGO.GetComponent<BagRootMini>();
-        EnemyMiniMapSC ??=UIManager.Instance.MapUI.EnemyMiniMapGO.GetComponent<EnemyMiniMapView>();
+        EnemyMiniMapSC ??= EternalCavans.Instance.EnemyMiniMapGO.GetComponent<EnemyMiniMapView>();
         _battleData ??= BattleManager.Instance.battleData;
-        warReportRootGUI ??= UIManager.Instance.MapUI.WarReportGO.transform.GetChild(0).gameObject;
-        winGUI??=UIManager.Instance.MapUI.WinGUI;
-        failGUI??=UIManager.Instance.MapUI.FailGUI;
+        warReportRootGUI ??= EternalCavans.Instance.WarReportGO.transform.GetChild(0).gameObject;
+        winGUI??= EternalCavans.Instance.WinGUI;
+        failGUI??= EternalCavans.Instance.FailGUI;
     }
     #endregion
 }

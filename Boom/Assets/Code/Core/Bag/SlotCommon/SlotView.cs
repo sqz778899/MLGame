@@ -27,3 +27,18 @@ public class SlotView:MonoBehaviour
             Destroy(transform.GetChild(i).gameObject);
     }
 }
+
+public enum SlotType
+{
+    SpawnnerSlot = 0,
+    ItemBagSlot = 1,
+    BulletSlot = 2,
+    ItemEquipSlot = 3,
+    GemBagSlot = 4,
+    GemInlaySlot = 5,
+    CurBulletSlot = 6,
+    BulletInnerSlot = 7,
+    SpawnnerSlotInner = 8,
+    GemBagSlotInner = 9,
+    ShopSlot = 10,
+}

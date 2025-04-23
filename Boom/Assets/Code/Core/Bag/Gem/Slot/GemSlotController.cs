@@ -38,8 +38,8 @@ public class GemSlotController : BaseSlotController<ItemDataBase>
         //创建影子
         if (data is GemData gemData && LinkedGemInnerSlotController != null)
         {
-            var shadow = BagItemTools<GemInnerNew>.CreateTempObjectGO(gemData, CreateItemType.MiniBagGem);
-            shadow.GetComponent<GemInnerNew>().SourceGem = itemGO.GetComponent<GemNew>();
+            var shadow = BagItemTools<GemInner>.CreateTempObjectGO(gemData, CreateItemType.MiniBagGem);
+            shadow.GetComponent<GemInner>().SourceGem = itemGO.GetComponent<Gem>();
             LinkedGemInnerSlotController.Assign(gemData, shadow);
         }
         
@@ -75,17 +75,4 @@ public class GemSlotController : BaseSlotController<ItemDataBase>
         _curData = null;
         _view?.Clear();
     }
-}
-public enum SlotType
-{
-    SpawnnerSlot = 0,
-    ItemBagSlot = 1,
-    BulletSlot = 2,
-    ItemEquipSlot = 3,
-    GemBagSlot = 4,
-    GemInlaySlot = 5,
-    CurBulletSlot = 6,
-    BulletInnerSlot = 7,
-    SpawnnerSlotInner = 8,
-    GemBagSlotInner = 9,
 }

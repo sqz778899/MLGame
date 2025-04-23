@@ -16,7 +16,7 @@ public class CalculateDamageManager : ScriptableObject
     }
     #endregion
     
-    public void CalDamage(BulletData bullet,EnemyNew curEnemy)
+    public void CalDamage(BulletData bullet,Enemy curEnemy)
     {
         
     }

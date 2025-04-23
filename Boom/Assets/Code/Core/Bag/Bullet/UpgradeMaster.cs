@@ -24,7 +24,7 @@ public static class UpgradeMaster
             BulletUPMono curUISC = UIIns.GetComponent<BulletUPMono>();
             int bulletID = FindNeedUpgradeBullet();
             curUISC.InitData(bulletID);
-            UIIns.transform.SetParent(UIManager.Instance.MapUI.RewardRoot.transform,false);
+            UIIns.transform.SetParent(EternalCavans.Instance.RewardRoot.transform,false);
         }
     }
 

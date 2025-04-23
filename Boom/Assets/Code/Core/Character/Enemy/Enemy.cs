@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class EnemyNew : MonoBehaviour,IDamageable
+public class Enemy : MonoBehaviour,IDamageable
 {
     public EnemyData Data { get; private set; }
     public EnemyController Controller { get; private set; }
@@ -17,7 +17,7 @@ public class EnemyNew : MonoBehaviour,IDamageable
         Data = data;
         Controller.Bind(data, View,this);
     }
-    void Update() => Controller.Tick(Time.deltaTime);
+    void Update() => Controller.Tick();
     void OnDestroy() => Controller?.Dispose();
     
     //添加代理接口实现（转发给 Controller）

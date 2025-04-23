@@ -22,7 +22,7 @@ public class EnemyController:IDamageable
     
     void OnTakeDamage()=>_view.HealthBar.Refresh();
 
-    public void Tick(float dt)
+    public void Tick()
     {
         switch (_data.EState)
         {
@@ -62,12 +62,12 @@ public class EnemyController:IDamageable
     {
         if (_data.IsDead)
             return new DamageResult(0, 0, 0, true, -1);
-
-        _view.ShowHitText(damage);
+        
         int overflow = Mathf.Max(0, damage - _data.CurHP);
         int effective = damage - overflow;
 
         _data.TakeDamage(damage);
+        _view.ShowHitText(damage);//伤害跳字
         _data.EState = _data.IsDead ? EnemyState.dead : EnemyState.hit;
 
         if (_hitRoutine != null)

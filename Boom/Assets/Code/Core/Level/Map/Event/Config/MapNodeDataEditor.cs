@@ -25,6 +25,9 @@ public class MapNodeDataEditor : Editor
             case MapEventType.Bullet:
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("BulletEventConfig"));
                 break;
+            case MapEventType.RoomKey:
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("RoomKeyConfig"));
+                break;
             case MapEventType.WeaponRack:
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("WeaponRackConfig"));
                 break;
@@ -36,6 +39,9 @@ public class MapNodeDataEditor : Editor
                 break;
             case MapEventType.MysticalInteraction:
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("WigglingBoxConfig"));
+                break;
+            case MapEventType.Shop:
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("ShopEventConfig"));
                 break;
             case MapEventType.RoomArrow:
                 var arrowProp = serializedObject.FindProperty("RoomArrowConfig");

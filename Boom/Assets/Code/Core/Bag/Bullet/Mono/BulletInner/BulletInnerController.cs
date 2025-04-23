@@ -92,7 +92,7 @@ public class BulletInnerController
             if (_piercingCount >= Data.FinalPiercing)
                 _state = BulletInnerState.Dead;
             _piercingCount++;
-            if (target is EnemyNew) //最后一个如果是敌人，则不再贯穿
+            if (target is Enemy) //最后一个如果是敌人，则不再贯穿
                 _state = BulletInnerState.Dead;
         }
     }

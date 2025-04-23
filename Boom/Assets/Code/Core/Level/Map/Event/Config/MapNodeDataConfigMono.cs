@@ -20,25 +20,29 @@ public class MapNodeDataConfigMono : MonoBehaviour
     public GoldPileConfigData GoldPileConfig;
     public TreasureBoxConfigData TreasureBoxConfig;
     public BulletEventConfigData BulletEventConfig;
+    public RoomKeyConfigData RoomKeyConfig;
+    
     public WeaponRackConfigData WeaponRackConfig;
     public SkeletonConfigData SkeletonConfig;
     public StoneTabletConfigData StoneTabletConfig;
     public WigglingBoxConfigData WigglingBoxConfig;
+    public ShopEventConfigData ShopEventConfig;
     public RoomArrowConfigData RoomArrowConfig;
 
-    public void Start() => GetComponent<MapNode>().Init(ToRuntimeData());
+    public void Awake() => GetComponent<MapNode>().Init(ToRuntimeData());
     
     public MapNodeData ToRuntimeData()
     {
-        Debug.Log($"VAR{_MapEventType.ToString()}");
         MapEventRuntimeData runtime = _MapEventType switch
         {
             MapEventType.CoinsPile => GoldPileConfig?.ToRuntimeData(),
             MapEventType.TreasureBox => TreasureBoxConfig?.ToRuntimeData(),
             MapEventType.Bullet => BulletEventConfig?.ToRuntimeData(),
+            MapEventType.RoomKey => RoomKeyConfig?.ToRuntimeData(),
             MapEventType.Skeleton => SkeletonConfig?.ToRuntimeData(),
             MapEventType.StoneTablet => StoneTabletConfig?.ToRuntimeData(),
             MapEventType.MysticalInteraction => WigglingBoxConfig?.ToRuntimeData(),
+            MapEventType.Shop => ShopEventConfig?.ToRuntimeData(),
             MapEventType.WeaponRack => WeaponRackConfig?.ToRuntimeData(),
             MapEventType.RoomArrow =>RoomArrowConfig?.ToRuntimeData(),
             _ =>null,

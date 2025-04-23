@@ -20,9 +20,10 @@ public class RoomArrowNormalStrategy : IArrowStrategy
 {
     public void Execute(MapNodeData data, MapNodeView view)
     {
-        var runtime = data.EventData as RoomArrowRuntimeData;
-        BattleManager.Instance._MapManager.CurMapSate.SetCurRoomID(runtime.TargetRoomID);
-        UIManager.Instance.Logic.MapManagerSC.SetRolePos();
+        RoomArrowRuntimeData runtime = data.EventData as RoomArrowRuntimeData;
+        MapManager mapMgr = BattleManager.Instance._MapManager;
+        mapMgr.CurMapSate.TargetRoomID = runtime.TargetRoomID;
+        mapMgr.ToTargetRoom();  
         view.SetAsTriggered();
     }
 }
@@ -38,6 +39,8 @@ public class RoomArrowFightStrategy : IArrowStrategy
         DialogueFight diaFightSC = EternalCavans.Instance.DialogueFightSC;
         diaFightSC.gameObject.SetActive(true);
         diaFightSC.InitData(data);
+        //预设好目标房间
+        BattleManager.Instance._MapManager.CurMapSate.TargetRoomID = runtime.TargetRoomID;
         UIManager.Instance.IsLockedClick = true;
         data.IsLocked = true;
     }
@@ -56,7 +59,7 @@ public class RoomArrowKeyGateStrategy : IArrowStrategy
             view.ShowFloatingText("锁上了");
             FloatingTextFactory.CreateWorldText("我需要一把钥匙", 
                 PlayerManager.Instance.RoleInMapGO.transform.position + Vector3.up,
-                Color.yellow, 2f);
+                FloatingTextType.MapHint,Color.yellow, 2f);
             return;
         }
 
@@ -66,8 +69,9 @@ public class RoomArrowKeyGateStrategy : IArrowStrategy
             data.IsTriggered = true;
             view.SetAsTriggered();
         }
-        BattleManager.Instance._MapManager.CurMapSate.SetCurRoomID(runtime.TargetRoomID);
-        UIManager.Instance.Logic.MapManagerSC.SetRolePos();
+        MapManager mapMgr = BattleManager.Instance._MapManager;
+        mapMgr.CurMapSate.TargetRoomID = runtime.TargetRoomID;
+        mapMgr.ToTargetRoom();  
     }
 }
 

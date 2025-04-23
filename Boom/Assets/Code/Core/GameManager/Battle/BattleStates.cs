@@ -19,7 +19,7 @@ public class InLevelState : IFightState
 {
     BattleLogic _battleLogic;
     BattleData _battleData;
-    EnemyNew _curEnemy;
+    Enemy _curEnemy;
     RoleInner _curRole;
 
     public InLevelState()

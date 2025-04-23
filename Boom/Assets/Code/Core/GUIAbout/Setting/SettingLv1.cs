@@ -15,4 +15,5 @@ public class SettingLv1:MonoBehaviour,ICloseOnClickOutside
     }
     
     public void OnClickOutside() => Hide();
+    public RectTransform ClickArea => GetComponent<RectTransform>();
 }

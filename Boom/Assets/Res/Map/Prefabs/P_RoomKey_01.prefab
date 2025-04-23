@@ -9,8 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5185522752512677692}
+  - component: {fileID: -3395339001319818203}
+  - component: {fileID: 7328854410191046288}
+  - component: {fileID: -5309438404877794522}
   - component: {fileID: 6716404909817289347}
-  - component: {fileID: 4551791014851965433}
   m_Layer: 0
   m_Name: P_RoomKey_01
   m_TagString: Untagged
@@ -34,6 +36,118 @@ Transform:
   - {fileID: 1569897579636610440}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-3395339001319818203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5043649524570145868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3d49a032a6c497dae9c51106c2f0927, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 0
+  NodeName: 
+  Desc: 
+  _MapEventType: 8
+  StartLocked: 0
+  StartAsTriggered: 0
+  GoldPileConfig:
+    MinGold: 2
+    MaxGold: 4
+  TreasureBoxConfig:
+    Rarity: 0
+    MinLootCount: 0
+    MaxLootCount: 0
+    DropTable: []
+  BulletEventConfig:
+    BulletID: 0
+    DialogueName: 
+  RoomKeyConfig:
+    RoomKeysNum: 1
+  WeaponRackConfig:
+    EmptyChance: 25
+    TempBuffChance: 20
+    TempDebuffChance: 30
+    NormalLootChance: 10
+    MetaResourceChance: 10
+    RareLootChance: 5
+  SkeletonConfig:
+    LoreNotes:
+    - "\u522B\u4FE1\u5899\u4E0A\u7684\u95E8"
+    - "\u662F\u6211\u5148\u53D1\u73B0\u8FD9\u4E2A\u5B9D\u85CF\u7684"
+    - "\u94A5\u5319\u2026\u2026\u85CF\u5728\u58C1\u7089\u2026\u2026\u54B3\u2026\u2026"
+    EmptyChance: 30
+    NoteChance: 30
+    ItemChance: 20
+    DebuffChance: 15
+    KeyChance: 5
+  StoneTabletConfig:
+    LoreTexts:
+    - "\u9B54\u6CD5\u4E4B\u707E\u8D77\u6E90\u4E8E\u65E0\u540D\u5854\u3002"
+    - "\u7981\u5492\u53EA\u5728\u6700\u6DF1\u5904\u7684\u56FE\u4E66\u9986\u4E2D\u8BB0\u8F7D\u3002"
+    - "\u4ED6\u4EEC\u5C01\u5370\u4E86\u901A\u5F80\u65E7\u7EAA\u5143\u7684\u95E8\u3002"
+  WigglingBoxConfig:
+    RunAwayChance: 30
+    TalkChance: 30
+    ExplosionChance: 20
+    LootChance: 20
+  ShopEventConfig:
+    ShopType: 0
+    RollPRs: []
+    ShopCost: 0
+  RoomArrowConfig:
+    ArrowType: 0
+    TargetRoomID: 0
+    BattleConfig:
+      ID: 0
+      HP: 0
+      ShieldConfig:
+        ShieldsHPs: 
+      CurAward:
+        BaseScore: 0
+        Coin: 0
+        SupremeCharms: 
+        Items: 
+--- !u!114 &7328854410191046288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5043649524570145868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3dced086f3f4f56a3fafdba3f8c9c8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  view: {fileID: -5309438404877794522}
+--- !u!114 &-5309438404877794522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5043649524570145868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da50c5a0c33547e88ddcdd79113e93bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 3801287913696115515}
+  triggeredRenderer: {fileID: 0}
+  spineRenderer: {fileID: 0}
+  Ain: {fileID: 0}
+  EPara:
+    CurEffectType: 0
+    StartPos: {x: 0, y: 0, z: 0}
+    InsNum: 1
+    SpawntimeRange: {x: 0.3, y: 0.4}
+    Radius: 1
+    FlyRangeOffset: {x: -1, y: 1}
+    FlyTimeRange: {x: 0.4, y: 0.6}
 --- !u!61 &6716404909817289347
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -79,47 +193,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.46130908, y: 0.48886073}
   m_EdgeRadius: 0
---- !u!114 &4551791014851965433
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5043649524570145868}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73a1b4fc0a2404c42b8a762a5b864b24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4551791014851965433}
-        m_TargetAssemblyTypeName: RoomKeyNode, Assembly-CSharp
-        m_MethodName: GetRoomKeys
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  spriteRenderer: {fileID: 3801287913696115515}
-  OutlineColor: {r: 0.855934, g: 3.75531, b: 4.5412054, a: 0}
-  HeighLightColor: {r: 0.6509804, g: 0.5529412, b: 0.30980393, a: 1}
-  IsLocked: 0
-  NodeTextNode: {fileID: 0}
-  EPara:
-    CurEffectType: 1
-    StartPos: {x: 0, y: 0, z: 0}
-    InsNum: 1
-    SpawntimeRange: {x: 0.1, y: 0.2}
-    Radius: 1
-    FlyRangeOffset: {x: -1, y: 1}
-    FlyTimeRange: {x: 0.3, y: 0.4}
-  RoomKeysNum: 1
 --- !u!1 &8470093776154631115
 GameObject:
   m_ObjectHideFlags: 0
