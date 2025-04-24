@@ -72,6 +72,7 @@ public enum ItemTriggerTiming
     OnBulletHit = 3,
     OnShieldPenetrate = 4,
     OnEnterTreasureRoom = 5,
+    Passive = 6,
 }
 
 //用于UI显示的特质的信息结构体
