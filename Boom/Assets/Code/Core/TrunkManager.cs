@@ -14,6 +14,7 @@ public class TrunkManager: ScriptableObject
     Dictionary<string,List<DiaSingle>> _dialogueDesignJsons;//对话相关
     List<QuestJson> _questDesignJsons;
     List<TalentJson> _talentDesignJsons;
+    List<DropTableJson> _dropTableDesignJsons;
     
     public List<BulletJson> BulletDesignJsons => _bulletDesignJsons ??= LoadBulletData();
     public List<BulletJson> LoadBulletData() => 
@@ -44,6 +45,12 @@ public class TrunkManager: ScriptableObject
         JsonConvert.DeserializeObject<List<TalentJson>>(File.ReadAllText(PathConfig.TalentDesignJson));
     public TalentJson GetTalentJson(int ID)=>TalentDesignJsons.FirstOrDefault(each => each.ID == ID) ?? new TalentJson();
     
+    public List<DropTableJson> DropTableDesignJsons => _dropTableDesignJsons ??= LoadDropTableData();
+    public List<DropTableJson> LoadDropTableData()=>
+        JsonConvert.DeserializeObject<List<DropTableJson>>(File.ReadAllText(PathConfig.DropedDesignJson));
+    public DropTableJson GetDropTableJson(string _poolName) => DropTableDesignJsons.FirstOrDefault
+        (each => each.PoolName == _poolName) ?? new DropTableJson();
+    
     public void ForceRefresh()
     {
         _bulletDesignJsons = LoadBulletData();
@@ -52,6 +59,7 @@ public class TrunkManager: ScriptableObject
         _dialogueDesignJsons = LoadDialogueDesignData();
         _questDesignJsons = LoadQuestData();
         _talentDesignJsons = LoadTalentData();
+        _dropTableDesignJsons = LoadDropTableData();
     }
     #endregion
     

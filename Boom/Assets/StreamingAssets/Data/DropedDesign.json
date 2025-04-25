@@ -1,0 +1,507 @@
+[
+  {
+    "PoolName": "NormalLoot",
+    "Entries": [
+      {
+        "ID": 1,
+        "Weight": 10,
+        "DropedCategory": 1,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 2,
+        "Weight": 10,
+        "DropedCategory": 1,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 3,
+        "Weight": 10,
+        "DropedCategory": 1,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 4,
+        "Weight": 10,
+        "DropedCategory": 1,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 5,
+        "Weight": 10,
+        "DropedCategory": 1,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 6,
+        "Weight": 10,
+        "DropedCategory": 1,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 7,
+        "Weight": 10,
+        "DropedCategory": 1,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 8,
+        "Weight": 10,
+        "DropedCategory": 1,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 9,
+        "Weight": 10,
+        "DropedCategory": 1,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 10,
+        "Weight": 10,
+        "DropedCategory": 1,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 200,
+        "Weight": 5,
+        "DropedCategory": 1,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 201,
+        "Weight": 5,
+        "DropedCategory": 1,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 202,
+        "Weight": 5,
+        "DropedCategory": 1,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 203,
+        "Weight": 5,
+        "DropedCategory": 1,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 204,
+        "Weight": 5,
+        "DropedCategory": 1,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 1,
+        "Weight": 10,
+        "DropedCategory": 0,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 10,
+        "Weight": 10,
+        "DropedCategory": 0,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 20,
+        "Weight": 10,
+        "DropedCategory": 0,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      }
+    ]
+  },
+  {
+    "PoolName": "RareLoot",
+    "Entries": [
+      {
+        "ID": 200,
+        "Weight": 10,
+        "DropedCategory": 1,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 201,
+        "Weight": 10,
+        "DropedCategory": 1,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 202,
+        "Weight": 10,
+        "DropedCategory": 1,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 203,
+        "Weight": 10,
+        "DropedCategory": 1,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 204,
+        "Weight": 10,
+        "DropedCategory": 1,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 300,
+        "Weight": 5,
+        "DropedCategory": 1,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 301,
+        "Weight": 5,
+        "DropedCategory": 1,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 302,
+        "Weight": 5,
+        "DropedCategory": 1,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 401,
+        "Weight": 3,
+        "DropedCategory": 1,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 402,
+        "Weight": 3,
+        "DropedCategory": 1,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 403,
+        "Weight": 3,
+        "DropedCategory": 1,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 2,
+        "Weight": 5,
+        "DropedCategory": 0,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 3,
+        "Weight": 2,
+        "DropedCategory": 0,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 11,
+        "Weight": 5,
+        "DropedCategory": 0,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 12,
+        "Weight": 2,
+        "DropedCategory": 0,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 21,
+        "Weight": 5,
+        "DropedCategory": 0,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 22,
+        "Weight": 2,
+        "DropedCategory": 0,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 1101,
+        "Weight": 10,
+        "DropedCategory": 1,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 1102,
+        "Weight": 5,
+        "DropedCategory": 1,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      }
+    ]
+  },
+  {
+    "PoolName": "MetaResource",
+    "Entries": [
+      {
+        "ID": 1100,
+        "Weight": 90,
+        "DropedCategory": 1,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 1101,
+        "Weight": 10,
+        "DropedCategory": 1,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 1102,
+        "Weight": 5,
+        "DropedCategory": 1,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      }
+    ]
+  },
+  {
+    "PoolName": "DebuffChance",
+    "Entries": [
+      {
+        "ID": 1,
+        "Weight": 10,
+        "DropedCategory": 3,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 2,
+        "Weight": 10,
+        "DropedCategory": 3,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 3,
+        "Weight": 10,
+        "DropedCategory": 3,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 4,
+        "Weight": 10,
+        "DropedCategory": 3,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 5,
+        "Weight": 10,
+        "DropedCategory": 3,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 6,
+        "Weight": 10,
+        "DropedCategory": 3,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 100,
+        "Weight": 5,
+        "DropedCategory": 3,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 101,
+        "Weight": 5,
+        "DropedCategory": 3,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 201,
+        "Weight": 3,
+        "DropedCategory": 3,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 202,
+        "Weight": 3,
+        "DropedCategory": 3,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      }
+    ]
+  },
+  {
+    "PoolName": "BuffChance",
+    "Entries": [
+      {
+        "ID": 1,
+        "Weight": 10,
+        "DropedCategory": 3,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 2,
+        "Weight": 10,
+        "DropedCategory": 3,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 3,
+        "Weight": 10,
+        "DropedCategory": 3,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 4,
+        "Weight": 10,
+        "DropedCategory": 3,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 5,
+        "Weight": 10,
+        "DropedCategory": 3,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 6,
+        "Weight": 10,
+        "DropedCategory": 3,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 100,
+        "Weight": 5,
+        "DropedCategory": 3,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 101,
+        "Weight": 5,
+        "DropedCategory": 3,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 201,
+        "Weight": 3,
+        "DropedCategory": 3,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      },
+      {
+        "ID": 202,
+        "Weight": 3,
+        "DropedCategory": 3,
+        "Icon": null,
+        "Rarity": 0,
+        "OnlyOncePerRun": false
+      }
+    ]
+  }
+]

@@ -36,6 +36,7 @@ public static class PathConfig
    
    public static string DialogueDesignJson = GetDataPrepath() + "Data/DialogueDesign.json";
    public static string TalentDesignJson = GetDataPrepath() + "Data/TalentDesign.json";
+   public static string DropedDesignJson = GetDataPrepath() + "Data/DropedDesign.json";
 
    //.........................ScriptObject...........................
    public static string TrunkManagerOBJ = GetPrepath() + "Res/TrunkManager.asset";

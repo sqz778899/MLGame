@@ -46,7 +46,7 @@ public class RoomKeyRuntimeData : MapEventRuntimeData
 
 #region 赌博型
 [Serializable]
-public class WeaponRackRuntimeData : MapEventRuntimeData
+public class BasicGamblingRuntimeData : MapEventRuntimeData
 {
     public int EmptyChance;
     public int TempBuffChance;
@@ -54,16 +54,6 @@ public class WeaponRackRuntimeData : MapEventRuntimeData
     public int NormalLootChance;
     public int MetaResourceChance;
     public int RareLootChance;
-}
-
-[Serializable]
-public class SkeletonRuntimeData : MapEventRuntimeData
-{
-    public int EmptyChance;
-    public int NoteChance;
-    public int ItemChance;
-    public int DebuffChance;
-    public int KeyChance;
 }
 #endregion
 
@@ -167,7 +157,7 @@ public class RoomKeyConfigData : MapEventConfigData
 
 #region 赌博型
 [Serializable]
-public class WeaponRackConfigData : MapEventConfigData
+public class BasicGamblingConfigData : MapEventConfigData
 {
     [Range(0, 100)] public int EmptyChance = 25;
     [Range(0, 100)] public int TempBuffChance = 20;
@@ -176,7 +166,7 @@ public class WeaponRackConfigData : MapEventConfigData
     [Range(0, 100)] public int MetaResourceChance = 10;
     [Range(0, 100)] public int RareLootChance = 5;
 
-    public override MapEventRuntimeData ToRuntimeData() => new WeaponRackRuntimeData
+    public override MapEventRuntimeData ToRuntimeData() => new BasicGamblingRuntimeData
     {
         EmptyChance = EmptyChance,
         TempBuffChance = TempBuffChance,
@@ -184,32 +174,6 @@ public class WeaponRackConfigData : MapEventConfigData
         NormalLootChance = NormalLootChance,
         MetaResourceChance = MetaResourceChance,
         RareLootChance = RareLootChance
-    };
-}
-
-[Serializable]
-public class SkeletonConfigData : MapEventConfigData
-{
-    public List<string> LoreNotes = new()
-    {
-        "别信墙上的门", 
-        "是我先发现这个宝藏的", 
-        "钥匙……藏在壁炉……咳……"
-    };
-
-    public int EmptyChance = 30;
-    public int NoteChance = 30;
-    public int ItemChance = 20;
-    public int DebuffChance = 15;
-    public int KeyChance = 5;
-    
-    public override MapEventRuntimeData ToRuntimeData() => new SkeletonRuntimeData
-    {
-        EmptyChance = EmptyChance,
-        NoteChance = NoteChance,
-        ItemChance = ItemChance,
-        DebuffChance = DebuffChance,
-        KeyChance = KeyChance,
     };
 }
 #endregion
@@ -295,40 +259,12 @@ public class RoomArrowConfigData : MapEventConfigData
 #endregion
 
 #region 一些枚举定义
-[Serializable]
-public class DropedObjEntry
-{
-    public int ID; // 掉落物ID
-    public int Weight; // 权重
-    public DropedCategory DropedCategory; // 是宝石还是道具
-    public Sprite Icon;
-    public DropedRarity Rarity;
-
-    public void InitData()
-    {
-        switch (DropedCategory)
-        {
-            case DropedCategory.Item:
-                ItemJson itemjson = TrunkManager.Instance.GetItemJson(ID);
-                Icon = ResManager.instance.GetItemIcon(ID);
-                Rarity = itemjson.Rarity;
-                break;
-            case DropedCategory.Gem:
-                GemJson gemjson = TrunkManager.Instance.GetGemJson(ID);
-                Icon = ResManager.instance.GetGemIcon(ID);
-                Rarity = gemjson.Rarity;
-                break;
-        }
-    }
-}
-
 //主类别
 public enum MapEventType
 {
     None = 0,
     CoinsPile = 1,
-    WeaponRack = 2,
-    Skeleton = 3,
+    BasicGambling = 2,
     StoneTablet = 4,
     MysticalInteraction = 5,
     TreasureBox = 6,

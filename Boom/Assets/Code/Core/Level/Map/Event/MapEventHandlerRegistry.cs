@@ -19,8 +19,7 @@ public static class MapEventHandlerRegistry
         Register(MapEventType.TreasureBox,new TreasureBoxEventHandler());
         Register(MapEventType.Bullet,new BulletEventHandler());
         Register(MapEventType.RoomKey, new RoomKeyEventHandler());
-        Register(MapEventType.WeaponRack, new WeaponRackEventHandler());
-        Register(MapEventType.Skeleton, new SkeletonHandler());
+        Register(MapEventType.BasicGambling, new BasicGamblingEventHandler());
         Register(MapEventType.StoneTablet,new StoneTabletHandler());
         Register(MapEventType.MysticalInteraction,new WigglingBoxHandler());
         Register(MapEventType.Shop, new ShopEventHandler());
@@ -179,11 +178,11 @@ public class RoomKeyEventHandler : IMapEventHandler
 #endregion
 
 #region 伪随机赌博类
-public class WeaponRackEventHandler : IMapEventHandler
+public class BasicGamblingEventHandler : IMapEventHandler
 {
     public void Handle(MapNodeData data, MapNodeView view)
     {
-        var weaponData = data.EventData as WeaponRackRuntimeData;
+        var weaponData = data.EventData as BasicGamblingRuntimeData;
         if (weaponData == null) return;
 
         Dictionary<string, int> weights = new()
@@ -208,45 +207,6 @@ public class WeaponRackEventHandler : IMapEventHandler
             case "Meta": view.ShowFloatingText("发现稀有材料：秘银！"); break;
             case "Rare": view.ShowFloatingText("这是传说中的…神器？"); break;
         }
-    }
-}
-
-public class SkeletonHandler : IMapEventHandler
-{
-    public void Handle(MapNodeData data, MapNodeView view)
-    {
-        if (data.EventData is not SkeletonRuntimeData skeletonData)
-        {
-            Debug.LogWarning("Skeleton事件缺少有效数据");
-            return;
-        }
-
-        var weights = new Dictionary<string, int>
-        {
-            { "Empty", skeletonData.EmptyChance },
-            { "Note", skeletonData.NoteChance },
-            { "Item", skeletonData.ItemChance },
-            { "Debuff", skeletonData.DebuffChance },
-            { "Key", skeletonData.KeyChance }
-        };
-
-        string result = ProbabilityService.Draw($"Skeleton_Layer_{data.ID}", weights,
-            GM.Root.BattleMgr._MapManager.CurMapSate.MapRandomSeed);
-
-        switch (result)
-        {
-            case "Empty": view.ShowFloatingText("只剩一堆骨头…"); break;
-            case "Note": view.ShowFloatingText($"发现了一张纸条："); break;
-            case "Item":
-                PlayerManager.Instance._PlayerData.ModifyCoins(1);
-                view.ShowFloatingText("找到了一枚生锈的金币");
-                break;
-            case "Debuff": view.ShowFloatingText("你感到一阵阴冷…"); break;
-            case "Key": view.ShowFloatingText("从骨缝中找到了一把腐朽的钥匙！"); break;
-        }
-
-        data.IsTriggered = true;
-        view.SetAsTriggered();
     }
 }
 #endregion

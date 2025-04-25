@@ -36,6 +36,8 @@ public class PlayerData: ScriptableObject
     public float CoinToDustRate = 2f;     // 金币转魔尘比例
     public int CoinAdd = 0;               // 局内金币加成
     
+    public BuffManager BuffManager = new();
+    
     //talent
     public List<TalentData> Talents;  // 天赋数据
     //新手教程完成情况
@@ -125,6 +127,7 @@ public class PlayerData: ScriptableObject
         CoinToDustRate = 2f;     // 金币转魔尘比例
         CoinAdd = 0;               // 局内金币加成
         TalentGemBonuses = new();
+        BuffManager.Clear(); // 清空 Buff
     }
     
     #region 人物属性

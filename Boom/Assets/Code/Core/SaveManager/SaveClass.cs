@@ -181,16 +181,18 @@ public class ItemJson:ItemJsonBase
     public DropedRarity Rarity;
     public string ResName;
     public string Desc;
+    public string Flavor;
     public ItemCategory Category;
     public PersistentItemType PersistentType;
     
     public ItemJson(int _id = -1, string _name = "",int rarity = -1,
-        string _desc = "",int _price = 0, string resName = "")
+        string _desc = "",string _flavor = "",int _price = 0, string resName = "")
     {
         ID = _id;
         Rarity = (DropedRarity)rarity;
         Name = _name;
         Desc = _desc;
+        Flavor = _flavor;
         ResName = resName;
         Price = _price;
     }
@@ -233,6 +235,19 @@ public class TalentJson
         DependTalents = new List<int>();
         UnlockTalents = new List<int>();
         Price = -1;
+    }
+}
+
+[Serializable]
+public class DropTableJson
+{
+    public string PoolName; // 池名称
+    public List<DropedObjEntry> Entries; // 掉落项列表
+
+    public DropTableJson()
+    {
+        PoolName = "";
+        Entries = new List<DropedObjEntry>();
     }
 }
 #endregion

@@ -23,6 +23,7 @@ namespace Code.Editor
             ExportDialogue(); //对话相关
             ExportQuestDesign();//任务相关
             ExportTalent();//天赋相关
+            ExportDrop();//掉落相关
             AssetDatabase.Refresh();
             TrunkManager.Instance.ForceRefresh();
         }
@@ -68,7 +69,8 @@ namespace Code.Editor
                 curItem.Rarity = (DropedRarity)GetCellInt(curTable.Rows[i][2].ToString());
                 curItem.Desc = curTable.Rows[i][3].ToString();
                 curItem.Price = GetCellInt(curTable.Rows[i][4].ToString());
-                curItem.ResName = curTable.Rows[i][5].ToString();
+                curItem.Flavor = curTable.Rows[i][5].ToString();
+                curItem.ResName = curTable.Rows[i][6].ToString();
                 curItem.Category = ItemCategory.Equipable;
                 curItemDesign.Add(curItem);
             }
@@ -80,10 +82,11 @@ namespace Code.Editor
                 if (persistentTable.Rows[i][1].ToString() == "") continue;
                 curItem.ID = GetCellInt(persistentTable.Rows[i][0].ToString());
                 curItem.Name = persistentTable.Rows[i][1].ToString();
-                string typeStr = persistentTable.Rows[i][2].ToString();
-                curItem.Desc = persistentTable.Rows[i][3].ToString();
-                curItem.Price = GetCellInt(persistentTable.Rows[i][4].ToString());
-                curItem.ResName = persistentTable.Rows[i][5].ToString();
+                curItem.Rarity = (DropedRarity)GetCellInt(curTable.Rows[i][2].ToString());
+                string typeStr = persistentTable.Rows[i][3].ToString();
+                curItem.Desc = persistentTable.Rows[i][4].ToString();
+                curItem.Price = GetCellInt(persistentTable.Rows[i][5].ToString());
+                curItem.ResName = persistentTable.Rows[i][6].ToString();
                 curItem.Category = ItemCategory.Persistent;
                 if (typeStr == "任务道具")
                     curItem.PersistentType = PersistentItemType.QuestItem;
@@ -210,6 +213,34 @@ namespace Code.Editor
                 (Formatting)Formatting.Indented);
             File.WriteAllText(PathConfig.TalentDesignJson, content01);
         }
+
+        public void ExportDrop()
+        {
+            DataSet curTables = GetDataSet("DropDesign.xlsx");
+            List<DropTableJson> curDropDesign = new List<DropTableJson>();
+            for (int i = 0; i < curTables.Tables.Count; i++)
+            {
+                DataTable curTable = curTables.Tables[i];
+                DropTableJson curData = new DropTableJson();
+                if (curTable.Rows[1][1].ToString() == "") continue;
+                curData.PoolName = curTable.TableName;
+                for (int j = 1; j < curTable.Rows.Count; j++)
+                {
+                    DropedObjEntry curEntry = new DropedObjEntry();
+                    if (curTable.Rows[j][1].ToString() == "") continue;
+                    curEntry.ID = int.Parse(curTable.Rows[j][0].ToString());
+                    curEntry.DropedCategory =
+                        (DropedCategory)Enum.Parse(typeof(DropedCategory), curTable.Rows[j][1].ToString());
+                    curEntry.Weight = int.Parse(curTable.Rows[j][2].ToString());
+                    curEntry.OnlyOncePerRun = GetCellBool(curTable.Rows[j][3].ToString());
+                    curData.Entries.Add(curEntry);
+                }
+                curDropDesign.Add(curData);
+            }
+            
+            string content01 = JsonConvert.SerializeObject(curDropDesign, (Formatting)Formatting.Indented);
+            File.WriteAllText(PathConfig.DropedDesignJson, content01);
+        }
         #endregion
 
         #region 多语言
@@ -310,7 +341,15 @@ namespace Code.Editor
             else
                 return int.Parse(curStr);
         }
-        
+
+        bool GetCellBool(string curStr)
+        {
+            if (curStr == "TRUE")
+                return true;
+            else
+                return false;
+        }
+
         string GetDesignExcelPath(string excelName)
         {
             string diskDir = Application.streamingAssetsPath.Replace(

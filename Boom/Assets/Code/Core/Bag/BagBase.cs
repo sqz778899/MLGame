@@ -362,14 +362,16 @@ public enum DropedCategory
     Gem = 0,
     Item = 1,
     Key = 2,
+    Buff = 3,
 }
 
 //Item类划分
 public enum ItemCategory
 {
-    Equipable = 0, // 原有的可装备型道具
+    Equipable = 0,       // 原有的可装备型道具
     Persistent = 1,      // 新增：可保留、无效果型道具
 }
+
 //Item的Persistent类型划分
 public enum PersistentItemType
 {

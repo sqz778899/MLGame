@@ -28,11 +28,8 @@ public class MapNodeDataEditor : Editor
             case MapEventType.RoomKey:
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("RoomKeyConfig"));
                 break;
-            case MapEventType.WeaponRack:
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("WeaponRackConfig"));
-                break;
-            case MapEventType.Skeleton:
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("SkeletonConfig"));
+            case MapEventType.BasicGambling:
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("BasicGamblingConfig"));
                 break;
             case MapEventType.StoneTablet:
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("StoneTabletConfig"));

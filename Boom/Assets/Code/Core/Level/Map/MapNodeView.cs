@@ -59,7 +59,7 @@ public class MapNodeView:MonoBehaviour
             case MapEventType.CoinsPile:
                 PlayCoinsEffect(coinsAmount);
                 break;
-            case MapEventType.WeaponRack:
+            case MapEventType.BasicGambling:
                 // 可选：播放开柜子动画/粒子等
                 break;
         }

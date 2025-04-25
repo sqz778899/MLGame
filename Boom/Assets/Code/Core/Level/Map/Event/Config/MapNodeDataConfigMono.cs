@@ -22,8 +22,7 @@ public class MapNodeDataConfigMono : MonoBehaviour
     public BulletEventConfigData BulletEventConfig;
     public RoomKeyConfigData RoomKeyConfig;
     
-    public WeaponRackConfigData WeaponRackConfig;
-    public SkeletonConfigData SkeletonConfig;
+    public BasicGamblingConfigData BasicGamblingConfig;
     public StoneTabletConfigData StoneTabletConfig;
     public WigglingBoxConfigData WigglingBoxConfig;
     public ShopEventConfigData ShopEventConfig;
@@ -39,11 +38,10 @@ public class MapNodeDataConfigMono : MonoBehaviour
             MapEventType.TreasureBox => TreasureBoxConfig?.ToRuntimeData(),
             MapEventType.Bullet => BulletEventConfig?.ToRuntimeData(),
             MapEventType.RoomKey => RoomKeyConfig?.ToRuntimeData(),
-            MapEventType.Skeleton => SkeletonConfig?.ToRuntimeData(),
             MapEventType.StoneTablet => StoneTabletConfig?.ToRuntimeData(),
             MapEventType.MysticalInteraction => WigglingBoxConfig?.ToRuntimeData(),
             MapEventType.Shop => ShopEventConfig?.ToRuntimeData(),
-            MapEventType.WeaponRack => WeaponRackConfig?.ToRuntimeData(),
+            MapEventType.BasicGambling => BasicGamblingConfig?.ToRuntimeData(),
             MapEventType.RoomArrow =>RoomArrowConfig?.ToRuntimeData(),
             _ =>null,
         };
