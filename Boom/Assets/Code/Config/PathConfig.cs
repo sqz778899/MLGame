@@ -37,6 +37,8 @@ public static class PathConfig
    public static string DialogueDesignJson = GetDataPrepath() + "Data/DialogueDesign.json";
    public static string TalentDesignJson = GetDataPrepath() + "Data/TalentDesign.json";
    public static string DropedDesignJson = GetDataPrepath() + "Data/DropedDesign.json";
+   //..........................编辑器用Json
+   public static string TagDesignJson = GetDataPrepath() + "Data/TagDesign.json";
 
    //.........................ScriptObject...........................
    public static string TrunkManagerOBJ = GetPrepath() + "Res/TrunkManager.asset";
@@ -64,6 +66,8 @@ public static class PathConfig
    public static string AwardCoin = GetPrepath() + "Res/UI/Prefabs/Misc/P_Award_Coin_01.prefab";
    public static string AwardRoomKey = GetPrepath() + "Res/UI/Prefabs/Misc/P_Award_RoomKey_01.prefab";
    public static string ObserveHPPB = GetPrepath() + "Res/Character/Image/Enemy/P_ObserveHP_01.prefab";
+   //...........................FX.........................................
+   public static string AwardTrait = GetPrepath() + "Res/FX/Prefab/FX_Trail_01.prefab";
    
    //...........................角色.................................
    public static string EnemyPB = GetPrepath() + "Res/Character/SpineData/P_Enemy_Template.prefab";

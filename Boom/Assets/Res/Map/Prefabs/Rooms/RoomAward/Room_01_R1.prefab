@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 966425719418008020}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -12.4, y: 16.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -518,6 +518,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6975114077311158086}
     m_Modifications:
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: _MapEventType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.data[0]
+      value: Flag
+      objectReference: {fileID: 0}
     - target: {fileID: 3026045377306217954, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.661
@@ -684,6 +696,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6975114077311158086}
     m_Modifications:
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: _MapEventType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.data[0]
+      value: Stone
+      objectReference: {fileID: 0}
     - target: {fileID: 3026045377306217954, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.021
@@ -851,6 +875,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6975114077311158086}
     m_Modifications:
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: _MapEventType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.data[0]
+      value: Stone
+      objectReference: {fileID: 0}
     - target: {fileID: 3026045377306217954, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.195
@@ -1002,6 +1038,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6975114077311158086}
     m_Modifications:
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: _MapEventType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.data[0]
+      value: Stone
+      objectReference: {fileID: 0}
     - target: {fileID: 3026045377306217954, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.477
@@ -1245,6 +1293,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6975114077311158086}
     m_Modifications:
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: _MapEventType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.data[0]
+      value: SheepSkull
+      objectReference: {fileID: 0}
     - target: {fileID: 3026045377306217954, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.033
@@ -1410,6 +1470,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6975114077311158086}
     m_Modifications:
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: _MapEventType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.data[0]
+      value: MiscGroup
+      objectReference: {fileID: 0}
     - target: {fileID: 3026045377306217954, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.103
@@ -1585,6 +1657,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6975114077311158086}
     m_Modifications:
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: _MapEventType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.data[0]
+      value: Candle
+      objectReference: {fileID: 0}
     - target: {fileID: 3026045377306217954, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.375
@@ -1735,6 +1819,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6975114077311158086}
     m_Modifications:
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: _MapEventType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.data[0]
+      value: Flag
+      objectReference: {fileID: 0}
     - target: {fileID: 3026045377306217954, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.43

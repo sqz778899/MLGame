@@ -29,12 +29,15 @@ public class GameInitializer:MonoBehaviour
         SaveManager.LoadSaveFile();
         
         //5)初始化各种静态类需要的配置
+        //............跳字静态类...............
         FloatingTextFactory.DamageFontAsset =
             ResManager.instance.GetAssetCache<TMP_FontAsset>(PathConfig.DamageFontAsset);
         FloatingTextFactory.DamageFontMaterial =
             ResManager.instance.GetAssetCache<Material>(PathConfig.DamageFontMaterial);
         FloatingTextFactory.MapHintFontAsset =
             ResManager.instance.GetAssetCache<TMP_FontAsset>(PathConfig.MapHintFontAsset);
+        //............道具掉落静态类...............
+        DropTableService.LoadFromJson();
         //5)重置随机概率
         //ProbabilityService.Reset("WeaponRackLoot");
     }

@@ -49,9 +49,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: 0
-  NodeName: 
-  Desc: 
-  EventType: 100
+  ClutterTags: []
+  _MapEventType: 100
   StartLocked: 0
   StartAsTriggered: 0
   GoldPileConfig:
@@ -62,23 +61,20 @@ MonoBehaviour:
     MinLootCount: 0
     MaxLootCount: 0
     DropTable: []
-  WeaponRackConfig:
+  BulletEventConfig:
+    BulletID: 0
+    DialogueName: 
+  RoomKeyConfig:
+    RoomKeysNum: 1
+  BasicGamblingConfig:
     EmptyChance: 25
     TempBuffChance: 20
     TempDebuffChance: 30
     NormalLootChance: 10
     MetaResourceChance: 10
     RareLootChance: 5
-  SkeletonConfig:
-    LoreNotes:
-    - "\u522B\u4FE1\u5899\u4E0A\u7684\u95E8"
-    - "\u662F\u6211\u5148\u53D1\u73B0\u8FD9\u4E2A\u5B9D\u85CF\u7684"
-    - "\u94A5\u5319\u2026\u2026\u85CF\u5728\u58C1\u7089\u2026\u2026\u54B3\u2026\u2026"
-    EmptyChance: 30
-    NoteChance: 30
-    ItemChance: 20
-    DebuffChance: 15
-    KeyChance: 5
+    MinDropCount: 1
+    MaxDropCount: 1
   StoneTabletConfig:
     LoreTexts:
     - "\u9B54\u6CD5\u4E4B\u707E\u8D77\u6E90\u4E8E\u65E0\u540D\u5854\u3002"
@@ -89,6 +85,10 @@ MonoBehaviour:
     TalkChance: 30
     ExplosionChance: 20
     LootChance: 20
+  ShopEventConfig:
+    ShopType: 0
+    RollPRs: []
+    ShopCost: 0
   RoomArrowConfig:
     ArrowType: 0
     TargetRoomID: 8
@@ -116,6 +116,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 4237508852845662978}
   triggeredRenderer: {fileID: 0}
+  spineRenderer: {fileID: 0}
+  Ain: {fileID: 0}
   EPara:
     CurEffectType: 0
     StartPos: {x: 0, y: 0, z: 0}

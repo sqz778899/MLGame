@@ -315,7 +315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9741303cabdd764b8a3360b94f0d6cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoomID: 9
+  RoomID: 2
   IsStartRoom: 0
   _state: 1
   CameraStartPos: {fileID: 3238521738176435409}
@@ -828,6 +828,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5313180267009122753}
     m_Modifications:
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: _MapEventType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.data[0]
+      value: Broom
+      objectReference: {fileID: 0}
     - target: {fileID: 3026045377306217954, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.874
@@ -992,6 +1004,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5313180267009122753}
     m_Modifications:
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: _MapEventType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.data[0]
+      value: Candle
+      objectReference: {fileID: 0}
     - target: {fileID: 3026045377306217954, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.0574
@@ -1143,6 +1167,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5313180267009122753}
     m_Modifications:
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: _MapEventType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.data[0]
+      value: Bucket
+      objectReference: {fileID: 0}
     - target: {fileID: 3026045377306217954, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.121
@@ -1290,6 +1326,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5313180267009122753}
     m_Modifications:
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: _MapEventType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.data[0]
+      value: Sack
+      objectReference: {fileID: 0}
     - target: {fileID: 3026045377306217954, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.817
@@ -1450,6 +1498,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5313180267009122753}
     m_Modifications:
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: _MapEventType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.data[0]
+      value: WoodenPile
+      objectReference: {fileID: 0}
     - target: {fileID: 3026045377306217954, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.349
@@ -1636,6 +1696,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5313180267009122753}
     m_Modifications:
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: _MapEventType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.data[0]
+      value: Bucket
+      objectReference: {fileID: 0}
     - target: {fileID: 3026045377306217954, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.598
@@ -1796,6 +1868,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5313180267009122753}
     m_Modifications:
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: _MapEventType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.data[0]
+      value: Broom
+      objectReference: {fileID: 0}
     - target: {fileID: 3026045377306217954, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.442
@@ -1988,6 +2072,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5313180267009122753}
     m_Modifications:
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: _MapEventType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.data[0]
+      value: Paper
+      objectReference: {fileID: 0}
     - target: {fileID: 3026045377306217954, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.281
@@ -2209,7 +2305,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8180966680721843295, guid: 8f9e5967b2dce18468d12ea95863447a, type: 3}
       propertyPath: RoomArrowConfig.TargetRoomID
-      value: 6
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2229,6 +2325,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5313180267009122753}
     m_Modifications:
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: _MapEventType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.data[0]
+      value: Bucket
+      objectReference: {fileID: 0}
     - target: {fileID: 3026045377306217954, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.921
@@ -2383,6 +2491,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5313180267009122753}
     m_Modifications:
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: _MapEventType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.data[0]
+      value: Sack
+      objectReference: {fileID: 0}
     - target: {fileID: 3026045377306217954, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.021
@@ -2535,6 +2655,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5313180267009122753}
     m_Modifications:
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: _MapEventType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.data[0]
+      value: Candle
+      objectReference: {fileID: 0}
     - target: {fileID: 3026045377306217954, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.071
@@ -2685,6 +2817,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5313180267009122753}
     m_Modifications:
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: _MapEventType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.data[0]
+      value: Box
+      objectReference: {fileID: 0}
     - target: {fileID: 3026045377306217954, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.33
@@ -2837,6 +2981,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5313180267009122753}
     m_Modifications:
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: _MapEventType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.data[0]
+      value: Candle
+      objectReference: {fileID: 0}
     - target: {fileID: 3026045377306217954, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.111
@@ -2988,6 +3144,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5313180267009122753}
     m_Modifications:
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: _MapEventType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.data[0]
+      value: Box
+      objectReference: {fileID: 0}
     - target: {fileID: 3026045377306217954, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.431
@@ -3137,6 +3305,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5313180267009122753}
     m_Modifications:
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: _MapEventType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.data[0]
+      value: Bottle
+      objectReference: {fileID: 0}
     - target: {fileID: 3026045377306217954, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.121
@@ -3282,6 +3462,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5313180267009122753}
     m_Modifications:
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: _MapEventType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.data[0]
+      value: Candle
+      objectReference: {fileID: 0}
     - target: {fileID: 3026045377306217954, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.361
@@ -3443,6 +3635,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5313180267009122753}
     m_Modifications:
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: _MapEventType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1610861751604572897, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
+      propertyPath: ClutterTags.Array.data[0]
+      value: Stone
+      objectReference: {fileID: 0}
     - target: {fileID: 3026045377306217954, guid: 86350a1b7f033ce4a9959141f229083d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.529

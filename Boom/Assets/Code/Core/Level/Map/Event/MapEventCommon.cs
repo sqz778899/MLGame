@@ -49,11 +49,15 @@ public class RoomKeyRuntimeData : MapEventRuntimeData
 public class BasicGamblingRuntimeData : MapEventRuntimeData
 {
     public int EmptyChance;
+    public int KeyChance; //钥匙事件
     public int TempBuffChance;
     public int TempDebuffChance;
     public int NormalLootChance;
     public int MetaResourceChance;
     public int RareLootChance;
+    //多重掉落支持
+    public int MinDropCount = 1; // 最少掉几个
+    public int MaxDropCount = 1; // 最多掉几个
 }
 #endregion
 
@@ -160,20 +164,27 @@ public class RoomKeyConfigData : MapEventConfigData
 public class BasicGamblingConfigData : MapEventConfigData
 {
     [Range(0, 100)] public int EmptyChance = 25;
+    [Range(0, 100)] public int KeyChance = 25;
     [Range(0, 100)] public int TempBuffChance = 20;
     [Range(0, 100)] public int TempDebuffChance = 30;
     [Range(0, 100)] public int NormalLootChance = 10;
     [Range(0, 100)] public int MetaResourceChance = 10;
     [Range(0, 100)] public int RareLootChance = 5;
-
+    //多重掉落支持
+    public int MinDropCount = 1; // 最少掉几个
+    public int MaxDropCount = 1; // 最多掉几个
     public override MapEventRuntimeData ToRuntimeData() => new BasicGamblingRuntimeData
     {
         EmptyChance = EmptyChance,
+        KeyChance = KeyChance,
         TempBuffChance = TempBuffChance,
         TempDebuffChance = TempDebuffChance,
         NormalLootChance = NormalLootChance,
         MetaResourceChance = MetaResourceChance,
-        RareLootChance = RareLootChance
+        RareLootChance = RareLootChance,
+        //ClutterTags = ClutterTags,
+        MinDropCount = MinDropCount,
+        MaxDropCount = MaxDropCount,
     };
 }
 #endregion
@@ -295,8 +306,7 @@ public static class EventTypeRules
 public class MapNodeData
 {
     public int ID;
-    public string Name;
-    public string Desc;
+    public List<string> ClutterTags;
     public MapEventType EventType;
     
     public MapEventRuntimeData EventData;
@@ -304,12 +314,11 @@ public class MapNodeData
     public bool IsLocked;
     public bool IsTriggered;
 
-    public MapNodeData(int id, string name, string desc, 
+    public MapNodeData(int id, List<string> _clutterTags,
         MapEventType eventType,MapEventRuntimeData eventData)
     {
         ID = id;
-        Name = name;
-        Desc = desc;
+        ClutterTags = _clutterTags;
         EventType = eventType;
         IsLocked = false;
         IsTriggered = false;

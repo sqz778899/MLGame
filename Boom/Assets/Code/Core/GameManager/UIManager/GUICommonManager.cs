@@ -2,7 +2,6 @@
 
 public class GUICommonManager
 {
-    public GameObject EffectRoot{ get; private set; } //特效根节点
    // public GameObject DialogueRoot{ get; private set; } //对话框根节点
     public GameObject StandbyRoot{ get; private set; } //备选区根节点
     
@@ -12,7 +11,6 @@ public class GUICommonManager
     
     public GUICommonManager()
     {
-        EffectRoot = EternalCavans.Instance.EffectRoot;
         //DialogueRoot = EternalCavans.Instance.DialogueRoot;
         StandbyRoot = EternalCavans.Instance.StandbyRoot;
         G_SideBar = EternalCavans.Instance.G_SideBar;

@@ -32,6 +32,10 @@ public class EffectManager : MonoBehaviour
                 insPath = PathConfig.AwardCoin;
                 targetpos = BagTarget.transform.position;
                 break;
+            case EffectType.FlipReward:  //新加翻找掉落走这条
+                insPath = PathConfig.AwardTrait;
+                targetpos = BagTarget.transform.position;
+                break;
             default:
                 insPath = PathConfig.AwardCoin;
                 targetpos = CoinsTarget.transform.position;
@@ -154,17 +158,42 @@ public class EffectManager : MonoBehaviour
             awardIns.transform.position,cpos, targetpos,
             Random.Range(EPara.FlyTimeRange.x,EPara.FlyTimeRange.y), () =>
             {
-                Destroy(awardIns);
-                onFinish?.Invoke();
+                FadeOutAndDestroy(awardIns);
+                //Destroy(awardIns);
             }));
     }
+    
+    void FadeOutAndDestroy(GameObject obj)
+    {
+        var ps = obj.GetComponentInChildren<ParticleSystem>();
+        if (ps != null)
+        {
+            // 1. 停止发射新粒子
+            ps.Stop();
+
+            // 2. 等粒子自然结束后销毁
+            float delay = ps.main.startLifetime.constantMax; // 粒子最长生命周期
+            DOTween.Sequence()
+                .AppendInterval(delay)
+                .AppendCallback(() => {
+                    Destroy(obj);
+                });
+        }
+        else
+        {
+            // 如果没有粒子，直接销毁
+            Destroy(obj);
+        }
+    }
+
 }
 
 public enum EffectType
 {
-    CoinsPile,
-    RoomKeys,
-    Shop
+    CoinsPile = 0,
+    RoomKeys = 1,
+    Shop = 2,
+    FlipReward = 3
 }
 [Serializable]
 public class EParameter

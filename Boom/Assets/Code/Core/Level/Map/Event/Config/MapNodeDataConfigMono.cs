@@ -1,15 +1,13 @@
-﻿using UnityEngine;
-using UnityEngine.Serialization;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class MapNodeDataConfigMono : MonoBehaviour
 {
     [Header("基础信息")]
     public int ID;
-    public string NodeName;
-    [TextArea(2, 5)]
-    public string Desc;
+    public List<string> ClutterTags;
 
-    [FormerlySerializedAs("EventType")] [Header("事件类型")]
+    [Header("事件类型")]
     public MapEventType _MapEventType = MapEventType.TreasureBox;
 
     [Header("显示控制")]
@@ -46,6 +44,6 @@ public class MapNodeDataConfigMono : MonoBehaviour
             _ =>null,
         };
 
-        return new MapNodeData(ID, NodeName, Desc, _MapEventType, runtime);
+        return new MapNodeData(ID, ClutterTags, _MapEventType, runtime);
     }
 }

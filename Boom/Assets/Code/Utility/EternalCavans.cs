@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -29,7 +28,6 @@ public class EternalCavans : MonoBehaviour
     
     [Header("Common")]
     public GameObject DialogueRoot;
-    public GameObject EffectRoot;
     public GameObject StandbyRoot;
     
     [Header("侧栏相关")]
@@ -84,6 +82,8 @@ public class EternalCavans : MonoBehaviour
     public DragManager DragManager;
     public TooltipsManager TooltipsManager;
     public RightClickMenuManager RightClickMenuManager;
+    public EffectManager _EffectManager;
+    
     public SceneState CurSceneState { get; private set; }
     float _preCameraOrthographicSize;
     public event Action OnOpenBag;

@@ -22,7 +22,7 @@ public class GemShopPreview : ItemBase, IItemInteractionBehaviour,IHighlightable
     void Awake()
     {
         _rectTransform = GetComponent<RectTransform>();
-        _effectManager = UIManager.Instance.CommonUI.EffectRoot.GetComponent<EffectManager>();
+        _effectManager = EternalCavans.Instance._EffectManager;
         _outlineMat = ResManager.instance.GetAssetCache<Material>(PathConfig.MatUIOutLine);
     }
 

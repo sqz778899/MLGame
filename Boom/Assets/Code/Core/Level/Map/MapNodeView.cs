@@ -27,7 +27,7 @@ public class MapNodeView:MonoBehaviour
         get
         {
             if (_effectManager==null)
-                _effectManager = UIManager.Instance.CommonUI.EffectRoot.GetComponent<EffectManager>();
+                _effectManager = EternalCavans.Instance._EffectManager;
             return _effectManager;
         }
     }

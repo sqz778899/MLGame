@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
+using Newtonsoft.Json;
+using System.IO;
 
 public class LevelEdit
 {
@@ -63,6 +66,8 @@ public class LevelEdit
                 curRoom.RoomID = IDStart+ i;
                 curRoom.State = MapRoomState.IsLocked;
             }
+
+            SetResIDByTagsAndDropTemplate(curRoom.gameObject);
         }
     }
 
@@ -99,7 +104,155 @@ public class LevelEdit
         SpriteRenderer arrowRenderer = arrowGO.GetComponentInChildren<SpriteRenderer>();
         arrowRenderer.color = Boss;
     }
+    
+    [PropertyOrder(98)]
+    [Button("测试伪随机掉落")]
+    [HorizontalGroup("伪随机", 0.5f)]
+    public void TestPseudoRandomDrop()
+    {
+        int testSeed = 12345; // 测试种子
+        string poolName = "NormalLoot"; // 测试池名
+        int testCount = 500; // 测试次数
+        List<string> testTags = new List<string> { "Bone", "Alchemy" }; // 假设杂物Tag
+
+        Dictionary<string, int> dropStat = new();
+
+        for (int i = 0; i < testCount; i++)
+        {
+            // 模拟每次不同节点ID扰动
+            int fakeMapNodeID = i;
+
+            DropedObjEntry result = DropTableService.Draw(poolName, fakeMapNodeID, testTags);
+            if (result == null) continue;
+
+            string key = $"{result.DropedCategory}_{result.ID}";
+            if (!dropStat.ContainsKey(key))
+                dropStat[key] = 0;
+            dropStat[key]++;
+        }
+
+        Debug.Log($"====== 测试结果 [{poolName}]，总次数 {testCount} ======");
+        foreach (var pair in dropStat.OrderByDescending(p => p.Value))
+        {
+            Debug.Log($"{pair.Key} : {pair.Value} 次，占比 {(pair.Value * 100f / testCount):F1}%");
+        }
+    }
+    
+    [PropertyOrder(98)]
+    [Button("测试大池子掉落分布")]
+    [HorizontalGroup("伪随机", 0.5f)]
+    public void TestRoomNodePseudoRandomOrder()
+    {
+        int testSeed = 12345; // 地图种子
+        int nodeCount = 20;   // 房间内节点数量
+        string dropPoolName = "BasicGambling"; // 大池子名字
+
+        // 大池子的权重
+        Dictionary<string, int> weights = new Dictionary<string, int>
+        {
+            { "Empty", 30 },
+            { "BuffChance", 20 },
+            { "DebuffChance", 20 },
+            { "NormalLoot", 15 },
+            { "MetaResource", 10 },
+            { "RareLoot", 5 }
+        };
+
+        List<string> resultList = new List<string>();
+        Dictionary<string, int> resultStat = new Dictionary<string, int>();
+
+        Debug.Log($"====== 房间内伪随机掉落顺序测试，节点数量 {nodeCount} ======");
+
+        for (int i = 0; i < nodeCount; i++)
+        {
+            int nodeID = 1000 + i; // 模拟MapNode ID
+            int localSeed = testSeed + nodeID * 17000;
+            string bucketKey = $"weaponrack_{nodeID}";
+            string result = ProbabilityService.Draw(bucketKey, weights, localSeed);
+
+            resultList.Add(result);
+
+            if (!resultStat.ContainsKey(result))
+                resultStat[result] = 0;
+            resultStat[result]++;
+
+            // 打印顺序
+            Debug.Log($"第 {i + 1} 次 翻找 -> {result}");
+        }
+
+        Debug.Log($"====== 最终掉落统计结果 ======");
+        foreach (var pair in resultStat.OrderByDescending(p => p.Value))
+        {
+            Debug.Log($"{pair.Key} : {pair.Value} 次，占比 {(pair.Value * 100f / nodeCount):F1}%");
+        }
+    }
+
+
     #endregion
+    
+
+    public class TagTableJson
+    {
+        public string Tag;            // 标签
+        public int FixedID;           // 固定ID，用于伪随机池分组
+        public int EmptyChance;       // 空掉落权重
+        public int KeyChance;         // 掉落钥匙权重
+        public int BuffChance;        // 临时Buff权重
+        public int DeBuffChance;        // 临时Buff权重
+        public int NormalLoot;        // 普通掉落权重
+        public int MetaResource;      // 局外资源权重（黑曜石、秘银）
+        public int RareLoot;          // 稀有掉落权重
+    }
+    
+ 
+    void SetResIDByTagsAndDropTemplate(GameObject root)
+    {
+        // 读取Tag表
+        List<TagTableJson> tagTable = JsonConvert.DeserializeObject<List<TagTableJson>>(File.ReadAllText(PathConfig.TagDesignJson));
+        MapNodeDataConfigMono[] configMonos = root.GetComponentsInChildren<MapNodeDataConfigMono>(true);
+
+        foreach (var eachConfigMono in configMonos)
+        {
+            if (eachConfigMono._MapEventType != MapEventType.BasicGambling)
+                continue;
+            
+            List<string> tags = eachConfigMono.ClutterTags;
+            if (tags == null || tags.Count == 0)
+                tags = new List<string> { "Default" };
+
+            string mainTag = tags[0];
+
+            // 查Tag表
+            TagTableJson template = tagTable.FirstOrDefault(t => t.Tag == mainTag);
+            if (template == null)
+            {
+                Debug.LogWarning($"找不到Tag模板：{mainTag}，跳过！");
+                continue;
+            }
+
+            // 赋ID
+            eachConfigMono.ID = template.FixedID;
+
+            // 初始化大池子配置（只针对BasicGambling类型）
+            if (eachConfigMono._MapEventType == MapEventType.BasicGambling)
+            {
+                if (eachConfigMono.BasicGamblingConfig == null)
+                    eachConfigMono.BasicGamblingConfig = new BasicGamblingConfigData();
+
+                eachConfigMono.BasicGamblingConfig.EmptyChance = template.EmptyChance;
+                eachConfigMono.BasicGamblingConfig.KeyChance = template.KeyChance;
+                eachConfigMono.BasicGamblingConfig.TempBuffChance = template.BuffChance;
+                eachConfigMono.BasicGamblingConfig.TempDebuffChance = template.DeBuffChance;
+                eachConfigMono.BasicGamblingConfig.NormalLootChance = template.NormalLoot;
+                eachConfigMono.BasicGamblingConfig.MetaResourceChance = template.MetaResource;
+                eachConfigMono.BasicGamblingConfig.RareLootChance = template.RareLoot;
+            }
+
+            EditorUtility.SetDirty(eachConfigMono);
+        }
+
+        Debug.Log($"统一设置完毕，共处理 {configMonos.Length} 个节点。");
+    }
     
     #region 雾
     GameObject MapRoot;

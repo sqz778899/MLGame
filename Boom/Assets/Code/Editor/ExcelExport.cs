@@ -24,6 +24,8 @@ namespace Code.Editor
             ExportQuestDesign();//任务相关
             ExportTalent();//天赋相关
             ExportDrop();//掉落相关
+            //编辑器离线用表
+            ExportEditorOffline();
             AssetDatabase.Refresh();
             TrunkManager.Instance.ForceRefresh();
         }
@@ -213,7 +215,7 @@ namespace Code.Editor
                 (Formatting)Formatting.Indented);
             File.WriteAllText(PathConfig.TalentDesignJson, content01);
         }
-
+        
         public void ExportDrop()
         {
             DataSet curTables = GetDataSet("DropDesign.xlsx");
@@ -228,11 +230,12 @@ namespace Code.Editor
                 {
                     DropedObjEntry curEntry = new DropedObjEntry();
                     if (curTable.Rows[j][1].ToString() == "") continue;
-                    curEntry.ID = int.Parse(curTable.Rows[j][0].ToString());
-                    curEntry.DropedCategory =
-                        (DropedCategory)Enum.Parse(typeof(DropedCategory), curTable.Rows[j][1].ToString());
-                    curEntry.Weight = int.Parse(curTable.Rows[j][2].ToString());
+                    curEntry.ID = GetCellInt(curTable.Rows[j][0].ToString());
+                    curEntry.DropedCategory = (DropedCategory)Enum.Parse(typeof(DropedCategory), curTable.Rows[j][1].ToString());
+                    curEntry.Weight = GetCellInt(curTable.Rows[j][2].ToString());
                     curEntry.OnlyOncePerRun = GetCellBool(curTable.Rows[j][3].ToString());
+                    curEntry.TagAffinity = GetCellStrList(curTable.Rows[j][4].ToString());
+                    curEntry.AffinityWeightMultiplier = GetCellFloat(curTable.Rows[j][5].ToString());
                     curData.Entries.Add(curEntry);
                 }
                 curDropDesign.Add(curData);
@@ -241,6 +244,36 @@ namespace Code.Editor
             string content01 = JsonConvert.SerializeObject(curDropDesign, (Formatting)Formatting.Indented);
             File.WriteAllText(PathConfig.DropedDesignJson, content01);
         }
+        #endregion
+
+        #region 编辑器离线用表
+        public void ExportEditorOffline()
+        {
+            DataSet curTables = GetDataSet();
+            List<LevelEdit.TagTableJson> curDatas = new();
+            
+            DataTable curTable = curTables.Tables["TagSystem"];
+
+            for (int i = 1; i < curTable.Rows.Count; i++)
+            {
+                LevelEdit.TagTableJson curTableJson = new LevelEdit.TagTableJson();
+                if (curTable.Rows[i][1].ToString() == "") continue;
+                curTableJson.Tag = curTable.Rows[i][0].ToString();
+                curTableJson.FixedID = GetCellInt(curTable.Rows[i][1].ToString());
+                curTableJson.EmptyChance = GetCellInt(curTable.Rows[i][2].ToString());
+                curTableJson.KeyChance = GetCellInt(curTable.Rows[i][3].ToString());
+                curTableJson.BuffChance = GetCellInt(curTable.Rows[i][4].ToString());
+                curTableJson.DeBuffChance = GetCellInt(curTable.Rows[i][5].ToString());
+                curTableJson.NormalLoot = GetCellInt(curTable.Rows[i][6].ToString());
+                curTableJson.MetaResource = GetCellInt(curTable.Rows[i][7].ToString());
+                curTableJson.RareLoot = GetCellInt(curTable.Rows[i][8].ToString());
+                curDatas.Add(curTableJson);
+            }
+
+            string content01 = JsonConvert.SerializeObject(curDatas, (Formatting)Formatting.Indented);
+            File.WriteAllText(PathConfig.TagDesignJson, content01);
+        }
+
         #endregion
 
         #region 多语言
@@ -334,12 +367,28 @@ namespace Code.Editor
                 return curStr.Split(';').Select(int.Parse).ToList();
         }
         
+        List<string> GetCellStrList(string curStr)
+        {
+            if (curStr == "")
+                return new List<string>();
+            else
+                return curStr.Split(';').ToList();
+        }
+        
         int GetCellInt(string curStr)
         {
             if (curStr == "")
                 return 0;
             else
                 return int.Parse(curStr);
+        }
+        
+        float GetCellFloat(string curStr)
+        {
+            if (curStr == "")
+                return 0;
+            else
+                return float.Parse(curStr);
         }
 
         bool GetCellBool(string curStr)

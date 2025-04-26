@@ -48,8 +48,7 @@ public class TrunkManager: ScriptableObject
     public List<DropTableJson> DropTableDesignJsons => _dropTableDesignJsons ??= LoadDropTableData();
     public List<DropTableJson> LoadDropTableData()=>
         JsonConvert.DeserializeObject<List<DropTableJson>>(File.ReadAllText(PathConfig.DropedDesignJson));
-    public DropTableJson GetDropTableJson(string _poolName) => DropTableDesignJsons.FirstOrDefault
-        (each => each.PoolName == _poolName) ?? new DropTableJson();
+    public List<DropTableJson> GetDropTableJson() => DropTableDesignJsons;
     
     public void ForceRefresh()
     {

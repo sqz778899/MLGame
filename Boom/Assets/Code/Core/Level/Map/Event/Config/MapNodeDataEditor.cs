@@ -2,6 +2,7 @@
 using UnityEditor;
 
 [CustomEditor(typeof(MapNodeDataConfigMono))]
+[CanEditMultipleObjects]
 public class MapNodeDataEditor : Editor
 {
     public override void OnInspectorGUI()
@@ -10,8 +11,7 @@ public class MapNodeDataEditor : Editor
         serializedObject.Update();
 
         EditorGUILayout.PropertyField(serializedObject.FindProperty("ID"));
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("NodeName"));
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("Desc"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("ClutterTags"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("_MapEventType"));
 
         switch (mono._MapEventType)

@@ -163,7 +163,7 @@ public class RoomKeyEventHandler : IMapEventHandler
             StartPos = view.transform.position
         };
 
-        EffectManager effectManager = UIManager.Instance.CommonUI.EffectRoot.GetComponent<EffectManager>();
+        EffectManager effectManager = EternalCavans.Instance._EffectManager;
         effectManager.CreatEffect(para, false, () =>
         {
             FloatingTextFactory.CreateWorldText("获得一个钥匙！", 
@@ -174,7 +174,6 @@ public class RoomKeyEventHandler : IMapEventHandler
         GameObject.Destroy(view.gameObject); // 直接移除地图物体
     }
 }
-
 #endregion
 
 #region 伪随机赌博类
@@ -182,32 +181,87 @@ public class BasicGamblingEventHandler : IMapEventHandler
 {
     public void Handle(MapNodeData data, MapNodeView view)
     {
-        var weaponData = data.EventData as BasicGamblingRuntimeData;
-        if (weaponData == null) return;
-
+        BasicGamblingRuntimeData gamblingData = data.EventData as BasicGamblingRuntimeData;
+        if (gamblingData == null) return;
+        //Step1：构建大池子
         Dictionary<string, int> weights = new()
         {
-            { "Empty", weaponData.EmptyChance },
-            { "TempBuff", weaponData.TempBuffChance },
-            { "TempDebuff", weaponData.TempDebuffChance },
-            { "NormalLoot", weaponData.NormalLootChance },
-            { "Meta", weaponData.MetaResourceChance },
-            { "Rare", weaponData.RareLootChance }
-        };
-
-        string result = ProbabilityService.Draw($"weaponrack_{data.ID}", weights,
-            GM.Root.BattleMgr._MapManager.CurMapSate.MapRandomSeed);
-
-        switch (result)
+            { "EmptyChance", gamblingData.EmptyChance },
+            { "KeyChance", gamblingData.KeyChance },
+            { "BuffChance", gamblingData.TempBuffChance },
+            { "DebuffChance", gamblingData.TempDebuffChance },
+            { "NormalLoot", gamblingData.NormalLootChance },
+            { "MetaResource", gamblingData.MetaResourceChance },
+            { "RareLoot", gamblingData.RareLootChance }
+        }; 
+        //Step2：抽取大池子
+        int dropCount = Random.Range(gamblingData.MinDropCount, gamblingData.MaxDropCount + 1);
+        List<string> resultList = new();
+        for (int i = 0; i < dropCount; i++)
         {
-            case "Empty": view.ShowFloatingText("空空如也…"); break;
-            case "TempBuff": view.ShowFloatingText("获得临时 Buff！"); break;
-            case "TempDebuff": view.ShowFloatingText("诶呀，有点不对劲…"); break;
-            case "NormalLoot": view.ShowFloatingText("捡到一把普通的破武器。"); break;
-            case "Meta": view.ShowFloatingText("发现稀有材料：秘银！"); break;
-            case "Rare": view.ShowFloatingText("这是传说中的…神器？"); break;
+            int mapRandomSeed = GM.Root.BattleMgr._MapManager.CurMapSate.MapRandomSeed;
+            int localSeed = mapRandomSeed + data.ID * 17000 + i * 2333; // 真正扰动 seed！
+            string bucketKey = $"bigPool_{data.ID * 17000}";
+            string result = ProbabilityService.Draw(bucketKey, weights, localSeed);
+            Debug.Log($"result: {result},bucketKey: {bucketKey}");
+            resultList.Add(result);
         }
+
+        //Step3：抽取小池子
+        foreach (string eachResult in resultList)
+        {
+            switch (eachResult)
+            {
+                case "EmptyChance": view.ShowFloatingText("空空如也…"); break;
+                case "KeyChance":
+                    view.ShowFloatingText("你找到了一把钥匙！");
+                    EParameter para = new EParameter
+                    {
+                        CurEffectType = EffectType.RoomKeys,
+                        InsNum = 1,
+                        StartPos = view.transform.position
+                    };
+
+                    EffectManager effectManager = EternalCavans.Instance._EffectManager;
+                    effectManager.CreatEffect(para, false, () =>
+                    {
+                        FloatingTextFactory.CreateWorldText("获得一个钥匙！", 
+                            view.transform.position + Vector3.up, FloatingTextType.MapHint,Color.yellow, 2f);
+                    });
+
+                    PlayerManager.Instance._PlayerData.ModifyRoomKeys(1);
+                    break;
+                case "BuffChance":
+                case "DebuffChance":
+                case "NormalLoot":
+                case "MetaResource":
+                case "RareLoot":
+                    //掉落实际物品
+                    HandleRealLoot(eachResult,data,view,data.ClutterTags);
+                    break;
+            }
+        }
+        // 标记为已触发
+        data.IsTriggered = true;
+        view.SetAsTriggered();
     }
+
+    #region 抽取真实物品
+    void HandleRealLoot(string dropPoolName, MapNodeData data,MapNodeView view,List<string> clutterTags = null)
+    {
+        DropedObjEntry drop = DropTableService.Draw(dropPoolName,data.ID,clutterTags);
+        
+        if (drop == null)
+        {
+            view.ShowFloatingText("……什么都没有找到。");
+            return;
+        }
+
+        //展示掉落
+        DropRewardService.Drop(drop,view.transform.position);
+        view.ShowFloatingText($"{drop.ID}_+{drop.DropedCategory.ToString()}");
+    }
+    #endregion
 }
 #endregion
 
