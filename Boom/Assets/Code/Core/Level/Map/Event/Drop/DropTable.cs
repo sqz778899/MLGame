@@ -36,7 +36,6 @@ public class DropedObjEntry
 public static class DropTableService
 {
     static Dictionary<string, List<DropedObjEntry>> _dropTables = new();
-    static HashSet<int> _drawnUniqueItems = new();
     
     public static void LoadFromJson()
     {
@@ -59,9 +58,17 @@ public static class DropTableService
         }
         
         //Step1.过滤不可重复项 （道具不能抽重复的，这里过滤一下池子）
-        List<DropedObjEntry> filtered = entries
-            .Where(e => !e.OnlyOncePerRun || !_drawnUniqueItems.Contains(e.ID))
-            .ToList();
+        List<DropedObjEntry> filtered = new List<DropedObjEntry>();
+        foreach (DropedObjEntry eachDropedEntry in entries)
+        {
+            if (eachDropedEntry.DropedCategory == DropedCategory.Item)
+            {
+                if (!GM.Root.InventoryMgr.ItemDuplicateCheck(eachDropedEntry.ID))
+                    filtered.Add(eachDropedEntry);
+            }
+            else
+                filtered.Add(eachDropedEntry);
+        }
         if (filtered.Count == 0)
         {
             Debug.LogWarning($"DropTableService: 所有可抽元素均已被抽取，池 {poolName} 为空");
@@ -93,18 +100,10 @@ public static class DropTableService
             Debug.LogError($"DropTableService: 无法根据 key 找到对应的 Entry：{selectedKey}");
             return null;
         }
-        //Step5，如果是不可重复项（道具）的话，添加到查重池
-        if (selectedEntry.OnlyOncePerRun)
-            _drawnUniqueItems.Add(selectedEntry.ID);
-
         return selectedEntry;
     }
     
-    public static void ResetAll()
-    {
-        _dropTables.Clear();
-        _drawnUniqueItems.Clear();
-    }
+    public static void ResetAll() => _dropTables.Clear();
 }
 
 //展示物品奖励的封装
@@ -118,26 +117,16 @@ public static class DropRewardService
             return;
         }
         
-        // Step1：触发特效（光团飞向背包）
-        //FlipRewardFxManager.Instance.PlayDropEffect(drop);
-        EParameter para = new EParameter
-        {
-            CurEffectType = EffectType.FlipReward,
-            InsNum = 1,
-            StartPos = startPos,
-            Radius = 2f,
-            SpawntimeRange = new Vector2(0.3f,0.4f),
-            FlyRangeOffset  = new Vector2(0.5f,0.8f),
-            FlyTimeRange = new Vector2(0.5f,0.8f),
-        };
-
+        // Step1：根据稀有度设置不同的特效参数
+        EParameter para = GetParaByRarity(drop.Rarity, startPos);
         EffectManager effectManager = EternalCavans.Instance._EffectManager;
-        effectManager.CreatEffect(para, false, () =>
+        // Step2：触发特效（光团飞向背包）
+        effectManager.CreatEffect(para, null, () =>
         {
             RewardBannerManager.Instance.ShowReward(drop.Icon, 1, drop.Rarity);
         });
 
-        // 加到背包
+        // Step3：数据加到背包
         switch (drop.DropedCategory)
         {
             case DropedCategory.Gem:
@@ -150,9 +139,61 @@ public static class DropRewardService
                 Debug.LogWarning($"DropRewardService: 未知掉落类型 {drop.DropedCategory}");
                 break;
         }
+    }
+    
+    static EParameter GetParaByRarity(DropedRarity rarity, Vector3 startPos)
+    {
+        EParameter para = new EParameter
+        {
+            CurEffectType = EffectType.FlipReward,
+            StartPos = startPos,
+        };
 
-        // 展示奖励Banner
-        //RewardBannerManager.Instance.ShowReward(drop.Icon, 1, drop.Rarity);
+        switch (rarity)
+        {
+            case DropedRarity.Common:
+                para.InsNum = 6;
+                para.Radius = 1.0f;
+                para.SpawntimeRange = new Vector2(0.2f, 0.3f);
+                para.FlyRangeOffset = new Vector2(0.5f, 0.8f);
+                para.FlyTimeBase = 0.2f;
+                para.FlyTimePerUnitDistance = 0.04f;
+                para.FlyTimeClampMax = 0.6f;
+                para.SpecialEffectPath = PathConfig.AwardTraitCommon; // 普通光球
+                break;
+            case DropedRarity.Rare:
+                para.InsNum = 12;
+                para.Radius = 1.5f;
+                para.SpawntimeRange = new Vector2(0.25f, 0.35f);
+                para.FlyRangeOffset = new Vector2(0.6f, 0.9f);
+                para.FlyTimeBase = 0.25f;
+                para.FlyTimePerUnitDistance = 0.045f;
+                para.FlyTimeClampMax = 0.7f;
+                para.SpecialEffectPath = PathConfig.AwardTraitRare; // 带亮光
+                break;
+            case DropedRarity.Epic:
+                para.InsNum = 20;
+                para.Radius = 2.0f;
+                para.SpawntimeRange = new Vector2(0.35f, 0.45f);
+                para.FlyRangeOffset = new Vector2(0.7f, 1.0f);
+                para.FlyTimeBase = 0.3f;
+                para.FlyTimePerUnitDistance = 0.05f;
+                para.FlyTimeClampMax = 0.8f;
+                para.SpecialEffectPath = PathConfig.AwardTraitEpic; // 带拖尾
+                break;
+            case DropedRarity.Legendary:
+                para.InsNum = 30;
+                para.Radius = 2.5f;
+                para.SpawntimeRange = new Vector2(0.5f, 0.6f);
+                para.FlyRangeOffset = new Vector2(1.0f, 1.2f);
+                para.FlyTimeBase = 0.4f;
+                para.FlyTimePerUnitDistance = 0.06f;
+                para.FlyTimeClampMax = 1.0f;
+                para.SpecialEffectPath = PathConfig.AwardTraitLegendary; // 彩虹爆炸粒子
+                break;
+        }
+
+        return para;
     }
 }
 

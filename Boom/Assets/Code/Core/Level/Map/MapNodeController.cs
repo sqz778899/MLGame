@@ -17,11 +17,11 @@ public class MapNodeController
         
         if (_data.IsTriggered && !EventTypeRules.IsRepeatable(_data.EventType))
         {
-            _view.ShowFloatingText("已经没什么好拿的了");
+            _view.NonFind();
             return;
         }
 
-        var handler = MapEventHandlerRegistry.GetHandler(_data.EventType);
+        IMapEventHandler handler = MapEventHandlerRegistry.GetHandler(_data.EventType);
         if (handler != null)
             handler.Handle(_data, _view);
         else

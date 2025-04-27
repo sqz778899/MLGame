@@ -156,15 +156,12 @@ public class RoomKeyEventHandler : IMapEventHandler
             return;
         }
 
-        EParameter para = new EParameter
-        {
+        EParameter para = new EParameter {
             CurEffectType = EffectType.RoomKeys,
-            InsNum = runtime.RoomKeysNum,
             StartPos = view.transform.position
         };
-
         EffectManager effectManager = EternalCavans.Instance._EffectManager;
-        effectManager.CreatEffect(para, false, () =>
+        effectManager.CreatEffect(para,null, () =>
         {
             FloatingTextFactory.CreateWorldText("获得一个钥匙！", 
                 view.transform.position + Vector3.up, FloatingTextType.MapHint,Color.yellow, 2f);
@@ -207,28 +204,33 @@ public class BasicGamblingEventHandler : IMapEventHandler
             resultList.Add(result);
         }
 
-        //Step3：抽取小池子
+        //改成协程方式：一个一个播放
+        EternalCavans.Instance.StartCoroutine(PlayRewardSequence(resultList, data, view));
+    }
+
+    IEnumerator PlayRewardSequence(List<string> resultList, MapNodeData data, MapNodeView view)
+    {
         foreach (string eachResult in resultList)
         {
             switch (eachResult)
             {
-                case "EmptyChance": view.ShowFloatingText("空空如也…"); break;
+                case "EmptyChance":
+                    view.ShowFloatingText("空空如也…");
+                    break;
                 case "KeyChance":
                     view.ShowFloatingText("你找到了一把钥匙！");
-                    EParameter para = new EParameter
+                    var para = new EParameter
                     {
                         CurEffectType = EffectType.RoomKeys,
                         InsNum = 1,
-                        StartPos = view.transform.position
+                        StartPos = view.transform.position,
+                        FlyTimeBase = 0.2f
                     };
-
-                    EffectManager effectManager = EternalCavans.Instance._EffectManager;
-                    effectManager.CreatEffect(para, false, () =>
+                    EternalCavans.Instance._EffectManager.CreatEffect(para, null, () =>
                     {
-                        FloatingTextFactory.CreateWorldText("获得一个钥匙！", 
-                            view.transform.position + Vector3.up, FloatingTextType.MapHint,Color.yellow, 2f);
+                        FloatingTextFactory.CreateWorldText("获得一个钥匙！",
+                            view.transform.position + Vector3.up, FloatingTextType.MapHint, Color.yellow, 2f);
                     });
-
                     PlayerManager.Instance._PlayerData.ModifyRoomKeys(1);
                     break;
                 case "BuffChance":
@@ -236,13 +238,16 @@ public class BasicGamblingEventHandler : IMapEventHandler
                 case "NormalLoot":
                 case "MetaResource":
                 case "RareLoot":
-                    //掉落实际物品
-                    HandleRealLoot(eachResult,data,view,data.ClutterTags);
+                    HandleRealLoot(eachResult, data, view, data.ClutterTags);
                     break;
             }
+
+            // 🎯 每个掉落后等一段时间（比如0.25秒）
+            yield return new WaitForSeconds(0.25f);
         }
-        // 标记为已触发
-        data.IsTriggered = true;
+        
+        // 最后，房间标记为已触发
+        //data.IsTriggered = true;
         view.SetAsTriggered();
     }
 

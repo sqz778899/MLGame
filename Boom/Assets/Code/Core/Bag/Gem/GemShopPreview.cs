@@ -67,7 +67,7 @@ public class GemShopPreview : ItemBase, IItemInteractionBehaviour,IHighlightable
         if (ShopUtility.SelOne(this))
         {
             EPara.StartPos = transform.position;
-            _effectManager.CreatEffect(EPara, gameObject, true);
+            _effectManager.CreatEffect(EPara, gameObject);
         }
     }
     

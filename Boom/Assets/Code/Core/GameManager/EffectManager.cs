@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -12,180 +10,147 @@ public class EffectManager : MonoBehaviour
     public GameObject CoinsTarget;
     public GameObject RoomKeysTarget;
     public GameObject BagTarget;
+    [Header("Curves")]
+    public AnimationCurve GamblingCurve;
+    [Header("公共参数")] 
+    public EParameter eParamKey;
 
     #region 总接口
-    public void CreatEffect(EParameter EPara,bool IsLine = false,Action onFinish = null)
+    public void CreatEffect(EParameter eParam,GameObject Ins = null,Action onFinish = null)
     {
-        string insPath = "";
+        string prefabPath = "";
         Vector3 targetpos;
-        switch (EPara.CurEffectType)
+        switch (eParam.CurEffectType)
         {
             case EffectType.CoinsPile:
-                insPath = PathConfig.AwardCoin;
+                prefabPath = PathConfig.AwardCoin;
                 targetpos = CoinsTarget.transform.position;
                 break;
             case EffectType.RoomKeys:
-                insPath = PathConfig.AwardRoomKey;
+                eParamKey.StartPos = eParam.StartPos;
+                eParam = eParamKey;
+                prefabPath = PathConfig.AwardRoomKey;
                 targetpos = RoomKeysTarget.transform.position;
                 break;
             case EffectType.Shop:
-                insPath = PathConfig.AwardCoin;
+                prefabPath = PathConfig.AwardCoin;
                 targetpos = BagTarget.transform.position;
                 break;
             case EffectType.FlipReward:  //新加翻找掉落走这条
-                insPath = PathConfig.AwardTrait;
+                eParam.CustomFlyCurve = GamblingCurve;
+                prefabPath = eParam.SpecialEffectPath;
                 targetpos = BagTarget.transform.position;
                 break;
             default:
-                insPath = PathConfig.AwardCoin;
+                prefabPath = PathConfig.AwardCoin;
                 targetpos = CoinsTarget.transform.position;
                 break;
         }
+        
+        int total = eParam.InsNum;
+        int finished = 0;
+        
+        for (int i = 0; i < eParam.InsNum; i++)
+        {
+            GameObject instance = null;
+            if (Ins != null)
+                instance = Ins;
+            else
+                instance = ResManager.instance.CreatInstance(prefabPath);
 
-        if (IsLine)
-            PlayEffectIsLine(EPara,targetpos, insPath,onFinish);
+          
+            PlaySingleAward(instance, eParam, targetpos, () =>
+            {
+                finished++;
+                if (finished >= total)
+                {
+                    onFinish?.Invoke(); //所有光球飞完之后，再统一弹 Banner
+                }
+            });
+        }
+    }
+    
+    void PlaySingleAward(GameObject obj, EParameter eParam, Vector3 targetPos, Action onFinish = null)
+    {
+        if (obj.GetComponent<RectTransform>())
+            obj.transform.SetParent(Root.transform, false);
         else
-            PlayAwardEffect(EPara,targetpos, insPath,onFinish);
-    }
-    
-    public void CreatEffect(EParameter EPara,GameObject Ins,bool IsLine = false,Action onFinish = null)
-    {
-        Vector3 targetpos;
-        switch (EPara.CurEffectType)
-        {
-            case EffectType.CoinsPile:
-                targetpos = CoinsTarget.transform.position;
-                break;
-            case EffectType.RoomKeys:
-              
-                targetpos = RoomKeysTarget.transform.position;
-                break;
-            case EffectType.Shop:
-                targetpos = BagTarget.transform.position;
-                break;
-            default:
-                targetpos = CoinsTarget.transform.position;
-                break;
-        }
+            obj.transform.SetParent(Root.transform, true);
+        eParam.StartPos.z = targetPos.z; // 保持z轴一致
+        obj.transform.position = eParam.StartPos;
 
-        if (IsLine)
-        {
-            PlayEffectIsLine(EPara,targetpos,Ins,onFinish);
-        }
-        else 
-            PlayAwardEffect(EPara,targetpos, Ins,onFinish);
-    }
-    #endregion
+        Vector3 randomExpandOffset = Random.insideUnitSphere * eParam.Radius;
+        Vector3 expandPos = eParam.StartPos + randomExpandOffset;
 
-    #region 带一些曲线飞向目标
-    //带一些曲线飞向目标
-    void PlayAwardEffect(EParameter EPara,Vector3 targetpos,string resPath,Action onFinish = null)
-    {
+        float spawnDuration = Random.Range(eParam.SpawntimeRange.x, eParam.SpawntimeRange.y);
+
+        float distance = Vector3.Distance(expandPos, targetPos);
+        float flyTime = eParam.FlyTimeBase + distance * eParam.FlyTimePerUnitDistance;
+        flyTime = Mathf.Clamp(flyTime, eParam.FlyTimeBase, eParam.FlyTimeClampMax);
+
+        Vector3 controlPoint = Vector3.Lerp(expandPos, targetPos, 0.5f)
+                               + Random.insideUnitSphere * Random.Range(eParam.FlyRangeOffset.x, eParam.FlyRangeOffset.y);
+
         Sequence seq = DOTween.Sequence();
-        float val = Random.Range(EPara.FlyRangeOffset.x,EPara.FlyRangeOffset.y);
-        for (int i = 0; i < EPara.InsNum; i++)
+        seq.Append(obj.transform.DOMove(expandPos, spawnDuration).SetEase(Ease.OutSine));
+        seq.Append(obj.transform.DOBezier(expandPos, controlPoint, targetPos, flyTime, () =>
         {
-            GameObject awardIns = ResManager.instance.CreatInstance(resPath);
-            SetEffectSe(awardIns,EPara,targetpos,val,ref seq,onFinish);
-        }
+            FadeOutAndDestroy(obj);
 
-        seq.SetUpdate(true);
-        seq.AppendCallback(() =>
-        {
+            if (eParam.CurEffectType == EffectType.FlipReward && BagTarget != null)
+            {
+                BagTarget.GetComponent<BagIconAnimator>()?.PlayHeartbeatBump();
+            }
             onFinish?.Invoke();
-        });
-    }
-    
-    void PlayAwardEffect(EParameter EPara,Vector3 targetpos,GameObject Ins,Action onFinish = null)
-    {
-        Sequence seq = DOTween.Sequence();
-        float val = Random.Range(EPara.FlyRangeOffset.x,EPara.FlyRangeOffset.y);
-        SetEffectSe(Ins,EPara,targetpos,val,ref seq,onFinish);
+        }).SetEase(eParam.CustomFlyCurve));
         
         seq.SetUpdate(true);
-        seq.AppendCallback(() =>
-        {
-            onFinish?.Invoke();
-        });
-    } 
-    #endregion
-
-    #region 直接飞向目标
-    void PlayEffectIsLine(EParameter EPara, Vector3 targetpos, string resPath, Action onFinish = null)
-    {
-        Sequence seq = DOTween.Sequence();
-        float val = Random.Range(EPara.FlyRangeOffset.x,EPara.FlyRangeOffset.y);
-        for (int i = 0; i < EPara.InsNum; i++)
-        {
-            GameObject ins = ResManager.instance.CreatInstance(resPath);
-            SetEffectSe(ins, EPara, targetpos, val, ref seq, onFinish);
-        }
-
-        seq.SetUpdate(true);
-        seq.AppendCallback(() =>
-        {
-            onFinish?.Invoke();
-        });
-    }
-    
-    //直接飞向目标
-    void PlayEffectIsLine(EParameter EPara, Vector3 targetpos, GameObject ins, Action onFinish = null)
-    {
-        Sequence seq = DOTween.Sequence();
-        float val = Random.Range(EPara.FlyRangeOffset.x,EPara.FlyRangeOffset.y);
-        SetEffectSe(ins,EPara,targetpos,val,ref seq,onFinish);
-        seq.SetUpdate(true);
-        seq.AppendCallback(() =>
-        {
-            onFinish?.Invoke();
-        });
     }
     #endregion
-    
-    void SetEffectSe(GameObject awardIns,EParameter EPara,Vector3 targetpos,float val,ref Sequence seq,Action onFinish = null)
-    {
-        awardIns.transform.SetParent(Root.transform,false);
-        float randomTime = Random.Range(EPara.SpawntimeRange.x,EPara.SpawntimeRange.y);
-        awardIns.transform.position = EPara.StartPos;
-        if (EPara.CurEffectType != EffectType.Shop)
-        {
-            seq.Insert(0,awardIns.transform.DOMove(
-                EPara.StartPos + Random.insideUnitSphere * EPara.Radius,randomTime).SetEase(Ease.OutSine));
-        }
-        Vector3 cpos = new Vector3(awardIns.transform.position.x + val,
-            awardIns.transform.position.y + val,awardIns.transform.position.z);
-        seq.Insert(randomTime,awardIns.transform.DOBezier(
-            awardIns.transform.position,cpos, targetpos,
-            Random.Range(EPara.FlyTimeRange.x,EPara.FlyTimeRange.y), () =>
-            {
-                FadeOutAndDestroy(awardIns);
-                //Destroy(awardIns);
-            }));
-    }
     
     void FadeOutAndDestroy(GameObject obj)
     {
+        bool handled = false;
+
+        // 1. 处理粒子系统
         var ps = obj.GetComponentInChildren<ParticleSystem>();
         if (ps != null)
         {
-            // 1. 停止发射新粒子
             ps.Stop();
-
-            // 2. 等粒子自然结束后销毁
-            float delay = ps.main.startLifetime.constantMax; // 粒子最长生命周期
+            float delay = ps.main.startLifetime.constantMax;
             DOTween.Sequence()
                 .AppendInterval(delay)
-                .AppendCallback(() => {
-                    Destroy(obj);
-                });
+                .AppendCallback(() => Destroy(obj));
+            handled = true;
         }
-        else
+
+        // 2. 处理SpriteRenderer（渐隐）
+        var sr = obj.GetComponentInChildren<SpriteRenderer>();
+        if (sr != null)
         {
-            // 如果没有粒子，直接销毁
+            DOTween.To(() => sr.color, c => sr.color = c, new Color(sr.color.r, sr.color.g, sr.color.b, 0), 0.4f)
+                .OnComplete(() => Destroy(obj));
+            handled = true;
+        }
+
+        // 3. 处理TrailRenderer（自然消散）
+        var trail = obj.GetComponentInChildren<TrailRenderer>();
+        if (trail != null)
+        {
+            trail.emitting = false; // 关闭发射新轨迹
+            float trailDuration = trail.time;
+            DOTween.Sequence()
+                .AppendInterval(trailDuration)
+                .AppendCallback(() => Destroy(obj));
+            handled = true;
+        }
+
+        // 4. 如果啥都没找到，直接销毁
+        if (!handled)
+        {
             Destroy(obj);
         }
     }
-
 }
 
 public enum EffectType
@@ -204,7 +169,13 @@ public class EParameter
     public Vector2 SpawntimeRange;  //诞生动画时长
     public float Radius;            // 诞生球半径
     public Vector2 FlyRangeOffset;  // 贝塞尔控制点偏移
-    public Vector2 FlyTimeRange;    //飞行动画时长
+    
+    public float FlyTimeBase = 0.5f;
+    public float FlyTimePerUnitDistance = 0.05f;
+    public float FlyTimeClampMax = 1.2f;
+    public string SpecialEffectPath = "";
+    
+    public AnimationCurve CustomFlyCurve; //加一个飞行动画曲线
 
     public EParameter()
     {
@@ -214,6 +185,6 @@ public class EParameter
         SpawntimeRange = new Vector2(0.3f, 0.4f);
         Radius = 1;
         FlyRangeOffset = new Vector2(-1, 1);
-        FlyTimeRange = new Vector2(0.4f, 0.6f);
+        CustomFlyCurve = AnimationCurve.EaseInOut(0,0,1,1); // 默认曲线
     }
 }

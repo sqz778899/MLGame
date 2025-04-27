@@ -176,8 +176,26 @@ public class MapRoomNode : MonoBehaviour
         _instanceFogMat.SetFloat("_DissolveAmount", endDissolveAmount);
         
         _resources.ToList().ForEach(r => r.UnLocked());
+        RefreshMouseHoverHighlight();
         _arrows.ToList().ForEach(r => r.UnLocked());
         IsFogUnLocked = true;
     }
+    
+    void RefreshMouseHoverHighlight()
+    {
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        RaycastHit2D hitInfo = Physics2D.Raycast(mousePos, Vector2.zero);
+
+        if (hitInfo.collider != null)
+        {
+            GameObject hitObj = hitInfo.collider.gameObject;
+            var nodeView = hitObj.GetComponent<MapNodeView>();
+            if (nodeView != null)
+            {
+                nodeView.HighLight();
+            }
+        }
+    }
+
     #endregion
 }

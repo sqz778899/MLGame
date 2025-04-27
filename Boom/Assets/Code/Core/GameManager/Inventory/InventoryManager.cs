@@ -44,6 +44,20 @@ public class InventoryManager : MonoBehaviour
         BagItemTools<Gem>.AddObjectGO(newGemData);//在OnDrop中添加到数据层
     }
 
+    //抽取道具的时候，不能抽取重复的道具，这一步查重
+    public bool ItemDuplicateCheck(int itemID)
+    {
+        List<ItemData> allItems = _InventoryData.BagItems
+            .Concat(_InventoryData.EquipItems)
+            .ToList();
+        foreach (ItemData each in allItems)
+        {
+            if (each.ID == itemID && each.Category == ItemCategory.Equipable)
+                return true;
+        }
+        return false;
+    }
+
     #region 子弹的一些外部操作
     public void AddBulletToFight(BulletData bulletData)
     {

@@ -72,6 +72,13 @@ public class MapNodeView:MonoBehaviour
         Destroy(gameObject);
     }
 
+    public void NonFind()
+    {
+        GameObject clickSmoke = ResManager.instance.CreatInstance(PathConfig.ClickSmokeFX);
+        clickSmoke.transform.position = transform.position;
+        ShowFloatingText("已经没什么好拿的了");
+    }
+
     public void ShowFloatingText(string message)
     {
         if (Time.time - lastFloatingTime < FloatingCooldown) return;

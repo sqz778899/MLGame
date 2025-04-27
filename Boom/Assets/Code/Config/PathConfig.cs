@@ -67,7 +67,12 @@ public static class PathConfig
    public static string AwardRoomKey = GetPrepath() + "Res/UI/Prefabs/Misc/P_Award_RoomKey_01.prefab";
    public static string ObserveHPPB = GetPrepath() + "Res/Character/Image/Enemy/P_ObserveHP_01.prefab";
    //...........................FX.........................................
-   public static string AwardTrait = GetPrepath() + "Res/FX/Prefab/FX_Trail_01.prefab";
+   public static string AwardTraitCommon = GetPrepath() + "Res/FX/Prefab/FX_Trail_Common_01.prefab";
+   public static string AwardTraitRare = GetPrepath() + "Res/FX/Prefab/FX_Trail_Rare_01.prefab";
+   public static string AwardTraitEpic = GetPrepath() + "Res/FX/Prefab/FX_Trail_Epic_01.prefab";
+   public static string AwardTraitLegendary = GetPrepath() + "Res/FX/Prefab/FX_Trail_Legendary_01.prefab";
+   
+   public static string ClickSmokeFX = GetPrepath() + "Res/FX/Prefab/FX_ClickSmoke_01.prefab";
    
    //...........................角色.................................
    public static string EnemyPB = GetPrepath() + "Res/Character/SpineData/P_Enemy_Template.prefab";
