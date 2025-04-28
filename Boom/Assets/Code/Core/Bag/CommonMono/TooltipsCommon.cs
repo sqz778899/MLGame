@@ -34,7 +34,8 @@ public enum ToolTipsType
     None = 0,
     Item = 1,
     Bullet = 2,
-    Gem = 3
+    Gem = 3,
+    Buff = 4
 }
 
 public struct ToolTipsAttriSingleInfo

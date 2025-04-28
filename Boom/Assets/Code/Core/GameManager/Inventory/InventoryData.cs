@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class InventoryData: ScriptableObject
@@ -43,5 +44,8 @@ public class InventoryData: ScriptableObject
         EquipItems.Remove(item);
         OnEquipItemChanged?.Invoke();
     }
+    
+    /// 查找背包内的可堆叠道具
+    public ItemData FindStackableItem(int id) =>  BagItems.FirstOrDefault(item => item.ID == id && item.IsStackable);
     #endregion
 }

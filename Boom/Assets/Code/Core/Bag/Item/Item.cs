@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class Item : ItemBase,IItemInteractionBehaviour
@@ -9,6 +11,7 @@ public class Item : ItemBase,IItemInteractionBehaviour
     public Image Icon;
     public Image ItemBGInBag;
     public Image ItemBGInEquip;
+    public TextMeshProUGUI StackCountText;
     public Color RareColor;
     
     public Color Rare1;
@@ -24,6 +27,7 @@ public class Item : ItemBase,IItemInteractionBehaviour
     {
         Data = data as ItemData;
         Data.InstanceID = GetInstanceID();
+        Data.OnDataChanged += RefreshUI;
         RefreshUI();
     }
 
@@ -51,7 +55,18 @@ public class Item : ItemBase,IItemInteractionBehaviour
         }
         if (ItemBGInBag != null) ItemBGInBag.color = RareColor;
         if (ItemBGInEquip != null) ItemBGInEquip.color = RareColor;
+        
+        // 堆叠数量显示
+        if (Data.IsStackable && Data.StackCount > 1)
+        {
+            StackCountText.text = $"x{Data.StackCount}";
+            StackCountText.gameObject.SetActive(true);
+        }
+        else
+            StackCountText.gameObject.SetActive(false);
     }
+
+    void OnDestroy() => Data.OnDataChanged -= RefreshUI;
     #endregion
 
     #region 双击与右键逻辑

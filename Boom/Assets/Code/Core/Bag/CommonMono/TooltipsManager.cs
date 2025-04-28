@@ -11,18 +11,21 @@ public class TooltipsManager:MonoBehaviour
     public void Disable() => isEnabled = false;
     public void Enable() => isEnabled = true;
     public static TooltipsManager Instance { get; private set; }
+    
+    private float DefaultOrthoSize;
 
     public void Init()
     {
         Instance = this;
         if (tooltipGO != null)
             tooltipGO.SetActive(false);
+        DefaultOrthoSize = Camera.main.orthographicSize;
     }
 
     /// <summary>
     /// 显示 Tooltips
     /// </summary>
-    public void Show(ToolTipsInfo info, Vector3 worldPosition)
+    public void Show(ToolTipsInfo info, Vector3 worldPosition, Vector3 offset = default)
     {
         if (!isEnabled) return;
         
@@ -30,10 +33,28 @@ public class TooltipsManager:MonoBehaviour
 
         tooltipGO.SetActive(true);
         tooltipSC.SetInfo(info);
-        tooltipGO.transform.position = worldPosition;
+        Vector3 finalWorldPos = ScreenToCanvasWorldPos(worldPosition + offset);
+        tooltipGO.transform.position = finalWorldPos;
     }
     
-    public void UpdatePosition(Vector3 screenPos) =>tooltipGO.transform.position = screenPos;
+    private Vector3 ScreenToCanvasWorldPos(Vector3 screenPos)
+    {
+        RectTransform canvasRect = tooltipGO.GetComponentInParent<Canvas>().GetComponent<RectTransform>();
+        Camera cam = canvasRect.GetComponentInParent<Canvas>().worldCamera; // 注意Canvas要绑定了Camera！
+
+        RectTransformUtility.ScreenPointToWorldPointInRectangle(canvasRect, screenPos, cam, out Vector3 worldPoint);
+        return worldPoint;
+    }
+    
+    
+    //public void UpdatePosition(Vector3 screenPos)=>tooltipGO.transform.position = screenPos;
+    
+    public void UpdatePosition(Vector3 screenPos)
+    {
+        Vector3 finalWorldPos = ScreenToCanvasWorldPos(screenPos);
+        tooltipGO.transform.position = finalWorldPos;
+    }
+  
 
     /// <summary>
     /// 隐藏 Tooltips
@@ -41,7 +62,6 @@ public class TooltipsManager:MonoBehaviour
     public void Hide()
     {
         if (tooltipGO == null || tooltipSC == null) return;
-        
         tooltipGO.SetActive(false);
     }
 }

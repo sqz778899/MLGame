@@ -32,6 +32,24 @@ public class ResManager : Singleton<ResManager>
         return GetAssetCache<Sprite>(AssetPath);
     }
 
+    public Sprite GetBuffIcon(int id)
+    {
+        BuffJson curJson = TrunkManager.Instance.GetBuffJson(id);
+        if (curJson.Rarity == DropedRarity.Common && curJson.IsDebuff == false)
+            return GetAssetCache<Sprite>(PathConfig.BuffLv1);
+        if (curJson.Rarity == DropedRarity.Rare && curJson.IsDebuff == false)
+            return GetAssetCache<Sprite>(PathConfig.BuffLv2);
+        if (curJson.Rarity == DropedRarity.Epic && curJson.IsDebuff == false)
+            return GetAssetCache<Sprite>(PathConfig.BuffLv3);
+        if (curJson.Rarity == DropedRarity.Common && curJson.IsDebuff)
+            return GetAssetCache<Sprite>(PathConfig.DeBuffLv1);
+        if (curJson.Rarity == DropedRarity.Rare && curJson.IsDebuff)
+            return GetAssetCache<Sprite>(PathConfig.DeBuffLv2);
+        if (curJson.Rarity == DropedRarity.Epic && curJson.IsDebuff)
+            return GetAssetCache<Sprite>(PathConfig.DeBuffLv3);
+        return null;
+    }
+
     static string GetFileNameByPath(string CurPath)
     {
         CurPath = CurPath.Replace("\\","/");

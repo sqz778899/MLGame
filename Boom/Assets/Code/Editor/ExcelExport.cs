@@ -24,6 +24,7 @@ namespace Code.Editor
             ExportQuestDesign();//任务相关
             ExportTalent();//天赋相关
             ExportDrop();//掉落相关
+            ExportBuff();//Buff相关
             //编辑器离线用表
             ExportEditorOffline();
             AssetDatabase.Refresh();
@@ -224,7 +225,7 @@ namespace Code.Editor
             {
                 DataTable curTable = curTables.Tables[i];
                 DropTableJson curData = new DropTableJson();
-                if (curTable.Rows[1][1].ToString() == "") continue;
+                if (curTable.Rows[i][1].ToString() == "") continue;
                 curData.PoolName = curTable.TableName;
                 for (int j = 1; j < curTable.Rows.Count; j++)
                 {
@@ -240,9 +241,35 @@ namespace Code.Editor
                 }
                 curDropDesign.Add(curData);
             }
-            
             string content01 = JsonConvert.SerializeObject(curDropDesign, (Formatting)Formatting.Indented);
             File.WriteAllText(PathConfig.DropedDesignJson, content01);
+        }
+
+        public void ExportBuff()
+        {
+            DataSet curTables = GetDataSet();
+            List<BuffJson> curBuffJsonDesign = new List<BuffJson>();
+            DataTable curTable = curTables.Tables["Buff设计"];
+
+            for (int i = 1; i < curTable.Rows.Count; i++)
+            {
+                BuffJson curData = new BuffJson();
+                if (curTable.Rows[i][1].ToString() == "") continue;
+                curData.ID = GetCellInt(curTable.Rows[i][0].ToString());
+                curData.Name = curTable.Rows[i][1].ToString();
+                curData.Rarity = (DropedRarity)GetCellInt(curTable.Rows[i][2].ToString());
+                string typeStr = curTable.Rows[i][3].ToString();
+                if (typeStr == "Debuff")
+                    curData.IsDebuff = true;
+                else
+                    curData.IsDebuff = false;
+                curData.Desc = curTable.Rows[i][4].ToString();
+                curBuffJsonDesign.Add(curData);
+            }
+            
+            string content01 = JsonConvert.SerializeObject(curBuffJsonDesign,
+                (Formatting)Formatting.Indented);
+            File.WriteAllText(PathConfig.BuffDesignJson, content01);
         }
         #endregion
 

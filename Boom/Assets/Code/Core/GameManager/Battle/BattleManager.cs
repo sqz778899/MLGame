@@ -62,7 +62,7 @@ public class BattleManager: MonoBehaviour
         battleUI.InitWinFailGUI();
         _MapManager.SwitchMapScene();
         _MapManager.ToTargetRoom();
-        GM.Root.PlayerMgr._PlayerData.BuffManager.OnBattleEnd(); //Buff结算
+        GM.Root.PlayerMgr._PlayerData.OnBattleEnd(); //Buff结算
     }
 
     //战斗失败
@@ -72,7 +72,7 @@ public class BattleManager: MonoBehaviour
         battleUI.InitWinFailGUI();
         _MapManager.SwitchMapScene();
         _MapManager.ToCurRoom();
-        GM.Root.PlayerMgr._PlayerData.BuffManager.OnBattleEnd();//Buff结算
+        GM.Root.PlayerMgr._PlayerData.OnBattleEnd();//Buff结算
     }
     #endregion
     

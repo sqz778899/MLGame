@@ -36,6 +36,8 @@ public static class PathConfig
    
    public static string DialogueDesignJson = GetDataPrepath() + "Data/DialogueDesign.json";
    public static string TalentDesignJson = GetDataPrepath() + "Data/TalentDesign.json";
+   public static string BuffDesignJson = GetDataPrepath() + "Data/BuffDesign.json";
+   
    public static string DropedDesignJson = GetDataPrepath() + "Data/DropedDesign.json";
    //..........................编辑器用Json
    public static string TagDesignJson = GetDataPrepath() + "Data/TagDesign.json";
@@ -73,6 +75,7 @@ public static class PathConfig
    public static string AwardTraitLegendary = GetPrepath() + "Res/FX/Prefab/FX_Trail_Legendary_01.prefab";
    
    public static string ClickSmokeFX = GetPrepath() + "Res/FX/Prefab/FX_ClickSmoke_01.prefab";
+   public static string OpenBoxSmokeFX = GetPrepath() + "Res/FX/Prefab/FX_OpenBoxSmoke_01.prefab";
    
    //...........................角色.................................
    public static string EnemyPB = GetPrepath() + "Res/Character/SpineData/P_Enemy_Template.prefab";
@@ -96,6 +99,12 @@ public static class PathConfig
    public static string ScoreMatImage = GetPrepath() + "Res/Bullet/Textures/T_ScoreMat_01.png";
    
    //..........................Buff.............................................
+   public static string BuffLv1 = GetPrepath() + "Res/UI/Buff/T_Buff_01.png";
+   public static string BuffLv2 = GetPrepath() + "Res/UI/Buff/T_Buff_02.png";
+   public static string BuffLv3 = GetPrepath() + "Res/UI/Buff/T_Buff_03.png";
+   public static string DeBuffLv1 = GetPrepath() + "Res/UI/Buff/T_DeBuff_01.png";
+   public static string DeBuffLv2 = GetPrepath() + "Res/UI/Buff/T_DeBuff_02.png";
+   public static string DeBuffLv3 = GetPrepath() + "Res/UI/Buff/T_DeBuff_03.png";
 
    //..........................Connon...........................................
    public static string ConnonPB = GetPrepath() + "Res/Character/SpineData/Connon01/P_Connon_01.prefab";

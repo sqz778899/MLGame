@@ -1,0 +1,72 @@
+[
+  {
+    "ID": 1,
+    "Name": "迷乱咒印",
+    "Rarity": 1,
+    "Desc": "开火时子弹顺序打乱，持续一场战斗",
+    "IsDebuff": true
+  },
+  {
+    "ID": 2,
+    "Name": "魔力残毒",
+    "Rarity": 1,
+    "Desc": "第一颗子弹宝石效果-1，持续一场战斗",
+    "IsDebuff": true
+  },
+  {
+    "ID": 3,
+    "Name": "咒术疲劳",
+    "Rarity": 1,
+    "Desc": "第二颗子弹伤害-1，持续一场战斗",
+    "IsDebuff": true
+  },
+  {
+    "ID": 4,
+    "Name": "魔力短路",
+    "Rarity": 1,
+    "Desc": "第一颗子弹穿透失效，持续一场战斗",
+    "IsDebuff": true
+  },
+  {
+    "ID": 5,
+    "Name": "魔流逆涌",
+    "Rarity": 1,
+    "Desc": "你最后一颗子弹伤害-2，持续一场战斗",
+    "IsDebuff": true
+  },
+  {
+    "ID": 6,
+    "Name": "咒语打结",
+    "Rarity": 1,
+    "Desc": "你无法发射第四颗子弹，持续一场战斗",
+    "IsDebuff": true
+  },
+  {
+    "ID": 100,
+    "Name": "脆弱",
+    "Rarity": 2,
+    "Desc": "你的全部子弹伤害-1，持续一场战斗",
+    "IsDebuff": true
+  },
+  {
+    "ID": 101,
+    "Name": "咒式卡顿",
+    "Rarity": 2,
+    "Desc": "第三颗子弹无法触发宝石效果，持续一场战斗",
+    "IsDebuff": true
+  },
+  {
+    "ID": 201,
+    "Name": "偏斜射击",
+    "Rarity": 3,
+    "Desc": "穿透失效，持续一场战斗",
+    "IsDebuff": true
+  },
+  {
+    "ID": 202,
+    "Name": "共鸣屏障",
+    "Rarity": 3,
+    "Desc": "共振失效，持续一场战斗",
+    "IsDebuff": true
+  }
+]

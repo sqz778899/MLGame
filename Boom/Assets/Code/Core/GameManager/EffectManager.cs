@@ -78,9 +78,21 @@ public class EffectManager : MonoBehaviour
             obj.transform.SetParent(Root.transform, true);
         eParam.StartPos.z = targetPos.z; // 保持z轴一致
         obj.transform.position = eParam.StartPos;
-
-        Vector3 randomExpandOffset = Random.insideUnitSphere * eParam.Radius;
-        Vector3 expandPos = eParam.StartPos + randomExpandOffset;
+        // 原本是 Random.insideUnitSphere * Radius
+        Vector3 randomStartOffset = Vector3.zero;
+        if (eParam.ExplodeMode == EffectExplodeMode.Sphere)
+        {
+            randomStartOffset = Random.insideUnitSphere * eParam.Radius;
+        }
+        else if (eParam.ExplodeMode == EffectExplodeMode.Upward)
+        {
+            randomStartOffset = new Vector3(
+                Random.Range(-eParam.Radius, eParam.Radius),
+                Random.Range(0.8f * eParam.Radius, 1.5f * eParam.Radius),
+                0f);
+        }
+        //Vector3 randomExpandOffset = Random.insideUnitSphere * eParam.Radius;
+        Vector3 expandPos = eParam.StartPos + randomStartOffset;
 
         float spawnDuration = Random.Range(eParam.SpawntimeRange.x, eParam.SpawntimeRange.y);
 
@@ -160,6 +172,13 @@ public enum EffectType
     Shop = 2,
     FlipReward = 3
 }
+
+public enum EffectExplodeMode
+{
+    Sphere,    // 球形四散
+    Upward     // 向上喷射
+}
+
 [Serializable]
 public class EParameter
 {
@@ -176,7 +195,8 @@ public class EParameter
     public string SpecialEffectPath = "";
     
     public AnimationCurve CustomFlyCurve; //加一个飞行动画曲线
-
+    public EffectExplodeMode ExplodeMode; //扩散形状
+    
     public EParameter()
     {
         CurEffectType = EffectType.CoinsPile;
@@ -186,5 +206,6 @@ public class EParameter
         Radius = 1;
         FlyRangeOffset = new Vector2(-1, 1);
         CustomFlyCurve = AnimationCurve.EaseInOut(0,0,1,1); // 默认曲线
+        ExplodeMode = EffectExplodeMode.Sphere;//默认球形
     }
 }

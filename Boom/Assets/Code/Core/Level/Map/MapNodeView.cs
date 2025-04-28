@@ -21,16 +21,8 @@ public class MapNodeView:MonoBehaviour
     const float FloatingCooldown = 0.5f; // 半秒内不重复跳字
     [Header("飞行特效参数")] 
     public EParameter EPara;
-    EffectManager _effectManager;
-    EffectManager eEffectManager
-    {
-        get
-        {
-            if (_effectManager==null)
-                _effectManager = EternalCavans.Instance._EffectManager;
-            return _effectManager;
-        }
-    }
+    EffectManager eEffectManager => EternalCavans.Instance._EffectManager;
+   
 
     public Action OnClick; //新手引导等外部注册
     
@@ -59,8 +51,8 @@ public class MapNodeView:MonoBehaviour
             case MapEventType.CoinsPile:
                 PlayCoinsEffect(coinsAmount);
                 break;
-            case MapEventType.BasicGambling:
-                // 可选：播放开柜子动画/粒子等
+            case MapEventType.TreasureBox:
+                QuickFxFactory.PlayFx(PathConfig.OpenBoxSmokeFX, transform.position);//播放动画/粒子等
                 break;
         }
     }
@@ -74,8 +66,7 @@ public class MapNodeView:MonoBehaviour
 
     public void NonFind()
     {
-        GameObject clickSmoke = ResManager.instance.CreatInstance(PathConfig.ClickSmokeFX);
-        clickSmoke.transform.position = transform.position;
+        QuickFxFactory.PlayFx(PathConfig.ClickSmokeFX, transform.position);
         ShowFloatingText("已经没什么好拿的了");
     }
 

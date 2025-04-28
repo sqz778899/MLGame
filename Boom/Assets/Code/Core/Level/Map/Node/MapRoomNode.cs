@@ -181,6 +181,7 @@ public class MapRoomNode : MonoBehaviour
         IsFogUnLocked = true;
     }
     
+    //解锁迷雾之后，响应一下鼠标悬停
     void RefreshMouseHoverHighlight()
     {
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);

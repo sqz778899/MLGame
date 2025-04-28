@@ -28,20 +28,48 @@ public class InventoryManager : MonoBehaviour
         InitItemGem();
     }
 
-    public void AddItemToBag(int itemID)
-    {
-        ItemData newItemData = new ItemData(itemID, 
-            SlotManager.GetEmptySlotController(SlotType.ItemBagSlot) as ItemSlotController);
-        _InventoryData.AddItemToBag(newItemData);
-        BagItemTools<Item>.AddObjectGO(newItemData);
+    public void AddItemToBag(int itemID, int amount = 1)
+    {  
+        // 1. 尝试找所有能堆叠的同类道具
+        List<ItemData> candidates = _InventoryData.BagItems
+            .Where(item => item.ID == itemID && item.IsStackable && item.StackCount < item.MaxStackCount)
+            .ToList();
+        int remaining = amount;
+        
+        // 2. 先补充已有的堆叠
+        foreach (ItemData item in candidates)
+        {
+            int space = item.MaxStackCount - item.StackCount;
+            int add = Mathf.Min(space, remaining);
+            item.StackCount += add;
+            //item.OnDataChanged?.Invoke();
+            remaining -= add;
+            if (remaining <= 0)
+                break;
+        }
+        
+        // 3. 如果还有剩余，开新物品
+        while (remaining > 0)
+        {
+            int createAmount = Mathf.Min(remaining, 5); // 每组最多5个
+            ItemSlotController slotController = SlotManager.GetEmptySlotController(SlotType.ItemBagSlot) as ItemSlotController;
+            ItemData newItemData = new ItemData(itemID, slotController);
+            newItemData.StackCount = createAmount;
+            _InventoryData.AddItemToBag(newItemData);
+            BagItemTools<Item>.AddObjectGO(newItemData);
+            remaining -= createAmount;
+        }
     }
     
-    public void AddGemToBag(int gemID)
+    public void AddGemToBag(int gemID,int count = 1)
     {
-        GemSlotController emptyGemSlotController = 
-            SlotManager.GetEmptySlotController(SlotType.GemBagSlot) as GemSlotController;
-        GemData newGemData = new GemData(gemID, emptyGemSlotController);
-        BagItemTools<Gem>.AddObjectGO(newGemData);//在OnDrop中添加到数据层
+        for (int i = 0; i < count; i++)
+        {
+            GemSlotController emptyGemSlotController = 
+                SlotManager.GetEmptySlotController(SlotType.GemBagSlot) as GemSlotController;
+            GemData newGemData = new GemData(gemID, emptyGemSlotController);
+            BagItemTools<Gem>.AddObjectGO(newGemData);//在OnDrop中添加到数据层
+        }
     }
 
     //抽取道具的时候，不能抽取重复的道具，这一步查重

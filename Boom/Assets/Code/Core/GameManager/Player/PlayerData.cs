@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine.Serialization;
 
 public class PlayerData: ScriptableObject
@@ -35,8 +36,13 @@ public class PlayerData: ScriptableObject
     public float ScoreToDustRate = 0.1f;  // 分数转魔尘比例
     public float CoinToDustRate = 2f;     // 金币转魔尘比例
     public int CoinAdd = 0;               // 局内金币加成
-    
-    public BuffManager BuffManager = new();
+
+    #region 局内Buff相关
+    readonly List<IBuffEffect> _activeBuffs = new();
+    public IEnumerable<IBuffEffect> ActiveBuffs => _activeBuffs;
+    public event Action<IBuffEffect> OnBuffAdded;
+    public event Action<IBuffEffect> OnBuffRemoved;
+    #endregion
     
     //talent
     public List<TalentData> Talents;  // 天赋数据
@@ -111,6 +117,52 @@ public class PlayerData: ScriptableObject
     }
     
     public TalentData GetTalent(int talentID) => Talents.Find(t => t.ID == talentID);
+    
+    public void AddBuff(int buffId, int stack = 1)
+    {
+        IBuffEffect existing = ActiveBuffs.FirstOrDefault(b => b.Id == buffId);
+        if (existing != null)
+        {
+            existing.Stack += stack;
+        }
+        else
+        {
+            IBuffEffect buff = BuffFactory.Create(buffId);
+            if (buff != null)
+            {
+                buff.Stack = stack;
+                _activeBuffs.Add(buff);
+                OnBuffAdded?.Invoke(buff);
+            }
+            else
+                Debug.LogError($"BuffManager: 无法创建Buff，id={buffId}");
+        }
+    }
+    
+    public void TriggerBuff(ItemTriggerTiming timing, BattleContext ctx)
+    {
+        foreach (var buff in ActiveBuffs)
+        {
+            if (buff.TriggerTiming == timing)
+                buff.Apply(ctx);
+        }
+    }
+    
+    // 每次战斗结束时调用（减少持续回合）
+    public void OnBattleEnd()
+    {
+        for (int i = _activeBuffs.Count - 1; i >= 0; i--)
+        {
+            IBuffEffect buff = _activeBuffs[i];
+            buff.RemainingBattles--;
+
+            if (buff.IsExpired())
+            {
+                OnBuffRemoved?.Invoke(buff);
+                _activeBuffs.RemoveAt(i);
+            }
+        }
+    }
     #endregion
 
     public void ClearData()
@@ -127,7 +179,9 @@ public class PlayerData: ScriptableObject
         CoinToDustRate = 2f;     // 金币转魔尘比例
         CoinAdd = 0;               // 局内金币加成
         TalentGemBonuses = new();
-        BuffManager.Clear(); // 清空 Buff
+        foreach (var buff in _activeBuffs)
+            OnBuffRemoved?.Invoke(buff);
+        _activeBuffs.Clear(); // 清空 Buff
     }
     
     #region 人物属性

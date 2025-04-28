@@ -6283,27 +6283,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2274404185774983987, guid: 86b82ecfdd9d0764bbb8109ee03d3ee7, type: 3}
       propertyPath: BasicGamblingConfig.KeyChance
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2274404185774983987, guid: 86b82ecfdd9d0764bbb8109ee03d3ee7, type: 3}
       propertyPath: BasicGamblingConfig.EmptyChance
-      value: 40
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2274404185774983987, guid: 86b82ecfdd9d0764bbb8109ee03d3ee7, type: 3}
+      propertyPath: BasicGamblingConfig.RareLootChance
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2274404185774983987, guid: 86b82ecfdd9d0764bbb8109ee03d3ee7, type: 3}
       propertyPath: BasicGamblingConfig.TempBuffChance
-      value: 5
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2274404185774983987, guid: 86b82ecfdd9d0764bbb8109ee03d3ee7, type: 3}
       propertyPath: BasicGamblingConfig.NormalLootChance
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2274404185774983987, guid: 86b82ecfdd9d0764bbb8109ee03d3ee7, type: 3}
       propertyPath: BasicGamblingConfig.TempDebuffChance
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2274404185774983987, guid: 86b82ecfdd9d0764bbb8109ee03d3ee7, type: 3}
       propertyPath: BasicGamblingConfig.MetaResourceChance
-      value: 15
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2844920488313249110, guid: 86b82ecfdd9d0764bbb8109ee03d3ee7, type: 3}
       propertyPath: BasicGamblingConfig.KeyChance
@@ -7813,6 +7817,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4999144444234433583}
     m_Modifications:
+    - target: {fileID: 1771881781661420394, guid: e53388c857969c04a841ae15e1c04251, type: 3}
+      propertyPath: TreasureBoxConfig.MaxLootCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1771881781661420394, guid: e53388c857969c04a841ae15e1c04251, type: 3}
+      propertyPath: TreasureBoxConfig.MinLootCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1771881781661420394, guid: e53388c857969c04a841ae15e1c04251, type: 3}
+      propertyPath: TreasureBoxConfig.DropTable.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1771881781661420394, guid: e53388c857969c04a841ae15e1c04251, type: 3}
+      propertyPath: TreasureBoxConfig.DropTable.Array.data[2].ID
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1771881781661420394, guid: e53388c857969c04a841ae15e1c04251, type: 3}
+      propertyPath: TreasureBoxConfig.DropTable.Array.data[2].Weight
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3974852627006142317, guid: e53388c857969c04a841ae15e1c04251, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.73
@@ -9450,6 +9474,10 @@ PrefabInstance:
     - target: {fileID: 432025081251070923, guid: ac0c66fb83182a34ba82b46a229163b3, type: 3}
       propertyPath: EPara.Radius
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 432025081251070923, guid: ac0c66fb83182a34ba82b46a229163b3, type: 3}
+      propertyPath: EPara.ExplodeMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4499334659297616150, guid: ac0c66fb83182a34ba82b46a229163b3, type: 3}
       propertyPath: m_Name

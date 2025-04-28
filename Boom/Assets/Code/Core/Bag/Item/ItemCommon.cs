@@ -28,7 +28,26 @@ public class ItemData : ItemDataBase,ITooltipBuilder
     public IItemEffect EffectLogic; // 每个道具一个策略实现
     //区分是否是任务物品
     public ItemCategory Category { get; private set; }
+
+    #region 物品堆叠支持
     public PersistentItemType PersistentType { get; private set; }
+    //堆叠数量
+    int _stackCount;
+    public int StackCount
+    {
+        get => _stackCount;
+        set
+        {
+            if (_stackCount != value)
+            {
+                _stackCount = value;
+                OnDataChanged?.Invoke();
+            }
+        }
+    }
+    public int MaxStackCount; // 最大堆叠数量
+    public bool IsStackable => Category == ItemCategory.Persistent && PersistentType == PersistentItemType.Resource;
+    #endregion
     public bool IsEquipable => Category == ItemCategory.Equipable;
     public bool IsPersistent => Category == ItemCategory.Persistent;
 
@@ -44,6 +63,11 @@ public class ItemData : ItemDataBase,ITooltipBuilder
         PersistentType = json.PersistentType;
         ImageName = json.ResName;
         EffectLogic = ItemEffectFactory.CreateEffectLogic(ID);
+        
+        // 新加的
+        //MaxStackCount = json.MaxStackCount > 0 ? json.MaxStackCount : 1; // 读配置
+        MaxStackCount = 5;
+        StackCount = 1;
     }
 
     public void ApplyEffect(BattleContext ctx) => EffectLogic?.Apply(ctx);

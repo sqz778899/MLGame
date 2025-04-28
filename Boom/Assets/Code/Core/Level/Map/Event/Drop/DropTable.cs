@@ -7,6 +7,7 @@ using UnityEngine;
 public class DropedObjEntry
 {
     public int ID; // 掉落物ID
+    public string Name;
     public int Weight; // 权重
     public DropedCategory DropedCategory; // 是宝石还是道具
     public Sprite Icon;
@@ -23,11 +24,19 @@ public class DropedObjEntry
                 ItemJson itemjson = TrunkManager.Instance.GetItemJson(ID);
                 Icon = ResManager.instance.GetItemIcon(ID);
                 Rarity = itemjson.Rarity;
+                Name = itemjson.Name;
                 break;
             case DropedCategory.Gem:
                 GemJson gemjson = TrunkManager.Instance.GetGemJson(ID);
                 Icon = ResManager.instance.GetGemIcon(ID);
                 Rarity = gemjson.Rarity;
+                Name = gemjson.Name;
+                break;
+            case DropedCategory.Buff:
+                BuffJson buffjson = TrunkManager.Instance.GetBuffJson(ID);
+                Icon = ResManager.instance.GetBuffIcon(ID);
+                Name = buffjson.Name;
+                Rarity = buffjson.Rarity;
                 break;
         }
     }
@@ -103,44 +112,75 @@ public static class DropTableService
         return selectedEntry;
     }
     
+    #region 合并掉落工具
+    public static List<(DropedObjEntry drop, int count)> MergeDrops(List<DropedObjEntry> originalDrops)
+    {
+        Dictionary<(int id, DropedCategory cat), int> counter = new();
+        Dictionary<(int id, DropedCategory cat), DropedObjEntry> keeper = new();
+
+        foreach (var drop in originalDrops)
+        {
+            var key = (drop.ID, drop.DropedCategory);
+            if (!counter.ContainsKey(key))
+            {
+                counter[key] = 0;
+                keeper[key] = drop;
+            }
+            counter[key]++;
+        }
+
+        List<(DropedObjEntry drop, int count)> merged = new();
+        foreach (var kvp in counter)
+        {
+            merged.Add((keeper[kvp.Key], kvp.Value));
+        }
+
+        return merged;
+    }
+    #endregion
+    
     public static void ResetAll() => _dropTables.Clear();
 }
 
 //展示物品奖励的封装
 public static class DropRewardService
 {
-    public static void Drop(DropedObjEntry drop, Vector3 startPos)
+    public static void Drop(DropedObjEntry drop, Vector3 startPos,MapEventType eventType,int count)
     {
         if (drop == null)
         {
             Debug.LogError("DropRewardService: 尝试处理空的掉落对象！");
             return;
         }
+        drop.InitData();
         
         // Step1：根据稀有度设置不同的特效参数
         EParameter para = GetParaByRarity(drop.Rarity, startPos);
+        // Step2：根据事件类型设置不同的特效参数
+        para = SetParaByEventType(para, eventType);
         EffectManager effectManager = EternalCavans.Instance._EffectManager;
-        // Step2：触发特效（光团飞向背包）
+        // Step3：触发特效（光团飞向背包）
         effectManager.CreatEffect(para, null, () =>
         {
-            RewardBannerManager.Instance.ShowReward(drop.Icon, 1, drop.Rarity);
+            RewardBannerManager.Instance.ShowReward(drop, count);
         });
 
-        // Step3：数据加到背包
+        // Step4：数据加到背包
         switch (drop.DropedCategory)
         {
             case DropedCategory.Gem:
-                InventoryManager.Instance.AddGemToBag(drop.ID);
+                InventoryManager.Instance.AddGemToBag(drop.ID,count);
                 break;
             case DropedCategory.Item:
-                InventoryManager.Instance.AddItemToBag(drop.ID);
+                InventoryManager.Instance.AddItemToBag(drop.ID,count);
                 break;
             default:
                 Debug.LogWarning($"DropRewardService: 未知掉落类型 {drop.DropedCategory}");
                 break;
         }
     }
-    
+
+    #region 根据稀有度&&事件类型，设置特效参数
     static EParameter GetParaByRarity(DropedRarity rarity, Vector3 startPos)
     {
         EParameter para = new EParameter
@@ -192,9 +232,24 @@ public static class DropRewardService
                 para.SpecialEffectPath = PathConfig.AwardTraitLegendary; // 彩虹爆炸粒子
                 break;
         }
+        return para;
+    }
+
+    static EParameter SetParaByEventType(EParameter para, MapEventType eventType)
+    {
+        switch (eventType)
+        {
+            case MapEventType.TreasureBox:
+                para.ExplodeMode = EffectExplodeMode.Upward;
+                break;
+            case MapEventType.BasicGambling:
+                para.ExplodeMode = EffectExplodeMode.Sphere;
+                break;
+        }
 
         return para;
     }
+    #endregion
 }
 
 

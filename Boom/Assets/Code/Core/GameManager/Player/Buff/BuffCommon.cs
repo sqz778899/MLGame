@@ -1,6 +1,11 @@
-﻿public interface IBuffEffect
+﻿using UnityEngine;
+
+
+public interface IBuffEffect
 {
-    string BuffId { get; } // 唯一标识
+    int Id { get; } // 唯一标识
+    BuffData Data { get; } // Buff数据
+    
     ItemTriggerTiming TriggerTiming { get; }
 
     int Stack { get; set; } // 当前层数
@@ -12,15 +17,29 @@
     string GetDescription();
 }
 
-/*public static class BuffFactory
+public class BuffData:ITooltipBuilder
 {
-    public static IBuffEffect Create(string id)
+    public int ID;
+    public string Name;
+    public string Desc;
+    public bool IsDebuff;
+    public DropedRarity Rarity;
+    public Sprite Icon;
+    
+    public BuffData(int _id)
     {
-        return id switch
-        {
-            "SecondBulletNerf" => new Buff_SecondBulletNerf(),
-            "StrengthUp" => new Buff_StrengthUp(),
-            _ => null,
-        };
+        ID = _id;
+        BuffJson curJson = TrunkManager.Instance.GetBuffJson(_id);
+        Name = curJson.Name;
+        Desc = curJson.Desc;
+        Rarity = curJson.Rarity;
+        IsDebuff = curJson.IsDebuff;
+        Icon = ResManager.instance.GetBuffIcon(_id);
     }
-}*/
+
+    public ToolTipsInfo BuildTooltip()
+    {
+        ToolTipsInfo info = new ToolTipsInfo(Name, 0, Desc, ToolTipsType.Buff, Rarity);
+        return info;
+    }
+}

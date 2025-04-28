@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class BagRoot : MonoBehaviour
 {
@@ -38,7 +37,6 @@ public class BagRoot : MonoBehaviour
             GM.Root.InventoryMgr._ItemEffectMrg.GetCurrentSynergiesInfos();
         if (traitInfos.Count == 0)
         {
-            Debug.Log("没有组合特质");
             txtSynergies.text = "没有组合特质";
             return;
         }

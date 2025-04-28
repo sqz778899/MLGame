@@ -10,6 +10,7 @@ public class RewardBanner : MonoBehaviour
     public CanvasGroup canvasGroup;
     public RectTransform iconRect;
     public Image iconImage;
+    public TextMeshProUGUI nameText;
     public TextMeshProUGUI countText;
     
     [Header("UI参数")]
@@ -30,12 +31,13 @@ public class RewardBanner : MonoBehaviour
     
     static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor");
 
-    public void Init(Sprite icon, int count, DropedRarity rarity = DropedRarity.Common)
+    public void Init(DropedObjEntry drop, int count)
     {
-        iconImage.sprite = icon;
+        iconImage.sprite = drop.Icon;
         countText.text = "0";
+        nameText.text = drop.Name;
         
-        ApplyRarityColor(rarity);
+        ApplyRarityColor(drop.Rarity);
         
         StartCoroutine(PlaySequence(count));
     }
@@ -69,10 +71,13 @@ public class RewardBanner : MonoBehaviour
     
     IEnumerator PlaySequence(int targetCount)
     {
-        // 初始化位置
+        // 初始化位置,各个信息载体状态
         rectTransform.anchoredPosition = new Vector2(-BannerLenth, rectTransform.anchoredPosition.y);
         iconRect.localScale = Vector3.one * 0.6f;
         countText.alpha = 0;
+        nameText.alpha = 0;
+        nameText.transform.localScale = Vector3.one * 0.8f;
+
 
         // Step 1: 整体滑入
         yield return null;
@@ -83,8 +88,15 @@ public class RewardBanner : MonoBehaviour
         iconSeq.Append(iconRect.DOScale(IconBounceScale, 0.2f));
         iconSeq.Append(iconRect.DOScale(1f, 0.2f));
         iconSeq.Play();
+        
+        // Step3 NameText淡入 + 弹出
+        Sequence nameSeq = DOTween.Sequence();
+        nameSeq.Append(nameText.DOFade(1f, 0.3f));
+        nameSeq.Join(nameText.transform.DOScale(1.1f, 0.2f).SetEase(Ease.OutBack));
+        nameSeq.Append(nameText.transform.DOScale(1f, 0.2f));
+        nameSeq.Play();
 
-        // Step 3: 数量从 0 滚动到目标值
+        // Step 4: 数量从 0 滚动到目标值
         DOTween.To(() => 0, x =>
         {
             countText.text = x.ToString();
@@ -100,7 +112,7 @@ public class RewardBanner : MonoBehaviour
 
         yield return new WaitForSeconds(StayDuration);
 
-        // Step 4: 整体向上滑动渐隐
+        // Step 5: 整体向上滑动渐隐
         Sequence exit = DOTween.Sequence();
         exit.Append(rectTransform.DOAnchorPosY(rectTransform.anchoredPosition.y + 100f, SlideOutDuration));
         exit.Join(canvasGroup.DOFade(0f, SlideOutDuration));

@@ -250,6 +250,16 @@ public class DropTableJson
         Entries = new List<DropedObjEntry>();
     }
 }
+
+[Serializable]
+public class BuffJson
+{
+    public int ID;
+    public string Name;
+    public DropedRarity Rarity;
+    public string Desc;
+    public bool IsDebuff;
+}
 #endregion
 
 #region 游戏内存档数据结构
