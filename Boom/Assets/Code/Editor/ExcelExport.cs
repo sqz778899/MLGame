@@ -25,6 +25,7 @@ namespace Code.Editor
             ExportTalent();//天赋相关
             ExportDrop();//掉落相关
             ExportBuff();//Buff相关
+            ExportTrait();//特质相关
             //编辑器离线用表
             ExportEditorOffline();
             AssetDatabase.Refresh();
@@ -270,6 +271,28 @@ namespace Code.Editor
             string content01 = JsonConvert.SerializeObject(curBuffJsonDesign,
                 (Formatting)Formatting.Indented);
             File.WriteAllText(PathConfig.BuffDesignJson, content01);
+        }
+
+        public void ExportTrait()
+        {
+            DataSet curTables = GetDataSet("TraitDesign.xlsx");
+            List<TraitJson> curTraitJsonDesign = new List<TraitJson>();
+            DataTable curTable = curTables.Tables["特质设计"];
+            for (int i = 1; i < curTable.Rows.Count; i++)
+            {
+                TraitJson curData = new TraitJson();
+                if (curTable.Rows[i][1].ToString() == "") continue;
+                curData.ID = GetCellInt(curTable.Rows[i][0].ToString());
+                curData.Name = curTable.Rows[i][1].ToString();
+                curData.Rarity = (DropedRarity)GetCellInt(curTable.Rows[i][2].ToString());
+                curData.Desc = curTable.Rows[i][4].ToString();
+                curData.Flavor = curTable.Rows[i][5].ToString();
+                curData.ResName = curTable.Rows[i][6].ToString();
+                curTraitJsonDesign.Add(curData);
+            }
+            string content01 = JsonConvert.SerializeObject(curTraitJsonDesign,
+                (Formatting)Formatting.Indented);
+            File.WriteAllText(PathConfig.TraitDesignJson, content01);
         }
         #endregion
 

@@ -21,6 +21,14 @@ public class ShieldData
         CurHP = Mathf.Clamp(CurHP - damage, 0, MaxHP);
         OnTakeDamage?.Invoke();
     }
+    
+    public void ModifyHP(int amount)
+    {
+        MaxHP = Mathf.Clamp(MaxHP + amount, 1, 999); // 注意最少为 1
+        CurHP = MaxHP;
+        Debug.Log("MaxHP: " + MaxHP);
+        OnTakeDamage?.Invoke();
+    }
 }
 
 [Serializable]

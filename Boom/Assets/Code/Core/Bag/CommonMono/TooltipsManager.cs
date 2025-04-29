@@ -25,7 +25,7 @@ public class TooltipsManager:MonoBehaviour
     /// <summary>
     /// 显示 Tooltips
     /// </summary>
-    public void Show(ToolTipsInfo info, Vector3 worldPosition, Vector3 offset = default)
+    public void Show(ToolTipsInfo info, Vector3 offset = default)
     {
         if (!isEnabled) return;
         
@@ -33,7 +33,7 @@ public class TooltipsManager:MonoBehaviour
 
         tooltipGO.SetActive(true);
         tooltipSC.SetInfo(info);
-        Vector3 finalWorldPos = ScreenToCanvasWorldPos(worldPosition + offset);
+        Vector3 finalWorldPos = ScreenToCanvasWorldPos(Input.mousePosition + offset);
         tooltipGO.transform.position = finalWorldPos;
     }
     
@@ -49,12 +49,8 @@ public class TooltipsManager:MonoBehaviour
     
     //public void UpdatePosition(Vector3 screenPos)=>tooltipGO.transform.position = screenPos;
     
-    public void UpdatePosition(Vector3 screenPos)
-    {
-        Vector3 finalWorldPos = ScreenToCanvasWorldPos(screenPos);
-        tooltipGO.transform.position = finalWorldPos;
-    }
-  
+    public void UpdatePosition(Vector3 Offfset = default)
+        => tooltipGO.transform.position = ScreenToCanvasWorldPos(Input.mousePosition + Offfset);
 
     /// <summary>
     /// 隐藏 Tooltips

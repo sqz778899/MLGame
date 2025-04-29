@@ -260,6 +260,17 @@ public class BuffJson
     public string Desc;
     public bool IsDebuff;
 }
+
+[Serializable]
+public class TraitJson
+{
+    public int ID;
+    public string Name;
+    public DropedRarity Rarity;
+    public string Desc;
+    public string Flavor;
+    public string ResName;
+}
 #endregion
 
 #region 游戏内存档数据结构

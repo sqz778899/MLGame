@@ -35,7 +35,8 @@ public enum ToolTipsType
     Item = 1,
     Bullet = 2,
     Gem = 3,
-    Buff = 4
+    Buff = 4,
+    Trait = 5,
 }
 
 public struct ToolTipsAttriSingleInfo
@@ -60,11 +61,4 @@ public enum ToolTipsAttriType
     Piercing = 1,
     Resonance = 2,
     Element = 10,
-}
-
-public enum ToolTipsMenuState
-{
-    Normal = 0,
-    RightClick = 1,
-    Locked = 2
 }

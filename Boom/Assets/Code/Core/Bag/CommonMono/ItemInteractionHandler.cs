@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -7,6 +8,9 @@ public class ItemInteractionHandler: MonoBehaviour,
     IPointerClickHandler, IBeginDragHandler, IEndDragHandler,
     IDragHandler,IPointerMoveHandler,IPointerUpHandler
 {
+    [Header("测试")]
+    public Vector2 Offset = default;
+    
     IItemInteractionBehaviour behaviour;
     RectTransform rectTransform;
     public ItemDataBase Data { get; private set; }
@@ -99,24 +103,22 @@ public class ItemInteractionHandler: MonoBehaviour,
         if (!DisableTooltip)
             ShowTooltips();
     }
-    
+
     public void OnPointerMove(PointerEventData eventData)
     {
-        Vector3 pos = UTools.GetWPosByMouse(rectTransform);
-        if (Data.CurSlotController != null)
-            pos += Data.CurSlotController.TooltipOffset;
-        TooltipsManager.Instance.UpdatePosition(pos);
+        if (Data.CurSlotController == null) return;
+        TooltipsManager.Instance.UpdatePosition(Data.CurSlotController.TooltipOffset);
     }
+
     #endregion
 
     public void ShowTooltips()
     {
+        if (Data.CurSlotController == null) return;
         if (Data is ITooltipBuilder builder)
         {
-            Vector3 pos = UTools.GetWPosByMouse(rectTransform);
-            if (Data.CurSlotController != null)
-                pos += Data.CurSlotController.TooltipOffset;
-            TooltipsManager.Instance.Show(builder.BuildTooltip(), pos);
+            TooltipsManager.Instance.Show(builder.BuildTooltip(),
+                Data.CurSlotController.TooltipOffset);
         }
     }
 }

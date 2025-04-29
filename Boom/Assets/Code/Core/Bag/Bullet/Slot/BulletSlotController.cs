@@ -24,7 +24,7 @@ public class BulletSlotController: BaseSlotController<ItemDataBase>
             bulletNew.CreateFlag = BulletCreateFlag.Spawnered;
     }
 
-    public override void AssignDirectly(ItemDataBase data, GameObject itemGO)
+    public override void AssignDirectly(ItemDataBase data, GameObject itemGO,bool isRefreshData = true)
     {
         // step 2: 赋值自己
         _curData = data;
@@ -33,8 +33,11 @@ public class BulletSlotController: BaseSlotController<ItemDataBase>
         // step 3: UI更新
         _view?.Display(itemGO);
         // step 4: 刷新数据层
-        GM.Root.InventoryMgr._BulletInvData.EquipBullet(_curData as BulletData);
-        GM.Root.InventoryMgr._BulletInvData.RefreshModifiers();
+        if (isRefreshData)
+        {
+            GM.Root.InventoryMgr._BulletInvData.EquipBullet(_curData as BulletData);
+            GM.Root.InventoryMgr._BulletInvData.RefreshModifiers();
+        }
     }
 
     public void Unassign()

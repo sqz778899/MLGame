@@ -27,16 +27,11 @@ public class BagRootMini : MonoBehaviour
     public float TargetOrthographicSize;
     public bool IsCameraNear = false;
     
-    ISlotController[] slotControllersSpawnnerInner;
-    ISlotController[] slotControllersGemInner;
-    
     void Start()
     {
         SwichBullet();
         TargetCameraOffset = new Vector3(-2.5f,-0.65f,0);
         TargetOrthographicSize = 3.35f;
-        slotControllersSpawnnerInner = SlotManager.GetAllSlotController(SlotType.SpawnnerSlotInner);
-        slotControllersGemInner = SlotManager.GetAllSlotController(SlotType.GemBagSlotInner);
     }
     
     public void InitData()
@@ -51,9 +46,6 @@ public class BagRootMini : MonoBehaviour
         if(!IsCameraNear)
         SetCameraEdit();//拉近摄像机
         SetBulletInnerTextUp();//把子弹的伤害数字抬起来
-        //为了tooltips标签位置正确
-        slotControllersSpawnnerInner.ForEach(s => s.IsCameraNear = IsCameraNear);
-        slotControllersGemInner.ForEach(s => s.IsCameraNear = IsCameraNear);
     }
     
     //响应开始在战斗场景内推远摄像机的事件
@@ -64,9 +56,6 @@ public class BagRootMini : MonoBehaviour
             DragManager.Instance.CancelDrag();
             SetCameraBattle();//推远摄像机
             SetBulletInnerTextReturn();//把伤害数字位置还原
-            //为了tooltips标签位置正确
-            slotControllersSpawnnerInner.ForEach(s => s.IsCameraNear = IsCameraNear);
-            slotControllersGemInner.ForEach(s => s.IsCameraNear = IsCameraNear);
         }
     }
 

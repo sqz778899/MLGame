@@ -108,10 +108,10 @@ public class RoleInner : BaseMove
         yield return new WaitForSeconds(connonReloadTime);  //大炮装填子弹动画
         //...
         //进行子弹装填
-        List<BulletInnerNew> _bullets = GM.Root.InventoryMgr.CurBulletsInFight;
+        List<BulletInner> _bullets = GM.Root.InventoryMgr.CurBulletsInFight;
         for (int i = 0; i < _bullets.Count; i++)
         {
-            BulletInnerNew curBullet = _bullets[i];
+            BulletInner curBullet = _bullets[i];
             CurConnon.AllBullets.Add(_bullets[i]);//并且把弹药数据装填进大炮
             curBullet.controller.StartAttack(CurConnon.FillNode.transform.position);
             yield return new WaitForSeconds(delay);  // 在发射下一个子弹之前，等待delay秒

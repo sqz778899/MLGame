@@ -59,7 +59,7 @@ public class BattleUIController
     void InitData()
     {
         _MapManager ??=  BattleManager.Instance._MapManager;
-        BagRootMiniSC ??=UIManager.Instance.BagUI.BagRootMiniGO.GetComponent<BagRootMini>();
+        BagRootMiniSC ??=EternalCavans.Instance.BagRootMini.GetComponent<BagRootMini>();
         EnemyMiniMapSC ??= EternalCavans.Instance.EnemyMiniMapGO.GetComponent<EnemyMiniMapView>();
         _battleData ??= BattleManager.Instance.battleData;
         warReportRootGUI ??= EternalCavans.Instance.WarReportGO.transform.GetChild(0).gameObject;

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8405334449814595491}
   - component: {fileID: 817091602876896368}
   - component: {fileID: 822854251249369893}
-  - component: {fileID: 5758648266271036559}
+  - component: {fileID: -1953020060470332037}
   m_Layer: 5
   m_Name: P_UIFloatingtxt_01
   m_TagString: Untagged
@@ -135,7 +135,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &5758648266271036559
+--- !u!114 &-1953020060470332037
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,8 +144,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 2058314815287461985}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96f49041aceb6774a8c7a65295640356, type: 3}
+  m_Script: {fileID: 11500000, guid: d573a7c5562440e9beb8ac1b3640ac62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveUpDistance: 1.5
-  duration: 2
+  moveUpDistance: 1
+  duration: 1000
+  moveOffset: {x: 0, y: 1, z: 0}
+  ease: 9
+  worldText: {fileID: 0}
+  uiText: {fileID: 822854251249369893}
+  textRenderer: {fileID: 0}

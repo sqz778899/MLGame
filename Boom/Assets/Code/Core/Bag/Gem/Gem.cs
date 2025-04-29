@@ -39,7 +39,7 @@ public class Gem: ItemBase,IItemInteractionBehaviour
         var toSlot = (from.SlotType == SlotType.GemInlaySlot)
             ? SlotManager.GetEmptySlotController(SlotType.GemBagSlot)
             : SlotManager.GetEmptySlotController(SlotType.GemInlaySlot);
-        
+        if (toSlot == null )return;//没有空位
         toSlot.Assign(Data, gameObject);
     }
 

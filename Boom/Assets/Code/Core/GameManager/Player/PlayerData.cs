@@ -2,7 +2,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine.Serialization;
 
 public class PlayerData: ScriptableObject
 {
@@ -72,6 +71,7 @@ public class PlayerData: ScriptableObject
     public void ModifyCoins(int amount)
     {
         Coins += amount;
+        Coins = Math.Max(Coins, 0);
         //金币的加减采取不同的动画
         if (amount >= 0)
             OnCoinsAdd?.Invoke();

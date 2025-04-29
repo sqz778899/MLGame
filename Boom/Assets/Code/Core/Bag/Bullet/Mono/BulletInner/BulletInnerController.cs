@@ -83,6 +83,9 @@ public class BulletInnerController
         
         if (collider.TryGetComponent<IDamageable>(out var target))
         {
+            // 处理子弹击中敌人的加成道具Buff等等
+            BattleContext ctx = new BattleContext(Data, target);
+            GM.Root.InventoryMgr._ItemEffectMrg.Trigger(ItemTriggerTiming.OnBulletHit,ctx);
             // 命中处理：伤害结算
             DamageResult result = target.TakeDamage(Data, Data.FinalDamage);
             _view.PlayHitEffect();

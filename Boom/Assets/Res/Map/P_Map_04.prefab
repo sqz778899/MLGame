@@ -7877,6 +7877,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5444657157194793289, guid: e53388c857969c04a841ae15e1c04251, type: 3}
+      propertyPath: RoomArrowConfig.BattleConfig.ShieldConfig.ShieldsHPs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5444657157194793289, guid: e53388c857969c04a841ae15e1c04251, type: 3}
+      propertyPath: RoomArrowConfig.BattleConfig.ShieldConfig.ShieldsHPs.Array.data[0]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5444657157194793289, guid: e53388c857969c04a841ae15e1c04251, type: 3}
+      propertyPath: RoomArrowConfig.BattleConfig.ShieldConfig.ShieldsHPs.Array.data[1]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5448199941957431290, guid: e53388c857969c04a841ae15e1c04251, type: 3}
+      propertyPath: BulletEventConfig.BulletID
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6382861751356012840, guid: e53388c857969c04a841ae15e1c04251, type: 3}
       propertyPath: BasicGamblingConfig.KeyChance
       value: 10

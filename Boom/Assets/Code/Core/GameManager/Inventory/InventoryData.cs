@@ -30,11 +30,19 @@ public class InventoryData: ScriptableObject
     #endregion
     
     #region 道具操作
-    public void AddItemToBag(ItemData item) => BagItems.Add(item);
-    public void AddItemToEquip(ItemData item) => EquipItems.Add(item);
-    public void RemoveItemToBag(ItemData itemData) =>BagItems.Remove(itemData);
+    public void AddItemToBag(ItemData item)
+    {
+        if (EquipItems.Contains(item))
+            EquipItems.Remove(item);
+        BagItems.Add(item);
+        OnEquipItemChanged?.Invoke();
+    }
+
+    public void RemoveItemToBag(ItemData itemData) => BagItems.Remove(itemData);
     public void EquipItem(ItemData item)
     {
+        if (BagItems.Contains(item))
+            BagItems.Remove(item);
         EquipItems.Add(item);
         OnEquipItemChanged?.Invoke();
     }

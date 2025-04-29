@@ -24,7 +24,7 @@ public class ItemSlotController:BaseSlotController<ItemDataBase>
         AssignDirectly(data, itemGO);
     }
     
-    public override void AssignDirectly(ItemDataBase data, GameObject itemGO)
+    public override void AssignDirectly(ItemDataBase data, GameObject itemGO,bool isRefreshData =true)
     {
         //赋值自己
         _curData = data;

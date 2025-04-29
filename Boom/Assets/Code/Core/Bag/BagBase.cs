@@ -33,10 +33,9 @@ public interface ISlotController
     void Unassign();
     bool CanAccept(ItemDataBase data);
     void Assign(ItemDataBase data, GameObject itemGO);
-    void AssignDirectly(ItemDataBase data, GameObject itemGO);
+    void AssignDirectly(ItemDataBase data, GameObject itemGO,bool isRefreshData = true);
     public Vector3 TooltipOffset{ get; }
     bool IsEmpty => CurData == null;
-    bool IsCameraNear { get; set; }
     public GameObject GetGameObject();
 }
 #endregion
@@ -105,7 +104,7 @@ public abstract class BaseSlotController<T> :ISlotController where T : ItemDataB
     public virtual bool CanAccept(ItemDataBase data) { return data is T; }
 
     public virtual void Assign(ItemDataBase data, GameObject itemGO) {}
-    public virtual void AssignDirectly(ItemDataBase data, GameObject itemGO) {}
+    public virtual void AssignDirectly(ItemDataBase data, GameObject itemGO,bool isRefreshData = true) {}
     public virtual void Unassign()
     {
         if (_curData != null)
@@ -115,28 +114,23 @@ public abstract class BaseSlotController<T> :ISlotController where T : ItemDataB
         CachedGO = null;
         _view?.Clear();
     }
-    public bool IsCameraNear { get; set; }//是否摄像机切近景了
     public Vector3 TooltipOffset
     {
         get
         {
+            Vector3 StandardOffset = new Vector3(210f, -130f, 0);
+            Vector3 NOffset = new Vector3(-190f, -130f, 0);
             return SlotType switch
             {
-                SlotType.GemBagSlot =>IsCameraNear?
-                    new Vector3(0.7f, -0.39f, 0) :
-                    new Vector3(1.01f, -0.6f, 0),
-                SlotType.GemBagSlotInner=>IsCameraNear?
-                    new Vector3(0.7f, -0.39f, 0) :
-                    new Vector3(1.01f, -0.6f, 0),
-                SlotType.ItemBagSlot => new Vector3(1.2f, -0.6f, 0),
-                SlotType.GemInlaySlot => new Vector3(-0.92f, -0.6f, 0),
-                SlotType.ItemEquipSlot => new Vector3(-1.1f, -0.6f, 0),
-                SlotType.SpawnnerSlot => new Vector3(1.01f, -0.6f, 0),
-                SlotType.SpawnnerSlotInner =>IsCameraNear?
-                    new Vector3(0.7f, -0.39f, 0) :
-                    new Vector3(1.01f, -0.6f, 0),
-                SlotType.CurBulletSlot => new Vector3(1.01f, -0.6f, 0),
-                SlotType.ShopSlot => new Vector3(1.01f, -0.6f, 0),
+                SlotType.GemBagSlot => StandardOffset,
+                SlotType.GemBagSlotInner => StandardOffset,
+                SlotType.ItemBagSlot =>  StandardOffset,
+                SlotType.GemInlaySlot => NOffset,
+                SlotType.ItemEquipSlot => NOffset,
+                SlotType.SpawnnerSlot => StandardOffset,
+                SlotType.SpawnnerSlotInner => StandardOffset,
+                SlotType.CurBulletSlot => StandardOffset,
+                SlotType.ShopSlot => StandardOffset,
                 _ => Vector3.zero
             };
         }
@@ -238,6 +232,7 @@ public class BulletData:ItemDataBase,ITooltipBuilder
     public int FinalResonance;
     public bool IsResonance; //是否开启共振
     public List<IBulletModifier> Modifiers = new();
+    public int OrderInRound; // 第几颗子弹（从1开始）
     
     //子弹孵化器专用
     public int _spawnerCount;

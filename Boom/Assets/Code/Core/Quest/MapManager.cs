@@ -94,7 +94,7 @@ public class MapManager : MonoBehaviour
         if (UIManager.Instance.IsLockedClick) return;
         GetComponent<MapMouseControl>().UnLockMap();
         Camera.main.transform.position = _preCameraPos;
-        UIManager.Instance.BagUI.HideBag();
+        EternalCavans.Instance.CloseBag();
         EternalCavans.Instance.BagButtonGO.SetActive(true);
         FightSceneOff();
         MapSceneOn();
@@ -105,7 +105,7 @@ public class MapManager : MonoBehaviour
         if (UIManager.Instance.IsLockedClick) return;
         
         _preCameraPos = Camera.main.transform.position;
-        UIManager.Instance.BagUI.HideBag();
+        EternalCavans.Instance.CloseBag();
         EternalCavans.Instance.BagButtonGO.SetActive(false);
         PlayerManager.Instance.RoleInFightSC.ClearConnon();
         MapSceneOff();
@@ -131,7 +131,7 @@ public class MapManager : MonoBehaviour
     void FightSceneOn()
     {
         _GUIUIFightMapRootGO.SetActive(true);
-        UIManager.Instance.BagUI.ShowMiniBag();
+        EternalCavans.Instance.ShowMiniBag();
         BattleManager.Instance.battleLogic.enabled = true;
         try { _battleLogicSC.enabled = true; }catch (Exception e) {}
         
@@ -144,7 +144,7 @@ public class MapManager : MonoBehaviour
     void FightSceneOff()
     {
         _GUIUIFightMapRootGO.SetActive(false);
-        UIManager.Instance.BagUI.HideMiniBag();
+        EternalCavans.Instance.HideMiniBag();
         BattleManager.Instance.battleLogic.enabled = false;
         try { _battleLogicSC.enabled = false; }catch (Exception e) {}
         for (int i = 0; i < MapFightRoot.transform.childCount; i++)
@@ -200,6 +200,19 @@ public class MapManager : MonoBehaviour
         //找到当前房间的节点
         MapRoomNode targetRoom = _allMapRooms.FirstOrDefault(
             each => each.RoomID == CurMapSate.TargetRoomID);
+
+        #region 触发 OnEnterRoom 相关道具&&Buff
+        bool isFirstEnter = !CurMapSate.IsFinishedRooms.Contains(targetRoom.RoomID);
+        // --- 创建Context传参 ---
+        BattleContext ctx = new BattleContext
+        {
+            EnterRoomID = targetRoom.RoomID,
+            IsFirstEnterRoom = isFirstEnter
+        };
+        // 交给道具管理器处理
+        GM.Root.InventoryMgr._ItemEffectMrg.Trigger(ItemTriggerTiming.OnEnterRoom, ctx);
+        #endregion
+        
         CurMapSate.FinishAndToNextRoom();//记录下探索度
         targetRoom.State = MapRoomState.Unlocked;
         //设置角色&&摄像机位置

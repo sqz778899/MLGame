@@ -29,6 +29,7 @@ public class EternalCavans : MonoBehaviour
     [Header("Common")]
     public GameObject DialogueRoot;
     public GameObject StandbyRoot;
+    public GameObject FloatingTextRoot;
     
     [Header("侧栏相关")]
     public GameObject G_SideBar;    //侧边栏
@@ -191,6 +192,14 @@ public class EternalCavans : MonoBehaviour
         Camera.main.orthographicSize = _preCameraOrthographicSize;
         OnCloseBag?.Invoke();
     }
+    
+    public void ShowMiniBag()
+    {
+        BagRootMini.SetActive(true);
+        BagRootMini.GetComponent<BagRootMini>().InitData();
+    }
+    
+    public void HideMiniBag() => BagRootMini.SetActive(false);
     #endregion
 
     #region 战斗结束的界面响应

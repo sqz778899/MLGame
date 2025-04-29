@@ -37,6 +37,7 @@ public static class PathConfig
    public static string DialogueDesignJson = GetDataPrepath() + "Data/DialogueDesign.json";
    public static string TalentDesignJson = GetDataPrepath() + "Data/TalentDesign.json";
    public static string BuffDesignJson = GetDataPrepath() + "Data/BuffDesign.json";
+   public static string TraitDesignJson = GetDataPrepath() + "Data/TraitDesign.json";
    
    public static string DropedDesignJson = GetDataPrepath() + "Data/DropedDesign.json";
    //..........................编辑器用Json
@@ -60,6 +61,7 @@ public static class PathConfig
    public static string ItemPersistentImageDir = GetPrepath() + "Res/UI/Item/Textures/Persistent/";
    public static string ItemEquipableImageDir = GetPrepath() + "Res/UI/Item/Textures/Equipable/";
    public static string GemImageDir = GetPrepath() + "Res/UI/Gem/Textures/";
+   public static string TraitImageDir = GetPrepath() + "Res/UI/Item/Textures/Trait/";
    public static string ItemPB = GetPrepath() + "Res/UI/Item/Prefabs/P_Item_Template_01.prefab";
 
    ///.........................GUI.................................
@@ -139,17 +141,14 @@ public static class PathConfig
          curDir = ItemEquipableImageDir;
       return curDir + $"{name}.png";
    }
+
+   public static string GetTraitPath(string name) => $"{TraitImageDir}{name}.png";
    //获得宝石资产的路径
-   public static string GetGemPath(string name)
-   {
-      return GemImageDir + $"{name}.png";
-   }
+   public static string GetGemPath(string name) => GemImageDir + $"{name}.png";
    
    //获得字体的路径
-   public static string GetFondPath(MultiLaEN MultiLa)
-   {
-      return GetPrepath() + string.Format("Res/UI/Fond/{0}.asset",MultiLa.ToString());
-   }
+   public static string GetFondPath(MultiLaEN MultiLa) 
+      => GetPrepath() + string.Format("Res/UI/Fond/{0}.asset",MultiLa.ToString());
    
    public static string GetBulletTemplate(BulletInsMode bulletInsMode)
    {

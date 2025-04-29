@@ -73,7 +73,7 @@ public class BattleCameraController
 
         if (isBeginCatch)
         {
-            BulletInnerNew firstBullet = GM.Root.InventoryMgr.CurBulletsInFight[0];
+            BulletInner firstBullet = GM.Root.InventoryMgr.CurBulletsInFight[0];
             float curSpeed = firstBullet.controller.AttackSeed; // 直接拿实时速度
             // 镜头的加速度
             _cameraCurSpeed = Mathf.Lerp(_cameraCurSpeed, Mathf.Max(curSpeed * 1.5f, curSpeed + 10f), Time.deltaTime * 14f);

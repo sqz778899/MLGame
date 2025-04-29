@@ -50,6 +50,13 @@ public class ResManager : Singleton<ResManager>
         return null;
     }
 
+    public Sprite GetTraitIcon(int id)
+    {
+        TraitJson json = TrunkManager.Instance.GetTraitJson(id);
+        string AssetPath = PathConfig.GetTraitPath(json.ResName);
+        return GetAssetCache<Sprite>(AssetPath);
+    }
+
     static string GetFileNameByPath(string CurPath)
     {
         CurPath = CurPath.Replace("\\","/");

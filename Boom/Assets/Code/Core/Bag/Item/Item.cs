@@ -94,6 +94,7 @@ public class Item : ItemBase,IItemInteractionBehaviour
             ? SlotManager.GetEmptySlotController(SlotType.ItemBagSlot)
             : SlotManager.GetEmptySlotController(SlotType.ItemEquipSlot);
 
+        if (toSlot == null )return;//没有空位
         if (toSlot.CanAccept(Data))
             toSlot.Assign(Data, gameObject);
         SyncBackground();

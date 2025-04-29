@@ -21,7 +21,7 @@ public static class BulletFactory
             _bulletInner.BindData(_bulletData);
         }*/
         
-        if (bulletSC is BulletInnerNew _bulletInner)
+        if (bulletSC is BulletInner _bulletInner)
         {
             _bulletInner.BindData(_bulletData);
         }

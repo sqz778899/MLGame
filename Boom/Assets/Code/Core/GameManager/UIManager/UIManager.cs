@@ -6,15 +6,9 @@ public class UIManager : ScriptableObject
     //Global Control
     public bool IsLockedClick = false;
     
-    public GUICommonManager CommonUI { get; private set; }
-    public GUIBagManager BagUI { get; private set; }
-   
-    
     public void InitStartGame()
     {
         IsLockedClick = false;
-        CommonUI = new GUICommonManager();
-        BagUI = new GUIBagManager();
     }
     
     #region 单例

@@ -28,7 +28,9 @@ public static class SlotManager
     public static ISlotController GetEmptySlotController(SlotType slotType)
     {
         SlotView[] allSlot = GetCurSlotArraySlotView(slotType);
-        ISlotController curTargetGemSlot = allSlot.FirstOrDefault(each => each.Controller.IsEmpty).Controller;
+        SlotView curSlotView = allSlot.FirstOrDefault(each => each.Controller.IsEmpty);
+        if (curSlotView == null) return null;
+        ISlotController curTargetGemSlot =curSlotView.Controller;
         return curTargetGemSlot;
     }
     

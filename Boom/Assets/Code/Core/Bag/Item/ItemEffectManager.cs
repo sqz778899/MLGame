@@ -10,9 +10,9 @@ public class ItemEffectManager
 
     public void InitData() => RegisterAllComboTraits();
     
-    public void Trigger(ItemTriggerTiming timing)
+    public void Trigger(ItemTriggerTiming timing,BattleContext ctx = null)
     {
-        BattleContext ctx = GetNewBattleContext();
+        ctx ??= new BattleContext();
         //触发每一个道具的效果
         foreach (var item in GM.Root.InventoryMgr._InventoryData.EquipItems)
         {
@@ -30,18 +30,14 @@ public class ItemEffectManager
         }
     }
     
-    public List<ItemComboSynergiesInfo> GetCurrentSynergiesInfos()
+    public List<TraitData> GetCurrentSynergiesInfos()
     {
         // 检测并缓存满足条件的组合特质
         RefreshComboTraits();
-        var infos = new List<ItemComboSynergiesInfo>();
-        foreach (var combo in _activeTraits)
+        var infos = new List<TraitData>();
+        foreach (IItemSynergies combo in _activeTraits)
         {
-            infos.Add(new ItemComboSynergiesInfo(
-                combo.Name,
-                combo.Description,
-                combo.GetIcon()
-            ));
+            infos.Add(combo.Data);
         }
         return infos;
     }
@@ -59,15 +55,6 @@ public class ItemEffectManager
                 _activeTraits.Add(trait);
         }
     }
-    
-    BattleContext GetNewBattleContext() =>
-        new BattleContext
-        {
-            AllBullets = GM.Root.InventoryMgr._BulletInvData.EquipBullets,
-            CurEnemy = BattleManager.Instance.battleData.CurLevel.CurEnemy.Data,
-            RoundIndex = BattleManager.Instance.battleData.CurWarReport.CurWarIndex,
-            IsTreasureRoom = false,
-        };
     
     void RegisterAllComboTraits()
     {

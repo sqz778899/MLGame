@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -52,10 +51,11 @@ public class Tooltips : MonoBehaviour
     public void SetInfo(ToolTipsInfo toolTipsInfo)
     {
         ClearInfo();
-        if (toolTipsInfo.CurToolTipsType == ToolTipsType.Item)
-            SetItemInfo(toolTipsInfo);
-        else
+        if (toolTipsInfo.CurToolTipsType == ToolTipsType.Gem || 
+            toolTipsInfo.CurToolTipsType == ToolTipsType.Bullet)
             SetGemBulletInfo(toolTipsInfo);
+        else
+            SetItemInfo(toolTipsInfo);
     }
     
     void SetItemInfo(ToolTipsInfo toolTipsInfo)

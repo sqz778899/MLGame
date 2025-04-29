@@ -22,6 +22,8 @@ public class BagRoot : MonoBehaviour
 
     [Header("道具特质相关")] 
     public TextMeshProUGUI txtSynergies;
+    public TextMeshProUGUI txtSynergiesDesc;
+    public TraitIcon traitIcon;
     
     void Start()
     {
@@ -30,18 +32,23 @@ public class BagRoot : MonoBehaviour
         RefreshSynergies();//先同步一次
     }
 
-
+    //特质触发
     public void RefreshSynergies()
     {
-        List<ItemComboSynergiesInfo> traitInfos = 
+        List<TraitData> traitInfos = 
             GM.Root.InventoryMgr._ItemEffectMrg.GetCurrentSynergiesInfos();
         if (traitInfos.Count == 0)
         {
-            txtSynergies.text = "没有组合特质";
+            txtSynergies.text = "";
+            txtSynergiesDesc.text = "";
+            traitIcon.gameObject.SetActive(false);
             return;
         }
-        ItemComboSynergiesInfo SynergiesInfo = traitInfos[0];
+        TraitData SynergiesInfo = traitInfos[0];
         txtSynergies.text = SynergiesInfo.Name;
+        txtSynergiesDesc.text = SynergiesInfo.Desc;
+        traitIcon.gameObject.SetActive(true);
+        traitIcon.BindingData(traitInfos[0]);
     }
 
     #region 页签切换

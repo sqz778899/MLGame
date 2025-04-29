@@ -29,11 +29,9 @@ public class InLevelState : IFightState
         _curEnemy = _battleData.CurEnemy;
         _curRole = _battleData.CurRole;
     }
-    
-    public void Enter()
-    {
-        Debug.Log("进入战斗中状态");
-    }
+
+    public void Enter() => GM.Root.InventoryMgr.
+        _ItemEffectMrg.Trigger(ItemTriggerTiming.OnBattleStart);
     
     public void Update()
     {

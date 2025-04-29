@@ -1,0 +1,74 @@
+[
+  {
+    "ID": 1,
+    "Name": "施法失衡",
+    "Rarity": 1,
+    "Desc": "你所有子弹的伤害会随机波动（-3~2）",
+    "Flavor": "“你当然施放了咒语——只是你从不确定，它会不会先爆了自己。”",
+    "ResName": "T_Trait_ManaChaos_01"
+  },
+  {
+    "ID": 2,
+    "Name": "教学事故",
+    "Rarity": 2,
+    "Desc": "第一颗子弹伤害-6，最后一颗子弹伤害+6",
+    "Flavor": "“一开始全错，最后居然刚刚好。”",
+    "ResName": "T_Trait_PowerSurge_01"
+  },
+  {
+    "ID": 3,
+    "Name": "混沌三角",
+    "Rarity": 3,
+    "Desc": "所有子弹宝石类型变为共振，每颗子弹共振效果+1",
+    "Flavor": "“三件乱七八糟的东西，居然凑出了奇迹。”",
+    "ResName": "T_Trait_MindTrap_01"
+  },
+  {
+    "ID": 4,
+    "Name": "渐强式魔咒",
+    "Rarity": 2,
+    "Desc": "第三颗子弹伤害+1，第四颗子弹伤害+2",
+    "Flavor": "“这是魔法塔一年级学生的基础练习。第三击蓄力，第四击爆发——但没几个人练得完。”",
+    "ResName": "T_Trait_TempoBoost_01"
+  },
+  {
+    "ID": 5,
+    "Name": "三阶混念术",
+    "Rarity": 3,
+    "Desc": "你的所有子弹共振效果+1",
+    "Flavor": "“这门本不该教的课，在不稳定的魔力中竟意外成功。”",
+    "ResName": "T_Trait_TempoBoost_01"
+  },
+  {
+    "ID": 6,
+    "Name": "无限金币术",
+    "Rarity": 1,
+    "Desc": "你每翻找一次物品时，额外获得#Yellow(2~10)#金币。",
+    "Flavor": "“你翻左边抽屉是2块，翻右边是10块……不过别问为什么。”",
+    "ResName": "T_Trait_EconomicSupport_01"
+  },
+  {
+    "ID": 7,
+    "Name": "垃圾之光",
+    "Rarity": 3,
+    "Desc": "如果你有至少两颗子弹未镶嵌宝石，则最后一颗子弹伤害+4，穿透+1",
+    "Flavor": "“从废墟中发射的那发，格外致命。”",
+    "ResName": "T_Trait_StatusBuff_01"
+  },
+  {
+    "ID": 8,
+    "Name": "尖叫猫头鹰",
+    "Rarity": 1,
+    "Desc": "战斗开始时，敌人护盾血量减少#Blue(1~2)#。",
+    "Flavor": "“你吵醒了猫头鹰，它对敌人叫了两声。现在敌人的护盾没了，它也睡不着了。”",
+    "ResName": "T_Trait_DeckbuildingAid_01"
+  },
+  {
+    "ID": 9,
+    "Name": "虹彩混响陷阱",
+    "Rarity": 1,
+    "Desc": "所有子弹在战斗开始时，其宝石类型将统一变为随机的一种（共振/穿透/伤害）",
+    "Flavor": "“咒语未定，魔力已乱。你明明准备了七种术式，它们却全变成了……共振？”",
+    "ResName": "T_Trait_DeckDisruption_01"
+  }
+]

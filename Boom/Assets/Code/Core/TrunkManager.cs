@@ -16,6 +16,7 @@ public class TrunkManager: ScriptableObject
     List<TalentJson> _talentDesignJsons;
     List<DropTableJson> _dropTableDesignJsons;
     List<BuffJson> _buffDesignJsons;
+    List<TraitJson> _traitDesignJsons;
     
     public List<BulletJson> BulletDesignJsons => _bulletDesignJsons ??= LoadBulletData();
     public List<BulletJson> LoadBulletData() => 
@@ -56,6 +57,11 @@ public class TrunkManager: ScriptableObject
         JsonConvert.DeserializeObject<List<BuffJson>>(File.ReadAllText(PathConfig.BuffDesignJson));
     public BuffJson GetBuffJson(int ID)=>BuffDesignJsons.FirstOrDefault(each => each.ID == ID) ?? new BuffJson();
     
+    public List<TraitJson> TraitDesignJsons => _traitDesignJsons ??= LoadTraitData();
+    public List<TraitJson> LoadTraitData()=>
+        JsonConvert.DeserializeObject<List<TraitJson>>(File.ReadAllText(PathConfig.TraitDesignJson));
+    public TraitJson GetTraitJson(int ID)=>TraitDesignJsons.FirstOrDefault(each => each.ID == ID) ?? new TraitJson();
+    
     public void ForceRefresh()
     {
         _bulletDesignJsons = LoadBulletData();
@@ -66,6 +72,7 @@ public class TrunkManager: ScriptableObject
         _talentDesignJsons = LoadTalentData();
         _dropTableDesignJsons = LoadDropTableData();
         _buffDesignJsons = LoadBuffData();
+        _traitDesignJsons = LoadTraitData();
     }
     #endregion
     

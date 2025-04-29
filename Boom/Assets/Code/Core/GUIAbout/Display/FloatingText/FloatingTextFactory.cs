@@ -23,7 +23,7 @@ public static class FloatingTextFactory
         GameObject prefab = ResManager.instance.CreatInstance(WorldTextPrefabPath);
         prefab.transform.position = worldPos;
         if (parent != null)
-            prefab.transform.SetParent(parent, true);
+            prefab.transform.SetParent(parent, false);
 
         FloatingText floating = prefab.GetComponent<FloatingText>();
         TextMeshPro curText = prefab.GetComponent<TextMeshPro>();
@@ -47,14 +47,13 @@ public static class FloatingTextFactory
     /// <summary>
     /// 创建一个 UI 坐标系中的浮动文字
     /// </summary>
-    public static void CreateUIText(string content, Transform uiParent, 
-        Color? color = null, float fontSize = 28f)
+    public static void CreateUIText(string content, Color? color = null, float fontSize = 28f)
     {
         GameObject prefab = ResManager.instance.CreatInstance(UITextPrefabPath);
-        prefab.transform.SetParent(uiParent, false);
-
+        prefab.transform.SetParent(EternalCavans.Instance.FloatingTextRoot.transform, false);
+        
         FloatingText floating = prefab.GetComponent<FloatingText>();
-        floating.textRenderer.sortingLayerName = "FloatingText";
+        //floating.textRenderer.sortingLayerName = "FloatingText";
         floating.Animate(content, color ?? Color.white, fontSize);
     }
 }

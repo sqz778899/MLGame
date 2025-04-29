@@ -4,7 +4,7 @@ using UnityEngine.Serialization;
 public class BulletInnerDragAgent : MonoBehaviour
 {
     [Header("战斗表现引用")]
-    public BulletInnerNew BulletInnerSC;
+    public BulletInner BulletInnerSC;
     public Renderer MainRenderer;
 
     [Header("UI 分身资产")]
@@ -20,7 +20,7 @@ public class BulletInnerDragAgent : MonoBehaviour
         dragGhostSC = BulletFactory.CreateBullet(data, BulletInsMode.EditA) as BulletNew;
         dragGhostSC.gameObject.SetActive(false);
         dragGhostSC.transform.SetParent(DragManager.Instance.dragRoot.transform,false);
-        bagRootMini = UIManager.Instance.BagUI.BagRootMiniGO.GetComponent<BagRootMini>();
+        bagRootMini = EternalCavans.Instance.BagRootMini.GetComponent<BagRootMini>();
     }
 
     void OnMouseDown()

@@ -77,7 +77,7 @@ public class BaseMove : MonoBehaviour
         // 延迟初始化 FightLogic 组件
         if (BattleLogic == null)
             BattleLogic = BattleManager.Instance.battleLogic;
-        _bagRootMini = UIManager.Instance.BagUI.BagRootMiniGO.GetComponent<BagRootMini>();
+        _bagRootMini = EternalCavans.Instance.BagRootMini.GetComponent<BagRootMini>();
         
         OnEditEndInner += _bagRootMini.EditEnd;
     }

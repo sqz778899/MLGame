@@ -68,6 +68,10 @@ public class BulletInvData : ScriptableObject
     {
         EquipBullets.Sort((bullet1, bullet2) => 
             bullet1.CurSlotController.SlotID.CompareTo(bullet2.CurSlotController.SlotID));
+        
+        //排序完后，依次写入 OrderInRound
+        for (int i = 0; i < EquipBullets.Count; i++)
+            EquipBullets[i].OrderInRound = i + 1;
         OnBulletsChanged?.Invoke();
     }
     #endregion
@@ -78,8 +82,8 @@ public class BulletInvData : ScriptableObject
         if (EquipBullets.Count < 2) return;
 
         SortEquipBullet();
-        ResonanceSlotCol[] ResonanceSlotCols=UIManager.Instance.BagUI.EquipBulletSlotRoot.
-                GetComponentsInChildren<ResonanceSlotCol>(true);
+        ResonanceSlotCol[] ResonanceSlotCols= EternalCavans.Instance.
+            EquipBulletSlotRoot.GetComponentsInChildren<ResonanceSlotCol>(true);
       
         //处理共振
         for (int i = 1; i < EquipBullets.Count; i++)

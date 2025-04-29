@@ -16,7 +16,7 @@ public class BulletInnerSlotController: BaseSlotController<ItemDataBase>
         AssignDirectly(data, itemGO);
     }
 
-    public override void AssignDirectly(ItemDataBase data, GameObject itemGO)
+    public override void AssignDirectly(ItemDataBase data, GameObject itemGO,bool isRefreshData =true)
     {
         //2)添加新子弹，到数据层
         _curData = data;

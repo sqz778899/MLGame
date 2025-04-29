@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ public class InventoryManager : MonoBehaviour
     public BulletInvData _BulletInvData;
     public ItemEffectManager _ItemEffectMrg;
     
-    public List<BulletInnerNew> CurBulletsInFight;
+    public List<BulletInner> CurBulletsInFight;
     public List<BulletSlotController> CurBulletSlotControllers;
     public List<BulletInnerSlotController> CurBulletInnerSlotControllers;
     
@@ -76,8 +77,7 @@ public class InventoryManager : MonoBehaviour
     public bool ItemDuplicateCheck(int itemID)
     {
         List<ItemData> allItems = _InventoryData.BagItems
-            .Concat(_InventoryData.EquipItems)
-            .ToList();
+            .Concat(_InventoryData.EquipItems).ToList();
         foreach (ItemData each in allItems)
         {
             if (each.ID == itemID && each.Category == ItemCategory.Equipable)
@@ -89,12 +89,11 @@ public class InventoryManager : MonoBehaviour
     #region 子弹的一些外部操作
     public void AddBulletToFight(BulletData bulletData)
     {
-        BulletInnerNew bulletInnerSC = BulletFactory.CreateBullet(bulletData, BulletInsMode.Inner) as BulletInnerNew;
+        BulletInner bulletInnerSC = BulletFactory.CreateBullet(bulletData, BulletInsMode.Inner) as BulletInner;
         bulletInnerSC.view.UpText();
         CurBulletsInFight.Add(bulletInnerSC);
         CurBulletsInFight = CurBulletsInFight
-            .OrderBy(bullet => bullet.controller.Data.CurSlotController.SlotID)
-            .ToList();
+            .OrderBy(bullet => bullet.controller.Data.CurSlotController.SlotID).ToList();
     }
     
     public void SyncMainBulletSlot()
@@ -116,14 +115,14 @@ public class InventoryManager : MonoBehaviour
 
     public void RemoveBulletToFight(GameObject bulletInnerGO)
     {
-        BulletInnerNew bulletSC = bulletInnerGO.GetComponent<BulletInnerNew>();
+        BulletInner bulletSC = bulletInnerGO.GetComponent<BulletInner>();
         CurBulletsInFight.Remove(bulletSC);
         Destroy(bulletInnerGO);
     }
     
     public void RemoveBulletToFight(BulletData bulletData)
     {
-        BulletInnerNew bulletSC = GetBulletInnerFormFight(bulletData);  
+        BulletInner bulletSC = GetBulletInnerFormFight(bulletData);  
         CurBulletsInFight.Remove(bulletSC);
         Destroy(bulletSC.gameObject);
     }
@@ -155,7 +154,7 @@ public class InventoryManager : MonoBehaviour
         _BulletInvData.AddSpawner(_data.ID);
         _BulletInvData.UnEquipBullet(_data);
         //把战场数据也删除掉
-        BulletInnerNew bulletSC = GetBulletInnerFormFight(_data);
+        BulletInner bulletSC = GetBulletInnerFormFight(_data);
         if (bulletSC != null)
         {
             CurBulletsInFight.Remove(bulletSC);
@@ -166,7 +165,7 @@ public class InventoryManager : MonoBehaviour
         SlotManager.ClearSlot(_data.CurSlotController);
     }
     
-    BulletInnerNew GetBulletInnerFormFight(BulletData bulletData) =>
+    BulletInner GetBulletInnerFormFight(BulletData bulletData) =>
         CurBulletsInFight.FirstOrDefault(b => b.controller.Data == bulletData);
     
     //初始化子弹槽的锁定状态
@@ -215,7 +214,7 @@ public class InventoryManager : MonoBehaviour
         foreach (BulletData each in _BulletInvData.EquipBullets)
         {
             GameObject BulletIns = BulletFactory.CreateBullet(each, BulletInsMode.EditB).gameObject;
-            each.CurSlotController.Assign(each,BulletIns);
+            each.CurSlotController.AssignDirectly(each,BulletIns,false);
         }
     }
     
@@ -270,7 +269,7 @@ public class InventoryManager : MonoBehaviour
         else
             Destroy(gameObject);
 
-        CurBulletsInFight = new List<BulletInnerNew>();
+        CurBulletsInFight = new List<BulletInner>();
         _InventoryData =  ResManager.instance.GetAssetCache<InventoryData>(PathConfig.InventoryDataPath);
         _BulletInvData =  ResManager.instance.GetAssetCache<BulletInvData>(PathConfig.BulletInvDataPath);
         _ItemEffectMrg = new ItemEffectManager();
