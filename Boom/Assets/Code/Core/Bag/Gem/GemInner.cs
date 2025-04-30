@@ -33,8 +33,14 @@ public class GemInner : ItemBase, IBeginDragHandler, IEndDragHandler,
     public override void BindData(ItemDataBase data)
     {
         Data = data as GemData;
-        Icon.sprite = ResManager.instance.GetAssetCache<Sprite>(PathConfig.GetGemPath(Data.ImageName));
+        Data.OnDataChanged += RefreshUI;
+        RefreshUI();
     }
+
+    void OnDestroy() => Data.OnDataChanged -= RefreshUI;
+
+    void RefreshUI() =>
+        Icon.sprite = ResManager.instance.GetAssetCache<Sprite>(PathConfig.GetGemPath(Data.ImageName));
 
     public void OnPointerEnter(PointerEventData eventData) => ShowTooltips();
 

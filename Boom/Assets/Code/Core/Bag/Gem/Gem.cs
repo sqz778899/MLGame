@@ -26,7 +26,11 @@ public class Gem: ItemBase,IItemInteractionBehaviour
         // TODO: 设置稀有度边框颜色等
     }
 
-    void OnDestroy() => PlayerManager.Instance.OnTalentLearned -= Data.AddTalentGemBonus;
+    void OnDestroy()
+    {
+        PlayerManager.Instance.OnTalentLearned -= Data.AddTalentGemBonus;
+    }
+
     #endregion
 
     #region 双击与右键逻辑

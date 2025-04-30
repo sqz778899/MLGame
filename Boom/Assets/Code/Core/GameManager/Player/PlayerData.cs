@@ -27,6 +27,13 @@ public class PlayerData: ScriptableObject
             GM.Root.InventoryMgr.RefreshBulletSlotLockedState();
         }
     }
+    
+    public void SetBulletSlotLockedState(int slotIndex, bool isUnLocked)
+    {
+        if (!CurBulletSlotLockedState.ContainsKey(slotIndex)) return;
+        CurBulletSlotLockedState[slotIndex] = isUnLocked;
+        GM.Root.InventoryMgr.RefreshBulletSlotLockedState();
+    }
     #endregion
     
     //Buff类

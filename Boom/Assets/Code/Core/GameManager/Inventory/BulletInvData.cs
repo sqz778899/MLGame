@@ -54,8 +54,9 @@ public class BulletInvData : ScriptableObject
     {
         if (_data == null) return;
         EquipBullets.Remove(_data);
-        OnBulletsChanged?.Invoke();
         RefreshModifiers();
+        SortEquipBullet();//子弹内部数据进行排序
+        OnBulletsChanged?.Invoke();
     }
     
     public void AddSpawner(int bulletID)
@@ -68,7 +69,6 @@ public class BulletInvData : ScriptableObject
     {
         EquipBullets.Sort((bullet1, bullet2) => 
             bullet1.CurSlotController.SlotID.CompareTo(bullet2.CurSlotController.SlotID));
-        
         //排序完后，依次写入 OrderInRound
         for (int i = 0; i < EquipBullets.Count; i++)
             EquipBullets[i].OrderInRound = i + 1;

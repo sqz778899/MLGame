@@ -200,28 +200,28 @@ public class MapManager : MonoBehaviour
         //找到当前房间的节点
         MapRoomNode targetRoom = _allMapRooms.FirstOrDefault(
             each => each.RoomID == CurMapSate.TargetRoomID);
-
-        #region 触发 OnEnterRoom 相关道具&&Buff
-        bool isFirstEnter = !CurMapSate.IsFinishedRooms.Contains(targetRoom.RoomID);
-        // --- 创建Context传参 ---
-        BattleContext ctx = new BattleContext
-        {
-            EnterRoomID = targetRoom.RoomID,
-            IsFirstEnterRoom = isFirstEnter
-        };
-        // 交给道具管理器处理
-        GM.Root.InventoryMgr._ItemEffectMrg.Trigger(ItemTriggerTiming.OnEnterRoom, ctx);
-        #endregion
         
-        CurMapSate.FinishAndToNextRoom();//记录下探索度
-        targetRoom.State = MapRoomState.Unlocked;
         //设置角色&&摄像机位置
-        SetRoomInfo(targetRoom);
-        //设置当前房间ID
-        CurMapSate.CurRoomID = targetRoom.RoomID;
+        SetRoomInfo(targetRoom, () =>
+        {
+            #region 触发 OnEnterRoom 相关道具&&Buff
+            bool isFirstEnter = !CurMapSate.IsFinishedRooms.Contains(targetRoom.RoomID);
+            // --- 创建Context传参 ---
+            BattleContext ctx = new BattleContext
+            {
+                EnterRoomID = targetRoom.RoomID,
+                IsFirstEnterRoom = isFirstEnter
+            };
+            // 交给道具管理器处理
+            GM.Root.InventoryMgr._ItemEffectMrg.Trigger(ItemTriggerTiming.OnEnterRoom, ctx);
+            #endregion
+            // --- 处理房间状态 ---
+            CurMapSate.FinishAndToNextRoom();//记录下探索度,并同步当前房间ID
+            targetRoom.State = MapRoomState.Unlocked;
+        });
     }
 
-    void SetRoomInfo(MapRoomNode roomNode)
+    void SetRoomInfo(MapRoomNode roomNode,Action onFinish = null)
     {
         //设置角色&&摄像机位置
         GameObject roleInMap = PlayerManager.Instance.RoleInMapGO;
@@ -229,8 +229,11 @@ public class MapManager : MonoBehaviour
         roleInMap.transform.position = roomNode.RoleStartPos.position;
         Vector3 newCameraPos = new Vector3(roomNode.CameraStartPos.position.x,
             roomNode.CameraStartPos.position.y, Camera.main.transform.position.z);
-        Camera.main.transform.DOMove(newCameraPos, 0.5f);
-        roomNode.SetRenderLayer(roleInMap);
+        Camera.main.transform.DOMove(newCameraPos, 0.5f).OnComplete(() =>
+        {
+            roomNode.SetRenderLayer(roleInMap);
+            onFinish?.Invoke(); // ✅ 回调
+        });
     }
     
     public void UnloadLevelData()

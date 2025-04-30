@@ -11,6 +11,9 @@ public class BattleData: ScriptableObject
     [Header("关卡")]
     //public MapSate CurMapSate;
     public LevelMono CurLevel;
+
+    [Header("Buff")] 
+    public BattleTempBuffManager BattleTempBuffMgr;
     
     [Header("Display")] 
     public float Distance;            //与敌人的距离
@@ -21,6 +24,9 @@ public class BattleData: ScriptableObject
     public void InitFightData(EnemyConfigData _enemyConfig,int _levelID)
     {
         //CurMapSate.CurLevelID = _levelID;
+        BattleTempBuffMgr = new BattleTempBuffManager();
+        GM.Root.InventoryMgr._BulletInvData.OnBulletsChanged +=
+            BattleTempBuffMgr.ApplyAll;//子弹数据变化时，应用所有临时buff
         CurLevel = LevelManager.LoadLevel(_levelID);
         CurRole = PlayerManager.Instance.RoleInFightSC;
         GM.Root.InventoryMgr.CreateAllBulletToFight();//初始化局内子弹
@@ -39,6 +45,9 @@ public class BattleData: ScriptableObject
     
     public void ClearData()
     {
+        GM.Root.InventoryMgr._BulletInvData.OnBulletsChanged -=
+            BattleTempBuffMgr.ApplyAll;//注销事件注册
+        BattleTempBuffMgr.Clear();
         CurEnemy = null;
         CurRole = null;
         CurWarReport = new WarReport();

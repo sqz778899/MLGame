@@ -52,4 +52,14 @@ public class GMTools
     {
         InventoryManager.Instance.AddGemToBag(GemID);
     }
+    
+    [Button("解锁子弹槽",ButtonSizes.Large),PropertyOrder(3)]
+    void UnlockBulletSlot()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            GM.Root.PlayerMgr._PlayerData.SetBulletSlotLockedState(i,true);
+        }
+        //GM.Root.InventoryMgr.RefreshBulletSlotLockedState();
+    }
 }

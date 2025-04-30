@@ -17,6 +17,15 @@ public static class ItemEffectFactory
             3 => new Effect_MismatchedTacticalNotes(),
             4 => new Effect_DizzyOwlFigurine(),
             5 => new Effect_GoldenKey(),
+            6 => new Effect_DraftyFlyingBroom(),
+            7 => new Effect_LeftFootOfFortune(),
+            8 => new Effect_TransmutationPracticeQuill(),
+            9 => new Effect_CrackedToyWand(),
+            10 => new Effect_MoldyTrainingLog(),
+            //
+            200 => new Effect_MisspelledSpellbook(),
+            201 => new Effect_FlickeringCandle(),
+            202 => new Effect_GrudgeTangledScarf(),
             // ...
             401 => new Effect_RainbowBook(),
             _ => null,

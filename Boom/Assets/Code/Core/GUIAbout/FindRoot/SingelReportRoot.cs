@@ -23,7 +23,7 @@ public class SingelReportRoot : MonoBehaviour
         BulletData curBulletData = curInfo.BulletData;
         List<BattleOnceHit> curBattleOnceHits = curInfo.Hits;
         //战报标题部分
-        txtDamage.text = curBulletData.FinalDamage.ToString();//伤害
+        txtDamage.text = curBattleOnceHits[0].FinalDamage.ToString();//伤害
         if (curBulletData.FinalPiercing == 0)
             txtPiercing.gameObject.SetActive(false);
         txtPiercing.text = curBulletData.FinalPiercing.ToString();//穿透

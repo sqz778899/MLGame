@@ -30,6 +30,7 @@ public struct DamageResult
 #region 战报相关
 public struct BattleOnceHit
 {
+    public int FinalDamage; //子弹的实际伤害（加上各种BUFF的）
     public int HitIndex;
     public int ShieldIndex;
     public int EnemyIndex;
@@ -38,9 +39,10 @@ public struct BattleOnceHit
     public int Damage;
     public bool IsDestroyed;
 
-    public BattleOnceHit(int hitIndex = -1, int shieldIndex = -1, int enemyIndex = -1,
+    public BattleOnceHit(int _finalDamage,int hitIndex = -1, int shieldIndex = -1, int enemyIndex = -1,
         int effectiveDamage = 0, int overflowDamage = 0, int damage = 0, bool isDestroyed = false)
     {
+        FinalDamage = _finalDamage;
         HitIndex = hitIndex;
         ShieldIndex = shieldIndex;
         EnemyIndex = enemyIndex;
@@ -64,6 +66,7 @@ public class BulletAttackRecord
         BulletSlotID = bulletSlotID;
         Hits = new List<BattleOnceHit>();
     }
+    
     public void RecordHit(BattleOnceHit hit) => Hits.Add(hit);
 }
 
@@ -84,6 +87,9 @@ public class SingleBattleReport
         }
         return record;
     }
+
+    public BulletAttackRecord GetBulletRecord(BulletData bullet) =>
+        BulletAttackRecords.FirstOrDefault(r => r.BulletData == bullet);
 }
 
 public class WarReport

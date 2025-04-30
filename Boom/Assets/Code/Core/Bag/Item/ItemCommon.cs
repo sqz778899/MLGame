@@ -91,6 +91,8 @@ public class BattleContext
     //进入房间相关
     public int EnterRoomID;
     public bool IsFirstEnterRoom;
+    // 是否跳过命中
+    public bool ShieldSkipCount;
 
     public BattleContext() => InitCommonData();
     
@@ -113,6 +115,7 @@ public class BattleContext
         // 默认房间数据
         EnterRoomID = -1;
         IsFirstEnterRoom = false;
+        ShieldSkipCount = false;
     }
 }
 

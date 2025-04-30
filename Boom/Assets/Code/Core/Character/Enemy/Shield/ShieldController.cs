@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public class ShieldController:IDamageable
 {
@@ -58,8 +59,6 @@ public class ShieldController:IDamageable
         _hitRoutine = _coroutineHost.StartCoroutine(HitToIdle());
 
         bool isDestroyed = _data.IsDestroyed;
-        /*if (isDestroyed)
-            GameObject.Destroy(_view.gameObject);*/
 
         return new DamageResult(damage, effective, overflow, isDestroyed, _data.ShieldIndex);
     }

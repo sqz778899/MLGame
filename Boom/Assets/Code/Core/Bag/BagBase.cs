@@ -148,12 +148,55 @@ public class GemData : ItemDataBase,ITooltipBuilder
     public int Piercing;
     public int Resonance;
     public string ImageName;
+    public GemType CurGemType;
     public BulletModifierGem Modifier;
+    
+    #region 处理战场临时Buff
+    public GemType ChangedType;
+    Dictionary<string, bool> triggeredTempBuffs = new();
+    public bool IsTriggered(string buffUniqueKey) => triggeredTempBuffs.ContainsKey(buffUniqueKey);
+    //类型还原
+    public void ReturnGemType()
+    {
+        if (triggeredTempBuffs.Count == 0)
+            return;
+        triggeredTempBuffs.Clear();
+        List<int> s = typeIDDict[ChangedType];
+        List<int> targetList = typeIDDict[CurGemType];
+        int index = s.IndexOf(ID);
+        ID = targetList[index];
+    }
+
+    public void ClearTempBuffs()
+    {
+        ReturnGemType();
+    }
+
+    //类型变化
+    public void ChangeGemType(GemType _changedType,string buffUniqueKey)
+    {
+        // 已经触发过则跳过
+        if (triggeredTempBuffs.ContainsKey(buffUniqueKey))
+            return;
+        
+        triggeredTempBuffs[buffUniqueKey] = true;
+        ChangedType = _changedType;
+        List<int> s = typeIDDict[CurGemType];
+        List<int> targetList = typeIDDict[_changedType];
+        int index = s.IndexOf(ID);
+        ID = targetList[index];
+    }
+    #endregion
     
     public GemData(int _id,GemSlotController gemSlotController)
     {
         GemJson json = TrunkManager.Instance.GetGemJson(_id);
         CurSlotController = gemSlotController;
+        foreach (var each in typeIDDict)
+        {
+            if (each.Value.Contains(_id))
+                CurGemType = each.Key;
+        }
         InitData(json);
         Modifier = new BulletModifierGem(this);
     }
@@ -169,6 +212,19 @@ public class GemData : ItemDataBase,ITooltipBuilder
         Damage = json.Damage;
         Piercing = json.Piercing;
         Resonance = json.Resonance;
+        SyncFinalAttributes();
+    }
+    Dictionary<GemType, List<int>> typeIDDict = new Dictionary<GemType, List<int>>
+    {
+        { GemType.Damage, new List<int>{1, 2, 3} },
+        { GemType.Piercing,  new List<int>{10,11,12} },
+        { GemType.Resonance, new List<int>{20,21,22} }
+    };
+
+    public void SyncFinalAttributes()
+    {
+        //处理临时Buff
+       
         OnDataChanged?.Invoke();
     }
     
@@ -232,7 +288,28 @@ public class BulletData:ItemDataBase,ITooltipBuilder
     public int FinalResonance;
     public bool IsResonance; //是否开启共振
     public List<IBulletModifier> Modifiers = new();
+    //
     public int OrderInRound; // 第几颗子弹（从1开始）
+    public int JumpHitCount; // 跳跃命中次数
+    public bool IgnoreGemModifier = false; //是否忽略宝石加强(权重更高)
+    public GemEffectOverrideState GemEffectOverride = GemEffectOverrideState.None; //宝石效果覆盖状态
+
+    #region 处理战场临时Buff
+    Dictionary<string, IBattleTempBuff> triggeredTempBuffs = new();
+    public void AddTempBuff(IBattleTempBuff buff)
+    {
+        triggeredTempBuffs[buff.GetUniqueKey()] = buff;
+        SyncFinalAttributes();
+    }
+
+    public void ClearTempBuffs()
+    {
+        triggeredTempBuffs.Clear();
+        GemEffectOverride = GemEffectOverrideState.None;
+        IgnoreGemModifier = false;
+        SyncFinalAttributes();
+    }
+    #endregion
     
     //子弹孵化器专用
     public int _spawnerCount;
@@ -250,6 +327,7 @@ public class BulletData:ItemDataBase,ITooltipBuilder
     {
         BulletJson json = TrunkManager.Instance.GetBulletJson(_id);
         CurSlotController = _slot;
+        JumpHitCount = 0;
         InitData(json);
     }
 
@@ -294,7 +372,12 @@ public class BulletData:ItemDataBase,ITooltipBuilder
         FinalDamage = Damage;
         FinalPiercing = Piercing;
         FinalResonance = Resonance;
-        Modifiers.ForEach(mo => mo.Modify(this));
+        if (!IgnoreGemModifier)//处理临时Buff，让宝石修改失效
+            Modifiers.ForEach(mo => mo.Modify(this));//处理宝石
+        //处理临时Buff
+        foreach (var each in triggeredTempBuffs)
+            each.Value.Apply(this);
+        
         if (FinalResonance == 0)
             ResonanceDamage = 0;
         FinalDamage += ResonanceDamage;
@@ -343,52 +426,32 @@ public class BulletModifierGem : IBulletModifier
     }
     public void Modify(BulletData data)
     {
-        data.FinalDamage += gem.Damage;
-        data.FinalPiercing += gem.Piercing;
-        data.FinalResonance += gem.Resonance;
+        int dmg = gem.Damage;
+        int pierce = gem.Piercing;
+        int reso = gem.Resonance;
+
+        //宝石效果Buff相关
+        switch (data.GemEffectOverride)
+        {
+            case GemEffectOverrideState.Ignore:
+                return;
+            case GemEffectOverrideState.Double:
+                dmg *= 2;
+                pierce *= 2;
+                reso *= 2;
+                break;
+        }
+        
+        data.FinalDamage += dmg;
+        data.FinalPiercing += pierce;
+        data.FinalResonance += reso;
     }
 }
-#endregion
 
-#region 最大的物品类划分细则
-//全局物品划分
-public enum DropedCategory
+public enum GemEffectOverrideState
 {
-    Gem = 0,
-    Item = 1,
-    Key = 2,
-    Buff = 3,
-}
-
-//Item类划分
-public enum ItemCategory
-{
-    Equipable = 0,       // 原有的可装备型道具
-    Persistent = 1,      // 新增：可保留、无效果型道具
-}
-
-//Item的Persistent类型划分
-public enum PersistentItemType
-{
-    Resource = 0,
-    QuestItem = 1,
-}
-#endregion
-
-#region 稀有度类型细则划分
-public enum DropedRarity
-{
-    None = 0, // 无
-    Common = 1,     // 白色
-    Rare = 2,       // 蓝色
-    Epic = 3,       // 紫色
-    Legendary = 4   // 橙色
-}
-
-public enum TreasureBoxRarity
-{
-    Common,     // 普通
-    Rare,       // 稀有
-    Legendary   // 传奇
+    None = 0,
+    Ignore = 1,
+    Double = 2
 }
 #endregion

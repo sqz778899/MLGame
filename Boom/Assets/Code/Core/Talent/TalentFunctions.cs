@@ -35,7 +35,7 @@ public static class TalentFunctions
 public class UnlockBulletSlotStrategy : ITalentUnlockStrategy
 {
     public void Learn(TalentJson talent) =>
-        PlayerManager.Instance._PlayerData.CurBulletSlotLockedState[talent.EffectID] = true;
+        PlayerManager.Instance._PlayerData.SetBulletSlotLockedState(talent.EffectID,true);
 }
 // 携带宝石
 public class CarryGemTalentStrategy : ITalentUnlockStrategy

@@ -83,9 +83,14 @@ public class BulletInnerController
         
         if (collider.TryGetComponent<IDamageable>(out var target))
         {
+            #region 触发 OnBulletHit 相关道具&&Buff
             // 处理子弹击中敌人的加成道具Buff等等
             BattleContext ctx = new BattleContext(Data, target);
             GM.Root.InventoryMgr._ItemEffectMrg.Trigger(ItemTriggerTiming.OnBulletHit,ctx);
+            // 若标记了跳过命中，则不进行伤害结算
+            if (ctx.ShieldSkipCount) return;
+            #endregion
+            
             // 命中处理：伤害结算
             DamageResult result = target.TakeDamage(Data, Data.FinalDamage);
             _view.PlayHitEffect();
@@ -105,6 +110,7 @@ public class BulletInnerController
         SingleBattleReport report = BattleManager.Instance.battleData.CurWarReport.GetCurBattleInfo();
         BulletAttackRecord record = report.GetOrCreateBulletRecord(Data);// 单个子弹在一场战斗中的全部表现
         var hit = new BattleOnceHit(
+            Data.FinalDamage,//在此时记录以便于记下来Buff
             record.Hits.Count,
             result.TargetIndex,
             (target is EnemyController) ? 1 : -1,  //1表示敌人，-1表示不是

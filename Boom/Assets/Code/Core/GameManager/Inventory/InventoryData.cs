@@ -23,7 +23,12 @@ public class InventoryData: ScriptableObject
     }
 
     #region 宝石操作
-    public void AddGemToBag(GemData gem) => BagGems.Add(gem);
+    public void AddGemToBag(GemData gem)
+    {
+        gem.ReturnGemType();
+        BagGems.Add(gem);
+    }
+
     public void RemoveGemToBag(GemData gem) => BagGems.Remove(gem);
     public void EquipGem(GemData gem) => EquipGems.Add(gem);
     public void UnEquipGem(GemData gem) => EquipGems.Remove(gem);

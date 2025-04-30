@@ -40,6 +40,7 @@ public class InLevelState : IFightState
         {
             _battleData.IsBattleEnded = true;
             GM.Root.InventoryMgr.SyncMainBulletSlot();//战斗结束时，子弹槽的子弹都要回到背包
+            GM.Root.BattleMgr.battleData.BattleTempBuffMgr.Clear();
             // 根据敌人状态切换到胜利或失败状态
             if (_battleLogic.CurrentEnemyIsDead())
                 _battleLogic.ChangeState(new WinState());

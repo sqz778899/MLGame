@@ -24,7 +24,7 @@ public class CoinsPileRuntimeData : MapEventRuntimeData
 [Serializable]
 public class TreasureBoxRuntimeData : MapEventRuntimeData
 {
-    public TreasureBoxRarity Rarity;
+    public DropedRarity Rarity;
     public int MinLootCount;
     public int MaxLootCount;
     public List<DropedObjEntry> DropTable;
@@ -119,7 +119,7 @@ public class GoldPileConfigData : MapEventConfigData
 [Serializable]
 public class TreasureBoxConfigData : MapEventConfigData
 {
-    public TreasureBoxRarity Rarity;
+    public DropedRarity Rarity;
     public int MinLootCount;
     public int MaxLootCount;
     public List<DropedObjEntry> DropTable = new();
