@@ -24,12 +24,12 @@ public class SingelReportRoot : MonoBehaviour
         List<BattleOnceHit> curBattleOnceHits = curInfo.Hits;
         //战报标题部分
         txtDamage.text = curBattleOnceHits[0].FinalDamage.ToString();//伤害
-        if (curBulletData.FinalPiercing == 0)
+        if (curBattleOnceHits[0].FinalPiercing == 0)
             txtPiercing.gameObject.SetActive(false);
-        txtPiercing.text = curBulletData.FinalPiercing.ToString();//穿透
-        if (curBulletData.FinalResonance == 0)
+        txtPiercing.text = curBattleOnceHits[0].FinalPiercing.ToString();//穿透
+        if (curBattleOnceHits[0].FinalResonance == 0)
             txtResonance.gameObject.SetActive(false);
-        txtResonance.text = curBulletData.FinalResonance.ToString();
+        txtResonance.text = curBattleOnceHits[0].FinalResonance.ToString();
         //细节部分参数
         int effectiveDamage = 0;
         int overflowDamage = 0;

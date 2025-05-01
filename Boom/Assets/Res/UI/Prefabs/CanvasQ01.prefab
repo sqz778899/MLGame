@@ -6437,7 +6437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 9
+  ViewSlotID: 79
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -9073,7 +9073,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 9
+  ViewSlotID: 59
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -9262,7 +9262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 3
+  ViewSlotID: 13
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -10033,7 +10033,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 3
+  ViewSlotID: 33
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -10201,7 +10201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 4
+  ViewSlotID: 24
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -10725,7 +10725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 1
+  ViewSlotID: 61
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -11759,7 +11759,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 7
+  ViewSlotID: 37
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -12721,7 +12721,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 7
+  ViewSlotID: 57
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -18498,7 +18498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 2
+  ViewSlotID: 52
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -18834,7 +18834,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 4
+  ViewSlotID: 14
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -25748,7 +25748,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 9
+  ViewSlotID: 19
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -26901,7 +26901,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 8
+  ViewSlotID: 48
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -28047,7 +28047,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 9
+  ViewSlotID: 49
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -28236,7 +28236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 6
+  ViewSlotID: 66
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -28538,7 +28538,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 1
+  ViewSlotID: 71
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -28727,7 +28727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 2
+  ViewSlotID: 62
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -29180,7 +29180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 5
+  ViewSlotID: 55
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -29893,7 +29893,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 8
+  ViewSlotID: 58
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -30216,7 +30216,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 8
+  ViewSlotID: 28
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -31408,7 +31408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 3
+  ViewSlotID: 43
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -31705,7 +31705,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 4
+  ViewSlotID: 34
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -32830,7 +32830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 7
+  ViewSlotID: 17
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -34264,7 +34264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 2
+  ViewSlotID: 72
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -34664,7 +34664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 9
+  ViewSlotID: 69
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -42846,7 +42846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 9
+  ViewSlotID: 70
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -43469,7 +43469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 2
+  ViewSlotID: 22
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -43675,7 +43675,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 9
+  ViewSlotID: 80
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -44222,7 +44222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 5
+  ViewSlotID: 15
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -44524,7 +44524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 9
+  ViewSlotID: 29
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -45368,96 +45368,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 0.5
   valueType: 0
---- !u!1 &2942211040146319135
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 418381633453386459}
-  - component: {fileID: 898769209467830490}
-  - component: {fileID: 9170502553728862717}
-  - component: {fileID: 8241870218583947917}
-  m_Layer: 5
-  m_Name: Mask
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &418381633453386459
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2942211040146319135}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7491993071288316705}
-  m_Father: {fileID: 5414217102688716331}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 640, y: 618}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &898769209467830490
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2942211040146319135}
-  m_CullTransparentMesh: 1
---- !u!114 &9170502553728862717
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2942211040146319135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8f27b61a2e091a84fb8842c635f4c2fb, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!114 &8241870218583947917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2942211040146319135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShowMaskGraphic: 1
 --- !u!1 &2963929168049411341
 GameObject:
   m_ObjectHideFlags: 0
@@ -45656,7 +45566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 6
+  ViewSlotID: 36
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -55701,7 +55611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 5
+  ViewSlotID: 75
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -58036,7 +57946,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 1
+  ViewSlotID: 31
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -59982,7 +59892,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 4
+  ViewSlotID: 44
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -60614,97 +60524,6 @@ MonoBehaviour:
   InstanceID: 0
   IsLocked: 0
   ChildScale: {x: 1, y: 1, z: 1}
---- !u!1 &4166096596626954670
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7491993071288316705}
-  - component: {fileID: 4011306908477328787}
-  - component: {fileID: 4955325086142329003}
-  m_Layer: 5
-  m_Name: SpineHead
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &7491993071288316705
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4166096596626954670}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 418381633453386459}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -41, y: -95}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &4011306908477328787
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4166096596626954670}
-  m_CullTransparentMesh: 1
---- !u!114 &4955325086142329003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4166096596626954670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d85b887af7e6c3f45a2e2d2920d641bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: b66cf7a186d13054989b33a5c90044e4, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  skeletonDataAsset: {fileID: 11400000, guid: 0f7f4af05daa0b44691016da91877673, type: 2}
-  initialSkinName: 
-  initialFlipX: 0
-  initialFlipY: 0
-  startingAnimation: idle
-  startingLoop: 1
-  timeScale: 1
-  freeze: 0
-  updateWhenInvisible: 3
-  unscaledTime: 0
-  allowMultipleCanvasRenderers: 0
-  canvasRenderers: []
-  separatorSlotNames: []
-  enableSeparatorSlots: 0
-  separatorParts: []
-  updateSeparatorPartLocation: 1
-  meshGenerator:
-    settings:
-      useClipping: 1
-      zSpacing: 0
-      pmaVertexColors: 1
-      tintBlack: 0
-      canvasGroupTintBlack: 0
-      calculateTangents: 0
-      addNormals: 0
-      immutableTriangles: 0
 --- !u!1 &4175531530476065875
 GameObject:
   m_ObjectHideFlags: 0
@@ -61412,7 +61231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 8
+  ViewSlotID: 78
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -68979,7 +68798,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 3
+  ViewSlotID: 73
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -69383,7 +69202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 3
+  ViewSlotID: 53
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -69698,7 +69517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 6
+  ViewSlotID: 76
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -71004,7 +70823,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 9
+  ViewSlotID: 40
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -71708,7 +71527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 7
+  ViewSlotID: 67
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -72320,7 +72139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 2
+  ViewSlotID: 12
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -72996,7 +72815,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 9
+  ViewSlotID: 20
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -74278,7 +74097,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 3
+  ViewSlotID: 63
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -74567,7 +74386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 9
+  ViewSlotID: 60
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -75760,7 +75579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 6
+  ViewSlotID: 16
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -75949,7 +75768,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 6
+  ViewSlotID: 56
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -76954,7 +76773,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 8
+  ViewSlotID: 38
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -77383,7 +77202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 9
+  ViewSlotID: 39
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -77420,7 +77239,6 @@ RectTransform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 361230913738604579}
-  - {fileID: 418381633453386459}
   m_Father: {fileID: 1757052299886785464}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -77821,7 +77639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 5
+  ViewSlotID: 35
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -78082,7 +77900,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 2
+  ViewSlotID: 42
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -80082,7 +79900,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 4
+  ViewSlotID: 64
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -87199,7 +87017,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 7
+  ViewSlotID: 47
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -87610,7 +87428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 4
+  ViewSlotID: 54
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -89786,7 +89604,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 1
+  ViewSlotID: 51
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -90087,7 +89905,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 9
+  ViewSlotID: 30
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -90215,7 +90033,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 1
+  ViewSlotID: 11
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -91209,7 +91027,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 5
+  ViewSlotID: 65
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -93451,7 +93269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 1
+  ViewSlotID: 21
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -98869,7 +98687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 8
+  ViewSlotID: 68
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -102180,7 +101998,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 4
+  ViewSlotID: 74
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -102912,7 +102730,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 5
+  ViewSlotID: 25
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -103229,7 +103047,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 6
+  ViewSlotID: 26
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -105084,7 +104902,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 9
+  ViewSlotID: 10
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -106856,7 +106674,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 9
+  ViewSlotID: 50
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -112006,7 +111824,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 5
+  ViewSlotID: 45
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -112817,7 +112635,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 3
+  ViewSlotID: 23
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -113704,7 +113522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 8
+  ViewSlotID: 18
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -122414,7 +122232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 7
+  ViewSlotID: 27
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -123719,7 +123537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 2
+  ViewSlotID: 32
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -125347,7 +125165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 1
+  ViewSlotID: 41
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -125761,7 +125579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 7
+  ViewSlotID: 77
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0
@@ -125988,7 +125806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ac9353f0da4649946d7880cae332a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ViewSlotID: 6
+  ViewSlotID: 46
   ViewSlotType: 1
   InstanceID: 0
   IsLocked: 0

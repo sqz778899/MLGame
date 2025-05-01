@@ -1,7 +1,10 @@
 ﻿public interface IItemEffect
 {
     ItemTriggerTiming TriggerTiming { get; }
+    ItemTriggerTiming TriggerCash { get; }
+    void ApplyCash(BattleContext ctx);
     void Apply(BattleContext ctx);
+    void RemoveEffect();
     string GetDescription();
 }
 
@@ -26,8 +29,16 @@ public static class ItemEffectFactory
             200 => new Effect_MisspelledSpellbook(),
             201 => new Effect_FlickeringCandle(),
             202 => new Effect_GrudgeTangledScarf(),
+            203 => new Effect_SilentWatcherBlindfold(),
+            204 => new Effect_ScavengerHandbook(),
             // ...
-            401 => new Effect_RainbowBook(),
+            300 => new Effect_StickyWizardGloves(),
+            301 => new Effect_BloodhoundRing(),
+            302 => new Effect_ResonantMagicChain(),
+            //...
+            401 => new Effect_IridescentGrimoire(),
+            402 => new Effect_ArrogantKingCrown(),
+            403 => new Effect_EchoingEdict(),
             _ => null,
         };
     }

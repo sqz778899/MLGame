@@ -14,6 +14,7 @@ public class BattleData: ScriptableObject
 
     [Header("Buff")] 
     public BattleTempBuffManager BattleTempBuffMgr;
+    public BattleTempState BattleStateCash; //临时记录状态的缓存，用来处理条件和目标不一致的Buff
     
     [Header("Display")] 
     public float Distance;            //与敌人的距离
@@ -25,6 +26,7 @@ public class BattleData: ScriptableObject
     {
         //CurMapSate.CurLevelID = _levelID;
         BattleTempBuffMgr = new BattleTempBuffManager();
+        BattleStateCash = new BattleTempState();
         GM.Root.InventoryMgr._BulletInvData.OnBulletsChanged +=
             BattleTempBuffMgr.ApplyAll;//子弹数据变化时，应用所有临时buff
         CurLevel = LevelManager.LoadLevel(_levelID);

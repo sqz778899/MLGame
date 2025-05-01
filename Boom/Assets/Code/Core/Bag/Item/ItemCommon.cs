@@ -13,6 +13,8 @@ public interface IItemSynergies
     string Description { get; }
     bool Match(List<ItemData> equippedItems); // 判断是否满足条件
     void ApplyEffect(BattleContext ctx); // 应用效果（支持不同阶段）
+    
+    void RemoveEffect();
     ItemTriggerTiming TriggerTiming { get; }
 }
 
@@ -70,9 +72,13 @@ public class ItemData : ItemDataBase,ITooltipBuilder
         MaxStackCount = 5;
         StackCount = 1;
     }
+    
+    public void ApplyEffectCash(BattleContext ctx) => EffectLogic?.ApplyCash(ctx);
 
     public void ApplyEffect(BattleContext ctx) => EffectLogic?.Apply(ctx);
-
+    
+    public void RemoveEffect() => EffectLogic?.RemoveEffect();
+    
     public ToolTipsInfo BuildTooltip()
     {
         ToolTipsInfo info = new ToolTipsInfo(Name,Level,Desc, ToolTipsType.Item,
@@ -81,52 +87,15 @@ public class ItemData : ItemDataBase,ITooltipBuilder
     }
 }
 
-public class BattleContext
-{
-    public List<BulletData> AllBullets;
-    public EnemyData CurEnemy; // 当前敌人
-    public BulletData CurBullet; // 当前命中的子弹
-    public IDamageable TargetEnemy; // 当前命中的敌人
-    public int OrderInRound => CurBullet?.OrderInRound ?? -1;//当前子弹的顺序
-    //进入房间相关
-    public int EnterRoomID;
-    public bool IsFirstEnterRoom;
-    // 是否跳过命中
-    public bool ShieldSkipCount;
-
-    public BattleContext() => InitCommonData();
-    
-    public BattleContext(BulletData _curBullet,IDamageable _curTargetEnemy)
-    {
-        InitCommonData();
-        CurBullet = _curBullet;
-        TargetEnemy = _curTargetEnemy;
-    }
-    
-    void InitCommonData()
-    {
-        AllBullets = GM.Root.InventoryMgr._BulletInvData.EquipBullets;
-        if (GM.Root.BattleMgr.battleData.CurLevel == null)
-            CurEnemy = null;
-        else
-            CurEnemy = GM.Root.BattleMgr.battleData.CurLevel.CurEnemy.Data;
-        CurBullet = null;
-        TargetEnemy = null;
-        // 默认房间数据
-        EnterRoomID = -1;
-        IsFirstEnterRoom = false;
-        ShieldSkipCount = false;
-    }
-}
-
 public enum ItemTriggerTiming
 {
     OnAlltimes = 0,
     OnBattleStart = 1,
     OnBulletFire = 2,
-    OnBulletHit = 3,
-    OnShieldPenetrate = 4,
+    OnBulletHitBefore = 3,
+    OnBulletHitAfter = 4,
     OnEnterRoom = 5,
     Passive = 6,
+    None = 99,
 }
 #endregion

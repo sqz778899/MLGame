@@ -19,15 +19,11 @@ public class HPSync : MonoBehaviour
     {
         int maxHP = PlayerManager.Instance._PlayerData.MaxHP;
         int curHP = PlayerManager.Instance._PlayerData.HP;
-        for (int i = maxHP - 1; i >= 0; i--)
+        for (int i = 0; i < maxHP; i++)
         {
-            if (i == curHP - 1) break;
-            Herts[i].SetActive(false);
+            Herts[i].SetActive(i < curHP);
         }
     }
 
-    void OnDestroy()
-    {
-        PlayerManager.Instance._PlayerData.OnHPChanged -= HPChanged;
-    }
+    void OnDestroy() => PlayerManager.Instance._PlayerData.OnHPChanged -= HPChanged;
 }

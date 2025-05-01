@@ -15,6 +15,7 @@ public static class SaveManager
         #region Character
         PlayerManager.Instance._PlayerData.MaxHP = saveFile.MaxHP;
         PlayerManager.Instance._PlayerData.HP = saveFile.HP;
+        PlayerManager.Instance._PlayerData.LostHPs = saveFile.LostHPs;
         PlayerManager.Instance._PlayerData.Score = saveFile.Score;
         PlayerManager.Instance._PlayerData.Coins = saveFile.Coins;
         PlayerManager.Instance._PlayerData.RoomKeys = saveFile.RoomKeys;
@@ -119,6 +120,7 @@ public static class SaveManager
         #region Character
         saveFile.MaxHP = PlayerManager.Instance._PlayerData.MaxHP;
         saveFile.HP = PlayerManager.Instance._PlayerData.HP;
+        saveFile.LostHPs = PlayerManager.Instance._PlayerData.LostHPs;
         saveFile.Score = PlayerManager.Instance._PlayerData.Score;
         saveFile.Coins = PlayerManager.Instance._PlayerData.Coins;
         saveFile.RoomKeys = PlayerManager.Instance._PlayerData.RoomKeys;

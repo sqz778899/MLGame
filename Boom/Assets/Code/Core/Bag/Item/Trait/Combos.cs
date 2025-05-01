@@ -15,22 +15,29 @@ public class Trait_MagicInstability : IItemSynergies
 
     public void ApplyEffect(BattleContext ctx)
     {
-        /*if (ctx.AllBullets.Count > 0)
-            ctx.AllBullets[0].FinalDamage += 2;
-        if (ctx.AllBullets.Count > 1)
-            ctx.AllBullets[1].FinalPiercing -= 1;*/
+        if (ctx?.CurBullet == null) return;
+      
+        int delta = Random.Range(-3, 3); // 上限不包含 3 => [-3, 2]
+        ctx.CurBullet.FinalDamage += delta;
+        ctx.CurBullet.FinalDamage = Mathf.Max(ctx.CurBullet.FinalDamage, 0); // 确保伤害不为负数
+        // 记录日志用于调试
+        //Debug.Log($"[特质·施法失衡] 第{ctx.CurBullet.OrderInRound}颗子弹伤害波动：{delta}");
     }
     
-    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnBulletFire;
+    public void RemoveEffect() {}
+    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnBulletHitBefore;
     TraitData _data;
     public TraitData Data => _data ??= new TraitData(Id); // 懒加载
 }
 
+//教学事故
 public class Trait_TeachingDisaster : IItemSynergies
 {
     public int Id => 2;
     public string Name => "教学事故";
+    string cacheKey => $"教学事故-{Id}";
     public string Description => "第一颗子弹伤害-6，最后一颗子弹伤害+6";
+    List<BulletData> _bullets => GM.Root.InventoryMgr._BulletInvData.EquipBullets;
 
     public bool Match(List<ItemData> equippedItems) =>
         equippedItems.Any(i => i.ID == 8) &&
@@ -39,14 +46,29 @@ public class Trait_TeachingDisaster : IItemSynergies
 
     public void ApplyEffect(BattleContext ctx)
     {
-        if (ctx.AllBullets.Count > 0)
-            ctx.AllBullets[0].FinalDamage -= 6;
-
-        if (ctx.AllBullets.Count > 4)
-            ctx.AllBullets[4].FinalDamage += 6;
+        for(int i = 0; i < _bullets.Count; i++)
+        {
+            if (i == 0)
+                _bullets[i].ModifierDamageAdditionDict[cacheKey] = -6;
+            else if (_bullets[i].IsLastBullet)
+                _bullets[i].ModifierDamageAdditionDict[cacheKey] = 6;
+            else
+                _bullets[i].ModifierDamageAdditionDict[cacheKey] = 0;
+            
+            _bullets[i].SyncFinalAttributes();
+        }
+        //Debug.Log($"[教学事故] 触发");
     }
 
-    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnBulletFire;
+    public void RemoveEffect()
+    {
+        foreach (var each in _bullets)
+        {
+            each.ModifierDamageAdditionDict.Remove(cacheKey);
+            each.SyncFinalAttributes();
+        }
+    }
+    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnAlltimes;
     TraitData _data;
     public TraitData Data => _data ??= new TraitData(Id);
 }
@@ -55,7 +77,7 @@ public class Trait_ChaosTriangle : IItemSynergies
 {
     public int Id => 3;
     public string Name => "混沌三角";
-    public string Description => "所有子弹宝石类型变为共振，效果+1（本轮）";
+    public string Description => "战斗开始时,所有子弹宝石类型变为共振，效果+1";
 
     public bool Match(List<ItemData> equippedItems) =>
         equippedItems.Any(i => i.ID == 1) &&
@@ -64,10 +86,15 @@ public class Trait_ChaosTriangle : IItemSynergies
 
     public void ApplyEffect(BattleContext ctx)
     {
-        // TODO: implement logic
+        Debug.Log("混沌三角");
+        
+        ChangeGemTypeAllBuff tempBuff = new ChangeGemTypeAllBuff(
+            BuffSource.Trait, Id);
+        GM.Root.BattleMgr.battleData.BattleTempBuffMgr.Add(tempBuff);
     }
-
-    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnBulletFire;
+    
+    public void RemoveEffect() {}
+    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnBattleStart;
     TraitData _data;
     public TraitData Data => _data ??= new TraitData(Id);
 }
@@ -76,7 +103,9 @@ public class Trait_ProgressiveSpell : IItemSynergies
 {
     public int Id => 4;
     public string Name => "渐强式魔咒";
+    string cacheKey => $"渐强式魔咒-{Id}";
     public string Description => "第三颗子弹伤害+1，第四颗子弹伤害+2";
+    List<BulletData> _bullets => GM.Root.InventoryMgr._BulletInvData.EquipBullets;
 
     public bool Match(List<ItemData> equippedItems) =>
         equippedItems.Any(i => i.ID == 2) &&
@@ -85,13 +114,28 @@ public class Trait_ProgressiveSpell : IItemSynergies
 
     public void ApplyEffect(BattleContext ctx)
     {
-        if (ctx.AllBullets.Count > 2)
-            ctx.AllBullets[2].FinalDamage += 1;
-        if (ctx.AllBullets.Count > 3)
-            ctx.AllBullets[3].FinalDamage += 2;
+        for(int i = 0; i < _bullets.Count; i++)
+        {
+            if (i == 2)
+                _bullets[i].ModifierDamageAdditionDict[cacheKey] = 1;
+            else if (i == 3)
+                _bullets[i].ModifierDamageAdditionDict[cacheKey] = 2;
+            else
+                _bullets[i].ModifierDamageAdditionDict[cacheKey] = 0;
+            
+            _bullets[i].SyncFinalAttributes();
+        }
     }
 
-    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnBulletFire;
+    public void RemoveEffect()
+    {
+        foreach (var each in _bullets)
+        {
+            each.ModifierDamageAdditionDict.Remove(cacheKey);
+            each.SyncFinalAttributes();
+        }
+    }
+    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnAlltimes;
     TraitData _data;
     public TraitData Data => _data ??= new TraitData(Id);
 }
@@ -103,9 +147,9 @@ public class Trait_ThirdResonanceChaos : IItemSynergies
     public string Description => "你的所有子弹的共振效果+1";
     
     public bool Match(List<ItemData> equippedItems) =>
-        equippedItems.Any(i => i.ID == 9990) &&
-        equippedItems.Any(i => i.ID == 9991) &&
-        equippedItems.Any(i => i.ID == 3);
+        equippedItems.Any(i => i.ID == 4) && //晕头转向的猫头鹰雕像
+        equippedItems.Any(i => i.ID == 8) && //变形术练习笔
+        equippedItems.Any(i => i.ID == 10);  //发霉训练日志
 
     public void ApplyEffect(BattleContext ctx)
     {
@@ -115,7 +159,8 @@ public class Trait_ThirdResonanceChaos : IItemSynergies
                 bullet.ResonanceBonus += 1;
         }*/
     }
-
+    
+    public void RemoveEffect() {}
     public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnBulletFire;
     TraitData _data;
     public TraitData Data => _data ??= new TraitData(Id);
@@ -137,6 +182,7 @@ public class Trait_UnlimitedCoin : IItemSynergies
         // 留空：此效果应挂接到“翻找事件”逻辑中，由事件系统调用
     }
 
+    public void RemoveEffect() {}
     public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.Passive;
     TraitData _data;
     public TraitData Data => _data ??= new TraitData(Id);
@@ -163,6 +209,7 @@ public class Trait_TrashExplosion : IItemSynergies
         }*/
     }
 
+    public void RemoveEffect() {}
     public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnBulletFire;
     TraitData _data;
     public TraitData Data => _data ??= new TraitData(Id);
@@ -184,6 +231,7 @@ public class Trait_ScreamingOwl : IItemSynergies
     {
     }
 
+    public void RemoveEffect() {}
     public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnBattleStart;
 
     TraitData _data;
@@ -208,6 +256,7 @@ public class Trait_RainbowResonantTrap : IItemSynergies
        
     }
 
+    public void RemoveEffect() {}
     public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnBattleStart;
 
     TraitData _data;

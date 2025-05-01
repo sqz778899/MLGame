@@ -12,11 +12,11 @@ public class EquippedItemIconRoot : MonoBehaviour
 
     void Start()
     {
-        GM.Root.InventoryMgr._InventoryData.OnEquipItemChanged += RefreshIcons;
+        GM.Root.InventoryMgr._InventoryData.OnStructureChanged += RefreshIcons;
         RefreshIcons();
     }
 
-    void OnDestroy() => GM.Root.InventoryMgr._InventoryData.OnEquipItemChanged -= RefreshIcons;
+    void OnDestroy() => GM.Root.InventoryMgr._InventoryData.OnStructureChanged -= RefreshIcons;
 
     void RefreshIcons()
     {

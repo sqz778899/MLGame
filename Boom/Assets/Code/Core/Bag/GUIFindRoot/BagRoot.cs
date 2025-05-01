@@ -28,7 +28,7 @@ public class BagRoot : MonoBehaviour
     void Start()
     {
         SwichGem();
-        GM.Root.InventoryMgr._InventoryData.OnEquipItemChanged += RefreshSynergies;
+        GM.Root.InventoryMgr._InventoryData.OnStructureChanged += RefreshSynergies;
         RefreshSynergies();//先同步一次
     }
 
@@ -99,5 +99,5 @@ public class BagRoot : MonoBehaviour
     #endregion
 
     void OnDestroy() =>
-        GM.Root.InventoryMgr._InventoryData.OnEquipItemChanged -= RefreshSynergies;
+        GM.Root.InventoryMgr._InventoryData.OnStructureChanged -= RefreshSynergies;
 }

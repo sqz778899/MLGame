@@ -65,8 +65,21 @@ public class BasicGamblingEventHandler : IMapEventHandler
             yield return new WaitForSeconds(0.25f); // 每个掉落之后等一下
         }
         
-        // 最后，房间标记为已触发
-        //data.IsTriggered = true;
+        // 道具 翻找术手册 有50%概率可以额外翻找一次
+        bool allowExtra = GM.Root.InventoryMgr._ItemEffectMrg.ShouldRetryGambling();
+        if (data.SearchCount == 0 && allowExtra)
+        {
+            FloatingTextFactory.CreateWorldText($"触发翻找术手册！！", default,
+                FloatingTextType.MapHint, Color.green, 2.5f);
+            // 允许再翻一次，不标记 IsTriggered
+            data.SearchCount++; // 标记本次是额外翻找
+        }
+        else
+        {
+            data.SearchCount++;
+            data.IsTriggered = true; // 结束翻找流程
+        }
+        
         view.SetAsTriggered();
     }
 

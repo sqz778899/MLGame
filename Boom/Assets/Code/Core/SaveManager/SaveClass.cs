@@ -53,6 +53,7 @@ public class SaveFileJson
     //单局会清理的数据
     public int MaxHP;
     public int HP;
+    public int LostHPs;              //损失过的血量
     public int Score;                //分数
     public int Coins;                //硬币数量
     public int RoomKeys;             //钥匙数量
@@ -82,6 +83,7 @@ public class SaveFileJson
     {
         MaxHP = 3;
         HP = 3;
+        LostHPs = 0;
         Score = 0;
         Coins = 0;
         RoomKeys = 0;

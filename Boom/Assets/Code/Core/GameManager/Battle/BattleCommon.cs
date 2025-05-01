@@ -31,6 +31,8 @@ public struct DamageResult
 public struct BattleOnceHit
 {
     public int FinalDamage; //子弹的实际伤害（加上各种BUFF的）
+    public int FinalPiercing; //子弹的穿透（加上各种BUFF的）
+    public int FinalResonance; //子弹的共振（加上各种BUFF的）
     public int HitIndex;
     public int ShieldIndex;
     public int EnemyIndex;
@@ -39,10 +41,14 @@ public struct BattleOnceHit
     public int Damage;
     public bool IsDestroyed;
 
-    public BattleOnceHit(int _finalDamage,int hitIndex = -1, int shieldIndex = -1, int enemyIndex = -1,
+    public BattleOnceHit(int _finalDamage, int _finalPiercing, int _finalResonance,
+        int hitIndex = -1, int shieldIndex = -1, int enemyIndex = -1,
         int effectiveDamage = 0, int overflowDamage = 0, int damage = 0, bool isDestroyed = false)
     {
         FinalDamage = _finalDamage;
+        FinalPiercing = _finalPiercing;
+        FinalResonance = _finalResonance;
+        
         HitIndex = hitIndex;
         ShieldIndex = shieldIndex;
         EnemyIndex = enemyIndex;
@@ -118,4 +124,76 @@ public class WarReport
         return report;
     }
 }
+#endregion
+
+#region 战场Buff之类相关
+public class BattleContext
+{
+    public List<BulletData> AllBullets;
+    public EnemyData CurEnemy; // 当前敌人
+    public BulletData CurBullet; // 当前命中的子弹
+    public IDamageable TargetEnemy; // 当前命中的敌人
+    //进入房间相关
+    public int EnterRoomID;
+    public bool IsFirstEnterRoom;
+    // 是否跳过命中
+    public bool ShieldSkipCount;
+    // 是否击破护盾
+    public bool IsShieldBreak;
+
+    public BattleContext() => InitCommonData();
+    
+    public BattleContext(BulletData _curBullet,IDamageable _curTargetEnemy)
+    {
+        InitCommonData();
+        CurBullet = _curBullet;
+        TargetEnemy = _curTargetEnemy;
+    }
+    
+    void InitCommonData()
+    {
+        AllBullets = GM.Root.InventoryMgr._BulletInvData.EquipBullets;
+        if (GM.Root.BattleMgr.battleData.CurLevel == null)
+            CurEnemy = null;
+        else
+            CurEnemy = GM.Root.BattleMgr.battleData.CurLevel.CurEnemy.Data;
+        CurBullet = null;
+        TargetEnemy = null;
+        // 默认房间数据
+        EnterRoomID = -1;
+        IsFirstEnterRoom = false;
+        ShieldSkipCount = false;
+    }
+}
+
+public class BattleTempState
+{
+    // key: 唯一标识符（如 ItemID），value: 任意对象（每个道具自定义数据结构）
+    private Dictionary<string, object> _data = new();
+
+    /// <summary>
+    /// 设置一个状态数据（同Key覆盖）
+    /// </summary>
+    public void Set<T>(string key, T value) where T : class
+    {
+        _data[key] = value;
+    }
+
+    /// <summary>
+    /// 获取一个状态数据，如果没有则返回 null
+    /// </summary>
+    public T Get<T>(string key) where T : class
+    {
+        if (_data.TryGetValue(key, out var value))
+            return value as T;
+        return null;
+    }
+
+    public void Clear()
+    {
+        _data.Clear();
+    }
+}
+
+
 #endregion

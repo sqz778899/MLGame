@@ -308,7 +308,7 @@ public class MapNodeData
     public int ID;
     public List<string> ClutterTags;
     public MapEventType EventType;
-    
+    public int SearchCount = 0;
     public MapEventRuntimeData EventData;
 
     public bool IsLocked;

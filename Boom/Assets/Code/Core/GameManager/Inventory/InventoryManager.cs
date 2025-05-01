@@ -288,6 +288,10 @@ public class InventoryManager : MonoBehaviour
 
         _BulletInvData.CurBulletSlotControllers = CurBulletSlotControllers;
         _ItemEffectMrg.InitData();
+        _BulletInvData.OnModifiersChanged += _ItemEffectMrg.ApplyAlltimesEffectsToBullets;
     }
+    
+    void OnDestroy() =>  _BulletInvData.OnModifiersChanged 
+        -= _ItemEffectMrg.ApplyAlltimesEffectsToBullets;
     #endregion 
 }

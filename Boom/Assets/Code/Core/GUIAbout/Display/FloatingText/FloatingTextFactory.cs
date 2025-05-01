@@ -16,10 +16,15 @@ public static class FloatingTextFactory
     /// <summary>
     /// 创建一个世界坐标系中的浮动文字
     /// </summary>
-    public static void CreateWorldText(string content, Vector3 worldPos, 
+    public static void CreateWorldText(string content, Vector3 worldPos = default, 
         FloatingTextType type = FloatingTextType.MapHint,
         Color? color = null, float fontSize = 4f, Transform parent = null)
     {
+        //默认使用角色位置
+        Vector3 playerPos = GM.Root.PlayerMgr.RoleInMapGO.transform.position + Vector3.up * 2.4f + new Vector3(0.25f,0,0);
+        if (worldPos == default)
+            worldPos = playerPos;
+        
         GameObject prefab = ResManager.instance.CreatInstance(WorldTextPrefabPath);
         prefab.transform.position = worldPos;
         if (parent != null)

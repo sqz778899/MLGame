@@ -6,10 +6,20 @@ public interface IBattleTempBuff
 {
     BuffSource Source { get; }
     int SourceID { get; }
+    BuffBehavior SepicialBehavior { get; } // 0:无特殊行为 1:改变宝石类型 2:忽略宝石修改
+    
     void Apply(BulletData bullets); // 通用接口，目标对象为子弹列表
     void ApplyMacro();   // 宏观层需要调用
     void RemoveBuff();
     string GetUniqueKey();
+}
+
+public enum BuffBehavior
+{
+    None = 0,
+    ChangeGemType = 1,
+    IgnoreGem = 2,
+    LastBullet = 3
 }
 
 public class BattleTempBuffManager

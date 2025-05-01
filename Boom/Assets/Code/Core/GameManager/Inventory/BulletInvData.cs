@@ -11,6 +11,7 @@ public class BulletInvData : ScriptableObject
     public List<BulletSlotController> CurBulletSlotControllers;//子弹槽
     
     public event Action OnBulletsChanged;//子弹数据变化
+    public event Action OnModifiersChanged;//子弹数据变化
     
     public void ClearData()
     {
@@ -37,7 +38,8 @@ public class BulletInvData : ScriptableObject
             }
         }
         
-        InventoryManager.Instance._BulletInvData.ProcessBulletRelations();
+        ProcessBulletRelations();
+        OnModifiersChanged?.Invoke();
     }
     
     #region 子弹操作
@@ -71,7 +73,12 @@ public class BulletInvData : ScriptableObject
             bullet1.CurSlotController.SlotID.CompareTo(bullet2.CurSlotController.SlotID));
         //排序完后，依次写入 OrderInRound
         for (int i = 0; i < EquipBullets.Count; i++)
+        {
             EquipBullets[i].OrderInRound = i + 1;
+            EquipBullets[i].IsLastBullet = false;
+            if (i == EquipBullets.Count -1)
+                EquipBullets[i].IsLastBullet = true;
+        }
         OnBulletsChanged?.Invoke();
     }
     #endregion
@@ -102,7 +109,7 @@ public class BulletInvData : ScriptableObject
                 continue;//不符合共振条件
             }
 
-            bool isResonance = false;
+            /*bool isResonance = false;
             int preRemainder = preBullet.ID % 100;
             int nextRemainder = nextBullet.ID % 100;
             if (nextRemainder == preRemainder)//符合共振条件
@@ -120,7 +127,19 @@ public class BulletInvData : ScriptableObject
                     ResonanceClusterDict[clusterCount] = new List<int>{preBullet.CurSlotController.SlotID,nextBullet.CurSlotController.SlotID};
             }
             else
-                resonanceCount = 0;
+                resonanceCount = 0;*/
+            
+            resonanceCount++;
+            preBullet.IsResonance = true;
+            nextBullet.IsResonance = true;
+            nextBullet.ResonanceDamage = 0;
+            nextBullet.ResonanceDamage += nextBullet.FinalResonance * resonanceCount;
+            nextBullet.SyncFinalAttributes();
+            //构建共振簇
+            if (ResonanceClusterDict.ContainsKey(clusterCount))
+                ResonanceClusterDict[clusterCount].Add(nextBullet.CurSlotController.SlotID);
+            else
+                ResonanceClusterDict[clusterCount] = new List<int>{preBullet.CurSlotController.SlotID,nextBullet.CurSlotController.SlotID};
 
             if (resonanceCount == 0)//说明共振被中断了，要重新开始
                 clusterCount++;

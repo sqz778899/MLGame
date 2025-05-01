@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class InventoryData: ScriptableObject
 {
-    public event Action OnEquipItemChanged;
+    public event Action OnStructureChanged;
     // 存放在背包内的道具和宝石
     public List<ItemData> BagItems = new();
     public List<GemData> BagGems = new();
@@ -30,8 +30,17 @@ public class InventoryData: ScriptableObject
     }
 
     public void RemoveGemToBag(GemData gem) => BagGems.Remove(gem);
-    public void EquipGem(GemData gem) => EquipGems.Add(gem);
-    public void UnEquipGem(GemData gem) => EquipGems.Remove(gem);
+    public void EquipGem(GemData gem)
+    {
+        EquipGems.Add(gem);
+        OnStructureChanged?.Invoke();
+    }
+
+    public void UnEquipGem(GemData gem)
+    {
+        EquipGems.Remove(gem);
+        OnStructureChanged?.Invoke();
+    }
     #endregion
     
     #region 道具操作
@@ -40,7 +49,7 @@ public class InventoryData: ScriptableObject
         if (EquipItems.Contains(item))
             EquipItems.Remove(item);
         BagItems.Add(item);
-        OnEquipItemChanged?.Invoke();
+        OnStructureChanged?.Invoke();
     }
 
     public void RemoveItemToBag(ItemData itemData) => BagItems.Remove(itemData);
@@ -49,13 +58,13 @@ public class InventoryData: ScriptableObject
         if (BagItems.Contains(item))
             BagItems.Remove(item);
         EquipItems.Add(item);
-        OnEquipItemChanged?.Invoke();
+        OnStructureChanged?.Invoke();
     }
 
     public void UnEquipItem(ItemData item)
     {
         EquipItems.Remove(item);
-        OnEquipItemChanged?.Invoke();
+        OnStructureChanged?.Invoke();
     }
     
     /// 查找背包内的可堆叠道具

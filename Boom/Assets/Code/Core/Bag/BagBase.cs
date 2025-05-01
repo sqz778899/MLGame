@@ -118,7 +118,7 @@ public abstract class BaseSlotController<T> :ISlotController where T : ItemDataB
     {
         get
         {
-            Vector3 StandardOffset = new Vector3(210f, -130f, 0);
+            Vector3 StandardOffset = new Vector3(250f, -130f, 0);
             Vector3 NOffset = new Vector3(-190f, -130f, 0);
             return SlotType switch
             {
@@ -167,10 +167,7 @@ public class GemData : ItemDataBase,ITooltipBuilder
         ID = targetList[index];
     }
 
-    public void ClearTempBuffs()
-    {
-        ReturnGemType();
-    }
+    public void ClearTempBuffs() => ReturnGemType();
 
     //类型变化
     public void ChangeGemType(GemType _changedType,string buffUniqueKey)
@@ -178,12 +175,12 @@ public class GemData : ItemDataBase,ITooltipBuilder
         // 已经触发过则跳过
         if (triggeredTempBuffs.ContainsKey(buffUniqueKey))
             return;
-        
         triggeredTempBuffs[buffUniqueKey] = true;
         ChangedType = _changedType;
         List<int> s = typeIDDict[CurGemType];
         List<int> targetList = typeIDDict[_changedType];
         int index = s.IndexOf(ID);
+        if (index == -1) return;
         ID = targetList[index];
     }
     #endregion
@@ -290,9 +287,11 @@ public class BulletData:ItemDataBase,ITooltipBuilder
     public List<IBulletModifier> Modifiers = new();
     //
     public int OrderInRound; // 第几颗子弹（从1开始）
+    public bool IsLastBullet; // 是否是最后一颗子弹
     public int JumpHitCount; // 跳跃命中次数
-    public bool IgnoreGemModifier = false; //是否忽略宝石加强(权重更高)
     public GemEffectOverrideState GemEffectOverride = GemEffectOverrideState.None; //宝石效果覆盖状态
+    public Dictionary<string, int> ModifierGemAdditionDict = new(); //记录Buff对宝石附加值的修改
+    public Dictionary<string, int> ModifierDamageAdditionDict = new(); //记录Buff直接对伤害的修改
 
     #region 处理战场临时Buff
     Dictionary<string, IBattleTempBuff> triggeredTempBuffs = new();
@@ -306,7 +305,6 @@ public class BulletData:ItemDataBase,ITooltipBuilder
     {
         triggeredTempBuffs.Clear();
         GemEffectOverride = GemEffectOverrideState.None;
-        IgnoreGemModifier = false;
         SyncFinalAttributes();
     }
     #endregion
@@ -372,19 +370,24 @@ public class BulletData:ItemDataBase,ITooltipBuilder
         FinalDamage = Damage;
         FinalPiercing = Piercing;
         FinalResonance = Resonance;
-        if (!IgnoreGemModifier)//处理临时Buff，让宝石修改失效
-            Modifiers.ForEach(mo => mo.Modify(this));//处理宝石
+        Modifiers.ForEach(mo => mo.Modify(this));//处理宝石
         //处理临时Buff
         foreach (var each in triggeredTempBuffs)
             each.Value.Apply(this);
+        //处理全局Buff
+        foreach (var each in ModifierDamageAdditionDict)
+            FinalDamage += each.Value;
         
         if (FinalResonance == 0)
             ResonanceDamage = 0;
         FinalDamage += ResonanceDamage;
+
+        FinalDamage = Mathf.Max(FinalDamage, 0);
         OnDataChanged?.Invoke();
     }
     #endregion
-    
+
+    #region ToolTip等不关心的信息
     public ToolTipsInfo BuildTooltip()
     {
         ToolTipsInfo info = new ToolTipsInfo(Name,Level,"", ToolTipsType.Bullet);
@@ -413,6 +416,7 @@ public class BulletData:ItemDataBase,ITooltipBuilder
     }
     
     public override ItemBaseSaveData ToSaveData() => new BulletBaseSaveData(this);
+    #endregion
 }
 
 //宝石修饰器
@@ -426,9 +430,20 @@ public class BulletModifierGem : IBulletModifier
     }
     public void Modify(BulletData data)
     {
+        int gemAdditon = 0;
+        foreach (var each in data.ModifierGemAdditionDict)
+            gemAdditon += each.Value;
+
         int dmg = gem.Damage;
         int pierce = gem.Piercing;
         int reso = gem.Resonance;
+        
+        if (gem.CurGemType == GemType.Damage)
+            dmg += gemAdditon;
+        if (gem.CurGemType == GemType.Piercing)
+            pierce += gemAdditon;
+        if (gem.CurGemType == GemType.Resonance)
+            reso += gemAdditon;
 
         //宝石效果Buff相关
         switch (data.GemEffectOverride)

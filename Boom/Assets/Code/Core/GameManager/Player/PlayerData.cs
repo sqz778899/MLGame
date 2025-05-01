@@ -8,6 +8,7 @@ public class PlayerData: ScriptableObject
     //单局会清理的数据
     public int MaxHP;
     public int HP;
+    public int LostHPs;
     public int Coins;
     public int RoomKeys;
     public int Score;
@@ -71,6 +72,8 @@ public class PlayerData: ScriptableObject
     #region 对外的数据变动接口
     public void ModifyHP(int amount)
     {
+        if (amount < 0)
+            LostHPs += Mathf.Abs(amount);
         HP = Mathf.Clamp(HP + amount, 0, MaxHP);
         OnHPChanged?.Invoke();
     }
@@ -190,22 +193,4 @@ public class PlayerData: ScriptableObject
             OnBuffRemoved?.Invoke(buff);
         _activeBuffs.Clear(); // 清空 Buff
     }
-    
-    #region 人物属性
-    [Header("人物属性")] 
-    public int WaterElement;
-    public int FireElement;
-    public int ThunderElement;
-    public int LightElement;
-    public int DarkElement;
-
-    public int DebuffMaxDamage;
-    [Header("伤害倍率")]
-    public int WaterDamage;
-    public int FireDamage;
-    public int ThunderDamage;
-    public int LightDamage;
-    public int DarkDamage;
-    public int MaxDamage;
-    #endregion
 }

@@ -7891,7 +7891,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5444657157194793289, guid: e53388c857969c04a841ae15e1c04251, type: 3}
       propertyPath: RoomArrowConfig.BattleConfig.ShieldConfig.ShieldsHPs.Array.data[2]
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5448199941957431290, guid: e53388c857969c04a841ae15e1c04251, type: 3}
       propertyPath: BulletEventConfig.BulletID
