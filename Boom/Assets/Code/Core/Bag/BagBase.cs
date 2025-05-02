@@ -74,8 +74,7 @@ public abstract class ItemDataBase:ISaveable
     //动态数据层 运行时数据
     public int InstanceID;
     public ISlotController CurSlotController;
-
-    public virtual ToolTipsInfo BuildTooltip() { throw new NotImplementedException(); }
+    
     public virtual ItemBaseSaveData ToSaveData() { throw new NotImplementedException(); }
 }
 
@@ -118,19 +117,21 @@ public abstract class BaseSlotController<T> :ISlotController where T : ItemDataB
     {
         get
         {
-            Vector3 StandardOffset = new Vector3(250f, -130f, 0);
-            Vector3 NOffset = new Vector3(-190f, -130f, 0);
+            Vector3 StandardOffsetItem = new Vector3(280f, -135f, 0);
+            Vector3 StandardOffsetGemAndBullet = new Vector3(220f, -135f, 0);
+            Vector3 NOffsetItem = new Vector3(-250f, -135f, 0);
+            Vector3 NOffsetGemAndBullet = new Vector3(-200f, -135f, 0);
             return SlotType switch
             {
-                SlotType.GemBagSlot => StandardOffset,
-                SlotType.GemBagSlotInner => StandardOffset,
-                SlotType.ItemBagSlot =>  StandardOffset,
-                SlotType.GemInlaySlot => NOffset,
-                SlotType.ItemEquipSlot => NOffset,
-                SlotType.SpawnnerSlot => StandardOffset,
-                SlotType.SpawnnerSlotInner => StandardOffset,
-                SlotType.CurBulletSlot => StandardOffset,
-                SlotType.ShopSlot => StandardOffset,
+                SlotType.GemBagSlot => StandardOffsetGemAndBullet,
+                SlotType.GemBagSlotInner => StandardOffsetGemAndBullet,
+                SlotType.ItemBagSlot =>  StandardOffsetItem,
+                SlotType.GemInlaySlot => NOffsetGemAndBullet,
+                SlotType.ItemEquipSlot => NOffsetItem,
+                SlotType.SpawnnerSlot => StandardOffsetGemAndBullet,
+                SlotType.SpawnnerSlotInner => StandardOffsetGemAndBullet,
+                SlotType.CurBulletSlot => StandardOffsetGemAndBullet,
+                SlotType.ShopSlot => StandardOffsetGemAndBullet,
                 _ => Vector3.zero
             };
         }
@@ -184,7 +185,8 @@ public class GemData : ItemDataBase,ITooltipBuilder
         ID = targetList[index];
     }
     #endregion
-    
+
+    #region 不关心的初始化
     public GemData(int _id,GemSlotController gemSlotController)
     {
         GemJson json = TrunkManager.Instance.GetGemJson(_id);
@@ -209,7 +211,7 @@ public class GemData : ItemDataBase,ITooltipBuilder
         Damage = json.Damage;
         Piercing = json.Piercing;
         Resonance = json.Resonance;
-        SyncFinalAttributes();
+        OnDataChanged?.Invoke();
     }
     Dictionary<GemType, List<int>> typeIDDict = new Dictionary<GemType, List<int>>
     {
@@ -217,14 +219,10 @@ public class GemData : ItemDataBase,ITooltipBuilder
         { GemType.Piercing,  new List<int>{10,11,12} },
         { GemType.Resonance, new List<int>{20,21,22} }
     };
+    #endregion
 
-    public void SyncFinalAttributes()
-    {
-        //处理临时Buff
-       
-        OnDataChanged?.Invoke();
-    }
-    
+    #region 额外功能
+    //天赋针对的加成
     public void AddTalentGemBonus()
     {
         //同步一下天赋树加成
@@ -249,7 +247,9 @@ public class GemData : ItemDataBase,ITooltipBuilder
         GemJson json = TrunkManager.Instance.GetGemJson(ID);
         InitData(json);
     }
-    
+    #endregion
+
+    #region ToolTips相关
     public ToolTipsInfo BuildTooltip()
     {
         ToolTipsInfo info = new ToolTipsInfo(Name, Level,"", ToolTipsType.Gem);
@@ -263,6 +263,40 @@ public class GemData : ItemDataBase,ITooltipBuilder
 
         return info;
     }
+    
+    public ToolTipsInfo BuildTooltipInBulletContext(BulletData bulletContext)
+    {
+        ToolTipsInfo info = new ToolTipsInfo(Name, Level, "", ToolTipsType.Gem);
+
+        int gemAdditon = 0;
+        int gemResonanceAdd = 0;
+
+        foreach (var each in bulletContext.ModifierGemAdditionDict)
+            gemAdditon += each.Value;
+        foreach (var each in bulletContext.ModifierGemResonanceAdditionDict)
+            gemResonanceAdd += each.Value;
+
+        int dmg = Damage;
+        int pierce = Piercing;
+        int reso = Resonance;
+        
+        if (CurGemType == GemType.Damage)
+            dmg += gemAdditon;
+        if (CurGemType == GemType.Piercing)
+            pierce += gemAdditon;
+        if (CurGemType == GemType.Resonance)
+            reso += gemAdditon + gemResonanceAdd;
+        
+        if((dmg + dmg - Damage) != 0)
+            info.AttriInfos.Add(new ToolTipsAttriSingleInfo(ToolTipsAttriType.Damage, dmg, dmg - Damage));
+        if((pierce + pierce - Piercing) != 0)
+            info.AttriInfos.Add(new ToolTipsAttriSingleInfo(ToolTipsAttriType.Piercing, pierce, pierce - Piercing));
+        if((reso + reso - Resonance) != 0)
+            info.AttriInfos.Add(new ToolTipsAttriSingleInfo(ToolTipsAttriType.Resonance, reso, reso - Resonance));
+
+        return info;
+    }
+    #endregion
 }
 #endregion
 
@@ -285,13 +319,22 @@ public class BulletData:ItemDataBase,ITooltipBuilder
     public int FinalResonance;
     public bool IsResonance; //是否开启共振
     public List<IBulletModifier> Modifiers = new();
-    //
+
+    #region 针对buff道具等进行的属性增加
     public int OrderInRound; // 第几颗子弹（从1开始）
     public bool IsLastBullet; // 是否是最后一颗子弹
     public int JumpHitCount; // 跳跃命中次数
     public GemEffectOverrideState GemEffectOverride = GemEffectOverrideState.None; //宝石效果覆盖状态
+    //针对宝石修改器的修改
     public Dictionary<string, int> ModifierGemAdditionDict = new(); //记录Buff对宝石附加值的修改
+    public Dictionary<string, int> ModifierGemDamageAdditionDict = new(); //记录Buff对宝石附加值的修改(伤害专属)
+    public Dictionary<string, int> ModifierGemPiercingAdditionDict = new(); //记录Buff对宝石附加值的修改(穿透专属)
+    public Dictionary<string, int> ModifierGemResonanceAdditionDict = new(); //记录Buff对宝石附加值的修改(共振专属)
+    //直接改Bullet本体
     public Dictionary<string, int> ModifierDamageAdditionDict = new(); //记录Buff直接对伤害的修改
+    public Dictionary<string, int> ModifierPiercingAdditionDict = new(); //记录Buff直接对穿透的修改
+    public Dictionary<string, int> ModifierResonanceAdditionDict = new(); //记录Buff直接对共振的修改
+    #endregion
 
     #region 处理战场临时Buff
     Dictionary<string, IBattleTempBuff> triggeredTempBuffs = new();
@@ -308,7 +351,8 @@ public class BulletData:ItemDataBase,ITooltipBuilder
         SyncFinalAttributes();
     }
     #endregion
-    
+
+    #region 弹孵化器专用
     //子弹孵化器专用
     public int _spawnerCount;
     public int SpawnerCount
@@ -320,6 +364,7 @@ public class BulletData:ItemDataBase,ITooltipBuilder
             OnDataChanged?.Invoke();
         }
     }
+    #endregion
     
     public BulletData(int _id,BulletSlotController _slot)
     {
@@ -374,15 +419,21 @@ public class BulletData:ItemDataBase,ITooltipBuilder
         //处理临时Buff
         foreach (var each in triggeredTempBuffs)
             each.Value.Apply(this);
-        //处理全局Buff
+        //处理全局Buff直接对子弹的修改
         foreach (var each in ModifierDamageAdditionDict)
             FinalDamage += each.Value;
+        foreach (var each in ModifierPiercingAdditionDict)
+            FinalPiercing += each.Value;
+        foreach (var each in ModifierResonanceAdditionDict)
+            FinalResonance += each.Value;
         
         if (FinalResonance == 0)
             ResonanceDamage = 0;
         FinalDamage += ResonanceDamage;
 
         FinalDamage = Mathf.Max(FinalDamage, 0);
+        //BuildTooltip();
+       // Debug.Log("BULLET FINAL DAMAGE: " + FinalDamage);
         OnDataChanged?.Invoke();
     }
     #endregion
@@ -392,19 +443,19 @@ public class BulletData:ItemDataBase,ITooltipBuilder
     {
         ToolTipsInfo info = new ToolTipsInfo(Name,Level,"", ToolTipsType.Bullet);
 
-        if (FinalDamage != 0)
+        if (Damage != 0 || FinalDamage != 0)
         {
             ToolTipsAttriSingleInfo curInfo = new ToolTipsAttriSingleInfo(
                 ToolTipsAttriType.Damage, FinalDamage,FinalDamage - Damage);
             info.AttriInfos.Add(curInfo);
         }
-        if (FinalPiercing != 0)
+        if (Piercing != 0 || FinalPiercing != 0)
         {
             ToolTipsAttriSingleInfo curInfo = new ToolTipsAttriSingleInfo(
                 ToolTipsAttriType.Piercing, FinalPiercing,FinalPiercing - Piercing);
             info.AttriInfos.Add(curInfo);
         }
-        if (FinalResonance != 0)
+        if (Resonance != 0 || FinalResonance !=0)
         {
             ToolTipsAttriSingleInfo curInfo = new ToolTipsAttriSingleInfo(
                 ToolTipsAttriType.Resonance, FinalResonance,FinalResonance - Resonance);
@@ -430,20 +481,41 @@ public class BulletModifierGem : IBulletModifier
     }
     public void Modify(BulletData data)
     {
-        int gemAdditon = 0;
+        int gemAdditon = 0;  //全效的宝石增益
+        int gemDamageAdditon = 0; //专门针对伤害的增益
+        int gemPiercingAdditon = 0; //专门针对穿透的增益
+        int gemResonanceAdditon = 0; //专门针对共振的增益
         foreach (var each in data.ModifierGemAdditionDict)
             gemAdditon += each.Value;
+        //专属伤害增益
+        foreach (var each in data.ModifierGemDamageAdditionDict)
+            gemDamageAdditon += each.Value;
+        //专属穿透增益
+        foreach (var each in data.ModifierGemPiercingAdditionDict)
+            gemPiercingAdditon += each.Value;
+        //专属共振增益
+        foreach (var each in data.ModifierGemResonanceAdditionDict)
+            gemResonanceAdditon += each.Value;
 
         int dmg = gem.Damage;
         int pierce = gem.Piercing;
         int reso = gem.Resonance;
-        
+
         if (gem.CurGemType == GemType.Damage)
+        {
             dmg += gemAdditon;
+            dmg += gemDamageAdditon;
+        }
         if (gem.CurGemType == GemType.Piercing)
+        {
             pierce += gemAdditon;
+            pierce += gemPiercingAdditon;
+        }
         if (gem.CurGemType == GemType.Resonance)
+        {
             reso += gemAdditon;
+            reso += gemResonanceAdditon;
+        }
 
         //宝石效果Buff相关
         switch (data.GemEffectOverride)

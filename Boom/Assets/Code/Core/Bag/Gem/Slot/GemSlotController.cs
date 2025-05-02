@@ -4,6 +4,8 @@ public class GemSlotController : BaseSlotController<ItemDataBase>
 {
     //持有的视窗数据
     public GemInnerSlotController LinkedGemInnerSlotController; // 指向关联的 GemSlotInner 的 controller
+    public BulletData ParentBullet;//指向父子弹的引用
+    public void SetParentBullet(BulletData bullet) => ParentBullet = bullet;
     
     public bool IsEmpty => CurData == null; //槽位是不是空的
     public bool IsLocked; //槽位是不是锁定的

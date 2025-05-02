@@ -20,7 +20,7 @@
       "SlotType": 8
     },
     {
-      "SpawnerCount": 0,
+      "SpawnerCount": 1,
       "ID": 3,
       "SlotID": 3,
       "SlotType": 8
@@ -29,14 +29,8 @@
   "UserCurBullets": [
     {
       "SpawnerCount": 0,
-      "ID": 3,
-      "SlotID": 1,
-      "SlotType": 6
-    },
-    {
-      "SpawnerCount": 0,
       "ID": 1,
-      "SlotID": 2,
+      "SlotID": 1,
       "SlotType": 6
     }
   ],
@@ -54,18 +48,8 @@
       "SlotType": 1
     },
     {
-      "ID": 5,
-      "SlotID": 7,
-      "SlotType": 1
-    },
-    {
       "ID": 6,
       "SlotID": 5,
-      "SlotType": 1
-    },
-    {
-      "ID": 204,
-      "SlotID": 8,
       "SlotType": 1
     },
     {
@@ -79,66 +63,76 @@
       "SlotType": 1
     },
     {
-      "ID": 2,
-      "SlotID": 9,
+      "ID": 8,
+      "SlotID": 7,
       "SlotType": 1
     },
     {
-      "ID": 300,
-      "SlotID": 1,
+      "ID": 5,
+      "SlotID": 29,
       "SlotType": 1
     },
     {
-      "ID": 10,
-      "SlotID": 6,
-      "SlotType": 1
-    },
-    {
-      "ID": 9,
+      "ID": 7,
       "SlotID": 20,
       "SlotType": 1
     },
     {
       "ID": 1,
-      "SlotID": 29,
+      "SlotID": 8,
       "SlotType": 1
     },
     {
-      "ID": 8,
-      "SlotID": 19,
+      "ID": 9,
+      "SlotID": 6,
+      "SlotType": 1
+    },
+    {
+      "ID": 10,
+      "SlotID": 9,
+      "SlotType": 1
+    },
+    {
+      "ID": 4,
+      "SlotID": 10,
+      "SlotType": 1
+    },
+    {
+      "ID": 204,
+      "SlotID": 1,
+      "SlotType": 1
+    },
+    {
+      "ID": 2,
+      "SlotID": 11,
+      "SlotType": 1
+    },
+    {
+      "ID": 300,
+      "SlotID": 40,
+      "SlotType": 1
+    },
+    {
+      "ID": 401,
+      "SlotID": 17,
+      "SlotType": 1
+    },
+    {
+      "ID": 200,
+      "SlotID": 36,
       "SlotType": 1
     }
   ],
   "UserGems": [
     {
-      "ID": 1,
-      "SlotID": 1,
-      "SlotType": 4
+      "ID": 10,
+      "SlotID": 3,
+      "SlotType": 5
     },
     {
       "ID": 1,
       "SlotID": 2,
-      "SlotType": 4
-    },
-    {
-      "ID": 3,
-      "SlotID": 3,
-      "SlotType": 4
-    },
-    {
-      "ID": 10,
-      "SlotID": 4,
-      "SlotType": 4
-    },
-    {
-      "ID": 20,
-      "SlotID": 5,
-      "SlotType": 4
-    },
-    {
-      "ID": 20,
-      "SlotID": 6,
-      "SlotType": 4
+      "SlotType": 5
     }
   ],
   "UserMainStoryProgress": 0,

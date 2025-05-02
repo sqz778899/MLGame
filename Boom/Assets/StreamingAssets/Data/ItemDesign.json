@@ -24,7 +24,7 @@
   {
     "Rarity": 1,
     "ResName": "T_Item_BookPaper_01",
-    "Desc": "开火时，你的子弹的顺序会被随机打乱。",
+    "Desc": "开火时，你的子弹的顺序会被随机打乱",
     "Flavor": "\t“某人抄错了战术笔记的页码，于是本来第三发该打Boss的……飞了。”",
     "Category": 0,
     "PersistentType": 0,
@@ -46,7 +46,7 @@
   {
     "Rarity": 1,
     "ResName": "T_Item_Key_01",
-    "Desc": "每进入一个新房间：50%得#Yellow(4)金币，50%失#Yellow(2)金币。",
+    "Desc": "每进入一个新房间：50%得#Yellow(4)#金币，50%失#Yellow(2)#金币",
     "Flavor": "“每换个地方它都发抖……不过抖着抖着，也许会掉出点什么。”",
     "Category": 0,
     "PersistentType": 0,
@@ -57,7 +57,7 @@
   {
     "Rarity": 1,
     "ResName": "T_Item_Broom_01",
-    "Desc": "你的第二颗子弹无视敌人的第一层护盾。",
+    "Desc": "你的第二颗子弹无视敌人的一层护盾",
     "Flavor": "“扫帚带着奇怪的风，飞行轨迹有点歪，却总能钻过缝隙直冲要害。”",
     "Category": 0,
     "PersistentType": 0,
@@ -68,7 +68,7 @@
   {
     "Rarity": 1,
     "ResName": "T_Item_Boots_01",
-    "Desc": "战斗开始时，你的第1~3颗子弹中随机一颗获得穿透#Blue(+1)#。",
+    "Desc": "战斗开始时，你的第1~3颗子弹中随机一颗获得穿透#Blue(+1)#",
     "Flavor": "“穿这只靴子的人，至少总有一次能踩到正点上。”",
     "Category": 0,
     "PersistentType": 0,
@@ -90,7 +90,7 @@
   {
     "Rarity": 1,
     "ResName": "T_Item_MagicWand_01",
-    "Desc": "你的最后一颗子弹本轮宝石全部失效。",
+    "Desc": "你的最后一颗子弹本轮宝石全部失效",
     "Flavor": "“啪嗒——在你需要它的时候，它只冒出了一颗粉色泡泡。”",
     "Category": 0,
     "PersistentType": 0,
@@ -101,7 +101,7 @@
   {
     "Rarity": 1,
     "ResName": "T_Item_BadBook_02",
-    "Desc": "你的第一颗子弹伤害#Red(-1)#。",
+    "Desc": "你的第一颗子弹伤害#Red(-1)#",
     "Flavor": "“上面写着：‘今天没练。’”",
     "Category": 0,
     "PersistentType": 0,
@@ -189,7 +189,7 @@
   {
     "Rarity": 3,
     "ResName": "T_Item_Chain_01",
-    "Desc": "若一颗子弹被护盾挡住，下一颗子弹获得穿透#Blue(+1)# 伤害#Blue(+2)#，仅生效一次",
+    "Desc": "若一颗子弹被护盾挡住，下一颗子弹获得穿透#Blue(+1)# 伤害#Red(+2)#，仅生效一次",
     "Flavor": "咒语未果，回音却化为利爪。",
     "Category": 0,
     "PersistentType": 0,
@@ -222,7 +222,7 @@
   {
     "Rarity": 4,
     "ResName": "T_Item_Oracle_01",
-    "Desc": "最后一颗子弹伤害#Red(+2)#\n若装备三件“残响之印”系列，最后一颗子弹伤害额外#Red(+4)#",
+    "Desc": "最后一颗子弹伤害#Red(+5)#",
     "Flavor": "“这不是某人写下的物品，而是「残响」意志本身的显现。它不被书写，也不可摧毁，只会在真正聆听的人心中回荡。”",
     "Category": 0,
     "PersistentType": 0,

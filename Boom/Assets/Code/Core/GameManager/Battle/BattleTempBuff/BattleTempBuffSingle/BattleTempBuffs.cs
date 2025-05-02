@@ -60,8 +60,6 @@ public class ChangeGemTypeAllBuff : IBattleTempBuff
     {
         List<GemData> filterGemDatas = new List<GemData>();
         string buffUniqueKey = GetUniqueKey();
-        //如果已经触发过则不再触发
-        Debug.Log("混沌三角ssss");
         // 过滤掉共振宝石
         foreach (GemData gem in curGems)
         {

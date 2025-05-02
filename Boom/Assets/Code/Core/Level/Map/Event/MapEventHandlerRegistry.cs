@@ -109,10 +109,6 @@ public class RoomKeyEventHandler : IMapEventHandler
 }
 #endregion
 
-#region 伪随机赌博类
-
-#endregion
-
 #region Lore探索型
 public class StoneTabletHandler : IMapEventHandler
 {

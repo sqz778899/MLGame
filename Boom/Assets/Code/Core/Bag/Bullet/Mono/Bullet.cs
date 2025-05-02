@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class BulletNew : ItemBase, IItemInteractionBehaviour
+public class Bullet : ItemBase, IItemInteractionBehaviour
 {
     public BulletData Data { get; private set; }
     

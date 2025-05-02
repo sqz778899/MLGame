@@ -27,10 +27,10 @@ public class Effect_IridescentGrimoire : IItemEffect
                 each.ModifierGemAdditionDict[cacheKey] = 1;
             else
                 each.ModifierGemAdditionDict[cacheKey] = 0;
-            Debug.Log($"[虹彩的魔法书] {gemTypes.Count}");
+            //Debug.Log($"[虹彩的魔法书] {gemTypes.Count}");
             each.SyncFinalAttributes();
         }
-        Debug.Log($"[虹彩的魔法书] 触发");
+        //Debug.Log($"[虹彩的魔法书] 触发");
     }
 
     public void RemoveEffect()
@@ -69,10 +69,10 @@ public class Effect_ArrogantKingCrown : IItemEffect
                 each.ModifierGemAdditionDict[cacheKey] = 1;
             else
                 each.ModifierGemAdditionDict[cacheKey] = 0;
-            Debug.Log($"[自大的国王王冠] {gemTypes.Count}");
+            //Debug.Log($"[自大的国王王冠] {gemTypes.Count}");
             each.SyncFinalAttributes();
         }
-        Debug.Log($"[自大的国王王冠] 触发");
+        //Debug.Log($"[自大的国王王冠] 触发");
     }
 
     public void RemoveEffect()

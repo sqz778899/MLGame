@@ -8,7 +8,7 @@ public class BulletInnerDragAgent : MonoBehaviour
     public Renderer MainRenderer;
 
     [Header("UI 分身资产")]
-    BulletNew dragGhostSC;
+    Bullet dragGhostSC;
 
     BagRootMini bagRootMini;
     BulletData data;
@@ -17,7 +17,7 @@ public class BulletInnerDragAgent : MonoBehaviour
     {
         data = BulletInnerSC.controller.Data;
         // 初始化拖拽影子
-        dragGhostSC = BulletFactory.CreateBullet(data, BulletInsMode.EditA) as BulletNew;
+        dragGhostSC = BulletFactory.CreateBullet(data, BulletInsMode.EditA) as Bullet;
         dragGhostSC.gameObject.SetActive(false);
         dragGhostSC.transform.SetParent(DragManager.Instance.dragRoot.transform,false);
         bagRootMini = EternalCavans.Instance.BagRootMini.GetComponent<BagRootMini>();

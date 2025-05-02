@@ -106,7 +106,7 @@ public class InventoryManager : MonoBehaviour
             BulletData curBullet = cash[i];
             BulletSlotController mainController = CurBulletSlotControllers.
                 FirstOrDefault(c => c.SlotID == curBullet.CurSlotController.SlotID);
-            BulletNew bulletSC = BulletFactory.CreateBullet(curBullet, BulletInsMode.EditA) as BulletNew;
+            Bullet bulletSC = BulletFactory.CreateBullet(curBullet, BulletInsMode.EditA) as Bullet;
             bulletSC.transform.SetParent(DragManager.Instance.dragRoot, false);
             mainController.Assign(curBullet,bulletSC.gameObject);
             TooltipsManager.Instance.Hide();
@@ -207,7 +207,7 @@ public class InventoryManager : MonoBehaviour
     void InitEquipBullets()
     {
         //...............Clear Old Data....................
-        BulletNew[] oldBullets = EternalCavans.Instance.EquipBulletSlotRoot.GetComponentsInChildren<BulletNew>();
+        Bullet[] oldBullets = EternalCavans.Instance.EquipBulletSlotRoot.GetComponentsInChildren<Bullet>();
         for (int i = oldBullets.Length - 1; i >= 0; i--)
             Destroy(oldBullets[i].gameObject);
         //..............Instance New Data..................
@@ -224,10 +224,10 @@ public class InventoryManager : MonoBehaviour
         //..............Clear Old Data..................
         GameObject spawnerSlotRoot = EternalCavans.Instance.SpawnerSlotRoot;
         GameObject SpawnerSlotRootMini = EternalCavans.Instance.SpawnerSlotRootMini;
-        BulletSpawnerNew[] oldSpawner = spawnerSlotRoot.GetComponentsInChildren<BulletSpawnerNew>(true);
+        BulletSpawner[] oldSpawner = spawnerSlotRoot.GetComponentsInChildren<BulletSpawner>(true);
         for (int i = oldSpawner.Length - 1; i >= 0; i--)
             Destroy(oldSpawner[i].gameObject);
-        BulletSpawnerNew[] oldSpawnerMini = SpawnerSlotRootMini.GetComponentsInChildren<BulletSpawnerNew>(true);
+        BulletSpawner[] oldSpawnerMini = SpawnerSlotRootMini.GetComponentsInChildren<BulletSpawner>(true);
         for (int i = oldSpawnerMini.Length - 1; i >= 0; i--)
             Destroy(oldSpawnerMini[i].gameObject);
         //..............Instance New Data..................

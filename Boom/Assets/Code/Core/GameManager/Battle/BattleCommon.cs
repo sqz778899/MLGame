@@ -155,6 +155,8 @@ public class BattleContext
         AllBullets = GM.Root.InventoryMgr._BulletInvData.EquipBullets;
         if (GM.Root.BattleMgr.battleData.CurLevel == null)
             CurEnemy = null;
+        else if (GM.Root.BattleMgr.battleData.CurLevel.CurEnemy == null)
+            CurEnemy = null;
         else
             CurEnemy = GM.Root.BattleMgr.battleData.CurLevel.CurEnemy.Data;
         CurBullet = null;

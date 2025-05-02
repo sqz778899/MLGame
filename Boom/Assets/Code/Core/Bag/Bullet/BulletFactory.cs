@@ -10,7 +10,7 @@ public static class BulletFactory
             CreatInstance(PathConfig.GetBulletTemplate(bulletInsMode));
         
         ItemBase bulletSC = bulletIns.GetComponent<ItemBase>();
-        if (bulletSC is BulletNew bulletNew)
+        if (bulletSC is Bullet bulletNew)
         {
             bulletNew.BindData(_bulletData);
             bulletIns.GetComponent<ItemInteractionHandler>().BindData(_bulletData);
@@ -26,7 +26,7 @@ public static class BulletFactory
             _bulletInner.BindData(_bulletData);
         }
         
-        if (bulletSC is BulletSpawnerNew bulletSpawnerNew)
+        if (bulletSC is BulletSpawner bulletSpawnerNew)
             bulletSpawnerNew.BindData(_bulletData);
         
         if (bulletSC is BulletSpawnerInner bulletSpawnerInner)

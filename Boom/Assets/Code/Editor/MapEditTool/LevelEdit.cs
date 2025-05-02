@@ -104,6 +104,66 @@ public class LevelEdit
         SpriteRenderer arrowRenderer = arrowGO.GetComponentInChildren<SpriteRenderer>();
         arrowRenderer.color = Boss;
     }
+
+    #region 编辑敌人配置相关
+    public class EnemyEditEntry
+    {
+        [InlineProperty, OnValueChanged("OnEdited")]
+        public EnemyConfigData EnemyConfig;
+
+        [HideInInspector]
+        public Action OnValueChanged;
+
+        void OnEdited() => OnValueChanged?.Invoke();
+    }
+
+    [TitleGroup("房间内敌人配置预览")]
+    [EnumToggleButtons, PropertyOrder(98)]
+    public OnOff 房间敌人预览开关 = OnOff.Off;
+    
+    [TableList(ShowIndexLabels = true), ShowInInspector, PropertyOrder(98)]
+    public List<EnemyEditEntry> PreviewEnemyEntries = new();
+
+    [OnInspectorInit]
+    void SyncEnemyConfigsFromSelection()
+    {
+        Selection.selectionChanged -= DisplyEnemyConfig; // 避免重复注册
+        Selection.selectionChanged += DisplyEnemyConfig;
+    }
+
+    void DisplyEnemyConfig()
+    {
+        if (房间敌人预览开关 != OnOff.On) return;
+        PreviewEnemyEntries.Clear();
+        foreach (var go in Selection.gameObjects)
+        {
+            var monoList = go.GetComponentsInChildren<MapNodeDataConfigMono>(true);
+            foreach (var each in monoList)
+            {
+                if (each._MapEventType != MapEventType.RoomArrow || each.RoomArrowConfig.ArrowType != RoomArrowType.Fight)
+                    continue;
+
+                var configRef = each; // 捕获房间配置引用
+
+                var enemyConfigCopy = configRef.RoomArrowConfig.BattleConfig;
+                var entry = new EnemyEditEntry
+                {
+                    EnemyConfig = enemyConfigCopy
+                };
+
+                // 回调绑定（此时 entry 已构造完成）
+                entry.OnValueChanged = () =>
+                {
+                    configRef.RoomArrowConfig.BattleConfig = entry.EnemyConfig;
+                    EditorUtility.SetDirty(configRef);
+                };
+
+                PreviewEnemyEntries.Add(entry);
+            }
+        }
+        UnityEditorInternal.InternalEditorUtility.RepaintAllViews();
+    }
+    #endregion
     
     [PropertyOrder(98)]
     [Button("测试伪随机掉落")]

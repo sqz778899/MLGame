@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+
+//定义事件接口，地图类特质触发
 public class TraitData:ITooltipBuilder
 {
     public int ID { get; private set; }

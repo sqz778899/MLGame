@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class BulletSpawnerNew:ItemBase,
+public class BulletSpawner:ItemBase,
     IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler,IPointerMoveHandler
 {
     public BulletData Data { get; private set; }
@@ -29,7 +29,7 @@ public class BulletSpawnerNew:ItemBase,
         // 减去 1
         Data.SpawnerCount--;
         // 创建新子弹
-        BulletNew bulletSC = BulletFactory.CreateBullet(newData, BulletInsMode.EditA) as BulletNew;
+        Bullet bulletSC = BulletFactory.CreateBullet(newData, BulletInsMode.EditA) as Bullet;
         bulletSC.transform.SetParent(DragManager.Instance.dragRoot, false);
         bulletSC.transform.position = UTools.GetWPosByMouse(rectTransform);
         bulletSC.CreateFlag = createFlag;

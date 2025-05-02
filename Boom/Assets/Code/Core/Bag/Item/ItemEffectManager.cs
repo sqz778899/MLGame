@@ -19,28 +19,36 @@ public class ItemEffectManager
         ApplyAlltimesEffectsToBullets();
     }
 
+    //全图类特质触发接口
+    public void TriggerTraitMapEvent() => 
+        _activeTraits.ForEach(t => t.OnClutterSearchResolved());
+
+    //常规根据Timing触发
     public void Trigger(ItemTriggerTiming timing,BattleContext ctx = null)
     {
         ctx ??= new BattleContext();
+        #region 时态道具触发
         //触发每一个道具的效果
         foreach (var item in equipItems)
         {
             if (item.EffectLogic?.TriggerTiming == timing)
                 item.ApplyEffect(ctx);
         }
+        #endregion
         
+        #region 时态特质触发
         // 检测并缓存满足条件的组合特质
         RefreshComboTraits();
         // 触发当前时机的组合特质
-        foreach (var trait in _activeTraits)
+        foreach (IItemSynergies trait in _activeTraits)
         {
             if (trait.TriggerTiming == timing)
-            {
                 trait.ApplyEffect(ctx);
-            }
         }
+        #endregion
     }
     
+    //根据Timming触发道具的Cash信息
     public void TriggerCash(ItemTriggerTiming timing,BattleContext ctx = null)
     {
         ctx ??= new BattleContext();

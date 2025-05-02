@@ -80,6 +80,8 @@ public class BasicGamblingEventHandler : IMapEventHandler
             data.IsTriggered = true; // 结束翻找流程
         }
         
+        //全图类特质触发接口
+        GM.Root.InventoryMgr._ItemEffectMrg.TriggerTraitMapEvent();
         view.SetAsTriggered();
     }
 
@@ -124,7 +126,7 @@ public class BasicGamblingEventHandler : IMapEventHandler
 
         EternalCavans.Instance._EffectManager.CreatEffect(para, null, () =>
         {
-            FloatingTextFactory.CreateWorldText("获得一个钥匙！", startPos + Vector3.up, FloatingTextType.MapHint, Color.yellow, 2f);
+            FloatingTextFactory.CreateWorldText("获得一个钥匙！", default, FloatingTextType.MapHint, Color.yellow, 2f);
         });
     }
     #endregion

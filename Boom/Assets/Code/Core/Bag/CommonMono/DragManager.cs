@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class DragManager : MonoBehaviour
 {
     public static DragManager Instance;
+    public event Action OnMgrEndDrag;
     public RectTransform dragRoot;
     GameObject draggedObject;
     Vector3 originalPosition;
@@ -23,7 +24,7 @@ public class DragManager : MonoBehaviour
         go.transform.SetParent(dragRoot);
         
         //如果是 Bullet，切换为 EditA 模式
-        if (go.TryGetComponent<BulletNew>(out var bullet))
+        if (go.TryGetComponent<Bullet>(out var bullet))
             bullet.SwitchMode(BulletInsMode.EditA);
     }
 
@@ -53,7 +54,7 @@ public class DragManager : MonoBehaviour
                 ItemDataBase Data = null;
                 if (curItem is Gem gem)
                     Data = gem.Data;
-                else if (curItem is BulletNew bullet)
+                else if (curItem is Bullet bullet)
                     Data = bullet.Data;
                 else if (curItem is Item item)
                     Data = item.Data;
@@ -85,7 +86,7 @@ public class DragManager : MonoBehaviour
                 if (targetCtrl.IsEmpty &&
                     targetCtrl.SlotType == SlotType.SpawnnerSlotInner)
                 {
-                    draggedObject.TryGetComponent(out BulletNew bulletNew);
+                    draggedObject.TryGetComponent(out Bullet bulletNew);
                     Data.CurSlotController.Unassign();
                     bulletNew.OnDragCanceled();
                     dropped = true;
@@ -100,6 +101,7 @@ public class DragManager : MonoBehaviour
         
         draggedObject = null;
         originalParent = null;
+        OnMgrEndDrag?.Invoke();
     }
     
     public void CancelDrag()
@@ -114,7 +116,7 @@ public class DragManager : MonoBehaviour
     void NonDropped()
     {
         //是子弹
-        if (draggedObject.TryGetComponent(out BulletNew bulletNew))
+        if (draggedObject.TryGetComponent(out Bullet bulletNew))
         {
             //拖拽失败，通知 Spawner 回滚
             if (bulletNew.CreateFlag == BulletCreateFlag.Spawner || 
@@ -180,6 +182,7 @@ public class DragManager : MonoBehaviour
         draggedObject = null;
         lastEventData = null;
         TooltipsManager.Instance.Enable();
+        OnMgrEndDrag?.Invoke();
     }
     #endregion
 }

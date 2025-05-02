@@ -1,5 +1,6 @@
 ﻿using System;
 using Spine.Unity;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -11,7 +12,7 @@ public class MapNodeView:MonoBehaviour
     
     [Header("Spine 渲染")]
     public Renderer spineRenderer;
-    public SkeletonAnimation Ain;
+    public SkeletonAnimation Skeleton;
     
     public MapNodeData Data { get; private set; }
     public MapNodeController controller;
@@ -22,17 +23,30 @@ public class MapNodeView:MonoBehaviour
     [Header("飞行特效参数")] 
     public EParameter EPara;
     EffectManager eEffectManager => EternalCavans.Instance._EffectManager;
-   
 
     public Action OnClick; //新手引导等外部注册
     
-    void Awake() => AniUtility.PlayIdle(Ain);
+    void Awake() => AniUtility.PlayIdle(Skeleton);
 
     public void Init(MapNodeData data)
     {
         Data = data;
+        if (Data.EventData is BulletEventRuntimeData bulletEventRuntimeData)
+        {
+            int bulletID = bulletEventRuntimeData.BulletID;
+            Debug.Log(bulletID);
+            Skeleton.skeletonDataAsset = ResManager.instance.GetAssetCache<SkeletonDataAsset>(
+                PathConfig.GetBulletImageOrSpinePath(bulletID, BulletInsMode.Inner));
+            StartCoroutine(InitSkeleton());
+        }
         controller = new MapNodeController(Data, this);
         SetDefaultVisual();
+    }
+    IEnumerator InitSkeleton()
+    {
+        // 等待 1 帧，确保 Spine 所有依赖生命周期跑完
+        yield return null;
+        Skeleton.Initialize(true);
     }
     
     public void SetAsTriggered(int coinsAmount = 0)

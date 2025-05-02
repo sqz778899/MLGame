@@ -170,8 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: 0
-  NodeName: 
-  Desc: 
+  ClutterTags: []
   _MapEventType: 7
   StartLocked: 0
   StartAsTriggered: 0
@@ -186,23 +185,18 @@ MonoBehaviour:
   BulletEventConfig:
     BulletID: 1
     DialogueName: "\u9ECF\u571F\u65E5\u5E381"
-  WeaponRackConfig:
+  RoomKeyConfig:
+    RoomKeysNum: 1
+  BasicGamblingConfig:
     EmptyChance: 25
+    KeyChance: 25
     TempBuffChance: 20
     TempDebuffChance: 30
     NormalLootChance: 10
     MetaResourceChance: 10
     RareLootChance: 5
-  SkeletonConfig:
-    LoreNotes:
-    - "\u522B\u4FE1\u5899\u4E0A\u7684\u95E8"
-    - "\u662F\u6211\u5148\u53D1\u73B0\u8FD9\u4E2A\u5B9D\u85CF\u7684"
-    - "\u94A5\u5319\u2026\u2026\u85CF\u5728\u58C1\u7089\u2026\u2026\u54B3\u2026\u2026"
-    EmptyChance: 30
-    NoteChance: 30
-    ItemChance: 20
-    DebuffChance: 15
-    KeyChance: 5
+    MinDropCount: 1
+    MaxDropCount: 1
   StoneTabletConfig:
     LoreTexts:
     - "\u9B54\u6CD5\u4E4B\u707E\u8D77\u6E90\u4E8E\u65E0\u540D\u5854\u3002"
@@ -213,6 +207,10 @@ MonoBehaviour:
     TalkChance: 30
     ExplosionChance: 20
     LootChance: 20
+  ShopEventConfig:
+    ShopType: 0
+    RollPRs: []
+    ShopCost: 0
   RoomArrowConfig:
     ArrowType: 0
     TargetRoomID: 0
@@ -241,7 +239,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 0}
   triggeredRenderer: {fileID: 0}
   spineRenderer: {fileID: 1505137839352981486}
-  Ain: {fileID: 1977059419070274435}
+  Skeleton: {fileID: 1977059419070274435}
   EPara:
     CurEffectType: 0
     StartPos: {x: 0, y: 0, z: 0}
@@ -249,7 +247,35 @@ MonoBehaviour:
     SpawntimeRange: {x: 0.3, y: 0.4}
     Radius: 1
     FlyRangeOffset: {x: -1, y: 1}
-    FlyTimeRange: {x: 0.4, y: 0.6}
+    FlyTimeBase: 0.5
+    FlyTimePerUnitDistance: 0.05
+    FlyTimeClampMax: 1.2
+    SpecialEffectPath: 
+    CustomFlyCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    ExplodeMode: 0
 --- !u!114 &639657353193487140
 MonoBehaviour:
   m_ObjectHideFlags: 0

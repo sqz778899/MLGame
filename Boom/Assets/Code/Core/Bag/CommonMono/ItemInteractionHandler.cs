@@ -25,6 +25,8 @@ public class ItemInteractionHandler: MonoBehaviour,
         rectTransform = GetComponent<RectTransform>();
         behaviour = GetComponent<IItemInteractionBehaviour>();
     }
+    void Start() => DragManager.Instance.OnMgrEndDrag += ShowTooltips;
+    void OnDestroy() => DragManager.Instance.OnMgrEndDrag -= ShowTooltips;
 
     #region UI交互逻辑
     // 绑定数据（泛型适配）
@@ -115,6 +117,19 @@ public class ItemInteractionHandler: MonoBehaviour,
     public void ShowTooltips()
     {
         if (Data.CurSlotController == null) return;
+        
+        if (Data is GemData gemData)
+        {
+            if (gemData.CurSlotController is GemSlotController gemSlot &&
+                gemSlot.ParentBullet != null)
+            {
+                TooltipsManager.Instance.Show(
+                    gemData.BuildTooltipInBulletContext(gemSlot.ParentBullet),
+                    gemData.CurSlotController.TooltipOffset);
+                return;
+            }
+        }
+        
         if (Data is ITooltipBuilder builder)
         {
             TooltipsManager.Instance.Show(builder.BuildTooltip(),

@@ -14,6 +14,8 @@ public interface IItemSynergies
     bool Match(List<ItemData> equippedItems); // 判断是否满足条件
     void ApplyEffect(BattleContext ctx); // 应用效果（支持不同阶段）
     
+    void OnClutterSearchResolved();//地图类特质触发
+    
     void RemoveEffect();
     ItemTriggerTiming TriggerTiming { get; }
 }

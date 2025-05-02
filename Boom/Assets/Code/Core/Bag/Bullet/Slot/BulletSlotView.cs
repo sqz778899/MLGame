@@ -29,7 +29,7 @@ public class BulletSlotView: SlotView
     {
         base.Display(itemGO);
         // 切换成 EditB 模式
-        if (itemGO.TryGetComponent<BulletNew>(out var bullet))
+        if (itemGO.TryGetComponent<Bullet>(out var bullet))
             bullet.SwitchMode(BulletInsMode.EditB);
         // 落下即刻显示Tooltips
         TooltipsManager.Instance.Enable();

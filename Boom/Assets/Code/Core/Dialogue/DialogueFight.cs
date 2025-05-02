@@ -40,7 +40,7 @@ public class DialogueFight : MonoBehaviour
             RectTransform rectTrans = observeHPIns.GetComponent<RectTransform>();
             rectTrans.anchoredPosition = new Vector2(0, observeHPYOffset * i);
             
-            int currentHP = (i == 0) ? _enemyConfig.HP : shields[i - 1];
+            int currentHP = (i == 0) ? _enemyConfig.HP : shields[shields.Count - i];
             var hpText = observeHPIns.GetComponentInChildren<TextMeshProUGUI>(true);
             hpText.text = currentHP.ToString();
         }

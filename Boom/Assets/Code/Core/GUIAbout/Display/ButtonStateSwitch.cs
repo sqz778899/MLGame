@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class ButtonStateSwitch : MonoBehaviour
@@ -19,10 +20,7 @@ public class ButtonStateSwitch : MonoBehaviour
     [Header("Button 资产")]
     public GameObject Btn_Locked;
     public GameObject Btn_Selected;
-    void Awake()
-    {
-        ChangeState();
-    }
+    void Awake() => ChangeState();
 
     void ChangeState()
     {

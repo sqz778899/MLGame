@@ -53900,7 +53900,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &934114172566226600
 RectTransform:
   m_ObjectHideFlags: 0
@@ -73337,9 +73337,6 @@ MonoBehaviour:
   BtnBulletSC: {fileID: 3577258970689518044}
   BtnItemSC: {fileID: 7377065110142720810}
   BtnGemSC: {fileID: 1022520704814383058}
-  GroupBulletSpawnerSlot: {fileID: 4230152080606656703}
-  BagReadySlotGO: {fileID: 7233178698174259306}
-  EquipItemRoot: {fileID: 8155822993080496522}
   txtSynergies: {fileID: 2750184737776244973}
   txtSynergiesDesc: {fileID: 1215246024489114987}
   traitIcon: {fileID: 3412737607206424142}

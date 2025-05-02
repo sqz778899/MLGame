@@ -1,6 +1,6 @@
 ﻿using UnityEngine.EventSystems;
 
-public class BulletSpawnerInner: BulletSpawnerNew
+public class BulletSpawnerInner: BulletSpawner
 {
     public override void OnPointerDown(PointerEventData eventData)
     {

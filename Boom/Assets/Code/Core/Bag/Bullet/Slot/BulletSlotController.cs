@@ -20,7 +20,7 @@ public class BulletSlotController: BaseSlotController<ItemDataBase>
         itemGO.transform.SetParent(DragManager.Instance.dragRoot.transform);
         from?.Unassign();
         AssignDirectly(data, itemGO);
-        if (itemGO.TryGetComponent(out BulletNew bulletNew))
+        if (itemGO.TryGetComponent(out Bullet bulletNew))
             bulletNew.CreateFlag = BulletCreateFlag.Spawnered;
     }
 
@@ -38,6 +38,7 @@ public class BulletSlotController: BaseSlotController<ItemDataBase>
             GM.Root.InventoryMgr._BulletInvData.EquipBullet(_curData as BulletData);
             GM.Root.InventoryMgr._BulletInvData.RefreshModifiers();
         }
+        GemSlotControllers.ForEach(gs => gs.SetParentBullet(data as BulletData));
     }
 
     public void Unassign()

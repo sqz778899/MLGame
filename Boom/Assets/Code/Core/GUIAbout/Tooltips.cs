@@ -130,7 +130,10 @@ public class Tooltips : MonoBehaviour
                 attriSingleTexts[1].color = valueColor;
                 if (attriInfo.AddedValue != 0)
                 {
-                    attriSingleTexts[2].text = $"(+{attriInfo.AddedValue})";
+                    if (attriInfo.AddedValue < 0)
+                        attriSingleTexts[2].text = $"({attriInfo.AddedValue})";
+                    else
+                        attriSingleTexts[2].text = $"(+{attriInfo.AddedValue})";
                     attriSingleTexts[2].color = valueColor;
                 }
                 else

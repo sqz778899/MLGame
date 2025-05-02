@@ -7,23 +7,20 @@ public class BagRoot : MonoBehaviour
 {
     public bool IsUnLockedItem = false;
     [Header("背包页签相关资源")]
-    public GameObject BagBulletRootGO;
-    public GameObject BagItemRootGO;
-    public GameObject BagGemRootGO;
+    [SerializeField] GameObject BagBulletRootGO;
+    [SerializeField] GameObject BagItemRootGO;
+    [SerializeField] GameObject BagGemRootGO;
     [Header("背包页签按钮脚本")]
-    public ButtonStateSwitch BtnBulletSC;
-    public ButtonStateSwitch BtnItemSC;
-    public ButtonStateSwitch BtnGemSC;
-    
-    [Header("背包其它资源")]
-    public GameObject GroupBulletSpawnerSlot;
-    public GameObject BagReadySlotGO;  //子弹槽
-    public GameObject EquipItemRoot;  //装备栏
+    [SerializeField] ButtonStateSwitch BtnBulletSC;
+    [SerializeField] ButtonStateSwitch BtnItemSC;
+    [SerializeField] ButtonStateSwitch BtnGemSC;
 
     [Header("道具特质相关")] 
-    public TextMeshProUGUI txtSynergies;
-    public TextMeshProUGUI txtSynergiesDesc;
-    public TraitIcon traitIcon;
+    [SerializeField] TextMeshProUGUI txtSynergies;
+    [SerializeField] TextMeshProUGUI txtSynergiesDesc;
+    [SerializeField] TraitIcon traitIcon;
+    
+    GameObject _equipBulletSlotRoot => EternalCavans.Instance.EquipBulletSlotRoot;  //子弹槽
     
     void Start()
     {
@@ -32,7 +29,7 @@ public class BagRoot : MonoBehaviour
         RefreshSynergies();//先同步一次
     }
 
-    //特质触发
+    //特质触发，同步特质UI资产
     public void RefreshSynergies()
     {
         List<TraitData> traitInfos = 
@@ -46,7 +43,7 @@ public class BagRoot : MonoBehaviour
         }
         TraitData SynergiesInfo = traitInfos[0];
         txtSynergies.text = SynergiesInfo.Name;
-        txtSynergiesDesc.text = SynergiesInfo.Desc;
+        txtSynergiesDesc.text =  TextProcessor.Parse(SynergiesInfo.Desc);
         traitIcon.gameObject.SetActive(true);
         traitIcon.BindingData(traitInfos[0]);
     }
@@ -58,13 +55,14 @@ public class BagRoot : MonoBehaviour
         if (EternalCavans.Instance.TutoriaSwichBulletLock) return;
         
         BagBulletRootGO.SetActive(true);
-        BagReadySlotGO.SetActive(true);
+        _equipBulletSlotRoot.SetActive(true);
         BagItemRootGO.SetActive(false);
         BagGemRootGO.SetActive(false);
         //页签选中状态
         BtnBulletSC.State = UILockedState.isSelected;
         BtnItemSC.State = UILockedState.isNormal;
         BtnGemSC.State = UILockedState.isNormal;
+        GM.Root.InventoryMgr._BulletInvData.ProcessBulletRelations();
     }
 
     //页签切换为Item
@@ -73,13 +71,14 @@ public class BagRoot : MonoBehaviour
         //if(!IsUnLockedItem) return;
         
         BagBulletRootGO.SetActive(false);
-        BagReadySlotGO.SetActive(false);
+        _equipBulletSlotRoot.SetActive(false);
         BagItemRootGO.SetActive(true);
         BagGemRootGO.SetActive(false);
         //页签选中状态
         BtnBulletSC.State = UILockedState.isNormal;
         BtnItemSC.State = UILockedState.isSelected;
         BtnGemSC.State = UILockedState.isNormal;
+        GM.Root.InventoryMgr._BulletInvData.ProcessBulletRelations();
     }
     
     //页签切换为Gem
@@ -88,13 +87,14 @@ public class BagRoot : MonoBehaviour
         if (EternalCavans.Instance.TutorialSwichGemLock) return;
         
         BagBulletRootGO.SetActive(false);
-        BagReadySlotGO.SetActive(true);
+        _equipBulletSlotRoot.SetActive(true);
         BagItemRootGO.SetActive(false);
         BagGemRootGO.SetActive(true);
         //页签选中状态
         BtnBulletSC.State = UILockedState.isNormal;
         BtnItemSC.State = UILockedState.isNormal;
         BtnGemSC.State = UILockedState.isSelected;
+        GM.Root.InventoryMgr._BulletInvData.ProcessBulletRelations();
     }
     #endregion
 

@@ -66,11 +66,19 @@ public class Effect_DizzyOwlFigurine : IItemEffect
     {
         if (ctx.CurEnemy == null || ctx.CurEnemy.Shields == null) return;
         
+        List<TraitData> activeTraits = GM.Root.InventoryMgr._ItemEffectMrg.GetCurrentSynergiesInfos();
+        if (activeTraits.Any(t => t.ID == 8)) // Trait ID 8 = 尖叫猫头鹰
+        {
+            //Debug.Log("[猫头鹰雕像] 被特质“尖叫猫头鹰”覆盖，无效化");
+            return;
+        }
+        
         List<ShieldData> shieldData = ctx.CurEnemy.Shields;
         foreach (var shield in shieldData)
         {
             int randomChange = Random.Range(0, 2) == 0 ? -1 : 1; // ±1
             shield.ModifyHP(randomChange);
+           // Debug.Log($"错晕头转向的猫头鹰雕像 {randomChange}");
         }
     }
     public void RemoveEffect(){}

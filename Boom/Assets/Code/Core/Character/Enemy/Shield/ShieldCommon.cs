@@ -26,7 +26,6 @@ public class ShieldData
     {
         MaxHP = Mathf.Clamp(MaxHP + amount, 1, 999); // 注意最少为 1
         CurHP = MaxHP;
-        Debug.Log("MaxHP: " + MaxHP);
         OnTakeDamage?.Invoke();
     }
 }
@@ -39,7 +38,7 @@ public class ShieldConfigData
     public List<ShieldData> ToData()
     {
         List<ShieldData> curShields = new List<ShieldData>();
-        for (int i = 0; i < ShieldsHPs.Count; i++)
+        for (int i = ShieldsHPs.Count - 1; i >= 0; i--)
             curShields.Add(new ShieldData(ShieldsHPs[i], i));
         return curShields;
     }
