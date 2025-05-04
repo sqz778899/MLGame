@@ -34,7 +34,6 @@ public class MapNodeView:MonoBehaviour
         if (Data.EventData is BulletEventRuntimeData bulletEventRuntimeData)
         {
             int bulletID = bulletEventRuntimeData.BulletID;
-            Debug.Log(bulletID);
             Skeleton.skeletonDataAsset = ResManager.instance.GetAssetCache<SkeletonDataAsset>(
                 PathConfig.GetBulletImageOrSpinePath(bulletID, BulletInsMode.Inner));
             StartCoroutine(InitSkeleton());

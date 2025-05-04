@@ -52,23 +52,33 @@ public class Effect_FlickeringCandle : IItemEffect
 public class Effect_GrudgeTangledScarf : IItemEffect
 {
     public int Id => 202; //怨念缠绕的围巾 Grudge-Tangled Scarf
-    public ItemTriggerTiming TriggerCash => ItemTriggerTiming.OnAlltimes;
-    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnBattleStart;
+    string cacheKey => $"怨念缠绕的围巾-{Id}";
+    public ItemTriggerTiming TriggerCash => ItemTriggerTiming.None;
+    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnAlltimes;
+    List<BulletData> bullets => GM.Root.InventoryMgr._BulletInvData.EquipBullets;
     public void ApplyCash(BattleContext ctx) {}
     public void Apply(BattleContext ctx)
     {
-        StatBuff buff = new StatBuff(
-            BulletStatType.Damage,
-            new[] { new KeyValuePair<int, int>(-1, 2) }, // index占位用
-            BuffSource.Item,
-            Id,
-            BuffBehavior.LastBullet
-        );
-        GM.Root.BattleMgr.battleData.BattleTempBuffMgr.Add(buff);
+        foreach (BulletData each in bullets)
+        {
+            if (each.IsLastBullet)
+                each.ModifierDamageAdditionDict[cacheKey] = 2;
+            else
+                each.ModifierDamageAdditionDict[cacheKey] = 0;
+            each.SyncFinalAttributes();
+        }
         //用于调试
         //Debug.Log($"[怨念缠绕的围巾] 触发");
     }
-    public void RemoveEffect(){}
+
+    public void RemoveEffect()
+    {
+        foreach (var each in bullets)
+        {
+            each.ModifierDamageAdditionDict.Remove(cacheKey);
+            each.SyncFinalAttributes();
+        }
+    }
     public string GetDescription() => "最后一颗子弹伤害+2";
 }
 

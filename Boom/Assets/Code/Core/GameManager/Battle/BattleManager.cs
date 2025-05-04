@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 public class BattleManager: MonoBehaviour
@@ -60,11 +60,21 @@ public class BattleManager: MonoBehaviour
     {
         IsInBattle = false;
         battleUI.InitWinFailGUI();
-        _MapManager.SwitchMapScene();
-        _MapManager.ToTargetRoom();
-        GM.Root.PlayerMgr._PlayerData.OnBattleEnd(); //Buff结算
+        //结算之后抽一发奖励
+        ShowWinReward(() =>
+        {
+            _MapManager.SwitchMapScene();
+            _MapManager.ToTargetRoom();
+            GM.Root.PlayerMgr._PlayerData.OnBattleEnd(); // Buff结算
+        });
     }
-
+    public void ShowWinReward(Action onFinish)
+    {
+        // 创建奖励面板
+        RollAward rollAwardUI = EternalCavans.Instance.RollAwardSC;
+        rollAwardUI.ShowReward(onFinish);
+    }
+    
     //战斗失败
     public void FailToThisRoom()
     {

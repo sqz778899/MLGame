@@ -90,39 +90,6 @@ public enum UILockedState
     isSelected = 2
 }
 
-public class ElementState
-{
-    //元素均衡
-    public bool ELBalance;
-    public int ELBalenceLV;
-    //元素沸腾
-    public bool ELEbullitionWater;
-    public bool ELEbullitionWaterLV;
-    //元素精纯
-    public bool ELPureWater;
-    public bool ELPureWaterLV;
-}
-
-[Serializable]
-public class SupremeCharm
-{
-    public int ID;
-    public string name;
-    
-    public int damage;
-    public ElementalTypes elementalTypes;
-
-    public void GetSupremeCharmByID()
-    {
-        
-    }
-
-    public SupremeCharm(int _id)
-    {
-        ID = _id;
-    }
-}
-
 public enum SceneState
 {
     StartGame = 0,

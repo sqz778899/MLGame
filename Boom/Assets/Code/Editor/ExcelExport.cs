@@ -86,7 +86,7 @@ namespace Code.Editor
                 if (persistentTable.Rows[i][1].ToString() == "") continue;
                 curItem.ID = GetCellInt(persistentTable.Rows[i][0].ToString());
                 curItem.Name = persistentTable.Rows[i][1].ToString();
-                curItem.Rarity = (DropedRarity)GetCellInt(curTable.Rows[i][2].ToString());
+                curItem.Rarity = (DropedRarity)GetCellInt(persistentTable.Rows[i][2].ToString());
                 string typeStr = persistentTable.Rows[i][3].ToString();
                 curItem.Desc = persistentTable.Rows[i][4].ToString();
                 curItem.Price = GetCellInt(persistentTable.Rows[i][5].ToString());

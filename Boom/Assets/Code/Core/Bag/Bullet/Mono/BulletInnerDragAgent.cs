@@ -51,12 +51,14 @@ public class BulletInnerDragAgent : MonoBehaviour
     {
         if (UIManager.Instance.IsLockedClick) return;
         SpineHighLight();
+        TooltipsManager.Instance.Hide();
     }
 
     internal void OnMouseExit()
     {
         if (UIManager.Instance.IsLockedClick) return;
         SpineQuitHighLight();
+        TooltipsManager.Instance.Hide();
     }
     
     void SpineHighLight()

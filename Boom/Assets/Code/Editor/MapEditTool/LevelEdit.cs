@@ -163,6 +163,18 @@ public class LevelEdit
         }
         UnityEditorInternal.InternalEditorUtility.RepaintAllViews();
     }
+    
+    [TitleGroup("房间内敌人配置预览")]
+    [EnumToggleButtons, PropertyOrder(98)]
+    [OnValueChanged("OnGizmoEnemyStatsChanged")]
+    public OnOff 显示敌人血量信息 = OnOff.Off;
+
+    void OnGizmoEnemyStatsChanged()
+    {
+        EnemyStatsGizmoDrawer.SetEnabled(显示敌人血量信息 == OnOff.On);
+        UnityEditorInternal.InternalEditorUtility.RepaintAllViews();
+    }
+
     #endregion
     
     [PropertyOrder(98)]

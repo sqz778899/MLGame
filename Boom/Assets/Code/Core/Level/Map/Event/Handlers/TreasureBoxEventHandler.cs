@@ -20,6 +20,7 @@ public class TreasureBoxEventHandler : IMapEventHandler
         //Step3 开启协程依次展示掉落
         view.StartCoroutine(PlayDropsSequentially(view, rolledDrops));
         //Step4 回调下通用触发
+        data.IsTriggered = true;
         view.SetAsTriggered();
     }
     

@@ -89,7 +89,7 @@ public class Effect_ArrogantKingCrown : IItemEffect
 public class Effect_EchoingEdict : IItemEffect
 {
     public int Id => 403; //永响之谕 Echoing Edict
-    string cacheKey => $"EchoingEdict-{Id}";
+    string cacheKey => $"永响之谕-{Id}";
     public ItemTriggerTiming TriggerCash => ItemTriggerTiming.None;
     public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnAlltimes;
     List<BulletData> bullets => GM.Root.InventoryMgr._BulletInvData.EquipBullets;
@@ -98,7 +98,7 @@ public class Effect_EchoingEdict : IItemEffect
 
     public void Apply(BattleContext ctx)
     {
-        foreach (BulletData each in ctx.AllBullets)
+        foreach (BulletData each in bullets)
         {
             if (each.IsLastBullet)
                 each.ModifierDamageAdditionDict[cacheKey] = 5;
@@ -113,7 +113,7 @@ public class Effect_EchoingEdict : IItemEffect
     {
         foreach (var each in bullets)
         {
-            each.ModifierDamageAdditionDict[cacheKey] = 0;
+            each.ModifierDamageAdditionDict.Remove(cacheKey);
             each.SyncFinalAttributes();
         }
     }

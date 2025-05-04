@@ -62,6 +62,8 @@ public class EternalCavans : MonoBehaviour
     [Header(("对话系统"))]
     public Dialogue DialogueSC;
     public DialogueFight DialogueFightSC;
+    [Header("奖励相关")]
+    public RollAward RollAwardSC;
     
     [Header("新手引导使用的资产")] 
     public Transform btnBag_Apos;

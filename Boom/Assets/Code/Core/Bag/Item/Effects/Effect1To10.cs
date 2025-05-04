@@ -98,13 +98,13 @@ public class Effect_GoldenKey : IItemEffect
         if (Random.value < 0.5f)
         {
             PlayerManager.Instance._PlayerData.ModifyCoins(4);
-            FloatingTextFactory.CreateWorldText("+4 Gold",pos,
+            FloatingTextFactory.CreateWorldText("胆小鬼的黄金钥匙 +4 硬币",pos,
                 FloatingTextType.MapHint, Color.yellow, 4f);
         }
         else
         {
             PlayerManager.Instance._PlayerData.ModifyCoins(-2);
-            FloatingTextFactory.CreateWorldText("-2 Gold",pos,
+            FloatingTextFactory.CreateWorldText("胆小鬼的黄金钥匙 -2 硬币",pos,
                 FloatingTextType.MapHint,  Color.red, 4f);
         }
     }

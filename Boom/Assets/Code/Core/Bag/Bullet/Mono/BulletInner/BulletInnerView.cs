@@ -9,12 +9,16 @@ public class BulletInnerView : MonoBehaviour
     BulletData _data; //绝对核心数据
     [Header("表现资产")] 
     public TextMeshPro txtDamage;
+    public TextMeshPro txtPiercing;
     public Renderer CurRenderer;
     public SkeletonAnimation Skeleton;
     public GameObject HitEffectPrefab;
     public SkeletonDataAsset HitSpfxAsset; // 子弹击中效果子弹Spine资产资产
     [Header("表现参数")] 
     public float AniScale = 1f;
+    Vector3 startTxtPos= new Vector3(-0.13f, 1.1f, 0);
+    Vector3 startOffsetPos= new Vector3(0.17f, 0, 0);
+    
     
     #region 数据和初始化等等
     void Start()
@@ -63,6 +67,8 @@ public class BulletInnerView : MonoBehaviour
         HitEffectPrefab = ResManager.instance.GetAssetCache<GameObject>(PathConfig.BulletSpfxTemplate);
         HitSpfxAsset = ResManager.instance.GetAssetCache<SkeletonDataAsset>(PathConfig.GetBulletSpfxPath(_data.ID));
         txtDamage.text = _data.FinalDamage.ToString();//实时变化
+        txtPiercing.text = _data.FinalPiercing.ToString();//实时变化
+        UpText();
     }
     
     public void HandleDisappear() => Destroy(gameObject);
@@ -83,11 +89,33 @@ public class BulletInnerView : MonoBehaviour
     //战场中操作子弹时候的TxtUI抬升下落相关
     public void UpText()
     {
-        Vector3 tmpPos = new Vector3(0,1.05f,0) + transform.position;
-        tmpPos.y += 0.4f;
-        txtDamage.transform.position = tmpPos;
+        SetTxtPos();
+        txtDamage.transform.position += new Vector3(0, 0.4f, 0);
+        txtPiercing.transform.position += new Vector3(0, 0.4f, 0);
     }
-    public void ReturnText() => txtDamage.transform.position = transform.position + new Vector3(0,1.05f,0);
+
+    void SetTxtPos()
+    {
+        Vector3 tmpDamagePos = Vector3.zero;
+        Vector3 tmpPiercingPos = Vector3.zero;
+        if (_data.FinalPiercing == 0)
+        {
+            tmpDamagePos = startTxtPos + transform.position;
+            txtPiercing.gameObject.SetActive(false);
+            txtDamage.transform.position = tmpDamagePos;
+        }
+        else
+        {
+            txtPiercing.gameObject.SetActive(true);
+            tmpDamagePos = startTxtPos + startOffsetPos + transform.position;
+            tmpPiercingPos = startTxtPos  - startOffsetPos + transform.position;
+            txtDamage.transform.position = tmpDamagePos;
+            txtPiercing.transform.position = tmpPiercingPos;
+        }
+        
+    }
+    public void ReturnText() => SetTxtPos();
+
     #endregion
 
     #region 攻击相关
@@ -102,6 +130,7 @@ public class BulletInnerView : MonoBehaviour
         StartCoroutine(FadeOut(aniTime));
         //......关闭伤害提示UI
         txtDamage.gameObject.SetActive(false);
+        txtPiercing.gameObject.SetActive(false);
     }
 
     IEnumerator FadeOut(float duration)

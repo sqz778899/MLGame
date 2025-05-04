@@ -61,7 +61,7 @@ public class Effect_BloodhoundRing : IItemEffect
         int lostHearts = GM.Root.PlayerMgr._PlayerData.LostHPs;
         firstBullet.ModifierDamageAdditionDict[cacheKey] = lostHearts;
         firstBullet.SyncFinalAttributes();
-        Debug.Log($"[溅血猎犬的指环] 首颗子弹伤害 +{lostHearts}");
+        //Debug.Log($"[溅血猎犬的指环] 首颗子弹伤害 +{lostHearts}");
     }
 
     public void RemoveEffect()
