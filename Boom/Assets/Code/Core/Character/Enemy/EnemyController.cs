@@ -45,7 +45,7 @@ public class EnemyController:IDamageable
     IEnumerator HitToIdle()
     {
         float hitTime = 0f;
-        AniUtility.PlayHit01(_view.Ani, ref hitTime);
+        AniUtility.PlayHit01(_view.Skeleton, ref hitTime);
         yield return new WaitForSeconds(hitTime);
         if (!_data.IsDead)
             _data.EState = EnemyState.live;

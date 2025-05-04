@@ -61,6 +61,7 @@ public enum EnemyState
 public struct Award
 {
     public int BaseScore;
+    public string RollPoolName;
     public int Coin;
     public List<int> SupremeCharms;
     public List<int> Items;
@@ -71,6 +72,7 @@ public struct Award
         Coin = _coin;
         SupremeCharms = _supremeCharms ?? new List<int>();
         Items = _items ?? new List<int>();
+        RollPoolName = "草怪掉落01";
     }
 }
 
@@ -79,6 +81,7 @@ public class EnemyConfigData
 {
     public int ID;
     public int HP;
+    public EnemyType _EnemyType;
     public ShieldConfigData ShieldConfig;
     public Award CurAward;
 }

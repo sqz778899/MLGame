@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using Spine.Unity;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class EnemyView : MonoBehaviour
 {
     [Header("Enemy自身资产")]
     public Sprite Portrait; //对话头像
-    public SkeletonAnimation Ani;
+    public SkeletonAnimation Skeleton;
     public HealthBar HealthBar;
     public Transform HitTextPos;
     public Color HitColor;
@@ -19,22 +21,29 @@ public class EnemyView : MonoBehaviour
     {
         Portrait = ResManager.instance.
             GetAssetCache<Sprite>(PathConfig.GetEnemyPortrait(data.ID));
-        var asset = ResManager.instance.GetAssetCache<SkeletonDataAsset>(
+        SkeletonDataAsset asset = ResManager.instance.GetAssetCache<SkeletonDataAsset>(
             PathConfig.GetEnemySkelentonDataPath(data.ID));
-        Ani.skeletonDataAsset = asset;
-        Ani.Initialize(true);
+        Skeleton.skeletonDataAsset = asset;
+        StartCoroutine(InitSkeleton());
         InitShields(data.Shields);
+    }
+    
+    IEnumerator InitSkeleton()
+    {
+        // 等待 1 帧，确保 Spine 所有依赖生命周期跑完
+        yield return null;
+        Skeleton.Initialize(true);
     }
 
     public void PlayIdle(bool isFullHP)
     {
         if (isFullHP)
-            AniUtility.PlayIdle(Ani);
+            AniUtility.PlayIdle(Skeleton);
         else
-            AniUtility.PlayIdle(Ani);
+            AniUtility.PlayIdle(Skeleton);
     }
 
-    public void PlayDead() => AniUtility.PlayDead01(Ani);
+    public void PlayDead() => AniUtility.PlayDead01(Skeleton);
 
     public void ShowHitText(int damage) => FloatingTextFactory.CreateWorldText(
         $"-{damage}",HitTextPos.position+Vector3.up*0.5f,FloatingTextType.Damage,HitColor,15f);

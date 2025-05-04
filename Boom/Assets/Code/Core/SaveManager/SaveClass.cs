@@ -57,6 +57,7 @@ public class SaveFileJson
     public int Score;                //分数
     public int Coins;                //硬币数量
     public int RoomKeys;             //钥匙数量
+    public int WallwalkSkillCount;    //穿墙术数量
     //局外数据
     public int MagicDust;//魔尘
     

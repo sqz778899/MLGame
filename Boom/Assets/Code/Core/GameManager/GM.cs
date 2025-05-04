@@ -5,8 +5,11 @@ using UnityEngine;
 public class GM: MonoBehaviour
 {
     public bool IsSkipStorylineMode;
+    [Header("需要依赖的资产")]
+    public QuestDatabaseOBJ questDatabase;
     
     public PlayerManager PlayerMgr { get; private set; }
+    public QuestManager QuestMgr { get; private set; }
     public InventoryManager InventoryMgr { get; private set; }
     public BattleManager BattleMgr{ get; private set; }
     public GlobalTicker GlobalTickerMgr { get; private set; }
@@ -27,6 +30,7 @@ public class GM: MonoBehaviour
             DontDestroyOnLoad(gameObject);
             // 添加核心管理器组件
             PlayerMgr = gameObject.AddComponent<PlayerManager>();
+            QuestMgr = gameObject.AddComponent<QuestManager>();
             InventoryMgr = gameObject.AddComponent<InventoryManager>();
             BattleMgr = gameObject.AddComponent<BattleManager>();
             GlobalTickerMgr = gameObject.AddComponent<GlobalTicker>();

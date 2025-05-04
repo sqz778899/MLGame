@@ -30,7 +30,7 @@ public class L3Step1Tutorial:TutorialStepBase
     {
         if ((_InventoryData.BagGems.Count + _InventoryData.EquipGems.Count) == 2 &&
             _BulletInvData.BagBulletSpawners[0].SpawnerCount + _BulletInvData.EquipBullets.Count == 2 &&
-            QuestManager.Instance.currentQuest.ID == 3)
+            GM.Root.QuestMgr.currentQuest.ID == 3)
         {
             GM.Root.GlobalTickerMgr.OnUpdate -= Update;
             BeginTutorial();

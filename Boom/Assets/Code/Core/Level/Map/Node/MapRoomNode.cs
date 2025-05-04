@@ -11,7 +11,7 @@ public class MapRoomNode : MonoBehaviour
     public bool IsStartRoom; //是否是起始房间
 
     [SerializeField]
-    private MapRoomState _state;
+    MapRoomState _state;
     public MapRoomState State
     {
         set
@@ -37,6 +37,10 @@ public class MapRoomNode : MonoBehaviour
     [Header("渲染相关")]
     public string SortingLayerName;
     Renderer[] _renderers;
+
+    [Header("隐藏房间")] 
+    public GameObject hideLeft;
+    public GameObject hideRight;
     
     //Room节点下全部资产信息
     public MapNodeController[] _resources; //全部的资源
@@ -68,7 +72,7 @@ public class MapRoomNode : MonoBehaviour
                 }
             }
         }
-
+        
         _arrows = arrows.ToArray();
         _resources = resources.ToArray();
         if (RoomFog)
@@ -77,7 +81,11 @@ public class MapRoomNode : MonoBehaviour
             RoomFog.material = _instanceFogMat;
         }
         IsFogUnLocked = false;
-        
+
+        if (hideLeft != null)
+            hideLeft.SetActive(false);
+        if (hideRight != null)
+            hideRight.SetActive(false);
         //2）设置渲染层级
         SetRenderLayer();
         

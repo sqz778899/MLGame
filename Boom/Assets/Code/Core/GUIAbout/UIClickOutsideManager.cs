@@ -39,6 +39,7 @@ public class UIClickOutsideManager : MonoBehaviour
     public static void Unregister(ICloseOnClickOutside target) => tracked.Remove(target);
 }
 
+//点击外部关闭的接口
 public interface ICloseOnClickOutside
 {
     void Show();

@@ -61,3 +61,12 @@ public enum BattleBuffType
     Addition = 0,
     ChangeType = 1,
 }
+
+//敌人分类
+public enum EnemyType
+{
+    None = 0,
+    Normal = 1,
+    Elite = 2,
+    Boss = 3,
+}

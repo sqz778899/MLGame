@@ -72,24 +72,9 @@ public class QuestManager : MonoBehaviour
         //3）加载固定的游戏场景，返回城镇
         MSceneManager.Instance.LoadScene(1);
     }
-
-    #region 单例的加载卸载
-    public static QuestManager Instance { get; private set; }
-    void OnDestroy()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
     
-    void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-            SceneManager.sceneLoaded += OnSceneLoaded;
-        }
-        else
-            Destroy(gameObject);
-    }
+    #region 数据加载卸载
+    public void InitData() => SceneManager.sceneLoaded += OnSceneLoaded;
+    void OnDestroy() => SceneManager.sceneLoaded -= OnSceneLoaded;
     #endregion
 }

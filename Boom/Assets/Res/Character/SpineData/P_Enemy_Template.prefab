@@ -265,7 +265,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 0
   MaxHP: 0
-  ShieldsHPs: 
+  ShieldsHPs:
+    ShieldsHPs: 
   CurAward:
     BaseScore: 0
     Coin: 0
@@ -284,7 +285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Portrait: {fileID: 0}
-  Ani: {fileID: 2008770084707223584}
+  Skeleton: {fileID: 2008770084707223584}
   HealthBar: {fileID: 3694549218633813643}
   HitTextPos: {fileID: 7240787214066684924}
   HitColor: {r: 0.6603774, g: 0, b: 0, a: 1}

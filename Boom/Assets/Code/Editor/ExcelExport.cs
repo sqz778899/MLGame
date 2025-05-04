@@ -226,7 +226,6 @@ namespace Code.Editor
             {
                 DataTable curTable = curTables.Tables[i];
                 DropTableJson curData = new DropTableJson();
-                if (curTable.Rows[i][1].ToString() == "") continue;
                 curData.PoolName = curTable.TableName;
                 for (int j = 1; j < curTable.Rows.Count; j++)
                 {

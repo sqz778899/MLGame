@@ -27,7 +27,7 @@ public class BulletMove : MonoBehaviour
     
     float CurDistance()
     {
-        return transform.position.x - PlayerManager.Instance.RoleInFightGO.transform.position.x;
+        return transform.position.x - GM.Root.PlayerMgr.RoleInFightGO.transform.position.x;
     }
     void Move()
     {

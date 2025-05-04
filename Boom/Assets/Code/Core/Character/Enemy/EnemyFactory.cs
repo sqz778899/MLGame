@@ -7,7 +7,7 @@ public static class EnemyFactory
         GameObject enmeyIns = ResManager.instance.CreatInstance(PathConfig.EnemyPB);
         Enemy enmeySC = enmeyIns.GetComponent<Enemy>();
         // 生成 Data
-        EnemyData data = new EnemyData(config.ID, config.HP, config.ShieldConfig);
+        EnemyData data = new EnemyData(config.ID, config.HP, config.ShieldConfig,config.CurAward);
         // Controller 绑定
         enmeySC.BindData(data);
         return enmeySC;

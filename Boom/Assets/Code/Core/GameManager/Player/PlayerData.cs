@@ -50,12 +50,25 @@ public class PlayerData: ScriptableObject
     public event Action<IBuffEffect> OnBuffAdded;
     public event Action<IBuffEffect> OnBuffRemoved;
     #endregion
+
+    #region 技能类
+    public int WallwalkSkillCount = 1; // 走墙技能
+    public bool CanUseWallwalkSkill => WallwalkSkillCount > 0;
+
+    public void UseWallwalkSkill()
+    {
+        if (CanUseWallwalkSkill)
+        {
+            WallwalkSkillCount--;
+            OnWallwalkSkillCountChange?.Invoke();
+        }
+    }
+    #endregion
     
     //talent
     public List<TalentData> Talents;  // 天赋数据
     //新手教程完成情况
     public TutorialCompletionStatus _TutorialCompletionStatus;
-    
     // 宝石伤害加成
     public List<TalentGemBonus> TalentGemBonuses = new();
 
@@ -67,6 +80,7 @@ public class PlayerData: ScriptableObject
     public event Action OnScoreChanged;
     public event Action OnMagicDustAdd;
     public event Action OnMagicDustSub;
+    public event Action OnWallwalkSkillCountChange;
     #endregion
 
     #region 对外的数据变动接口
@@ -115,6 +129,12 @@ public class PlayerData: ScriptableObject
             OnMagicDustAdd?.Invoke();
         else
             OnMagicDustSub?.Invoke();
+    }
+    
+    public void ModifyWallwalkSkillCount(int amount)
+    {
+        WallwalkSkillCount += amount;
+        OnWallwalkSkillCountChange?.Invoke();
     }
 
     //任务完成后，结算魔尘奖励
@@ -182,6 +202,7 @@ public class PlayerData: ScriptableObject
         Coins = 0;
         RoomKeys = 0;
         Score = 0;
+        WallwalkSkillCount = 1;
         //Buff类初始化
         PerfectDamageBonus = 100;  // 完美击杀加成
         OverflowDamageBonus = 2;   // 溢出伤害加成

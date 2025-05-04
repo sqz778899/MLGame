@@ -8,32 +8,37 @@ public class GMTools
 {
     [TitleGroup("魔尘&&金币&&钥匙&&血量")]
     [Button("魔尘添加",ButtonSizes.Large),PropertyOrder(0)]
-    [HorizontalGroup("魔尘&&金币添加",0.25f)]
+    [HorizontalGroup("魔尘&&金币添加",0.2f)]
     void AddDust()
     {
         PlayerManager.Instance._PlayerData.ModifyMagicDust(10000);
     }
-    
-    
     [Button("金币添加",ButtonSizes.Large),PropertyOrder(0)]
-    [HorizontalGroup("魔尘&&金币添加",0.25f)]
+    [HorizontalGroup("魔尘&&金币添加",0.2f)]
     void AddCoins()
     {
         PlayerManager.Instance._PlayerData.ModifyCoins(1000);
     }
     
     [Button("钥匙添加",ButtonSizes.Large),PropertyOrder(0)]
-    [HorizontalGroup("魔尘&&金币添加",0.25f)]
+    [HorizontalGroup("魔尘&&金币添加",0.2f)]
     void AddKeys()
     {
         PlayerManager.Instance._PlayerData.ModifyRoomKeys(1);
     }
     
     [Button("血量添加",ButtonSizes.Large),PropertyOrder(0)]
-    [HorizontalGroup("魔尘&&金币添加",0.25f)]
+    [HorizontalGroup("魔尘&&金币添加",0.2f)]
     void AddHPs()
     {
         PlayerManager.Instance._PlayerData.ModifyHP(1);
+    }
+    
+    [Button("穿墙术添加",ButtonSizes.Large),PropertyOrder(0)]
+    [HorizontalGroup("魔尘&&金币添加",0.2f)]
+    void AddSkillWalk()
+    {
+        PlayerManager.Instance._PlayerData.ModifyWallwalkSkillCount(1);
     }
     
     [Title("剧情解锁程度"),PropertyOrder(1)]

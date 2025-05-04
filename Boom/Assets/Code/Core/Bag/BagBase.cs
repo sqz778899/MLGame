@@ -226,7 +226,7 @@ public class GemData : ItemDataBase,ITooltipBuilder
     public void AddTalentGemBonus()
     {
         //同步一下天赋树加成
-        List<TalentGemBonus> TalentGemBonuses = PlayerManager.Instance._PlayerData.TalentGemBonuses;
+        List<TalentGemBonus> TalentGemBonuses = GM.Root.PlayerMgr._PlayerData.TalentGemBonuses;
         foreach (var bonus in TalentGemBonuses)
         {
             if (bonus.GemID == ID)

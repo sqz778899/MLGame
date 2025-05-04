@@ -13,53 +13,54 @@ public static class SaveManager
         saveFile = JsonConvert.DeserializeObject<SaveFileJson>(SaveFileJsonString);
         
         #region Character
-        PlayerManager.Instance._PlayerData.MaxHP = saveFile.MaxHP;
-        PlayerManager.Instance._PlayerData.HP = saveFile.HP;
-        PlayerManager.Instance._PlayerData.LostHPs = saveFile.LostHPs;
-        PlayerManager.Instance._PlayerData.Score = saveFile.Score;
-        PlayerManager.Instance._PlayerData.Coins = saveFile.Coins;
-        PlayerManager.Instance._PlayerData.RoomKeys = saveFile.RoomKeys;
-        PlayerManager.Instance._PlayerData.MagicDust = saveFile.MagicDust;
+        GM.Root.PlayerMgr._PlayerData.MaxHP = saveFile.MaxHP;
+        GM.Root.PlayerMgr._PlayerData.HP = saveFile.HP;
+        GM.Root.PlayerMgr._PlayerData.LostHPs = saveFile.LostHPs;
+        GM.Root.PlayerMgr._PlayerData.Score = saveFile.Score;
+        GM.Root.PlayerMgr._PlayerData.Coins = saveFile.Coins;
+        GM.Root.PlayerMgr._PlayerData.RoomKeys = saveFile.RoomKeys;
+        GM.Root.PlayerMgr._PlayerData.MagicDust = saveFile.MagicDust;
+        GM.Root.PlayerMgr._PlayerData.WallwalkSkillCount = saveFile.WallwalkSkillCount;
         
-        InventoryManager.Instance._InventoryData.ClearData();
+        GM.Root.InventoryMgr._InventoryData.ClearData();
         //读取Item
         for (int i = 0; i < saveFile.UserItems.Count; i++)
         {
             ItemData curItem = LoadItemData(saveFile.UserItems[i]);
             if (curItem.CurSlotController.SlotType == SlotType.ItemBagSlot)
-                InventoryManager.Instance._InventoryData.AddItemToBag(curItem);
+                GM.Root.InventoryMgr._InventoryData.AddItemToBag(curItem);
             if (curItem.CurSlotController.SlotType == SlotType.ItemEquipSlot)
-                InventoryManager.Instance._InventoryData.EquipItem(curItem);
+                GM.Root.InventoryMgr._InventoryData.EquipItem(curItem);
         }
         //读取Gem
         for (int i = 0; i < saveFile.UserGems.Count; i++)
         {
             GemData curGem = LoadGemData(saveFile.UserGems[i]);
             if (curGem.CurSlotController.SlotType == SlotType.GemBagSlot)
-                InventoryManager.Instance._InventoryData.AddGemToBag(curGem);
+                GM.Root.InventoryMgr._InventoryData.AddGemToBag(curGem);
             if (curGem.CurSlotController.SlotType == SlotType.GemInlaySlot)
-                InventoryManager.Instance._InventoryData.EquipGem(curGem);
+                GM.Root.InventoryMgr._InventoryData.EquipGem(curGem);
         }
         
         //读取子弹槽状态
-        PlayerManager.Instance._PlayerData.CurBulletSlotLockedState = saveFile.UserBulletSlotLockedState;
+        GM.Root.PlayerMgr._PlayerData.CurBulletSlotLockedState = saveFile.UserBulletSlotLockedState;
 
-        List<BulletData> curSpawners = InventoryManager.Instance._BulletInvData.BagBulletSpawners;
+        List<BulletData> curSpawners = GM.Root.InventoryMgr._BulletInvData.BagBulletSpawners;
         curSpawners.Clear();
         curSpawners.AddRange(saveFile.UserBulletSpawner.Select(LoadBulletData));
-        List<BulletData> curBullets = InventoryManager.Instance._BulletInvData.EquipBullets;
+        List<BulletData> curBullets = GM.Root.InventoryMgr._BulletInvData.EquipBullets;
         curBullets.Clear();
         curBullets.AddRange(saveFile.UserCurBullets.Select(LoadBulletData));
         
-        InventoryManager.Instance.InitAllBagGO();//初始化背包数据
+        GM.Root.InventoryMgr.InitAllBagGO();//初始化背包数据
         //读取天赋信息
-        PlayerManager.Instance._PlayerData.Talents = saveFile.UserTalents;
+        GM.Root.PlayerMgr._PlayerData.Talents = saveFile.UserTalents;
         #endregion
 
         #region Quest
         List<QuestSaveData> UserQuests = saveFile.UserQuests;
-        List<Quest> designQuests = QuestManager.Instance.questDatabase.quests;
-        List<Quest> curQuests = PlayerManager.Instance._QuestData.Quests;
+        List<Quest> designQuests = GM.Root.QuestMgr.questDatabase.quests;
+        List<Quest> curQuests = GM.Root.PlayerMgr._QuestData.Quests;
         foreach (var eachSave in UserQuests)
         {
             bool isExist = false;
@@ -118,54 +119,55 @@ public static class SaveManager
         SaveFileJson saveFile = TrunkManager.Instance._saveFile;
         
         #region Character
-        saveFile.MaxHP = PlayerManager.Instance._PlayerData.MaxHP;
-        saveFile.HP = PlayerManager.Instance._PlayerData.HP;
-        saveFile.LostHPs = PlayerManager.Instance._PlayerData.LostHPs;
-        saveFile.Score = PlayerManager.Instance._PlayerData.Score;
-        saveFile.Coins = PlayerManager.Instance._PlayerData.Coins;
-        saveFile.RoomKeys = PlayerManager.Instance._PlayerData.RoomKeys;
-        saveFile.MagicDust = PlayerManager.Instance._PlayerData.MagicDust;
+        saveFile.MaxHP = GM.Root.PlayerMgr._PlayerData.MaxHP;
+        saveFile.HP = GM.Root.PlayerMgr._PlayerData.HP;
+        saveFile.LostHPs = GM.Root.PlayerMgr._PlayerData.LostHPs;
+        saveFile.Score = GM.Root.PlayerMgr._PlayerData.Score;
+        saveFile.Coins = GM.Root.PlayerMgr._PlayerData.Coins;
+        saveFile.RoomKeys = GM.Root.PlayerMgr._PlayerData.RoomKeys;
+        saveFile.MagicDust = GM.Root.PlayerMgr._PlayerData.MagicDust;
+        saveFile.WallwalkSkillCount = GM.Root.PlayerMgr._PlayerData.WallwalkSkillCount;
         
         saveFile.UserBulletSpawner.Clear();
-        saveFile.UserBulletSpawner.AddRange(InventoryManager.Instance._BulletInvData.
+        saveFile.UserBulletSpawner.AddRange(GM.Root.InventoryMgr._BulletInvData.
             BagBulletSpawners.Select(each =>each.ToSaveData() as BulletBaseSaveData));
         saveFile.UserCurBullets.Clear();
-        saveFile.UserCurBullets.AddRange(InventoryManager.Instance._BulletInvData.EquipBullets
+        saveFile.UserCurBullets.AddRange(GM.Root.InventoryMgr._BulletInvData.EquipBullets
             .Select(each =>each.ToSaveData() as BulletBaseSaveData));
         
         //存储Item数据信息
         saveFile.UserItems.Clear();
         List<ItemSaveData> UserItems = new List<ItemSaveData>();
-        foreach (var each in InventoryManager.Instance._InventoryData.BagItems.Concat(
-                     InventoryManager.Instance._InventoryData.EquipItems))
+        foreach (var each in GM.Root.InventoryMgr._InventoryData.BagItems.Concat(
+                     GM.Root.InventoryMgr._InventoryData.EquipItems))
             UserItems.Add(new ItemSaveData(each));
         saveFile.UserItems = UserItems;
         
         //存储Gem信息
         saveFile.UserGems.Clear();
         List<GemBaseSaveData> UserGems = new List<GemBaseSaveData>();
-        foreach (var each in InventoryManager.Instance._InventoryData.BagGems)
+        foreach (var each in GM.Root.InventoryMgr._InventoryData.BagGems)
             UserGems.Add(new GemBaseSaveData(each));
-        foreach (var each in InventoryManager.Instance._InventoryData.EquipGems)
+        foreach (var each in GM.Root.InventoryMgr._InventoryData.EquipGems)
             UserGems.Add(new GemBaseSaveData(each));
         
         saveFile.UserGems = UserGems;
         
         //存子弹槽状态信息
-        saveFile.UserBulletSlotLockedState = PlayerManager.Instance._PlayerData.CurBulletSlotLockedState;
+        saveFile.UserBulletSlotLockedState = GM.Root.PlayerMgr._PlayerData.CurBulletSlotLockedState;
         //存天赋信息状态
-        saveFile.UserTalents = PlayerManager.Instance._PlayerData.Talents;
+        saveFile.UserTalents = GM.Root.PlayerMgr._PlayerData.Talents;
         #endregion
         
         #region 任务剧情新手教程等
         List<QuestSaveData> UserQuests = new List<QuestSaveData>();
-        PlayerManager.Instance._QuestData.Quests.ForEach(each => {UserQuests.Add(new QuestSaveData(each)); });
+        GM.Root.PlayerMgr._QuestData.Quests.ForEach(each => {UserQuests.Add(new QuestSaveData(each)); });
         saveFile.UserQuests = UserQuests;
-        saveFile.UserMainStoryProgress = PlayerManager.Instance._QuestData.MainStoryProgress;
+        saveFile.UserMainStoryProgress = GM.Root.PlayerMgr._QuestData.MainStoryProgress;
         //存新手教程完成情况
-        saveFile.UserTutorial = PlayerManager.Instance._PlayerData._TutorialCompletionStatus;
+        saveFile.UserTutorial = GM.Root.PlayerMgr._PlayerData._TutorialCompletionStatus;
         //存储剧情节点状态
-        saveFile.UserStorylineNodesState = StorylineSystem.Instance.SaveStorylineData();
+        saveFile.UserStorylineNodesState = GM.Root.StorylineSys.SaveStorylineData();
         #endregion
         
         string content01 = JsonConvert.SerializeObject(saveFile,(Formatting) Formatting.Indented);

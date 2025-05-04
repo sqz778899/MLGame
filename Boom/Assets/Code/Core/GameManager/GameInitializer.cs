@@ -25,7 +25,10 @@ public class GameInitializer:MonoBehaviour
         BulletInnerSlotView[] bulletInnerViews = EternalCavans.Instance.
             Bag.GetComponentsInChildren<BulletInnerSlotView>(true);
         GM.Root.InventoryMgr.InitStep2(bulletViews,bulletInnerViews);
-        //4) 读档
+        //4)初始化任务管理器
+        GM.Root.QuestMgr.questDatabase = GM.Root.questDatabase;
+        GM.Root.QuestMgr.InitData();
+        //5) 读档
         SaveManager.LoadSaveFile();
         
         //5)初始化各种静态类需要的配置

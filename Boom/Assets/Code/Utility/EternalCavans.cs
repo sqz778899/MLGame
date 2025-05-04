@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class EternalCavans : MonoBehaviour
 {
@@ -16,7 +17,6 @@ public class EternalCavans : MonoBehaviour
     public GameObject BagRoot;
     public GameObject BagRootMini;
     public GameObject BagButtonGO;
-    public GameObject BagButtonReturnGO;
 
     public GameObject GemRoot;
     public GameObject GemRootInner;
@@ -89,6 +89,7 @@ public class EternalCavans : MonoBehaviour
     
     public SceneState CurSceneState { get; private set; }
     float _preCameraOrthographicSize;
+    bool _isBagOpen = false;
     public event Action OnOpenBag;
     public event Action OnCloseBag;
     public event Action OnFightContinue; //战报后面那个继续的按钮
@@ -169,19 +170,27 @@ public class EternalCavans : MonoBehaviour
     #endregion
     
     #region 开关背包
-    public void OpendBag()
+    public void OnOffBag()
+    {
+        if (TutorialCloseBagLock) return; //教程锁
+        if (UIManager.Instance.IsLockedClick) return;
+        if (_isBagOpen)
+            CloseBag();
+        else
+            OpendBag();
+    }
+    void OpendBag()
     {
         if(UIManager.Instance.IsLockedClick) return;
         BagRoot.SetActive(true);
-        BagButtonGO.SetActive(false);
-        BagButtonReturnGO.SetActive(true);
         TitleRoot.SetActive(true);
         _preCameraOrthographicSize = Camera.main.orthographicSize;
         Camera.main.orthographicSize = 5;
+        _isBagOpen = true;
         OnOpenBag?.Invoke();
     }
 
-    public void CloseBag()
+    void CloseBag()
     {
         if (TutorialCloseBagLock) return; //教程锁
         if(UIManager.Instance.IsLockedClick) return;
@@ -189,9 +198,8 @@ public class EternalCavans : MonoBehaviour
         BagRoot.SetActive(false);
         if(CurSceneState == SceneState.MainEnv)
             TitleRoot.SetActive(false);
-        BagButtonGO.SetActive(true);
-        BagButtonReturnGO.SetActive(false);
         Camera.main.orthographicSize = _preCameraOrthographicSize;
+        _isBagOpen = false;
         OnCloseBag?.Invoke();
     }
     
@@ -208,7 +216,7 @@ public class EternalCavans : MonoBehaviour
     public void Continue() => OnFightContinue?.Invoke();
     public void WinToNextRoom() => OnWinToNextRoom?.Invoke();
     public void FailToThisRoom() => OnFailToThisRoom?.Invoke();
-    public void GameOver() => QuestManager.Instance.FailQuest();
+    public void GameOver() => GM.Root.QuestMgr.FailQuest();
     
     public void ShowConquerTheLevelGUI()
     {
@@ -218,11 +226,11 @@ public class EternalCavans : MonoBehaviour
     }
     public void ReturnTown()
     {
-        QuestManager.Instance.CompleteQuest();
+        GM.Root.QuestMgr.CompleteQuest();
         ConquerTheLevel.SetActive(false);
     }
     
-    public void ReturnTownMidWay() => QuestManager.Instance.CompleteQuest(true);
+    public void ReturnTownMidWay() =>GM.Root.QuestMgr.CompleteQuest(true);
     #endregion
 
     #region Setting界面相关

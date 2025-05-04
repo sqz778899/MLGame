@@ -42,7 +42,7 @@ public class QuestMenu : MonoBehaviour
         UpdateProgressBar(curQuest.ExplorationPercent/100f);
         
         //4)添加按钮事件
-        btnQuest.onClick.AddListener(() => QuestManager.Instance.SelectQuest(questID));
+        btnQuest.onClick.AddListener(() => GM.Root.QuestMgr.SelectQuest(questID));
     }
     
     public void UpdateProgressBar(float percent)

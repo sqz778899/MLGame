@@ -117,6 +117,7 @@ public class TrunkManager: ScriptableObject
         _saveFile.Coins = 0;
         _saveFile.RoomKeys = 0;
         _saveFile.MagicDust = 0;
+        _saveFile.WallwalkSkillCount = 0;
         //_saveFile.UserStandbyBullet = newGameSD;
         //.................新手教程完成情况........................
         _saveFile.UserTutorial = new TutorialCompletionStatus();

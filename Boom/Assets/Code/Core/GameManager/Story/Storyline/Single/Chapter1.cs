@@ -29,7 +29,7 @@ public class Chapter1Step1: IStorylineNodeBuilder
     public void OnComplete()
     {
         dia.OnDialogueEnd -= OnComplete;
-        QuestManager.Instance.SelectQuest(1);
+        GM.Root.QuestMgr.SelectQuest(1);
         PlayerManager.Instance._QuestData.MainStoryProgress += 1;
         StorylineSystem.Instance.MarkNodeComplete(1);
     }

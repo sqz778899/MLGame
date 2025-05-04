@@ -82,7 +82,7 @@ public class LevelEdit
     }
 
     [PropertyOrder(97)]
-    [HorizontalGroup("怪物颜色", 0.5f)]
+    [HorizontalGroup("怪物颜色", 0.333f)]
     [Button(ButtonSizes.Large, Name = "精英怪")]
     void SetEliteEnemy()
     {
@@ -91,10 +91,15 @@ public class LevelEdit
         
         SpriteRenderer arrowRenderer = arrowGO.GetComponentInChildren<SpriteRenderer>();
         arrowRenderer.color = EliteEnemy;
+        
+        MapNodeDataConfigMono _config = arrowGO.GetComponent<MapNodeDataConfigMono>();
+        _config.RoomArrowConfig.BattleConfig._EnemyType = EnemyType.Elite;
+        _config.RoomArrowConfig.BattleConfig.CurAward.RollPoolName = "精英掉落01";
+        EditorUtility.SetDirty(arrowGO);
     }
     
     [PropertyOrder(97)]
-    [HorizontalGroup("怪物颜色",0.5f)]
+    [HorizontalGroup("怪物颜色",0.333f)]
     [Button(ButtonSizes.Large, Name = "Boss")]
     void SetBoss()
     {
@@ -103,6 +108,26 @@ public class LevelEdit
         
         SpriteRenderer arrowRenderer = arrowGO.GetComponentInChildren<SpriteRenderer>();
         arrowRenderer.color = Boss;
+        MapNodeDataConfigMono _config = arrowGO.GetComponent<MapNodeDataConfigMono>();
+        _config.RoomArrowConfig.BattleConfig._EnemyType = EnemyType.Boss;
+        _config.RoomArrowConfig.BattleConfig.CurAward.RollPoolName = "Boss掉落01";
+        EditorUtility.SetDirty(arrowGO);
+    }
+    
+    [PropertyOrder(97)]
+    [HorizontalGroup("怪物颜色",0.333f)]
+    [Button(ButtonSizes.Large, Name = "Normal")]
+    void SetNormal()
+    {
+        GameObject arrowGO = Selection.activeGameObject;
+        if (!arrowGO.name.StartsWith("Arrow")) return;
+        
+        SpriteRenderer arrowRenderer = arrowGO.GetComponentInChildren<SpriteRenderer>();
+        arrowRenderer.color = NormalEnemy;
+        MapNodeDataConfigMono _config = arrowGO.GetComponent<MapNodeDataConfigMono>();
+        _config.RoomArrowConfig.BattleConfig._EnemyType = EnemyType.Normal;
+        _config.RoomArrowConfig.BattleConfig.CurAward.RollPoolName = "草怪掉落01";
+        EditorUtility.SetDirty(arrowGO);
     }
 
     #region 编辑敌人配置相关

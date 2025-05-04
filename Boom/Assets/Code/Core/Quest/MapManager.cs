@@ -94,7 +94,6 @@ public class MapManager : MonoBehaviour
         if (UIManager.Instance.IsLockedClick) return;
         GetComponent<MapMouseControl>().UnLockMap();
         Camera.main.transform.position = _preCameraPos;
-        EternalCavans.Instance.CloseBag();
         EternalCavans.Instance.BagButtonGO.SetActive(true);
         FightSceneOff();
         MapSceneOn();
@@ -105,7 +104,6 @@ public class MapManager : MonoBehaviour
         if (UIManager.Instance.IsLockedClick) return;
         
         _preCameraPos = Camera.main.transform.position;
-        EternalCavans.Instance.CloseBag();
         EternalCavans.Instance.BagButtonGO.SetActive(false);
         PlayerManager.Instance.RoleInFightSC.ClearConnon();
         MapSceneOff();
@@ -178,6 +176,7 @@ public class MapManager : MonoBehaviour
 
     #region 外部调用的各种关于地图信息的接口
     public MapRoomNode GetMapRoomNode(int roomID) => _allMapRooms.FirstOrDefault(r => r.RoomID == roomID);
+    public MapRoomNode GetCurRoomNode() => _allMapRooms.FirstOrDefault(r => r.RoomID == CurMapSate.CurRoomID);
 
     #endregion
 

@@ -255,7 +255,7 @@ public class RoomArrowConfigData : MapEventConfigData
     public RoomArrowType ArrowType;
     public int TargetRoomID;
     public EnemyConfigData BattleConfig;
-
+    
     public override MapEventRuntimeData ToRuntimeData()
     {
         return new RoomArrowRuntimeData

@@ -28,7 +28,7 @@ public class L2Step1Tutorial:TutorialStepBase
 
     void Update()
     {
-        if (_InventoryData.BagGems.Count > 0 && QuestManager.Instance.currentQuest.ID == 2)
+        if (_InventoryData.BagGems.Count > 0 && GM.Root.QuestMgr.currentQuest.ID == 2)
         {
             GM.Root.GlobalTickerMgr.OnUpdate -= Update;
             BeginTutorial();
