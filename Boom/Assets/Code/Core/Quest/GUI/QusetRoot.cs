@@ -11,11 +11,18 @@ public class QusetRoot: MonoBehaviour
     
     public void InitAllQuests()
     {
-        List<Quest> quests = PlayerManager.Instance._QuestData.Quests;
+        List<Quest> quests = GM.Root.PlayerMgr._QuestData.Quests;
         for (int i = 0; i < quests.Count; i++)
         {
             GameObject go = Instantiate(QuestBarPrefab, transform);
-            go.GetComponent<QuestBar>().SetInfo(quests[i].ID, QuestMenuGO);
+            if (quests[i].ID == 50)
+            {
+                go.GetComponent<QuestBar>().SetInfo(quests[i].ID, QuestMenuGO,false);
+            }
+            else
+            {
+                go.GetComponent<QuestBar>().SetInfo(quests[i].ID, QuestMenuGO,true);
+            }
             Vector3 pos = go.transform.position;
             go.transform.position = new Vector3(pos.x, pos.y - i*Yoffset, pos.z);
         }

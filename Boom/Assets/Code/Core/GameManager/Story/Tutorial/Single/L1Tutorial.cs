@@ -83,7 +83,7 @@ public class L1Step1PickBullet : TutorialStepBase
     {
         Exit();
         controller.NextStep();
-        PlayerManager.Instance._PlayerData._TutorialCompletionStatus.L1Step1 = true;
+        GM.Root.PlayerMgr._PlayerData._TutorialCompletionStatus.L1Step1 = true;
     }
 
     public override void Exit() => EventManager.OnBulletPicked -= OnBulletPicked;
@@ -192,7 +192,7 @@ public class L1Step2EquipBullet : TutorialStepBase
     {
         Exit();
         controller.NextStep();
-        PlayerManager.Instance._PlayerData._TutorialCompletionStatus.L1Step2 = true;
+        GM.Root.PlayerMgr._PlayerData._TutorialCompletionStatus.L1Step2 = true;
     }
 
     public override void Exit() => EventManager.OnBulletEquipped -= OnBulletEquipped;
@@ -278,7 +278,7 @@ public class L1Step3Battle : TutorialStepBase
     {
         Exit();
         controller.NextStep();
-        PlayerManager.Instance._PlayerData._TutorialCompletionStatus.L1Step3 = true;
+        GM.Root.PlayerMgr._PlayerData._TutorialCompletionStatus.L1Step3 = true;
     }
 
     public override void Exit() => EventManager.OnFirstBattleEnd -= OnFirstBattleEnd;
@@ -328,7 +328,7 @@ public class L1Step4EquipGem : TutorialStepBase
         tutorialBG.enabled = true;
         UIManager.Instance.IsLockedClick = true;
         //2）找到需要开启的宝箱
-        _curBox = PlayerManager.Instance.RoleInMapSC.CurRoom.Treasures[0];
+        _curBox = GM.Root.PlayerMgr.RoleInMapSC.CurRoom.Treasures[0];
         _curBox._view.gameObject.AddComponent<ShaderHoleController>().radius = 0.06f;
         //3）计算一下引导箭头特效的坐标，赋予并显示
         RectTransform arrowRTrans = fxArrow.GetComponent<RectTransform>();
@@ -430,7 +430,7 @@ public class L1Step4EquipGem : TutorialStepBase
     {
         Exit();
         controller.NextStep();
-        PlayerManager.Instance._PlayerData._TutorialCompletionStatus.L1Step4 = true;
+        GM.Root.PlayerMgr._PlayerData._TutorialCompletionStatus.L1Step4 = true;
     }
 
     public override void Exit() => EventManager.OnGemEquipped -= OnGemEquipped;
@@ -518,7 +518,7 @@ public class L1Step5DragBullet : TutorialStepBase
     
     void OnDragged()
     {
-        TutorialCompletionStatus curStatus = PlayerManager.Instance._PlayerData._TutorialCompletionStatus;
+        TutorialCompletionStatus curStatus = GM.Root.PlayerMgr._PlayerData._TutorialCompletionStatus;
         curStatus.L1 = true;
         curStatus.L1Step5 = true;
         Exit();

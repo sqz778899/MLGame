@@ -116,7 +116,7 @@ public class FailState : IFightState
     public void Enter()
     {
         Debug.Log("进入失败状态");
-        PlayerManager.Instance._PlayerData.ModifyHP(-1);
+        GM.Root.PlayerMgr._PlayerData.ModifyHP(-1);
         DOVirtual.DelayedCall(3f, () => 
             { BattleManager.Instance.ShowWarReport(false); });
     }

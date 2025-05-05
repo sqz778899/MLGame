@@ -32,7 +32,7 @@ public class BasicGamblingEventHandler : IMapEventHandler
                 case "KeyChance":
                     view.ShowFloatingText("你找到了一把钥匙！");
                     PlayKeyReward(view.transform.position);
-                    PlayerManager.Instance._PlayerData.ModifyRoomKeys(1);
+                    GM.Root.PlayerMgr._PlayerData.ModifyRoomKeys(1);
                     break;
                 case "BuffChance":
                 case "DebuffChance":

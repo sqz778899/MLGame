@@ -29,28 +29,28 @@ public class TextSync : MonoBehaviour
         switch (valueType)
         {
             case ValueType.Coins:
-                PlayerManager.Instance._PlayerData.OnCoinsAdd -= CommonChange;
-                PlayerManager.Instance._PlayerData.OnCoinsAdd += CommonChange;
-                PlayerManager.Instance._PlayerData.OnCoinsSub -= CommonSub;
-                PlayerManager.Instance._PlayerData.OnCoinsSub += CommonSub;
-                _curValue = _targetValue = PlayerManager.Instance._PlayerData.Coins;
+                GM.Root.PlayerMgr._PlayerData.OnCoinsAdd -= CommonChange;
+                GM.Root.PlayerMgr._PlayerData.OnCoinsAdd += CommonChange;
+                GM.Root.PlayerMgr._PlayerData.OnCoinsSub -= CommonSub;
+                GM.Root.PlayerMgr._PlayerData.OnCoinsSub += CommonSub;
+                _curValue = _targetValue = GM.Root.PlayerMgr._PlayerData.Coins;
                 break;
             case ValueType.RoomKeys:
-                PlayerManager.Instance._PlayerData.OnRoomKeysChanged -= CommonChange;
-                PlayerManager.Instance._PlayerData.OnRoomKeysChanged += CommonChange;
-                _curValue = _targetValue = PlayerManager.Instance._PlayerData.RoomKeys;
+                GM.Root.PlayerMgr._PlayerData.OnRoomKeysChanged -= CommonChange;
+                GM.Root.PlayerMgr._PlayerData.OnRoomKeysChanged += CommonChange;
+                _curValue = _targetValue = GM.Root.PlayerMgr._PlayerData.RoomKeys;
                 break;
             case ValueType.Score:
-                PlayerManager.Instance._PlayerData.OnScoreChanged -= CommonChange;
-                PlayerManager.Instance._PlayerData.OnScoreChanged += CommonChange;
-                _curValue = _targetValue =  PlayerManager.Instance._PlayerData.Score;
+                GM.Root.PlayerMgr._PlayerData.OnScoreChanged -= CommonChange;
+                GM.Root.PlayerMgr._PlayerData.OnScoreChanged += CommonChange;
+                _curValue = _targetValue =  GM.Root.PlayerMgr._PlayerData.Score;
                 break;
             case ValueType.MagicDust:
-                PlayerManager.Instance._PlayerData.OnMagicDustAdd -= CommonChange;
-                PlayerManager.Instance._PlayerData.OnMagicDustAdd += CommonChange;
-                PlayerManager.Instance._PlayerData.OnMagicDustSub -= CommonSub;
-                PlayerManager.Instance._PlayerData.OnMagicDustSub += CommonSub;
-                _curValue = _targetValue = PlayerManager.Instance._PlayerData.MagicDust;
+                GM.Root.PlayerMgr._PlayerData.OnMagicDustAdd -= CommonChange;
+                GM.Root.PlayerMgr._PlayerData.OnMagicDustAdd += CommonChange;
+                GM.Root.PlayerMgr._PlayerData.OnMagicDustSub -= CommonSub;
+                GM.Root.PlayerMgr._PlayerData.OnMagicDustSub += CommonSub;
+                _curValue = _targetValue = GM.Root.PlayerMgr._PlayerData.MagicDust;
                 break;
         }
         _txt.text = _curValue.ToString();
@@ -63,16 +63,16 @@ public class TextSync : MonoBehaviour
         switch (valueType)
         {
             case ValueType.Coins:
-                _targetValue = PlayerManager.Instance._PlayerData.Coins;
+                _targetValue = GM.Root.PlayerMgr._PlayerData.Coins;
                 break;
             case ValueType.RoomKeys:
-                _targetValue = PlayerManager.Instance._PlayerData.RoomKeys;
+                _targetValue = GM.Root.PlayerMgr._PlayerData.RoomKeys;
                 break;
             case ValueType.Score:
-                _targetValue = PlayerManager.Instance._PlayerData.Score;
+                _targetValue = GM.Root.PlayerMgr._PlayerData.Score;
                 break;
             case ValueType.MagicDust:
-                _targetValue = PlayerManager.Instance._PlayerData.MagicDust;
+                _targetValue = GM.Root.PlayerMgr._PlayerData.MagicDust;
                 break;
         }
         
@@ -92,16 +92,16 @@ public class TextSync : MonoBehaviour
         switch (valueType)
         {
             case ValueType.Coins:
-                _targetValue = PlayerManager.Instance._PlayerData.Coins;
+                _targetValue = GM.Root.PlayerMgr._PlayerData.Coins;
                 break;
             case ValueType.RoomKeys:
-                _targetValue = PlayerManager.Instance._PlayerData.RoomKeys;
+                _targetValue = GM.Root.PlayerMgr._PlayerData.RoomKeys;
                 break;
             case ValueType.Score:
-                _targetValue = PlayerManager.Instance._PlayerData.Score;
+                _targetValue = GM.Root.PlayerMgr._PlayerData.Score;
                 break;
             case ValueType.MagicDust:
-                _targetValue = PlayerManager.Instance._PlayerData.MagicDust;
+                _targetValue = GM.Root.PlayerMgr._PlayerData.MagicDust;
                 break;
         }
         _curValue = _targetValue;
@@ -132,18 +132,18 @@ public class TextSync : MonoBehaviour
         switch (valueType)
         {
             case ValueType.Coins:
-                PlayerManager.Instance._PlayerData.OnCoinsAdd -= CommonChange;
-                PlayerManager.Instance._PlayerData.OnCoinsSub -= CommonSub;
+                GM.Root.PlayerMgr._PlayerData.OnCoinsAdd -= CommonChange;
+                GM.Root.PlayerMgr._PlayerData.OnCoinsSub -= CommonSub;
                 break;
             case ValueType.RoomKeys:
-                PlayerManager.Instance._PlayerData.OnRoomKeysChanged -= CommonChange;
+                GM.Root.PlayerMgr._PlayerData.OnRoomKeysChanged -= CommonChange;
                 break;
             case ValueType.Score:
-                PlayerManager.Instance._PlayerData.OnScoreChanged -= CommonChange;
+                GM.Root.PlayerMgr._PlayerData.OnScoreChanged -= CommonChange;
                 break;
             case ValueType.MagicDust:
-                PlayerManager.Instance._PlayerData.OnMagicDustAdd -= CommonChange;
-                PlayerManager.Instance._PlayerData.OnMagicDustSub -= CommonSub;
+                GM.Root.PlayerMgr._PlayerData.OnMagicDustAdd -= CommonChange;
+                GM.Root.PlayerMgr._PlayerData.OnMagicDustSub -= CommonSub;
                 break;
         }
     }

@@ -53,6 +53,7 @@ public static class SaveManager
         curBullets.AddRange(saveFile.UserCurBullets.Select(LoadBulletData));
         
         GM.Root.InventoryMgr.InitAllBagGO();//初始化背包数据
+        
         //读取天赋信息
         GM.Root.PlayerMgr._PlayerData.Talents = saveFile.UserTalents;
         #endregion
@@ -104,11 +105,11 @@ public static class SaveManager
             }
         }
         //读取剧情节点状态
-        StorylineSystem.Instance.StorylineSaveData = saveFile.UserStorylineNodesState;
+        GM.Root.StorylineSys.StorylineSaveData = saveFile.UserStorylineNodesState;
         //读取主线剧情推进状态
-        PlayerManager.Instance._QuestData.MainStoryProgress = saveFile.UserMainStoryProgress;
+        GM.Root.PlayerMgr._QuestData.MainStoryProgress = saveFile.UserMainStoryProgress;
         //读取新手教程完成情况
-        PlayerManager.Instance._PlayerData._TutorialCompletionStatus = saveFile.UserTutorial;
+        GM.Root.PlayerMgr._PlayerData._TutorialCompletionStatus = saveFile.UserTutorial;
         #endregion
         
         LoadUserConfig();
@@ -117,7 +118,6 @@ public static class SaveManager
     public static void SaveFile()
     {
         SaveFileJson saveFile = TrunkManager.Instance._saveFile;
-        
         #region Character
         saveFile.MaxHP = GM.Root.PlayerMgr._PlayerData.MaxHP;
         saveFile.HP = GM.Root.PlayerMgr._PlayerData.HP;

@@ -114,7 +114,7 @@ public class DesignTool
     [Button("重置子弹",ButtonSizes.Large)]
     void SetBullet()
     {
-        PlayerManager.Instance.RoleInFightGO.GetComponent<RoleInner>().InitData();
+        GM.Root.PlayerMgr.RoleInFightGO.GetComponent<RoleInner>().InitData();
     }
     
     [Button("敌人血量无限",ButtonSizes.Large)]
@@ -131,7 +131,7 @@ public class DesignTool
         if (InventoryManager.Instance._BulletInvData.EquipBullets.Count >= 5)
             InventoryManager.Instance._BulletInvData.EquipBullets.RemoveAt(0);
         //InventoryManager.Instance._BulletInvData.EquipBullet(new BulletData(bulletID,SlotManager.GetEmptySlot(SlotType.CurBulletSlot)));
-        PlayerManager.Instance.RoleInFightGO.GetComponent<RoleInner>().InitData();
+        GM.Root.PlayerMgr.RoleInFightGO.GetComponent<RoleInner>().InitData();
     }
     [Button("添加黏土子弹Lv1",ButtonSizes.Large)]
     [ButtonGroup("添加黏土子弹")]

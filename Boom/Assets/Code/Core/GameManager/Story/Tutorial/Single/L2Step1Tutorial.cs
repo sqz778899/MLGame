@@ -111,7 +111,7 @@ public class L2Step1Tutorial:TutorialStepBase
         fxDoubleClick.Stop();
         Exit();
         controller.NextStep();
-        TutorialCompletionStatus curStatus = PlayerManager.Instance._PlayerData._TutorialCompletionStatus;
+        TutorialCompletionStatus curStatus = GM.Root.PlayerMgr._PlayerData._TutorialCompletionStatus;
         curStatus.L2Step1 = true; //标记当前步骤完成
         curStatus.L2 = true;
     }

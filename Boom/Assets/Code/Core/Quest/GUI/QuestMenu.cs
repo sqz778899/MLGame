@@ -23,7 +23,7 @@ public class QuestMenu : MonoBehaviour
     public void SetInfo(int questID)
     {
         QuestID = questID;
-        Quest curQuest = PlayerManager.Instance._QuestData.GetQuestByID(questID);
+        Quest curQuest = GM.Root.PlayerMgr._QuestData.GetQuestByID(questID);
         //1)同步任务信息
         txtQuestName.text = curQuest.Name;
         txtQuesDescription.text = curQuest.Description;

@@ -222,14 +222,8 @@ public class InventoryManager : MonoBehaviour
     void InitSpawners()
     {
         //..............Clear Old Data..................
-        GameObject spawnerSlotRoot = EternalCavans.Instance.SpawnerSlotRoot;
-        GameObject SpawnerSlotRootMini = EternalCavans.Instance.SpawnerSlotRootMini;
-        BulletSpawner[] oldSpawner = spawnerSlotRoot.GetComponentsInChildren<BulletSpawner>(true);
-        for (int i = oldSpawner.Length - 1; i >= 0; i--)
-            Destroy(oldSpawner[i].gameObject);
-        BulletSpawner[] oldSpawnerMini = SpawnerSlotRootMini.GetComponentsInChildren<BulletSpawner>(true);
-        for (int i = oldSpawnerMini.Length - 1; i >= 0; i--)
-            Destroy(oldSpawnerMini[i].gameObject);
+        SlotManager.ClearSlot(SlotType.SpawnnerSlot);
+        SlotManager.ClearSlot(SlotType.SpawnnerSlotInner);
         //..............Instance New Data..................
         ISlotController[] slots = SlotManager.GetAllSlotController(SlotType.SpawnnerSlot);
         ISlotController[] slotMinis = SlotManager.GetAllSlotController(SlotType.SpawnnerSlotInner);

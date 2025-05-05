@@ -109,7 +109,7 @@ public class TrunkManager: ScriptableObject
         _saveFile.UserGems = new List<GemBaseSaveData>();
         //...................子弹槽状态..............................
         _saveFile.UserBulletSlotLockedState = new Dictionary<int, bool>
-        { {0, true},{1, true},{2,false},{3,false},{4,false} };
+        { {0, true},{1, true},{2,true},{3,true},{4,false} };
       
         _saveFile.UserCurBullets = new List<BulletBaseSaveData>();
         _saveFile.UserBulletSpawner = UserBulletSpawner;

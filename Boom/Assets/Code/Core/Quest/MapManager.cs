@@ -28,21 +28,13 @@ public class MapManager : MonoBehaviour
     
     Vector3 _preCameraPos;
 
-    public bool IsTest;//是否是测试模式
-
     void Awake()
     {
-        //todo 单独启动场景时候的初始化
-        if (IsTest)
-        {
-            TrunkManager.Instance.ForceRefresh();
-            UIManager.Instance.InitStartGame();
-        }
-        //todo ......................
-        BattleManager.Instance._MapManager = this;
+       
+        GM.Root.BattleMgr._MapManager = this;
         RoleInner curRoleInFight = MapFightRoot.GetComponentInChildren<RoleInner>(true);
-        PlayerManager.Instance.RoleInFightSC = curRoleInFight;
-        PlayerManager.Instance.RoleInFightGO = curRoleInFight.gameObject;
+        GM.Root.PlayerMgr.RoleInFightSC = curRoleInFight;
+        GM.Root.PlayerMgr.RoleInFightGO = curRoleInFight.gameObject;
         EternalCavans.Instance.InMapScene();
         EternalCavans.Instance.OnOpenBag += LockAllThings;
         EternalCavans.Instance.OnCloseBag += UnLockAllThings;
@@ -75,8 +67,8 @@ public class MapManager : MonoBehaviour
         currentMap = ResManager.instance.CreatInstance(PathConfig.MapPB(questID));
         currentMap.transform.SetParent(MapResRoot.transform,false);
         _mapController = currentMap.GetComponent<MapController>();
-        PlayerManager.Instance.RoleInMapGO = _mapController.Role;
-        PlayerManager.Instance.RoleInMapSC = _mapController.Role.GetComponent<RoleInMap>();
+        GM.Root.PlayerMgr.RoleInMapGO = _mapController.Role;
+        GM.Root.PlayerMgr.RoleInMapSC = _mapController.Role.GetComponent<RoleInMap>();
         
         //获取地图房间节点
         _allMapRooms = currentMap.GetComponentsInChildren<MapRoomNode>();
@@ -105,7 +97,7 @@ public class MapManager : MonoBehaviour
         
         _preCameraPos = Camera.main.transform.position;
         EternalCavans.Instance.BagButtonGO.SetActive(false);
-        PlayerManager.Instance.RoleInFightSC.ClearConnon();
+        GM.Root.PlayerMgr.RoleInFightSC.ClearConnon();
         MapSceneOff();
         FightSceneOn();
     }
@@ -223,7 +215,7 @@ public class MapManager : MonoBehaviour
     void SetRoomInfo(MapRoomNode roomNode,Action onFinish = null)
     {
         //设置角色&&摄像机位置
-        GameObject roleInMap = PlayerManager.Instance.RoleInMapGO;
+        GameObject roleInMap = GM.Root.PlayerMgr.RoleInMapGO;
         roleInMap.GetComponent<RoleInMap>().CurRoom = roomNode;
         roleInMap.transform.position = roomNode.RoleStartPos.position;
         Vector3 newCameraPos = new Vector3(roomNode.CameraStartPos.position.x,

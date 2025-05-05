@@ -82,9 +82,9 @@ public class Shop:MonoBehaviour,ICloseOnClickOutside
         //Cal gold
         if (!IsFirstOpen) //商店第一次打开免费
         {
-            int curGold = PlayerManager.Instance._PlayerData.Coins;
+            int curGold = GM.Root.PlayerMgr._PlayerData.Coins;
             if (curGold < ShopCost) return false;
-            PlayerManager.Instance._PlayerData.ModifyCoins(-ShopCost);
+            GM.Root.PlayerMgr._PlayerData.ModifyCoins(-ShopCost);
         }
         else
             IsFirstOpen = false;

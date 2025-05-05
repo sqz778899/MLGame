@@ -14,10 +14,12 @@ public class QuestBar : MonoBehaviour
     public GameObject Medal;
     public GameObject QuestMenuGO;
     QuestMenu QuestMenuSC;
+    public bool IsLocked = false;
 
-    public void SetInfo(int questID,GameObject questMenuGO)
+    public void SetInfo(int questID,GameObject questMenuGO,bool isLocked = false)
     {
-        Quest curQuest = PlayerManager.Instance._QuestData.GetQuestByID(questID);
+        IsLocked = isLocked;
+        Quest curQuest = GM.Root.PlayerMgr._QuestData.GetQuestByID(questID);
         txtQuestName.text = curQuest.Name;
         QuestID = questID;
         QuestMenuGO = questMenuGO;
@@ -40,6 +42,11 @@ public class QuestBar : MonoBehaviour
 
     void OpenMenu()
     {
+        if (IsLocked)
+        {
+            FloatingTextFactory.CreateUIText("任务暂时锁定", transform.localPosition, Color.white, 50f);
+            return;
+        }
         QuestMenuSC.SetInfo(QuestID);
         QuestMenuGO.SetActive(true);
     }

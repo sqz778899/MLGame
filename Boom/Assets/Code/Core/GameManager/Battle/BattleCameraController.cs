@@ -23,8 +23,8 @@ public class BattleCameraController
     
     public BattleCameraController()
     {
-        _battleLogic = BattleManager.Instance.battleLogic;
-        CurRole = PlayerManager.Instance.RoleInFightGO.GetComponent<RoleInner>();
+        _battleLogic = GM.Root.BattleMgr.battleLogic;
+        CurRole = GM.Root.PlayerMgr.RoleInFightGO.GetComponent<RoleInner>();
         _mainCamera.transform.position = new Vector3(2.5f,1,-10);
         _mainCamera.orthographicSize = 5;
         _battleLogic.IsBeginCameraMove = false;

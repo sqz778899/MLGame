@@ -41,7 +41,7 @@ public class TalentNode : MonoBehaviour
 #endif
         {
             // 正常运行时，从玩家数据中加载
-            _talentData = PlayerManager.Instance._PlayerData.GetTalent(ID);
+            _talentData = GM.Root.PlayerMgr._PlayerData.GetTalent(ID);
         }
         
         //_nameText.text = _talentData.Name + ": " +_talentData.ID;
@@ -76,7 +76,7 @@ public class TalentNode : MonoBehaviour
         if (_talentData.IsLearned) return;
         
         //3) 检查是否有足够的魔尘
-        if(!PlayerManager.Instance._PlayerData.CostMagicDust(_talentData.Price))
+        if(!GM.Root.PlayerMgr._PlayerData.CostMagicDust(_talentData.Price))
         {
             FloatingTextFactory.CreateUIText("魔尘不足",FloatingTextNode.transform.position,
                 new Color(0.85f, 0.85f, 0.85f, 1), 50f);
@@ -86,7 +86,7 @@ public class TalentNode : MonoBehaviour
         _talentData.IsLearned = true; // 学习
         UpdateState();
         OnLearned?.Invoke(ID); // 通知 Root
-        PlayerManager.Instance.LoadTalent();// 重新加载天赋数据
+        GM.Root.PlayerMgr.LoadTalent();// 重新加载天赋数据
     }
     
     public void UpdateState()

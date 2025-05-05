@@ -9,7 +9,10 @@ public class GameInitializer:MonoBehaviour
     void Awake() =>  Instance = this;
 
     public void InitGameData()
-    {
+    { 
+        //0)是否是测试关卡
+        GM.Root.QuestMgr.IsTestMode = GM.Root.IsTestMode;
+        GM.Root.QuestMgr.TestMapID = GM.Root.TestMapID;
         //1）初始化GUI相关的Manager数据
         GameObject.Find("CanvasQ01").GetComponent<EternalCavans>().InitData();
         EternalCavans.Instance.TooltipsManager.Init();
@@ -43,5 +46,8 @@ public class GameInitializer:MonoBehaviour
         DropTableService.LoadFromJson();
         //5)重置随机概率
         //ProbabilityService.Reset("WeaponRackLoot");
+        
+        //99)
+        UIManager.Instance.InitStartGame();
     }
 }

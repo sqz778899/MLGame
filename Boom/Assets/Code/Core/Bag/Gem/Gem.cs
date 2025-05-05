@@ -15,8 +15,8 @@ public class Gem: ItemBase,IItemInteractionBehaviour
     public override void BindData(ItemDataBase data)
     {
         Data = data as GemData;
-        PlayerManager.Instance.OnTalentLearned -= Data.AddTalentGemBonus;
-        PlayerManager.Instance.OnTalentLearned += Data.AddTalentGemBonus;
+        GM.Root.PlayerMgr.OnTalentLearned -= Data.AddTalentGemBonus;
+        GM.Root.PlayerMgr.OnTalentLearned += Data.AddTalentGemBonus;
         RefreshUI();
     }
 
@@ -26,11 +26,7 @@ public class Gem: ItemBase,IItemInteractionBehaviour
         // TODO: 设置稀有度边框颜色等
     }
 
-    void OnDestroy()
-    {
-        PlayerManager.Instance.OnTalentLearned -= Data.AddTalentGemBonus;
-    }
-
+    void OnDestroy() => GM.Root.PlayerMgr.OnTalentLearned -= Data.AddTalentGemBonus;
     #endregion
 
     #region 双击与右键逻辑

@@ -14,18 +14,18 @@ public class GUIFail : MonoBehaviour
     [Header("小心心")]
     public GameObject HertRoot;
     List<GameObject> Herts;
-    
+    PlayerData _playerData => GM.Root.PlayerMgr._PlayerData;
     public void SetHertAni()
     {
         Herts = new List<GameObject>();
         Herts.AddRange(HertRoot.transform.Cast<Transform>().Select(child => child.gameObject));
         
-        if (PlayerManager.Instance._PlayerData.HP == 0)//如果血量为0,不显示继续了。播完动画直接显示gameover
+        if (_playerData.HP == 0)//如果血量为0,不显示继续了。播完动画直接显示gameover
             ContinueButton.SetActive(false);
         
         //Should HP
-        int shouldHP = PlayerManager.Instance._PlayerData.HP + 1;
-        int maxHP = PlayerManager.Instance._PlayerData.MaxHP;
+        int shouldHP = _playerData.HP + 1;
+        int maxHP = _playerData.MaxHP;
         
         for (int i = maxHP - 1; i >= 0; i--)
         {
@@ -36,7 +36,7 @@ public class GUIFail : MonoBehaviour
         int needSubIndex = shouldHP - 1;
         CuteDisappear(Herts[needSubIndex].GetComponent<Image>());
         
-        if(PlayerManager.Instance._PlayerData.HP == 0)
+        if(_playerData.HP == 0)
             StartCoroutine(ShowGameOver());
     }
     

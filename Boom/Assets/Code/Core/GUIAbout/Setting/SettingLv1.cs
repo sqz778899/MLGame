@@ -2,6 +2,9 @@
 
 public class SettingLv1:MonoBehaviour,ICloseOnClickOutside
 {
+    [Header("ClickArea")]
+    public RectTransform ClickRoot;
+    
     public void Show()
     {
         gameObject.SetActive(true);
@@ -15,5 +18,5 @@ public class SettingLv1:MonoBehaviour,ICloseOnClickOutside
     }
     
     public void OnClickOutside() => Hide();
-    public RectTransform ClickArea => GetComponent<RectTransform>();
+    public RectTransform ClickArea => ClickRoot;
 }

@@ -43,7 +43,7 @@ public class CoinsPileEventHandler : IMapEventHandler
         CoinsPileRuntimeData coinsData = data.EventData as CoinsPileRuntimeData;
 
         int amount = Random.Range(coinsData.MinGold, coinsData.MaxGold + 1);
-        PlayerManager.Instance._PlayerData.ModifyCoins(amount);
+        GM.Root.PlayerMgr._PlayerData.ModifyCoins(amount);
         view.ShowFloatingText($"获得 {amount} 枚金币！");
         view.SetAsTriggered(amount); //把数量传回 View
     }
@@ -74,7 +74,7 @@ public class BulletEventHandler : IMapEventHandler
             BulletJson bulletDesignJson = TrunkManager.Instance.BulletDesignJsons
                 .FirstOrDefault(b => b.ID == runtime.BulletID) ?? new BulletJson();
             FloatingTextFactory.CreateWorldText($"获得 {bulletDesignJson.Name}",
-                GM.Root.PlayerMgr.RoleInMapGO.transform.position, FloatingTextType.MapHint,new Color(0.8f, 0.8f, 0.8f, 1), 3f);
+                default, FloatingTextType.MapHint,new Color(0.8f, 0.8f, 0.8f, 1), 3f);
 
             GameObject.Destroy(view.gameObject);
         }
@@ -100,10 +100,10 @@ public class RoomKeyEventHandler : IMapEventHandler
         effectManager.CreatEffect(para,null, () =>
         {
             FloatingTextFactory.CreateWorldText("获得一个钥匙！", 
-                view.transform.position + Vector3.up, FloatingTextType.MapHint,Color.yellow, 2f);
+                default, FloatingTextType.MapHint,Color.yellow, 2f);
         });
 
-        PlayerManager.Instance._PlayerData.ModifyRoomKeys(runtime.RoomKeysNum);
+        GM.Root.PlayerMgr._PlayerData.ModifyRoomKeys(runtime.RoomKeysNum);
         GameObject.Destroy(view.gameObject); // 直接移除地图物体
     }
 }
@@ -176,7 +176,7 @@ public class WigglingBoxHandler : IMapEventHandler
                 break;
             case "Loot":
                 view.ShowFloatingText("你捡到了一枚金币！");
-                PlayerManager.Instance._PlayerData.ModifyCoins(1);
+                GM.Root.PlayerMgr._PlayerData.ModifyCoins(1);
                 break;
         }
 

@@ -5372,6 +5372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df8ee96f2ade4cb7a877aec68e8c7efe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StorylineSaveData: []
 --- !u!4 &173059832
 Transform:
   m_ObjectHideFlags: 0
@@ -10678,7 +10679,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dc7158957454266a45da8dd48677eed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsSkipStorylineMode: 0
+  IsSkipStorylineMode: 1
+  IsTestMode: 0
+  TestMapID: 0
+  questDatabase: {fileID: 11400000, guid: b3afe3c0848720b4abc1239df04ae770, type: 2}
   cursorTexture: {fileID: 2800000, guid: 8fc5c96b67981e04782b297c1f74d9df, type: 3}
   hotspot: {x: 20, y: 0}
 --- !u!4 &535633426
@@ -16804,64 +16808,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!1 &1567720630
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1567720632}
-  - component: {fileID: 1567720631}
-  m_Layer: 0
-  m_Name: QuestManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1567720631
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1567720630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c02e7dbd0113f7d47acc6ba389f0490c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  questDatabase: {fileID: 11400000, guid: b3afe3c0848720b4abc1239df04ae770, type: 2}
-  currentQuest:
-    ID: 0
-    Name: 
-    Level: 0
-    Description: 
-    State: 0
-    IsCompleted: 0
-    DifficultyLevel: 0
-    TotalScore: 0
-    TotalLoopCount: 0
-    ExplorationPercent: 0
-  IsTestMode: 0
-  TestMapID: 0
---- !u!4 &1567720632
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1567720630}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.9733267, y: -2.6035004, z: 0.07122852}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1569430560
 GameObject:
   m_ObjectHideFlags: 0
@@ -27131,7 +27077,6 @@ SceneRoots:
   - {fileID: 38597907}
   - {fileID: 711175114}
   - {fileID: 535633426}
-  - {fileID: 1567720632}
   - {fileID: 1467555133}
   - {fileID: 173059832}
   - {fileID: 3477590402500192859}

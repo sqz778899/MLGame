@@ -87,7 +87,7 @@ public class EternalCavans : MonoBehaviour
     public RightClickMenuManager RightClickMenuManager;
     public EffectManager _EffectManager;
     
-    public SceneState CurSceneState { get; private set; }
+    SceneState CurSceneState { get; set; }
     float _preCameraOrthographicSize;
     bool _isBagOpen = false;
     public event Action OnOpenBag;

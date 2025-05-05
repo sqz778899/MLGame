@@ -392,12 +392,9 @@ public class LevelEdit
 
     void SetTestMode()
     {
-        GameObject MM = GameObject.Find("MapManager");
-        MM.GetComponent<MapManager>().IsTest = (关卡测试开关 == OnOff.On);
-        GameObject QuestManager = GameObject.Find("QuestManager(singleton)");
-        QuestManager.GetComponent<QuestManager>().IsTestMode = (关卡测试开关 == OnOff.On);
-        EditorUtility.SetDirty(MM);
-        EditorUtility.SetDirty(QuestManager);
+        GameObject GM = GameObject.Find("GM");
+        GM.GetComponent<GM>().IsTestMode = (关卡测试开关 == OnOff.On);
+        EditorUtility.SetDirty(GM);
     }
     #endregion
 }

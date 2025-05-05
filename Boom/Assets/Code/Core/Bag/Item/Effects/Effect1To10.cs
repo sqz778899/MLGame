@@ -97,13 +97,13 @@ public class Effect_GoldenKey : IItemEffect
         Vector3 pos = GM.Root.PlayerMgr.RoleInMapGO.transform.position + Vector3.up *2.8f;
         if (Random.value < 0.5f)
         {
-            PlayerManager.Instance._PlayerData.ModifyCoins(4);
+            GM.Root.PlayerMgr._PlayerData.ModifyCoins(4);
             FloatingTextFactory.CreateWorldText("胆小鬼的黄金钥匙 +4 硬币",pos,
                 FloatingTextType.MapHint, Color.yellow, 4f);
         }
         else
         {
-            PlayerManager.Instance._PlayerData.ModifyCoins(-2);
+            GM.Root.PlayerMgr._PlayerData.ModifyCoins(-2);
             FloatingTextFactory.CreateWorldText("胆小鬼的黄金钥匙 -2 硬币",pos,
                 FloatingTextType.MapHint,  Color.red, 4f);
         }

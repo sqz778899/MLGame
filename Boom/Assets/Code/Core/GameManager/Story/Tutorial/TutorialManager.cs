@@ -23,7 +23,7 @@ public class TutorialManager : MonoBehaviour
         tutorialController = new TutorialController();
         
         //1）构造教学关卡1的引导序列
-        TutorialCompletionStatus curStatus = PlayerManager.Instance._PlayerData._TutorialCompletionStatus;
+        TutorialCompletionStatus curStatus = GM.Root.PlayerMgr._PlayerData._TutorialCompletionStatus;
         if (curStatus.L1 == false)
         {
             if (curStatus.L1Step1 == false)

@@ -41,44 +41,44 @@ public class UnlockBulletSlotStrategy : ITalentUnlockStrategy
 public class CarryGemTalentStrategy : ITalentUnlockStrategy
 {
     public void Learn(TalentJson talent) =>
-        InventoryManager.Instance.AddGemToBag(talent.EffectID);
+        GM.Root.InventoryMgr.AddGemToBag(talent.EffectID);
 }
 // 携带子弹
 public class CarryBulletTalentStrategy : ITalentUnlockStrategy
 {
     public void Learn(TalentJson talent)=>
-        InventoryManager.Instance._BulletInvData.AddSpawner(talent.EffectID);
+        GM.Root.InventoryMgr._BulletInvData.AddSpawner(talent.EffectID);
 }
 // 携带钥匙
 public class CarryRoomKeyTalentStrategy : ITalentUnlockStrategy
 {
     public void Learn(TalentJson talent) => 
-        PlayerManager.Instance._PlayerData.ModifyRoomKeys(talent.EffectValue);
+        GM.Root.PlayerMgr._PlayerData.ModifyRoomKeys(talent.EffectValue);
 }
 // 宝石加成
 public class AddGemBonusStrategy : ITalentUnlockStrategy
 {
     public void Learn(TalentJson talent) =>
-        PlayerManager.Instance._PlayerData.TalentGemBonuses
+        GM.Root.PlayerMgr._PlayerData.TalentGemBonuses
             .Add(new TalentGemBonus(talent.EffectID, talent.EffectValue));
 }
 //局内资源加成
 public class ResBonusStrategy : ITalentUnlockStrategy
 {
     public void Learn(TalentJson talent) =>
-        PlayerManager.Instance._PlayerData.CoinAdd += talent.EffectValue;
+        GM.Root.PlayerMgr._PlayerData.CoinAdd += talent.EffectValue;
 }
 //分数转魔尘能力
 public class ScoreToDustBonusStrategy : ITalentUnlockStrategy
 {
     public void Learn(TalentJson talent) =>
-        PlayerManager.Instance._PlayerData.ScoreToDustRate += (float)talent.EffectValue/100;
+        GM.Root.PlayerMgr._PlayerData.ScoreToDustRate += (float)talent.EffectValue/100;
 }
 //分数转魔尘能力
 public class CoinToDustBonusStrategy : ITalentUnlockStrategy
 {
     public void Learn(TalentJson talent) =>
-        PlayerManager.Instance._PlayerData.CoinToDustRate += talent.EffectValue;
+        GM.Root.PlayerMgr._PlayerData.CoinToDustRate += talent.EffectValue;
 }
 // 子弹资源加成
 public class BulletResBonusStrategy : ITalentUnlockStrategy

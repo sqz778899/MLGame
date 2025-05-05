@@ -17,7 +17,7 @@ public class Chapter1Step1: IStorylineNodeBuilder
     }
 
     public bool Condition() =>
-        PlayerManager.Instance._QuestData.MainStoryProgress == 0 &&
+        GM.Root.PlayerMgr._QuestData.MainStoryProgress == 0 &&
         SceneManager.GetActiveScene().name == "1.MainEnv";
     
     public void OnStart()
@@ -30,7 +30,7 @@ public class Chapter1Step1: IStorylineNodeBuilder
     {
         dia.OnDialogueEnd -= OnComplete;
         GM.Root.QuestMgr.SelectQuest(1);
-        PlayerManager.Instance._QuestData.MainStoryProgress += 1;
+        GM.Root.PlayerMgr._QuestData.MainStoryProgress += 1;
         StorylineSystem.Instance.MarkNodeComplete(1);
     }
 }
@@ -53,7 +53,7 @@ public class Chapter1Step2: IStorylineNodeBuilder
     }
 
     public bool Condition() =>
-        PlayerManager.Instance._QuestData.MainStoryProgress == 1 &&
+        GM.Root.PlayerMgr._QuestData.MainStoryProgress == 1 &&
         SceneManager.GetActiveScene().name == "1.MainEnv";
     
     public void OnStart()
@@ -132,7 +132,7 @@ public class Chapter1Step2: IStorylineNodeBuilder
     
     public void OnComplete()
     {
-        PlayerManager.Instance._QuestData.MainStoryProgress += 1;
+        GM.Root.PlayerMgr._QuestData.MainStoryProgress += 1;
         StorylineSystem.Instance.MarkNodeComplete(2);
     }
 }
@@ -167,7 +167,7 @@ public class Chapter1Step3: IStorylineNodeBuilder
     #endregion
 
     public bool Condition() =>
-        PlayerManager.Instance._QuestData.MainStoryProgress == 2 &&
+        GM.Root.PlayerMgr._QuestData.MainStoryProgress == 2 &&
         SceneManager.GetActiveScene().name == "1.MainEnv";
     
     public void OnStart()
@@ -221,7 +221,7 @@ public class Chapter1Step3: IStorylineNodeBuilder
     
     public void OnComplete()
     {
-        PlayerManager.Instance._QuestData.MainStoryProgress += 1;
+        GM.Root.PlayerMgr._QuestData.MainStoryProgress += 1;
         StorylineSystem.Instance.MarkNodeComplete(3);
     }
 }

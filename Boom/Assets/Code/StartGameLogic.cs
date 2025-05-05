@@ -14,6 +14,7 @@ public class StartGameLogic : KeyBoardBase
     public void NewGame()
     {
         TrunkManager.Instance.SetSaveFileTemplate();
+        SaveManager.LoadSaveFile();
         MSceneManager.Instance.LoadScene(1);
     }
     

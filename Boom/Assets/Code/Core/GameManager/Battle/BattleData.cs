@@ -30,7 +30,7 @@ public class BattleData: ScriptableObject
         GM.Root.InventoryMgr._BulletInvData.OnBulletsChanged +=
             BattleTempBuffMgr.ApplyAll;//子弹数据变化时，应用所有临时buff
         CurLevel = LevelManager.LoadLevel(_levelID);
-        CurRole = PlayerManager.Instance.RoleInFightSC;
+        CurRole = GM.Root.PlayerMgr.RoleInFightSC;
         GM.Root.InventoryMgr.CreateAllBulletToFight();//初始化局内子弹
         CurRole.InitData(CurLevel);//初始化角色数据
         CurLevel.SetEnemy(_enemyConfig);//初始化敌人属性

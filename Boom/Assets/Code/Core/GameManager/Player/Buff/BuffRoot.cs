@@ -10,23 +10,20 @@ public class BuffRoot : MonoBehaviour
     public Vector2 StartPos;
     public float IconSpacing = 100f;
 
-    private readonly List<BuffIcon> activeIcons = new();
-
+    readonly List<BuffIcon> activeIcons = new();
+    PlayerData _playerData => GM.Root.PlayerMgr._PlayerData;
     void Start() => Init();
 
     public void Init()
     {
-        PlayerManager.Instance._PlayerData.OnBuffAdded += AddBuffIcon;
-        PlayerManager.Instance._PlayerData.OnBuffRemoved += RemoveBuffIcon;
+        _playerData.OnBuffAdded += AddBuffIcon;
+        _playerData.OnBuffRemoved += RemoveBuffIcon;
     }
 
     void OnDestroy()
     {
-        if (PlayerManager.Instance != null && PlayerManager.Instance._PlayerData != null)
-        {
-            PlayerManager.Instance._PlayerData.OnBuffAdded -= AddBuffIcon;
-            PlayerManager.Instance._PlayerData.OnBuffRemoved -= RemoveBuffIcon;
-        }
+        _playerData.OnBuffAdded -= AddBuffIcon;
+        _playerData.OnBuffRemoved -= RemoveBuffIcon;
     }
 
     void AddBuffIcon(IBuffEffect buff)

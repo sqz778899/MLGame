@@ -17,11 +17,6 @@ public class OutsideLogic : MonoBehaviour
         for (int i = 0; i < BuildRoot.transform.childCount; i++)
             _builds.Add(BuildRoot.transform.GetChild(i).GetComponent<BuildBase>());
         
-        //todo 单独启动场景时候的初始化
-        TrunkManager.Instance.ForceRefresh();
-        UIManager.Instance.InitStartGame();
-        SaveManager.LoadSaveFile();
-        //todo ......................
         EternalCavans.Instance.InMainEnv();
         EternalCavans.Instance.OnOpenBag += LockedAllThings;
         EternalCavans.Instance.OnCloseBag += UnLockedAllThings;

@@ -80,7 +80,7 @@ public class BagRootMini : MonoBehaviour
         seq.Join(DOTween.To(() => Camera.main.orthographicSize, 
             x => Camera.main.orthographicSize = x, 
             TargetOrthographicSize, duration).SetEase(Ease.InOutQuad));
-        GameObject RoleGO = PlayerManager.Instance.RoleInMapGO;
+        GameObject RoleGO = GM.Root.PlayerMgr.RoleInMapGO;
         seq.Join(RoleGO.transform.DOMove(new Vector3(targetCameraPos.x,
             RoleGO.transform.position.y,RoleGO.transform.position.z), duration).SetEase(Ease.InOutQuad));
         

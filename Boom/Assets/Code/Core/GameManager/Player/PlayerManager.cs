@@ -17,6 +17,11 @@ public class PlayerManager : MonoBehaviour
         _PlayerData.ClearData();
     }
 
+    public void InitData()
+    {
+        _PlayerData = new PlayerData();
+        _QuestData = new QuestData();
+    }
     /// 读取天赋数据
     public void LoadTalent()
     {
@@ -29,24 +34,6 @@ public class PlayerManager : MonoBehaviour
         }
         OnTalentLearned?.Invoke();
     }
-    
-    #region 单例的加载卸载
-    public static PlayerManager Instance { get; private set; }
-    
-    void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-            // 确保只加载一次，使用单例缓存
-            _PlayerData = GameDataCache.PlayerData;
-            _QuestData = GameDataCache.QuestData;
-        }
-        else
-            Destroy(gameObject);
-    }
-    #endregion 
 }
 
 public static class GameDataCache

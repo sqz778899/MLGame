@@ -23,9 +23,9 @@ public class QuestManager : MonoBehaviour
         currentQuest = quest;
 
         //1)同步数据给PlayerManager
-        PlayerManager.Instance._QuestData.UpdateQuestState(questID, QuestState.InProgress);
+        GM.Root.PlayerMgr._QuestData.UpdateQuestState(questID, QuestState.InProgress);
         //2)读取天赋
-        PlayerManager.Instance.LoadTalent();
+        GM.Root.PlayerMgr.LoadTalent();
         SaveManager.SaveFile();
         //3)加载固定的游戏场景
         MSceneManager.Instance.LoadScene(2);
@@ -37,24 +37,21 @@ public class QuestManager : MonoBehaviour
         // 场景加载完成后通知MapManager加载对应Prefab
         var mapManager = FindObjectOfType<MapManager>();
         if (mapManager != null && currentQuest != null)
-        {
-            if (IsTestMode)
-                mapManager.InitializeMap(new Quest(TestMapID));
-            else
-                mapManager.InitializeMap(currentQuest);
-        }
+            mapManager.InitializeMap(currentQuest);
+        if (IsTestMode)
+            mapManager.InitializeMap(new Quest(TestMapID));
     }
 
     public void CompleteQuest(bool IsMidway = false)
     {
         //1)更新任务数据
         if (!IsMidway)//如果中途返回则不更新任务状态
-            PlayerManager.Instance._QuestData.UpdateQuestState(
+            GM.Root.PlayerMgr._QuestData.UpdateQuestState(
                 currentQuest.ID, QuestState.Completed);
         //2）清理战斗数据
-        BattleManager.Instance.battleData.ClearData();
-        PlayerManager.Instance.ClearPlayerData();
-        InventoryManager.Instance.ClearInventoryData();
+        GM.Root.BattleMgr.battleData.ClearData();
+        GM.Root.PlayerMgr.ClearPlayerData();
+        GM.Root.InventoryMgr.ClearInventoryData();
         
         SaveManager.SaveFile();
         //3）加载固定的游戏场景，返回城镇
@@ -64,10 +61,10 @@ public class QuestManager : MonoBehaviour
     public void FailQuest()
     {
         //1)更新任务数据
-        PlayerManager.Instance._QuestData.UpdateQuestState(
+        GM.Root.PlayerMgr._QuestData.UpdateQuestState(
             currentQuest.ID, QuestState.Failed);
         //2）清理战斗数据
-        BattleManager.Instance.battleData.ClearData();
+        GM.Root.BattleMgr.battleData.ClearData();
         SaveManager.SaveFile();
         //3）加载固定的游戏场景，返回城镇
         MSceneManager.Instance.LoadScene(1);

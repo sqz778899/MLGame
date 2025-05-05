@@ -47,7 +47,7 @@ public class BulletInnerController
     //追随角色
     void HandleFollowPlayer(float deltaTime)
     {
-        Vector3 playerPos = PlayerManager.Instance.RoleInFightGO.transform.position;
+        Vector3 playerPos = GM.Root.PlayerMgr.RoleInFightGO.transform.position;
         var dis = _view.GetHorizontalDistance(playerPos);
 
         if (Mathf.Abs(dis) > _followDistance)

@@ -24,15 +24,15 @@ public class QuestData : ScriptableObject
                 // 2)任务完成后，标记为已完成
                 quest.IsCompleted = true;
                 // 3)任务完成后，记录历史最高分数
-                int curScore = PlayerManager.Instance._PlayerData.Score;
+                int curScore = GM.Root.PlayerMgr._PlayerData.Score;
                 quest.TotalScore = Mathf.Max(curScore, quest.TotalScore);
                 // 4)任务完成后，记录完成次数
                 quest.TotalLoopCount += 1;
                 // 5)任务完成后，记录房间探索进度
-                int explorePercent = BattleManager.Instance._MapManager.CurMapSate.ExplorePercent;
+                int explorePercent = GM.Root.BattleMgr._MapManager.CurMapSate.ExplorePercent;
                 quest.ExplorationPercent = Mathf.Max(explorePercent, quest.ExplorationPercent);
                 // 6)任务完成后，结算魔尘奖励
-                PlayerManager.Instance._PlayerData.LevelRewards();
+                GM.Root.PlayerMgr._PlayerData.LevelRewards();
             }
         }
     }

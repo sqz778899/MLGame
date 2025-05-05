@@ -202,7 +202,7 @@ public class Trait_UnlimitedCoin : IItemSynergies
     public void OnClutterSearchResolved()
     {
         int coinGain = Random.Range(2, 11); // [2,10] inclusive
-        PlayerManager.Instance._PlayerData.ModifyCoins(coinGain);
+        GM.Root.PlayerMgr._PlayerData.ModifyCoins(coinGain);
     
         FloatingTextFactory.CreateWorldText($"无限金币术 +{coinGain}",
             default, FloatingTextType.MapHint, Color.yellow, 2.5f);

@@ -52,13 +52,12 @@ public class RoomArrowKeyGateStrategy : IArrowStrategy
     public void Execute(MapNodeData data, MapNodeView view)
     {
         var runtime = data.EventData as RoomArrowRuntimeData;
-        var player = PlayerManager.Instance._PlayerData;
+        var player = GM.Root.PlayerMgr._PlayerData;
 
         if (player.RoomKeys <= 0 && !data.IsTriggered)
         {
             view.ShowFloatingText("锁上了");
-            FloatingTextFactory.CreateWorldText("我需要一把钥匙", 
-                PlayerManager.Instance.RoleInMapGO.transform.position + Vector3.up,
+            FloatingTextFactory.CreateWorldText("我需要一把钥匙", default,
                 FloatingTextType.MapHint,Color.yellow, 2f);
             return;
         }

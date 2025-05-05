@@ -33,7 +33,7 @@ public class BulletInnerView : MonoBehaviour
     void SetInitialPosition()
     {
         if (_data == null) return; // 不做 null check 的话可以加个断言
-        RoleInner curRole = PlayerManager.Instance.RoleInFightSC;
+        RoleInner curRole = GM.Root.PlayerMgr.RoleInFightSC;
         Vector3 startPos = new Vector3(curRole.transform.position.x - 1, -0.64f, -0.15f);
         float offsetX = startPos.x - (_data.CurSlotController.SlotID - 1) * 1f;
         transform.position = new Vector3(offsetX, startPos.y, startPos.z + (_data.CurSlotController.SlotID - 1));

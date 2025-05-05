@@ -1,4 +1,5 @@
 using System.Linq;
+using Sirenix.Utilities;
 using UnityEngine;
 
 public static class SlotManager
@@ -8,6 +9,12 @@ public static class SlotManager
     {
         if (curSlot == null) return;
         curSlot.Unassign();
+    }
+    //清除一类Slot
+    public static void ClearSlot(SlotType slotType)
+    {
+        ISlotController[] slots = GetAllSlotController(slotType);
+        slots.ForEach(s => ClearSlot(s));
     }
     
     //获得当前Slot的GameObject

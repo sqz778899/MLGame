@@ -35,7 +35,7 @@ public class GUIWin : MonoBehaviour
         //1)计算分数
         AllScoreStruct allScore = ScoreCalculator.CalculateScore(CurAward.BaseScore);
         //2)同步到数据层
-        PlayerManager.Instance._PlayerData.ModifyScore(allScore.TotalScore);
+        GM.Root.PlayerMgr._PlayerData.ModifyScore(allScore.TotalScore);
         //3)显示UI
         ResetUI();
         ShowScores(allScore.BaseScore, allScore.OverflowBonusScore, allScore.PerfectBonusScore);

@@ -8,12 +8,12 @@ public static class ShopUtility
         RollBase curSCBase = SelGO.GetComponent<RollBase>();
         //............Cost Money.................
         int curCost = 5;
-        if (PlayerManager.Instance._PlayerData.Coins < curCost)
+        if (GM.Root.PlayerMgr._PlayerData.Coins < curCost)
         {
             Debug.Log("No Money");
             return;
         }
-        PlayerManager.Instance._PlayerData.ModifyCoins(-curCost);
+        GM.Root.PlayerMgr._PlayerData.ModifyCoins(-curCost);
         
         //............Deal Data.................
         switch (curSCBase.CurType)
@@ -31,7 +31,7 @@ public static class ShopUtility
                 break;
             case RollBulletMatType.Score:
                 RollScore curSCS = curSCBase as RollScore;
-                PlayerManager.Instance._PlayerData.Score +=  curSCS.Score;
+                GM.Root.PlayerMgr._PlayerData.Score +=  curSCS.Score;
                 break;
         }
     }
@@ -39,12 +39,12 @@ public static class ShopUtility
     public static bool SelOne(GemShopPreview SelGem)
     {
         //............Cost Money.................
-        if (PlayerManager.Instance._PlayerData.Coins < SelGem.Data.Price)
+        if (GM.Root.PlayerMgr._PlayerData.Coins < SelGem.Data.Price)
         {
             Debug.Log("No Money");
             return false;
         }
-        PlayerManager.Instance._PlayerData.ModifyCoins(-SelGem.Data.Price);
+        GM.Root.PlayerMgr._PlayerData.ModifyCoins(-SelGem.Data.Price);
         
         //...........Buy This One................
         InventoryManager.Instance.AddGemToBag(SelGem.Data.ID);

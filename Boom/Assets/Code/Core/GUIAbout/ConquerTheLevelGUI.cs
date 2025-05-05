@@ -66,8 +66,8 @@ public class ConquerTheLevelGUI : MonoBehaviour
 
     public void PlaySettlementAnimation()
     {
-        int unspentCoins = PlayerManager.Instance._PlayerData.Coins;
-        int totalScore = PlayerManager.Instance._PlayerData.Score;
+        int unspentCoins = GM.Root.PlayerMgr._PlayerData.Coins;
+        int totalScore = GM.Root.PlayerMgr._PlayerData.Score;
         int scoreDustAmount = ScoreCalculator.ScoreToDust(totalScore);
         int coinDustAmount = ScoreCalculator.CoinToDust(unspentCoins);
         int totalDustAmount = scoreDustAmount + coinDustAmount;

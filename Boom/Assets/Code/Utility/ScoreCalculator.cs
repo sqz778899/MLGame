@@ -27,10 +27,10 @@ public static class ScoreCalculator
         int perfectBonusScore = 0;
         int totalScore = 0;
 
-        int overFlowDamage = BattleManager.Instance.battleData.CurWarReport.OverFlowDamage;
+        int overFlowDamage = GM.Root.BattleMgr.battleData.CurWarReport.OverFlowDamage;
         
-        int overflowDamageBonus = PlayerManager.Instance._PlayerData.OverflowDamageBonus;
-        int perfectDamageBonus = PlayerManager.Instance._PlayerData.PerfectDamageBonus;
+        int overflowDamageBonus = GM.Root.PlayerMgr._PlayerData.OverflowDamageBonus;
+        int perfectDamageBonus = GM.Root.PlayerMgr._PlayerData.PerfectDamageBonus;
         
         if (overFlowDamage > 0)
         {
@@ -52,8 +52,8 @@ public static class ScoreCalculator
     }
     
     // 积分转魔尘
-    public static int ScoreToDust(int score) => (int)Math.Round(score * PlayerManager.Instance._PlayerData.ScoreToDustRate);
+    public static int ScoreToDust(int score) => (int)Math.Round(score * GM.Root.PlayerMgr._PlayerData.ScoreToDustRate);
     
     // 金币转魔尘
-    public static int CoinToDust(int coin) => (int)Math.Round(coin * PlayerManager.Instance._PlayerData.CoinToDustRate);
+    public static int CoinToDust(int coin) => (int)Math.Round(coin * GM.Root.PlayerMgr._PlayerData.CoinToDustRate);
 }

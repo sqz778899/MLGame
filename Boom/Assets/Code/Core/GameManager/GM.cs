@@ -5,6 +5,10 @@ using UnityEngine;
 public class GM: MonoBehaviour
 {
     public bool IsSkipStorylineMode;
+    [Header("测试模式")]
+    public bool IsTestMode;
+    public int TestMapID;
+    
     [Header("需要依赖的资产")]
     public QuestDatabaseOBJ questDatabase;
     
@@ -30,7 +34,9 @@ public class GM: MonoBehaviour
             DontDestroyOnLoad(gameObject);
             // 添加核心管理器组件
             PlayerMgr = gameObject.AddComponent<PlayerManager>();
+            PlayerMgr.InitData();
             QuestMgr = gameObject.AddComponent<QuestManager>();
+            
             InventoryMgr = gameObject.AddComponent<InventoryManager>();
             BattleMgr = gameObject.AddComponent<BattleManager>();
             GlobalTickerMgr = gameObject.AddComponent<GlobalTicker>();

@@ -92,7 +92,7 @@ public class TalentRoot : MonoBehaviour
 
         foreach (var unlockID in data.UnlockTalents)
         {
-            TalentData unlocked = PlayerManager.Instance._PlayerData.GetTalent(unlockID);
+            TalentData unlocked = GM.Root.PlayerMgr._PlayerData.GetTalent(unlockID);
             if (unlocked == null) continue;
             unlocked.IsLocked = false;
 
