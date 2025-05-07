@@ -13,6 +13,7 @@ public class InventoryData: ScriptableObject
     // 已装备的道具和宝石
     public List<ItemData> EquipItems = new();
     public List<GemData> EquipGems = new();
+    public List<MiracleOddityData> EquipMiracleOddities = new();
 
     public void ClearData()
     {
@@ -20,6 +21,8 @@ public class InventoryData: ScriptableObject
         BagGems.Clear();
         EquipItems.Clear();
         EquipGems.Clear();
+        EquipMiracleOddities.Clear();
+        OnStructureChanged?.Invoke();
     }
 
     #region 宝石操作
@@ -53,21 +56,26 @@ public class InventoryData: ScriptableObject
     }
 
     public void RemoveItemToBag(ItemData itemData) => BagItems.Remove(itemData);
-    public void EquipItem(ItemData item)
-    {
-        if (BagItems.Contains(item))
-            BagItems.Remove(item);
-        EquipItems.Add(item);
-        OnStructureChanged?.Invoke();
-    }
+    #endregion
 
-    public void UnEquipItem(ItemData item)
+    #region 奇迹物件操作
+    public void EquipMiracleOddity(int id)
     {
-        EquipItems.Remove(item);
+        MiracleOddityData data = new MiracleOddityData(id);
+        EquipMiracleOddities.Add(data);
         OnStructureChanged?.Invoke();
     }
     
-    /// 查找背包内的可堆叠道具
-    public ItemData FindStackableItem(int id) =>  BagItems.FirstOrDefault(item => item.ID == id && item.IsStackable);
+    public void UnEquipMiracleOddity(MiracleOddityData _data)
+    {
+        EquipMiracleOddities.Remove(_data);
+        OnStructureChanged?.Invoke();
+    }
+
+    public void ClearMiracleOddity()
+    {
+        EquipMiracleOddities.Clear();
+        OnStructureChanged?.Invoke();
+    }
     #endregion
 }

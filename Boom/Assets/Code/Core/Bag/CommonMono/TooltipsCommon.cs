@@ -37,6 +37,7 @@ public enum ToolTipsType
     Gem = 3,
     Buff = 4,
     Trait = 5,
+    MiracleOddity = 6,
 }
 
 public struct ToolTipsAttriSingleInfo

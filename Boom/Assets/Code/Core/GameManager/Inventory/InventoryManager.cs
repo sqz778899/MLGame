@@ -7,28 +7,13 @@ public class InventoryManager : MonoBehaviour
 {
     public InventoryData _InventoryData;
     public BulletInvData _BulletInvData;
-    public ItemEffectManager _ItemEffectMrg;
+    public MiracleOddityManager MiracleOddityMrg;
     
     public List<BulletInner> CurBulletsInFight;
     public List<BulletSlotController> CurBulletSlotControllers;
     public List<BulletInnerSlotController> CurBulletInnerSlotControllers;
-    
-    public void ClearInventoryData()
-    {
-        _InventoryData.ClearData();
-        _BulletInvData.ClearData();
-        InitAllBagGO();
-        //读取天赋数据，看看有无初始携带类天赋
-    }
-    
-    public void InitAllBagGO()
-    {
-        BagItemTools<ItemBase>.ClearAllObject();
-        InitEquipBullets();
-        InitSpawners();
-        InitItemGem();
-    }
 
+    #region 宝石&道具&奇迹物品等外部操作
     public void AddItemToBag(int itemID, int amount = 1)
     {  
         // 1. 尝试找所有能堆叠的同类道具
@@ -61,7 +46,6 @@ public class InventoryManager : MonoBehaviour
             remaining -= createAmount;
         }
     }
-    
     public void AddGemToBag(int gemID,int count = 1)
     {
         for (int i = 0; i < count; i++)
@@ -72,19 +56,8 @@ public class InventoryManager : MonoBehaviour
             BagItemTools<Gem>.AddObjectGO(newGemData);//在OnDrop中添加到数据层
         }
     }
-
-    //抽取道具的时候，不能抽取重复的道具，这一步查重
-    public bool ItemDuplicateCheck(int itemID)
-    {
-        List<ItemData> allItems = _InventoryData.BagItems
-            .Concat(_InventoryData.EquipItems).ToList();
-        foreach (ItemData each in allItems)
-        {
-            if (each.ID == itemID && each.Category == ItemCategory.Equipable)
-                return true;
-        }
-        return false;
-    }
+    public void EquipMiracleOddity(int miracleID) => _InventoryData.EquipMiracleOddity(miracleID);
+    #endregion
 
     #region 子弹的一些外部操作
     public void AddBulletToFight(BulletData bulletData)
@@ -249,6 +222,35 @@ public class InventoryManager : MonoBehaviour
         }
     }
     #endregion
+
+    #region 不关心的方法
+    //抽取奇迹物件的时候，不能抽取重复的，这一步查重
+    public bool MiracleOdditiesDuplicateCheck(int id)
+    {
+        foreach (MiracleOddityData each in _InventoryData.EquipMiracleOddities)
+        {
+            if (each.ID == id)
+                return true;
+        }
+        return false;
+    }
+
+    public void ClearInventoryData()
+    {
+        _InventoryData.ClearData();
+        _BulletInvData.ClearData();
+        InitAllBagGO();
+        //读取天赋数据，看看有无初始携带类天赋
+    }
+    
+    public void InitAllBagGO()
+    {
+        BagItemTools<ItemBase>.ClearAllObject();
+        InitEquipBullets();
+        InitSpawners();
+        InitItemGem();
+    }
+    #endregion
     
     #region 单例的加载卸载
     public static InventoryManager Instance { get; private set; }
@@ -266,7 +268,7 @@ public class InventoryManager : MonoBehaviour
         CurBulletsInFight = new List<BulletInner>();
         _InventoryData =  ResManager.instance.GetAssetCache<InventoryData>(PathConfig.InventoryDataPath);
         _BulletInvData =  ResManager.instance.GetAssetCache<BulletInvData>(PathConfig.BulletInvDataPath);
-        _ItemEffectMrg = new ItemEffectManager();
+        MiracleOddityMrg = new MiracleOddityManager();
     }
 
     //初始化一些依赖UI的容器
@@ -281,11 +283,15 @@ public class InventoryManager : MonoBehaviour
             CurBulletInnerSlotControllers.Add(bulletInnerViews[i].Controller as BulletInnerSlotController);
 
         _BulletInvData.CurBulletSlotControllers = CurBulletSlotControllers;
-        _ItemEffectMrg.InitData();
-        _BulletInvData.OnModifiersChanged += _ItemEffectMrg.ApplyAlltimesEffectsToBullets;
+        _BulletInvData.OnModifiersChanged += MiracleOddityMrg.ApplyAlltimesEffectsToBullets;
+    }
+    //初始化一些需要读档之后的信息
+    public void InitStep3()
+    {
+        MiracleOddityMrg.InitData();
     }
     
     void OnDestroy() =>  _BulletInvData.OnModifiersChanged 
-        -= _ItemEffectMrg.ApplyAlltimesEffectsToBullets;
+        -= MiracleOddityMrg.ApplyAlltimesEffectsToBullets;
     #endregion 
 }

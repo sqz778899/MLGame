@@ -127,7 +127,6 @@ public abstract class BaseSlotController<T> :ISlotController where T : ItemDataB
                 SlotType.GemBagSlotInner => StandardOffsetGemAndBullet,
                 SlotType.ItemBagSlot =>  StandardOffsetItem,
                 SlotType.GemInlaySlot => NOffsetGemAndBullet,
-                SlotType.ItemEquipSlot => NOffsetItem,
                 SlotType.SpawnnerSlot => StandardOffsetGemAndBullet,
                 SlotType.SpawnnerSlotInner => StandardOffsetGemAndBullet,
                 SlotType.CurBulletSlot => StandardOffsetGemAndBullet,

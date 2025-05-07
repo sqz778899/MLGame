@@ -22,6 +22,7 @@ public enum DropedCategory
     Item = 1,
     Key = 2,
     Buff = 3,
+    MiracleOddity = 4
 }
 
 //Item类划分

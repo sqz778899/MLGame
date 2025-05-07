@@ -2,11 +2,11 @@
 using System.Linq;
 using UnityEngine;
 
-public class Effect_MisspelledSpellbook : IItemEffect
+public class Effect_MisspelledSpellbook : IMiracleOddityEffect
 {
     public int Id => 200; //写满错字的魔法书 Misspelled Spellbook
-    public ItemTriggerTiming TriggerCash => ItemTriggerTiming.OnAlltimes;
-    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnBulletFire;
+    public MiracleOddityTriggerTiming TriggerCash => MiracleOddityTriggerTiming.OnAlltimes;
+    public MiracleOddityTriggerTiming TriggerTiming => MiracleOddityTriggerTiming.OnBulletFire;
     public void ApplyCash(BattleContext ctx) {}
     public void Apply(BattleContext ctx)
     {
@@ -28,11 +28,11 @@ public class Effect_MisspelledSpellbook : IItemEffect
     public string GetDescription() => "第三颗子弹，50%概率宝石效果翻倍，30%概率宝石效果失效";
 }
 
-public class Effect_FlickeringCandle : IItemEffect
+public class Effect_FlickeringCandle : IMiracleOddityEffect
 {
     public int Id => 201; //忽明忽暗的蜡烛 Flickering Candle
-    public ItemTriggerTiming TriggerCash => ItemTriggerTiming.OnAlltimes;
-    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnBattleStart;
+    public MiracleOddityTriggerTiming TriggerCash => MiracleOddityTriggerTiming.OnAlltimes;
+    public MiracleOddityTriggerTiming TriggerTiming => MiracleOddityTriggerTiming.OnBattleStart;
     public void ApplyCash(BattleContext ctx) {}
     public void Apply(BattleContext ctx)
     {
@@ -49,12 +49,12 @@ public class Effect_FlickeringCandle : IItemEffect
     public string GetDescription() => "你的第一、第三、第五颗子弹伤害+1";
 }
 
-public class Effect_GrudgeTangledScarf : IItemEffect
+public class Effect_GrudgeTangledScarf : IMiracleOddityEffect
 {
     public int Id => 202; //怨念缠绕的围巾 Grudge-Tangled Scarf
     string cacheKey => $"怨念缠绕的围巾-{Id}";
-    public ItemTriggerTiming TriggerCash => ItemTriggerTiming.None;
-    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnAlltimes;
+    public MiracleOddityTriggerTiming TriggerCash => MiracleOddityTriggerTiming.None;
+    public MiracleOddityTriggerTiming TriggerTiming => MiracleOddityTriggerTiming.OnAlltimes;
     List<BulletData> bullets => GM.Root.InventoryMgr._BulletInvData.EquipBullets;
     public void ApplyCash(BattleContext ctx) {}
     public void Apply(BattleContext ctx)
@@ -82,11 +82,11 @@ public class Effect_GrudgeTangledScarf : IItemEffect
     public string GetDescription() => "最后一颗子弹伤害+2";
 }
 
-public class Effect_SilentWatcherBlindfold : IItemEffect
+public class Effect_SilentWatcherBlindfold : IMiracleOddityEffect
 {
     public int Id => 203; //沉默注视者的眼罩 Silent Watcher's Blindfold
-    public ItemTriggerTiming TriggerCash => ItemTriggerTiming.OnAlltimes;
-    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnBattleStart;
+    public MiracleOddityTriggerTiming TriggerCash => MiracleOddityTriggerTiming.OnAlltimes;
+    public MiracleOddityTriggerTiming TriggerTiming => MiracleOddityTriggerTiming.OnBattleStart;
     public void ApplyCash(BattleContext ctx) {}
     public void Apply(BattleContext ctx)
     {
@@ -109,11 +109,11 @@ public class Effect_SilentWatcherBlindfold : IItemEffect
     public string GetDescription() => "若敌人战斗护盾≥2层，第1颗子弹穿透+1,伤害+1";
 }
 
-public class Effect_ScavengerHandbook : IItemEffect
+public class Effect_ScavengerHandbook : IMiracleOddityEffect
 {
     public int Id => 204; //翻找术手册 Scavenger's Handbook
-    public ItemTriggerTiming TriggerCash => ItemTriggerTiming.OnAlltimes;
-    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnAlltimes;
+    public MiracleOddityTriggerTiming TriggerCash => MiracleOddityTriggerTiming.OnAlltimes;
+    public MiracleOddityTriggerTiming TriggerTiming => MiracleOddityTriggerTiming.OnAlltimes;
     public void ApplyCash(BattleContext ctx) {}
     public void Apply(BattleContext ctx)
     {

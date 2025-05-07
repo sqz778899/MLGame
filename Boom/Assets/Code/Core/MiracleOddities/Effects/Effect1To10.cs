@@ -2,11 +2,11 @@
 using System.Linq;
 using UnityEngine;
 
-public class Effect_ShabbyHat: IItemEffect
+public class Effect_ShabbyHat: IMiracleOddityEffect
 {
     public int Id => 1;//蹩脚的魔术师帽子 Shabby Magician's Hat
-    public ItemTriggerTiming TriggerCash => ItemTriggerTiming.None;
-    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnBulletFire;
+    public MiracleOddityTriggerTiming TriggerCash => MiracleOddityTriggerTiming.None;
+    public MiracleOddityTriggerTiming TriggerTiming => MiracleOddityTriggerTiming.OnBulletFire;
     public void ApplyCash(BattleContext ctx) {}
     public void Apply(BattleContext ctx)
     {
@@ -20,26 +20,26 @@ public class Effect_ShabbyHat: IItemEffect
     public string GetDescription() => "你第一个子弹的伤害随机变化（0～3），发射前无法预知。";
 }
 
-public class Effect_ScreamingClayJar : IItemEffect
+public class Effect_ScreamingClayJar : IMiracleOddityEffect
 {
     public int Id => 2; //尖叫陶罐 Screaming Clay Jar
-    public ItemTriggerTiming TriggerCash => ItemTriggerTiming.None;
-    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnBulletHitBefore;
+    public MiracleOddityTriggerTiming TriggerCash => MiracleOddityTriggerTiming.None;
+    public MiracleOddityTriggerTiming TriggerTiming => MiracleOddityTriggerTiming.OnBulletHitBefore;
     public void ApplyCash(BattleContext ctx) {}
     public void Apply(BattleContext ctx)
     {
-        if (ctx.CurBullet.OrderInRound == 2 && ctx.TargetEnemy is Shield)
+        if (ctx.CurBullet.OrderInRound == 2 && (ctx.TargetEnemy is Shield || ctx.TargetEnemy is ShieldData ))
             ctx.CurBullet.FinalDamage += 1;
     }
     public void RemoveEffect(){}
     public string GetDescription() => "你的第二颗子弹若命中敌人的护盾，则该子弹伤害+1";
 }
 
-public class Effect_MismatchedTacticalNotes : IItemEffect
+public class Effect_MismatchedTacticalNotes : IMiracleOddityEffect
 {
     public int Id => 3; //错页的战术笔记 Mismatched Tactical Notes
-    public ItemTriggerTiming TriggerCash => ItemTriggerTiming.None;
-    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnBulletFire;
+    public MiracleOddityTriggerTiming TriggerCash => MiracleOddityTriggerTiming.None;
+    public MiracleOddityTriggerTiming TriggerTiming => MiracleOddityTriggerTiming.OnBulletFire;
     public void ApplyCash(BattleContext ctx) {}
     public void Apply(BattleContext ctx)
     {
@@ -56,22 +56,15 @@ public class Effect_MismatchedTacticalNotes : IItemEffect
     public string GetDescription() => "开火时，你的子弹的顺序会被随机打乱";
 }
 
-public class Effect_DizzyOwlFigurine : IItemEffect
+public class Effect_DizzyOwlFigurine : IMiracleOddityEffect
 {
     public int Id => 4; //错晕头转向的猫头鹰雕像 Dizzy Owl Figurine
-    public ItemTriggerTiming TriggerCash => ItemTriggerTiming.None;
-    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnBattleStart;
+    public MiracleOddityTriggerTiming TriggerCash => MiracleOddityTriggerTiming.None;
+    public MiracleOddityTriggerTiming TriggerTiming => MiracleOddityTriggerTiming.OnBattleStart;
     public void ApplyCash(BattleContext ctx) {}
     public void Apply(BattleContext ctx)
     {
         if (ctx.CurEnemy == null || ctx.CurEnemy.Shields == null) return;
-        
-        List<TraitData> activeTraits = GM.Root.InventoryMgr._ItemEffectMrg.GetCurrentSynergiesInfos();
-        if (activeTraits.Any(t => t.ID == 8)) // Trait ID 8 = 尖叫猫头鹰
-        {
-            //Debug.Log("[猫头鹰雕像] 被特质“尖叫猫头鹰”覆盖，无效化");
-            return;
-        }
         
         List<ShieldData> shieldData = ctx.CurEnemy.Shields;
         foreach (var shield in shieldData)
@@ -85,11 +78,11 @@ public class Effect_DizzyOwlFigurine : IItemEffect
     public string GetDescription() => "战斗开始时，敌方护盾血量随机±1";
 }
 
-public class Effect_GoldenKey : IItemEffect
+public class Effect_GoldenKey : IMiracleOddityEffect
 {
     public int Id => 5; //胆小鬼的黄金钥匙 Coward's Golden Key
-    public ItemTriggerTiming TriggerCash => ItemTriggerTiming.None;
-    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnEnterRoom;
+    public MiracleOddityTriggerTiming TriggerCash => MiracleOddityTriggerTiming.None;
+    public MiracleOddityTriggerTiming TriggerTiming => MiracleOddityTriggerTiming.OnEnterRoom;
     public void ApplyCash(BattleContext ctx) {}
     public void Apply(BattleContext ctx)
     {
@@ -112,16 +105,16 @@ public class Effect_GoldenKey : IItemEffect
     public string GetDescription() => "每进入一个新房间：50%得4金币，50%失2金币。";
 }
 
-public class Effect_DraftyFlyingBroom : IItemEffect
+public class Effect_DraftyFlyingBroom : IMiracleOddityEffect
 {
     public int Id => 6; //漏风的飞天扫帚 Drafty Flying Broom
-    public ItemTriggerTiming TriggerCash => ItemTriggerTiming.None;
-    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnBulletHitBefore;
+    public MiracleOddityTriggerTiming TriggerCash => MiracleOddityTriggerTiming.None;
+    public MiracleOddityTriggerTiming TriggerTiming => MiracleOddityTriggerTiming.OnBulletHitBefore;
     public void ApplyCash(BattleContext ctx) {}
     public void Apply(BattleContext ctx)
     {
         if (ctx.CurBullet.OrderInRound == 2 &&
-            ctx.TargetEnemy is Shield &&
+            (ctx.TargetEnemy is Shield || ctx.TargetEnemy is ShieldData)&&
             ctx.CurBullet.JumpHitCount == 0)
         {
             ctx.CurBullet.JumpHitCount += 1;
@@ -132,11 +125,11 @@ public class Effect_DraftyFlyingBroom : IItemEffect
     public string GetDescription() => "你的第二颗子弹无视敌人的一层护盾";
 }
 
-public class Effect_LeftFootOfFortune : IItemEffect
+public class Effect_LeftFootOfFortune : IMiracleOddityEffect
 {
     public int Id => 7; //左脚的幸运靴 Left Foot of Fortune
-    public ItemTriggerTiming TriggerCash => ItemTriggerTiming.None;
-    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnBattleStart;
+    public MiracleOddityTriggerTiming TriggerCash => MiracleOddityTriggerTiming.None;
+    public MiracleOddityTriggerTiming TriggerTiming => MiracleOddityTriggerTiming.OnBattleStart;
     public void ApplyCash(BattleContext ctx) {}
     public void Apply(BattleContext ctx)
     {
@@ -158,11 +151,11 @@ public class Effect_LeftFootOfFortune : IItemEffect
     public string GetDescription() => "战斗开始时，你的第1~3颗子弹中随机一颗获得穿透+1";
 }
 
-public class Effect_TransmutationPracticeQuill : IItemEffect
+public class Effect_TransmutationPracticeQuill : IMiracleOddityEffect
 {
     public int Id => 8; //变形术练习笔 Transmutation Practice Quill
-    public ItemTriggerTiming TriggerCash => ItemTriggerTiming.None;
-    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnBattleStart;
+    public MiracleOddityTriggerTiming TriggerCash => MiracleOddityTriggerTiming.None;
+    public MiracleOddityTriggerTiming TriggerTiming => MiracleOddityTriggerTiming.OnBattleStart;
     public void ApplyCash(BattleContext ctx) {}
     public void Apply(BattleContext ctx)
     {
@@ -177,11 +170,11 @@ public class Effect_TransmutationPracticeQuill : IItemEffect
     public string GetDescription() => "战斗开始时，你镶嵌的宝石中，随机一个类型变为“共振”";
 }
 
-public class Effect_CrackedToyWand : IItemEffect
+public class Effect_CrackedToyWand : IMiracleOddityEffect
 {
     public int Id => 9; //碎裂的玩具魔杖 Cracked Toy Wand
-    public ItemTriggerTiming TriggerCash => ItemTriggerTiming.None;
-    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnBattleStart;
+    public MiracleOddityTriggerTiming TriggerCash => MiracleOddityTriggerTiming.None;
+    public MiracleOddityTriggerTiming TriggerTiming => MiracleOddityTriggerTiming.OnBattleStart;
     public void ApplyCash(BattleContext ctx) {}
     public void Apply(BattleContext ctx)
     {
@@ -195,12 +188,12 @@ public class Effect_CrackedToyWand : IItemEffect
     public string GetDescription() => "你的最后一颗子弹本轮宝石全部失效";
 }
 
-public class Effect_MoldyTrainingLog : IItemEffect
+public class Effect_MoldyTrainingLog : IMiracleOddityEffect
 {
     public int Id => 10; //发霉的训练日志 Moldy Training Log
     string cacheKey => $"MoldyTrainingLog-{Id}";
-    public ItemTriggerTiming TriggerCash => ItemTriggerTiming.None;
-    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnAlltimes;
+    public MiracleOddityTriggerTiming TriggerCash => MiracleOddityTriggerTiming.None;
+    public MiracleOddityTriggerTiming TriggerTiming => MiracleOddityTriggerTiming.OnAlltimes;
     List<BulletData> bullets => GM.Root.InventoryMgr._BulletInvData.EquipBullets;
     public void ApplyCash(BattleContext ctx) {}
     public void Apply(BattleContext ctx)

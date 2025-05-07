@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShieldData
+public class ShieldData:IDamageable
 {
     public int MaxHP { get; private set; }
-    public int CurHP { get; private set; }
+    public int CurHP { get;set; }
     public EnemyState EState;
     public int ShieldIndex { get; private set; }
-    public bool IsDestroyed => CurHP <= 0;
+    public bool IsDead => CurHP <= 0;
     public event Action OnTakeDamage;
     public ShieldData(int maxHP, int index)
     {
@@ -16,10 +16,16 @@ public class ShieldData
         CurHP = maxHP;
         ShieldIndex = index;
     }
-    public void TakeDamage(int damage)
+    
+    public DamageResult TakeDamage(BulletData source)
     {
+        int damage = source.FinalDamage;
+        int overflow = Mathf.Max(0, damage - CurHP);
+        int effective = damage - overflow;
         CurHP = Mathf.Clamp(CurHP - damage, 0, MaxHP);
+        EState = IsDead ? EnemyState.dead : EnemyState.hit;
         OnTakeDamage?.Invoke();
+        return new DamageResult(damage, effective, overflow, IsDead, ShieldIndex);
     }
     
     public void ModifyHP(int amount)

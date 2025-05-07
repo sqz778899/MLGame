@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class BagRoot : MonoBehaviour
 {
-    public bool IsUnLockedItem = false;
     [Header("背包页签相关资源")]
     [SerializeField] GameObject BagBulletRootGO;
     [SerializeField] GameObject BagItemRootGO;
@@ -25,27 +22,7 @@ public class BagRoot : MonoBehaviour
     void Start()
     {
         SwichGem();
-        GM.Root.InventoryMgr._InventoryData.OnStructureChanged += RefreshSynergies;
-        RefreshSynergies();//先同步一次
-    }
-
-    //特质触发，同步特质UI资产
-    public void RefreshSynergies()
-    {
-        List<TraitData> traitInfos = 
-            GM.Root.InventoryMgr._ItemEffectMrg.GetCurrentSynergiesInfos();
-        if (traitInfos.Count == 0)
-        {
-            txtSynergies.text = "";
-            txtSynergiesDesc.text = "";
-            traitIcon.gameObject.SetActive(false);
-            return;
-        }
-        TraitData SynergiesInfo = traitInfos[0];
-        txtSynergies.text = SynergiesInfo.Name;
-        txtSynergiesDesc.text =  TextProcessor.Parse(SynergiesInfo.Desc);
-        traitIcon.gameObject.SetActive(true);
-        traitIcon.BindingData(traitInfos[0]);
+        _equipBulletSlotRoot.SetActive(true);
     }
 
     #region 页签切换
@@ -55,7 +32,6 @@ public class BagRoot : MonoBehaviour
         if (EternalCavans.Instance.TutoriaSwichBulletLock) return;
         
         BagBulletRootGO.SetActive(true);
-        _equipBulletSlotRoot.SetActive(true);
         BagItemRootGO.SetActive(false);
         BagGemRootGO.SetActive(false);
         //页签选中状态
@@ -71,7 +47,6 @@ public class BagRoot : MonoBehaviour
         //if(!IsUnLockedItem) return;
         
         BagBulletRootGO.SetActive(false);
-        _equipBulletSlotRoot.SetActive(false);
         BagItemRootGO.SetActive(true);
         BagGemRootGO.SetActive(false);
         //页签选中状态
@@ -87,7 +62,6 @@ public class BagRoot : MonoBehaviour
         if (EternalCavans.Instance.TutorialSwichGemLock) return;
         
         BagBulletRootGO.SetActive(false);
-        _equipBulletSlotRoot.SetActive(true);
         BagItemRootGO.SetActive(false);
         BagGemRootGO.SetActive(true);
         //页签选中状态
@@ -97,7 +71,4 @@ public class BagRoot : MonoBehaviour
         GM.Root.InventoryMgr._BulletInvData.ProcessBulletRelations();
     }
     #endregion
-
-    void OnDestroy() =>
-        GM.Root.InventoryMgr._InventoryData.OnStructureChanged -= RefreshSynergies;
 }

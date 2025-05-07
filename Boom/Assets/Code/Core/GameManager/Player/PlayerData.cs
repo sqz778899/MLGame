@@ -169,7 +169,7 @@ public class PlayerData: ScriptableObject
         }
     }
     
-    public void TriggerBuff(ItemTriggerTiming timing, BattleContext ctx)
+    public void TriggerBuff(MiracleOddityTriggerTiming timing, BattleContext ctx)
     {
         foreach (var buff in ActiveBuffs)
         {

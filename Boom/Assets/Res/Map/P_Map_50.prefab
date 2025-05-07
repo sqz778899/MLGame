@@ -9832,6 +9832,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4999144444234433583}
     m_Modifications:
+    - target: {fileID: 2292887717865861996, guid: e53388c857969c04a841ae15e1c04251, type: 3}
+      propertyPath: RoomArrowConfig.BattleConfig.HP
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2292887717865861996, guid: e53388c857969c04a841ae15e1c04251, type: 3}
+      propertyPath: RoomArrowConfig.BattleConfig.ShieldConfig.ShieldsHPs.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3974852627006142317, guid: e53388c857969c04a841ae15e1c04251, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.73

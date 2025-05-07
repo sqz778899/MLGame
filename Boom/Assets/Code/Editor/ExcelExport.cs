@@ -18,6 +18,7 @@ namespace Code.Editor
         {
             ExportBullet();
             ExportItem();
+            ExportMiracleOddities();//奇迹物件
             ExportGemDesign();
             ExportMuliLa();
             ExportDialogue(); //对话相关
@@ -58,10 +59,33 @@ namespace Code.Editor
             File.WriteAllText(PathConfig.BulletDesignJson, content01);
         }
 
+        public void ExportMiracleOddities()
+        {
+            DataSet curTables = GetDataSet();
+            DataTable curTable = curTables.Tables["奇迹物件设计"];
+            
+            List<MiracleOddityJson> curItemDesign = new List<MiracleOddityJson>();
+            for (int i = 1; i < curTable.Rows.Count; i++)
+            {
+                MiracleOddityJson curItem = new MiracleOddityJson();
+                if (curTable.Rows[i][1].ToString() == "") continue;
+                curItem.ID = GetCellInt(curTable.Rows[i][0].ToString());
+                curItem.Name = curTable.Rows[i][1].ToString();
+                curItem.Rarity = (DropedRarity)GetCellInt(curTable.Rows[i][2].ToString());
+                curItem.Desc = curTable.Rows[i][3].ToString();
+                curItem.Price = GetCellInt(curTable.Rows[i][4].ToString());
+                curItem.Flavor = curTable.Rows[i][5].ToString();
+                curItem.ResName = curTable.Rows[i][6].ToString();
+                curItemDesign.Add(curItem);
+            }
+            string content01 = JsonConvert.SerializeObject(curItemDesign, (Formatting)Formatting.Indented);
+            File.WriteAllText(PathConfig.MiracleOddityDesignJson, content01);
+        }
+
         public void ExportItem()
         {
             DataSet curTables = GetDataSet();
-            DataTable curTable = curTables.Tables["道具设计"];
+            DataTable curTable = curTables.Tables["奇迹物件设计"];
             
             List<ItemJson> curItemDesign = new List<ItemJson>();
             for (int i = 1; i < curTable.Rows.Count; i++)

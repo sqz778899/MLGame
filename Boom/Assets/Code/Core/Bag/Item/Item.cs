@@ -10,7 +10,6 @@ public class Item : ItemBase,IItemInteractionBehaviour
     [Header("UI表现")]
     public Image Icon;
     public Image ItemBGInBag;
-    public Image ItemBGInEquip;
     public TextMeshProUGUI StackCountText;
     public Color RareColor;
     
@@ -53,8 +52,7 @@ public class Item : ItemBase,IItemInteractionBehaviour
                 RareColor = Rare4;
                 break;
         }
-        if (ItemBGInBag != null) ItemBGInBag.color = RareColor;
-        if (ItemBGInEquip != null) ItemBGInEquip.color = RareColor;
+        ItemBGInBag.color = RareColor;
         
         // 堆叠数量显示
         if (Data.IsStackable && Data.StackCount > 1)
@@ -74,32 +72,10 @@ public class Item : ItemBase,IItemInteractionBehaviour
     public void OnEndDrag() {}
     public void OnClick() {}
     public bool CanDrag => true;
+    void HideBackground() =>  ItemBGInBag.gameObject.SetActive(false);
+    public void SyncBackground() => ItemBGInBag.gameObject.SetActive(Data.CurSlotController.SlotType == SlotType.ItemBagSlot);
 
-    void HideBackground()
-    {
-        ItemBGInBag.gameObject.SetActive(false);
-        ItemBGInEquip.gameObject.SetActive(false);
-    }
-    
-    public void SyncBackground()
-    {
-        ItemBGInBag.gameObject.SetActive(Data.CurSlotController.SlotType == SlotType.ItemBagSlot);
-        ItemBGInEquip.gameObject.SetActive(Data.CurSlotController.SlotType == SlotType.ItemEquipSlot);
-    }
-
-    void IItemInteractionBehaviour.OnDoubleClick()
-    {
-        ItemSlotController from = Data.CurSlotController as ItemSlotController;
-        ISlotController toSlot = (from.SlotType == SlotType.ItemEquipSlot)
-            ? SlotManager.GetEmptySlotController(SlotType.ItemBagSlot)
-            : SlotManager.GetEmptySlotController(SlotType.ItemEquipSlot);
-
-        if (toSlot == null )return;//没有空位
-        if (toSlot.CanAccept(Data))
-            toSlot.Assign(Data, gameObject);
-        SyncBackground();
-    }
-
+    void IItemInteractionBehaviour.OnDoubleClick(){}
     void IItemInteractionBehaviour.OnRightClick()
     {
         if (Data.CurSlotController.SlotType == SlotType.ItemBagSlot)

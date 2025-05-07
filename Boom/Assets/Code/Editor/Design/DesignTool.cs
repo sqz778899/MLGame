@@ -12,44 +12,19 @@ public class DesignTool
     public int 存档测试;
     [Button("默认存档",ButtonSizes.Large),PropertyOrder(0)]
     [ButtonGroup("默认存档")]
-    void ResetAll()
-    {
-        TrunkManager.Instance.SetSaveFileTemplate();
-    }
+    void ResetAll() => TrunkManager.Instance.SetSaveFileTemplate();
     
     [Button("默认存档万解",ButtonSizes.Large),PropertyOrder(0)]
     [ButtonGroup("默认存档")]
-    void ResetAllFiveSlots()
-    {
-        TrunkManager.Instance.SetSaveFileFiveSlotsTemplate();
-    }
-    
-    [Button("测试存档",ButtonSizes.Large),PropertyOrder(0)]
-    [ButtonGroup("默认存档")]
-    void ResetAllWithGem()
-    {
-        TrunkManager.Instance.SetSaveFileTest();
-    }
+    void ResetAllFiveSlots() => TrunkManager.Instance.SetSaveFileFiveSlotsTemplate();
     
     [Button("存档",ButtonSizes.Large),PropertyOrder(0)]
     [ButtonGroup("存档")]
-    void SaveFile()
-    {
-        SaveManager.SaveFile();
-    }
+    void SaveFile() => SaveManager.SaveFile();
     
     [Button("读档",ButtonSizes.Large),PropertyOrder(0)]
     [ButtonGroup("存档")]
-    void LoadFile()
-    {
-        SaveManager.LoadSaveFile();
-    }
-
-    [Button("强制刷新配表数据",ButtonSizes.Large),PropertyOrder(0)]
-    void sss()
-    {
-        TrunkManager.Instance.ForceRefresh();
-    }
+    void LoadFile() => SaveManager.LoadSaveFile();
     #endregion
 
     #region 切换场景

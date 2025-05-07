@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BulletInnerController 
 {
@@ -86,18 +85,18 @@ public class BulletInnerController
             #region 触发 OnBulletHit 相关道具&&Buff
             // 处理子弹击中敌人的加成道具Buff等等
             BattleContext ctx = new BattleContext(Data, target);
-            GM.Root.InventoryMgr._ItemEffectMrg.Trigger(ItemTriggerTiming.OnBulletHitBefore,ctx);
+            GM.Root.InventoryMgr.MiracleOddityMrg.Trigger(MiracleOddityTriggerTiming.OnBulletHitBefore,ctx);
             // 若标记了跳过命中，则不进行伤害结算
             if (ctx.ShieldSkipCount) return;
             #endregion
             
             // 命中处理：伤害结算
-            DamageResult result = target.TakeDamage(Data, Data.FinalDamage);
+            DamageResult result = target.TakeDamage(Data);
             _view.PlayHitEffect();
             
             #region 触发 OnBulletHitAfter 的Cash 相关道具&&Buff
             BattleContext ctxCash = new BattleContext(Data, target);
-            GM.Root.InventoryMgr._ItemEffectMrg.TriggerCash(ItemTriggerTiming.OnBulletHitAfter,ctxCash);
+            GM.Root.InventoryMgr.MiracleOddityMrg.TriggerCash(MiracleOddityTriggerTiming.OnBulletHitAfter,ctxCash);
             #endregion
             
             // 战报记录

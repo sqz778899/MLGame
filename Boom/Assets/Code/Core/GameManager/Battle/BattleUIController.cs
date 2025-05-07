@@ -4,36 +4,36 @@ using UnityEngine;
 
 public class BattleUIController
 {
-    [Header("一些脚本")] 
-    MapManager _MapManager;
-    BagRootMini BagRootMiniSC;
-    EnemyMiniMapView EnemyMiniMapSC;
-    BattleData _battleData;
+    //一些脚本
+    BagRootMini BagRootMiniSC => EternalCavans.Instance.BagRootMiniSC;
+    EnemyMiniMapView EnemyMiniMapSC => EternalCavans.Instance.EnemyMiniMapSC;
+    BattleData _battleData => GM.Root.BattleMgr.battleData;
+    Simulator _simulator => EternalCavans.Instance.SimulatorSC;
     
-    [Header("一些GUI")] 
-    GameObject warReportRootGUI;
-    GameObject winGUI;
-    GameObject failGUI;
+    //一些GUI")]
+    GameObject warReportRootGUI =>EternalCavans.Instance.WarReportGO;
+    GameObject winGUI=> EternalCavans.Instance.WinGUI;
+    GameObject failGUI=> EternalCavans.Instance.FailGUI;
+    
 
     public void InitFightData()
     {
-        InitData();
         //初始化小地图背包界面
         BagRootMiniSC.InitData();
         //初始化小地图敌人信息界面
         EnemyMiniMapSC.Bind(_battleData.CurEnemy.Controller._data);
+        //初始化胜率界面
+        _simulator.InitData();
     }
     
     public void ShowWarReport()
     {
-        InitData();
         warReportRootGUI.SetActive(true);
         warReportRootGUI.GetComponent<GUIWarReport>().SyncReport();
     }
     
     public void WarReportContinue()
     {
-        InitData();
         warReportRootGUI.SetActive(false);
         if (_battleData.CurWarReport.IsWin)
         {
@@ -48,23 +48,13 @@ public class BattleUIController
         }
     }
 
+    public void StopSimulate() =>
+        _simulator.StopSimulate();
+
     public void InitWinFailGUI()
     {
         warReportRootGUI.SetActive(false);
         winGUI.SetActive(false);
         failGUI.SetActive(false);
     }
-    
-    #region 不关心的私有方法
-    void InitData()
-    {
-        _MapManager ??=  BattleManager.Instance._MapManager;
-        BagRootMiniSC ??=EternalCavans.Instance.BagRootMini.GetComponent<BagRootMini>();
-        EnemyMiniMapSC ??= EternalCavans.Instance.EnemyMiniMapGO.GetComponent<EnemyMiniMapView>();
-        _battleData ??= BattleManager.Instance.battleData;
-        warReportRootGUI ??= EternalCavans.Instance.WarReportGO.transform.GetChild(0).gameObject;
-        winGUI??= EternalCavans.Instance.WinGUI;
-        failGUI??= EternalCavans.Instance.FailGUI;
-    }
-    #endregion
 }

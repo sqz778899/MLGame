@@ -9,12 +9,12 @@ public class StickyGloveCache
     public int BreakShieldOrder;
 }
 
-public class Effect_StickyWizardGloves : IItemEffect
+public class Effect_StickyWizardGloves : IMiracleOddityEffect
 {
     public int Id => 300; //黏糊糊的巫师手套 Sticky Wizard Gloves
     string cacheKey => $"StickyGlove-{Id}";
-    public ItemTriggerTiming TriggerCash => ItemTriggerTiming.OnBulletHitAfter;
-    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnBulletHitBefore;
+    public MiracleOddityTriggerTiming TriggerCash => MiracleOddityTriggerTiming.OnBulletHitAfter;
+    public MiracleOddityTriggerTiming TriggerTiming => MiracleOddityTriggerTiming.OnBulletHitBefore;
     BattleTempState battleTempState => GM.Root.BattleMgr.battleData.BattleStateCash;
     
     public void ApplyCash(BattleContext ctx)
@@ -44,12 +44,12 @@ public class Effect_StickyWizardGloves : IItemEffect
     public string GetDescription() => "首次击穿护盾后，下一发子弹伤害+3";
 }
 
-public class Effect_BloodhoundRing : IItemEffect
+public class Effect_BloodhoundRing : IMiracleOddityEffect
 {
     public int Id => 301; //溅血猎犬的指环 Bloodhound's Ring
     string cacheKey => $"BloodhoundRing-{Id}";
-    public ItemTriggerTiming TriggerCash => ItemTriggerTiming.None;
-    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnAlltimes;
+    public MiracleOddityTriggerTiming TriggerCash => MiracleOddityTriggerTiming.None;
+    public MiracleOddityTriggerTiming TriggerTiming => MiracleOddityTriggerTiming.OnAlltimes;
     List<BulletData> bullets => GM.Root.InventoryMgr._BulletInvData.EquipBullets;
     public void ApplyCash(BattleContext ctx) {}
 
@@ -82,17 +82,17 @@ public class ResonantMagicChainCache
     public int BlockedBulletOrder = -1; // 被护盾挡住的子弹编号
 }
 
-public class Effect_ResonantMagicChain : IItemEffect
+public class Effect_ResonantMagicChain : IMiracleOddityEffect
 {
     public int Id => 302; //残响魔链 Resonant Magic Chain
     string cacheKey => $"ResonantMagicChain-{Id}";
-    public ItemTriggerTiming TriggerCash => ItemTriggerTiming.OnBulletHitAfter;
-    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnBulletHitBefore;
+    public MiracleOddityTriggerTiming TriggerCash => MiracleOddityTriggerTiming.OnBulletHitAfter;
+    public MiracleOddityTriggerTiming TriggerTiming => MiracleOddityTriggerTiming.OnBulletHitBefore;
     BattleTempState battleTempState => GM.Root.BattleMgr.battleData.BattleStateCash;
     public void ApplyCash(BattleContext ctx)
     {
         // 条件：子弹未击破护盾，被挡住了（护盾未死）
-        if (!ctx.TargetEnemy.IsDead && ctx.TargetEnemy is Shield)
+        if (!ctx.TargetEnemy.IsDead && (ctx.TargetEnemy is Shield || ctx.TargetEnemy is ShieldData))
         {
             ResonantMagicChainCache state = battleTempState.Get<ResonantMagicChainCache>(cacheKey)
                                             ?? new ResonantMagicChainCache();

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Linq;
 
-public class ShieldController:IDamageable
+public class ShieldController
 {
     ShieldData _data;
     ShieldView _view;
@@ -40,30 +40,24 @@ public class ShieldController:IDamageable
         float hitTime = 0f;
         AniUtility.PlayHit(_view.Ani, ref hitTime);
         yield return new WaitForSeconds(hitTime);
-        if (!_data.IsDestroyed)
+        if (!_data.IsDead)
             _data.EState = EnemyState.live;
     }
     
     #region IDamageable接口相关的实现
-    public DamageResult TakeDamage(BulletData source, int damage)
+    public DamageResult TakeDamage(BulletData source)
     {
-        int overflow = Mathf.Max(0, damage - _data.CurHP);
-        int effective = damage - overflow;
-
-        _data.TakeDamage(damage);
-        _view.ShowHitText(damage); //伤害跳字
-        _data.EState = _data.IsDestroyed ? EnemyState.dead : EnemyState.hit;
-        
+        //计算完全交给Data
+        DamageResult result = _data.TakeDamage(source);
+        //表现相关
+        _view.ShowHitText(source.FinalDamage); //伤害跳字
         if (_hitRoutine != null)
             _coroutineHost.StopCoroutine(_hitRoutine);
         _hitRoutine = _coroutineHost.StartCoroutine(HitToIdle());
-
-        bool isDestroyed = _data.IsDestroyed;
-
-        return new DamageResult(damage, effective, overflow, isDestroyed, _data.ShieldIndex);
+        return  result;
     }
 
-    public bool IsDead => _data.IsDestroyed;
+    public bool IsDead => _data.IsDead;
     public int CurHP => _data.CurHP;
     public int MaxHP => _data.MaxHP;
     #endregion

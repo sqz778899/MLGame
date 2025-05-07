@@ -68,6 +68,7 @@ public class SaveFileJson
     
     public List<ItemSaveData> UserItems;           //用户道具
     public List<GemBaseSaveData> UserGems;         //用户宝石
+    public List<MiracleOdditySaveData> UserMiracleOddities;
     //public List<MapSate> UserMapSate;            //地图状态
 
     #region 任务剧情新手教程等
@@ -274,6 +275,19 @@ public class TraitJson
     public string Flavor;
     public string ResName;
 }
+
+[Serializable]
+public class MiracleOddityJson
+{
+    public int ID;
+    public string Name;
+    public DropedRarity Rarity;
+    public string Desc;
+    public int Price;
+    public string Flavor;
+    public string ResName;
+    public MiracleOddityTriggerTiming TriggerTiming;
+}
 #endregion
 
 #region 游戏内存档数据结构
@@ -337,6 +351,16 @@ public class ItemSaveData:ItemBaseSaveData
         SlotType = data.CurSlotController.SlotType;
     }
     public ItemSaveData() {}// 让无参构造也保留，以免 JsonUtility/序列化报错
+}
+
+[Serializable]
+public class MiracleOdditySaveData:ItemBaseSaveData
+{
+    public MiracleOdditySaveData(MiracleOddityData data)
+    {
+        ID = data.ID; //有了ID，其他静态数据通过配表索引出来
+    }
+    public MiracleOdditySaveData() {}// 让无参构造也保留，以免 JsonUtility/序列化报错
 }
 
 [Serializable]

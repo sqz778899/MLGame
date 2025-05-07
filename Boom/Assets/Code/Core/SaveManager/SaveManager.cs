@@ -27,10 +27,7 @@ public static class SaveManager
         for (int i = 0; i < saveFile.UserItems.Count; i++)
         {
             ItemData curItem = LoadItemData(saveFile.UserItems[i]);
-            if (curItem.CurSlotController.SlotType == SlotType.ItemBagSlot)
-                GM.Root.InventoryMgr._InventoryData.AddItemToBag(curItem);
-            if (curItem.CurSlotController.SlotType == SlotType.ItemEquipSlot)
-                GM.Root.InventoryMgr._InventoryData.EquipItem(curItem);
+            GM.Root.InventoryMgr._InventoryData.AddItemToBag(curItem);
         }
         //读取Gem
         for (int i = 0; i < saveFile.UserGems.Count; i++)
@@ -41,6 +38,10 @@ public static class SaveManager
             if (curGem.CurSlotController.SlotType == SlotType.GemInlaySlot)
                 GM.Root.InventoryMgr._InventoryData.EquipGem(curGem);
         }
+        //读取奇迹物件
+        Debug.Log("读取奇迹物件");
+        for (int i = 0; i < saveFile.UserMiracleOddities.Count; i++)
+            GM.Root.InventoryMgr.EquipMiracleOddity(saveFile.UserMiracleOddities[i].ID);
         
         //读取子弹槽状态
         GM.Root.PlayerMgr._PlayerData.CurBulletSlotLockedState = saveFile.UserBulletSlotLockedState;
@@ -150,8 +151,14 @@ public static class SaveManager
             UserGems.Add(new GemBaseSaveData(each));
         foreach (var each in GM.Root.InventoryMgr._InventoryData.EquipGems)
             UserGems.Add(new GemBaseSaveData(each));
-        
         saveFile.UserGems = UserGems;
+        
+        //存储奇迹物件信息
+        saveFile.UserMiracleOddities.Clear();
+        List<MiracleOdditySaveData> UserMiracleOddities = new List<MiracleOdditySaveData>();
+        foreach (var each in GM.Root.InventoryMgr._InventoryData.EquipMiracleOddities)
+            UserMiracleOddities.Add(new MiracleOdditySaveData(each));
+        saveFile.UserMiracleOddities = UserMiracleOddities;
         
         //存子弹槽状态信息
         saveFile.UserBulletSlotLockedState = GM.Root.PlayerMgr._PlayerData.CurBulletSlotLockedState;

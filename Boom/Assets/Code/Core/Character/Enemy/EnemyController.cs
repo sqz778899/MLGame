@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class EnemyController:IDamageable
+public class EnemyController
 {
     public EnemyData _data { get; private set; }
     EnemyView _view;
@@ -20,7 +20,7 @@ public class EnemyController:IDamageable
         _data.OnTakeDamage += OnTakeDamage;
     }
     
-    void OnTakeDamage()=>_view.HealthBar.Refresh();
+    void OnTakeDamage() => _view.HealthBar.Refresh();
 
     public void Tick()
     {
@@ -40,7 +40,6 @@ public class EnemyController:IDamageable
 
     public EnemyState GetEState() => _data.EState;
     public Award GetAward() => _data.CurAward;
-    public void SetEState(EnemyState EState) => _data.EState = EState;
     
     IEnumerator HitToIdle()
     {
@@ -58,23 +57,18 @@ public class EnemyController:IDamageable
     public int CurHP => _data.CurHP;
     public int MaxHP => _data.MaxHP;
     public Vector3 GetHitPosition() => _view.HitTextPos.position;
-    public DamageResult TakeDamage(BulletData source, int damage)
+    public DamageResult TakeDamage(BulletData source)
     {
-        if (_data.IsDead)
-            return new DamageResult(0, 0, 0, true, -1);
+        //计算完全交给Data
+        DamageResult result = _data.TakeDamage(source);
         
-        int overflow = Mathf.Max(0, damage - _data.CurHP);
-        int effective = damage - overflow;
-
-        _data.TakeDamage(damage);
-        _view.ShowHitText(damage);//伤害跳字
-        _data.EState = _data.IsDead ? EnemyState.dead : EnemyState.hit;
-
+        //表现相关
+        _view.ShowHitText(source.FinalDamage);//伤害跳字
         if (_hitRoutine != null)
             _coroutineHost.StopCoroutine(_hitRoutine);
         _hitRoutine = _coroutineHost.StartCoroutine(HitToIdle());
 
-        return new DamageResult(damage, effective, overflow, _data.IsDead, /* target index */ -1);
+        return result;
     }
     #endregion
 }

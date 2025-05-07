@@ -33,7 +33,6 @@ public enum SlotType
     SpawnnerSlot = 0,
     ItemBagSlot = 1,
     BulletSlot = 2,
-    ItemEquipSlot = 3,
     GemBagSlot = 4,
     GemInlaySlot = 5,
     CurBulletSlot = 6,

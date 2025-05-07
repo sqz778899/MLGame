@@ -4,11 +4,12 @@ using UnityEngine;
 
 public interface IDamageable
 {
-    DamageResult TakeDamage(BulletData source, int damage);
+    DamageResult TakeDamage(BulletData source);
     bool IsDead { get; }
     int CurHP { get; }
     int MaxHP { get; }
 }
+
 public struct DamageResult
 {
     public int TotalDamage;         // 实际造成的伤害

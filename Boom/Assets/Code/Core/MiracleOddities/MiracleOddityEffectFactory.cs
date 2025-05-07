@@ -1,7 +1,7 @@
-﻿public interface IItemEffect
+﻿public interface IMiracleOddityEffect
 {
-    ItemTriggerTiming TriggerTiming { get; }
-    ItemTriggerTiming TriggerCash { get; }
+    MiracleOddityTriggerTiming TriggerTiming { get; }
+    MiracleOddityTriggerTiming TriggerCash { get; }
     void ApplyCash(BattleContext ctx);
     void Apply(BattleContext ctx);
     void RemoveEffect();
@@ -9,9 +9,9 @@
 }
 
 
-public static class ItemEffectFactory
+public static class MiracleOddityEffectFactory
 {
-    public static IItemEffect CreateEffectLogic(int itemId)
+    public static IMiracleOddityEffect CreateEffectLogic(int itemId)
     {
         return itemId switch
         {

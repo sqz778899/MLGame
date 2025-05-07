@@ -51,11 +51,10 @@ public static class SlotManager
     public static SlotView[] GetAllSlotView()
     {
         SlotView[] allItemSlot = EternalCavans.Instance.ItemRoot.GetComponentsInChildren<SlotView>();
-        SlotView[] allEuipItemSlot = EternalCavans.Instance.EquipItemRoot.GetComponentsInChildren<SlotView>();
         SlotView[] allGemSlot = EternalCavans.Instance.GemRoot.GetComponentsInChildren<SlotView>();
         SlotView[] allGemInlaySlot = EternalCavans.Instance.EquipBulletSlotRoot.GetComponentsInChildren<SlotView>();
         SlotView[] allBagMiniSlot = EternalCavans.Instance.BagRootMini.GetComponentsInChildren<SlotView>();
-        SlotView[] allSlot = allItemSlot.Concat(allEuipItemSlot).Concat(allGemSlot).Concat(allGemInlaySlot).Concat(allBagMiniSlot).ToArray();
+        SlotView[] allSlot = allItemSlot.Concat(allGemSlot).Concat(allGemInlaySlot).Concat(allBagMiniSlot).ToArray();
         return allSlot;
     }
     
@@ -115,9 +114,6 @@ public static class SlotManager
                 break;
             case SlotType.CurBulletSlot:
                 allSlot = EternalCavans.Instance.EquipBulletSlotRoot.GetComponentsInChildren<BulletSlotView>(true);
-                break;
-            case SlotType.ItemEquipSlot:
-                allSlot = EternalCavans.Instance.EquipItemRoot.GetComponentsInChildren<SlotView>(true);
                 break;
             case SlotType.ItemBagSlot:
                 allSlot = EternalCavans.Instance.ItemRoot.GetComponentsInChildren<SlotView>(true);

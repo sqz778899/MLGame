@@ -26,6 +26,13 @@ public class ResManager : Singleton<ResManager>
         return GetAssetCache<Sprite>(AssetPath);
     }
     
+    public Sprite GetMiracleOddityIcon(int id)
+    {
+        MiracleOddityJson json = TrunkManager.Instance.GetMiracleOddityJson(id);
+        string AssetPath = PathConfig.GetMiracleOddityPath(json.ResName);
+        return GetAssetCache<Sprite>(AssetPath);
+    }
+    
     //直接获得GemIcon的简便方法
     public Sprite GetGemIcon(int id)
     {

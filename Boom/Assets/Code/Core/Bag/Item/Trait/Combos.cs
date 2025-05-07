@@ -26,7 +26,7 @@ public class Trait_MagicInstability : IItemSynergies
     
     public void RemoveEffect() {}
     public void OnClutterSearchResolved(){}
-    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnBulletHitBefore;
+    public MiracleOddityTriggerTiming TriggerTiming => MiracleOddityTriggerTiming.OnBulletHitBefore;
     TraitData _data;
     public TraitData Data => _data ??= new TraitData(Id); // 懒加载
 }
@@ -70,7 +70,7 @@ public class Trait_TeachingDisaster : IItemSynergies
         }
     }
     public void OnClutterSearchResolved(){}
-    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnAlltimes;
+    public MiracleOddityTriggerTiming TriggerTiming => MiracleOddityTriggerTiming.OnAlltimes;
     TraitData _data;
     public TraitData Data => _data ??= new TraitData(Id);
 }
@@ -98,7 +98,7 @@ public class Trait_ChaosTriangle : IItemSynergies
     
     public void RemoveEffect() {}
     public void OnClutterSearchResolved(){}
-    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnBattleStart;
+    public MiracleOddityTriggerTiming TriggerTiming => MiracleOddityTriggerTiming.OnBattleStart;
     TraitData _data;
     public TraitData Data => _data ??= new TraitData(Id);
 }
@@ -141,7 +141,7 @@ public class Trait_ProgressiveSpell : IItemSynergies
         }
     }
     public void OnClutterSearchResolved(){}
-    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnAlltimes;
+    public MiracleOddityTriggerTiming TriggerTiming => MiracleOddityTriggerTiming.OnAlltimes;
     TraitData _data;
     public TraitData Data => _data ??= new TraitData(Id);
 }
@@ -180,7 +180,7 @@ public class Trait_ThirdResonanceChaos : IItemSynergies
         //Debug.Log("[三阶混念术] 移除效果");
     }
     public void OnClutterSearchResolved(){}
-    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnAlltimes;
+    public MiracleOddityTriggerTiming TriggerTiming => MiracleOddityTriggerTiming.OnAlltimes;
     TraitData _data;
     public TraitData Data => _data ??= new TraitData(Id);
 }
@@ -208,7 +208,7 @@ public class Trait_UnlimitedCoin : IItemSynergies
             default, FloatingTextType.MapHint, Color.yellow, 2.5f);
     }
     public void RemoveEffect() {}
-    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.Passive;
+    public MiracleOddityTriggerTiming TriggerTiming => MiracleOddityTriggerTiming.Passive;
     TraitData _data;
     public TraitData Data => _data ??= new TraitData(Id);
 }
@@ -257,7 +257,7 @@ public class Trait_TrashExplosion : IItemSynergies
         }
     }
     public void OnClutterSearchResolved(){}
-    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnAlltimes;
+    public MiracleOddityTriggerTiming TriggerTiming => MiracleOddityTriggerTiming.OnAlltimes;
     #endregion
 
     #region 绑定信息
@@ -293,7 +293,7 @@ public class Trait_ScreamingOwl : IItemSynergies
     }
     public void RemoveEffect() {}
     public void OnClutterSearchResolved(){}
-    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnBattleStart;
+    public MiracleOddityTriggerTiming TriggerTiming => MiracleOddityTriggerTiming.OnBattleStart;
     #endregion
     
     #region 绑定信息
@@ -315,7 +315,7 @@ public class Trait_RainbowResonantTrap : IItemSynergies
     string cacheKey => $"虹彩混响陷阱-{Id}";
     public string Description => "所有子弹伤害-1";
     List<BulletData> _bullets => GM.Root.InventoryMgr._BulletInvData.EquipBullets;
-    public ItemTriggerTiming TriggerTiming => ItemTriggerTiming.OnAlltimes;
+    public MiracleOddityTriggerTiming TriggerTiming => MiracleOddityTriggerTiming.OnAlltimes;
     #endregion
 
     #region 核心实现

@@ -66,7 +66,7 @@ public class BasicGamblingEventHandler : IMapEventHandler
         }
         
         // 道具 翻找术手册 有50%概率可以额外翻找一次
-        bool allowExtra = GM.Root.InventoryMgr._ItemEffectMrg.ShouldRetryGambling();
+        bool allowExtra = GM.Root.InventoryMgr.MiracleOddityMrg.ShouldRetryGambling();
         if (data.SearchCount == 0 && allowExtra)
         {
             FloatingTextFactory.CreateWorldText($"触发翻找术手册！！", default,
@@ -79,9 +79,6 @@ public class BasicGamblingEventHandler : IMapEventHandler
             data.SearchCount++;
             data.IsTriggered = true; // 结束翻找流程
         }
-        
-        //全图类特质触发接口
-        GM.Root.InventoryMgr._ItemEffectMrg.TriggerTraitMapEvent();
         view.SetAsTriggered();
     }
 

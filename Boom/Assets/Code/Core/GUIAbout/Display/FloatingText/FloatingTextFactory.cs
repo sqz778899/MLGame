@@ -21,7 +21,12 @@ public static class FloatingTextFactory
         Color? color = null, float fontSize = 4f, Transform parent = null)
     {
         //默认使用角色位置
-        Vector3 playerPos = GM.Root.PlayerMgr.RoleInMapGO.transform.position + Vector3.up * 2.4f + new Vector3(0.25f,0,0);
+        Vector3 playerPos = Vector3.zero;
+        if (GM.Root.PlayerMgr.RoleInMapGO != null)
+        {
+            playerPos = GM.Root.PlayerMgr.RoleInMapGO.transform.position 
+                        + Vector3.up * 2.4f + new Vector3(0.25f,0,0);
+        }
         if (worldPos == default)
             worldPos = playerPos;
         

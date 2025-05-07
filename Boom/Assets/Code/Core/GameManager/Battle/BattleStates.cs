@@ -31,7 +31,7 @@ public class InLevelState : IFightState
     }
 
     public void Enter() => GM.Root.InventoryMgr.
-        _ItemEffectMrg.Trigger(ItemTriggerTiming.OnBattleStart);
+        MiracleOddityMrg.Trigger(MiracleOddityTriggerTiming.OnBattleStart);
     
     public void Update()
     {
@@ -59,7 +59,10 @@ public class InLevelState : IFightState
         
         if (Input.GetKeyDown(KeyCode.Space) && !_battleData.IsAttacking)
         {
-            GM.Root.InventoryMgr._ItemEffectMrg.Trigger(ItemTriggerTiming.OnBulletFire);
+            //停止模拟
+            GM.Root.BattleMgr.battleUI.StopSimulate();
+            //触发开火
+            GM.Root.InventoryMgr.MiracleOddityMrg.Trigger(MiracleOddityTriggerTiming.OnBulletFire);
             
             _battleData.IsAttacking = true;
             _battleData.IsAfterAttack = true;

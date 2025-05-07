@@ -16,6 +16,7 @@ public class EternalCavans : MonoBehaviour
     [Header("Bag")]
     public GameObject BagRoot;
     public GameObject BagRootMini;
+    public BagRootMini BagRootMiniSC;
     public GameObject BagButtonGO;
 
     public GameObject GemRoot;
@@ -24,7 +25,6 @@ public class EternalCavans : MonoBehaviour
     public GameObject SpawnerSlotRoot;
     public GameObject SpawnerSlotRootMini;
     public GameObject ItemRoot;
-    public GameObject EquipItemRoot;
     
     [Header("Common")]
     public GameObject DialogueRoot;
@@ -43,10 +43,11 @@ public class EternalCavans : MonoBehaviour
     [Header("战斗地图相关")]
     public GameObject GUIFightMapRootGO;
     public GameObject WarReportGO;
+    public Simulator SimulatorSC;
     public GameObject WinGUI;
     public GameObject FailGUI;
     public GameObject ConquerTheLevel;
-    public GameObject EnemyMiniMapGO;
+    public EnemyMiniMapView EnemyMiniMapSC;
 
     [Header("UI根据各个场景切换表现")] 
     public GameObject Bag;

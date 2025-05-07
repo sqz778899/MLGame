@@ -17,7 +17,7 @@ public interface IItemSynergies
     void OnClutterSearchResolved();//地图类特质触发
     
     void RemoveEffect();
-    ItemTriggerTiming TriggerTiming { get; }
+    MiracleOddityTriggerTiming TriggerTiming { get; }
 }
 
 #region 道具类
@@ -30,7 +30,7 @@ public class ItemData : ItemDataBase,ITooltipBuilder
     public string ImageName;
     public DropedRarity Rarity;
 
-    public IItemEffect EffectLogic; // 每个道具一个策略实现
+    public IMiracleOddityEffect EffectLogic; // 每个道具一个策略实现
     //区分是否是任务物品
     public ItemCategory Category { get; private set; }
 
@@ -67,7 +67,7 @@ public class ItemData : ItemDataBase,ITooltipBuilder
         Category = json.Category;
         PersistentType = json.PersistentType;
         ImageName = json.ResName;
-        EffectLogic = ItemEffectFactory.CreateEffectLogic(ID);
+        EffectLogic = MiracleOddityEffectFactory.CreateEffectLogic(ID);
         
         // 新加的
         //MaxStackCount = json.MaxStackCount > 0 ? json.MaxStackCount : 1; // 读配置
@@ -87,17 +87,5 @@ public class ItemData : ItemDataBase,ITooltipBuilder
             Rarity,Category,PersistentType);
         return info;
     }
-}
-
-public enum ItemTriggerTiming
-{
-    OnAlltimes = 0,
-    OnBattleStart = 1,
-    OnBulletFire = 2,
-    OnBulletHitBefore = 3,
-    OnBulletHitAfter = 4,
-    OnEnterRoom = 5,
-    Passive = 6,
-    None = 99,
 }
 #endregion

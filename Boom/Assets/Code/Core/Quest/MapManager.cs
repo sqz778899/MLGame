@@ -204,7 +204,7 @@ public class MapManager : MonoBehaviour
                 IsFirstEnterRoom = isFirstEnter
             };
             // 交给道具管理器处理
-            GM.Root.InventoryMgr._ItemEffectMrg.Trigger(ItemTriggerTiming.OnEnterRoom, ctx);
+            GM.Root.InventoryMgr.MiracleOddityMrg.Trigger(MiracleOddityTriggerTiming.OnEnterRoom, ctx);
             #endregion
             // --- 处理房间状态 ---
             CurMapSate.FinishAndToNextRoom();//记录下探索度,并同步当前房间ID

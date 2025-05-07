@@ -60,13 +60,6 @@ public class RightClickMenuManager:MonoBehaviour
             if (curEmptyGemSlot.CanAccept(curGem.Data))
                 curEmptyGemSlot.Assign(curGem.Data, CurIns);
         }
-        if (curBaseSC is Item curItem)
-        {
-            ItemSlotController curEmptyItemSlot = SlotManager.GetEmptySlotController(SlotType.ItemEquipSlot) as ItemSlotController;
-            if (curEmptyItemSlot == null) return;
-            if (curEmptyItemSlot.CanAccept(curItem.Data))
-                curEmptyItemSlot.Assign(curItem.Data, CurIns);
-        }
         Hide();
     }
 

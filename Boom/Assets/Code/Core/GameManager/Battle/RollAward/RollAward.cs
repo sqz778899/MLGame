@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class RollAward : MonoBehaviour
 {
@@ -27,14 +26,11 @@ public class RollAward : MonoBehaviour
             if (reward != null && drawnKeys.Add($"{reward.ID}_{reward.DropedCategory}"))
                 selectedRewards.Add(reward);
         }
-
-        
         for (int i = 0; i < rollSingles.Count; i++)
         {
             DropedObjEntry entry = selectedRewards[i];
             rollSingles[i].InitData(entry, OnItemSelected);
         }
-        
     }
     
     void OnItemSelected(DropedObjEntry dropedObjEntry)

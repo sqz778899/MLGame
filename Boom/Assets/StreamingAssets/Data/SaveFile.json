@@ -12,22 +12,35 @@
       "SpawnerCount": 0,
       "ID": 1,
       "SlotID": 1,
-      "SlotType": 0
+      "SlotType": 8
     },
     {
       "SpawnerCount": 0,
       "ID": 2,
       "SlotID": 2,
-      "SlotType": 0
+      "SlotType": 8
     },
     {
       "SpawnerCount": 0,
       "ID": 3,
       "SlotID": 3,
-      "SlotType": 0
+      "SlotType": 8
     }
   ],
-  "UserCurBullets": [],
+  "UserCurBullets": [
+    {
+      "SpawnerCount": 0,
+      "ID": 1,
+      "SlotID": 1,
+      "SlotType": 6
+    },
+    {
+      "SpawnerCount": 0,
+      "ID": 1,
+      "SlotID": 2,
+      "SlotType": 6
+    }
+  ],
   "UserBulletSlotLockedState": {
     "0": true,
     "1": true,
@@ -37,6 +50,13 @@
   },
   "UserItems": [],
   "UserGems": [],
+  "UserMiracleOddities": [
+    {
+      "ID": 403,
+      "SlotID": 0,
+      "SlotType": 0
+    }
+  ],
   "UserMainStoryProgress": 0,
   "UserStorylineNodesState": [],
   "UserQuests": [
@@ -60,6 +80,60 @@
     },
     {
       "ID": 3,
+      "IsCompleted": false,
+      "State": 1,
+      "DifficultyLevel": 0,
+      "TotalScore": 0,
+      "TotalLoopCount": 0,
+      "ExplorationPercent": 0
+    },
+    {
+      "ID": 50,
+      "IsCompleted": false,
+      "State": 1,
+      "DifficultyLevel": 0,
+      "TotalScore": 0,
+      "TotalLoopCount": 0,
+      "ExplorationPercent": 0
+    },
+    {
+      "ID": 51,
+      "IsCompleted": false,
+      "State": 1,
+      "DifficultyLevel": 0,
+      "TotalScore": 0,
+      "TotalLoopCount": 0,
+      "ExplorationPercent": 0
+    },
+    {
+      "ID": 52,
+      "IsCompleted": false,
+      "State": 1,
+      "DifficultyLevel": 0,
+      "TotalScore": 0,
+      "TotalLoopCount": 0,
+      "ExplorationPercent": 0
+    },
+    {
+      "ID": 100,
+      "IsCompleted": false,
+      "State": 1,
+      "DifficultyLevel": 0,
+      "TotalScore": 0,
+      "TotalLoopCount": 0,
+      "ExplorationPercent": 0
+    },
+    {
+      "ID": 150,
+      "IsCompleted": false,
+      "State": 1,
+      "DifficultyLevel": 0,
+      "TotalScore": 0,
+      "TotalLoopCount": 0,
+      "ExplorationPercent": 0
+    },
+    {
+      "ID": 200,
       "IsCompleted": false,
       "State": 1,
       "DifficultyLevel": 0,

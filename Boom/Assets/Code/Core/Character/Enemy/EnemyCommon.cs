@@ -2,29 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageState
-{
-    public int Ice;
-    public int Fire;
-    public int Electric;
-
-    public DamageState()
-    {
-        Ice = 0;
-        Fire = 0;
-        Electric = 0;
-    }
-}
-
 #region 敌人
-public class EnemyData
+public class EnemyData:IDamageable
 {
     public int ID;
-    public int MaxHP;
-    public int CurHP;
+    public int MaxHP{ get; set;}
+    public int CurHP{ get; set; }
     public EnemyState EState;
     public Award CurAward;
     public List<ShieldData> Shields;
+
     public bool IsDead => CurHP <= 0;
     public event Action OnTakeDamage;
 
@@ -41,12 +28,32 @@ public class EnemyData
         EState = EnemyState.live;
     }
     
-    public EnemyData(){}
-
-    public void TakeDamage(int damage)
+    public EnemyData(int _id,int _hp,List<ShieldData> _shields = null,Award _award = default)
     {
+        ID = _id;
+        MaxHP = _hp;
+        CurHP = _hp;
+        CurAward = _award;
+        Shields = new List<ShieldData>();
+        for (int i = 0; i < _shields.Count; i++)
+        {
+            ShieldData newShield = new ShieldData(_shields[i].MaxHP, i);
+            Shields.Add(newShield);
+        }
+        EState = EnemyState.live;
+    }
+    
+    public DamageResult TakeDamage(BulletData source)
+    {
+        int damage = source.FinalDamage;
+        if (IsDead)
+            return new DamageResult(0, 0, 0, true, -1);
+        int overflow = Mathf.Max(0, damage - CurHP);
+        int effective = damage - overflow;
         CurHP = Mathf.Clamp(CurHP - damage, 0, MaxHP);
+        EState = IsDead ? EnemyState.dead : EnemyState.hit;
         OnTakeDamage?.Invoke();
+        return new DamageResult(damage, effective, overflow, IsDead, /* target index */ -1);
     }
 }
 

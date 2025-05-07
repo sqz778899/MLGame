@@ -33,6 +33,7 @@ public class GameInitializer:MonoBehaviour
         GM.Root.QuestMgr.InitData();
         //5) 读档
         SaveManager.LoadSaveFile();
+        GM.Root.InventoryMgr.InitStep3();//初始化需要读档之后的信息
         
         //5)初始化各种静态类需要的配置
         //............跳字静态类...............

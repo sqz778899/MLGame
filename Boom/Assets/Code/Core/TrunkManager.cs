@@ -10,6 +10,7 @@ public class TrunkManager: ScriptableObject
     #region 策划数据
     List<BulletJson> _bulletDesignJsons;
     List<ItemJson> _itemDesignJsons;
+    List<MiracleOddityJson> _miracleOddityDesignJsons;
     List<GemJson> _gemDesignJsons;
     Dictionary<string,List<DiaSingle>> _dialogueDesignJsons;//对话相关
     List<QuestJson> _questDesignJsons;
@@ -62,6 +63,11 @@ public class TrunkManager: ScriptableObject
         JsonConvert.DeserializeObject<List<TraitJson>>(File.ReadAllText(PathConfig.TraitDesignJson));
     public TraitJson GetTraitJson(int ID)=>TraitDesignJsons.FirstOrDefault(each => each.ID == ID) ?? new TraitJson();
     
+    public List<MiracleOddityJson> MiracleOddityDesignJsons => _miracleOddityDesignJsons ??= LoadMiracleOddityData();
+    public List<MiracleOddityJson> LoadMiracleOddityData()=>
+        JsonConvert.DeserializeObject<List<MiracleOddityJson>>(File.ReadAllText(PathConfig.MiracleOddityDesignJson));
+    public MiracleOddityJson GetMiracleOddityJson(int ID)=>MiracleOddityDesignJsons.FirstOrDefault(each => each.ID == ID) ?? new MiracleOddityJson();
+    
     public void ForceRefresh()
     {
         _bulletDesignJsons = LoadBulletData();
@@ -73,6 +79,7 @@ public class TrunkManager: ScriptableObject
         _dropTableDesignJsons = LoadDropTableData();
         _buffDesignJsons = LoadBuffData();
         _traitDesignJsons = LoadTraitData();
+        _miracleOddityDesignJsons = LoadMiracleOddityData();
     }
     #endregion
     
@@ -83,7 +90,7 @@ public class TrunkManager: ScriptableObject
     public bool IsGamePause = false;
     
     #region NewGame
-    public void SetSaveFileTemplate()
+    void InitDefaultSaveFile()
     {
         _saveFile = new SaveFileJson();
         #region Character
@@ -107,6 +114,8 @@ public class TrunkManager: ScriptableObject
         _saveFile.UserItems = new List<ItemSaveData>();
         //...................Gems..................................
         _saveFile.UserGems = new List<GemBaseSaveData>();
+        //....................MiracleOddity.......................
+        _saveFile.UserMiracleOddities = new List<MiracleOdditySaveData>();
         //...................子弹槽状态..............................
         _saveFile.UserBulletSlotLockedState = new Dictionary<int, bool>
         { {0, true},{1, true},{2,true},{3,true},{4,false} };
@@ -142,6 +151,11 @@ public class TrunkManager: ScriptableObject
         _saveFile.UserMainStoryProgress = 0;
         _saveFile.UserStorylineNodesState = new List<StorylineNodeStateData>();
         #endregion
+    }
+    
+    public void SetSaveFileTemplate()
+    {
+        InitDefaultSaveFile();
 
         string content01 = JsonConvert.SerializeObject(_saveFile,(Formatting) Formatting.Indented);
         File.WriteAllText(PathConfig.SaveFileJson, content01);
@@ -149,124 +163,11 @@ public class TrunkManager: ScriptableObject
     
     public void SetSaveFileFiveSlotsTemplate()
     {
-        _saveFile = new SaveFileJson();
-        #region Character
-        _saveFile.MaxHP = 3;
-        _saveFile.HP = 3;
-        //................UserBulletSpawner...........................
-        List<BulletBaseSaveData> UserBulletSpawner = new List<BulletBaseSaveData>();
-        BulletBaseSaveData spawner01 = new BulletBaseSaveData(1,1,SlotType.SpawnnerSlot,1);
-        spawner01.SpawnerCount = 5;
-        UserBulletSpawner.Add(spawner01);
-        
-        BulletBaseSaveData spawner02 = new BulletBaseSaveData(2,2,SlotType.SpawnnerSlot,1);
-        spawner02.SpawnerCount = 0;
-        UserBulletSpawner.Add(spawner02);
-        
-        BulletBaseSaveData spawner03 = new BulletBaseSaveData(3,3,SlotType.SpawnnerSlot,0);
-        spawner03.SpawnerCount = 0;
-        UserBulletSpawner.Add(spawner03);
-        
-        //...................Items.................................
-        _saveFile.UserItems = new List<ItemSaveData>();
-        //...................Gems..................................
-        _saveFile.UserGems = new List<GemBaseSaveData>();
-        //...................子弹槽状态..............................
+        InitDefaultSaveFile();
         _saveFile.UserBulletSlotLockedState = new Dictionary<int, bool>
-        { {0, true},{1, true},{2,true},{3,true},{4,true} };
-      
-        _saveFile.UserCurBullets = new List<BulletBaseSaveData>();
-        _saveFile.UserBulletSpawner = UserBulletSpawner;
-        _saveFile.Score = 0;
-        _saveFile.Coins = 0;
-        _saveFile.RoomKeys = 0;
+            { {0, true},{1, true},{2,true},{3,true},{4,true} };
         _saveFile.MagicDust = 9999;
-        //_saveFile.UserStandbyBullet = newGameSD;
-        //.................新手教程完成情况........................
-        _saveFile.UserTutorial = new TutorialCompletionStatus();
         
-        _saveFile.UserTalents = new List<TalentData>();
-        foreach (var each in TalentDesignJsons)
-        {
-            TalentData newTalent = new TalentData(each.ID);
-            _saveFile.UserTalents.Add(newTalent);
-        }
-        #endregion
-        
-        #region Quest
-        int questDesignCount = 3;
-        List<QuestSaveData> UserQuests = new List<QuestSaveData>();
-        for (int i = 0; i < questDesignCount; i++)
-        {
-            QuestSaveData newQuest = new QuestSaveData(new Quest(i+1));
-            UserQuests.Add(newQuest);
-        }
-        _saveFile.UserQuests = UserQuests;
-        _saveFile.UserMainStoryProgress = 0;
-        _saveFile.UserStorylineNodesState = new List<StorylineNodeStateData>();
-        #endregion
-
-        string content01 = JsonConvert.SerializeObject(_saveFile,(Formatting) Formatting.Indented);
-        File.WriteAllText(PathConfig.SaveFileJson, content01);
-    }
-    
-    public void SetSaveFileTest()
-    {
-        _saveFile = new SaveFileJson();
-        #region Character
-        _saveFile.MaxHP = 3;
-        _saveFile.HP = 3;
-        //................UserBulletSpawner...........................
-        List<BulletBaseSaveData> UserBulletSpawner = new List<BulletBaseSaveData>();
-        BulletBaseSaveData spawner01 = new BulletBaseSaveData(1,1,SlotType.SpawnnerSlot,1);
-        UserBulletSpawner.Add(spawner01);
-        
-        BulletBaseSaveData spawner02 = new BulletBaseSaveData(2,2,SlotType.SpawnnerSlot,1);
-        spawner02.SpawnerCount = 1;
-        UserBulletSpawner.Add(spawner02);
-        
-        BulletBaseSaveData spawner03 = new BulletBaseSaveData(3,3,SlotType.SpawnnerSlot,0);
-        spawner03.SpawnerCount = 0;
-        UserBulletSpawner.Add(spawner03);
-        
-        //...................Items.................................
-        _saveFile.UserItems = new List<ItemSaveData>();
-        //...................Gems..................................
-        _saveFile.UserGems = new List<GemBaseSaveData>();
-        //...................子弹槽状态..............................
-        _saveFile.UserBulletSlotLockedState = new Dictionary<int, bool>
-        { {0, true},{1, true},{2,false},{3,false},{4,false} };
-      
-        _saveFile.UserCurBullets = new List<BulletBaseSaveData>();
-        _saveFile.UserBulletSpawner = UserBulletSpawner;
-        _saveFile.Score = 0;
-        _saveFile.Coins = 0;
-        _saveFile.RoomKeys = 0;
-        _saveFile.MagicDust = 9999;
-        //.................新手教程完成情况........................
-        _saveFile.UserTutorial = new TutorialCompletionStatus();
-        
-        _saveFile.UserTalents = new List<TalentData>();
-        foreach (var each in TalentDesignJsons)
-        {
-            TalentData newTalent = new TalentData(each.ID);
-            _saveFile.UserTalents.Add(newTalent);
-        }
-        #endregion
-        
-        #region Quest
-        int questDesignCount = 3;
-        List<QuestSaveData> UserQuests = new List<QuestSaveData>();
-        for (int i = 0; i < questDesignCount; i++)
-        {
-            QuestSaveData newQuest = new QuestSaveData(new Quest(i+1));
-            UserQuests.Add(newQuest);
-        }
-        _saveFile.UserQuests = UserQuests;
-        _saveFile.UserMainStoryProgress = 0;
-        _saveFile.UserStorylineNodesState = new List<StorylineNodeStateData>();
-        #endregion
-
         string content01 = JsonConvert.SerializeObject(_saveFile,(Formatting) Formatting.Indented);
         File.WriteAllText(PathConfig.SaveFileJson, content01);
     }

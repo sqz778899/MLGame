@@ -31,6 +31,7 @@ public static class PathConfig
    public static string UserConfigJson = GetDataPrepath() + "Data/UserConfig.json";
    public static string BulletDesignJson = GetDataPrepath() + "Data/BulletDesign.json";
    public static string ItemDesignJson = GetDataPrepath() + "Data/ItemDesign.json";
+   public static string MiracleOddityDesignJson = GetDataPrepath() + "Data/MiracleOddityDesign.json";
    public static string GemDesignJson = GetDataPrepath() + "Data/GemDesign.json";
    public static string QuestDesignJson = GetDataPrepath() + "Data/QuestDesign.json";
    
@@ -59,7 +60,7 @@ public static class PathConfig
    //商店
    public static string RollGemPB = GetPrepath() + "Res/UI/Gem/Prefabs/P_GemInShop_Template.prefab";
    public static string ItemPersistentImageDir = GetPrepath() + "Res/UI/Item/Textures/Persistent/";
-   public static string ItemEquipableImageDir = GetPrepath() + "Res/UI/Item/Textures/Equipable/";
+   public static string MiracleOddityImageDir = GetPrepath() + "Res/UI/Item/Textures/Equipable/";
    public static string GemImageDir = GetPrepath() + "Res/UI/Gem/Textures/";
    public static string TraitImageDir = GetPrepath() + "Res/UI/Item/Textures/Trait/";
    public static string ItemPB = GetPrepath() + "Res/UI/Item/Prefabs/P_Item_Template_01.prefab";
@@ -138,7 +139,14 @@ public static class PathConfig
    {
       string curDir = ItemPersistentImageDir;
       if (Category == ItemCategory.Equipable)
-         curDir = ItemEquipableImageDir;
+         curDir = MiracleOddityImageDir;
+      return curDir + $"{name}.png";
+   }
+   
+   public static string GetMiracleOddityPath(string name)
+   {
+      string curDir = ItemPersistentImageDir;
+      curDir = MiracleOddityImageDir;
       return curDir + $"{name}.png";
    }
 

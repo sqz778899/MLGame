@@ -32,6 +32,12 @@ public class DropedObjEntry
                 Rarity = gemjson.Rarity;
                 Name = gemjson.Name;
                 break;
+            case DropedCategory.MiracleOddity:
+                MiracleOddityJson mojson = TrunkManager.Instance.GetMiracleOddityJson(ID);
+                Icon = ResManager.instance.GetMiracleOddityIcon(ID);
+                Rarity = mojson.Rarity;
+                Name = mojson.Name;
+                break;
             case DropedCategory.Buff:
                 BuffJson buffjson = TrunkManager.Instance.GetBuffJson(ID);
                 Icon = ResManager.instance.GetBuffIcon(ID);
@@ -60,7 +66,7 @@ public static class DropTableService
     
     public static DropedObjEntry Draw(string poolName,int _mapNodeDataID,List<string> clutterTags = null)
     {
-        if (!_dropTables.TryGetValue(poolName, out var entries) || entries.Count == 0)
+        if (!_dropTables.TryGetValue(poolName, out List<DropedObjEntry> entries) || entries.Count == 0)
         {
             Debug.LogError($"DropTableService: 未找到掉落池 {poolName}");
             return null;
@@ -70,9 +76,9 @@ public static class DropTableService
         List<DropedObjEntry> filtered = new List<DropedObjEntry>();
         foreach (DropedObjEntry eachDropedEntry in entries)
         {
-            if (eachDropedEntry.DropedCategory == DropedCategory.Item)
+            if (eachDropedEntry.DropedCategory == DropedCategory.MiracleOddity)
             {
-                if (!GM.Root.InventoryMgr.ItemDuplicateCheck(eachDropedEntry.ID))
+                if (!GM.Root.InventoryMgr.MiracleOdditiesDuplicateCheck(eachDropedEntry.ID))
                     filtered.Add(eachDropedEntry);
             }
             else
@@ -173,6 +179,9 @@ public static class DropRewardService
                 break;
             case DropedCategory.Item:
                 InventoryManager.Instance.AddItemToBag(drop.ID,count);
+                break;
+            case DropedCategory.MiracleOddity:
+                InventoryManager.Instance.EquipMiracleOddity(drop.ID);
                 break;
             default:
                 Debug.LogWarning($"DropRewardService: 未知掉落类型 {drop.DropedCategory}");

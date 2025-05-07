@@ -41,6 +41,7 @@ public class BattleManager: MonoBehaviour
         //3)锁一下地图缩放
         _MapManager.GetComponent<MapMouseControl>().LockMap();
     }
+    
 
     #region 战后UI以及行为
     //胜利结算战报界面
@@ -78,6 +79,7 @@ public class BattleManager: MonoBehaviour
     //战斗失败
     public void FailToThisRoom()
     {
+        //Debug.Log("FailToThisRoom");
         IsInBattle = false;
         battleUI.InitWinFailGUI();
         _MapManager.SwitchMapScene();

@@ -6,7 +6,7 @@ public interface IBuffEffect
     int Id { get; } // 唯一标识
     BuffData Data { get; } // Buff数据
     
-    ItemTriggerTiming TriggerTiming { get; }
+    MiracleOddityTriggerTiming TriggerTiming { get; }
 
     int Stack { get; set; } // 当前层数
     bool IsDebuff { get; }

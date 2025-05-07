@@ -25,5 +25,5 @@ public class Enemy : MonoBehaviour,IDamageable
     public int CurHP => Controller.CurHP;
     public int MaxHP => Controller.MaxHP;
     public Vector3 GetHitPosition() => Controller.GetHitPosition();
-    public DamageResult TakeDamage(BulletData source, int damage) => Controller.TakeDamage(source, damage);
+    public DamageResult TakeDamage(BulletData source) => Controller.TakeDamage(source);
 }
