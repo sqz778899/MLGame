@@ -35,7 +35,7 @@ public enum ElementalTypes
     Non = 1,
     Ice = 2,
     Fire = 3,
-    Electric = 4
+    Thunder = 4
 }
 #endregion
 

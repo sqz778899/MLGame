@@ -44,6 +44,7 @@ public class EternalCavans : MonoBehaviour
     public GameObject GUIFightMapRootGO;
     public GameObject WarReportGO;
     public Simulator SimulatorSC;
+    public ElementZoneRoot ElementZoneRootSC;
     public GameObject WinGUI;
     public GameObject FailGUI;
     public GameObject ConquerTheLevel;

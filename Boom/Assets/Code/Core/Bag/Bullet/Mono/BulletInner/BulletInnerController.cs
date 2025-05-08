@@ -89,9 +89,18 @@ public class BulletInnerController
             // 若标记了跳过命中，则不进行伤害结算
             if (ctx.ShieldSkipCount) return;
             #endregion
+
+            //子弹第一次命中压入元素场域
+            if (_piercingCount == 0)
+                GM.Root.BattleMgr.elementZoneMgr.ApplyZone(Data);
             
             // 命中处理：伤害结算
             DamageResult result = target.TakeDamage(Data);
+            
+            // 处理元素反应伤害结算
+            if (_piercingCount >= Data.FinalPiercing)
+                GM.Root.BattleMgr.elementZoneMgr.TriggerReaction();
+            
             _view.PlayHitEffect();
             
             #region 触发 OnBulletHitAfter 的Cash 相关道具&&Buff
@@ -102,7 +111,9 @@ public class BulletInnerController
             // 战报记录
             RecordBattleHit(result, target);
             if (_piercingCount >= Data.FinalPiercing)
+            {
                 _state = BulletInnerState.Dead;
+            }
             _piercingCount++;
             if (target is Enemy) //最后一个如果是敌人，则不再贯穿
                 _state = BulletInnerState.Dead;

@@ -78,7 +78,7 @@ public class Tooltips : MonoBehaviour
             _ => Common
         };
         //
-        Badge.SetActive(toolTipsInfo.Category == ItemCategory.Persistent);
+        Badge.SetActive(true);
     }
     
     void SetGemBulletInfo(ToolTipsInfo toolTipsInfo)
@@ -145,7 +145,7 @@ public class Tooltips : MonoBehaviour
                 {
                     ElementalTypes.Fire => "火",
                     ElementalTypes.Ice => "冰",
-                    ElementalTypes.Electric => "电",
+                    ElementalTypes.Thunder => "雷",
                     _ => "无"
                 };
                 attriSingleTexts[1].text = curEleStr;

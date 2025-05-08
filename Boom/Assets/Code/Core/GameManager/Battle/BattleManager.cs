@@ -7,6 +7,7 @@ public class BattleManager: MonoBehaviour
     
     public BattleData battleData;
     public BattleLogic battleLogic;
+    public ElementZoneManager elementZoneMgr;
     public BattleUIController battleUI;
 
     public bool IsInBattle = false;
@@ -51,10 +52,7 @@ public class BattleManager: MonoBehaviour
         battleUI.ShowWarReport();
     }
     
-    public void WarReportContinue()
-    {
-        battleUI.WarReportContinue();
-    }
+    public void WarReportContinue() => battleUI.WarReportContinue();
     
     //赢得战斗
     public void WinToNextRoom()
@@ -101,6 +99,7 @@ public class BattleManager: MonoBehaviour
         else
             Destroy(gameObject);
         battleData = ResManager.instance.GetAssetCache<BattleData>(PathConfig.BattleDataPath);
+        elementZoneMgr = new ElementZoneManager();
     }
     #endregion
     

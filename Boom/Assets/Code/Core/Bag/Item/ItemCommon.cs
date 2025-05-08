@@ -31,8 +31,6 @@ public class ItemData : ItemDataBase,ITooltipBuilder
     public DropedRarity Rarity;
 
     public IMiracleOddityEffect EffectLogic; // 每个道具一个策略实现
-    //区分是否是任务物品
-    public ItemCategory Category { get; private set; }
 
     #region 物品堆叠支持
     public PersistentItemType PersistentType { get; private set; }
@@ -51,10 +49,8 @@ public class ItemData : ItemDataBase,ITooltipBuilder
         }
     }
     public int MaxStackCount; // 最大堆叠数量
-    public bool IsStackable => Category == ItemCategory.Persistent && PersistentType == PersistentItemType.Resource;
+    public bool IsStackable => PersistentType == PersistentItemType.Resource;
     #endregion
-    public bool IsEquipable => Category == ItemCategory.Equipable;
-    public bool IsPersistent => Category == ItemCategory.Persistent;
 
     public ItemData(int id,ItemSlotController itemSlotController)
     {
@@ -64,7 +60,6 @@ public class ItemData : ItemDataBase,ITooltipBuilder
         Name = json.Name;
         Desc = json.Desc;
         Rarity = json.Rarity;
-        Category = json.Category;
         PersistentType = json.PersistentType;
         ImageName = json.ResName;
         EffectLogic = MiracleOddityEffectFactory.CreateEffectLogic(ID);
@@ -75,16 +70,10 @@ public class ItemData : ItemDataBase,ITooltipBuilder
         StackCount = 1;
     }
     
-    public void ApplyEffectCash(BattleContext ctx) => EffectLogic?.ApplyCash(ctx);
-
-    public void ApplyEffect(BattleContext ctx) => EffectLogic?.Apply(ctx);
-    
-    public void RemoveEffect() => EffectLogic?.RemoveEffect();
-    
     public ToolTipsInfo BuildTooltip()
     {
         ToolTipsInfo info = new ToolTipsInfo(Name,Level,Desc, ToolTipsType.Item,
-            Rarity,Category,PersistentType);
+            Rarity,PersistentType);
         return info;
     }
 }

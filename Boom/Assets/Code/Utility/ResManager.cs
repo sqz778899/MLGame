@@ -22,7 +22,7 @@ public class ResManager : Singleton<ResManager>
     public Sprite GetItemIcon(int id)
     {
         ItemJson json = TrunkManager.Instance.GetItemJson(id);
-        string AssetPath = PathConfig.GetItemPath(json.ResName, json.Category);
+        string AssetPath = PathConfig.GetItemPath(json.ResName);
         return GetAssetCache<Sprite>(AssetPath);
     }
     

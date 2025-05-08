@@ -61,6 +61,8 @@ public class InLevelState : IFightState
         {
             //停止模拟
             GM.Root.BattleMgr.battleUI.StopSimulate();
+            //元素反应数据初始化
+            GM.Root.BattleMgr.elementZoneMgr.InitDataOnFire();
             //触发开火
             GM.Root.InventoryMgr.MiracleOddityMrg.Trigger(MiracleOddityTriggerTiming.OnBulletFire);
             

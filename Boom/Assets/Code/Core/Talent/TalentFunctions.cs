@@ -47,7 +47,7 @@ public class CarryGemTalentStrategy : ITalentUnlockStrategy
 public class CarryBulletTalentStrategy : ITalentUnlockStrategy
 {
     public void Learn(TalentJson talent)=>
-        GM.Root.InventoryMgr._BulletInvData.AddSpawner(talent.EffectID);
+        GM.Root.InventoryMgr.AddSpawner(talent.EffectID);
 }
 // 携带钥匙
 public class CarryRoomKeyTalentStrategy : ITalentUnlockStrategy

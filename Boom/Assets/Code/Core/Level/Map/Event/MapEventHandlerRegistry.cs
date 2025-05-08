@@ -69,7 +69,7 @@ public class BulletEventHandler : IMapEventHandler
         void OnDialogueEnd()
         {
             dialogue.OnDialogueEnd -= OnDialogueEnd;
-            InventoryManager.Instance._BulletInvData.AddSpawner(runtime.BulletID);
+            GM.Root.InventoryMgr.AddSpawner(runtime.BulletID);
 
             BulletJson bulletDesignJson = TrunkManager.Instance.BulletDesignJsons
                 .FirstOrDefault(b => b.ID == runtime.BulletID) ?? new BulletJson();

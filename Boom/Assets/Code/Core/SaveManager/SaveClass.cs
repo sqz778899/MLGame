@@ -138,11 +138,12 @@ public class BulletJson : ItemJsonBase
     public int Damage;
     public int Piercing;
     public int Resonance;
+    public int ElementalInfusionValue;
     //资产相关
     public string HitEffectName;
 
     public BulletJson(int _id = -1, string _name = "", int _level = 1,int _elementalType = -1,
-        int _damage = 0, int _piercing = 0, int _resonance = 0,string _hitEffectName = "")
+        int _damage = 0, int _piercing = 0, int _resonance = 0,int _ElementalInfusionValue = 0,string _hitEffectName = "")
     {
         ID = _id;
         Name = _name;
@@ -151,6 +152,7 @@ public class BulletJson : ItemJsonBase
         Damage = _damage;
         Piercing = _piercing;
         Resonance = _resonance;
+        ElementalInfusionValue = _ElementalInfusionValue;
         Price = 0;
         HitEffectName = _hitEffectName;
     }
@@ -186,7 +188,6 @@ public class ItemJson:ItemJsonBase
     public string ResName;
     public string Desc;
     public string Flavor;
-    public ItemCategory Category;
     public PersistentItemType PersistentType;
     
     public ItemJson(int _id = -1, string _name = "",int rarity = -1,

@@ -309,6 +309,7 @@ public class BulletData:ItemDataBase,ITooltipBuilder
     public int Damage;
     public int Piercing;
     public int Resonance;
+    public int ElementalInfusionValue; //元素灌注值
     public ElementalTypes ElementalType;
     
     //动态数据层 运行时数据
@@ -316,7 +317,7 @@ public class BulletData:ItemDataBase,ITooltipBuilder
     public int FinalDamage;
     public int FinalPiercing;
     public int FinalResonance;
-    public bool IsResonance; //是否开启共振
+    public int FinalElementalInfusionValue;
     public List<IBulletModifier> Modifiers = new();
 
     #region 针对buff道具等进行的属性增加
@@ -404,7 +405,7 @@ public class BulletData:ItemDataBase,ITooltipBuilder
         Damage = json.Damage;
         Piercing = json.Piercing;
         Resonance = json.Resonance;
-        
+        ElementalInfusionValue = json.ElementalInfusionValue;
         ElementalType = (ElementalTypes)json.ElementalType;
         SyncFinalAttributes();
     }
@@ -414,6 +415,8 @@ public class BulletData:ItemDataBase,ITooltipBuilder
         FinalDamage = Damage;
         FinalPiercing = Piercing;
         FinalResonance = Resonance;
+        FinalElementalInfusionValue = ElementalInfusionValue;
+        
         Modifiers.ForEach(mo => mo.Modify(this));//处理宝石
         //处理临时Buff
         foreach (var each in triggeredTempBuffs)

@@ -135,20 +135,8 @@ public static class PathConfig
       return LevelAssetDir + $"P_Level_{levelID.ToString("00")}.prefab";
    }
    //获得宝石资产的路径
-   public static string GetItemPath(string name,ItemCategory Category)
-   {
-      string curDir = ItemPersistentImageDir;
-      if (Category == ItemCategory.Equipable)
-         curDir = MiracleOddityImageDir;
-      return curDir + $"{name}.png";
-   }
-   
-   public static string GetMiracleOddityPath(string name)
-   {
-      string curDir = ItemPersistentImageDir;
-      curDir = MiracleOddityImageDir;
-      return curDir + $"{name}.png";
-   }
+   public static string GetItemPath(string name) => ItemPersistentImageDir + $"{name}.png";
+   public static string GetMiracleOddityPath(string name) => MiracleOddityImageDir + $"{name}.png";
 
    public static string GetTraitPath(string name) => $"{TraitImageDir}{name}.png";
    //获得宝石资产的路径

@@ -9,6 +9,7 @@ public class BattleUIController
     EnemyMiniMapView EnemyMiniMapSC => EternalCavans.Instance.EnemyMiniMapSC;
     BattleData _battleData => GM.Root.BattleMgr.battleData;
     Simulator _simulator => EternalCavans.Instance.SimulatorSC;
+    ElementZoneRoot _elementZoneRoot => EternalCavans.Instance.ElementZoneRootSC;
     
     //一些GUI")]
     GameObject warReportRootGUI =>EternalCavans.Instance.WarReportGO;
@@ -24,6 +25,8 @@ public class BattleUIController
         EnemyMiniMapSC.Bind(_battleData.CurEnemy.Controller._data);
         //初始化胜率界面
         _simulator.InitData();
+        //初始化元素反应界面
+        _elementZoneRoot.InitData();
     }
     
     public void ShowWarReport()

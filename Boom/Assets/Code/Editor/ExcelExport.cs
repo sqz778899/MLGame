@@ -38,7 +38,7 @@ namespace Code.Editor
         {
             DataSet curTables = GetDataSet();
             List<BulletJson> curBulletDesign = new List<BulletJson>();
-            DataTable curTable = curTables.Tables["BulletDesign"];
+            DataTable curTable = curTables.Tables["子弹设计"];
 
             for (int i = 1; i < curTable.Rows.Count; i++)
             {
@@ -48,8 +48,7 @@ namespace Code.Editor
                 curData.Level = int.Parse(curTable.Rows[i][1].ToString());
                 curData.Name = curTable.Rows[i][2].ToString();
                 curData.Damage = int.Parse(curTable.Rows[i][3].ToString());
-                curData.Piercing = int.Parse(curTable.Rows[i][4].ToString());
-                curData.Resonance = 0;
+                curData.ElementalInfusionValue = int.Parse(curTable.Rows[i][4].ToString());
                 curData.ElementalType = int.Parse(curTable.Rows[i][5].ToString());
                 curData.HitEffectName = curTable.Rows[i][6].ToString();
                 curBulletDesign.Add(curData);
@@ -85,23 +84,7 @@ namespace Code.Editor
         public void ExportItem()
         {
             DataSet curTables = GetDataSet();
-            DataTable curTable = curTables.Tables["奇迹物件设计"];
-            
             List<ItemJson> curItemDesign = new List<ItemJson>();
-            for (int i = 1; i < curTable.Rows.Count; i++)
-            {
-                ItemJson curItem = new ItemJson();
-                if (curTable.Rows[i][1].ToString() == "") continue;
-                curItem.ID = GetCellInt(curTable.Rows[i][0].ToString());
-                curItem.Name = curTable.Rows[i][1].ToString();
-                curItem.Rarity = (DropedRarity)GetCellInt(curTable.Rows[i][2].ToString());
-                curItem.Desc = curTable.Rows[i][3].ToString();
-                curItem.Price = GetCellInt(curTable.Rows[i][4].ToString());
-                curItem.Flavor = curTable.Rows[i][5].ToString();
-                curItem.ResName = curTable.Rows[i][6].ToString();
-                curItem.Category = ItemCategory.Equipable;
-                curItemDesign.Add(curItem);
-            }
             
             DataTable persistentTable = curTables.Tables["局外物品设计"];
             for (int i = 1; i < persistentTable.Rows.Count; i++)
@@ -115,7 +98,6 @@ namespace Code.Editor
                 curItem.Desc = persistentTable.Rows[i][4].ToString();
                 curItem.Price = GetCellInt(persistentTable.Rows[i][5].ToString());
                 curItem.ResName = persistentTable.Rows[i][6].ToString();
-                curItem.Category = ItemCategory.Persistent;
                 if (typeStr == "任务道具")
                     curItem.PersistentType = PersistentItemType.QuestItem;
                 if (typeStr == "养成道具")

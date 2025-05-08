@@ -25,13 +25,6 @@ public enum DropedCategory
     MiracleOddity = 4
 }
 
-//Item类划分
-public enum ItemCategory
-{
-    Equipable = 0,       // 原有的可装备型道具
-    Persistent = 1,      // 新增：可保留、无效果型道具
-}
-
 //Item的Persistent类型划分
 public enum PersistentItemType
 {

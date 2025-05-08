@@ -5,31 +5,34 @@
     "Damage": 1,
     "Piercing": 0,
     "Resonance": 0,
+    "ElementalInfusionValue": 0,
     "HitEffectName": "FX_Bullet01_hit",
     "ID": 1,
-    "Name": "黏土子弹",
+    "Name": "黏黏团子",
     "Price": 0
   },
   {
     "Level": 2,
     "ElementalType": 1,
-    "Damage": 2,
+    "Damage": 4,
     "Piercing": 0,
     "Resonance": 0,
+    "ElementalInfusionValue": 0,
     "HitEffectName": "FX_Bullet01_hit",
     "ID": 101,
-    "Name": "硬质子弹",
+    "Name": "\t硬崽",
     "Price": 0
   },
   {
     "Level": 3,
     "ElementalType": 1,
-    "Damage": 5,
+    "Damage": 10,
     "Piercing": 0,
     "Resonance": 0,
+    "ElementalInfusionValue": 0,
     "HitEffectName": "FX_Bullet01_hit",
     "ID": 201,
-    "Name": "黑曜石子弹",
+    "Name": "黑曜噗噗拳",
     "Price": 0
   },
   {
@@ -38,9 +41,10 @@
     "Damage": 1,
     "Piercing": 0,
     "Resonance": 0,
+    "ElementalInfusionValue": 1,
     "HitEffectName": "FX_Bullet02_hit",
     "ID": 2,
-    "Name": "Ice01",
+    "Name": "牙疼丸子冰",
     "Price": 0
   },
   {
@@ -49,20 +53,22 @@
     "Damage": 3,
     "Piercing": 0,
     "Resonance": 0,
+    "ElementalInfusionValue": 3,
     "HitEffectName": "FX_Bullet02_hit",
     "ID": 102,
-    "Name": "Ice02",
+    "Name": "冷脸子",
     "Price": 0
   },
   {
     "Level": 3,
     "ElementalType": 2,
-    "Damage": 6,
+    "Damage": 5,
     "Piercing": 0,
     "Resonance": 0,
+    "ElementalInfusionValue": 6,
     "HitEffectName": "FX_Bullet02_hit",
     "ID": 202,
-    "Name": "Ice03",
+    "Name": "\t冻霸",
     "Price": 0
   },
   {
@@ -71,9 +77,10 @@
     "Damage": 1,
     "Piercing": 0,
     "Resonance": 0,
+    "ElementalInfusionValue": 1,
     "HitEffectName": "FX_Bullet03_hit",
     "ID": 3,
-    "Name": "Fire01",
+    "Name": "火豆",
     "Price": 0
   },
   {
@@ -82,20 +89,58 @@
     "Damage": 2,
     "Piercing": 0,
     "Resonance": 0,
+    "ElementalInfusionValue": 3,
     "HitEffectName": "FX_Bullet03_hit",
     "ID": 103,
-    "Name": "Fire02",
+    "Name": "焦球",
     "Price": 0
   },
   {
     "Level": 3,
     "ElementalType": 3,
-    "Damage": 7,
+    "Damage": 5,
     "Piercing": 0,
     "Resonance": 0,
+    "ElementalInfusionValue": 6,
     "HitEffectName": "FX_Bullet03_hit",
     "ID": 203,
-    "Name": "Fire03",
+    "Name": "烧嘟嘟",
+    "Price": 0
+  },
+  {
+    "Level": 1,
+    "ElementalType": 4,
+    "Damage": 1,
+    "Piercing": 0,
+    "Resonance": 0,
+    "ElementalInfusionValue": 1,
+    "HitEffectName": "FX_Bullet04_hit",
+    "ID": 4,
+    "Name": "啪子",
+    "Price": 0
+  },
+  {
+    "Level": 2,
+    "ElementalType": 4,
+    "Damage": 2,
+    "Piercing": 0,
+    "Resonance": 0,
+    "ElementalInfusionValue": 3,
+    "HitEffectName": "FX_Bullet04_hit",
+    "ID": 104,
+    "Name": "电球球",
+    "Price": 0
+  },
+  {
+    "Level": 3,
+    "ElementalType": 4,
+    "Damage": 5,
+    "Piercing": 0,
+    "Resonance": 0,
+    "ElementalInfusionValue": 6,
+    "HitEffectName": "FX_Bullet04_hit",
+    "ID": 204,
+    "Name": "雷咚",
     "Price": 0
   }
 ]

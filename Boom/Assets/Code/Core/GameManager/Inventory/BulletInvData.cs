@@ -130,8 +130,6 @@ public class BulletInvData : ScriptableObject
                 resonanceCount = 0;*/
             
             resonanceCount++;
-            preBullet.IsResonance = true;
-            nextBullet.IsResonance = true;
             nextBullet.ResonanceDamage = 0;
             nextBullet.ResonanceDamage += nextBullet.FinalResonance * resonanceCount;
             nextBullet.SyncFinalAttributes();

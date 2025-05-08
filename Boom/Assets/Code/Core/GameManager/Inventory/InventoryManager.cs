@@ -60,6 +60,9 @@ public class InventoryManager : MonoBehaviour
     #endregion
 
     #region 子弹的一些外部操作
+
+    public void AddSpawner(int id) => _BulletInvData.AddSpawner(id);
+   
     public void AddBulletToFight(BulletData bulletData)
     {
         BulletInner bulletInnerSC = BulletFactory.CreateBullet(bulletData, BulletInsMode.Inner) as BulletInner;

@@ -11,13 +11,7 @@ public class BattleLogic : MonoBehaviour
     [Header("Camera")] 
     public bool IsBeginCameraMove;    //是否开始摄像机移动,外部唯一关心参数
     public BattleCameraController _battleCameraController;
-    BattleData _battleData;
-    
-    void Start()
-    {
-        TrunkManager.Instance.IsGamePause = false;
-        _battleData = BattleManager.Instance.battleData;
-    }
+    BattleData _battleData => GM.Root.BattleMgr.battleData;
 
     void Update()
     {

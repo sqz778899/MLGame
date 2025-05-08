@@ -9,7 +9,7 @@
   "MagicDust": 0,
   "UserBulletSpawner": [
     {
-      "SpawnerCount": 0,
+      "SpawnerCount": 2,
       "ID": 1,
       "SlotID": 1,
       "SlotType": 8
@@ -30,13 +30,13 @@
   "UserCurBullets": [
     {
       "SpawnerCount": 0,
-      "ID": 1,
+      "ID": 2,
       "SlotID": 1,
       "SlotType": 6
     },
     {
       "SpawnerCount": 0,
-      "ID": 1,
+      "ID": 3,
       "SlotID": 2,
       "SlotType": 6
     }

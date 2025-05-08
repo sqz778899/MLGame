@@ -46,9 +46,32 @@ public class GMTools
     [InlineButton("AddMiracleOddity","获得奇迹物件")]
     public int MiracleOddityID;
     void AddMiracleOddity() => GM.Root.InventoryMgr.EquipMiracleOddity(MiracleOddityID);
+
+    [TitleGroup("子弹添加"),PropertyOrder(5)]
+    public int v;
+    [PropertyOrder(5)]
+    [HorizontalGroup("子弹", 0.25f)]
+    [Button("黏土子弹Lv1", ButtonSizes.Large)]
+    void AddBullet1() => GM.Root.InventoryMgr.AddSpawner(1);
+    
+    [PropertyOrder(5)]
+    [HorizontalGroup("子弹", 0.25f)]
+    [Button("冰冻子弹Lv1", ButtonSizes.Large)]
+    void AddBullet2() => GM.Root.InventoryMgr.AddSpawner(2);
+    
+    [PropertyOrder(5)]
+    [HorizontalGroup("子弹", 0.25f)]
+    [Button("火焰子弹Lv1", ButtonSizes.Large)]
+    void AddBullet3() => GM.Root.InventoryMgr.AddSpawner(3);
+    
+    [PropertyOrder(5)]
+    [HorizontalGroup("子弹", 0.25f)]
+    [Button("雷电子弹Lv1", ButtonSizes.Large)]
+    void AddBullet4() => GM.Root.InventoryMgr.AddSpawner(4);
+    
     
     [Title("解锁子弹槽")]
-    [Button("解锁子弹槽",ButtonSizes.Large),PropertyOrder(5)]
+    [Button("解锁子弹槽",ButtonSizes.Large),PropertyOrder(6)]
     void UnlockBulletSlot()
     {
         for (int i = 0; i < 5; i++)
