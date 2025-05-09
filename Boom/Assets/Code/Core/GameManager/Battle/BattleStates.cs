@@ -35,6 +35,8 @@ public class InLevelState : IFightState
     
     public void Update()
     {
+        //战斗锁时停
+        if (BattleManager.Instance.battleFlowLock.IsReactionPlaying) return;
         // 检查战斗是否结束：子弹用完或敌人死亡
         if (_battleLogic.IsBattleOver())
         {
@@ -59,12 +61,7 @@ public class InLevelState : IFightState
         
         if (Input.GetKeyDown(KeyCode.Space) && !_battleData.IsAttacking)
         {
-            //停止模拟
-            GM.Root.BattleMgr.battleUI.StopSimulate();
-            //元素反应数据初始化
-            GM.Root.BattleMgr.elementZoneMgr.InitDataOnFire();
-            //触发开火
-            GM.Root.InventoryMgr.MiracleOddityMrg.Trigger(MiracleOddityTriggerTiming.OnBulletFire);
+            BattleEventBus.StartOnFire();
             
             _battleData.IsAttacking = true;
             _battleData.IsAfterAttack = true;

@@ -229,7 +229,7 @@ public class L1Step3Battle : TutorialStepBase
     
     public void Update()
     {
-        if (BattleManager.Instance.IsInBattle) BeginBattle();
+        //if (BattleManager.Instance.IsInBattle) BeginBattle();
     }
 
     void BeginBattle()
@@ -463,11 +463,11 @@ public class L1Step5DragBullet : TutorialStepBase
         if (BattleManager.Instance._MapManager == null) return;
         if (BattleManager.Instance._MapManager.CurMapSate.CurRoomID == 5)
         {
-            if (BattleManager.Instance.IsInBattle)
+            /*if (BattleManager.Instance.IsInBattle)
             {
                 GM.Root.GlobalTickerMgr.OnUpdate -= Update;
                 BeginDrag();
-            }
+            }*/
         }
     }
 

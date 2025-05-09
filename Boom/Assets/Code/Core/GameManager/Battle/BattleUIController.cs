@@ -27,6 +27,9 @@ public class BattleUIController
         _simulator.InitData();
         //初始化元素反应界面
         _elementZoneRoot.InitData();
+
+        BattleEventBus.OnFire -= StopSimulate;
+        BattleEventBus.OnFire += StopSimulate;
     }
     
     public void ShowWarReport()
@@ -51,8 +54,8 @@ public class BattleUIController
         }
     }
 
-    public void StopSimulate() =>
-        _simulator.StopSimulate();
+    //停止模拟
+    public void StopSimulate() => _simulator.StopSimulate();
 
     public void InitWinFailGUI()
     {

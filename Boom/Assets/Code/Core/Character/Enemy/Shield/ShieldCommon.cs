@@ -17,16 +17,9 @@ public class ShieldData:IDamageable
         ShieldIndex = index;
     }
     
-    public DamageResult TakeDamage(BulletData source)
-    {
-        int damage = source.FinalDamage;
-        int overflow = Mathf.Max(0, damage - CurHP);
-        int effective = damage - overflow;
-        CurHP = Mathf.Clamp(CurHP - damage, 0, MaxHP);
-        EState = IsDead ? EnemyState.dead : EnemyState.hit;
-        OnTakeDamage?.Invoke();
-        return new DamageResult(damage, effective, overflow, IsDead, ShieldIndex);
-    }
+    #region 伤害计算相关
+    public DamageResult TakeDamage(BulletData source) => DealDamage(source.FinalDamage);
+    public DamageResult TakeReactionDamage(int damage) => DealDamage(damage);
     
     public void ModifyHP(int amount)
     {
@@ -34,6 +27,18 @@ public class ShieldData:IDamageable
         CurHP = MaxHP;
         OnTakeDamage?.Invoke();
     }
+    DamageResult DealDamage(int damage)
+    {
+        if (IsDead)
+            return new DamageResult(0, 0, 0, true, -1);
+        int overflow = Mathf.Max(0, damage - CurHP);
+        int effective = damage - overflow;
+        CurHP = Mathf.Clamp(CurHP - damage, 0, MaxHP);
+        EState = IsDead ? EnemyState.dead : EnemyState.hit;
+        OnTakeDamage?.Invoke();
+        return new DamageResult(damage, effective, overflow, IsDead, -1);
+    }
+    #endregion
 }
 
 [Serializable]

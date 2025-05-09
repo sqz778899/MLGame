@@ -4,7 +4,7 @@ using System.Linq;
 
 public class ShieldController
 {
-    ShieldData _data;
+    public ShieldData _data { get; private set; }
     ShieldView _view;
     
     MonoBehaviour _coroutineHost; // 用于挂载协程
@@ -51,6 +51,17 @@ public class ShieldController
         DamageResult result = _data.TakeDamage(source);
         //表现相关
         _view.ShowHitText(source.FinalDamage); //伤害跳字
+        if (_hitRoutine != null)
+            _coroutineHost.StopCoroutine(_hitRoutine);
+        _hitRoutine = _coroutineHost.StartCoroutine(HitToIdle());
+        return  result;
+    }
+    public DamageResult TakeReactionDamage(int damage)
+    {
+        //计算完全交给Data
+        DamageResult result = _data.TakeReactionDamage(damage);
+        //表现相关
+        _view.ShowHitText(damage); //伤害跳字
         if (_hitRoutine != null)
             _coroutineHost.StopCoroutine(_hitRoutine);
         _hitRoutine = _coroutineHost.StartCoroutine(HitToIdle());

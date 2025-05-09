@@ -9,7 +9,14 @@ public class MiracleOddityManager
     List<MiracleOddityData> equipMiracleOddities => GM.Root.InventoryMgr._InventoryData.EquipMiracleOddities;
     List<MiracleOddityData> _activeAllTimeMiracleOddities = new();
 
-    public void InitData() => ApplyAlltimesEffectsToBullets();
+    public void InitData()
+    {
+        BattleEventBus.OnFire -= TriggerOnBulletFire;
+        BattleEventBus.OnFire += TriggerOnBulletFire;
+        ApplyAlltimesEffectsToBullets();
+    }
+    //触发开火时奇迹物件特性
+    public void TriggerOnBulletFire() => Trigger(MiracleOddityTriggerTiming.OnBulletFire);
 
     //常规根据Timing触发
     public void Trigger(MiracleOddityTriggerTiming timing,BattleContext ctx = null)

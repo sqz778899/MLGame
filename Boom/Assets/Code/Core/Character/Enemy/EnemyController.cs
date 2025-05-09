@@ -70,5 +70,19 @@ public class EnemyController
 
         return result;
     }
+    
+    //空实现。因为元素反应的伤害不在这里处理
+    public DamageResult TakeReactionDamage(int damage)
+    {
+        //计算完全交给Data
+        DamageResult result = _data.TakeReactionDamage(damage);
+        //表现相关
+        _view.ShowHitText(damage); //伤害跳字
+        if (_hitRoutine != null)
+            _coroutineHost.StopCoroutine(_hitRoutine);
+        _hitRoutine = _coroutineHost.StartCoroutine(HitToIdle());
+        return  result;
+    }
+
     #endregion
 }

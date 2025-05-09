@@ -1,10 +1,14 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class BattleData: ScriptableObject
 {
     [Header("角色")] 
     public Enemy CurEnemy;
+    public List<Shield> CurShields;
     public RoleInner CurRole;
+    public IDamageable CurDamageable;//实时更新的当前命中目标
+    public BulletData CurAttackBullet;//实时更新的当前命中的子弹
     
     [Header("战报")]
     public WarReport CurWarReport;
@@ -35,6 +39,7 @@ public class BattleData: ScriptableObject
         CurRole.InitData(CurLevel);//初始化角色数据
         CurLevel.SetEnemy(_enemyConfig);//初始化敌人属性
         CurEnemy = CurLevel.CurEnemy;
+        CurShields = CurEnemy.GetComponent<EnemyView>().Shields;
         //初始化各类数据
         IsBattleEnded = false;
         IsAttacking = false;

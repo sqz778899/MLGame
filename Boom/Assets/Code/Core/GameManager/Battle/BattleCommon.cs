@@ -5,6 +5,7 @@ using UnityEngine;
 public interface IDamageable
 {
     DamageResult TakeDamage(BulletData source);
+    DamageResult TakeReactionDamage(int damage);
     bool IsDead { get; }
     int CurHP { get; }
     int MaxHP { get; }

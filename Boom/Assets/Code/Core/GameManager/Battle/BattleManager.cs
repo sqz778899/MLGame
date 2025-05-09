@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 
 public class BattleManager: MonoBehaviour
@@ -9,29 +10,14 @@ public class BattleManager: MonoBehaviour
     public BattleLogic battleLogic;
     public ElementZoneManager elementZoneMgr;
     public BattleUIController battleUI;
-
-    public bool IsInBattle = false;
-
-    #region 事件的注册和注销
-    void Start()
-    {
-        EternalCavans.Instance.OnFightContinue += WarReportContinue;
-        EternalCavans.Instance.OnWinToNextRoom += WinToNextRoom;
-        EternalCavans.Instance.OnFailToThisRoom += FailToThisRoom;
-    }
-    void OnDestroy()
-    {
-        EternalCavans.Instance.OnFightContinue -= WarReportContinue;
-        EternalCavans.Instance.OnWinToNextRoom -= WinToNextRoom;
-        EternalCavans.Instance.OnFailToThisRoom -= FailToThisRoom;
-    }
-    #endregion
+    
+    //战斗流程控制锁，做时停用
+    public BattleFlowLock battleFlowLock { get; private set; } = new();
 
     //进入战斗唯一入口
     public void EnterFight(EnemyConfigData _enemyConfig,int _levelID)
     {
         InitData();
-        IsInBattle = true;
         //1)进入战斗场景
         _MapManager.SwitchFightScene();
         //2)初始化战斗数据
@@ -57,7 +43,6 @@ public class BattleManager: MonoBehaviour
     //赢得战斗
     public void WinToNextRoom()
     {
-        IsInBattle = false;
         battleUI.InitWinFailGUI();
         //结算之后抽一发奖励
         ShowWinReward(() =>
@@ -78,7 +63,6 @@ public class BattleManager: MonoBehaviour
     public void FailToThisRoom()
     {
         //Debug.Log("FailToThisRoom");
-        IsInBattle = false;
         battleUI.InitWinFailGUI();
         _MapManager.SwitchMapScene();
         _MapManager.ToCurRoom();
@@ -100,12 +84,35 @@ public class BattleManager: MonoBehaviour
             Destroy(gameObject);
         battleData = ResManager.instance.GetAssetCache<BattleData>(PathConfig.BattleDataPath);
         elementZoneMgr = new ElementZoneManager();
+        elementZoneMgr.InitData();
     }
     #endregion
     
+    #region 初始化以及事件的注册和注销
     void InitData()
     {
         battleLogic ??= GameObject.Find("BattleLogic").GetComponent<BattleLogic>();
         battleUI ??= new BattleUIController();
     }
+    void Start()
+    {
+        EternalCavans.Instance.OnFightContinue += WarReportContinue;
+        EternalCavans.Instance.OnWinToNextRoom += WinToNextRoom;
+        EternalCavans.Instance.OnFailToThisRoom += FailToThisRoom;
+    }
+    void OnDestroy()
+    {
+        EternalCavans.Instance.OnFightContinue -= WarReportContinue;
+        EternalCavans.Instance.OnWinToNextRoom -= WinToNextRoom;
+        EternalCavans.Instance.OnFailToThisRoom -= FailToThisRoom;
+    }
+    #endregion
+}
+
+public class BattleFlowLock
+{
+    public bool IsReactionPlaying { get; private set; }
+
+    public void LockReaction() => IsReactionPlaying = true;
+    public void UnlockReaction() => IsReactionPlaying = false;
 }

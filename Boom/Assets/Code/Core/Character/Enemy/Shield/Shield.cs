@@ -19,4 +19,5 @@ public class Shield : MonoBehaviour,IDamageable
     public int CurHP => Controller.CurHP;
     public int MaxHP => Controller.MaxHP;
     public DamageResult TakeDamage(BulletData source) => Controller.TakeDamage(source);
+    public DamageResult TakeReactionDamage(int damage) => Controller.TakeReactionDamage(damage);
 }

@@ -110,6 +110,10 @@ public class TrunkManager: ScriptableObject
         spawner03.SpawnerCount = 0;
         UserBulletSpawner.Add(spawner03);
         
+        BulletBaseSaveData spawner04 = new BulletBaseSaveData(4,4,SlotType.SpawnnerSlot,0);
+        spawner04.SpawnerCount = 0;
+        UserBulletSpawner.Add(spawner04);
+        
         //...................Items.................................
         _saveFile.UserItems = new List<ItemSaveData>();
         //...................Gems..................................

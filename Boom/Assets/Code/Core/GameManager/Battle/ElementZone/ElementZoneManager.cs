@@ -1,14 +1,22 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ElementZoneManager
 {
     public event Action OnZoneChanged;
+    public event Action<ElementReactionType, int> OnReaction;
     public List<ElementZoneData> ActiveZones = new();
     List<BulletData> bullets => GM.Root.InventoryMgr._BulletInvData.EquipBullets;
     List<ElementReactionType> _predictReaction;
     int curReactionIndex = 0;
+
+    public void InitData()
+    {
+        BattleEventBus.OnFire -= InitDataOnFire;
+        BattleEventBus.OnFire += InitDataOnFire;
+    }
 
     //开火之后先预计算元素反应
     public void InitDataOnFire() => _predictReaction = PredictReactions();
@@ -40,14 +48,69 @@ public class ElementZoneManager
         ElementReactionType expected = _predictReaction[curReactionIndex];
         if (reaction != expected || reaction == ElementReactionType.Non) return;
         
-        // 处理反应伤害
-        DamageCalculate.CalculateElementReaction(reaction, first, second, third);
         // 消耗掉场域
         int consumeCount = ElementReactionResolver.GetReactionCount(reaction);
+        int pseudoSlotID = 1000 + curReactionIndex;
+        
+        BulletData reactionBullet = BulletFactory.CreateVirtualReactionBullet(reaction, pseudoSlotID);
+        // 锁战斗流程
+        GM.Root.BattleMgr.battleFlowLock.LockReaction();
+        /// 延迟处理逻辑：交由协程执行
+        BattleManager.Instance.StartCoroutine(TriggerReactionAsync(reaction, first, second, third, reactionBullet, consumeCount));
+
+        // 启动协程处理演出 + 战报 + 伤害
+        curReactionIndex++;
+    }
+    
+    IEnumerator TriggerReactionAsync(
+        ElementReactionType reaction,
+        ElementZoneData a,
+        ElementZoneData b,
+        ElementZoneData c,
+        BulletData pseudoBullet,
+        int consumeCount)
+    {
+        // 1. 演出开始通知
+        OnReaction?.Invoke(reaction, consumeCount);
+
+        // 2. 创建战报记录
+        var report = BattleManager.Instance.battleData.CurWarReport.GetCurBattleInfo();
+        var record = report.GetOrCreateBulletRecord(pseudoBullet);
+
+        // 3. 协程逐击执行伤害
+        yield return DamageCalculate.ApplyElementReactionDamageAsync(
+            reaction, a, b, c, pseudoBullet,
+            (result, target) =>
+            {
+                // 可选演出
+                /*if (target is Enemy e)
+                    e.Controller.ShowReactionHitText(result.TotalDamage);
+                if (target is Shield s)
+                    s.Controller.PlayReactionEffect();*/
+
+                // 战报记录
+                int hitIndex = record.Hits.Count;
+                var onceHit = new BattleOnceHit(
+                    pseudoBullet.FinalDamage, pseudoBullet.FinalPiercing, pseudoBullet.FinalResonance,
+                    hitIndex: hitIndex,
+                    shieldIndex: result.TargetIndex >= 0 ? result.TargetIndex : -1,
+                    enemyIndex: result.TargetIndex < 0 ? 0 : -1,
+                    effectiveDamage: result.EffectiveDamage,
+                    overflowDamage: result.OverflowDamage,
+                    damage: result.TotalDamage,
+                    isDestroyed: result.IsDestroyed
+                );
+                record.RecordHit(onceHit);
+            });
+
+        // 4. 清除消耗的场域
         for (int i = consumeCount - 1; i >= 0; i--)
             ActiveZones.RemoveAt(i);
 
-        curReactionIndex++;
+        // 解锁战斗流程
+        GM.Root.BattleMgr.battleFlowLock.UnlockReaction();
+        
+        // 5. UI刷新
         OnZoneChanged?.Invoke();
     }
     
@@ -87,16 +150,7 @@ public class ElementZoneManager
 
         return results;
     }
-
 }
-
-public class ElementReactionPrediction
-{
-    public int Index; // 第几颗子弹
-    public ElementalTypes CurrentElement;
-    public ElementReactionType? Reaction; // 是否触发反应
-}
-
 
 public enum ElementReactionType
 {

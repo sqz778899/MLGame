@@ -42,10 +42,14 @@ public class EnemyData:IDamageable
         }
         EState = EnemyState.live;
     }
-    
-    public DamageResult TakeDamage(BulletData source)
+
+    #region 伤害计算相关
+
+    public DamageResult TakeDamage(BulletData source) => DealDamage(source.FinalDamage);
+    public DamageResult TakeReactionDamage(int damage)=> DealDamage(damage);
+
+    DamageResult DealDamage(int damage)
     {
-        int damage = source.FinalDamage;
         if (IsDead)
             return new DamageResult(0, 0, 0, true, -1);
         int overflow = Mathf.Max(0, damage - CurHP);
@@ -53,8 +57,9 @@ public class EnemyData:IDamageable
         CurHP = Mathf.Clamp(CurHP - damage, 0, MaxHP);
         EState = IsDead ? EnemyState.dead : EnemyState.hit;
         OnTakeDamage?.Invoke();
-        return new DamageResult(damage, effective, overflow, IsDead, /* target index */ -1);
+        return new DamageResult(damage, effective, overflow, IsDead, -1);
     }
+    #endregion
 }
 
 public enum EnemyState

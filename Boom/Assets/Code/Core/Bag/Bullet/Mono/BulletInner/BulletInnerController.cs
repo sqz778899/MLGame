@@ -39,6 +39,8 @@ public class BulletInnerController
 
     public void FixedTick(float fixedDeltaTime)
     {
+        //锁时停子弹飞行
+        if (BattleManager.Instance.battleFlowLock.IsReactionPlaying) return;
         if (_state == BulletInnerState.Attacking)
             _view.AttackingFly(AttackSeed, fixedDeltaTime);
     }
@@ -80,8 +82,13 @@ public class BulletInnerController
     {
         if (_state != BulletInnerState.Attacking) return;
         
-        if (collider.TryGetComponent<IDamageable>(out var target))
+        if (collider.TryGetComponent(out IDamageable target))
         {
+            //全局事件Invoke
+            BattleEventBus.BulletHit();
+            GM.Root.BattleMgr.battleData.CurDamageable = target;
+            GM.Root.BattleMgr.battleData.CurAttackBullet = Data;
+            
             #region 触发 OnBulletHit 相关道具&&Buff
             // 处理子弹击中敌人的加成道具Buff等等
             BattleContext ctx = new BattleContext(Data, target);
@@ -96,6 +103,8 @@ public class BulletInnerController
             
             // 命中处理：伤害结算
             DamageResult result = target.TakeDamage(Data);
+            // 战报记录
+            RecordBattleHit(result, target);
             
             // 处理元素反应伤害结算
             if (_piercingCount >= Data.FinalPiercing)
@@ -108,12 +117,8 @@ public class BulletInnerController
             GM.Root.InventoryMgr.MiracleOddityMrg.TriggerCash(MiracleOddityTriggerTiming.OnBulletHitAfter,ctxCash);
             #endregion
             
-            // 战报记录
-            RecordBattleHit(result, target);
             if (_piercingCount >= Data.FinalPiercing)
-            {
                 _state = BulletInnerState.Dead;
-            }
             _piercingCount++;
             if (target is Enemy) //最后一个如果是敌人，则不再贯穿
                 _state = BulletInnerState.Dead;
