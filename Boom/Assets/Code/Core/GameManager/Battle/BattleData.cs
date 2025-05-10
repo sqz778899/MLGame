@@ -31,7 +31,7 @@ public class BattleData: ScriptableObject
         //CurMapSate.CurLevelID = _levelID;
         BattleTempBuffMgr = new BattleTempBuffManager();
         BattleStateCash = new BattleTempState();
-        GM.Root.InventoryMgr._BulletInvData.OnBulletsChanged +=
+        GM.Root.InventoryMgr._BulletInvData.OnBulletDataChanged +=
             BattleTempBuffMgr.ApplyAll;//子弹数据变化时，应用所有临时buff
         CurLevel = LevelManager.LoadLevel(_levelID);
         CurRole = GM.Root.PlayerMgr.RoleInFightSC;
@@ -52,7 +52,7 @@ public class BattleData: ScriptableObject
     
     public void ClearData()
     {
-        GM.Root.InventoryMgr._BulletInvData.OnBulletsChanged -=
+        GM.Root.InventoryMgr._BulletInvData.OnBulletDataChanged -=
             BattleTempBuffMgr.ApplyAll;//注销事件注册
         BattleTempBuffMgr.Clear();
         CurEnemy = null;

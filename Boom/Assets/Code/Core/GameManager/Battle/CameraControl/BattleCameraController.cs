@@ -29,18 +29,7 @@ public class BattleCameraController
         BattleEventBus.OnBulletHit += ShakeCamera;
     }
     
-    void ShakeCamera()
-    {
-        //Debug.Log("ShakeCamera");
-        Vector3 startPos = _mainCamera.transform.position;
-        Vector3 endPos = new Vector3(startPos.x + 2f, startPos.y, startPos.z);
-        // 创建一个序列
-        Sequence cameraSequence = DOTween.Sequence();
-        // 连续震动，每次间隔0.5s
-        cameraSequence.Append(_mainCamera.transform.DOShakePosition(0.3f, strength: new Vector3(1f, 1.5f, 0f), vibrato: 20, randomness: 20));
-        cameraSequence.Append(_mainCamera.transform.DOMove(endPos, 3f));
-    }
-  
+    void ShakeCamera() => BattleCameraUtility.ShakeCamera();
     public void HandleCameraFollow()
     {
         if (!_battleLogic.IsBeginCameraMove) return;

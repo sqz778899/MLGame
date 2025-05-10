@@ -34,6 +34,7 @@ public class ShieldController
                 break;
         }
     }
+    public Vector3 GetHitPosition() => _view.HitTextPos.position;
     
     IEnumerator HitToIdle()
     {

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
+    public event Action OnBulleInnerChanged;//子弹数据变化
     public InventoryData _InventoryData;
     public BulletInvData _BulletInvData;
     public MiracleOddityManager MiracleOddityMrg;
@@ -70,6 +71,7 @@ public class InventoryManager : MonoBehaviour
         CurBulletsInFight.Add(bulletInnerSC);
         CurBulletsInFight = CurBulletsInFight
             .OrderBy(bullet => bullet.controller.Data.CurSlotController.SlotID).ToList();
+        OnBulleInnerChanged?.Invoke();
     }
     
     public void SyncMainBulletSlot()
@@ -94,6 +96,7 @@ public class InventoryManager : MonoBehaviour
         BulletInner bulletSC = bulletInnerGO.GetComponent<BulletInner>();
         CurBulletsInFight.Remove(bulletSC);
         Destroy(bulletInnerGO);
+        OnBulleInnerChanged?.Invoke();
     }
     
     public void RemoveBulletToFight(BulletData bulletData)
@@ -123,6 +126,7 @@ public class InventoryManager : MonoBehaviour
         }
         
         CurBulletsInFight.ForEach(b=>b.view.ReturnText());
+        OnBulleInnerChanged?.Invoke();
     }
     //把当前子弹，归还给子弹槽
     public void ReturnToSpawner(GameObject tmpBulletGO,BulletData _data)

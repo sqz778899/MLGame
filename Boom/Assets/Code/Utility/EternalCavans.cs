@@ -30,6 +30,7 @@ public class EternalCavans : MonoBehaviour
     public GameObject DialogueRoot;
     public GameObject StandbyRoot;
     public GameObject FloatingTextRoot;
+    public ScreenFlashEffect ScreenFlashEffectSC;
     
     [Header("侧栏相关")]
     public GameObject G_SideBar;    //侧边栏

@@ -8,8 +8,8 @@ public class ElementZoneManager
     public event Action OnZoneChanged;
     public event Action<ElementReactionType, int> OnReaction;
     public List<ElementZoneData> ActiveZones = new();
-    List<BulletData> bullets => GM.Root.InventoryMgr._BulletInvData.EquipBullets;
-    List<ElementReactionType> _predictReaction;
+    List<BulletInner> bulletInners => GM.Root.InventoryMgr.CurBulletsInFight;
+    List<ElementReactionInfo> _predictReaction;
     int curReactionIndex = 0;
 
     public void InitData()
@@ -19,14 +19,25 @@ public class ElementZoneManager
     }
 
     //开火之后先预计算元素反应
-    public void InitDataOnFire() => _predictReaction = PredictReactions();
-    
+    public void InitDataOnFire()
+    {
+        curReactionIndex = 0;
+        ActiveZones.Clear();
+        _predictReaction = PredictReactions();
+    }
+
     //子弹压入元素场域
     public void ApplyZone(BulletData bulletData)
     {
         if (bulletData.ElementalType == ElementalTypes.Non) return;
         ActiveZones.Add(new ElementZoneData(bulletData.ElementalType, bulletData.ElementalInfusionValue));
         OnZoneChanged?.Invoke();
+    }
+    
+    public void ApplyZoneSimulate(BulletData bulletData)
+    {
+        if (bulletData.ElementalType == ElementalTypes.Non) return;
+        ActiveZones.Add(new ElementZoneData(bulletData.ElementalType, bulletData.ElementalInfusionValue));
     }
 
     public void TriggerReaction()
@@ -45,7 +56,7 @@ public class ElementZoneManager
         //没有元素反应
         if (reaction == ElementReactionType.Non) return;
         //和预测不一样，证明是需要后续元素的三元素反应，等下个子弹打过来，更新场域之后再触发
-        ElementReactionType expected = _predictReaction[curReactionIndex];
+        ElementReactionType expected = _predictReaction[curReactionIndex].Reaction;
         if (reaction != expected || reaction == ElementReactionType.Non) return;
         
         // 消耗掉场域
@@ -61,14 +72,34 @@ public class ElementZoneManager
         // 启动协程处理演出 + 战报 + 伤害
         curReactionIndex++;
     }
+
+    public void TriggerReactionSimulate(BulletData pseudoBullet,List<IDamageable> targets)
+    {
+        if (curReactionIndex >= _predictReaction.Count) return;
+
+        ElementZoneData a = ActiveZones.Count > 0 ? ActiveZones[0] : null;
+        ElementZoneData b = ActiveZones.Count > 1 ? ActiveZones[1] : null;
+        ElementZoneData c = ActiveZones.Count > 2 ? ActiveZones[2] : null;
+
+        if (a == null || b == null) return;
+
+        ElementReactionType reaction = ElementReactionResolver.Resolve(a, b, c);
+        if (reaction != _predictReaction[curReactionIndex].Reaction) return;
+
+        // 直接伤害计算（无需演出）
+        DamageCalculate.ApplyElementReactionDamageSimulate(reaction, a, b, c,pseudoBullet,targets);
+
+        int consumeCount = ElementReactionResolver.GetReactionCount(reaction);
+        for (int i = consumeCount - 1; i >= 0; i--)
+            ActiveZones.RemoveAt(i);
+
+        curReactionIndex++;
+    }
     
     IEnumerator TriggerReactionAsync(
         ElementReactionType reaction,
-        ElementZoneData a,
-        ElementZoneData b,
-        ElementZoneData c,
-        BulletData pseudoBullet,
-        int consumeCount)
+        ElementZoneData a, ElementZoneData b, ElementZoneData c,
+        BulletData pseudoBullet, int consumeCount)
     {
         // 1. 演出开始通知
         OnReaction?.Invoke(reaction, consumeCount);
@@ -115,20 +146,19 @@ public class ElementZoneManager
     }
     
     //预测全部子弹的元素反应
-    public List<ElementReactionType> PredictReactions()
+    public List<ElementReactionInfo> PredictReactions()
     {
-        List<ElementReactionType> results = new();
+        List<ElementReactionInfo> results = new();
         int i = 0;
 
-        while (i < bullets.Count)
+        while (i < bulletInners.Count)
         {
-            BulletData first = bullets[i];
-            BulletData second = (i + 1 < bullets.Count) ? bullets[i + 1] : null;
-            BulletData third = (i + 2 < bullets.Count) ? bullets[i + 2] : null;
+            BulletData first = bulletInners[i].controller.Data;
+            BulletData second = (i + 1 < bulletInners.Count) ? bulletInners[i + 1].controller.Data : null;
+            BulletData third = (i + 2 < bulletInners.Count) ? bulletInners[i + 2].controller.Data : null;
 
             if (second == null)
             {
-                results.Add(ElementReactionType.Non); // 无法反应
                 i++;
                 continue;
             }
@@ -140,8 +170,20 @@ public class ElementZoneManager
                 : null;
 
             ElementReactionType reaction = ElementReactionResolver.Resolve(firstZone, secondZone, thirdZone);
+            ElementReactionInfo reactionInfo = new ElementReactionInfo();
+            reactionInfo.Reaction = reaction;
+            if (third == null)
+            {
+                reactionInfo.ReactionBullets = new List<BulletInner>
+                    { bulletInners[i], bulletInners[i + 1]};
+            }
+            else
+            {
+                reactionInfo.ReactionBullets = new List<BulletInner>
+                    { bulletInners[i], bulletInners[i + 1],bulletInners[i + 2]};
+            }
 
-            results.Add(reaction);
+            results.Add(reactionInfo);
 
             // 根据反应类型判断消耗多少颗子弹
             int consumeCount = ElementReactionResolver.GetReactionCount(reaction);
@@ -150,6 +192,12 @@ public class ElementZoneManager
 
         return results;
     }
+}
+
+public class ElementReactionInfo
+{
+    public ElementReactionType Reaction;
+    public List<BulletInner> ReactionBullets;
 }
 
 public enum ElementReactionType

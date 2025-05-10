@@ -65,7 +65,7 @@ public class MapNodeView:MonoBehaviour
                 PlayCoinsEffect(coinsAmount);
                 break;
             case MapEventType.TreasureBox:
-                QuickFxFactory.PlayFx(PathConfig.OpenBoxSmokeFX, transform.position);//播放动画/粒子等
+                VFXFactory.PlayFx(PathConfig.OpenBoxSmokeFX, transform.position);//播放动画/粒子等
                 break;
         }
     }
@@ -79,7 +79,7 @@ public class MapNodeView:MonoBehaviour
 
     public void NonFind()
     {
-        QuickFxFactory.PlayFx(PathConfig.ClickSmokeFX, transform.position);
+        VFXFactory.PlayFx(PathConfig.ClickSmokeFX, transform.position);
         ShowFloatingText("已经没什么好拿的了");
     }
 

@@ -79,6 +79,8 @@ public static class PathConfig
    
    public static string ClickSmokeFX = GetPrepath() + "Res/FX/Prefab/FX_ClickSmoke_01.prefab";
    public static string OpenBoxSmokeFX = GetPrepath() + "Res/FX/Prefab/FX_OpenBoxSmoke_01.prefab";
+   //元素反应用
+   public static string VFXThunderHit01 = GetPrepath() + "Res/FX/Prefab/FX_Thunder_01.prefab";
    
    //...........................角色.................................
    public static string EnemyPB = GetPrepath() + "Res/Character/SpineData/P_Enemy_Template.prefab";

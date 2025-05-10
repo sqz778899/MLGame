@@ -6,11 +6,11 @@ public class SiderbarSync : MonoBehaviour
     public GameObject IconRoot;
     void Start()
     {
-        InventoryManager.Instance._BulletInvData.OnBulletsChanged += SyncBulletIcon;
-        SyncBulletIcon();//最开始同步一次
+        InventoryManager.Instance._BulletInvData.OnBulletDataChanged += SyncBulletDataIcon;
+        SyncBulletDataIcon();//最开始同步一次
     }
 
-    void SyncBulletIcon()
+    void SyncBulletDataIcon()
     {
         for (int i = 0; i < 5; i++)
         {
@@ -36,6 +36,6 @@ public class SiderbarSync : MonoBehaviour
 
     private void OnDestroy()
     {
-        InventoryManager.Instance._BulletInvData.OnBulletsChanged -= SyncBulletIcon;
+        InventoryManager.Instance._BulletInvData.OnBulletDataChanged -= SyncBulletDataIcon;
     }
 }

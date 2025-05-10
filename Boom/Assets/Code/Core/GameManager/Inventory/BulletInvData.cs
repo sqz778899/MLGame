@@ -10,15 +10,15 @@ public class BulletInvData : ScriptableObject
     public List<BulletData> EquipBullets = new();// 有顺序要求的装备子弹
     public List<BulletSlotController> CurBulletSlotControllers;//子弹槽
     
-    public event Action OnBulletsChanged;//子弹数据变化
-    public event Action OnModifiersChanged;//子弹数据变化
+    public event Action OnBulletDataChanged;//子弹数据变化
+    public event Action OnModifiersChanged;//子弹修改器变化
     
     public void ClearData()
     {
         foreach (var each in BagBulletSpawners)
             each.SpawnerCount = 0;
         EquipBullets.Clear();
-        OnBulletsChanged?.Invoke();
+        OnBulletDataChanged?.Invoke();
     }
 
     //宝石操作和子弹槽操作都会响应这个函数
@@ -58,7 +58,7 @@ public class BulletInvData : ScriptableObject
         EquipBullets.Remove(_data);
         RefreshModifiers();
         SortEquipBullet();//子弹内部数据进行排序
-        OnBulletsChanged?.Invoke();
+        OnBulletDataChanged?.Invoke();
     }
     
     public void AddSpawner(int bulletID)
@@ -79,7 +79,7 @@ public class BulletInvData : ScriptableObject
             if (i == EquipBullets.Count -1)
                 EquipBullets[i].IsLastBullet = true;
         }
-        OnBulletsChanged?.Invoke();
+        OnBulletDataChanged?.Invoke();
     }
     #endregion
 
