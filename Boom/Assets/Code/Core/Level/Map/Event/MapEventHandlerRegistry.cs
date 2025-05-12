@@ -23,6 +23,7 @@ public static class MapEventHandlerRegistry
         Register(MapEventType.StoneTablet,new StoneTabletHandler());
         Register(MapEventType.MysticalInteraction,new WigglingBoxHandler());
         Register(MapEventType.Shop, new ShopEventHandler());
+        Register(MapEventType.WonderWorkshop, new WonderWorkshopEventHandler());
         
         Register(MapEventType.RoomArrow, new RoomArrowEventHandler());// 房间箭头
         // 更多事件类型...

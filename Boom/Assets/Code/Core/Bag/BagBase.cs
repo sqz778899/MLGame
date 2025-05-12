@@ -397,6 +397,7 @@ public class BulletData:ItemDataBase,ITooltipBuilder
     
     void InitData(BulletJson json)
     {
+        if (json == null) return;
         ID = json.ID;
         Level = json.Level;
         Name = json.Name;

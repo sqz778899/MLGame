@@ -27,6 +27,7 @@ namespace Code.Editor
             ExportDrop();//掉落相关
             ExportBuff();//Buff相关
             ExportTrait();//特质相关
+            ExportElementReaction();//元素反应相关
             //编辑器离线用表
             ExportEditorOffline();
             AssetDatabase.Refresh();
@@ -298,6 +299,26 @@ namespace Code.Editor
             string content01 = JsonConvert.SerializeObject(curTraitJsonDesign,
                 (Formatting)Formatting.Indented);
             File.WriteAllText(PathConfig.TraitDesignJson, content01);
+        }
+
+        public void ExportElementReaction()
+        {
+            DataSet curTables = GetDataSet();
+            List<ElementReactionJson> curDesign = new List<ElementReactionJson>();
+            DataTable curTable = curTables.Tables["元素反应设计"];
+            
+            for (int i = 1; i < curTable.Rows.Count; i++)
+            {
+                ElementReactionJson curData = new ElementReactionJson();
+                if (curTable.Rows[i][1].ToString() == "") continue;
+                curData.ID = GetCellInt(curTable.Rows[i][0].ToString());
+                curData.Name = curTable.Rows[i][1].ToString();
+                curData.Type =  (ElementReactionType)Enum.Parse(typeof(ElementReactionType), curTable.Rows[i][2].ToString());
+                curData.Description = curTable.Rows[i][3].ToString();
+                curDesign.Add(curData);
+            }
+            string content01 = JsonConvert.SerializeObject(curDesign,(Formatting)Formatting.Indented);
+            File.WriteAllText(PathConfig.ElementReactionDesignJson, content01);
         }
         #endregion
 

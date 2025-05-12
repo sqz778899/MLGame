@@ -29,10 +29,10 @@ public static partial class DamageCalculate
                 yield return ApplyCollapse(targets, results, a, b, c, onHitVisual); break;
             case ElementReactionType.Shift://冰冰雷 => 迁跃  伤害 = bullet + a + b + c
                 yield return ApplyShift(targets, results, a, b, c, pseudoBullet, onHitVisual); break;
-            case ElementReactionType.EchoingThunder://火雷雷 => 雷霆回响 伤害 = (a + b + c) x 2  50%暴击
-                yield return ApplyEchoingThunder(targets, results, a, b, c, onHitVisual); break;
             case ElementReactionType.Thunderburst://冰雷雷 => 雷涡 伤害 = Random(a, b, c)
                 yield return ApplyThunderburst(targets, results, a, b, c, onHitVisual); break;
+            case ElementReactionType.EchoingThunder://火雷雷 => 雷霆回响 伤害 = (a + b + c) x 2  50%暴击
+                yield return ApplyEchoingThunder(targets, results, a, b, c, onHitVisual); break;
             case ElementReactionType.BlazingTrail: //火火雷 => 流火  伤害 = (a + b + c) 致死循环
                 yield return ApplyBlazingTrail(targets, results, a, b, c, onHitVisual); break;
         }
@@ -59,10 +59,10 @@ public static partial class DamageCalculate
                 ApplyCollapseSimulate(targets, results, a, b, c); break;
             case ElementReactionType.Shift://冰冰雷 => 迁跃  伤害 = bullet + a + b + c
                 ApplyShiftSimulate(targets, results, a, b, c, pseudoBullet); break;
-            case ElementReactionType.EchoingThunder://火雷雷 => 雷霆回响 伤害 = (a + b + c) x 2  50%暴击
-                ApplyEchoingThunderSimulate(targets, results, a, b, c); break;
             case ElementReactionType.Thunderburst: //冰雷雷 => 雷涡 伤害 = Random(a, b, c)
                 ApplyThunderburstSimulate(targets, results, a, b, c); break;
+            case ElementReactionType.EchoingThunder://火雷雷 => 雷霆回响 伤害 = (a + b + c) x 2  50%暴击
+                ApplyEchoingThunderSimulate(targets, results, a, b, c); break;
             case ElementReactionType.BlazingTrail: //火火雷 => 流火  伤害 = (a + b + c) 致死循环
                 ApplyBlazingTrailSimulate(targets, results, a, b, c); break;
         }

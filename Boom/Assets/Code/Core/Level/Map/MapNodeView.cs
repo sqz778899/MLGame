@@ -39,7 +39,7 @@ public class MapNodeView:MonoBehaviour
             StartCoroutine(InitSkeleton());
         }
         controller = new MapNodeController(Data, this);
-        SetDefaultVisual();
+       
     }
     IEnumerator InitSkeleton()
     {
@@ -47,16 +47,12 @@ public class MapNodeView:MonoBehaviour
         yield return null;
         Skeleton.Initialize(true);
     }
-    
+
+    #region 触发之后的表现
     public void SetAsTriggered(int coinsAmount = 0)
     {
-        if (triggeredRenderer != null)
-        {
-            spriteRenderer.gameObject.SetActive(false);
-            triggeredRenderer.gameObject.SetActive(true);
-            spriteRenderer = triggeredRenderer;
-        }
-        QuitHighLight();
+        if(Data.IsTriggered)
+            QuitHighLight();
         
         // 针对不同事件类型添加额外表现逻辑
         switch (Data.EventType)
@@ -65,10 +61,31 @@ public class MapNodeView:MonoBehaviour
                 PlayCoinsEffect(coinsAmount);
                 break;
             case MapEventType.TreasureBox:
+                NormalTriggered();
                 VFXFactory.PlayFx(PathConfig.OpenBoxSmokeFX, transform.position);//播放动画/粒子等
+                break;
+            case MapEventType.WonderWorkshop:
+                WorkshopTriggered();
+                VFXFactory.PlayFx(PathConfig.OpenBoxSmokeFX, transform.position);
                 break;
         }
     }
+
+    void NormalTriggered()
+    {
+        if (triggeredRenderer != null)
+        {
+            spriteRenderer.gameObject.SetActive(false);
+            triggeredRenderer.gameObject.SetActive(true);
+            spriteRenderer = triggeredRenderer;
+        }
+    }
+
+    void WorkshopTriggered()
+    {
+        if (triggeredRenderer != null) triggeredRenderer.gameObject.SetActive(false);
+    }
+    #endregion
     void PlayCoinsEffect(int coinsAmount)
     {
         EPara.StartPos = transform.position;
@@ -119,19 +136,6 @@ public class MapNodeView:MonoBehaviour
         OnClick?.Invoke();
     }
     
-    void SetDefaultVisual()
-    {
-        if (spriteRenderer != null) spriteRenderer.gameObject.SetActive(true);
-        if (triggeredRenderer != null) triggeredRenderer.gameObject.SetActive(false);
-        
-        if (Data.IsTriggered && triggeredRenderer != null)
-        {
-            spriteRenderer.gameObject.SetActive(false);
-            triggeredRenderer.gameObject.SetActive(true);
-        }
-        QuitHighLight();
-    }
-
     #region 高亮显示相关
     void OnMouseEnter()
     {

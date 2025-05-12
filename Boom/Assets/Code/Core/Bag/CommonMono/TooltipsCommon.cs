@@ -35,6 +35,7 @@ public enum ToolTipsType
     Buff = 4,
     Trait = 5,
     MiracleOddity = 6,
+    ElementReaction = 7
 }
 
 public struct ToolTipsAttriSingleInfo

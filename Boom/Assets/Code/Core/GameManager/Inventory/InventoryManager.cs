@@ -61,7 +61,6 @@ public class InventoryManager : MonoBehaviour
     #endregion
 
     #region 子弹的一些外部操作
-
     public void AddSpawner(int id) => _BulletInvData.AddSpawner(id);
    
     public void AddBulletToFight(BulletData bulletData)
@@ -157,6 +156,42 @@ public class InventoryManager : MonoBehaviour
             curBulletSlotView.State = GM.Root.PlayerMgr._PlayerData.
                 CurBulletSlotLockedState[i]?UILockedState.isNormal:UILockedState.isLocked;
         }
+    }
+    
+    //升级子弹相关
+    public void UngradeBullet(int ID)
+    {
+        int targetId = ID + 100;  //子弹升级固定为ID后面+100
+        BulletJson targetBulletJson = TrunkManager.Instance.GetBulletJson(targetId);
+        if (targetBulletJson == null) return;//没找到这个ID，直接返回
+
+        //升级子弹
+        BulletData targetSpawner = _BulletInvData.BagBulletSpawners.FirstOrDefault(b=>b.ID==ID);
+        targetSpawner.ID = targetId;
+        foreach (BulletData each in _BulletInvData.EquipBullets)
+        {
+            if (each.ID == ID)
+                each.ID = targetId;
+        }
+    }
+
+    public UpgradeBulletInfo GetBulletClayInfo() =>
+        GetUpgradeBulletInfo(new List<int> { 1, 101, 201 });
+    public UpgradeBulletInfo GetBulletIceInfo()=>
+        GetUpgradeBulletInfo(new List<int> {2, 102, 202});
+    public UpgradeBulletInfo GetBulletFireInfo()=>
+        GetUpgradeBulletInfo(new List<int> {3, 103, 203});
+    public UpgradeBulletInfo GetBulletThunderInfo()=>
+        GetUpgradeBulletInfo(new List<int> {4, 104, 204});
+    UpgradeBulletInfo GetUpgradeBulletInfo(List<int> curTypeBulletIDs)
+    {
+        int maxLVBulletID = curTypeBulletIDs[curTypeBulletIDs.Count - 1];
+        foreach (BulletData each in _BulletInvData.BagBulletSpawners)
+        {
+            if (curTypeBulletIDs.Contains(each.ID))
+                return new UpgradeBulletInfo(each.ID, each.Name,each.ID != maxLVBulletID);
+        }
+        return null;
     }
     #endregion
     

@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,7 +11,14 @@ public class CustomButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     [Header("依赖资产")]
     [SerializeField] Image highlightBG; // 背景图用于高亮
     public Vector3 scale = new Vector3(1.2f, 1.2f, 1.2f);
-    void Start() =>highlightBG.enabled = false;
+    void Start() => highlightBG.enabled = false;
+
+    public void Reset()
+    {
+        transform.localScale = Vector3.one;
+        highlightBG.enabled = false;
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         transform.DOKill();
@@ -39,5 +47,5 @@ public class CustomButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         highlightBG.enabled = true;
     }
 
-    public void OnPointerClick(PointerEventData eventData) =>  OnClick?.Invoke();
+    public void OnPointerClick(PointerEventData eventData) => OnClick?.Invoke();
 }

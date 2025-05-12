@@ -30,6 +30,7 @@ public static class BulletFactory
         return bulletSC;
     }
     
+    
     public static BulletData CreateVirtualReactionBullet(ElementReactionType reaction, int slotID)
     {
         BulletData fake = new BulletData(-999, null); // id -999 表示虚拟

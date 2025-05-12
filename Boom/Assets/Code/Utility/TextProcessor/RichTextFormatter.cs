@@ -7,6 +7,7 @@ public static class RichTextFormatter
 
     public static string Format(string raw)
     {
+        if (string.IsNullOrEmpty(raw)) return raw;
         return RichColorRegex.Replace(raw, match =>
         {
             string colorKey = match.Groups[1].Value;

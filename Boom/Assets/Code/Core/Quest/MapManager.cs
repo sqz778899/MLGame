@@ -12,6 +12,7 @@ public class MapManager : MonoBehaviour
     public GameObject MapFightRoot;  // 地图战斗相关加载的节点
     public GameObject MapBuleltRoot;  // 场景内的子弹的父节点
     public MapMouseControl MapMouseControl;  // 地图鼠标控制脚本
+    public GameObject PreERIconGO;            //元素反应给外部用的资产
     
     GameObject currentMap;
     MapController _mapController;
@@ -19,7 +20,7 @@ public class MapManager : MonoBehaviour
     
     //[Header("一些脚本")] 
     BattleData _battleData => BattleManager.Instance.battleData;
-    BattleLogic _battleLogicSC => BattleManager.Instance.battleLogic;
+    BattleLogic _battleLogicSC => BattleManager.Instance.battleLogic;  
     
     //[Header("一些UI")] 
     GameObject _GUIUIFightMapRootGO => EternalCavans.Instance.GUIFightMapRootGO;

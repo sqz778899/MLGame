@@ -39,6 +39,7 @@ public static class PathConfig
    public static string TalentDesignJson = GetDataPrepath() + "Data/TalentDesign.json";
    public static string BuffDesignJson = GetDataPrepath() + "Data/BuffDesign.json";
    public static string TraitDesignJson = GetDataPrepath() + "Data/TraitDesign.json";
+   public static string ElementReactionDesignJson = GetDataPrepath() + "Data/ElementReactionDesign.json";
    
    public static string DropedDesignJson = GetDataPrepath() + "Data/DropedDesign.json";
    //..........................编辑器用Json

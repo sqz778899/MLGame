@@ -289,6 +289,15 @@ public class MiracleOddityJson
     public string ResName;
     public MiracleOddityTriggerTiming TriggerTiming;
 }
+
+[Serializable]
+public class ElementReactionJson
+{
+    public int ID;
+    public string Name;
+    public string Description;
+    public ElementReactionType Type;
+}
 #endregion
 
 #region 游戏内存档数据结构

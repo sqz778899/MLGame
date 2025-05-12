@@ -42,6 +42,13 @@ public class RoomKeyRuntimeData : MapEventRuntimeData
 {
     public int RoomKeysNum = 1;
 }
+
+//奇迹工坊事件
+[Serializable]
+public class WonderWorkshopRuntimeData : MapEventRuntimeData
+{
+    public int UpgradeCount = 0;
+}
 #endregion
 
 #region 赌博型
@@ -156,6 +163,15 @@ public class RoomKeyConfigData : MapEventConfigData
 
     public override MapEventRuntimeData ToRuntimeData() =>
         new RoomKeyRuntimeData { RoomKeysNum = RoomKeysNum };
+}
+
+//奇迹工坊事件
+[Serializable]
+public class WonderWorkshopConfigData : MapEventConfigData
+{
+    public int UpgradeCount = 0;
+    public override MapEventRuntimeData ToRuntimeData() =>
+         new WonderWorkshopRuntimeData { UpgradeCount = UpgradeCount };
 }
 #endregion
 
@@ -281,8 +297,9 @@ public enum MapEventType
     TreasureBox = 6,
     Bullet = 7,
     RoomKey = 8,
+    WonderWorkshop = 9,   //新增“奇迹工坊”
+    Shop = 10,
     Enemy,
-    Shop,
     Event,
     Boss,
     RoomArrow = 100,

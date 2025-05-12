@@ -18,11 +18,12 @@ public class TrunkManager: ScriptableObject
     List<DropTableJson> _dropTableDesignJsons;
     List<BuffJson> _buffDesignJsons;
     List<TraitJson> _traitDesignJsons;
+    List<ElementReactionJson> _elementReactionDesignJsons;
     
     public List<BulletJson> BulletDesignJsons => _bulletDesignJsons ??= LoadBulletData();
     public List<BulletJson> LoadBulletData() => 
         JsonConvert.DeserializeObject<List<BulletJson>>(File.ReadAllText(PathConfig.BulletDesignJson));
-    public BulletJson GetBulletJson(int ID)=>BulletDesignJsons.FirstOrDefault(each => each.ID == ID) ?? new BulletJson();
+    public BulletJson GetBulletJson(int ID)=>BulletDesignJsons.FirstOrDefault(each => each.ID == ID);
     
     public List<ItemJson> ItemDesignJsons => _itemDesignJsons ??= LoadItemData();
     public List<ItemJson> LoadItemData()=>
@@ -68,6 +69,11 @@ public class TrunkManager: ScriptableObject
         JsonConvert.DeserializeObject<List<MiracleOddityJson>>(File.ReadAllText(PathConfig.MiracleOddityDesignJson));
     public MiracleOddityJson GetMiracleOddityJson(int ID)=>MiracleOddityDesignJsons.FirstOrDefault(each => each.ID == ID) ?? new MiracleOddityJson();
     
+    public List<ElementReactionJson> ElementReactionDesignJsons => _elementReactionDesignJsons ??= LoadElementReactionData();
+    public List<ElementReactionJson> LoadElementReactionData()=>
+        JsonConvert.DeserializeObject<List<ElementReactionJson>>(File.ReadAllText(PathConfig.ElementReactionDesignJson));
+    public ElementReactionJson GetElementReactionJson(ElementReactionType Type)=>ElementReactionDesignJsons.FirstOrDefault(each => each.Type == Type) ?? new ElementReactionJson();
+    
     public void ForceRefresh()
     {
         _bulletDesignJsons = LoadBulletData();
@@ -80,6 +86,7 @@ public class TrunkManager: ScriptableObject
         _buffDesignJsons = LoadBuffData();
         _traitDesignJsons = LoadTraitData();
         _miracleOddityDesignJsons = LoadMiracleOddityData();
+        _elementReactionDesignJsons = LoadElementReactionData();
     }
     #endregion
     

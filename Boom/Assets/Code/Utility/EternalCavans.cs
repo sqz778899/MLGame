@@ -28,17 +28,16 @@ public class EternalCavans : MonoBehaviour
     
     [Header("Common")]
     public GameObject DialogueRoot;
-    public GameObject StandbyRoot;
     public GameObject FloatingTextRoot;
     public ScreenFlashEffect ScreenFlashEffectSC;
     
     [Header("侧栏相关")]
     public GameObject G_SideBar;    //侧边栏
-    public GameObject G_CurBulletIcon; //侧边栏当前子弹图标
     
-    [Header("GUIMap")]
+    [Header("关卡地图内相关")]
     public GameObject GUIMapRootGO;
     public GameObject ShopRoot;
+    public WonderWorkshop WonderWorkshopSC;
     public GameObject RewardRoot;
     
     [Header("战斗地图相关")]

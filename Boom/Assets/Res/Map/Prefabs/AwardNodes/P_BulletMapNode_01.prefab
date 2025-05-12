@@ -59,7 +59,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 3
+  m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 3b0e9a5eceea2bb45af97e56a87741a9, type: 2}
@@ -217,10 +217,12 @@ MonoBehaviour:
     BattleConfig:
       ID: 0
       HP: 0
+      _EnemyType: 0
       ShieldConfig:
         ShieldsHPs: 
       CurAward:
         BaseScore: 0
+        RollPoolName: 
         Coin: 0
         SupremeCharms: 
         Items: 

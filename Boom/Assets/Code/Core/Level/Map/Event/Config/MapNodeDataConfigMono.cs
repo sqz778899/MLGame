@@ -24,6 +24,7 @@ public class MapNodeDataConfigMono : MonoBehaviour
     public StoneTabletConfigData StoneTabletConfig;
     public WigglingBoxConfigData WigglingBoxConfig;
     public ShopEventConfigData ShopEventConfig;
+    public WonderWorkshopConfigData WonderWorkshopConfig;
     public RoomArrowConfigData RoomArrowConfig;
 
     public void Awake() => GetComponent<MapNode>().Init(ToRuntimeData());
@@ -39,6 +40,7 @@ public class MapNodeDataConfigMono : MonoBehaviour
             MapEventType.StoneTablet => StoneTabletConfig?.ToRuntimeData(),
             MapEventType.MysticalInteraction => WigglingBoxConfig?.ToRuntimeData(),
             MapEventType.Shop => ShopEventConfig?.ToRuntimeData(),
+            MapEventType.WonderWorkshop => WonderWorkshopConfig?.ToRuntimeData(),
             MapEventType.BasicGambling => BasicGamblingConfig?.ToRuntimeData(),
             MapEventType.RoomArrow =>RoomArrowConfig?.ToRuntimeData(),
             _ =>null,

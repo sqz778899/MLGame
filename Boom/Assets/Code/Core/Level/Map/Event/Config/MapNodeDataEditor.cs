@@ -40,6 +40,9 @@ public class MapNodeDataEditor : Editor
             case MapEventType.Shop:
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("ShopEventConfig"));
                 break;
+            case MapEventType.WonderWorkshop:
+                EditorGUILayout.PropertyField(serializedObject.FindProperty("WonderWorkshopConfig"));
+                break;
             case MapEventType.RoomArrow:
                 var arrowProp = serializedObject.FindProperty("RoomArrowConfig");
                 EditorGUILayout.PropertyField(arrowProp.FindPropertyRelative("ArrowType"));

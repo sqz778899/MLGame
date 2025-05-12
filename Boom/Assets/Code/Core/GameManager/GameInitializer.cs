@@ -18,6 +18,7 @@ public class GameInitializer:MonoBehaviour
         EternalCavans.Instance.TooltipsManager.Init();
         EternalCavans.Instance.DragManager.Init();
         EternalCavans.Instance.RightClickMenuManager.Init();
+        EternalCavans.Instance.WonderWorkshopSC.Init();
         //2）初始化背包Slot数据
         SlotView[] views = EternalCavans.Instance.Bag.GetComponentsInChildren<SlotView>(true);
         views.ForEach(v => v.Init());

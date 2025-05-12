@@ -8,7 +8,7 @@ public class Simulator : MonoBehaviour
 {
     [Header("依赖资产")]
     public TextMeshProUGUI winCountText;
-    public GameObject PreERIconGO;
+    GameObject PreERIconGO => GM.Root.BattleMgr._MapManager.PreERIconGO;
 
     GameObject _bulletInFightRoot => GM.Root.BattleMgr._MapManager.MapBuleltRoot;
     List<GameObject> currentIcons = new();
@@ -48,7 +48,7 @@ public class Simulator : MonoBehaviour
 
             GameObject icon = Instantiate(PreERIconGO, worldPos, Quaternion.identity, _bulletInFightRoot.transform);
             icon.SetActive(true);
-            // icon.GetComponent<ERIconView>().SetIcon(info.Reaction); // 如有图标绑定逻辑
+            icon.GetComponent<ERIconView>().InitData(info.Reaction); // 如有图标绑定逻辑
 
             currentIcons.Add(icon);
             currentBulletGroups.Add(info.ReactionBullets);
