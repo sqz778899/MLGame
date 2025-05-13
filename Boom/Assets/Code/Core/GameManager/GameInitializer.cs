@@ -46,6 +46,8 @@ public class GameInitializer:MonoBehaviour
             ResManager.instance.GetAssetCache<TMP_FontAsset>(PathConfig.MapHintFontAsset);
         //............道具掉落静态类...............
         DropTableService.LoadFromJson();
+        //............全局色板静态类...............
+        ColorPalette.Init(GM.Root.globalColorPalette);
         //5)重置随机概率
         //ProbabilityService.Reset("WeaponRackLoot");
         

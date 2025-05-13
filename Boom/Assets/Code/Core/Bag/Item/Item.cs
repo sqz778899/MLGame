@@ -11,12 +11,6 @@ public class Item : ItemBase,IItemInteractionBehaviour
     public Image Icon;
     public Image ItemBGInBag;
     public TextMeshProUGUI StackCountText;
-    public Color RareColor;
-    
-    public Color Rare1;
-    public Color Rare2;
-    public Color Rare3;
-    public Color Rare4;
     RectTransform rectTransform;
 
     void Awake() => rectTransform = GetComponent<RectTransform>();
@@ -37,22 +31,7 @@ public class Item : ItemBase,IItemInteractionBehaviour
         //同步背景形状
         SyncBackground();
         //同步稀有度颜色
-        switch (Data.Rarity)
-        {
-            case DropedRarity.Common:
-                RareColor = Rare1;
-                break;
-            case DropedRarity.Rare:
-                RareColor = Rare2;
-                break;
-            case DropedRarity.Epic:
-                RareColor = Rare3;
-                break;
-            case DropedRarity.Legendary:
-                RareColor = Rare4;
-                break;
-        }
-        ItemBGInBag.color = RareColor;
+        ItemBGInBag.color = ColorPalette.Rarity(Data.Rarity);
         
         // 堆叠数量显示
         if (Data.IsStackable && Data.StackCount > 1)

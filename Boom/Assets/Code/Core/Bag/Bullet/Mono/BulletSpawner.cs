@@ -15,14 +15,46 @@ public class BulletSpawner:ItemBase,
     public Transform StarGroup;
     internal RectTransform rectTransform;
     
+    float lastClickTime = -10f;
+    const float doubleClickThreshold = 0.3f; // 同样的双击间隔
+    
     public virtual void OnPointerDown(PointerEventData eventData) =>
         Spawner(eventData, BulletCreateFlag.Spawner);
+
+    //双击自动装备子弹功能
+    public bool IsDoubleClick()
+    {
+        float time = Time.time;
+        bool isDouble = time - lastClickTime < doubleClickThreshold;
+        lastClickTime = time;
+
+        if (isDouble)
+        {
+            Debug.Log("双击！");
+            ISlotController empty = SlotManager.GetEmptySlotController(SlotType.CurBulletSlot);
+            if (empty == null) return false; //没有空槽位,不走自动装备子弹的逻辑
+            
+            // 直接装备到当前槽位
+            // 克隆一份新的数据
+            BulletData newData = new BulletData(Data.ID, null);
+            BulletSlotController bulletController = empty as BulletSlotController;
+            if (bulletController == null || !bulletController.CanAccept(newData)) return false;
+            // Spawner 减去 1
+            Data.SpawnerCount--;
+            // 创建新子弹
+            Bullet bulletSC = BulletFactory.CreateBullet(newData, BulletInsMode.EditA) as Bullet;
+            bulletController.Assign(newData,bulletSC.gameObject);
+            return true;
+        }
+        return false;
+    }
+
 
     internal void Spawner(PointerEventData eventData,BulletCreateFlag createFlag)
     {
         if (eventData.button != PointerEventData.InputButton.Left) return;
-        
         if (Data.SpawnerCount <= 0) return;
+        if(IsDoubleClick()) return; //执行双击逻辑
 
         // 克隆一份新的数据
         BulletData newData = new BulletData(Data.ID, null);

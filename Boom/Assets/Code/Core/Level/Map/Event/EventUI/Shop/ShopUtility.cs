@@ -18,17 +18,7 @@ public static class ShopUtility
         //............Deal Data.................
         switch (curSCBase.CurType)
         {
-            case RollBulletMatType.Mat:
-                RollBulletMat curSCM = curSCBase as RollBulletMat;
-                bool isAdd = false;
-                //bool isAdd = MainRoleManager.Instance.AddStandbyBulletMat(curSCM.ID);
-                if (!isAdd)
-                {
-                    Debug.Log("没有位置了");
-                    return;
-                }
-                UpgradeMaster.UpgradeBullets(); //子弹升级
-                break;
+            
             case RollBulletMatType.Score:
                 RollScore curSCS = curSCBase as RollScore;
                 GM.Root.PlayerMgr._PlayerData.Score +=  curSCS.Score;

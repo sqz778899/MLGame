@@ -46,11 +46,7 @@ public class Bullet : ItemBase, IItemInteractionBehaviour
     /// <summary>
     /// 拖拽失败时手动调用
     /// </summary>
-    public void OnDragCanceled()
-    {
-        GetComponent<ItemInteractionHandler>().DisableTooltip = true;
-        GM.Root.InventoryMgr.ReturnToSpawner(gameObject,Data);
-    }
+    public void OnDragCanceled()=>GM.Root.InventoryMgr.ReturnToSpawner(gameObject,Data);
 
     #region IItemInteractionBehaviour 实现
     public void OnBeginDrag() {}

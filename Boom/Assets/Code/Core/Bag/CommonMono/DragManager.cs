@@ -83,10 +83,11 @@ public class DragManager : MonoBehaviour
                     break;
                 }
                 //战场内放回Spawner
-                if (targetCtrl.IsEmpty &&
+                if (targetCtrl.SlotType == SlotType.SpawnnerSlot||
                     targetCtrl.SlotType == SlotType.SpawnnerSlotInner)
                 {
                     draggedObject.TryGetComponent(out Bullet bulletNew);
+                    if (Data.CurSlotController == null) break;//可能是刚从Spwner中拖出来的，还未赋予槽位
                     Data.CurSlotController.Unassign();
                     bulletNew.OnDragCanceled();
                     dropped = true;

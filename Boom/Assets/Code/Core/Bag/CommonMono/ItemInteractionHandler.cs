@@ -12,19 +12,15 @@ public class ItemInteractionHandler: MonoBehaviour,
     public Vector2 Offset = default;
     
     IItemInteractionBehaviour behaviour;
-    RectTransform rectTransform;
     public ItemDataBase Data { get; private set; }
 
     float lastClickTime;
     const float doubleClickThreshold = 0.3f;
     
-    public bool DisableTooltip { get; set; } = false;
+    bool isHovered = false; //悬停标记，为了解决拖拽结束后是否显示Tooltips的问题
     
-    void Awake()
-    {
-        rectTransform = GetComponent<RectTransform>();
-        behaviour = GetComponent<IItemInteractionBehaviour>();
-    }
+    void Awake() => behaviour = GetComponent<IItemInteractionBehaviour>();
+
     void Start() => DragManager.Instance.OnMgrEndDrag += ShowTooltips;
     void OnDestroy() => DragManager.Instance.OnMgrEndDrag -= ShowTooltips;
 
@@ -34,6 +30,7 @@ public class ItemInteractionHandler: MonoBehaviour,
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        isHovered = true;
         //商店宝石的UI高亮
         if (gameObject.TryGetComponent<IHighlightableUI>(out var highlightable))
             highlightable.SetHighlight(true);
@@ -43,6 +40,7 @@ public class ItemInteractionHandler: MonoBehaviour,
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        isHovered = false;
         //商店宝石的UI高亮
         if (gameObject.TryGetComponent<IHighlightableUI>(out var highlightable))
             highlightable.SetHighlight(false);
@@ -102,8 +100,7 @@ public class ItemInteractionHandler: MonoBehaviour,
         DragManager.Instance.EndDrag(eventData);
         TooltipsManager.Instance.Enable();
         behaviour?.OnEndDrag();
-        if (!DisableTooltip)
-            ShowTooltips();
+        ShowTooltips();
     }
 
     public void OnPointerMove(PointerEventData eventData)
@@ -116,6 +113,7 @@ public class ItemInteractionHandler: MonoBehaviour,
 
     public void ShowTooltips()
     {
+        if (!isHovered) return;
         if (Data.CurSlotController == null) return;
         
         if (Data is GemData gemData)

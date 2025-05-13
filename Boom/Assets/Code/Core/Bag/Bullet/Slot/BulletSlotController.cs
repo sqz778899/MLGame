@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class BulletSlotController: BaseSlotController<ItemDataBase>
 {
-    public bool IsLocked; //槽位是不是锁定的
     public List<GemSlotController> GemSlotControllers;
     BulletSlotView _bulletView;
     public override void BindView(SlotView view)

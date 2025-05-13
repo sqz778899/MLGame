@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b158d9c14c6b589459de548efef63cce, type: 3}
+  m_Name: GlobalColorPalette
+  m_EditorClassIdentifier: 
+  commonColor: {r: 0.5411765, g: 0.5411765, b: 0.5411765, a: 1}
+  rareColor: {r: 0.27411884, g: 0.45285472, b: 0.7924528, a: 1}
+  epicColor: {r: 0.6115514, g: 0.31149873, b: 0.7075472, a: 1}
+  legendaryColor: {r: 0.9150943, g: 0.78728676, b: 0.3856057, a: 1}
+  NormalTextColor: {r: 0.752, g: 0.752, b: 0.752, a: 1}
+  DamageValueColor: {r: 0.5803922, g: 0.34901962, b: 0.34901962, a: 1}
+  PiercingValueColor: {r: 0.385, g: 0.52, b: 0.634, a: 1}
+  ResonanceValueColor: {r: 0.68, g: 0.54, b: 0.34, a: 1}
+  ElementalInfusionValue: {r: 0.6115514, g: 0.31149873, b: 0.7075472, a: 1}

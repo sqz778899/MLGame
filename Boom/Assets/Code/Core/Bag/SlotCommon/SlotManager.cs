@@ -64,7 +64,7 @@ public static class SlotManager
         ISlotController a = dtA.CurSlotController;
         ISlotController b = dtB.CurSlotController;
         
-        if (a is BulletInnerSlotController && b == null)
+        if ((a is BulletInnerSlotController || a is BulletSlotController )&& b == null)
         {
             //回退老子弹
             GM.Root.InventoryMgr.ReturnToSpawner(null,a.CurData as BulletData);

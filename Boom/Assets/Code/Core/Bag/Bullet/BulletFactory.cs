@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Spine.Unity;
 using UnityEngine;
 
 public static class BulletFactory
@@ -29,8 +30,17 @@ public static class BulletFactory
         
         return bulletSC;
     }
+
+    public static void SetBulletInUI(SkeletonGraphic _skeleton,int _bulletID)
+    {
+        _skeleton.skeletonDataAsset = ResManager.instance.GetAssetCache
+            <SkeletonDataAsset>(PathConfig.GetBulletImageOrSpinePath(_bulletID, BulletInsMode.Inner));
+        _skeleton.Initialize(true);
+        AniUtility.PlayIdle(_skeleton);
+    }
     
-    
+    #region 创建虚拟子弹（战报系统给元素反应用）
+    //创建虚拟子弹（战报系统给元素反应用）
     public static BulletData CreateVirtualReactionBullet(ElementReactionType reaction, int slotID)
     {
         BulletData fake = new BulletData(-999, null); // id -999 表示虚拟
@@ -56,5 +66,5 @@ public static class BulletFactory
         public GameObject GetGameObject() => null;
         public FakeSlotController(int slotID) => SlotID = slotID;
     }
-
+    #endregion
 } 

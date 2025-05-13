@@ -17,7 +17,5 @@ public class WonderWorkshopEventHandler : IMapEventHandler
         }
         EternalCavans.Instance.WonderWorkshopSC.Bind(view.controller);
         EternalCavans.Instance.WonderWorkshopSC.Show();
-        
-        view.SetAsTriggered();  
     }
 }

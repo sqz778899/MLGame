@@ -37,6 +37,7 @@ public class EternalCavans : MonoBehaviour
     [Header("关卡地图内相关")]
     public GameObject GUIMapRootGO;
     public GameObject ShopRoot;
+    public GameObject WonderWorkshopRoot;
     public WonderWorkshop WonderWorkshopSC;
     public GameObject RewardRoot;
     
@@ -143,8 +144,6 @@ public class EternalCavans : MonoBehaviour
         BagButtonGO.SetActive(true);
         
         TitleRoot.SetActive(true);
-        //G_SideBar.SetActive(true);
-        //MapFrame.SetActive(true);
         MagicDust.SetActive(false);
         CurSceneState = SceneState.MapScene;
         InitTextSync();
@@ -266,11 +265,12 @@ public class EternalCavans : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
             SceneManager.sceneLoaded += OnSceneLoadedCavans;
+            //
+            WonderWorkshopRoot.SetActive(true);
         }
         else if (Instance != this)
             Destroy(gameObject);
     }
-    void Awake() =>  InitData();
     void OnDestroy()
     {
         SceneManager.sceneLoaded -= OnSceneLoadedCavans;

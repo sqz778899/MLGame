@@ -309,6 +309,7 @@ public class BulletData:ItemDataBase,ITooltipBuilder
     public int Damage;
     public int Piercing;
     public int Resonance;
+    public int Critical;           //暴击率
     public int ElementalInfusionValue; //元素灌注值
     public ElementalTypes ElementalType;
     
@@ -317,6 +318,7 @@ public class BulletData:ItemDataBase,ITooltipBuilder
     public int FinalDamage;
     public int FinalPiercing;
     public int FinalResonance;
+    public int FinalCritical;
     public int FinalElementalInfusionValue;
     public List<IBulletModifier> Modifiers = new();
 
@@ -406,6 +408,7 @@ public class BulletData:ItemDataBase,ITooltipBuilder
         Damage = json.Damage;
         Piercing = json.Piercing;
         Resonance = json.Resonance;
+        Critical = json.Critical;
         ElementalInfusionValue = json.ElementalInfusionValue;
         ElementalType = (ElementalTypes)json.ElementalType;
         SyncFinalAttributes();
@@ -416,6 +419,7 @@ public class BulletData:ItemDataBase,ITooltipBuilder
         FinalDamage = Damage;
         FinalPiercing = Piercing;
         FinalResonance = Resonance;
+        FinalCritical = Critical;
         FinalElementalInfusionValue = ElementalInfusionValue;
         
         Modifiers.ForEach(mo => mo.Modify(this));//处理宝石
@@ -462,6 +466,19 @@ public class BulletData:ItemDataBase,ITooltipBuilder
         {
             ToolTipsAttriSingleInfo curInfo = new ToolTipsAttriSingleInfo(
                 ToolTipsAttriType.Resonance, FinalResonance,FinalResonance - Resonance);
+            info.AttriInfos.Add(curInfo);
+        }
+        if (Critical != 0 || FinalCritical !=0)
+        {
+            ToolTipsAttriSingleInfo curInfo = new ToolTipsAttriSingleInfo(
+                ToolTipsAttriType.Critical, FinalCritical,FinalCritical - Critical);
+            info.AttriInfos.Add(curInfo);
+        }
+        if (ElementalInfusionValue != 0 || FinalElementalInfusionValue !=0)
+        {
+            ToolTipsAttriSingleInfo curInfo = new ToolTipsAttriSingleInfo(
+                ToolTipsAttriType.ElementalValue, FinalElementalInfusionValue,
+                FinalElementalInfusionValue - ElementalInfusionValue);
             info.AttriInfos.Add(curInfo);
         }
         //把元素最后加上

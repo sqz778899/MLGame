@@ -26,7 +26,7 @@ public class BulletInnerView : MonoBehaviour
         //初始化Spine资产
         StartCoroutine(InitSkeleton());
         SetInitialPosition();
-        transform.SetParent( BattleManager.Instance._MapManager
+        transform.SetParent( GM.Root.BattleMgr._MapManager
             .MapBuleltRoot.transform,false);
     }
     

@@ -24,19 +24,8 @@ public class Tooltips : MonoBehaviour
     public GameObject BGMedium;
     public GameObject BGLarge;
     public GameObject BGItem;
-    
-    [Header("字体颜色")]
-    public Color TitleColor;
-    public Color DescriptionColor;
-    public Color DamageValueColor;
-    public Color PiercingValueColor;
-    public Color ResonanceValueColor;
-
-    [Header("道具稀有度颜色")] 
-    public Color Common;
-    public Color Rare;
-    public Color Epic;
-    public Color Legendary;
+  
+    [Header("分割线")]
     public Image IconDrividerLine;
     
     [Header("Badge")]
@@ -44,8 +33,8 @@ public class Tooltips : MonoBehaviour
 
     void Awake()
     {
-        txtTitle.color = TitleColor;
-        txtLV.color = TitleColor;
+        txtTitle.color = ColorPalette.NormalTextColor;
+        txtLV.color = ColorPalette.NormalTextColor;
     }
     
     public void SetInfo(ToolTipsInfo toolTipsInfo)
@@ -69,14 +58,7 @@ public class Tooltips : MonoBehaviour
         //加载描述
         txtDescription.text = TextProcessor.Parse(toolTipsInfo.Description);
         //设置稀有度颜色
-        IconDrividerLine.color = toolTipsInfo.Rarity switch
-        {
-            DropedRarity.Common => Common,
-            DropedRarity.Rare => Rare,
-            DropedRarity.Epic => Epic,
-            DropedRarity.Legendary => Legendary,
-            _ => Common
-        };
+        IconDrividerLine.color = ColorPalette.Rarity(toolTipsInfo.Rarity);
         //
         Badge.SetActive(true);
     }
@@ -113,20 +95,28 @@ public class Tooltips : MonoBehaviour
             switch (attriInfo.Type)
             {
                 case ToolTipsAttriType.Damage:
-                    desStr = "伤害:"; valueColor = DamageValueColor; break;
+                    desStr = "伤害:"; valueColor = ColorPalette.DamageValueColor; break;
                 case ToolTipsAttriType.Piercing:
-                    desStr = "穿透:"; valueColor = PiercingValueColor; break;
+                    desStr = "穿透:"; valueColor = ColorPalette.PiercingValueColor; break;
                 case ToolTipsAttriType.Resonance:
-                    desStr = "共振:"; valueColor = ResonanceValueColor; break;
+                    desStr = "共振:"; valueColor = ColorPalette.ResonanceValueColor; break;
+                case ToolTipsAttriType.Critical:
+                    desStr = "暴击:"; valueColor = ColorPalette.DamageValueColor; break;
+                case ToolTipsAttriType.ElementalValue:
+                    desStr = "元素伤害:"; valueColor = ColorPalette.ElementalInfusionValue; break;
                 case ToolTipsAttriType.Element:
-                    desStr = "元素:"; valueColor = DescriptionColor; break;
+                    desStr = "元素:"; valueColor = ColorPalette.NormalTextColor; break;
             }
             
             attriSingleTexts[0].text = desStr;
-            attriSingleTexts[0].color = DescriptionColor;
+            attriSingleTexts[0].color = ColorPalette.NormalTextColor;
             if (attriInfo.Type != ToolTipsAttriType.Element)
             {
-                attriSingleTexts[1].text = attriInfo.OriginValue.ToString();
+                if (attriInfo.Type == ToolTipsAttriType.Critical)//暴击率用百分比呈现
+                    attriSingleTexts[1].text = $"{attriInfo.OriginValue}%";
+                else
+                    attriSingleTexts[1].text = attriInfo.OriginValue.ToString();
+                
                 attriSingleTexts[1].color = valueColor;
                 if (attriInfo.AddedValue != 0)
                 {

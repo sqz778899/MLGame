@@ -65,10 +65,24 @@ public class MapNodeView:MonoBehaviour
                 VFXFactory.PlayFx(PathConfig.OpenBoxSmokeFX, transform.position);//播放动画/粒子等
                 break;
             case MapEventType.WonderWorkshop:
-                WorkshopTriggered();
-                VFXFactory.PlayFx(PathConfig.OpenBoxSmokeFX, transform.position);
+                NormalTriggered();
                 break;
         }
+    }
+    
+    public void NonFind()
+    {
+        string message = "已经没什么好拿的了";
+        // 针对不同事件类型添加额外表现逻辑
+        switch (Data.EventType)
+        {
+            case MapEventType.WonderWorkshop:
+                message = "已经没有能量了";
+                break;
+        }
+
+        VFXFactory.PlayFx(PathConfig.ClickSmokeFX, transform.position);
+        ShowFloatingText(message);
     }
 
     void NormalTriggered()
@@ -80,11 +94,6 @@ public class MapNodeView:MonoBehaviour
             spriteRenderer = triggeredRenderer;
         }
     }
-
-    void WorkshopTriggered()
-    {
-        if (triggeredRenderer != null) triggeredRenderer.gameObject.SetActive(false);
-    }
     #endregion
     void PlayCoinsEffect(int coinsAmount)
     {
@@ -92,12 +101,6 @@ public class MapNodeView:MonoBehaviour
         EPara.InsNum = coinsAmount;
         eEffectManager.CreatEffect(EPara);
         Destroy(gameObject);
-    }
-
-    public void NonFind()
-    {
-        VFXFactory.PlayFx(PathConfig.ClickSmokeFX, transform.position);
-        ShowFloatingText("已经没什么好拿的了");
     }
 
     public void ShowFloatingText(string message)

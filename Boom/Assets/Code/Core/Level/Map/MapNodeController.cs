@@ -37,9 +37,17 @@ public class MapNodeController
             workshopData.UpgradeCount -= count;
             if (workshopData.UpgradeCount == 0)
             {
+                SetAsTriggered();
                 _view.SetAsTriggered();
             }
         }
+    }
+    
+    //激活过
+    public void SetAsTriggered()
+    {
+        _data.IsTriggered = true;
+        _view.SetAsTriggered();
     }
 
     public void Locked() => _data.IsLocked = true;

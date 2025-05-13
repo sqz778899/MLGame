@@ -11,6 +11,7 @@ public class GM: MonoBehaviour
     
     [Header("需要依赖的资产")]
     public QuestDatabaseOBJ questDatabase;
+    public GlobalColorPalette globalColorPalette;//全局色板资产
     
     public PlayerManager PlayerMgr { get; private set; }
     public QuestManager QuestMgr { get; private set; }

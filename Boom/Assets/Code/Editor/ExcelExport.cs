@@ -49,9 +49,10 @@ namespace Code.Editor
                 curData.Level = int.Parse(curTable.Rows[i][1].ToString());
                 curData.Name = curTable.Rows[i][2].ToString();
                 curData.Damage = int.Parse(curTable.Rows[i][3].ToString());
-                curData.ElementalInfusionValue = int.Parse(curTable.Rows[i][4].ToString());
-                curData.ElementalType = int.Parse(curTable.Rows[i][5].ToString());
-                curData.HitEffectName = curTable.Rows[i][6].ToString();
+                curData.Critical = int.Parse(curTable.Rows[i][4].ToString());
+                curData.ElementalInfusionValue = int.Parse(curTable.Rows[i][5].ToString());
+                curData.ElementalType = int.Parse(curTable.Rows[i][6].ToString());
+                curData.HitEffectName = curTable.Rows[i][7].ToString();
                 curBulletDesign.Add(curData);
             }
 

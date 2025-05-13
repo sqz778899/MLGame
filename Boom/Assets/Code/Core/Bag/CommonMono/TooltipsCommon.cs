@@ -59,5 +59,7 @@ public enum ToolTipsAttriType
     Damage = 0,
     Piercing = 1,
     Resonance = 2,
+    Critical = 3,
+    ElementalValue = 4,
     Element = 10,
 }

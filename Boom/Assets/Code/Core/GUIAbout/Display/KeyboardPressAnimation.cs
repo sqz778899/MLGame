@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
 
+//新手教程在用的那种按下键盘的动画
 public class KeyboardPressAnimation : MonoBehaviour
 {
     public Sprite normalSprite;  // 正常图片
