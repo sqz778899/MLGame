@@ -3,23 +3,38 @@
     public int ID;
     public string Name;
     public string Desc;
-    public string ImageName;
+    public string Flavor;
     public DropedRarity Rarity;
 
     public IMiracleOddityEffect EffectLogic;
     public MiracleOddityTriggerTiming TriggerTiming;
-
+    
+    MiracleOddityJson _json => TrunkManager.Instance.GetMiracleOddityJson(ID);
     public MiracleOddityData(int id)
     {
         MiracleOddityJson json = TrunkManager.Instance.GetMiracleOddityJson(id);
         ID = json.ID;
-        Name = json.Name;
-        Desc = json.Desc;
-        ImageName = json.ResName;
         Rarity = json.Rarity;
         TriggerTiming = json.TriggerTiming;
         EffectLogic = MiracleOddityEffectFactory.CreateEffectLogic(ID);
+        
+        Loc.OnLanguageChanged -= SyncStrInfo;
+        Loc.OnLanguageChanged += SyncStrInfo;//语言改变事件
+        SyncStrInfo(json);//同步字符串信息
     }
+
+    #region 处理本地化多语言相关
+    void SyncStrInfo() => SyncStrInfo(_json);
+
+    void SyncStrInfo(MiracleOddityJson json)
+    {
+        Name = Loc.Get(json.NameKey);
+        Desc = Loc.Get(json.DescKey);
+        Flavor = Loc.Get(json.FlavorKey);
+    }
+    ~MiracleOddityData() => ClearData();
+    public void ClearData() => Loc.OnLanguageChanged -= SyncStrInfo;
+    #endregion
 
     public void ApplyEffect(BattleContext ctx) => EffectLogic?.Apply(ctx);
     public void ApplyEffectCash(BattleContext ctx) => EffectLogic?.ApplyCash(ctx);

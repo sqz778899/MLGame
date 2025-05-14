@@ -20,14 +20,14 @@ namespace Code.Editor
             ExportItem();
             ExportMiracleOddities();//奇迹物件
             ExportGemDesign();
-            ExportMuliLa();
+            ExportLocalization();//多语言
             ExportDialogue(); //对话相关
             ExportQuestDesign();//任务相关
             ExportTalent();//天赋相关
             ExportDrop();//掉落相关
             ExportBuff();//Buff相关
             ExportTrait();//特质相关
-            ExportElementReaction();//元素反应相关
+            ExportElementReaction();//元素反应相关  
             //编辑器离线用表
             ExportEditorOffline();
             AssetDatabase.Refresh();
@@ -46,8 +46,10 @@ namespace Code.Editor
                 BulletJson curData = new BulletJson();
                 if (curTable.Rows[i][1].ToString() == "") continue;
                 curData.ID = int.Parse(curTable.Rows[i][0].ToString());
+                GuessLocKey key = Loc.GuessKey(curData.ID,LocTableType.bullet);
+                
                 curData.Level = int.Parse(curTable.Rows[i][1].ToString());
-                curData.Name = curTable.Rows[i][2].ToString();
+                curData.NameKey = key.NameKey;
                 curData.Damage = int.Parse(curTable.Rows[i][3].ToString());
                 curData.Critical = int.Parse(curTable.Rows[i][4].ToString());
                 curData.ElementalInfusionValue = int.Parse(curTable.Rows[i][5].ToString());
@@ -65,21 +67,23 @@ namespace Code.Editor
             DataSet curTables = GetDataSet();
             DataTable curTable = curTables.Tables["奇迹物件设计"];
             
-            List<MiracleOddityJson> curItemDesign = new List<MiracleOddityJson>();
+            List<MiracleOddityJson> curMODesign = new List<MiracleOddityJson>();
             for (int i = 1; i < curTable.Rows.Count; i++)
             {
-                MiracleOddityJson curItem = new MiracleOddityJson();
+                MiracleOddityJson curMO = new MiracleOddityJson();
                 if (curTable.Rows[i][1].ToString() == "") continue;
-                curItem.ID = GetCellInt(curTable.Rows[i][0].ToString());
-                curItem.Name = curTable.Rows[i][1].ToString();
-                curItem.Rarity = (DropedRarity)GetCellInt(curTable.Rows[i][2].ToString());
-                curItem.Desc = curTable.Rows[i][3].ToString();
-                curItem.Price = GetCellInt(curTable.Rows[i][4].ToString());
-                curItem.Flavor = curTable.Rows[i][5].ToString();
-                curItem.ResName = curTable.Rows[i][6].ToString();
-                curItemDesign.Add(curItem);
+                curMO.ID = GetCellInt(curTable.Rows[i][0].ToString());
+                
+                GuessLocKey key = Loc.GuessKey(curMO.ID,LocTableType.mo);
+                curMO.NameKey = key.NameKey;
+                curMO.Rarity = (DropedRarity)GetCellInt(curTable.Rows[i][2].ToString());
+                curMO.DescKey = key.DescKey;
+                curMO.Price = GetCellInt(curTable.Rows[i][4].ToString());
+                curMO.FlavorKey = key.FlavorKey;
+                curMO.ResName = curTable.Rows[i][6].ToString();
+                curMODesign.Add(curMO);
             }
-            string content01 = JsonConvert.SerializeObject(curItemDesign, (Formatting)Formatting.Indented);
+            string content01 = JsonConvert.SerializeObject(curMODesign, (Formatting)Formatting.Indented);
             File.WriteAllText(PathConfig.MiracleOddityDesignJson, content01);
         }
 
@@ -94,10 +98,12 @@ namespace Code.Editor
                 ItemJson curItem = new ItemJson();
                 if (persistentTable.Rows[i][1].ToString() == "") continue;
                 curItem.ID = GetCellInt(persistentTable.Rows[i][0].ToString());
-                curItem.Name = persistentTable.Rows[i][1].ToString();
+                
+                GuessLocKey key = Loc.GuessKey(curItem.ID,LocTableType.item);
+                curItem.NameKey = key.NameKey;
                 curItem.Rarity = (DropedRarity)GetCellInt(persistentTable.Rows[i][2].ToString());
                 string typeStr = persistentTable.Rows[i][3].ToString();
-                curItem.Desc = persistentTable.Rows[i][4].ToString();
+                curItem.DescKey = key.DescKey;
                 curItem.Price = GetCellInt(persistentTable.Rows[i][5].ToString());
                 curItem.ResName = persistentTable.Rows[i][6].ToString();
                 if (typeStr == "任务道具")
@@ -122,7 +128,9 @@ namespace Code.Editor
                 GemJson curData = new GemJson();
                 if (curTable.Rows[i][1].ToString() == "") continue;
                 curData.ID = int.Parse(curTable.Rows[i][0].ToString());
-                curData.Name = curTable.Rows[i][1].ToString();
+                GuessLocKey key = Loc.GuessKey(curData.ID,LocTableType.gem);
+
+                curData.NameKey = key.NameKey;
                 curData.Rarity = (DropedRarity)GetCellInt(curTable.Rows[i][2].ToString());
                 curData.Level = GetCellInt(curTable.Rows[i][3].ToString());
                 curData.Damage = GetCellInt(curTable.Rows[i][4].ToString());
@@ -354,40 +362,33 @@ namespace Code.Editor
         #endregion
 
         #region 多语言
-
-        public void ExportMuliLa()
+        public void ExportLocalization()
         {
-            DataSet curTables = GetMultiDataSet();
-            MultiLaJson newMultiLa = new MultiLaJson();
+            DataSet curTables = GetDataSet("Localization.xlsx");
+            LocDataJson locDataDesign = new LocDataJson();
+            Dictionary<string, LocTable> locTableDict = new Dictionary<string, LocTable>();
+            locDataDesign.LocTableDict = locTableDict;
             for (int i = 0; i < curTables.Tables.Count; i++)
             {
-                DataTable curTable = curTables.Tables[i];
-                for (int j = 1; j < curTable.Rows.Count; j++)
+                LocTable locTable = new LocTable();
+                Dictionary<string, MultipleLanguage> locDict = new Dictionary<string, MultipleLanguage>();
+                locTable.TableName = curTables.Tables[i].TableName;
+                locTable.LocDict = locDict;
+                for (int j = 1; j < curTables.Tables[i].Rows.Count; j++)
                 {
-                    if (curTable.Rows[j][0].ToString() == "") continue;
-                    string keyStr = curTable.Rows[j][0].ToString(); //用英文当作Key
-                    newMultiLa.English.Add(keyStr);
-                    newMultiLa.ZH_Simplified.Add(keyStr, curTable.Rows[j][1].ToString());
-                    newMultiLa.ZH_Traditional.Add(keyStr, curTable.Rows[j][2].ToString());
-                    newMultiLa.Japanese.Add(keyStr, curTable.Rows[j][3].ToString());
-                    newMultiLa.Korean.Add(keyStr, curTable.Rows[j][4].ToString());
-                    //curTable.Rows[j][0]
+                    if (curTables.Tables[i].Rows[j][0].ToString() == "") continue;
+                    MultipleLanguage curData = new MultipleLanguage();
+                    curData.zh = curTables.Tables[i].Rows[j][1].ToString();
+                    curData.en = curTables.Tables[i].Rows[j][2].ToString();
+                    curData.ja = curTables.Tables[i].Rows[j][3].ToString();
+                    locDict.Add(curTables.Tables[i].Rows[j][0].ToString(), curData);
                 }
+                locTableDict[locTable.TableName] = locTable;//组装数据结构
             }
-
-            string content = JsonConvert.SerializeObject(newMultiLa, (Formatting)Formatting.Indented);
-            File.WriteAllText(PathConfig.MultiLaDesignJson, content);
+            
+            string content = JsonConvert.SerializeObject(locDataDesign, (Formatting)Formatting.Indented);
+            File.WriteAllText(PathConfig.LocalizationConfigJson, content);
         }
-
-        DataSet GetMultiDataSet()
-        {
-            FileStream fileStream =
-                File.Open(GetDesignExcelPath("Multi_Language.xlsx"), FileMode.Open, FileAccess.Read);
-            IExcelDataReader excelDataReader = ExcelReaderFactory.CreateOpenXmlReader(fileStream);
-            DataSet result = excelDataReader.AsDataSet();
-            return result;
-        }
-
         #endregion
 
         #region 对话相关

@@ -95,17 +95,17 @@ public class Tooltips : MonoBehaviour
             switch (attriInfo.Type)
             {
                 case ToolTipsAttriType.Damage:
-                    desStr = "伤害:"; valueColor = ColorPalette.DamageValueColor; break;
+                    desStr = $"{Loc.Get("battle.damage")}:"; valueColor = ColorPalette.DamageValueColor; break;
                 case ToolTipsAttriType.Piercing:
-                    desStr = "穿透:"; valueColor = ColorPalette.PiercingValueColor; break;
+                    desStr = $"{Loc.Get("battle.piercing")}:"; valueColor = ColorPalette.PiercingValueColor; break;
                 case ToolTipsAttriType.Resonance:
-                    desStr = "共振:"; valueColor = ColorPalette.ResonanceValueColor; break;
+                    desStr = $"{Loc.Get("battle.resonance")}:"; valueColor = ColorPalette.ResonanceValueColor; break;
                 case ToolTipsAttriType.Critical:
-                    desStr = "暴击:"; valueColor = ColorPalette.DamageValueColor; break;
+                    desStr = $"{Loc.Get("battle.critical")}:"; valueColor = ColorPalette.DamageValueColor; break;
                 case ToolTipsAttriType.ElementalValue:
-                    desStr = "元素伤害:"; valueColor = ColorPalette.ElementalInfusionValue; break;
+                    desStr = $"{Loc.Get("battle.evalue")}:"; valueColor = ColorPalette.ElementalInfusionValue; break;
                 case ToolTipsAttriType.Element:
-                    desStr = "元素:"; valueColor = ColorPalette.NormalTextColor; break;
+                    desStr = $"{Loc.Get("battle.element")}:"; valueColor = ColorPalette.NormalTextColor; break;
             }
             
             attriSingleTexts[0].text = desStr;
@@ -133,10 +133,10 @@ public class Tooltips : MonoBehaviour
             {
                 string curEleStr = attriInfo.ElementType switch
                 {
-                    ElementalTypes.Fire => "火",
-                    ElementalTypes.Ice => "冰",
-                    ElementalTypes.Thunder => "雷",
-                    _ => "无"
+                    ElementalTypes.Fire => Loc.Get("battle.fire"),
+                    ElementalTypes.Ice => Loc.Get("battle.ice"),
+                    ElementalTypes.Thunder => Loc.Get("battle.thunder"),
+                    _ => Loc.Get("battle.none")
                 };
                 attriSingleTexts[1].text = curEleStr;
                 attriSingleTexts[1].fontSize -= 5;

@@ -25,6 +25,17 @@ public static class PathConfig
    //..........................全局大地图...............................
    public static string MapPB(int ID) => GetPrepath() + $"Res/Map/P_Map_{ID.ToString("D2")}.prefab";
    
+   //..........................多语言相关...............................
+   public static string LocalizationConfigJson = GetDataPrepath() + "Data/LocalizationConfig.json";
+   public static string Font_zh = GetPrepath() + "Res/UI/Fond/ZH_Simplified.asset";
+   public static string Font_en = GetPrepath() + "Res/UI/Fond/DefaultFont.asset";
+   public static string Font_ja = GetPrepath() + "Res/UI/Fond/Japanese.asset";
+   
+   //...............................字体................................................
+   public static string DamageFontAsset = GetPrepath() + "Res/UI/Fond/DefaultFont.asset";
+   public static string DamageFontMaterial = GetPrepath() + "Res/UI/Fond/DefaultOutline.mat";
+   public static string MapHintFontAsset = GetPrepath() + "Res/UI/Fond/ZH_Simplified.asset";
+   
    //......................Data..............................................
    public static string MultiLaDesignJson = GetDataPrepath() + "Data/MultiLa.json";
    public static string SaveFileJson = GetDataPrepath() + "Data/SaveFile.json";
@@ -125,11 +136,6 @@ public static class PathConfig
    public static string InventoryDataPath = GetPrepath() + "Res/DataOBJ/InventoryData.asset";
    public static string BulletInvDataPath = GetPrepath() + "Res/DataOBJ/BulletInvData.asset";
    public static string BattleDataPath = GetPrepath() + "Res/DataOBJ/BattleData.asset";
-   
-   //...............................字体................................................
-   public static string DamageFontAsset = GetPrepath() + "Res/UI/Fond/DefaultFont.asset";
-   public static string DamageFontMaterial = GetPrepath() + "Res/UI/Fond/DefaultOutline.mat";
-   public static string MapHintFontAsset = GetPrepath() + "Res/UI/Fond/ZH_Simplified.asset";
    
    #region Function
    //获得关卡的路径

@@ -30,9 +30,9 @@ public class RollSingle : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
       ItemID = dropedObj.ID;
       Icon.sprite = ResManager.instance.GetItemIcon(ItemID);
       ItemJson itemJson = TrunkManager.Instance.GetItemJson(ItemID);
-      txtItemName.text = itemJson.Name;
-      txtItemDesc.text = TextProcessor.Parse(itemJson.Desc);
-      txtItemFlavor.text = itemJson.Flavor;
+      txtItemName.text = itemJson.NameKey;
+      txtItemDesc.text = TextProcessor.Parse(itemJson.DescKey);
+      txtItemFlavor.text = itemJson.FlavorKey;
       
       //同步稀有度颜色
       switch (itemJson.Rarity)

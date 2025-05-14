@@ -20,7 +20,7 @@ public class UpgradeSuccessPopUI : MonoBehaviour
             afterBulletJson = TrunkManager.Instance.GetBulletJson(curInfo.ID + 100);
             Debug.Log(curInfo.ID);
             BulletFactory.SetBulletInUI(AfterSkeleton,curInfo.ID + 100);
-            txtAfterName.text = afterBulletJson.Name;
+            txtAfterName.text = afterBulletJson.NameKey;
         }
 
         PopSelf();

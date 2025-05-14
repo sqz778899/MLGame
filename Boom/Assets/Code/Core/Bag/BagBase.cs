@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 //基础抽象类
 public interface IBulletModifier
@@ -151,6 +152,7 @@ public class GemData : ItemDataBase,ITooltipBuilder
     public GemType CurGemType;
     public BulletModifierGem Modifier;
     
+    GemJson _json => TrunkManager.Instance.GetGemJson(ID);
     #region 处理战场临时Buff
     public GemType ChangedType;
     Dictionary<string, bool> triggeredTempBuffs = new();
@@ -202,7 +204,6 @@ public class GemData : ItemDataBase,ITooltipBuilder
     public void InitData(GemJson json)
     {
         ID = json.ID;
-        Name = json.Name;
         Price = json.Price;
         Level = json.Level;
         ImageName = json.ImageName;
@@ -210,8 +211,21 @@ public class GemData : ItemDataBase,ITooltipBuilder
         Damage = json.Damage;
         Piercing = json.Piercing;
         Resonance = json.Resonance;
+        
+        Loc.OnLanguageChanged -= SyncStrInfo;
+        Loc.OnLanguageChanged += SyncStrInfo;//语言改变事件
+        SyncStrInfo(json);//同步字符串信息
+        
         OnDataChanged?.Invoke();
     }
+    
+    #region 处理本地化多语言相关
+    void SyncStrInfo() => SyncStrInfo(_json);
+    void SyncStrInfo(GemJson json) => Name = Loc.Get(json.NameKey);
+    ~GemData() => ClearData();
+    public void ClearData() => Loc.OnLanguageChanged -= SyncStrInfo;
+    #endregion
+    
     Dictionary<GemType, List<int>> typeIDDict = new Dictionary<GemType, List<int>>
     {
         { GemType.Damage, new List<int>{1, 2, 3} },
@@ -322,6 +336,8 @@ public class BulletData:ItemDataBase,ITooltipBuilder
     public int FinalElementalInfusionValue;
     public List<IBulletModifier> Modifiers = new();
 
+    BulletJson _json => TrunkManager.Instance.GetBulletJson(ID);
+    
     #region 针对buff道具等进行的属性增加
     public int OrderInRound; // 第几颗子弹（从1开始）
     public bool IsLastBullet; // 是否是最后一颗子弹
@@ -391,18 +407,13 @@ public class BulletData:ItemDataBase,ITooltipBuilder
     #endregion
 
     #region 数据同步
-    protected override void OnIDChanged()
-    {
-        BulletJson json = TrunkManager.Instance.GetBulletJson(ID);
-        InitData(json);
-    }
+    protected override void OnIDChanged() => InitData(_json);
     
     void InitData(BulletJson json)
     {
         if (json == null) return;
         ID = json.ID;
         Level = json.Level;
-        Name = json.Name;
         Price = json.Price;
         
         Damage = json.Damage;
@@ -412,7 +423,18 @@ public class BulletData:ItemDataBase,ITooltipBuilder
         ElementalInfusionValue = json.ElementalInfusionValue;
         ElementalType = (ElementalTypes)json.ElementalType;
         SyncFinalAttributes();
+        
+        Loc.OnLanguageChanged -= SyncStrInfo;
+        Loc.OnLanguageChanged += SyncStrInfo;//语言改变事件
+        SyncStrInfo(json);//同步字符串信息
     }
+    
+    #region 处理本地化多语言相关
+    void SyncStrInfo() => SyncStrInfo(_json);
+    void SyncStrInfo(BulletJson json) => Name = Loc.Get(json.NameKey);
+    ~BulletData() => ClearData();
+    public void ClearData() => Loc.OnLanguageChanged -= SyncStrInfo;
+    #endregion
     
     public void SyncFinalAttributes()
     {

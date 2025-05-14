@@ -1,0 +1,359 @@
+{
+  "LocTableDict": {
+    "UI": {
+      "TableName": "UI",
+      "LocDict": {
+        "ui.language": {
+          "zh": "语言",
+          "en": "Language",
+          "ja": "言語"
+        },
+        "ui.audio": {
+          "zh": "音频",
+          "en": "Audio",
+          "ja": "オーディオ"
+        },
+        "ui.continue": {
+          "zh": "继续",
+          "en": "Continue",
+          "ja": "続ける"
+        },
+        "ui.skip": {
+          "zh": "跳过",
+          "en": "Skip",
+          "ja": "スキップ"
+        }
+      }
+    },
+    "Item": {
+      "TableName": "Item",
+      "LocDict": {
+        "item.1000.name": {
+          "zh": "神秘的信件",
+          "en": "Mysterious Letter",
+          "ja": "謎めいた手紙"
+        },
+        "item.1001.name": {
+          "zh": "学院的徽章",
+          "en": "Academy Emblem",
+          "ja": "学院のバッジ"
+        },
+        "item.1003.name": {
+          "zh": "魔法课程笔记",
+          "en": "Magic Class Notes",
+          "ja": "魔法授業ノート"
+        },
+        "item.1004.name": {
+          "zh": "特训授权书",
+          "en": "Special Training Permit",
+          "ja": "特訓許可証"
+        },
+        "item.1100.name": {
+          "zh": "黑曜石",
+          "en": "Obsidian",
+          "ja": "黒曜石"
+        },
+        "item.1101.name": {
+          "zh": "奥术结晶",
+          "en": "Arcane Crystal",
+          "ja": "奥術の結晶"
+        },
+        "item.1102.name": {
+          "zh": "秘银",
+          "en": "Mithril",
+          "ja": "ミスリル"
+        }
+      }
+    },
+    "Bullet": {
+      "TableName": "Bullet",
+      "LocDict": {
+        "bullet.1.name": {
+          "zh": "黏黏团子",
+          "en": "Gooey Dumpling",
+          "ja": "ネバネバ団子"
+        },
+        "bullet.101.name": {
+          "zh": "硬崽",
+          "en": "Toughnut",
+          "ja": "カチカチ坊や"
+        },
+        "bullet.201.name": {
+          "zh": "黑曜噗噗拳",
+          "en": "Obsi-Puff Punch",
+          "ja": "黒曜プク拳"
+        },
+        "bullet.2.name": {
+          "zh": "牙疼丸子冰",
+          "en": "Toothache Ice Pop",
+          "ja": "歯痛アイス丸"
+        },
+        "bullet.102.name": {
+          "zh": "冷脸子",
+          "en": "Mr. Coldface",
+          "ja": "冷血さん"
+        },
+        "bullet.202.name": {
+          "zh": "冻霸",
+          "en": "Frost Boss",
+          "ja": "フリーズ覇王"
+        },
+        "bullet.3.name": {
+          "zh": "火豆",
+          "en": "Blazing Bean",
+          "ja": "火炎豆"
+        },
+        "bullet.103.name": {
+          "zh": "焦球",
+          "en": "Burnt Ball",
+          "ja": "焦げ玉"
+        },
+        "bullet.203.name": {
+          "zh": "烧嘟嘟",
+          "en": "Sizzleboom",
+          "ja": "ジュージュー丸"
+        },
+        "bullet.4.name": {
+          "zh": "啪子",
+          "en": "Poppy Pop",
+          "ja": "パチン小僧"
+        },
+        "bullet.104.name": {
+          "zh": "电球球",
+          "en": "Sparkorb",
+          "ja": "ビリビリ玉"
+        },
+        "bullet.204.name": {
+          "zh": "雷咚",
+          "en": "Thundrum",
+          "ja": "ドンドン雷丸"
+        }
+      }
+    },
+    "Gem": {
+      "TableName": "Gem",
+      "LocDict": {
+        "gem.1.name": {
+          "zh": "伤害宝石",
+          "en": "Damage Gem",
+          "ja": "ダメージ宝石"
+        },
+        "gem.10.name": {
+          "zh": "贯穿宝石",
+          "en": "Pierce Gem",
+          "ja": "貫通の宝石"
+        },
+        "gem.20.name": {
+          "zh": "共振宝石",
+          "en": "Resonance Gem",
+          "ja": "共鳴の宝石"
+        }
+      }
+    },
+    "奇迹物件": {
+      "TableName": "奇迹物件",
+      "LocDict": {
+        "mo.198.name": {
+          "zh": "蹩脚魔术师的帽子",
+          "en": "Crummy Mage Hat",
+          "ja": "ヘボ魔法帽子"
+        },
+        "mo.198.desc": {
+          "zh": "第一颗子弹伤害随机#Red(0～3)#",
+          "en": "First bullet damage is random #Red(0~3)#",
+          "ja": ""
+        },
+        "mo.198.flavor": {
+          "zh": "“帽子太旧了，魔力有时候会漏掉……或者突然爆发。”",
+          "en": "\"The hat is too old. Sometimes magic leaks... or suddenly explodes.\"",
+          "ja": ""
+        },
+        "mo.197.name": {
+          "zh": "尖叫陶罐",
+          "en": "Screaming Clay Pot",
+          "ja": "叫び声の土器"
+        },
+        "mo.196.name": {
+          "zh": "错页的战术笔记",
+          "en": "Jumbled Battle Notes",
+          "ja": "間違いだらけの戦術メモ"
+        },
+        "mo.163.name": {
+          "zh": "黏糊糊的巫师手套",
+          "en": "Gooey Wizard Gloves",
+          "ja": "ベトベト魔法手袋"
+        },
+        "mo.156.name": {
+          "zh": "晕头转向的猫头鹰雕像",
+          "en": "Dizzy Owl Figurine",
+          "ja": "フラフラ梟の像"
+        },
+        "mo.129.name": {
+          "zh": "写满错字的魔法书",
+          "en": "Misspelled Grimoire",
+          "ja": "誤字だらけの魔導書"
+        },
+        "mo.128.name": {
+          "zh": "胆小鬼的黄金钥匙",
+          "en": "Coward’s Golden Key",
+          "ja": "臆病者の金の鍵"
+        },
+        "mo.127.name": {
+          "zh": "变形术练习笔",
+          "en": "Polymorph Practice Pen",
+          "ja": "変身術の練習ペン"
+        },
+        "mo.123.name": {
+          "zh": "残响魔链",
+          "en": "Echoing Magic Chain",
+          "ja": "残響する魔鎖"
+        },
+        "mo.117.name": {
+          "zh": "忽明忽暗的蜡烛",
+          "en": "Flickering Magic Candle",
+          "ja": "チラチラ魔法ロウソク"
+        },
+        "mo.116.name": {
+          "zh": "发霉的训练日志",
+          "en": "Moldy Training Log",
+          "ja": "カビた訓練日誌"
+        },
+        "mo.99.name": {
+          "zh": "永响之谕",
+          "en": "Oath of Endless Echo",
+          "ja": "永久に響く誓い"
+        },
+        "mo.76.name": {
+          "zh": "碎裂的玩具魔杖",
+          "en": "Silent Watcher’s Blindfold",
+          "ja": "壊れたおもちゃの杖"
+        },
+        "mo.75.name": {
+          "zh": "沉默注视者的眼罩",
+          "en": "Silent Watcher’s Blindfold",
+          "ja": "沈黙の観察者の目隠し"
+        },
+        "mo.74.name": {
+          "zh": "自大的国王王冠",
+          "en": "Arrogant King’s Crown",
+          "ja": "尊大な王の冠"
+        },
+        "mo.38.name": {
+          "zh": "翻找术手册",
+          "en": "Manual of Rummaging",
+          "ja": "ゴソゴソ術の手引き書"
+        },
+        "mo.37.name": {
+          "zh": "漏风的飞天扫帚",
+          "en": "Drafty Flying Broom",
+          "ja": "スースー空飛ぶほうき"
+        },
+        "mo.36.name": {
+          "zh": "怨念缠绕的围巾",
+          "en": "Vengeful Spirit Scarf",
+          "ja": "怨霊まみれのマフラー"
+        },
+        "mo.26.name": {
+          "zh": "左脚的幸运靴",
+          "en": "Lucky Left Boot",
+          "ja": "左足のラッキーブーツ"
+        },
+        "mo.15.name": {
+          "zh": "虹彩的魔法书",
+          "en": "Iridescent Grimoire",
+          "ja": "虹色の魔導書"
+        },
+        "mo.10.name": {
+          "zh": "溅血猎犬的指环",
+          "en": "Bloodhound’s Ring",
+          "ja": "血まみれ猟犬の指輪"
+        }
+      }
+    },
+    "Battle": {
+      "TableName": "Battle",
+      "LocDict": {
+        "battle.damage": {
+          "zh": "伤害",
+          "en": "Damage",
+          "ja": "ダメージ"
+        },
+        "battle.piercing": {
+          "zh": "贯穿",
+          "en": "Pierce",
+          "ja": "貫通"
+        },
+        "battle.resonance": {
+          "zh": "共振",
+          "en": "Resonance",
+          "ja": "共鳴"
+        },
+        "battle.critical": {
+          "zh": "暴击",
+          "en": "Crit",
+          "ja": "クリティカル"
+        },
+        "battle.evalue": {
+          "zh": "元素值",
+          "en": "Elem Value",
+          "ja": "属性値"
+        },
+        "battle.element": {
+          "zh": "属性",
+          "en": "Element",
+          "ja": "属性"
+        },
+        "battle.fire": {
+          "zh": "火",
+          "en": "Fire",
+          "ja": "火"
+        },
+        "battle.ice": {
+          "zh": "冰",
+          "en": "Ice",
+          "ja": "氷"
+        },
+        "battle.thunder": {
+          "zh": "雷",
+          "en": "Thunder",
+          "ja": "雷"
+        },
+        "battle.none": {
+          "zh": "无",
+          "en": "None",
+          "ja": "無"
+        },
+        "battle.equip": {
+          "zh": "装备",
+          "en": "Equip",
+          "ja": "装備"
+        },
+        "battle.drop": {
+          "zh": "丢弃",
+          "en": "Drop",
+          "ja": "捨てる"
+        },
+        "battle.report": {
+          "zh": "战报",
+          "en": "Battle Report",
+          "ja": "戦闘レポート"
+        },
+        "battle.totalda": {
+          "zh": "总伤害",
+          "en": "Total Damage",
+          "ja": "総ダメージ"
+        },
+        "battle.effda": {
+          "zh": "有效伤害",
+          "en": "Effective Damage",
+          "ja": "有効ダメージ"
+        },
+        "battle.overda": {
+          "zh": "溢出伤害",
+          "en": "Overkill Damage",
+          "ja": "オーバーダメージ"
+        }
+      }
+    }
+  }
+}

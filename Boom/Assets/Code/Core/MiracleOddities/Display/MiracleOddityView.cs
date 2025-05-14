@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -27,4 +28,6 @@ public class MiracleOddityView : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     public void OnPointerMove(PointerEventData eventData)
         => TooltipsManager.Instance.UpdatePosition(TooltipOffset);
+
+    public void OnDestroy() => _data.ClearData();
 }

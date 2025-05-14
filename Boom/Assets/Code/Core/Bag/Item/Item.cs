@@ -43,7 +43,12 @@ public class Item : ItemBase,IItemInteractionBehaviour
             StackCountText.gameObject.SetActive(false);
     }
 
-    void OnDestroy() => Data.OnDataChanged -= RefreshUI;
+    void OnDestroy()
+    {
+        Data.OnDataChanged -= RefreshUI;
+        Data.ClearData();
+    }
+
     #endregion
 
     #region 双击与右键逻辑

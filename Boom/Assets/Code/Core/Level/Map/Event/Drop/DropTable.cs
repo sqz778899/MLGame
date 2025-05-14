@@ -24,19 +24,19 @@ public class DropedObjEntry
                 ItemJson itemjson = TrunkManager.Instance.GetItemJson(ID);
                 Icon = ResManager.instance.GetItemIcon(ID);
                 Rarity = itemjson.Rarity;
-                Name = itemjson.Name;
+                Name = itemjson.NameKey;
                 break;
             case DropedCategory.Gem:
                 GemJson gemjson = TrunkManager.Instance.GetGemJson(ID);
                 Icon = ResManager.instance.GetGemIcon(ID);
                 Rarity = gemjson.Rarity;
-                Name = gemjson.Name;
+                Name = gemjson.NameKey;
                 break;
             case DropedCategory.MiracleOddity:
                 MiracleOddityJson mojson = TrunkManager.Instance.GetMiracleOddityJson(ID);
                 Icon = ResManager.instance.GetMiracleOddityIcon(ID);
                 Rarity = mojson.Rarity;
-                Name = mojson.Name;
+                Name = mojson.NameKey;
                 break;
             case DropedCategory.Buff:
                 BuffJson buffjson = TrunkManager.Instance.GetBuffJson(ID);

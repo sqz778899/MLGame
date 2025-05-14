@@ -9,7 +9,7 @@
     "ElementalInfusionValue": 0,
     "HitEffectName": "FX_Bullet01_hit",
     "ID": 1,
-    "Name": "黏黏团子",
+    "NameKey": "bullet.1.name",
     "Price": 0
   },
   {
@@ -22,7 +22,7 @@
     "ElementalInfusionValue": 0,
     "HitEffectName": "FX_Bullet01_hit",
     "ID": 101,
-    "Name": "\t硬崽",
+    "NameKey": "bullet.101.name",
     "Price": 0
   },
   {
@@ -35,7 +35,7 @@
     "ElementalInfusionValue": 0,
     "HitEffectName": "FX_Bullet01_hit",
     "ID": 201,
-    "Name": "黑曜噗噗拳",
+    "NameKey": "bullet.201.name",
     "Price": 0
   },
   {
@@ -48,7 +48,7 @@
     "ElementalInfusionValue": 1,
     "HitEffectName": "FX_Bullet02_hit",
     "ID": 2,
-    "Name": "牙疼丸子冰",
+    "NameKey": "bullet.2.name",
     "Price": 0
   },
   {
@@ -61,7 +61,7 @@
     "ElementalInfusionValue": 3,
     "HitEffectName": "FX_Bullet02_hit",
     "ID": 102,
-    "Name": "冷脸子",
+    "NameKey": "bullet.102.name",
     "Price": 0
   },
   {
@@ -74,7 +74,7 @@
     "ElementalInfusionValue": 6,
     "HitEffectName": "FX_Bullet02_hit",
     "ID": 202,
-    "Name": "\t冻霸",
+    "NameKey": "bullet.202.name",
     "Price": 0
   },
   {
@@ -87,7 +87,7 @@
     "ElementalInfusionValue": 1,
     "HitEffectName": "FX_Bullet03_hit",
     "ID": 3,
-    "Name": "火豆",
+    "NameKey": "bullet.3.name",
     "Price": 0
   },
   {
@@ -100,7 +100,7 @@
     "ElementalInfusionValue": 3,
     "HitEffectName": "FX_Bullet03_hit",
     "ID": 103,
-    "Name": "焦球",
+    "NameKey": "bullet.103.name",
     "Price": 0
   },
   {
@@ -113,7 +113,7 @@
     "ElementalInfusionValue": 6,
     "HitEffectName": "FX_Bullet03_hit",
     "ID": 203,
-    "Name": "烧嘟嘟",
+    "NameKey": "bullet.203.name",
     "Price": 0
   },
   {
@@ -126,7 +126,7 @@
     "ElementalInfusionValue": 1,
     "HitEffectName": "FX_Bullet04_hit",
     "ID": 4,
-    "Name": "啪子",
+    "NameKey": "bullet.4.name",
     "Price": 0
   },
   {
@@ -139,7 +139,7 @@
     "ElementalInfusionValue": 3,
     "HitEffectName": "FX_Bullet04_hit",
     "ID": 104,
-    "Name": "电球球",
+    "NameKey": "bullet.104.name",
     "Price": 0
   },
   {
@@ -152,7 +152,7 @@
     "ElementalInfusionValue": 6,
     "HitEffectName": "FX_Bullet04_hit",
     "ID": 204,
-    "Name": "雷咚",
+    "NameKey": "bullet.204.name",
     "Price": 0
   }
 ]

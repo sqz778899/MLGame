@@ -31,7 +31,7 @@ public class UpgradeUIDisplay : MonoBehaviour
             BulletFactory.SetBulletInUI(PreSkeleton,curInfo.ID);
             BulletFactory.SetBulletInUI(AfterSkeleton,curInfo.ID + 100);
             txtPreName.text = curInfo.Name;
-            txtAfterName.text = afterBulletJson.Name;
+            txtAfterName.text = afterBulletJson.NameKey;
             //提升属性差异显示
             int difDamage = afterBulletJson.Damage - preBulletJson.Damage;
             int difCritical = afterBulletJson.Critical - preBulletJson.Critical;

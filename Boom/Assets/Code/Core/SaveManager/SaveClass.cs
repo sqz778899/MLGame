@@ -123,7 +123,7 @@ public class UserConfig
 public abstract class ItemJsonBase
 {
     public int ID;
-    public string Name;
+    public string NameKey;
     public int Price;
 }
 
@@ -143,11 +143,11 @@ public class BulletJson : ItemJsonBase
     //资产相关
     public string HitEffectName;
 
-    public BulletJson(int _id = -1, string _name = "", int _level = 1,int _elementalType = -1,
+    public BulletJson(int _id = -1, string nameKey = "", int _level = 1,int _elementalType = -1,
         int _damage = 0, int _piercing = 0, int _resonance = 0,int _critical = 0,int _ElementalInfusionValue = 0,string _hitEffectName = "")
     {
         ID = _id;
-        Name = _name;
+        NameKey = nameKey;
         Level = _level;
         ElementalType = _elementalType;
         Damage = _damage;
@@ -172,10 +172,10 @@ public class GemJson : ItemJsonBase
     public int Resonance;
     
     public GemJson(int id = -1,
-        string name = "", int _rarity = 1,int _level = 1,string imageName = "")
+        string nameKey = "", int _rarity = 1,int _level = 1,string imageName = "")
     {
         ID = id;
-        Name = name;
+        NameKey = nameKey;
         Rarity = (DropedRarity)_rarity;
         Level = _level;
         ImageName = imageName;
@@ -188,18 +188,18 @@ public class ItemJson:ItemJsonBase
 { 
     public DropedRarity Rarity;
     public string ResName;
-    public string Desc;
-    public string Flavor;
+    public string DescKey;
+    public string FlavorKey;
     public PersistentItemType PersistentType;
     
-    public ItemJson(int _id = -1, string _name = "",int rarity = -1,
-        string _desc = "",string _flavor = "",int _price = 0, string resName = "")
+    public ItemJson(int _id = -1, string nameKey = "",int rarity = -1,
+        string descKey = "",string flavorKey = "",int _price = 0, string resName = "")
     {
         ID = _id;
         Rarity = (DropedRarity)rarity;
-        Name = _name;
-        Desc = _desc;
-        Flavor = _flavor;
+        NameKey = nameKey;
+        DescKey = descKey;
+        FlavorKey = flavorKey;
         ResName = resName;
         Price = _price;
     }
@@ -283,11 +283,11 @@ public class TraitJson
 public class MiracleOddityJson
 {
     public int ID;
-    public string Name;
+    public string NameKey;
     public DropedRarity Rarity;
-    public string Desc;
+    public string DescKey;
     public int Price;
-    public string Flavor;
+    public string FlavorKey;
     public string ResName;
     public MiracleOddityTriggerTiming TriggerTiming;
 }

@@ -74,7 +74,7 @@ public class BulletEventHandler : IMapEventHandler
 
             BulletJson bulletDesignJson = TrunkManager.Instance.BulletDesignJsons
                 .FirstOrDefault(b => b.ID == runtime.BulletID) ?? new BulletJson();
-            FloatingTextFactory.CreateWorldText($"获得 {bulletDesignJson.Name}",
+            FloatingTextFactory.CreateWorldText($"获得 {bulletDesignJson.NameKey}",
                 default, FloatingTextType.MapHint,new Color(0.8f, 0.8f, 0.8f, 1), 3f);
 
             GameObject.Destroy(view.gameObject);
