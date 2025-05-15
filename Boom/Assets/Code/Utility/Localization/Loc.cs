@@ -29,6 +29,8 @@ public static class Loc
         {LocTableType.bullet,"Bullet"},
         {LocTableType.gem,"Gem"},
         {LocTableType.battle,"Battle"},
+        {LocTableType.npc,"NPC"},
+        {LocTableType.dia,"Dia"},
     };
     public static string Get(string key)
     {
@@ -65,6 +67,8 @@ public class GuessLocKey
     public string DescKey;
     public string FlavorKey;
 
+    public string ssss;
+
     public GuessLocKey(int ID,LocTableType locType)
     {
         NameKey = $"{locType.ToString()}.{ID}.name";
@@ -90,6 +94,8 @@ public enum LocTableType
     bullet = 4,
     gem = 5,
     battle = 6,
+    npc = 7,
+    dia = 8,
 }
 
 // 示例用法：

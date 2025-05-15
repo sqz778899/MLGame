@@ -3,290 +3,290 @@
     {
       "ID": 0,
       "Sign": "#",
-      "Name": "大聪明",
+      "NameKey": "npc.02",
       "IsLeft": 1,
       "NextIdex": 1,
-      "Content": "好饿……教授这个没人性的，把我关进塔里，非要我一路爬到顶层才能回家吃饭！"
+      "ContentKey": "dia.0.魔法基础大聪明"
     },
     {
       "ID": 1,
       "Sign": "#",
-      "Name": "大聪明",
+      "NameKey": "npc.02",
       "IsLeft": 1,
       "NextIdex": -1,
-      "Content": "旁边有个奇迹子弹。。。先#捡起来#吧"
-    }
-  ],
-  "Beginner02": [
-    {
-      "ID": 0,
-      "Sign": "#",
-      "Name": "黏土子弹",
-      "IsLeft": 2,
-      "NextIdex": 1,
-      "Content": "你好，法师先生，我是奇迹子弹——黏土子弹"
-    },
-    {
-      "ID": 1,
-      "Sign": "#",
-      "Name": "黏土子弹",
-      "IsLeft": 2,
-      "NextIdex": 2,
-      "Content": "我在这个塔里呆了很久了，这里根本没有吃的！好饿啊，先生。"
-    },
-    {
-      "ID": 2,
-      "Sign": "#",
-      "Name": "黏土子弹",
-      "IsLeft": 2,
-      "NextIdex": -1,
-      "Content": "请带我出去吧，先生，出口就在#顶层#！"
-    }
-  ],
-  "Beginner04": [
-    {
-      "ID": 0,
-      "Sign": "#",
-      "Name": "黏土子弹",
-      "IsLeft": 2,
-      "NextIdex": 1,
-      "Content": "啊啊啊，带我出去，饿死我了"
-    },
-    {
-      "ID": 1,
-      "Sign": "#",
-      "Name": "黏土子弹",
-      "IsLeft": 2,
-      "NextIdex": -1,
-      "Content": "我想出去吃土，最好是种过紫蔷薇和竹夹桃的"
-    }
-  ],
-  "黏土日常1": [
-    {
-      "ID": 0,
-      "Sign": "#",
-      "Name": "黏土子弹",
-      "IsLeft": 2,
-      "NextIdex": 1,
-      "Content": "我想种一整片黏土田园，种点小萝卜、苔藓，还有紫蔷薇~"
-    },
-    {
-      "ID": 1,
-      "Sign": "#",
-      "Name": "黏土子弹",
-      "IsLeft": 2,
-      "NextIdex": 2,
-      "Content": "可是这里没有阳光也没有泥巴，只有石砖和怪物……"
-    },
-    {
-      "ID": 2,
-      "Sign": "#",
-      "Name": "黏土子弹",
-      "IsLeft": 2,
-      "NextIdex": -1,
-      "Content": "快带我去塔顶吧，我要在那里开一片黏土花园！"
-    }
-  ],
-  "黏土日常2": [
-    {
-      "ID": 0,
-      "Sign": "#",
-      "Name": "黏土子弹",
-      "IsLeft": 2,
-      "NextIdex": 1,
-      "Content": "我刚刚梦见自己变成了热乎乎的土豆泥，好香……"
-    },
-    {
-      "ID": 1,
-      "Sign": "#",
-      "Name": "黏土子弹",
-      "IsLeft": 2,
-      "NextIdex": 2,
-      "Content": "法师先生，你的魔杖能变出点吃的吗？黏土也行，真的。"
-    },
-    {
-      "ID": 2,
-      "Sign": "#",
-      "Name": "黏土子弹",
-      "IsLeft": 2,
-      "NextIdex": -1,
-      "Content": "不行啦，再不出去，我要开始啃墙角了……"
+      "ContentKey": "dia.1.魔法基础大聪明"
     }
   ],
   "邓肯教学双击宝石1": [
     {
       "ID": 0,
       "Sign": "#",
-      "Name": "邓肯教授",
+      "NameKey": "npc.01",
       "IsLeft": 2,
       "NextIdex": -1,
-      "Content": "镶嵌宝石有一个便捷操作。现在#打开背包#。"
+      "ContentKey": "dia.0.邓肯教学双击宝石1"
     }
   ],
   "邓肯教学双击宝石2": [
     {
       "ID": 0,
       "Sign": "#",
-      "Name": "邓肯教授",
+      "NameKey": "npc.01",
       "IsLeft": 2,
       "NextIdex": -1,
-      "Content": "现在#双击#宝石"
+      "ContentKey": "dia.0.邓肯教学双击宝石2"
     }
   ],
   "邓肯教学共振1": [
     {
       "ID": 0,
       "Sign": "#",
-      "Name": "邓肯教授",
+      "NameKey": "npc.01",
       "IsLeft": 2,
       "NextIdex": -1,
-      "Content": "看好了，共振魔法我只演示一次。现在#打开背包#。"
+      "ContentKey": "dia.0.邓肯教学共振1"
     }
   ],
   "邓肯教学共振2": [
     {
       "ID": 0,
       "Sign": "#",
-      "Name": "邓肯教授",
+      "NameKey": "npc.01",
       "IsLeft": 2,
       "NextIdex": 1,
-      "Content": "[共振条件]  \n当连续的子弹#种类一致#，且都镶嵌了#【共振宝石】#，就会激发共振！"
+      "ContentKey": "dia.0.邓肯教学共振2"
     },
     {
       "ID": 1,
       "Sign": "#",
-      "Name": "邓肯教授",
+      "NameKey": "npc.01",
       "IsLeft": 2,
       "NextIdex": 2,
-      "Content": "[共振伤害规则]  \n第一发正常\n第二发 +1 伤害\n第三发 +2 伤害"
+      "ContentKey": "dia.1.邓肯教学共振2"
     },
     {
       "ID": 2,
       "Sign": "#",
-      "Name": "邓肯教授",
+      "NameKey": "npc.01",
       "IsLeft": 2,
       "NextIdex": 3,
-      "Content": "[共振伤害规则]  \n以此类推。。。#越往后伤害越高#"
+      "ContentKey": "dia.2.邓肯教学共振2"
     },
     {
       "ID": 3,
       "Sign": "#",
-      "Name": "邓肯教授",
+      "NameKey": "npc.01",
       "IsLeft": 2,
       "NextIdex": -1,
-      "Content": "[共振伤害规则]  \n当然，如果你的共振#加成#更高，伤害#递增#也会更高"
+      "ContentKey": "dia.3.邓肯教学共振2"
     }
   ],
   "开局对话邓肯": [
     {
       "ID": 0,
       "Sign": "#",
-      "Name": "邓肯教授",
+      "NameKey": "npc.01",
       "IsLeft": 2,
       "NextIdex": 1,
-      "Content": "又是你！我教学生涯的污点！"
+      "ContentKey": "dia.0.开局对话邓肯"
     },
     {
       "ID": 1,
       "Sign": "#",
-      "Name": "邓肯教授",
+      "NameKey": "npc.01",
       "IsLeft": 2,
       "NextIdex": 2,
-      "Content": "毕业典礼推迟了整整半小时，就因为你在咒语考试上把『变形术』变成了『爆炸术』！"
+      "ContentKey": "dia.1.开局对话邓肯"
     },
     {
       "ID": 2,
       "Sign": "#",
-      "Name": "邓肯教授",
+      "NameKey": "npc.01",
       "IsLeft": 2,
       "NextIdex": 3,
-      "Content": "你这次最好快点学会点东西，不然今天晚上的晚餐……"
+      "ContentKey": "dia.2.开局对话邓肯"
     },
     {
       "ID": 3,
       "Sign": "#",
-      "Name": "邓肯教授",
+      "NameKey": "npc.01",
       "IsLeft": 2,
       "NextIdex": 4,
-      "Content": "可能就只能是你自己了！"
+      "ContentKey": "dia.3.开局对话邓肯"
     },
     {
       "ID": 4,
       "Sign": "#",
-      "Name": "邓肯教授",
+      "NameKey": "npc.01",
       "IsLeft": 2,
       "NextIdex": -1,
-      "Content": "记住了，#基础魔法#，可别再搞错了！"
+      "ContentKey": "dia.4.开局对话邓肯"
     }
   ],
   "穿透对话邓肯": [
     {
       "ID": 0,
       "Sign": "#",
-      "Name": "邓肯教授",
+      "NameKey": "npc.01",
       "IsLeft": 2,
       "NextIdex": 1,
-      "Content": "穿透咒和穿孔咒都分不清？我真是拿你没办法……"
+      "ContentKey": "dia.0.穿透对话邓肯"
     },
     {
       "ID": 1,
       "Sign": "#",
-      "Name": "邓肯教授",
+      "NameKey": "npc.01",
       "IsLeft": 2,
       "NextIdex": 2,
-      "Content": "去那边的#传送门#，#自己领个实践任务#去。别又炸了哪面墙。"
+      "ContentKey": "dia.1.穿透对话邓肯"
     },
     {
       "ID": 2,
       "Sign": "#",
-      "Name": "邓肯教授",
+      "NameKey": "npc.01",
       "IsLeft": 2,
       "NextIdex": -1,
-      "Content": "动手前记得看看说明书，这次没人替你擦屁股了。"
+      "ContentKey": "dia.2.穿透对话邓肯"
     }
   ],
   "共振对话邓肯": [
     {
       "ID": 0,
       "Sign": "#",
-      "Name": "邓肯教授",
+      "NameKey": "npc.01",
       "IsLeft": 2,
       "NextIdex": 1,
-      "Content": "共振？哼，你那脑子最好先加点料再碰它。"
+      "ContentKey": "dia.0.共振对话邓肯"
     },
     {
       "ID": 1,
       "Sign": "#",
-      "Name": "邓肯教授",
+      "NameKey": "npc.01",
       "IsLeft": 2,
       "NextIdex": 2,
-      "Content": "#图书馆#开放了，先去那儿学点东西再说吧。"
+      "ContentKey": "dia.1.共振对话邓肯"
     },
     {
       "ID": 2,
       "Sign": "#",
-      "Name": "邓肯教授",
+      "NameKey": "npc.01",
       "IsLeft": 2,
       "NextIdex": -1,
-      "Content": "上回的学生现在还在轨道上绕着塔转呢……"
+      "ContentKey": "dia.2.共振对话邓肯"
     }
   ],
   "教学全部完成邓肯": [
     {
       "ID": 0,
       "Sign": "#",
-      "Name": "邓肯教授",
+      "NameKey": "npc.01",
       "IsLeft": 2,
       "NextIdex": 1,
-      "Content": "我只制作了这么多内容"
+      "ContentKey": "dia.0.教学全部完成邓肯"
     },
     {
       "ID": 1,
       "Sign": "#",
-      "Name": "邓肯教授",
+      "NameKey": "npc.01",
       "IsLeft": 2,
       "NextIdex": -1,
-      "Content": "恭喜你全部玩完了"
+      "ContentKey": "dia.1.教学全部完成邓肯"
+    }
+  ],
+  "clayBegin": [
+    {
+      "ID": 0,
+      "Sign": "#",
+      "NameKey": "bullet.1.name",
+      "IsLeft": 2,
+      "NextIdex": 1,
+      "ContentKey": "dia.0.clayBegin"
+    },
+    {
+      "ID": 1,
+      "Sign": "#",
+      "NameKey": "bullet.1.name",
+      "IsLeft": 2,
+      "NextIdex": 2,
+      "ContentKey": "dia.1.clayBegin"
+    },
+    {
+      "ID": 2,
+      "Sign": "#",
+      "NameKey": "bullet.1.name",
+      "IsLeft": 2,
+      "NextIdex": -1,
+      "ContentKey": "dia.2.clayBegin"
+    }
+  ],
+  "clay01": [
+    {
+      "ID": 0,
+      "Sign": "#",
+      "NameKey": "bullet.1.name",
+      "IsLeft": 2,
+      "NextIdex": 1,
+      "ContentKey": "dia.0.clay01"
+    },
+    {
+      "ID": 1,
+      "Sign": "#",
+      "NameKey": "bullet.1.name",
+      "IsLeft": 2,
+      "NextIdex": 2,
+      "ContentKey": "dia.1.clay01"
+    },
+    {
+      "ID": 2,
+      "Sign": "#",
+      "NameKey": "bullet.1.name",
+      "IsLeft": 2,
+      "NextIdex": -1,
+      "ContentKey": "dia.2.clay01"
+    }
+  ],
+  "clay02": [
+    {
+      "ID": 0,
+      "Sign": "#",
+      "NameKey": "bullet.1.name",
+      "IsLeft": 2,
+      "NextIdex": 1,
+      "ContentKey": "dia.0.clay02"
+    },
+    {
+      "ID": 1,
+      "Sign": "#",
+      "NameKey": "bullet.1.name",
+      "IsLeft": 2,
+      "NextIdex": 2,
+      "ContentKey": "dia.1.clay02"
+    },
+    {
+      "ID": 2,
+      "Sign": "#",
+      "NameKey": "bullet.1.name",
+      "IsLeft": 2,
+      "NextIdex": -1,
+      "ContentKey": "dia.2.clay02"
+    }
+  ],
+  "clay03": [
+    {
+      "ID": 0,
+      "Sign": "#",
+      "NameKey": "bullet.1.name",
+      "IsLeft": 2,
+      "NextIdex": 1,
+      "ContentKey": "dia.0.clay03"
+    },
+    {
+      "ID": 1,
+      "Sign": "#",
+      "NameKey": "bullet.1.name",
+      "IsLeft": 2,
+      "NextIdex": -1,
+      "ContentKey": "dia.1.clay03"
     }
   ]
 }

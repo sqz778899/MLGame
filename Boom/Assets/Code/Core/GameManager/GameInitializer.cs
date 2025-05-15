@@ -13,9 +13,12 @@ public class GameInitializer:MonoBehaviour
         //0)是否是测试关卡
         GM.Root.QuestMgr.IsTestMode = GM.Root.IsTestMode;
         GM.Root.QuestMgr.TestMapID = GM.Root.TestMapID;
-        //1)初始化语言
+        //1)初始化全局静态类
+        //............多语言静态类...............
         Loc.InitData();
         FontRegistry.InitData();
+        //............全局色板静态类...............
+        ColorPalette.Init(GM.Root.globalColorPalette);
         //1）初始化GUI相关的Manager数据
         GameObject.Find("CanvasQ01").GetComponent<EternalCavans>().InitData();
         EternalCavans.Instance.TooltipsManager.Init();
@@ -49,8 +52,7 @@ public class GameInitializer:MonoBehaviour
             ResManager.instance.GetAssetCache<TMP_FontAsset>(PathConfig.MapHintFontAsset);
         //............道具掉落静态类...............
         DropTableService.LoadFromJson();
-        //............全局色板静态类...............
-        ColorPalette.Init(GM.Root.globalColorPalette);
+        
         //5)重置随机概率
         //ProbabilityService.Reset("WeaponRackLoot");
         

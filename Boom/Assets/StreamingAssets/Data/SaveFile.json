@@ -9,50 +9,31 @@
   "MagicDust": 0,
   "UserBulletSpawner": [
     {
-      "SpawnerCount": 1,
+      "SpawnerCount": 0,
       "ID": 1,
       "SlotID": 1,
-      "SlotType": 8
+      "SlotType": 0
     },
     {
-      "SpawnerCount": 1,
+      "SpawnerCount": 0,
       "ID": 2,
       "SlotID": 2,
-      "SlotType": 8
+      "SlotType": 0
     },
     {
-      "SpawnerCount": 2,
+      "SpawnerCount": 0,
       "ID": 3,
       "SlotID": 3,
-      "SlotType": 8
+      "SlotType": 0
     },
     {
       "SpawnerCount": 0,
       "ID": 4,
       "SlotID": 4,
-      "SlotType": 8
+      "SlotType": 0
     }
   ],
-  "UserCurBullets": [
-    {
-      "SpawnerCount": 0,
-      "ID": 2,
-      "SlotID": 1,
-      "SlotType": 6
-    },
-    {
-      "SpawnerCount": 0,
-      "ID": 4,
-      "SlotID": 2,
-      "SlotType": 6
-    },
-    {
-      "SpawnerCount": 0,
-      "ID": 4,
-      "SlotID": 3,
-      "SlotType": 6
-    }
-  ],
+  "UserCurBullets": [],
   "UserBulletSlotLockedState": {
     "0": true,
     "1": true,
@@ -86,60 +67,6 @@
     },
     {
       "ID": 3,
-      "IsCompleted": false,
-      "State": 1,
-      "DifficultyLevel": 0,
-      "TotalScore": 0,
-      "TotalLoopCount": 0,
-      "ExplorationPercent": 0
-    },
-    {
-      "ID": 50,
-      "IsCompleted": false,
-      "State": 1,
-      "DifficultyLevel": 0,
-      "TotalScore": 0,
-      "TotalLoopCount": 0,
-      "ExplorationPercent": 0
-    },
-    {
-      "ID": 51,
-      "IsCompleted": false,
-      "State": 1,
-      "DifficultyLevel": 0,
-      "TotalScore": 0,
-      "TotalLoopCount": 0,
-      "ExplorationPercent": 0
-    },
-    {
-      "ID": 52,
-      "IsCompleted": false,
-      "State": 1,
-      "DifficultyLevel": 0,
-      "TotalScore": 0,
-      "TotalLoopCount": 0,
-      "ExplorationPercent": 0
-    },
-    {
-      "ID": 100,
-      "IsCompleted": false,
-      "State": 1,
-      "DifficultyLevel": 0,
-      "TotalScore": 0,
-      "TotalLoopCount": 0,
-      "ExplorationPercent": 0
-    },
-    {
-      "ID": 150,
-      "IsCompleted": false,
-      "State": 1,
-      "DifficultyLevel": 0,
-      "TotalScore": 0,
-      "TotalLoopCount": 0,
-      "ExplorationPercent": 0
-    },
-    {
-      "ID": 200,
       "IsCompleted": false,
       "State": 1,
       "DifficultyLevel": 0,

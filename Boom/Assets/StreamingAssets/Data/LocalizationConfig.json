@@ -3,6 +3,16 @@
     "UI": {
       "TableName": "UI",
       "LocDict": {
+        "ui.start": {
+          "zh": "开始",
+          "en": "Start",
+          "ja": "開始"
+        },
+        "ui.leave": {
+          "zh": "离开",
+          "en": "Leave",
+          "ja": "戻る"
+        },
         "ui.language": {
           "zh": "语言",
           "en": "Language",
@@ -22,6 +32,46 @@
           "zh": "跳过",
           "en": "Skip",
           "ja": "スキップ"
+        },
+        "ui.bullet": {
+          "zh": "子弹",
+          "en": "Bullet",
+          "ja": "弾丸"
+        },
+        "ui.item": {
+          "zh": "道具",
+          "en": "Item",
+          "ja": "アイテム"
+        },
+        "ui.gem": {
+          "zh": "宝石",
+          "en": "Gem",
+          "ja": "宝石"
+        },
+        "ui.upg": {
+          "zh": "升级",
+          "en": "Upgrade",
+          "ja": "強化"
+        },
+        "ui.upgs": {
+          "zh": "升级成功",
+          "en": "Upgrade Success",
+          "ja": "強化成功！"
+        },
+        "ui.mirforge": {
+          "zh": "奇迹工坊",
+          "en": "Miracle Forge",
+          "ja": "奇跡の工房"
+        },
+        "ui.upgb": {
+          "zh": "升级子弹",
+          "en": "Upgrade Bullet",
+          "ja": "弾丸を強化"
+        },
+        "ui.upgmo": {
+          "zh": "升级奇迹物件",
+          "en": "Upgrade Oddity",
+          "ja": "奇跡物件を強化"
         }
       }
     },
@@ -33,35 +83,70 @@
           "en": "Mysterious Letter",
           "ja": "謎めいた手紙"
         },
+        "item.1000.desc": {
+          "zh": "收件人是你，但寄件人写着‘未来的我'",
+          "en": "Recipient: You. Sender: \"Future Me.\"",
+          "ja": "宛名は君。差出人は「未来の私」。"
+        },
         "item.1001.name": {
           "zh": "学院的徽章",
           "en": "Academy Emblem",
           "ja": "学院のバッジ"
+        },
+        "item.1001.desc": {
+          "zh": "考试从没及格，但徽章从未掉色。",
+          "en": "Never passed an exam, but the badge never faded.",
+          "ja": "試験は全滅。でもこのバッジは色褪せない。"
         },
         "item.1003.name": {
           "zh": "魔法课程笔记",
           "en": "Magic Class Notes",
           "ja": "魔法授業ノート"
         },
+        "item.1003.desc": {
+          "zh": "涂鸦比公式多，某页还夹着半根火腿肠。",
+          "en": "More doodles than formulas. One page still has half a sausage.",
+          "ja": "落書きだらけ、公式少なめ。ページにはソーセージ半分。"
+        },
         "item.1004.name": {
           "zh": "特训授权书",
           "en": "Special Training Permit",
           "ja": "特訓許可証"
+        },
+        "item.1004.desc": {
+          "zh": "盖章歪了三次，据说咒语是临时编的。",
+          "en": "The seal was crooked thrice. They say the spell was made up on the spot.",
+          "ja": "印は三度ズレ、呪文は即興だったとか。"
         },
         "item.1100.name": {
           "zh": "黑曜石",
           "en": "Obsidian",
           "ja": "黒曜石"
         },
+        "item.1100.desc": {
+          "zh": "据说每块都有微弱的低语声，但没人愿意确认这点。",
+          "en": "Each piece whispers—allegedly. No one’s brave enough to check.",
+          "ja": "小さな囁きが聞こえるらしい。誰も確かめないけど。"
+        },
         "item.1101.name": {
           "zh": "奥术结晶",
           "en": "Arcane Crystal",
           "ja": "奥術の結晶"
         },
+        "item.1101.desc": {
+          "zh": "浓缩的魔力碎片，据说可稳定地为法术提供支撑。——常见于禁术书页的压纸石",
+          "en": "Condensed arcane fragments, said to stabilize spells. Also handy for holding down forbidden tomes.",
+          "ja": "魔力の結晶。術式を安定させるが、禁書の文鎮としても人気。"
+        },
         "item.1102.name": {
           "zh": "秘银",
           "en": "Mithril",
           "ja": "ミスリル"
+        },
+        "item.1102.desc": {
+          "zh": "一种能同时承载力量与意志的珍贵材料，多用于塔尖、魔阵中枢、老教授的假牙。",
+          "en": "A rare material that holds both power and will. Found in tower spires, ritual cores, and old professors’ dentures.",
+          "ja": "力と意志を同時に宿す貴重な素材。塔の頂、魔方陣の中心、そして教授の入れ歯にも使われる。"
         }
       }
     },
@@ -173,100 +258,300 @@
           "en": "Screaming Clay Pot",
           "ja": "叫び声の土器"
         },
+        "mo.197.desc": {
+          "zh": "你的第二颗子弹若命中敌人的护盾，则该子弹伤害#Red(+1)#",
+          "en": "xxx",
+          "ja": "xxx"
+        },
+        "mo.197.flavor": {
+          "zh": "“刺耳的尖叫在第一发后激起恐惧，第二发才真正砸在他们脸上。”",
+          "en": "xxx",
+          "ja": "xxx"
+        },
         "mo.196.name": {
           "zh": "错页的战术笔记",
           "en": "Jumbled Battle Notes",
           "ja": "間違いだらけの戦術メモ"
+        },
+        "mo.196.desc": {
+          "zh": "开火时，你的子弹的顺序会被随机打乱",
+          "en": "xxx",
+          "ja": "xxx"
+        },
+        "mo.196.flavor": {
+          "zh": "“某人抄错了战术笔记的页码，于是本来第三发该打Boss的……飞了。”",
+          "en": "xxx",
+          "ja": "xxx"
         },
         "mo.163.name": {
           "zh": "黏糊糊的巫师手套",
           "en": "Gooey Wizard Gloves",
           "ja": "ベトベト魔法手袋"
         },
+        "mo.163.desc": {
+          "zh": "首次击穿护盾后，下一发子弹伤害#Red(+3)#",
+          "en": "xxx",
+          "ja": "xxx"
+        },
+        "mo.163.flavor": {
+          "zh": "“它不只沾上了护盾的碎片，还顺便粘走了它的一点能量。”",
+          "en": "xxx",
+          "ja": "xxx"
+        },
         "mo.156.name": {
           "zh": "晕头转向的猫头鹰雕像",
           "en": "Dizzy Owl Figurine",
           "ja": "フラフラ梟の像"
+        },
+        "mo.156.desc": {
+          "zh": "战斗开始时，敌方护盾血量随机#Blue(±1)#",
+          "en": "xxx",
+          "ja": "xxx"
+        },
+        "mo.156.flavor": {
+          "zh": "“没人知道它头转了几圈……也没人知道敌人怎么就突然多了一层护盾。”",
+          "en": "xxx",
+          "ja": "xxx"
         },
         "mo.129.name": {
           "zh": "写满错字的魔法书",
           "en": "Misspelled Grimoire",
           "ja": "誤字だらけの魔導書"
         },
+        "mo.129.desc": {
+          "zh": "第三颗子弹，50%概率宝石效果翻倍，30%概率宝石效果失效",
+          "en": "xxx",
+          "ja": "xxx"
+        },
+        "mo.129.flavor": {
+          "zh": "“它原本是本火球术魔导手册……但作者拼错了‘火’和‘爆’。”",
+          "en": "xxx",
+          "ja": "xxx"
+        },
         "mo.128.name": {
           "zh": "胆小鬼的黄金钥匙",
           "en": "Coward’s Golden Key",
           "ja": "臆病者の金の鍵"
+        },
+        "mo.128.desc": {
+          "zh": "每进入一个新房间：50%得#Yellow(4)#金币，50%失#Yellow(2)#金币",
+          "en": "xxx",
+          "ja": "xxx"
+        },
+        "mo.128.flavor": {
+          "zh": "“每换个地方它都发抖……不过抖着抖着，也许会掉出点什么。”",
+          "en": "xxx",
+          "ja": "xxx"
         },
         "mo.127.name": {
           "zh": "变形术练习笔",
           "en": "Polymorph Practice Pen",
           "ja": "変身術の練習ペン"
         },
+        "mo.127.desc": {
+          "zh": "战斗开始时，你镶嵌的宝石中，随机一个类型变为“共振”",
+          "en": "xxx",
+          "ja": "xxx"
+        },
+        "mo.127.flavor": {
+          "zh": "“老师说‘变形’是高阶课程……它现在好像把伤害变得很有共鸣。”",
+          "en": "xxx",
+          "ja": "xxx"
+        },
         "mo.123.name": {
           "zh": "残响魔链",
           "en": "Echoing Magic Chain",
           "ja": "残響する魔鎖"
+        },
+        "mo.123.desc": {
+          "zh": "若一颗子弹被护盾挡住，下一颗子弹获得穿透#Blue(+1)# 伤害#Red(+2)#，仅生效一次",
+          "en": "xxx",
+          "ja": "xxx"
+        },
+        "mo.123.flavor": {
+          "zh": "咒语未果，回音却化为利爪",
+          "en": "xxx",
+          "ja": "xxx"
         },
         "mo.117.name": {
           "zh": "忽明忽暗的蜡烛",
           "en": "Flickering Magic Candle",
           "ja": "チラチラ魔法ロウソク"
         },
+        "mo.117.desc": {
+          "zh": "你的第一、第三、第五颗子弹伤害#Red(+1)#",
+          "en": "xxx",
+          "ja": "xxx"
+        },
+        "mo.117.flavor": {
+          "zh": "“它从来都不亮完整一整秒，但够你看清要瞄哪。”",
+          "en": "xxx",
+          "ja": "xxx"
+        },
         "mo.116.name": {
           "zh": "发霉的训练日志",
           "en": "Moldy Training Log",
           "ja": "カビた訓練日誌"
+        },
+        "mo.116.desc": {
+          "zh": "你的第一颗子弹伤害#Red(-1)#",
+          "en": "xxx",
+          "ja": "xxx"
+        },
+        "mo.116.flavor": {
+          "zh": "“上面写着：‘今天没练。’”",
+          "en": "xxx",
+          "ja": "xxx"
         },
         "mo.99.name": {
           "zh": "永响之谕",
           "en": "Oath of Endless Echo",
           "ja": "永久に響く誓い"
         },
+        "mo.99.desc": {
+          "zh": "最后一颗子弹伤害#Red(+5)#",
+          "en": "xxx",
+          "ja": "xxx"
+        },
+        "mo.99.flavor": {
+          "zh": "“这不是某人写下的物品，而是「残响」意志本身的显现。它不被书写，也不可摧毁，只会在真正聆听的人心中回荡。”",
+          "en": "xxx",
+          "ja": "xxx"
+        },
         "mo.76.name": {
           "zh": "碎裂的玩具魔杖",
           "en": "Silent Watcher’s Blindfold",
           "ja": "壊れたおもちゃの杖"
+        },
+        "mo.76.desc": {
+          "zh": "你的最后一颗子弹本轮宝石全部失效",
+          "en": "xxx",
+          "ja": "xxx"
+        },
+        "mo.76.flavor": {
+          "zh": "“啪嗒——在你需要它的时候，它只冒出了一颗粉色泡泡。”",
+          "en": "xxx",
+          "ja": "xxx"
         },
         "mo.75.name": {
           "zh": "沉默注视者的眼罩",
           "en": "Silent Watcher’s Blindfold",
           "ja": "沈黙の観察者の目隠し"
         },
+        "mo.75.desc": {
+          "zh": "若敌人战斗护盾≥2层，第1颗子弹穿透#Blue(+1)#,伤害#Red(+1)#",
+          "en": "xxx",
+          "ja": "xxx"
+        },
+        "mo.75.flavor": {
+          "zh": "看不到，也不意味着感知不到。",
+          "en": "xxx",
+          "ja": "xxx"
+        },
         "mo.74.name": {
           "zh": "自大的国王王冠",
           "en": "Arrogant King’s Crown",
           "ja": "尊大な王の冠"
+        },
+        "mo.74.desc": {
+          "zh": "若一颗子弹镶嵌一种类型宝石，则宝石效果#Blue(+1)#",
+          "en": "xxx",
+          "ja": "xxx"
+        },
+        "mo.74.flavor": {
+          "zh": "“它拒绝理解其他魔法体系，王者只需一种方式胜利。”",
+          "en": "xxx",
+          "ja": "xxx"
         },
         "mo.38.name": {
           "zh": "翻找术手册",
           "en": "Manual of Rummaging",
           "ja": "ゴソゴソ術の手引き書"
         },
+        "mo.38.desc": {
+          "zh": "有50%概率可以额外翻找一次",
+          "en": "xxx",
+          "ja": "xxx"
+        },
+        "mo.38.flavor": {
+          "zh": "“翻找的姿势也很关键。这是第五种。”",
+          "en": "xxx",
+          "ja": "xxx"
+        },
         "mo.37.name": {
           "zh": "漏风的飞天扫帚",
           "en": "Drafty Flying Broom",
           "ja": "スースー空飛ぶほうき"
+        },
+        "mo.37.desc": {
+          "zh": "你的第二颗子弹无视敌人的一层护盾",
+          "en": "xxx",
+          "ja": "xxx"
+        },
+        "mo.37.flavor": {
+          "zh": "“扫帚带着奇怪的风，飞行轨迹有点歪，却总能钻过缝隙直冲要害。”",
+          "en": "xxx",
+          "ja": "xxx"
         },
         "mo.36.name": {
           "zh": "怨念缠绕的围巾",
           "en": "Vengeful Spirit Scarf",
           "ja": "怨霊まみれのマフラー"
         },
+        "mo.36.desc": {
+          "zh": "最后一颗子弹伤害#Red(+2)#",
+          "en": "xxx",
+          "ja": "xxx"
+        },
+        "mo.36.flavor": {
+          "zh": "怨念盘旋不去，汇聚在最后那一击中……",
+          "en": "xxx",
+          "ja": "xxx"
+        },
         "mo.26.name": {
           "zh": "左脚的幸运靴",
           "en": "Lucky Left Boot",
           "ja": "左足のラッキーブーツ"
+        },
+        "mo.26.desc": {
+          "zh": "战斗开始时，你的第1~3颗子弹中随机一颗获得穿透#Blue(+1)#",
+          "en": "xxx",
+          "ja": "xxx"
+        },
+        "mo.26.flavor": {
+          "zh": "“穿这只靴子的人，至少总有一次能踩到正点上。”",
+          "en": "xxx",
+          "ja": "xxx"
         },
         "mo.15.name": {
           "zh": "虹彩的魔法书",
           "en": "Iridescent Grimoire",
           "ja": "虹色の魔導書"
         },
+        "mo.15.desc": {
+          "zh": "若一颗子弹镶嵌的宝石类型不重复，则宝石效果#Blue(+1)#",
+          "en": "xxx",
+          "ja": "xxx"
+        },
+        "mo.15.flavor": {
+          "zh": "“书页泛着七彩微光，读者从未真正理解过内容，但每一页都恰好唤起正确的咒语。”",
+          "en": "xxx",
+          "ja": "xxx"
+        },
         "mo.10.name": {
           "zh": "溅血猎犬的指环",
           "en": "Bloodhound’s Ring",
           "ja": "血まみれ猟犬の指輪"
+        },
+        "mo.10.desc": {
+          "zh": "你在本局游戏中每失去一颗心，首颗子弹获得一次伤害#Red(+1)#。",
+          "en": "xxx",
+          "ja": "xxx"
+        },
+        "mo.10.flavor": {
+          "zh": "你在本局游戏中每失去一颗心，首颗子弹获得一次伤害#Red(+1)#。",
+          "en": "xxx",
+          "ja": "xxx"
         }
       }
     },
@@ -352,6 +637,41 @@
           "zh": "溢出伤害",
           "en": "Overkill Damage",
           "ja": "オーバーダメージ"
+        }
+      }
+    },
+    "NPC": {
+      "TableName": "NPC",
+      "LocDict": {
+        "npc.01": {
+          "zh": "邓肯教授",
+          "en": "Start",
+          "ja": "開始"
+        },
+        "npc.02": {
+          "zh": "大聪明",
+          "en": "Start",
+          "ja": "開始"
+        }
+      }
+    },
+    "Dia": {
+      "TableName": "Dia",
+      "LocDict": {
+        "dia.0.clay01": {
+          "zh": "我想种一整片黏土田园，种点小萝卜、苔藓，还有紫蔷薇~",
+          "en": "I wanna grow a whole clay garden—carrots, moss, even purple roses~  ",
+          "ja": "ねえ、ねんど畑を作りたいの。にんじんとコケと、むらさきのバラも～"
+        },
+        "dia.1.clay01": {
+          "zh": "可是这里没有阳光也没有泥巴，只有石砖和怪物……",
+          "en": "But there’s no sunlight here, no soil… just bricks and monsters.",
+          "ja": "でもここ、日差しも土もないよ。あるのは石とモンスターばかり……"
+        },
+        "dia.2.clay01": {
+          "zh": "快带我去塔顶吧，我要在那里开一片黏土花园！",
+          "en": "Take me to the top of the tower! I’ll plant my clay flowerbed up there!",
+          "ja": "塔のてっぺんに連れてって！そこでねんどの花園を咲かせるの！"
         }
       }
     }

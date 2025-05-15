@@ -9954,6 +9954,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5448199941957431290, guid: e53388c857969c04a841ae15e1c04251, type: 3}
+      propertyPath: BulletEventConfig.DialogueName
+      value: clay01
+      objectReference: {fileID: 0}
     - target: {fileID: 6584581959271201940, guid: e53388c857969c04a841ae15e1c04251, type: 3}
       propertyPath: m_Name
       value: Room_03_U1R1

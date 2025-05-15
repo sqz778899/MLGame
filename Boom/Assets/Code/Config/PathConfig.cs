@@ -28,7 +28,7 @@ public static class PathConfig
    //..........................多语言相关...............................
    public static string LocalizationConfigJson = GetDataPrepath() + "Data/LocalizationConfig.json";
    public static string Font_zh = GetPrepath() + "Res/UI/Fond/ZH_Simplified.asset";
-   public static string Font_en = GetPrepath() + "Res/UI/Fond/DefaultFont.asset";
+   public static string Font_en = GetPrepath() + "Res/UI/Fond/ComicNeue-Regular.asset";
    public static string Font_ja = GetPrepath() + "Res/UI/Fond/Japanese.asset";
    
    //...............................字体................................................
@@ -45,8 +45,10 @@ public static class PathConfig
    public static string MiracleOddityDesignJson = GetDataPrepath() + "Data/MiracleOddityDesign.json";
    public static string GemDesignJson = GetDataPrepath() + "Data/GemDesign.json";
    public static string QuestDesignJson = GetDataPrepath() + "Data/QuestDesign.json";
-   
+   //对话
    public static string DialogueDesignJson = GetDataPrepath() + "Data/DialogueDesign.json";
+   public static string DiaRoleDesignJson = GetDataPrepath() + "Data/DiaRoleDesignJson.json";
+   
    public static string TalentDesignJson = GetDataPrepath() + "Data/TalentDesign.json";
    public static string BuffDesignJson = GetDataPrepath() + "Data/BuffDesign.json";
    public static string TraitDesignJson = GetDataPrepath() + "Data/TraitDesign.json";

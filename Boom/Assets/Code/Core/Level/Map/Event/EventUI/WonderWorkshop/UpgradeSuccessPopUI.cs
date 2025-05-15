@@ -18,9 +18,9 @@ public class UpgradeSuccessPopUI : MonoBehaviour
         if (curInfo.IsCanUpgrade)
         {
             afterBulletJson = TrunkManager.Instance.GetBulletJson(curInfo.ID + 100);
-            Debug.Log(curInfo.ID);
+            //Debug.Log(curInfo.ID);
             BulletFactory.SetBulletInUI(AfterSkeleton,curInfo.ID + 100);
-            txtAfterName.text = afterBulletJson.NameKey;
+            txtAfterName.text = Loc.Get(afterBulletJson.NameKey);
         }
 
         PopSelf();

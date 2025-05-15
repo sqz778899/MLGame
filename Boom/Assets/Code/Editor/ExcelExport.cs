@@ -392,7 +392,7 @@ namespace Code.Editor
         #endregion
 
         #region 对话相关
-        void SetPerDialoguesData(ref Dictionary<string,List<DiaSingle>> curDict ,DataTable curTable)
+        void SetPerDialoguesData(ref Dictionary<string,List<DiaSingle>> curDict ,DataTable curTable,List<DiaRole> curRoleDesign)
         {
             List<DiaSingle> dialogues = new List<DiaSingle>();
             for (int i = 1; i < curTable.Rows.Count; i++)
@@ -401,10 +401,19 @@ namespace Code.Editor
                 if (curTable.Rows[i][1].ToString() == "") continue;
                 curData.Sign = curTable.Rows[i][0].ToString();
                 curData.ID = int.Parse(curTable.Rows[i][1].ToString());
-                curData.Name = curTable.Rows[i][2].ToString();
+                string name = curTable.Rows[i][2].ToString();
+                DiaRole curRole = curRoleDesign.FirstOrDefault(x => x.Name == name);
+                if (curRole == null)
+                {
+                    Debug.LogError($"对话设计表中角色 {name} 不存在！");
+                    curData.NameKey = "xxx";
+                }
+                else
+                    curData.NameKey = curRole.NameKey;
+                
                 curData.IsLeft = int.Parse(curTable.Rows[i][3].ToString());
                 curData.NextIdex = int.Parse(curTable.Rows[i][4].ToString());
-                curData.Content = curTable.Rows[i][5].ToString();
+                curData.ContentKey = $"dia.{curData.ID}.{curTable.TableName}";
                 dialogues.Add(curData);
             }
             curDict[curTable.TableName] = dialogues;
@@ -412,19 +421,53 @@ namespace Code.Editor
         
         void ExportDialogue()
         {
+            //导出角色Mapping表
+            List<DiaRole> curRoleDesign = new List<DiaRole>();
+            //Step1 先把子弹都录入，因为子弹是角色
+            DataSet curTables = GetDataSet();
+            DataTable curTable = curTables.Tables["子弹设计"];
+            for (int i = 1; i < curTable.Rows.Count; i++)
+            {
+                DiaRole curRole = new DiaRole();
+                if (curTable.Rows[i][1].ToString() == "") continue;
+                int ID = int.Parse(curTable.Rows[i][0].ToString());
+                GuessLocKey key = Loc.GuessKey(ID,LocTableType.bullet);
+                
+                curRole.Name = curTable.Rows[i][2].ToString();
+                curRole.NameKey = key.NameKey;
+                
+                curRoleDesign.Add(curRole);
+            }
+            //Step2 录入其他角色
+            DataSet curRoleTables = GetDataSet("Localization.xlsx");
+            DataTable curRoleTable = curRoleTables.Tables["NPC"];
+            for (int i = 1; i < curRoleTable.Rows.Count; i++)
+            {
+                DiaRole curRole = new DiaRole();
+                if (curRoleTable.Rows[i][1].ToString() == "") continue;
+                curRole.NameKey = curRoleTable.Rows[i][0].ToString();
+                curRole.Name = curRoleTable.Rows[i][1].ToString();
+                curRoleDesign.Add(curRole);
+            }
             
+            string content02 = JsonConvert.SerializeObject(curRoleDesign, (Formatting)Formatting.Indented);
+            File.WriteAllText(PathConfig.DiaRoleDesignJson, content02);
+            
+            //导出对话设计表
             Dictionary<string,List<DiaSingle>> curDiaDesignDict = new Dictionary<string, List<DiaSingle>>();
-            
-            DataSet curTableTutorial = GetDataSet("BeginnerTutorial.xlsx");
-            for (int i = 0; i < curTableTutorial.Tables.Count; i++)
-                SetPerDialoguesData(ref curDiaDesignDict,curTableTutorial.Tables[i]);
-            
-            DataSet curTableStoryline = GetDataSet("StorylineDia.xlsx");
-            for (int i = 0; i < curTableStoryline.Tables.Count; i++)
-                SetPerDialoguesData(ref curDiaDesignDict,curTableStoryline.Tables[i]);
 
+            GetPerXlsxDia(ref curDiaDesignDict,curRoleDesign,"/Dialogue/BeginnerTutorial.xlsx");
+            GetPerXlsxDia(ref curDiaDesignDict,curRoleDesign,"/Dialogue/StorylineDia.xlsx");
+            GetPerXlsxDia(ref curDiaDesignDict,curRoleDesign,"/Dialogue/ClayDias.xlsx");
             string content01 = JsonConvert.SerializeObject(curDiaDesignDict, (Formatting)Formatting.Indented);
             File.WriteAllText(PathConfig.DialogueDesignJson, content01);
+        }
+
+        void GetPerXlsxDia(ref Dictionary<string,List<DiaSingle>> curDict ,List<DiaRole> curRoleDesign,string xlsxName)
+        {
+            DataSet curTable = GetDataSet(xlsxName);
+            for (int i = 0; i < curTable.Tables.Count; i++)
+                SetPerDialoguesData(ref curDict,curTable.Tables[i],curRoleDesign);
         }
         #endregion
 

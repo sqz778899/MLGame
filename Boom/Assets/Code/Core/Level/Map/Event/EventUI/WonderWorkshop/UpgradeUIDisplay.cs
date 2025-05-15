@@ -31,15 +31,15 @@ public class UpgradeUIDisplay : MonoBehaviour
             BulletFactory.SetBulletInUI(PreSkeleton,curInfo.ID);
             BulletFactory.SetBulletInUI(AfterSkeleton,curInfo.ID + 100);
             txtPreName.text = curInfo.Name;
-            txtAfterName.text = afterBulletJson.NameKey;
+            txtAfterName.text = Loc.Get(afterBulletJson.NameKey);
             //提升属性差异显示
             int difDamage = afterBulletJson.Damage - preBulletJson.Damage;
             int difCritical = afterBulletJson.Critical - preBulletJson.Critical;
             int difElementalInfusionValue = afterBulletJson.ElementalInfusionValue - preBulletJson.ElementalInfusionValue;
             Dictionary<string,int> difDic = new Dictionary<string, int>();
-            difDic.Add("伤害",difDamage);
-            difDic.Add("暴击",difCritical);
-            difDic.Add("元素",difElementalInfusionValue);
+            difDic.Add(Loc.Get("battle.damage"),difDamage);
+            difDic.Add(Loc.Get("battle.critical"),difCritical);
+            difDic.Add(Loc.Get("battle.evalue"),difElementalInfusionValue);
 
             int count = 0;
             foreach (var each in difDic)
@@ -52,7 +52,7 @@ public class UpgradeUIDisplay : MonoBehaviour
                 go.transform.SetParent(normalGroup.transform,false);
                 go.GetComponent<RectTransform>().anchoredPosition += new Vector2(0, -80 * count);
                 txt.text = $"{each.Key}+{each.Value}";
-                if (each.Key == "暴击")
+                if (each.Key == Loc.Get("battle.critical"))
                     txt.text = $"{each.Key}+{each.Value}%";
                 count++;
             }

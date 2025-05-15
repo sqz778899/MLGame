@@ -56,6 +56,7 @@ public class DialoguePortraitConfig : ScriptableObject
 [Serializable]
 public class Portrait
 {
+    public string Name;
     public Sprite PortraitSprite;
     public Vector2 PortraitSize;
     public float PortraitY;

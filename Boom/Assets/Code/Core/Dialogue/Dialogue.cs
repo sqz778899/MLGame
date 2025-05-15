@@ -104,26 +104,26 @@ public class Dialogue : MonoBehaviour
             return;
         }
         
-        Content.text = TextProcessor.Parse(curDia.Content,false);//标记的地方换色处理
+        Content.text = TextProcessor.Parse(Loc.Get(curDia.ContentKey),false);//标记的地方换色处理
         if (curDia.IsLeft == 1)
         {
             LeftGOs.ForEach(each => each.SetActive(true));
             RightGOs.ForEach(each => each.SetActive(false));
-            NameLeft.text = curDia.Name;
-            PLeft.sprite = _spriteDict[curDia.Name].PortraitSprite;
+            NameLeft.text = Loc.Get(curDia.NameKey);
+            PLeft.sprite = _spriteDict[curDia.NameKey].PortraitSprite;
             RectTransform PLeftRect = PLeft.GetComponent<RectTransform>();
-            PLeftRect.sizeDelta= _spriteDict[curDia.Name].PortraitSize;
-            PLeftRect.anchoredPosition = new Vector2(PLeftRect.anchoredPosition.x, _spriteDict[curDia.Name].PortraitY);
+            PLeftRect.sizeDelta= _spriteDict[curDia.NameKey].PortraitSize;
+            PLeftRect.anchoredPosition = new Vector2(PLeftRect.anchoredPosition.x, _spriteDict[curDia.NameKey].PortraitY);
         }
         else
         {
             LeftGOs.ForEach(each => each.SetActive(false));
             RightGOs.ForEach(each => each.SetActive(true));
-            NameRight.text = curDia.Name;
-            PRight.sprite = _spriteDict[curDia.Name].PortraitSprite;
+            NameRight.text = Loc.Get(curDia.NameKey);
+            PRight.sprite = _spriteDict[curDia.NameKey].PortraitSprite;
             RectTransform PLeftRect = PRight.GetComponent<RectTransform>();
-            PLeftRect.sizeDelta= _spriteDict[curDia.Name].PortraitSize;
-            PLeftRect.anchoredPosition = new Vector2(PLeftRect.anchoredPosition.x, _spriteDict[curDia.Name].PortraitY);
+            PLeftRect.sizeDelta= _spriteDict[curDia.NameKey].PortraitSize;
+            PLeftRect.anchoredPosition = new Vector2(PLeftRect.anchoredPosition.x, _spriteDict[curDia.NameKey].PortraitY);
         }
         nextDialogueID = curDia.NextIdex;
     }

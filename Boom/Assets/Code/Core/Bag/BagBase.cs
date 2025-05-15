@@ -118,10 +118,10 @@ public abstract class BaseSlotController<T> :ISlotController where T : ItemDataB
     {
         get
         {
-            Vector3 StandardOffsetItem = new Vector3(280f, -135f, 0);
-            Vector3 StandardOffsetGemAndBullet = new Vector3(220f, -135f, 0);
+            Vector3 StandardOffsetItem = new Vector3(310f, -135f, 0);
+            Vector3 StandardOffsetGemAndBullet = new Vector3(250f, -135f, 0);
             Vector3 NOffsetItem = new Vector3(-250f, -135f, 0);
-            Vector3 NOffsetGemAndBullet = new Vector3(-200f, -135f, 0);
+            Vector3 NOffsetGemAndBullet = new Vector3(-250f, -135f, 0);
             return SlotType switch
             {
                 SlotType.GemBagSlot => StandardOffsetGemAndBullet,

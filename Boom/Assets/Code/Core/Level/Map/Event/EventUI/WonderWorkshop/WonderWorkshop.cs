@@ -72,7 +72,7 @@ public class WonderWorkshop : MonoBehaviour,ICloseOnClickOutside
             return;
         }
 
-        label.text = $"升级 {info.Name}";
+        label.text = $"{Loc.Get("ui.upg")} {info.Name}";
         button.OnClick.AddListener(() =>
         {
             GM.Root.InventoryMgr.UngradeBullet(info.ID);

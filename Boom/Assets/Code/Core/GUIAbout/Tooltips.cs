@@ -1,44 +1,38 @@
+using System;
 using TMPro;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Tooltips : MonoBehaviour
 {
-    public float YOffset = 45f;
+    [SerializeField]  float YOffset = 45f;
     [Header("标题")]
-    public TextMeshProUGUI txtTitle;
-    public TextMeshProUGUI txtLV;
-    public TextMeshProUGUI txtItemTitle;
+    [SerializeField]  TextMeshProUGUI txtTitle;
+    [SerializeField]  TextMeshProUGUI txtItemTitle;
     
     [Header("Group")]
-    public GameObject ItemGroup;
-    public GameObject OtherGroup;
+    [SerializeField]  GameObject ItemGroup;
+    [SerializeField]  GameObject OtherGroup;
     [Header("属性")] 
-    public GameObject AttriRoot;
-    public GameObject OriginAttriGO;
+    [SerializeField]  GameObject AttriRoot;
+    [SerializeField]  GameObject OriginAttriGO;
     [Header("描述")]
-    public TextMeshProUGUI txtDescription;
-    
-    [Header("背景")] 
-    public GameObject BGSmall;
-    public GameObject BGMedium;
-    public GameObject BGLarge;
-    public GameObject BGItem;
-  
-    [Header("分割线")]
-    public Image IconDrividerLine;
-    
-    [Header("Badge")]
-    public GameObject Badge;
+    [SerializeField]  TextMeshProUGUI txtDescription;
 
-    void Awake()
-    {
-        txtTitle.color = ColorPalette.NormalTextColor;
-        txtLV.color = ColorPalette.NormalTextColor;
-    }
+    [Header("背景")]
+    [SerializeField] GameObject BG_Attri;
+    [SerializeField] GameObject BG_Normal;
+    [SerializeField] RectTransform BGRectTransformAttri;
+    [SerializeField] RectTransform BGRectTransformItem;
+     
+    [Header("分割线")]
+    [SerializeField]  Image IconDrividerLine;
     
     public void SetInfo(ToolTipsInfo toolTipsInfo)
     {
+        txtTitle.color = ColorPalette.NormalTextColor;
+        OriginAttriGO.SetActive(false);
         ClearInfo();
         if (toolTipsInfo.CurToolTipsType == ToolTipsType.Gem || 
             toolTipsInfo.CurToolTipsType == ToolTipsType.Bullet)
@@ -54,13 +48,11 @@ public class Tooltips : MonoBehaviour
         //加载标题
         txtItemTitle.text = toolTipsInfo.Name;
         //设置背景
-        SetBGItem();
+        SetBGLength(toolTipsInfo);
         //加载描述
         txtDescription.text = TextProcessor.Parse(toolTipsInfo.Description);
         //设置稀有度颜色
         IconDrividerLine.color = ColorPalette.Rarity(toolTipsInfo.Rarity);
-        //
-        Badge.SetActive(true);
     }
     
     void SetGemBulletInfo(ToolTipsInfo toolTipsInfo)
@@ -69,17 +61,10 @@ public class Tooltips : MonoBehaviour
         OtherGroup.SetActive(true);
         //加载标题
         txtTitle.text = toolTipsInfo.Name;
-        if(toolTipsInfo.Level != 0)
-            txtLV.text = $"Lv.{toolTipsInfo.Level}";
-        else
-            txtLV.text = "";
-        int attriCount = toolTipsInfo.AttriInfos.Count;
-        //设置背景大小
-        if (attriCount <= 3) SetBGSmall();
-        else if (attriCount <= 4) SetBGMedium();
-        else SetBGLarge();
+        //设置背景
+        SetBGLength(toolTipsInfo);
         //逐条加载属性
-        for (int i = 0; i < attriCount; i++)
+        for (int i = 0; i < toolTipsInfo.AttriInfos.Count; i++)
         {
             ToolTipsAttriSingleInfo attriInfo = toolTipsInfo.AttriInfos[i];
             //实例化属性词条UI
@@ -89,71 +74,62 @@ public class Tooltips : MonoBehaviour
             Vector2 newPos = new Vector2(curPos.x, curPos.y - YOffset * i);
             attriGO.GetComponent<RectTransform>().anchoredPosition = newPos;
             //装填属性
-            TextMeshProUGUI[] attriSingleTexts = attriGO.GetComponentsInChildren<TextMeshProUGUI>();
-            string desStr = "";
-            Color valueColor = Color.white;
-            switch (attriInfo.Type)
-            {
-                case ToolTipsAttriType.Damage:
-                    desStr = $"{Loc.Get("battle.damage")}:"; valueColor = ColorPalette.DamageValueColor; break;
-                case ToolTipsAttriType.Piercing:
-                    desStr = $"{Loc.Get("battle.piercing")}:"; valueColor = ColorPalette.PiercingValueColor; break;
-                case ToolTipsAttriType.Resonance:
-                    desStr = $"{Loc.Get("battle.resonance")}:"; valueColor = ColorPalette.ResonanceValueColor; break;
-                case ToolTipsAttriType.Critical:
-                    desStr = $"{Loc.Get("battle.critical")}:"; valueColor = ColorPalette.DamageValueColor; break;
-                case ToolTipsAttriType.ElementalValue:
-                    desStr = $"{Loc.Get("battle.evalue")}:"; valueColor = ColorPalette.ElementalInfusionValue; break;
-                case ToolTipsAttriType.Element:
-                    desStr = $"{Loc.Get("battle.element")}:"; valueColor = ColorPalette.NormalTextColor; break;
-            }
+            attriGO.GetComponent<ToolTipsAttriSingle>().InitData(attriInfo);
+        }
+    }
+
+    #region Tooltips自适应背景高度相关
+    bool isOpenLoop = false;
+    int preLineCount = 0;
+    int rightCount;
+    void Update()
+    {
+        if (isOpenLoop)
+        {
+            int lineCount = txtDescription.textInfo.lineCount;
+            int displayLine = Mathf.Max(2, lineCount); // 最少两行逻辑单位
+            float bottom = Mathf.Min(-120,(-120 - (displayLine - 2) * 60));
+            BGRectTransformItem.offsetMin = new Vector2(BGRectTransformItem.offsetMin.x,bottom); // Bottom (Y)
             
-            attriSingleTexts[0].text = desStr;
-            attriSingleTexts[0].color = ColorPalette.NormalTextColor;
-            if (attriInfo.Type != ToolTipsAttriType.Element)
+            //如果五次都没有变化，则关闭循环
+            if(lineCount == preLineCount)
+                rightCount++;
+            preLineCount = lineCount;
+            if(rightCount > 5)
             {
-                if (attriInfo.Type == ToolTipsAttriType.Critical)//暴击率用百分比呈现
-                    attriSingleTexts[1].text = $"{attriInfo.OriginValue}%";
-                else
-                    attriSingleTexts[1].text = attriInfo.OriginValue.ToString();
-                
-                attriSingleTexts[1].color = valueColor;
-                if (attriInfo.AddedValue != 0)
-                {
-                    if (attriInfo.AddedValue < 0)
-                        attriSingleTexts[2].text = $"({attriInfo.AddedValue})";
-                    else
-                        attriSingleTexts[2].text = $"(+{attriInfo.AddedValue})";
-                    attriSingleTexts[2].color = valueColor;
-                }
-                else
-                    attriSingleTexts[2].text = "";
-            }
-            else
-            {
-                string curEleStr = attriInfo.ElementType switch
-                {
-                    ElementalTypes.Fire => Loc.Get("battle.fire"),
-                    ElementalTypes.Ice => Loc.Get("battle.ice"),
-                    ElementalTypes.Thunder => Loc.Get("battle.thunder"),
-                    _ => Loc.Get("battle.none")
-                };
-                attriSingleTexts[1].text = curEleStr;
-                attriSingleTexts[1].fontSize -= 5;
-                attriSingleTexts[1].color = valueColor;
-                attriSingleTexts[2].text = "";
+                isOpenLoop = false;
+                rightCount = 0;
             }
         }
     }
 
-    public void ClearInfo()
+    void SetBGLength(ToolTipsInfo toolTipsInfo)
+    {
+        if (toolTipsInfo.CurToolTipsType == ToolTipsType.Gem ||
+            toolTipsInfo.CurToolTipsType == ToolTipsType.Bullet)
+        {
+            BG_Attri.SetActive(true);
+            BG_Normal.SetActive(false);
+            int attriCount = toolTipsInfo.AttriInfos.Count;//属性数量
+            int bottom = Mathf.Min(-30,(-30 - (attriCount-2) * 50));
+            BGRectTransformAttri.offsetMin = new Vector2(BGRectTransformAttri.offsetMin.x,bottom); // Bottom (Y)
+        }
+        else
+        {
+            BG_Attri.SetActive(false);
+            BG_Normal.SetActive(true);
+            //93 => -400
+            //20 = 1line
+            isOpenLoop = true;
+            preLineCount = 0;
+            rightCount = 0;
+        }
+    }
+    #endregion
+    void ClearInfo()
     {
         for (int i = AttriRoot.transform.childCount - 1; i >= 0; i--)
             Destroy(AttriRoot.transform.GetChild(i).gameObject);
     }
     
-    void SetBGSmall() { BGSmall.SetActive(true); BGMedium.SetActive(false); BGLarge.SetActive(false);BGItem.SetActive(false); }
-    void SetBGMedium() { BGSmall.SetActive(false); BGMedium.SetActive(true); BGLarge.SetActive(false);BGItem.SetActive(false); }
-    void SetBGLarge() { BGSmall.SetActive(false); BGMedium.SetActive(false); BGLarge.SetActive(true); BGItem.SetActive(false);}
-    void SetBGItem() { BGSmall.SetActive(false); BGMedium.SetActive(false); BGLarge.SetActive(false); BGItem.SetActive(true);}
 }
