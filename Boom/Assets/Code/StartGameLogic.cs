@@ -35,8 +35,5 @@ public class StartGameLogic : KeyBoardBase
         SaveManager.LoadSaveFile();
     }
     
-    public void ExitGame()
-    {
-        MSceneManager.Instance.ExitGame();
-    }
+    public void ExitGame() => PlayerSetting.ExitGame();
 }

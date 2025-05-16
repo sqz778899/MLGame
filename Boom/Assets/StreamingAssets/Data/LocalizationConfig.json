@@ -9,19 +9,79 @@
           "ja": "開始"
         },
         "ui.leave": {
-          "zh": "离开",
-          "en": "Leave",
+          "zh": "返回",
+          "en": "return",
           "ja": "戻る"
+        },
+        "ui.save": {
+          "zh": "保存游戏",
+          "en": "Save Game",
+          "ja": "ゲーム保存"
+        },
+        "ui.load": {
+          "zh": "读取游戏",
+          "en": "Load Game",
+          "ja": "ゲーム読込"
+        },
+        "ui.quit": {
+          "zh": "退出游戏",
+          "en": "Quit Game",
+          "ja": "ゲーム終了"
+        },
+        "ui.set": {
+          "zh": "设置",
+          "en": "Settings",
+          "ja": "設定"
+        },
+        "ui.display": {
+          "zh": "显示",
+          "en": "Display",
+          "ja": "画面"
+        },
+        "ui.resolu": {
+          "zh": "分辨率",
+          "en": "Resolution",
+          "ja": "解像度"
+        },
+        "ui.fscreen": {
+          "zh": "全屏",
+          "en": "Fullscreen",
+          "ja": "全画面表示"
+        },
+        "ui.border": {
+          "zh": "无边框",
+          "en": "Borderless",
+          "ja": "ボーダーレス"
+        },
+        "ui.window": {
+          "zh": "窗口模式",
+          "en": "Windowed",
+          "ja": "ウィンドウモード"
         },
         "ui.language": {
           "zh": "语言",
           "en": "Language",
           "ja": "言語"
         },
+        "ui.curlanguage": {
+          "zh": "当前语言",
+          "en": "Current Language",
+          "ja": "現在の言語"
+        },
         "ui.audio": {
           "zh": "音频",
           "en": "Audio",
           "ja": "オーディオ"
+        },
+        "ui.volume": {
+          "zh": "主音量",
+          "en": "Master Volume",
+          "ja": "マスター音量"
+        },
+        "ui.sfx": {
+          "zh": "音效",
+          "en": "SFX",
+          "ja": "効果音"
         },
         "ui.continue": {
           "zh": "继续",
@@ -32,6 +92,11 @@
           "zh": "跳过",
           "en": "Skip",
           "ja": "スキップ"
+        },
+        "ui.gamepad": {
+          "zh": "手柄",
+          "en": "Gamepad",
+          "ja": "コントローラー"
         },
         "ui.bullet": {
           "zh": "子弹",

@@ -215,8 +215,8 @@ public static class SaveManager
         userConfig = JsonConvert.DeserializeObject<UserConfig>(SaveFileJsonString);
 
         MultiLa.Instance.CurLanguage = (MultiLaEN)userConfig.UserLanguage;
-        MSceneManager.Instance.SetScreenResolution(userConfig.UserScreenResolution);
-        MSceneManager.Instance.SetScreenMode(userConfig.UserScreenMode);
+        PlayerSetting.SetScreenResolution(userConfig.UserScreenResolution);
+        PlayerSetting.SetScreenMode(userConfig.UserScreenMode);
     }
     
     public static void SaveUserConfig()

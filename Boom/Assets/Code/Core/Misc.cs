@@ -54,16 +54,6 @@ public class MultiLaJson
 }
 #endregion
 
-#region PlayerSetting
-public enum ScreenRes
-{
-    Set3840_2160 = 0,
-    Set2560_1440 = 1,
-    Set1920_1080 = 2,
-    Set1366_768 = 3
-}
-
-#endregion
 //score
 //gold
 //insignias

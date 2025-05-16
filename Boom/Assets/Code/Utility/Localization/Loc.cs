@@ -67,8 +67,6 @@ public class GuessLocKey
     public string DescKey;
     public string FlavorKey;
 
-    public string ssss;
-
     public GuessLocKey(int ID,LocTableType locType)
     {
         NameKey = $"{locType.ToString()}.{ID}.name";

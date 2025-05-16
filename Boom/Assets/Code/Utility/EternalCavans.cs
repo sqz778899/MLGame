@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 public class EternalCavans : MonoBehaviour
 {
@@ -50,6 +49,9 @@ public class EternalCavans : MonoBehaviour
     public GameObject FailGUI;
     public GameObject ConquerTheLevel;
     public EnemyMiniMapView EnemyMiniMapSC;
+    
+    [Header("设置页面")]
+    public Setting SettingSC;
 
     [Header("UI根据各个场景切换表现")] 
     public GameObject Bag;
@@ -254,7 +256,7 @@ public class EternalCavans : MonoBehaviour
     }
     #endregion
     
-    public void ExitGame() =>MSceneManager.Instance.ExitGame();
+    public void ExitGame() => PlayerSetting.ExitGame();
     
     #region 单例的加载卸载
     public static EternalCavans Instance { get; private set; }
@@ -267,6 +269,8 @@ public class EternalCavans : MonoBehaviour
             SceneManager.sceneLoaded += OnSceneLoadedCavans;
             //
             WonderWorkshopRoot.SetActive(true);
+            //数据初始化
+            SettingSC.InitData();
         }
         else if (Instance != this)
             Destroy(gameObject);
